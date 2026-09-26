@@ -7,7 +7,7 @@
 html{-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--ink);
   font-family:'Shippori Mincho',"Yu Mincho",serif;line-height:2.0;
-  font-size:16px;letter-spacing:.02em}
+  font-size:16px;letter-spacing:.02em;line-break:strict;word-break:auto-phrase;text-wrap:pretty}
 a{color:inherit}
 img{max-width:100%;display:block}
 .wrap{max-width:720px;margin:0 auto;padding:0 20px}
@@ -29,7 +29,7 @@ h1{font-size:27px;line-height:1.55;font-weight:600;margin:0 0 10px}
   color:#a89e8c;font-family:'Zen Kaku Gothic New',sans-serif;font-size:11px;letter-spacing:.1em;text-align:center;padding:8px;object-fit:cover;width:100%}
 .gallery .ph.big,.gallery .shot.big{grid-column:1 / -1;aspect-ratio:4/3}
 .lead{font-size:17px;margin:0 0 26px}
-article h2{font-size:15px;font-family:'Zen Kaku Gothic New',sans-serif;letter-spacing:.16em;color:var(--gold);
+article h2{font-size:15px;font-family:'Zen Kaku Gothic New',sans-serif;letter-spacing:.07em;color:var(--gold);
   margin:32px 0 12px;padding-left:12px;border-left:2px solid var(--gold)}
 article p{margin:0 0 18px;color:#35302a}
 .spec{border:1px solid var(--line);border-radius:6px;background:var(--bg2);padding:16px 18px;margin:6px 0 8px}
@@ -48,7 +48,7 @@ article p{margin:0 0 18px;color:#35302a}
 .hero h1{font-size:30px;margin:12px 0 8px}
 .hero p{color:var(--sub);font-size:15px}
 section.block{padding:30px 0;border-bottom:1px solid var(--line)}
-section.block h2{font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;letter-spacing:.16em;color:var(--gold);margin-bottom:12px}
+section.block h2{font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;letter-spacing:.07em;color:var(--gold);margin-bottom:12px}
 section.block p{color:#35302a;margin-bottom:12px}
 .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
 .links a{font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;letter-spacing:.06em;text-decoration:none;color:var(--btnink);
