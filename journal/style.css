@@ -54,7 +54,7 @@ section.block p{color:#35302a;margin-bottom:12px}
 .links a{font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;letter-spacing:.06em;text-decoration:none;color:var(--btnink);
   background:var(--btn);border-radius:6px;padding:11px 16px;font-weight:500}
 .links a.ghost{background:transparent;color:var(--ink);border:1px solid #cbc3b3;font-weight:400}
-.info dl{display:grid;grid-template-columns:6em 1fr;row-gap:8px;font-family:'Zen Kaku Gothic New',sans-serif;font-size:14px}
+.info dl{display:grid;grid-template-columns:7.5em 1fr;row-gap:8px;font-family:'Zen Kaku Gothic New',sans-serif;font-size:14px}
 .info dt{color:var(--sub)}
 .cardlist{display:grid;gap:14px;margin:8px 0}
 .cardlist a{display:grid;grid-template-columns:96px 1fr;gap:14px;text-decoration:none;
@@ -72,6 +72,22 @@ footer.site{border-top:1px solid var(--line);margin-top:40px;padding:28px 0 40px
 .sns a.disabled{color:#b3ab9c;border-style:dashed;border-color:var(--line)}
 .fnote{font-family:'Zen Kaku Gothic New',sans-serif;font-size:11px;letter-spacing:.08em;color:var(--sub);text-align:center;line-height:1.8}
 .fnote a{color:var(--gold);text-decoration:none}
-.legal{padding:34px 0}
+.legal{padding:34px 20px}
 .legal h2{font-size:16px;margin:22px 0 8px}
 .legal p{color:#35302a;margin-bottom:12px;font-size:15px}
+/* 2026-09-30 追加：要点ボックス・FAQ・価格・特商法表 */
+.summary{border:1px solid var(--line);border-radius:6px;background:var(--bg2);padding:14px 18px;margin:0 0 26px;
+  font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px;line-height:1.9}
+.summary b{display:block;font-size:12px;letter-spacing:.1em;color:var(--gold);margin-bottom:4px;font-weight:500}
+.summary ul{list-style:none}
+.summary li::before{content:"・"}
+.price{font-family:'Zen Kaku Gothic New',sans-serif;font-size:22px;font-weight:500;letter-spacing:.04em;margin:0 0 12px}
+.price small{font-size:12px;color:var(--sub);margin-left:6px;font-weight:400}
+.byline{font-family:'Zen Kaku Gothic New',sans-serif;font-size:12px;color:var(--sub);letter-spacing:.06em;margin:22px 0 0;text-align:right}
+.soldout{display:block;background:#cbc3b3;color:var(--ink);font-family:'Zen Kaku Gothic New',sans-serif;padding:16px 20px;border-radius:8px}
+.faq dt{font-weight:600;margin-top:14px}
+.faq dd{color:#35302a;margin:2px 0 0}
+.lawtable dl{display:grid;grid-template-columns:9.5em 1fr;row-gap:12px;column-gap:14px;font-size:14px;margin-top:10px}
+.lawtable dt{color:var(--sub);font-family:'Zen Kaku Gothic New',sans-serif;font-size:13px}
+@media (max-width:520px){.lawtable dl{grid-template-columns:1fr;row-gap:2px}.lawtable dd{margin-bottom:10px}}
+@media (max-width:520px){nav.site a{margin-left:12px;letter-spacing:.06em}.brand small{letter-spacing:.18em}}
