@@ -1,110 +1,429 @@
 [
-  {
-    "sku": "K11272",
-    "slug": "k00000-spoon",
-    "published": true,
-    "status": "available",
-    "title": "食卓のスプーンが、あなたの胸元で咲くまで",
-    "product_name": "洋白スプーンのペンダント（GAW・ホワイトハーツ×鹿革）",
-    "brand": "GAW",
-    "category": "アクセサリー／ネックレス",
-    "material": "洋白（ニッケルシルバー）、ガラスビーズ、鹿革",
-    "published_date": "2026-09-26",
-    "prices": {
-      "store": 12880,
-      "site": 12880,
-      "mercari": 12880
-    },
-    "price_rule": "マクドナルド方式：基準＝店頭（出品カードの紙の価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点は全チャネル係数1.0",
-    "links": {
-      "square": "https://square.link/u/uK6BtXGW",
-      "mercari": "https://jp.mercari.com/shops/product/2JX8ZeDHkG6rE72TdZiWWe"
-    },
-    "images": [
-      "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg",
-      "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaiseVWx8nYoUcBDaC.jpg",
-      "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipViqwguffwMERpE.jpg",
-      "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaikNZdxpbkzVoHuzH.jpg",
-      "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaintqhdAM67EWAHhy.jpg",
-      "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZainuRmvFcQP7qB5Rw.jpg",
-      "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZbSE7rksF9JBEAcYYR.jpg"
-    ],
-    "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg",
-    "summary_text": "古いスプーンを作り直した、小判鮫オリジナル「GAW」の一点もののペンダント。洋白（ニッケルシルバー）のトップに、ヴィンテージのホワイトハーツと鹿革コード。長さ約50〜90cmで調整可。12,880円（税込・送料込み）。",
-    "summary_points": [
-      "古いスプーンを作り直した、小判鮫オリジナル「GAW」の一点ものペンダント",
-      "素材：洋白（ニッケルシルバー）／ガラスビーズ（ホワイトハーツ）／鹿革コード",
-      "長さ：約50〜90cmで調整可（トップ 約3×5cm）",
-      "価格：12,880円（税込・送料込み）・在庫1点"
-    ],
-    "lead": "川越の古民家で古着屋をしている、小判鮫です。うちには時々、「これ、もとは何だったの？」と二度見される子がやってきます。今日の一本も、その一つ。よく見ると、トップはスプーンなんです。",
-    "body_html": "    <h2>前世</h2>\n    <p>柄に、草花の彫りが残っています。おそらく八〇年代ごろに流行した、装飾のあるカトラリー。有名なブランドではなくても、この彫りを見ていると、今の形になる前に人々の生活を彩っていたのかな、と思います。役目を終えて、新たな形に生まれ変わりました。</p>\n    <h2>転生</h2>\n    <p>そのスプーンを、草花の彫りは消さないように形を整えて、ペンダントのトップにしています。合わせたのは、廃盤となってしまっているヴィンテージのホワイトハーツ、特殊な加工を施し毛羽立ちをなくした鹿革の紐。革紐の結び目をスライドさせると、首元の短めから、ぐっと長めまで、その日の気分で長さを変えられます。同じ顔の子は二つとありません。小判鮫オリジナル、GAWラインの一点ものです。</p>\n    <h2>こんな人に</h2>\n    <p>量産のアクセサリーだと、どうしても誰かと被る。それが少し苦手な人。レザージャケットや無地のTシャツに、胸元で一つ“自分の記号”を足したい人。そんな人の相棒に向いています。</p>\n    <h2>これからの物語は、あなたの胸元で</h2>\n    <p>洋白も革も、使うほどに色と風合いが育っていく素材です。買った日がいちばんきれいな子ではなく、あなたと過ごすほど深くなっていく。かつて誰かの食卓を支えたスプーンが、今度はあなたの一日に付いてくる。この子の次の物語を書くのは、あなたです。</p>",
-    "spec": [
-      [
-        "ブランド",
-        "GAW（小判鮫オリジナル・リメイク）"
-      ],
-      [
-        "素材",
-        "洋白（ニッケルシルバー）／ガラスビーズ／鹿革コード"
-      ],
-      [
-        "色",
-        "シルバートーン × レッド × ブラウン"
-      ],
-      [
-        "サイズ",
-        "トップ 約3×5cm ／ 全長 約50〜90cm 調整可"
-      ],
-      [
-        "状態",
-        "ヴィンテージのスプーン再利用のため、経年の曇り・小傷あり（味としてお楽しみください）"
-      ],
-      [
-        "製作",
-        "Handmade in Kawagoe, Japan"
-      ]
-    ],
-    "square_item_name": "K11272/GAW spoon pendant"
+ {
+  "sku": "K11272",
+  "slug": "k00000-spoon",
+  "published": true,
+  "status": "available",
+  "title": "食卓のスプーンが、あなたの胸元で咲くまで",
+  "product_name": "洋白スプーンのペンダント（GAW・ホワイトハーツ×鹿革）",
+  "brand": "GAW",
+  "category": "アクセサリー／ネックレス",
+  "material": "洋白（ニッケルシルバー）、ガラスビーズ、鹿革",
+  "published_date": "2026-09-26",
+  "prices": {
+   "store": 12880,
+   "site": 12880,
+   "mercari": 12880
   },
-  {
-    "sku": "TEST00001",
-    "slug": "test-purchase-7c2f",
-    "published": false,
-    "noindex": true,
-    "status": "available",
-    "title": "【購入テスト】このページは確認用です",
-    "product_name": "購入テスト用の商品（発送なし）",
-    "brand": "TEST",
-    "category": "テスト",
-    "material": "-",
-    "published_date": "2026-09-30",
-    "prices": {
-      "store": 100,
-      "site": 100,
-      "mercari": 100
-    },
-    "price_rule": "テスト用",
-    "links": {
-      "square": "https://square.link/u/mxWeVWsX",
-      "mercari": ""
-    },
-    "images": [
-      "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg"
-    ],
-    "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg",
-    "summary_text": "購入テスト用のページです。一般公開していません。検証後に削除します。",
-    "summary_points": [
-      "購入テスト用（100円・発送なし）",
-      "検証後に削除します"
-    ],
-    "lead": "このページは、サイトからの購入が正しく動くかを確認するためのテストページです。",
-    "body_html": "    <h2>テストの手順</h2>\n    <p>下の購入ボタンから100円で購入し、決済画面の配送方法・合計金額を確認してください。購入後は返金します。</p>",
-    "spec": [
-      [
-        "内容",
-        "購入テスト（発送なし）"
-      ]
-    ]
-  }
+  "price_rule": "マクドナルド方式：基準＝店頭（出品カードの紙の価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点は全チャネル係数1.0",
+  "links": {
+   "square": "https://square.link/u/uK6BtXGW",
+   "mercari": "https://jp.mercari.com/shops/product/2JX8ZeDHkG6rE72TdZiWWe"
+  },
+  "images": [
+   "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaiseVWx8nYoUcBDaC.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipViqwguffwMERpE.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaikNZdxpbkzVoHuzH.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaintqhdAM67EWAHhy.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZainuRmvFcQP7qB5Rw.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZbSE7rksF9JBEAcYYR.jpg"
+  ],
+  "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg",
+  "summary_text": "古いスプーンを作り直した、小判鮫オリジナル「GAW」の一点もののペンダント。洋白（ニッケルシルバー）のトップに、ヴィンテージのホワイトハーツと鹿革コード。長さ約50〜90cmで調整可。12,880円（税込・送料込み）。",
+  "summary_points": [
+   "古いスプーンを作り直した、小判鮫オリジナル「GAW」の一点ものペンダント",
+   "素材：洋白（ニッケルシルバー）／ガラスビーズ（ホワイトハーツ）／鹿革コード",
+   "長さ：約50〜90cmで調整可（トップ 約3×5cm）",
+   "価格：12,880円（税込・送料込み）・在庫1点"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。うちには時々、「これ、もとは何だったの？」と二度見される子がやってきます。今日の一本も、その一つ。よく見ると、トップはスプーンなんです。",
+  "body_html": "    <h2>前世</h2>\n    <p>柄に、草花の彫りが残っています。おそらく八〇年代ごろに流行した、装飾のあるカトラリー。有名なブランドではなくても、この彫りを見ていると、今の形になる前に人々の生活を彩っていたのかな、と思います。役目を終えて、新たな形に生まれ変わりました。</p>\n    <h2>転生</h2>\n    <p>そのスプーンを、草花の彫りは消さないように形を整えて、ペンダントのトップにしています。合わせたのは、廃盤となってしまっているヴィンテージのホワイトハーツ、特殊な加工を施し毛羽立ちをなくした鹿革の紐。革紐の結び目をスライドさせると、首元の短めから、ぐっと長めまで、その日の気分で長さを変えられます。同じ顔の子は二つとありません。小判鮫オリジナル、GAWラインの一点ものです。</p>\n    <h2>こんな人に</h2>\n    <p>量産のアクセサリーだと、どうしても誰かと被る。それが少し苦手な人。レザージャケットや無地のTシャツに、胸元で一つ“自分の記号”を足したい人。そんな人の相棒に向いています。</p>\n    <h2>これからの物語は、あなたの胸元で</h2>\n    <p>洋白も革も、使うほどに色と風合いが育っていく素材です。買った日がいちばんきれいな子ではなく、あなたと過ごすほど深くなっていく。かつて誰かの食卓を支えたスプーンが、今度はあなたの一日に付いてくる。この子の次の物語を書くのは、あなたです。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "GAW（小判鮫オリジナル・リメイク）"
+   ],
+   [
+    "素材",
+    "洋白（ニッケルシルバー）／ガラスビーズ／鹿革コード"
+   ],
+   [
+    "色",
+    "シルバートーン × レッド × ブラウン"
+   ],
+   [
+    "サイズ",
+    "トップ 約3×5cm ／ 全長 約50〜90cm 調整可"
+   ],
+   [
+    "状態",
+    "ヴィンテージのスプーン再利用のため、経年の曇り・小傷あり（味としてお楽しみください）"
+   ],
+   [
+    "製作",
+    "Handmade in Kawagoe, Japan"
+   ]
+  ],
+  "square_item_name": "K11272/GAW spoon pendant"
+ },
+ {
+  "sku": "K11274",
+  "slug": "k11274-gaw-spoon-wallet-chain",
+  "published": true,
+  "status": "available",
+  "title": "食卓のスプーンが、腰で揺れるウォレットチェーンになるまで",
+  "product_name": "ヴィンテージスプーンの真鍮ウォレットチェーン（GAW・全長約49cm）",
+  "brand": "GAW",
+  "category": "アクセサリー／ウォレットチェーン",
+  "material": "真鍮（チェーン・ナスカン）、ヴィンテージスプーン（シルバートーン）",
+  "published_date": "2026-09-30",
+  "item_condition": "NewCondition",
+  "prices": {
+   "store": 15980,
+   "site": 15980,
+   "mercari": 15980
+  },
+  "price_rule": "マクドナルド方式：基準＝店頭（Square登録価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点はサイト＝Square価格。メルカリ掲載分は非公開（1点1販路）",
+  "links": {
+   "square": "https://square.link/u/PGX8mFdV",
+   "mercari": "https://jp.mercari.com/shops/product/2JVTFRvTVuHd46RXqVcwvM"
+  },
+  "mercari_status": "private",
+  "images": [
+   "https://assets.mercari-shops-static.com/-/large/plain/2JVTFNoryvLu69aZf4Qp9i.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JVTFNoxgMZKg3LxJrtZQR.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JVTFNoxP43ghR2aPzAMT2.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JVTFNouDhdrLmGxY4AysE.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JVTFNp6LL73SLcFvDMsmj.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JVTFNsPYvmomwWMoPdPfU.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JVTFNocm3EfNL3LSUsVkE.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JVTFNosvwTFEKdZ3WNcPD.jpg"
+  ],
+  "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JVTFNoryvLu69aZf4Qp9i.jpg",
+  "summary_text": "古いスプーンをフックに作り直した、小判鮫オリジナル「GAW」の一点もののウォレットチェーン。真鍮の喜平チェーンとナスカン、全長約49cm。15,980円（税込・送料込み）。",
+  "summary_points": [
+   "もとは誰かの食卓にあったスプーンを、フックに作り直した「GAW」の一点もの",
+   "素材：真鍮（喜平チェーン・ナスカン）／ヴィンテージスプーン（シルバートーン）",
+   "長さ：全長 約49cm（ベルトループから前ポケットまで届く標準的な長さ）",
+   "価格：15,980円（税込・送料込み）・在庫1点"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。ペンダントに続いて、スプーンがもう一本、生まれ変わりました。今度は胸元ではなく、腰で揺れる役目です。",
+  "body_html": "    <h2>前世</h2>\n    <p>もとは、誰かの食卓にいた一本のスプーン。柄には彫り模様が残っています。その模様を消さないように、フックの部分に仕立て直しました。</p>\n    <h2>転生</h2>\n    <p>合わせたのは、真鍮の喜平チェーンとナスカン。スプーンのシルバートーンと、真鍮のアンティークゴールド。二つの色が並ぶと、新品のチェーンにはない奥行きが出ます。小判鮫の手仕事による、GAWラインの一点ものです。</p>\n    <h2>サイズ感</h2>\n    <p>全長は約49cm。ベルトループから前ポケットの財布まで無理なく届く、標準的な長さです。腰の位置で自然なたるみが出て、長すぎて膝で暴れることがありません。デニムにも、スラックスにも、ワイドパンツにも。</p>\n    <h2>これからの物語は、あなたの腰で</h2>\n    <p>チェーンは新品ですが、フックは当時のスプーンを使っているので、経年の小傷やくすみが残ります。真鍮は使い込むほど色が深く変わっていく素材です。スプーンの時間と、あなたの時間が、同じ一本に重なっていきます。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "GAW（小判鮫オリジナル）"
+   ],
+   [
+    "素材",
+    "真鍮（チェーン・ナスカン）／ヴィンテージスプーン（フック部）"
+   ],
+   [
+    "色",
+    "アンティークゴールド × シルバートーン"
+   ],
+   [
+    "サイズ",
+    "全長 約49cm"
+   ],
+   [
+    "状態",
+    "新品・未使用のハンドメイド品。フック部は当時のスプーンを再利用のため、経年の小傷・くすみあり"
+   ],
+   [
+    "製作",
+    "Handmade in Kawagoe, Japan"
+   ]
+  ],
+  "square_item_name": "K11274/GAW ヴィンテージスプーン 真鍮ウォレットチェーン"
+ },
+ {
+  "sku": "K10015",
+  "slug": "k10015-wilds-palace-of-poison-tee",
+  "published": true,
+  "status": "available",
+  "title": "1994年、セントルイスの同窓会で配られたTシャツ",
+  "product_name": "90s Wild's Palace of Poison 1994 リユニオン記念Tシャツ（Fruit of the Loom BEST・XXL・USA製）",
+  "brand": "Fruit of the Loom",
+  "category": "メンズ／トップス／Tシャツ",
+  "material": "コットン50%・ポリエステル50%",
+  "published_date": "2026-09-30",
+  "item_condition": "UsedCondition",
+  "prices": {
+   "store": 14080,
+   "site": 14080,
+   "mercari": 14200
+  },
+  "price_rule": "マクドナルド方式：基準＝店頭（Square登録価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点はサイト＝Square価格。メルカリ掲載分は非公開（1点1販路）",
+  "links": {
+   "square": "https://square.link/u/SUMkLPcC",
+   "mercari": "https://jp.mercari.com/shops/product/2JREXvcVtpP3fd4NCWd6Zb"
+  },
+  "mercari_status": "private",
+  "images": [
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREXfbvsuBN8FPd6YZ6ZD.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREXfcQU5PqYLAAyc37qV.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREXfcJm3Lws6PSwjoqUz.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREXfcJkeYZxhHUSZQZXb.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREXfc9GpwFofrr2c5Co8.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREXfcbqf2EhVTPG583xD.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREXfccAU9Pj2JZv3amVa.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREXfcRiM9c4oZDD8Jh5s.jpg"
+  ],
+  "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JREXfbvsuBN8FPd6YZ6ZD.jpg",
+  "summary_text": "1994年、米ミズーリ州セントルイスのドライブイン「Wild's Palace of Poison」の同窓会（Second Annual Reunion）で作られた記念Tシャツ。Fruit of the Loom BEST、USA製、XXL。14,080円（税込・送料込み）。",
+  "summary_points": [
+   "1994年「Wild's Palace of Poison」Second Annual Reunion の記念Tシャツ（米・セントルイス）",
+   "ボディ：Fruit of the Loom BEST／コットン50%・ポリエステル50%／Made in U.S.A.",
+   "サイズ：XXL（肩幅57.5／身幅64／着丈76／袖丈22cm）・状態A",
+   "価格：14,080円（税込・送料込み）・在庫1点"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。古着のプリントTには、ときどき「一晩のためだけに作られた服」が混ざっています。これは、そういう一枚です。",
+  "body_html": "    <h2>前世</h2>\n    <p>ミズーリ州セントルイスに、1947年から64年まで「Wild's Palace of Poison」というドライブインがありました。そこに通った車好きたちが、1994年にもう一度集まった。その「Second Annual Reunion」の記念Tシャツです。</p>\n    <h2>プリント</h2>\n    <p>前面には、毒々しいスカル＆クロスボーンに墓石、店のイラスト。「Cruisin' Will Never Die!」「Eat Here If It Kills You」の文字。背面には、地元の自動車修理工場やスポンサーのロゴがびっしり並びます。あの夜、誰かがこれを着て、古いアメ車の横で笑っていたはずです。</p>\n    <h2>ボディとサイズ</h2>\n    <p>ボディはFruit of the Loomの「BEST」、コットンとポリエステルの50/50、Made in U.S.A.。XXLの本格的なオーバーサイズを、一枚でドロッと着るのがおすすめです。30年前のヴィンテージならではの自然な風合いはありますが、目立つ傷やダメージのない良好なコンディションです。</p>\n    <h2>こんな人に</h2>\n    <p>「ちょっと不気味で、かっこいい」が好きな人。アメ車、ロカビリー、ホットロッドの空気が好きな人。同じTシャツを着ている人に、まず会うことはありません。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "Fruit of the Loom（BEST）"
+   ],
+   [
+    "素材",
+    "コットン50%／ポリエステル50%"
+   ],
+   [
+    "色",
+    "杢グレー（Heather Gray）"
+   ],
+   [
+    "サイズ",
+    "XXL／肩幅57.5cm・身幅64cm・着丈76cm・袖丈22cm"
+   ],
+   [
+    "年代・生産",
+    "1994年（90s）・Made in U.S.A."
+   ],
+   [
+    "イベント",
+    "The Way We Were - Wild's Palace of Poison Second Annual Reunion 1994（St. Louis, MO）"
+   ],
+   [
+    "状態",
+    "A：目立った傷やダメージのない良好なコンディション"
+   ]
+  ],
+  "square_item_name": "K10015/Car event/skull print tee"
+ },
+ {
+  "sku": "K10888",
+  "slug": "k10888-cacharel-linen-jacket",
+  "published": true,
+  "status": "available",
+  "title": "しつけ糸がついたまま、まだ誰の通りも歩いていないジャケット",
+  "product_name": "90s Cacharel リネン100% テーラードジャケット（マスタードイエロー・3ボタン）",
+  "brand": "Cacharel",
+  "category": "メンズ／ジャケット・アウター／テーラードジャケット",
+  "material": "表地リネン100%、裏地ビスコース60%・アセテート40%",
+  "published_date": "2026-09-30",
+  "item_condition": "UsedCondition",
+  "prices": {
+   "store": 24800,
+   "site": 24800,
+   "mercari": 26800
+  },
+  "price_rule": "マクドナルド方式：基準＝店頭（Square登録価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点はサイト＝Square価格。メルカリ掲載分は非公開（1点1販路）",
+  "links": {
+   "square": "https://square.link/u/CrXhyMsU",
+   "mercari": "https://jp.mercari.com/shops/product/2JREPDZcpzPKyifQJHy4Br"
+  },
+  "mercari_status": "private",
+  "images": [
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREP2JXSyUre4Ak8e6U2A.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREP2KuXQ6Xi2tDzaSkXH.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREP2JcpWeZRBcvmiFQ47.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREP2Jz2XFHEDUfADHRNE.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREP2JeiVZojY8NoPknw4.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREP2K3rKAG7tpgLkZ6aA.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREP2LoTKVz9CoC5K48Tu.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JREP2JpD8GrL6DP8Agf3t.jpg"
+  ],
+  "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JREP2JXSyUre4Ak8e6U2A.jpg",
+  "summary_text": "90年代のCacharel（カシャレル）のリネン100%テーラードジャケット。マスタードイエローの3ボタン、しつけ糸付き。24,800円（税込・送料込み）。",
+  "summary_points": [
+   "90年代のCacharel（フランスのブランド）、リネン100%の3ボタンテーラード",
+   "色：マスタードイエロー／しつけ糸付きで、ほぼ未着用に近い状態（状態A）",
+   "サイズ：肩幅47／身幅55.5／着丈81／袖丈64cm",
+   "価格：24,800円（税込・送料込み）・在庫1点"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。古着なのに、まだ一度も着られていない服があります。ポケットや裾に、しつけ糸が残ったままの服です。",
+  "body_html": "    <h2>前世</h2>\n    <p>Cacharel（カシャレル）は、花柄や軽やかな服で知られるフランスのブランドです。これは90年代の一着。しつけ糸が残ったまま、“着られるのを待っていた”ジャケットです。パリの通りを歩いていたような色ですが、実はまだ誰の通りも歩いていません。</p>\n    <h2>色と素材</h2>\n    <p>表地はリネン100%。マスタードは難しそうに見えて、デニムと白Tの上に羽織るだけで一気に絵になる色です。リネンのしわは欠点ではなく、この服の表情。裏地はビスコースとアセテートです。</p>\n    <h2>こんな人に</h2>\n    <p>きれいに着すぎない人。ジャケットを“ちゃんとした服”としてではなく、Tシャツの延長で羽織りたい人に似合います。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "Cacharel（カシャレル）"
+   ],
+   [
+    "素材",
+    "表地 リネン100%／裏地 ビスコース60%・アセテート40%"
+   ],
+   [
+    "色",
+    "マスタードイエロー"
+   ],
+   [
+    "サイズ",
+    "肩幅47cm・身幅55.5cm・着丈81cm・袖丈64cm"
+   ],
+   [
+    "年代",
+    "90s"
+   ],
+   [
+    "状態",
+    "A：目立った傷やダメージのない良好なコンディション。しつけ糸付き"
+   ]
+  ],
+  "square_item_name": "K10888/cacharel/tailored jacket"
+ },
+ {
+  "sku": "K10889",
+  "slug": "k10889-bonvivant-deadstock-jacket",
+  "published": true,
+  "status": "available",
+  "title": "値札とタグのまま、数十年待っていたジャケット",
+  "product_name": "70〜80s Bon Vivant リネン混テーラードジャケット（デッドストック・JCPenney値札付き）",
+  "brand": "Bon Vivant Collection",
+  "category": "メンズ／ジャケット・アウター／テーラードジャケット",
+  "material": "ビスコース53%・ポリエステル25%・リネン12%・シルク10%",
+  "published_date": "2026-09-30",
+  "item_condition": "NewCondition",
+  "prices": {
+   "store": 18000,
+   "site": 18000,
+   "mercari": 20500
+  },
+  "price_rule": "マクドナルド方式：基準＝店頭（Square登録価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点はサイト＝Square価格。メルカリ掲載分は非公開（1点1販路）",
+  "links": {
+   "square": "https://square.link/u/i4Og8RPk",
+   "mercari": "https://jp.mercari.com/shops/product/2JRMiH7DuMxRnQC2f373sk"
+  },
+  "mercari_status": "private",
+  "images": [
+   "https://assets.mercari-shops-static.com/-/large/plain/2JRMi8D4LG5G3uouLwyVYH.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JRMi8CN79hdQ6fMnAnasC.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JRMi8Bb9rNYPsbDA6AnFs.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JRMi8CCw2ceWKPmTALeiL.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JRMi8D2SiSge2nwx6GTDe.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JRMi8DPKiwGZDa3mwAnpK.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JRMi8CzoJY2Lafn4PihPy.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JRMi8CzBCapCFVS4rcTGx.jpg"
+  ],
+  "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JRMi8D4LG5G3uouLwyVYH.jpg",
+  "summary_text": "70〜80年代アメリカのBon Vivantのテーラードジャケット。JCPenneyの値札（$79.99）としつけ糸が残るデッドストック。リネン・シルク混、ナチュラルベージュ。18,000円（税込・送料込み）。",
+  "summary_points": [
+   "70〜80年代アメリカのデッドストック。JCPenneyの値札（$79.99）としつけ糸がそのまま",
+   "素材：ビスコース53%／ポリエステル25%／リネン12%／シルク10%（ナチュラルベージュ）",
+   "サイズ：肩幅45／身幅52／着丈70／袖丈65cm（実寸）",
+   "価格：18,000円（税込・送料込み）・在庫1点"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。古着屋をやっていると、ときどき「時間だけが過ぎた服」に出会います。誰にも袖を通されないまま、何十年も。",
+  "body_html": "    <h2>前世</h2>\n    <p>70〜80年代のアメリカ。百貨店JCPenneyの値札（$79.99）と、しつけ糸が当時のまま残っています。売り場から誰かの家へ行くことなく、時間だけが過ぎた一着です。</p>\n    <h2>転生</h2>\n    <p>仕立ての時代の空気はそのままに、最初に袖を通すのはあなたです。リネンにシルクとビスコースが混ざった独特の質感と、当時のリラックスしたシルエット。汚れもほとんどなく、未使用の良好なコンディションです。</p>\n    <h2>こんな人に</h2>\n    <p>夏の終わりから秋口に、一枚で決まるジャケットを探している人。新品では手に入らない時代の仕立てを、新品の状態で着てみたい人に。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "Bon Vivant Collection Ltd."
+   ],
+   [
+    "素材",
+    "ビスコース53%／ポリエステル25%／リネン12%／シルク10%"
+   ],
+   [
+    "色",
+    "ナチュラルベージュ"
+   ],
+   [
+    "サイズ",
+    "肩幅45cm・身幅52cm・着丈70cm・袖丈65cm（実寸）"
+   ],
+   [
+    "年代・生産",
+    "70〜80s・USA（推定）"
+   ],
+   [
+    "状態",
+    "新品・未使用（デッドストック）。JCPenneyの値札（$79.99）・しつけ糸が残存"
+   ]
+  ],
+  "square_item_name": "K10889/bonvivant/linen blend jacket"
+ },
+ {
+  "sku": "K10715",
+  "slug": "k10715-misty-weather-nylon-trench",
+  "published": true,
+  "status": "available",
+  "title": "トレンチの形をした、本気の雨具",
+  "product_name": "80s MISTY WEATHER ナイロン ロングトレンチコート（ブラック・着丈105cm）",
+  "brand": "MISTY WEATHER",
+  "category": "レディース／ジャケット・アウター／ロングコート",
+  "material": "ナイロン（裏地一部ラバーコーティング）",
+  "published_date": "2026-09-30",
+  "item_condition": "UsedCondition",
+  "prices": {
+   "store": 7800,
+   "site": 7800,
+   "mercari": 6800
+  },
+  "price_rule": "マクドナルド方式：基準＝店頭（Square登録価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点はサイト＝Square価格。メルカリ掲載分は非公開（1点1販路）",
+  "links": {
+   "square": "https://square.link/u/TELaHsX1",
+   "mercari": "https://jp.mercari.com/shops/product/2JNC3SPNFCFzfgWL4KPU6F"
+  },
+  "mercari_status": "private",
+  "images": [
+   "https://assets.mercari-shops-static.com/-/large/plain/2JNC3EeehsV26vgUvaWiNK.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JNC3EeiW9ZxJ2iXSJ8KDY.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JNC3EetJEpnNUB2wnDrEw.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JNC3EeY56feFVVjQBpsnD.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JNC3EeoZFwvGdHrtATVmv.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JNC3EesN4ycAG4kJtuZTx.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JNC3EeK6HMPp48mULSW6S.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JNC3Ees3XscebA7wQgPz2.jpg"
+  ],
+  "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JNC3EeehsV26vgUvaWiNK.jpg",
+  "summary_text": "80年代のMISTY WEATHERの漆黒ナイロン・ロングトレンチコート。着丈105cm、ラグランスリーブ、裏地の一部にラバーコーティング。7,800円（税込・送料込み）。",
+  "summary_points": [
+   "80年代のMISTY WEATHER、漆黒ナイロンのロングトレンチ（着丈105cm）",
+   "軽い・しわになりにくい・雨に強い。裏地の一部にラバーコーティング",
+   "サイズ：表記6／身幅56・着丈105・袖丈(脇下から)42cm・ラグランスリーブ／状態B",
+   "価格：7,800円（税込・送料込み）・在庫1点"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。雨の季節が近づくと、この黒いコートのことを思い出します。見た目はトレンチ、中身は雨具。",
+  "body_html": "    <h2>前世</h2>\n    <p>80年代のMISTY WEATHER。漆黒のナイロンで、着丈105cmのロングトレンチです。裏地の一部にゴム張りがあるので、トレンチの形をした本気の雨具、と言ったほうが正確かもしれません。</p>\n    <h2>ディテール</h2>\n    <p>軽くて、しわになりにくく、雨に強い。肩を覆うケープ状の切り替えと、ポケットまわりのステッチで、黒一色なのに陰影が出ます。肩のラインに沿って落ちるラグランスリーブなので、肩幅を気にせず着られます。</p>\n    <h2>着こなし</h2>\n    <p>晴れた日はフロントを開けて羽織る。雨の日はベルトを無造作に縛る。ヴィンテージ特有のわずかな着用感はありますが、ナイロンの光沢はしっかり残っています。クリーニング済みです。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "MISTY WEATHER"
+   ],
+   [
+    "素材",
+    "ナイロン（裏地一部ラバーコーティング）"
+   ],
+   [
+    "色",
+    "ブラック"
+   ],
+   [
+    "サイズ",
+    "表記6／身幅56cm・着丈105cm・袖丈(脇下から)42cm（ラグランスリーブのため肩幅は計測不可）"
+   ],
+   [
+    "年代",
+    "1980s"
+   ],
+   [
+    "状態",
+    "B：わずかな着用感あり。目立つダメージや汚れはなし。クリーニング済み"
+   ]
+  ],
+  "square_item_name": "K10715/misty weather /rain"
+ }
 ]
