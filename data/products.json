@@ -66,5 +66,45 @@
       ]
     ],
     "square_item_name": "K11272/GAW spoon pendant"
+  },
+  {
+    "sku": "TEST00001",
+    "slug": "test-purchase-7c2f",
+    "published": false,
+    "noindex": true,
+    "status": "available",
+    "title": "【購入テスト】このページは確認用です",
+    "product_name": "購入テスト用の商品（発送なし）",
+    "brand": "TEST",
+    "category": "テスト",
+    "material": "-",
+    "published_date": "2026-09-30",
+    "prices": {
+      "store": 100,
+      "site": 100,
+      "mercari": 100
+    },
+    "price_rule": "テスト用",
+    "links": {
+      "square": "https://square.link/u/mxWeVWsX",
+      "mercari": ""
+    },
+    "images": [
+      "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg"
+    ],
+    "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg",
+    "summary_text": "購入テスト用のページです。一般公開していません。検証後に削除します。",
+    "summary_points": [
+      "購入テスト用（100円・発送なし）",
+      "検証後に削除します"
+    ],
+    "lead": "このページは、サイトからの購入が正しく動くかを確認するためのテストページです。",
+    "body_html": "    <h2>テストの手順</h2>\n    <p>下の購入ボタンから100円で購入し、決済画面の配送方法・合計金額を確認してください。購入後は返金します。</p>",
+    "spec": [
+      [
+        "内容",
+        "購入テスト（発送なし）"
+      ]
+    ]
   }
 ]
