@@ -1,6 +1,6 @@
 [
   {
-    "sku": "K00000",
+    "sku": "K11272",
     "slug": "k00000-spoon",
     "published": true,
     "status": "available",
@@ -17,7 +17,7 @@
     },
     "price_rule": "マクドナルド方式：基準＝店頭（出品カードの紙の価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点は全チャネル係数1.0",
     "links": {
-      "square": "",
+      "square": "https://square.link/u/uK6BtXGW",
       "mercari": "https://jp.mercari.com/shops/product/2JX8ZeDHkG6rE72TdZiWWe"
     },
     "images": [
@@ -64,6 +64,7 @@
         "製作",
         "Handmade in Kawagoe, Japan"
       ]
-    ]
+    ],
+    "square_item_name": "K11272/GAW spoon pendant"
   }
 ]
