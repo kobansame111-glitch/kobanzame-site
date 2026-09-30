@@ -1,0 +1,44 @@
+# 小判鮫 公式サイト 自動再生成
+# data/products.json（商品データ）か生成スクリプトが変わったら、サイトのHTMLを作り直してコミットする。
+# 在庫見張りGAS（60_stock_watch_v1.gs）が売れた商品の status を "sold" に書き換える → ここが動いて SOLD 表示になる。
+# このワークフロー自身のコミットは GITHUB_TOKEN で行うため、再度このワークフローを起動しない（無限ループしない）。
+name: build-site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/products.json'
+      - 'tools/build_site.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build pages
+        run: python3 tools/build_site.py
+      - name: Commit generated pages (only if something changed)
+        run: |
+          git config user.name "kobanzame-site-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "サイト自動再生成（data/products.json の変更を反映）"
+            git pull --rebase origin main
+            git push
+          fi
