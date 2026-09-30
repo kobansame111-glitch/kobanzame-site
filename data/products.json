@@ -425,5 +425,41 @@
    ]
   ],
   "square_item_name": "K10715/misty weather /rain"
+ },
+ {
+  "sku": "WATCHTEST",
+  "slug": "watch-test-0000",
+  "published": false,
+  "noindex": true,
+  "status": "available",
+  "title": "在庫見張りの動作テスト用（非公開）",
+  "product_name": "在庫見張りテスト用ダミー（販売しません）",
+  "brand": "TEST",
+  "category": "テスト",
+  "material": "-",
+  "published_date": "2026-10-01",
+  "prices": {
+   "store": 0,
+   "site": 0,
+   "mercari": 0
+  },
+  "price_rule": "テスト用・販売しない",
+  "links": {},
+  "images": [
+   "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg"
+  ],
+  "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg",
+  "summary_text": "在庫見張りGAS（60番）の動作テスト用の非公開ページです。販売はしていません。",
+  "summary_points": [
+   "在庫見張りの動作テスト用（非公開・検索除外・一覧に出ません）"
+  ],
+  "lead": "このページは在庫見張りの動作確認用です。",
+  "body_html": "    <p>テスト用ページです。</p>",
+  "spec": [
+   [
+    "用途",
+    "在庫見張りのテスト（sw_testSiteSold）"
+   ]
+  ]
  }
 ]
