@@ -1,5 +1,5 @@
 /**
- * 60_stock_watch_v1.gs  小判鮫 在庫見張り（Square × メルカリ × 公式サイト）  v1.3  2026-10-01
+ * 60_stock_watch_v1.gs  小判鮫 在庫見張り（Square × メルカリ × 公式サイト）  v1.4  2026-10-01
  * ---------------------------------------------------------------------------------
  * 何をするか（Claudeは使わない・GASだけで回る）：
  *   【15分おき】sw_watch
@@ -108,10 +108,19 @@ function sw_guard_(what, fn) {
   }
 }
 
+// ===== 許可の取り直し ============================================================
+
+/** 足りない許可（Gmailなど）を求め直す。実行すると許可画面が出る →「すべて選択」にチェックして許可 */
+function sw_authorize() {
+  ScriptApp.requireAllScopes(ScriptApp.AuthMode.FULL);
+  Logger.log('すべての許可がそろっています。次は sw_setup をもう一度実行してください。');
+}
+
 // ===== 初期設定 ==================================================================
 
 /** 見張りシートを作り、見張り対象を書き込み、接続を点検する（何度実行しても安全） */
 function sw_setup() {
+  ScriptApp.requireAllScopes(ScriptApp.AuthMode.FULL);   // 許可が1つでも足りなければ、ここで許可画面を出し直す
   var props = PropertiesService.getScriptProperties();
   var ss = sw_sheet_(true);   // setup だけは無ければ作る
   var tgt = ss.getSheetByName('見張り対象');
