@@ -674,7 +674,7 @@
   "sku_confidence": "確定"
  },
  {
-  "sku": "K10965",
+  "sku": "K11306",
   "slug": "k10965-turkish-silver-filigree-flower",
   "published": true,
   "release": "live",
@@ -741,7 +741,7 @@
     "B：使用感・細かい傷あり、着用に問題なし。細部に経年の燻し（酸化による黒ずみ）あり"
    ]
   ],
-  "sku_confidence": "推定"
+  "sku_confidence": "確定"
  },
  {
   "sku": "K11163",
@@ -2475,6 +2475,75 @@
    [
     "状態",
     "使用感あり（レザーのシワ・スレ）"
+   ]
+  ],
+  "sku_confidence": "確定"
+ },
+ {
+  "sku": "K10965",
+  "slug": "k10965-turkish-silver-lace-bracelet",
+  "published": true,
+  "release": "live",
+  "status": "available",
+  "title": "花びら一枚ずつ、細い銀線で組んだレースのような腕輪",
+  "product_name": "トルコ製 シルバー925 ハンドメイド ブレスレット（レース細工・花モチーフ・アンカラ買付）",
+  "brand": "ノーブランド（トルコ・職人ハンドメイド）",
+  "category": "アクセサリー／ブレスレット",
+  "material": "シルバー925",
+  "published_date": "2026-10-04",
+  "prices": {
+   "store": 44800,
+   "site": 44800,
+   "mercari": 69980
+  },
+  "price_rule": "店頭（Square登録価格）を正。2026-10-04",
+  "links": {
+   "mercari": "https://jp.mercari.com/shops/product/2JSiWPfNFfgjnGv2sEMaw6",
+   "square": "https://square.link/u/x7bMAKpP"
+  },
+  "images": [
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHf4BrhHQbj3DQxPvi.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHgTXbbuSkmH5nmz5s.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHhM9mjFw3TzRpyjVa.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHgZrsWUTfZxRXMMk4.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHgV8DfJYAmNoWQjKT.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHgVSVySrCyxyRBce9.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHgQNBPxHXoDFKuHXe.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHgVk8CZ9XZC72XxK8.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHgW4ZsAjPBqxkAUfF.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHgjLuxZk5ehNNfxNQ.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHgSti4xrjKFrbWrxE.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHhjJChsPa84eSJ6Dz.jpg"
+  ],
+  "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JSiWHf4BrhHQbj3DQxPvi.jpg",
+  "summary_text": "トルコ・アンカラで買い付けた、シルバー925のハンドメイドブレスレット。細いワイヤーで花びらや葉を組んでロウ付けした、レースのような細工の一点もの。",
+  "summary_points": [
+   "トルコ・アンカラで買い付けた、現地職人の手仕事によるレース細工のシルバーブレスレット",
+   "素材：シルバー925",
+   "花びらや葉を細いワイヤーで一つずつ嵌め込み、ロウ付けした一点もの"
+  ],
+  "lead": "トルコ・アンカラで買い付けてきた、シルバー925のブレスレット。現地の職人さんが手作業で仕上げた、レースのような一点ものです。",
+  "body_html": "<h2>手仕事</h2><p>花びらや葉っぱの一つひとつに、細いワイヤーを嵌め込み、丁寧にロウ付けしています。近頃は作り手も減ってきた技法で、日本ではあまり見かけません。</p><h2>つけてみると</h2><p>華奢に見えて、手首に乗せると意外と存在感があります。女性にも、男性にも。</p><h2>こんな人に</h2><p>手元に、少しの華やかさを足したい人へ。量産品にはない、手の跡が残る一本を探している人に。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "ノーブランド（トルコ・アンカラの職人によるハンドメイド）"
+   ],
+   [
+    "素材",
+    "シルバー925"
+   ],
+   [
+    "色",
+    "シルバー"
+   ],
+   [
+    "年代・生産",
+    "トルコ製（アンカラで買付）"
+   ],
+   [
+    "状態",
+    "新品・未使用"
    ]
   ],
   "sku_confidence": "確定"
