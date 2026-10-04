@@ -2386,5 +2386,69 @@
    ]
   ],
   "sku_confidence": "推定"
+ },
+ {
+  "sku": "K11263",
+  "slug": "k11263-match-leather-work-vest",
+  "published": true,
+  "release": "draft",
+  "status": "available",
+  "title": "前は革、背中は布。働く人の形をしたベスト",
+  "product_name": "MATCH レザーベスト（ダークブラウン・背面布地・尾錠つき）",
+  "brand": "MATCH",
+  "category": "メンズ／アウター／ベスト",
+  "material": "前身頃 レザー／背面 布地／裏地 キルティング",
+  "published_date": "2026-10-07",
+  "prices": {
+   "store": 16800,
+   "site": 16800
+  },
+  "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
+  "links": {},
+  "images": [
+   "/assets/products/k11263/01.jpg",
+   "/assets/products/k11263/02.jpg",
+   "/assets/products/k11263/03.jpg",
+   "/assets/products/k11263/04.jpg",
+   "/assets/products/k11263/05.jpg",
+   "/assets/products/k11263/06.jpg",
+   "/assets/products/k11263/07.jpg",
+   "/assets/products/k11263/08.jpg",
+   "/assets/products/k11263/09.jpg",
+   "/assets/products/k11263/10.jpg",
+   "/assets/products/k11263/11.jpg"
+  ],
+  "thumb": "/assets/products/k11263/thumb.jpg",
+  "summary_text": "MATCHのワークスタイルのレザーベスト。前身頃はダークブラウンのレザー、背中は布地、内側はキルティング、背中に尾錠つき。身幅50cm・着丈57cm・肩幅37cm。",
+  "summary_points": [
+   "前身頃がダークブラウンのレザー、背中が布地の、ワークスタイルのベスト（ブランド：MATCH）",
+   "内側はキルティングの裏地、背中に胴回りを絞れる尾錠（バックル）つき",
+   "実寸：身幅50cm／着丈57cm／肩幅37cm"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。ハンガーに掛けたときに、表と背中でまるで別の服に見える一着があります。",
+  "body_html": "<h2>つくり</h2><p>前はシボのあるダークブラウンのレザー、背中はしっかりした布地。前は革、背中は布という、ワークベストによくある組み合わせです。内側はひし形のキルティング。背中の尾錠で胴回りを少し絞れます。</p><h2>表情</h2><p>レザーには着用によるシワと艶、ボタンまわりに使い込みの跡があります。新品の均一な色ではなく、光の当たり方で茶色が浮かぶ色です。</p><h2>こんな人に</h2><p>白いシャツやスウェットの上に一枚足して、シルエットに縦の線を入れたい人。ジャケットほど構えず、でも上半身に重さを出したい季節に。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "MATCH"
+   ],
+   [
+    "素材",
+    "前身頃 レザー／背面 布地（素材表記は未確認）／裏地 キルティング"
+   ],
+   [
+    "色",
+    "ダークブラウン × ベージュ"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅50cm・着丈57cm・肩幅37cm"
+   ],
+   [
+    "状態",
+    "使用感あり（レザーのシワ・スレ）"
+   ]
+  ],
+  "sku_confidence": "確定"
  }
 ]
