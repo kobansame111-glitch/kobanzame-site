@@ -1,21 +1,24 @@
 # 古着屋 小判鮫（KOBANZAME）
 
-> 埼玉県川越市元町1-14-5の、築約80年の古民家で営業している古着屋。海外のヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱う。商品はすべて一点もの。運営は株式会社プラグ。
+> 埼玉県川越市元町1-14-5の、築約80年の古民家で営業している古着屋。海外のヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱う。商品はすべて一点もの。運営は株式会社プラグ。英語ページは https://kobanzame-site.pages.dev/en/ 。
 
 ## 基本情報
 - 店名: 古着屋 小判鮫（こばんざめ / KOBANZAME）
-- 所在地: 〒350-0062 埼玉県川越市元町1-14-5
+- 所在地: 〒350-0062 埼玉県川越市元町1-14-5（地図: https://www.google.com/maps/search/%E5%8F%A4%E7%9D%80%E5%B1%8B+%E5%B0%8F%E5%88%A4%E9%AE%AB+%E5%B7%9D%E8%B6%8A）
 - 営業時間: 12:00〜20:00（月曜・火曜定休）
+- 新着: 毎週水曜
 - 取扱い: ヴィンテージ古着（メンズ・レディース）、ヨーロッパ・アメリカの古着、オリジナルのリメイクアクセサリー「GAW」
 - 買い方: 店頭／このサイト（クレジットカード・Square決済・送料込み）／メルカリShops
+- 取り置き: 店頭で2日間（InstagramのDMかメールで依頼）
 - 発送: 決済確認後3日以内（月曜・火曜の定休日を除く）
 - 古物商許可: 埼玉県公安委員会 第431080060786号
 - お問い合わせ: kobansame111@gmail.com
 - Instagram: https://www.instagram.com/remora__used372/
 
 ## ページ
-- [トップ・よくある質問](https://kobanzame-site.pages.dev/): 店の紹介、アクセス、FAQ
-- [ジャーナル](https://kobanzame-site.pages.dev/journal/): 一点ものの成り立ちの記録（掲載商品はサイトで購入可）
+- [トップ・よくある質問](https://kobanzame-site.pages.dev/)
+- [ジャーナル](https://kobanzame-site.pages.dev/journal/)
+- [English](https://kobanzame-site.pages.dev/en/)
 - [特定商取引法に基づく表記](https://kobanzame-site.pages.dev/tokushoho/)
 - [プライバシーポリシー](https://kobanzame-site.pages.dev/privacy/)
 
