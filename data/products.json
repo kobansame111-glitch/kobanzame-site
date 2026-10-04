@@ -1177,14 +1177,14 @@
   "sku": "K10781",
   "slug": "k10781-grenson-suede-chukka-boots",
   "published": true,
-  "release": "draft",
+  "release": "live",
   "status": "available",
   "title": "英国の老舗が作った、雨の日も歩けるチャッカ",
   "product_name": "GRENSON Footmaster スエード チャッカブーツ（オリーブブラウン・UK6／24.5〜25cm相当・英国製）",
   "brand": "GRENSON",
   "category": "メンズ／靴／ブーツ",
   "material": "スエード（レザーアッパー）、ソール Vibram Montagna",
-  "published_date": "2026-10-07",
+  "published_date": "2026-10-04",
   "prices": {
    "store": 29800,
    "site": 29800,
@@ -1239,7 +1239,7 @@
    ],
    [
     "状態",
-    "A：ソールの減りほぼなし、ビブラムのロゴタグ残存。破れ・剥がれ・ソール剥離なし"
+    "A：ソールの減りほぼなし、ビブラムのロゴタグ残存。以前のソール剥がれは修理済み（現在は剥離なし）。破れなし"
    ]
   ],
   "sku_confidence": "推定"
@@ -2276,14 +2276,14 @@
   "sku": "K10780",
   "slug": "k10780-blackstone-petris-tassel-loafer",
   "published": true,
-  "release": "draft",
+  "release": "live",
   "status": "available",
   "title": "派手さはなく、長く履けるイタリアの黒ローファー",
   "product_name": "Blackstone by Petris sport タッセルローファー（ブラックレザー・EU40／約25.5cm・イタリア製）",
   "brand": "Blackstone by Petris sport",
   "category": "メンズ／靴／ローファー",
   "material": "本革（Genuine Leather）",
-  "published_date": "2026-10-07",
+  "published_date": "2026-10-04",
   "prices": {
    "store": 15800,
    "site": 15800,
