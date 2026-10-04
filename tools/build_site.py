@@ -49,7 +49,7 @@ T = {
   'util': '<b>毎週水曜 新着入荷</b>　送料込み・決済確認後3日以内に発送（月・火定休を除く）',
   'nav': [('/#list', '商品一覧'), ('/#store', '店舗'), ('/#faq', 'Q&amp;A')],
   'hero_h': 'One<br>of <em>One.</em>',
-  'hero_p': '埼玉・川越、築約80年の古民家から。海外のヴィンテージ古着と、オリジナルの「GAW」。どれも一点もので、同じものはありません。',
+  'hero_p': '埼玉・川越、築約80年の古民家から。国内外で買い付けたヴィンテージ古着と、オリジナルの「GAW」。どれも一点もので、同じものはありません。',
   'hero_btn': '一点ものを見る',
   'map': '地図を開く ／ 川越市元町1-14-5',
   'list_h': 'In Stock', 'list_s': 'オンラインで買える一点もの（毎週水曜更新）', 'unit': '点',
@@ -60,7 +60,7 @@ T = {
   'one': '1点限り', 'tax': '税込', 'tax_ship': '税込・送料込み',
   'trust': [('送料込み', '表示価格は税込・送料込み'), ('3日以内に発送', '決済確認後（月・火定休を除く）'),
             ('川越の実店舗', '古物商許可 ' + SHOP['kobutsu']), ('お店の評判', '<a href="{gm}" rel="noopener">Googleマップでクチコミを見る</a>')],
-  'store_p': '古着屋 小判鮫（KOBANZAME）は、埼玉県川越市元町にある築約80年の古民家で営業している古着屋です。海外のヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱っています。ブランドや流行ではなく、素材・質感・その一点にしかない気配で選んでいます。サイトに載っている商品は、店頭にも並んでいます。',
+  'store_p': '古着屋 小判鮫（KOBANZAME）は、埼玉県川越市元町にある築約80年の古民家で営業している古着屋です。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱っています。ブランドや流行ではなく、素材・質感・その一点にしかない気配で選んでいます。サイトに載っている商品は、店頭にも並んでいます。',
   'store_dl': [('住所', None), ('営業', '12:00–20:00'), ('定休日', '月曜・火曜'), ('運営', SHOP['company']), ('お問い合わせ', SHOP['email'])],
   'faq_s': 'よくある質問',
   'buy': '購入する（クレジットカード）', 'buy_s': '購入する', 'soldout': 'SOLD OUT（この一点は旅立ちました）', 'prep': '準備中（まもなく購入できるようになります）',
@@ -81,7 +81,7 @@ T = {
   'cats': {'outer': 'アウター', 'tops': 'トップス', 'bottoms': 'ボトムス・ワンピース', 'shoes': '靴', 'acc': 'アクセサリー・GAW', 'other': '小物・雑貨'},
   'nf_p': 'お探しのページは見つかりませんでした。売れた商品も、ふだんはSOLDとしてページを残しています。', 'nf_btn': 'オンラインで買える一点もの',
   'top_title': '古着屋 小判鮫 KOBANZAME｜埼玉・川越の古民家ヴィンテージ古着店',
-  'top_desc': '埼玉県川越市元町、築約80年の古民家で営業する古着屋 小判鮫（KOBANZAME）。海外のヴィンテージ古着と、オリジナルのリメイクアクセサリー「GAW」。すべて一点もの。サイトからクレジットカードで購入できます（送料込み）。',
+  'top_desc': '埼玉県川越市元町、築約80年の古民家で営業する古着屋 小判鮫（KOBANZAME）。国内外で買い付けたヴィンテージ古着と、オリジナルのリメイクアクセサリー「GAW」。すべて一点もの。サイトからクレジットカードで購入できます（送料込み）。',
   'jr_title': 'ジャーナル｜古着屋 小判鮫 KOBANZAME', 'jr_desc': '一点ものの古着とGAWアクセサリーの成り立ちの記録。掲載中の商品はクレジットカードで購入できます（送料込み）。',
   'no_en': '',
  },
@@ -89,7 +89,7 @@ T = {
   'util': '<b>New arrivals every Wednesday</b>　Shipping included · Dispatched within 3 days of payment (closed Mon & Tue)',
   'nav': [('/en/#list', 'Shop'), ('/en/#store', 'Store'), ('/en/#faq', 'FAQ')],
   'hero_h': 'One<br>of <em>One.</em>',
-  'hero_p': 'From an 80-year-old wooden house in Kawagoe, Saitama. Vintage clothing from abroad and our own remake line, GAW. Every piece is one of a kind.',
+  'hero_p': 'From an 80-year-old wooden house in Kawagoe, Saitama. Vintage clothing sourced in Japan and abroad, and our own remake line, GAW. Every piece is one of a kind.',
   'hero_btn': 'See the pieces',
   'map': 'Open map / 1-14-5 Motomachi, Kawagoe',
   'list_h': 'In Stock', 'list_s': 'One-of-a-kind pieces you can buy online (updated every Wednesday)', 'unit': ' items',
@@ -100,7 +100,7 @@ T = {
   'one': 'Only 1', 'tax': 'tax incl.', 'tax_ship': 'tax & shipping incl.',
   'trust': [('Shipping included', 'Prices include tax and domestic shipping'), ('Ships in 3 days', 'After payment (closed Mon & Tue)'),
             ('A real shop in Kawagoe', 'Licensed secondhand dealer (Saitama Pref. No. 431080060786)'), ('Reviews', '<a href="{gm}" rel="noopener">Read reviews on Google Maps</a>')],
-  'store_p': 'Kobanzame is a vintage clothing shop in an 80-year-old wooden house in Motomachi, Kawagoe, Saitama. We carry vintage clothing from abroad and GAW, our own line of remade accessories. We choose by material, texture and the feel of each single piece, not by brand or trend. Everything on this site is also in the shop.',
+  'store_p': 'Kobanzame is a vintage clothing shop in an 80-year-old wooden house in Motomachi, Kawagoe, Saitama. We carry vintage clothing sourced in Japan and abroad, and GAW, our own line of remade accessories. We choose by material, texture and the feel of each single piece, not by brand or trend. Everything on this site is also in the shop.',
   'store_dl': [('Address', None), ('Hours', '12:00–20:00'), ('Closed', 'Mondays & Tuesdays'), ('Operator', 'Plug Inc.'), ('Contact', SHOP['email'])],
   'faq_s': 'Frequently asked questions',
   'buy': 'Buy now (credit card)', 'buy_s': 'Buy now', 'soldout': 'SOLD OUT', 'prep': 'Coming soon',
@@ -121,7 +121,7 @@ T = {
   'cats': {'outer': 'Outerwear', 'tops': 'Tops', 'bottoms': 'Bottoms & dresses', 'shoes': 'Shoes', 'acc': 'Accessories & GAW', 'other': 'Goods'},
   'nf_p': 'We could not find that page. Sold pieces usually stay on the site marked SOLD.', 'nf_btn': 'See the pieces',
   'top_title': 'Kobanzame | Vintage clothing in an old wooden house, Kawagoe, Japan',
-  'top_desc': 'Kobanzame is a vintage clothing shop in an 80-year-old wooden house in Kawagoe, Saitama. Vintage clothing from abroad and our own remade accessories, GAW. Every piece is one of a kind. Buy online by credit card.',
+  'top_desc': 'Kobanzame is a vintage clothing shop in an 80-year-old wooden house in Kawagoe, Saitama. Vintage clothing sourced in Japan and abroad, and our own remade accessories, GAW. Every piece is one of a kind. Buy online by credit card.',
   'jr_title': 'Journal | Kobanzame, Kawagoe', 'jr_desc': 'Where each one-of-a-kind piece comes from. Listed pieces can be bought online.',
   'no_en': 'English description coming soon. The details below are in Japanese.',
  },
@@ -132,7 +132,7 @@ FAQ = {
  'ja': [
     ('小判鮫はどこにある古着屋ですか？', f'埼玉県川越市元町1-14-5（〒350-0062）にある、築約80年の古民家で営業している古着屋です。運営は{SHOP["company"]}です。'),
     ('営業時間と定休日は？', '12:00〜20:00の営業で、毎週月曜日・火曜日が定休日です。臨時の休みや営業時間の変更はInstagramでお知らせします。'),
-    ('どんなものを扱っていますか？', '海外のヴィンテージ古着（メンズ・レディース）と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱っています。商品はすべて一点ものです。'),
+    ('どんなものを扱っていますか？', '国内外で買い付けたヴィンテージ古着（メンズ・レディース）と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱っています。商品はすべて一点ものです。'),
     ('GAWとは何ですか？', '小判鮫オリジナルのリメイクアクセサリーのラインです。古いスプーンなどの素材を、ペンダントやバングルなどの一点ものに作り直しています。'),
     ('通販で買えますか？', 'はい。このサイトに載っている商品は、クレジットカード（Square決済）でそのまま購入できます。メルカリShopsでも販売しています。'),
     ('送料はかかりますか？', 'このサイトで購入した場合、表示価格は税込・送料込みです。'),
@@ -143,7 +143,7 @@ FAQ = {
  'en': [
     ('Where is Kobanzame?', 'At 1-14-5 Motomachi, Kawagoe, Saitama (350-0062), in an 80-year-old wooden house. The shop is run by Plug Inc.'),
     ('Opening hours?', 'Open 12:00–20:00. Closed every Monday and Tuesday. Changes are announced on Instagram.'),
-    ('What do you sell?', 'Vintage clothing from abroad (men\'s and women\'s) and GAW, our own line of remade accessories. Every piece is one of a kind.'),
+    ('What do you sell?', 'Vintage clothing sourced in Japan and abroad (men\'s and women\'s) and GAW, our own line of remade accessories. Every piece is one of a kind.'),
     ('What is GAW?', 'Kobanzame\'s own remake accessory line. We turn materials such as old spoons into one-of-a-kind pendants, bangles and more.'),
     ('Can I buy online?', 'Yes. Pieces on this site can be bought by credit card through Square. Online checkout ships within Japan; for overseas shipping, contact us first.'),
     ('Is shipping included?', 'Yes. Prices on this site include tax and domestic shipping.'),
@@ -221,7 +221,7 @@ def org_node():
     return {
         '@type': 'ClothingStore', '@id': BASE + '/#store',
         'name': SHOP['name'], 'alternateName': ['小判鮫', 'KOBANZAME', 'こばんざめ'],
-        'description': '埼玉県川越市、築約80年の古民家で営業する古着屋。海外のヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱う。商品はすべて一点もの。',
+        'description': '埼玉県川越市、築約80年の古民家で営業する古着屋。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱う。商品はすべて一点もの。',
         'url': BASE + '/', 'email': SHOP['email'],
         'address': {'@type': 'PostalAddress', 'postalCode': SHOP['postal'], 'addressRegion': '埼玉県',
                     'addressLocality': '川越市', 'streetAddress': '元町1-14-5', 'addressCountry': 'JP'},
@@ -817,7 +817,7 @@ items = '\n'.join(f"- [{p['title']}]({BASE}/journal/{p['slug']}/): {p['product_n
                   for p in live)
 write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 
-> 埼玉県川越市元町1-14-5の、築約80年の古民家で営業している古着屋。海外のヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱う。商品はすべて一点もの。運営は{SHOP['company']}。英語ページは {BASE}/en/ 。
+> 埼玉県川越市元町1-14-5の、築約80年の古民家で営業している古着屋。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱う。商品はすべて一点もの。運営は{SHOP['company']}。英語ページは {BASE}/en/ 。
 
 ## 基本情報
 - 店名: 古着屋 小判鮫（こばんざめ / KOBANZAME）
