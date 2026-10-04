@@ -34,7 +34,7 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr)}
 .hero-ph{position:relative}
-.hero-img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.hero-img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:50% 50%}
 .maplink{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;background:rgba(21,19,15,.82);border:1px solid var(--kin);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:8px 12px;text-decoration:none}
 .maplink svg{width:14px;height:14px;flex:none}
 .hero-copy{padding:32px 0 40px}

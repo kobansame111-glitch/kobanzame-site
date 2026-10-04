@@ -24,7 +24,7 @@ ADD_TAX = False          # Squareのオンライン決済に消費税がかか�
 TAX_RATE = 0.10
 CF_BEACON_TOKEN = ''     # Cloudflare Web Analytics のトークン（空なら計測タグを入れない）
 HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）
-HERO_IMAGE = ''          # 店内の写真（例 '/assets/hero-shop.jpg'）。空なら掲載中のアウターの写真を使う
+HERO_IMAGE = '/assets/hero-shop.jpg'          # 店内の写真（例 '/assets/hero-shop.jpg'）。空なら掲載中のアウターの写真を使う
 
 SHOP = {
     'name': '古着屋 小判鮫 KOBANZAME',
@@ -271,7 +271,7 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr)}
 .hero-ph{position:relative}
-.hero-img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.hero-img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:50% 50%}
 .maplink{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;background:rgba(21,19,15,.82);border:1px solid var(--kin);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:8px 12px;text-decoration:none}
 .maplink svg{width:14px;height:14px;flex:none}
 .hero-copy{padding:32px 0 40px}
@@ -551,6 +551,7 @@ def faq_ld(lang):
             'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in FAQ[lang]]}
 
 hero_p = next((p for p in avail_live if cat_of(p) == 'outer'), avail_live[0] if avail_live else None)
+HERO_SRCSET = (' srcset="/assets/hero-shop-800.jpg 800w, /assets/hero-shop.jpg 1200w" sizes="(min-width:900px) 55vw, 100vw" width="1200" height="1600"' if HERO_IMAGE == '/assets/hero-shop.jpg' else '')
 HERO_SRC = HERO_IMAGE or (hero_p['images'][0] if hero_p else 'https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg')
 
 for lang in ('ja', 'en'):
@@ -569,7 +570,7 @@ for lang in ('ja', 'en'):
   <section class="hero">
     <div class="wrap">
       <div class="hero-ph">
-        <img class="hero-img" src="{esc(HERO_SRC)}" alt="{hero_alt}" fetchpriority="high">
+        <img class="hero-img" src="{esc(HERO_SRC)}"{HERO_SRCSET} alt="{hero_alt}" fetchpriority="high">
         <a class="maplink" href="{SHOP['gmaps']}" rel="noopener">{PIN}{t['map']}</a>
       </div>
       <div class="hero-copy">
