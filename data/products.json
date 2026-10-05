@@ -17,8 +17,16 @@
   },
   "price_rule": "マクドナルド方式：基準＝店頭（出品カードの紙の価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点は全チャネル係数1.0",
   "links": {
-   "square": "https://square.link/u/uK6BtXGW",
-   "mercari": "https://jp.mercari.com/shops/product/2JX8ZeDHkG6rE72TdZiWWe"
+   "square": "https://square.link/u/3SX9YJmY",
+   "mercari": "https://jp.mercari.com/shops/product/2JX8ZeDHkG6rE72TdZiWWe",
+   "square_item": "https://square.link/u/uK6BtXGW",
+   "square_qp": {
+    "id": "GADVM24J5IQN3SI7",
+    "url": "https://square.link/u/3SX9YJmY",
+    "order_id": "ThR5OT6Rrtmq3m0gECLGKUX4I1VZY",
+    "amount": 12880,
+    "created_at": "2026-10-05T11:07:11Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg",
@@ -86,8 +94,16 @@
   },
   "price_rule": "マクドナルド方式：基準＝店頭（Square登録価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点はサイト＝Square価格。メルカリ掲載分は非公開（1点1販路）",
   "links": {
-   "square": "https://square.link/u/PGX8mFdV",
-   "mercari": "https://jp.mercari.com/shops/product/2JVTFRvTVuHd46RXqVcwvM"
+   "square": "https://square.link/u/QlYApRxE",
+   "mercari": "https://jp.mercari.com/shops/product/2JVTFRvTVuHd46RXqVcwvM",
+   "square_item": "https://square.link/u/PGX8mFdV",
+   "square_qp": {
+    "id": "G6BHT66E2CC33UT3",
+    "url": "https://square.link/u/QlYApRxE",
+    "order_id": "rbYJmBGpPbTNpbIzk7Ht2jmA0wcZY",
+    "amount": 15980,
+    "created_at": "2026-10-05T11:07:12Z"
+   }
   },
   "mercari_status": "private",
   "images": [
@@ -157,8 +173,16 @@
   },
   "price_rule": "マクドナルド方式：基準＝店頭（Square登録価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点はサイト＝Square価格。メルカリ掲載分は非公開（1点1販路）",
   "links": {
-   "square": "https://square.link/u/SUMkLPcC",
-   "mercari": "https://jp.mercari.com/shops/product/2JREXvcVtpP3fd4NCWd6Zb"
+   "square": "https://square.link/u/O0lMPloH",
+   "mercari": "https://jp.mercari.com/shops/product/2JREXvcVtpP3fd4NCWd6Zb",
+   "square_item": "https://square.link/u/SUMkLPcC",
+   "square_qp": {
+    "id": "O5XAMHSK2I2U2VB6",
+    "url": "https://square.link/u/O0lMPloH",
+    "order_id": "lehGfdEAukWnGKsAceFVM6H6xgAZY",
+    "amount": 14080,
+    "created_at": "2026-10-05T11:07:12Z"
+   }
   },
   "mercari_status": "private",
   "images": [
@@ -232,8 +256,16 @@
   },
   "price_rule": "マクドナルド方式：基準＝店頭（Square登録価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点はサイト＝Square価格。メルカリ掲載分は非公開（1点1販路）",
   "links": {
-   "square": "https://square.link/u/CrXhyMsU",
-   "mercari": "https://jp.mercari.com/shops/product/2JREPDZcpzPKyifQJHy4Br"
+   "square": "https://square.link/u/El3Ala76",
+   "mercari": "https://jp.mercari.com/shops/product/2JREPDZcpzPKyifQJHy4Br",
+   "square_item": "https://square.link/u/CrXhyMsU",
+   "square_qp": {
+    "id": "44J2RT23SD5YHXBR",
+    "url": "https://square.link/u/El3Ala76",
+    "order_id": "bjqUV701bwD9f9jm7Ex2VaZ0uf8YY",
+    "amount": 24800,
+    "created_at": "2026-10-05T11:07:13Z"
+   }
   },
   "mercari_status": "private",
   "images": [
@@ -303,8 +335,16 @@
   },
   "price_rule": "マクドナルド方式：基準＝店頭（Square登録価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点はサイト＝Square価格。メルカリ掲載分は非公開（1点1販路）",
   "links": {
-   "square": "https://square.link/u/i4Og8RPk",
-   "mercari": "https://jp.mercari.com/shops/product/2JRMiH7DuMxRnQC2f373sk"
+   "square": "https://square.link/u/sTctTJpD",
+   "mercari": "https://jp.mercari.com/shops/product/2JRMiH7DuMxRnQC2f373sk",
+   "square_item": "https://square.link/u/i4Og8RPk",
+   "square_qp": {
+    "id": "OB7RXF2FSH26NFTQ",
+    "url": "https://square.link/u/sTctTJpD",
+    "order_id": "lUOnjnh3Bm1Zrr4X28dWSXTPokbZY",
+    "amount": 18000,
+    "created_at": "2026-10-05T11:07:13Z"
+   }
   },
   "mercari_status": "private",
   "images": [
@@ -374,8 +414,16 @@
   },
   "price_rule": "マクドナルド方式：基準＝店頭（Square登録価格）。各チャネルは基準×係数、または個別に上書き。2026-09-30時点はサイト＝Square価格。メルカリ掲載分は非公開（1点1販路）",
   "links": {
-   "square": "https://square.link/u/TELaHsX1",
-   "mercari": "https://jp.mercari.com/shops/product/2JNC3SPNFCFzfgWL4KPU6F"
+   "square": "https://square.link/u/HMuSPKAv",
+   "mercari": "https://jp.mercari.com/shops/product/2JNC3SPNFCFzfgWL4KPU6F",
+   "square_item": "https://square.link/u/TELaHsX1",
+   "square_qp": {
+    "id": "QW4RPIR5FWJ7HLB5",
+    "url": "https://square.link/u/HMuSPKAv",
+    "order_id": "9WDyCBwAT0UVHHGLonoN1iafJjRZY",
+    "amount": 7800,
+    "created_at": "2026-10-05T11:07:13Z"
+   }
   },
   "mercari_status": "private",
   "images": [
@@ -482,7 +530,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JWyqnnSUWvkAYzM8WVgJg",
-   "square": "https://square.link/u/lGY7f9Sg"
+   "square": "https://square.link/u/BORwmEDM",
+   "square_item": "https://square.link/u/lGY7f9Sg",
+   "square_qp": {
+    "id": "47TWCEAXGAMSPLRK",
+    "url": "https://square.link/u/BORwmEDM",
+    "order_id": "f1KkfjAFbHut8V7uYNFuDpEPNsQZY",
+    "amount": 2600,
+    "created_at": "2026-10-05T11:07:14Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JWyqaycXtBcrmu6EhQmex.jpg",
@@ -548,7 +604,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JWrj3bDbsz8bthMsBbiQW",
-   "square": "https://square.link/u/nRHfkV1p"
+   "square": "https://square.link/u/5KR6Bp7w",
+   "square_item": "https://square.link/u/nRHfkV1p",
+   "square_qp": {
+    "id": "Y46VQ5C6VH242KM5",
+    "url": "https://square.link/u/5KR6Bp7w",
+    "order_id": "PXBRL0xNlTBpEfc3BJtSopIPbq8YY",
+    "amount": 8800,
+    "created_at": "2026-10-05T11:07:14Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JWrio4SyLUBkVfwTVKhaj.jpg",
@@ -618,7 +682,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JWiChYumCdq36GeazFLYW",
-   "square": "https://square.link/u/GaDpG7Vr"
+   "square": "https://square.link/u/pGptQjyk",
+   "square_item": "https://square.link/u/GaDpG7Vr",
+   "square_qp": {
+    "id": "6YK6FS5E7I72DMSD",
+    "url": "https://square.link/u/pGptQjyk",
+    "order_id": "1iN3uWyZx9P4UJreSl4MbfAmucTZY",
+    "amount": 9800,
+    "created_at": "2026-10-05T11:07:15Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbcbnfEEvJXHSLhkW6.jpg",
@@ -693,7 +765,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JWfjqzyM9hYzuo5pJziFK",
-   "square": "https://square.link/u/e0kLrxUM"
+   "square": "https://square.link/u/9POZyfQa",
+   "square_item": "https://square.link/u/e0kLrxUM",
+   "square_qp": {
+    "id": "OIAIIGRXGOVMFPSE",
+    "url": "https://square.link/u/9POZyfQa",
+    "order_id": "VyX0E71AIeBXzdhtsRLrITcxjtOZY",
+    "amount": 62800,
+    "created_at": "2026-10-05T11:07:15Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JWfjR7rSDpz9kG46PDPKB.jpg",
@@ -763,7 +843,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JWY7SSTvK6pbtYAojrYhR",
-   "square": "https://square.link/u/rW7DDJBV"
+   "square": "https://square.link/u/KhHlXTA7",
+   "square_item": "https://square.link/u/rW7DDJBV",
+   "square_qp": {
+    "id": "KAP22MEZWRHBYQTC",
+    "url": "https://square.link/u/KhHlXTA7",
+    "order_id": "XtWxKzwQNkbvH5bILAkRAwzMl7MZY",
+    "amount": 19800,
+    "created_at": "2026-10-05T11:07:16Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JWY7KG7oYM68F5rgDmYum.jpg",
@@ -834,7 +922,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JWY7ARpgpEBotJqEGjyKV",
-   "square": "https://square.link/u/3gEqD5hr"
+   "square": "https://square.link/u/9qMySeUU",
+   "square_item": "https://square.link/u/3gEqD5hr",
+   "square_qp": {
+    "id": "WKH225J2PTS5R4WG",
+    "url": "https://square.link/u/9qMySeUU",
+    "order_id": "bRXrf5ceUrC13jGu5owKjYQyOuHZY",
+    "amount": 26800,
+    "created_at": "2026-10-05T11:07:16Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JWY72fZgeHBVPfs3xCcR4.jpg",
@@ -987,7 +1083,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JVgb7K4G5hNu4nKMezGGP",
-   "square": "https://square.link/u/F8lKfKs4"
+   "square": "https://square.link/u/w96cYhUl",
+   "square_item": "https://square.link/u/F8lKfKs4",
+   "square_qp": {
+    "id": "6IIHPEYDWCPCHGL4",
+    "url": "https://square.link/u/w96cYhUl",
+    "order_id": "tChmTjHr2pC48jc6RUi08TV01GAZY",
+    "amount": 24800,
+    "created_at": "2026-10-05T11:07:16Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JVgb2meF6zWNrq9Y7hN6x.jpg",
@@ -1057,7 +1161,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JUfphmBjpzLr8QqFEEUPe",
-   "square": "https://square.link/u/s44wNCc8"
+   "square": "https://square.link/u/pzjP3BPA",
+   "square_item": "https://square.link/u/s44wNCc8",
+   "square_qp": {
+    "id": "OPYYWXWH4AVYJ4Y2",
+    "url": "https://square.link/u/pzjP3BPA",
+    "order_id": "dmJH5YPv2roy6rhlZeKyJZw2l5XZY",
+    "amount": 6800,
+    "created_at": "2026-10-05T11:07:17Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JUfpZvgPXcz4TkC4s9uPz.jpg",
@@ -1201,7 +1313,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JUe9duw3m9bKkGNjTZHdx",
-   "square": "https://square.link/u/Fj5TNQmK"
+   "square": "https://square.link/u/eDPiGmdK",
+   "square_item": "https://square.link/u/Fj5TNQmK",
+   "square_qp": {
+    "id": "AGNZFYALQJNCLV42",
+    "url": "https://square.link/u/eDPiGmdK",
+    "order_id": "tw4anAZbnrPnQddtX78HnseA1DWZY",
+    "amount": 29800,
+    "created_at": "2026-10-05T11:07:17Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JUe9VShXDuTxHFBEoXeG6.jpg",
@@ -1272,7 +1392,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JUe7v9n3Jze278XVh7aXj",
-   "square": "https://square.link/u/CtHxW0yE"
+   "square": "https://square.link/u/P08OwBJC",
+   "square_item": "https://square.link/u/CtHxW0yE",
+   "square_qp": {
+    "id": "OBJRA6R5DSMJHWUX",
+    "url": "https://square.link/u/P08OwBJC",
+    "order_id": "zv47nyzvvdMuowqwA0j8Ax7c2a8YY",
+    "amount": 12800,
+    "created_at": "2026-10-05T11:07:18Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JUe7qiAdXWmXPai5Y2udM.jpg",
@@ -1344,7 +1472,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JU6fBUygFvLnCqRXr4ugK",
-   "square": "https://square.link/u/wSWA7RCQ"
+   "square": "https://square.link/u/P2H8akMc",
+   "square_item": "https://square.link/u/wSWA7RCQ",
+   "square_qp": {
+    "id": "FK4DQMWHB3UEMXWF",
+    "url": "https://square.link/u/P2H8akMc",
+    "order_id": "vHdTN2PZdffuOa2AuXaoJ9n9qn8YY",
+    "amount": 9800,
+    "created_at": "2026-10-05T11:07:18Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6epy3UisztjnTMsWwMf.jpg",
@@ -1415,7 +1551,15 @@
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
-   "mercari": "https://jp.mercari.com/shops/product/2JU6e6wrXsF7RQszXieUYU"
+   "mercari": "https://jp.mercari.com/shops/product/2JU6e6wrXsF7RQszXieUYU",
+   "square_qp": {
+    "id": "WDBMWLTTYOKHYRPT",
+    "url": "https://square.link/u/2gBoA8aK",
+    "order_id": "Vu3LpSCBaPYD04H890aE0nDH23NZY",
+    "amount": 12800,
+    "created_at": "2026-10-05T11:07:18Z"
+   },
+   "square": "https://square.link/u/2gBoA8aK"
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6dwcLRUmTnc5nRVVRMS.jpg",
@@ -1484,7 +1628,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JU6caugFqKeyGKdUtwitf",
-   "square": "https://square.link/u/qLO4eFwh"
+   "square": "https://square.link/u/XQicCOJF",
+   "square_item": "https://square.link/u/qLO4eFwh",
+   "square_qp": {
+    "id": "FHLQBMM442DGEMCM",
+    "url": "https://square.link/u/XQicCOJF",
+    "order_id": "r3ihZynQDEvvcNxmpzuRJ7ViYscZY",
+    "amount": 7800,
+    "created_at": "2026-10-05T11:07:19Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6cUTdLZbWZsjGYnTBxZ.jpg",
@@ -1559,7 +1711,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JTriHiNngiQMqUXBXckeC",
-   "square": "https://square.link/u/j6DgLK77"
+   "square": "https://square.link/u/6z6AySNb",
+   "square_item": "https://square.link/u/j6DgLK77",
+   "square_qp": {
+    "id": "UVI36PPVE63Z4ITS",
+    "url": "https://square.link/u/6z6AySNb",
+    "order_id": "1K99sxhrJZ9AogUihuT8qG4drPZZY",
+    "amount": 13800,
+    "created_at": "2026-10-05T11:07:19Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JTriApaLU2yeRyxRW4wr9.jpg",
@@ -1633,7 +1793,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JTmNEYAvBQKNtf29V4jiz",
-   "square": "https://square.link/u/O3FobY9U"
+   "square": "https://square.link/u/QC1XOwj7",
+   "square_item": "https://square.link/u/O3FobY9U",
+   "square_qp": {
+    "id": "C4ASIQH43DLK5NIE",
+    "url": "https://square.link/u/QC1XOwj7",
+    "order_id": "hIBpS7aKIMQPZgwcjsV9rL2llvNZY",
+    "amount": 7800,
+    "created_at": "2026-10-05T11:07:20Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JTmN8z9ygibGgb32aexR5.jpg",
@@ -1713,7 +1881,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JTjJcWLS6g7n8SuyDgsGs",
-   "square": "https://square.link/u/vTCWTYL7"
+   "square": "https://square.link/u/OGd7SZm1",
+   "square_item": "https://square.link/u/vTCWTYL7",
+   "square_qp": {
+    "id": "VRC6JT2TJ5QY5LOR",
+    "url": "https://square.link/u/OGd7SZm1",
+    "order_id": "39ehotjMxf2D2RqkUSg0TaNpI8DZY",
+    "amount": 5800,
+    "created_at": "2026-10-05T11:07:20Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JTjJRUxyR6mT8tRTiCM6m.jpg",
@@ -1781,7 +1957,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JTQi9TvMT95wscuMTW3UV",
-   "square": "https://square.link/u/tsd74CK6"
+   "square": "https://square.link/u/WLXjVlj0",
+   "square_item": "https://square.link/u/tsd74CK6",
+   "square_qp": {
+    "id": "IDA2NSNMFUHQOFY6",
+    "url": "https://square.link/u/WLXjVlj0",
+    "order_id": "h01ufG9JLfyFzZDE4hLgTDZIaWSZY",
+    "amount": 9800,
+    "created_at": "2026-10-05T11:07:21Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JTQi2DPQ7QStdHiNXF4ac.jpg",
@@ -1857,7 +2041,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JTKKa8CQrPQCUvM2iTgmF",
-   "square": "https://square.link/u/PbHqUtGK"
+   "square": "https://square.link/u/PKbPkuNP",
+   "square_item": "https://square.link/u/PbHqUtGK",
+   "square_qp": {
+    "id": "R2JFU4EQQJN5F6VT",
+    "url": "https://square.link/u/PKbPkuNP",
+    "order_id": "HVq9fwNUSfwFDKAEkxliqwNtKwRZY",
+    "amount": 23800,
+    "created_at": "2026-10-05T11:07:21Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JTKKStBACoatjPT7MWAFz.jpg",
@@ -1931,7 +2123,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JT8vcB8GLdWgHnqZ6vdyp",
-   "square": "https://square.link/u/Pisi1mZK"
+   "square": "https://square.link/u/DgCIfhWi",
+   "square_item": "https://square.link/u/Pisi1mZK",
+   "square_qp": {
+    "id": "SLJDRMSTLSMBQITO",
+    "url": "https://square.link/u/DgCIfhWi",
+    "order_id": "RekdL3Hhz1YBAStdobx53NvINaSZY",
+    "amount": 7800,
+    "created_at": "2026-10-05T11:07:21Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JT8vVaXRieqtDxsj8DDpt.jpg",
@@ -2001,7 +2201,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JRrRmpfuywfh7bq9ikq88",
-   "square": "https://square.link/u/pNPpSk9V"
+   "square": "https://square.link/u/NZF1nK61",
+   "square_item": "https://square.link/u/pNPpSk9V",
+   "square_qp": {
+    "id": "IGO6TPP7NITP4VLC",
+    "url": "https://square.link/u/NZF1nK61",
+    "order_id": "vFobQRUkuk3lDP7kTu3kxBQdh2FZY",
+    "amount": 12800,
+    "created_at": "2026-10-05T11:07:22Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JRrRcv7H7M62bNEaZ5Srr.jpg",
@@ -2075,7 +2283,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JR475w2rppDJrhck46SAy",
-   "square": "https://square.link/u/wog9p39i"
+   "square": "https://square.link/u/1L5a5EVB",
+   "square_item": "https://square.link/u/wog9p39i",
+   "square_qp": {
+    "id": "Y2QOSASM7F32R55D",
+    "url": "https://square.link/u/1L5a5EVB",
+    "order_id": "ZGAkGg5Y9dRFhs0IwwKUX162fl9YY",
+    "amount": 16800,
+    "created_at": "2026-10-05T11:07:22Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JR46vzKr5hV6rhB2xhkYS.jpg",
@@ -2149,7 +2365,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JR46sxnWqwPuESWET67Uo",
-   "square": "https://square.link/u/lUuh7b5n"
+   "square": "https://square.link/u/i7u5Pput",
+   "square_item": "https://square.link/u/lUuh7b5n",
+   "square_qp": {
+    "id": "IZIM4MDGL3T6SEJL",
+    "url": "https://square.link/u/i7u5Pput",
+    "order_id": "Fq3wSNo8MWwXs5y3LAdq7E9GujTZY",
+    "amount": 12800,
+    "created_at": "2026-10-05T11:07:23Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JR46iMKmTGmAnRbdTkXnd.jpg",
@@ -2222,7 +2446,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JQm9hPjAxbW3dUPpwCe5B",
-   "square": "https://square.link/u/daepRYOc"
+   "square": "https://square.link/u/BIWM14i9",
+   "square_item": "https://square.link/u/daepRYOc",
+   "square_qp": {
+    "id": "434QJLK5VMOHMGIQ",
+    "url": "https://square.link/u/BIWM14i9",
+    "order_id": "xSehBgSp5Wc2f2JePVaPRV5ZKSbZY",
+    "amount": 8580,
+    "created_at": "2026-10-05T11:07:23Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JQiYkKyvpKMJrNqqiYAQK.jpg",
@@ -2300,7 +2532,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JPKi6EYNTNSbPnECxuAHN",
-   "square": "https://square.link/u/0FjWIYAu"
+   "square": "https://square.link/u/0pGNn9vP",
+   "square_item": "https://square.link/u/0FjWIYAu",
+   "square_qp": {
+    "id": "25LUE6RHXRSWZE3B",
+    "url": "https://square.link/u/0pGNn9vP",
+    "order_id": "Lv0ERF8jwuw9ubpw0tW69Mh8769YY",
+    "amount": 15800,
+    "created_at": "2026-10-05T11:07:23Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JPKi5YqrpAHMdaLtWMBHR.jpg",
@@ -2371,7 +2611,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JMdjFpVttwRkz6TRkidVn",
-   "square": "https://square.link/u/WxqgDsKT"
+   "square": "https://square.link/u/NB4WFNNv",
+   "square_item": "https://square.link/u/WxqgDsKT",
+   "square_qp": {
+    "id": "2BFTEQF4DAGV4NJC",
+    "url": "https://square.link/u/NB4WFNNv",
+    "order_id": "hgLyPrCrcJ3VKPEZqYWDVVwY9jJZY",
+    "amount": 8000,
+    "created_at": "2026-10-05T11:07:24Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JMdj5XEwqs4atLphQijNt.jpg",
@@ -2439,7 +2687,15 @@
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
-   "square": "https://square.link/u/ojW9ez0b"
+   "square": "https://square.link/u/PkAjcTbl",
+   "square_item": "https://square.link/u/ojW9ez0b",
+   "square_qp": {
+    "id": "KZQZZQYPB63MWDUG",
+    "url": "https://square.link/u/PkAjcTbl",
+    "order_id": "Ju0MPMWNGxPvbJukBPTTSJ5aE5AZY",
+    "amount": 16800,
+    "created_at": "2026-10-05T11:07:24Z"
+   }
   },
   "images": [
    "/assets/products/k11263/01.jpg",
@@ -2507,7 +2763,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JSiWPfNFfgjnGv2sEMaw6",
-   "square": "https://square.link/u/x7bMAKpP"
+   "square": "https://square.link/u/8I37YObu",
+   "square_item": "https://square.link/u/x7bMAKpP",
+   "square_qp": {
+    "id": "C4HNY7TYRTDH4UAD",
+    "url": "https://square.link/u/8I37YObu",
+    "order_id": "rzkZQINNOUjBYrQyTj9OJ0AWP7SZY",
+    "amount": 44800,
+    "created_at": "2026-10-05T11:07:25Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JSiWHf4BrhHQbj3DQxPvi.jpg",
