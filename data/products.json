@@ -1125,7 +1125,15 @@
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
    "mercari": "https://jp.mercari.com/shops/product/2JUfoE62bYYrmRv4vyXRqD",
-   "square": "https://square.link/u/9baLLjVf"
+   "square": "https://square.link/u/tAhGxraB",
+   "square_item": "https://square.link/u/9baLLjVf",
+   "square_qp": {
+    "id": "4I5IRSY3CNZDX546",
+    "url": "https://square.link/u/tAhGxraB",
+    "order_id": "jJVXQpVUdSDNixYJ8Z82gkLQPBKZY",
+    "amount": 2000,
+    "created_at": "2026-10-05T11:04:45Z"
+   }
   },
   "images": [
    "https://assets.mercari-shops-static.com/-/large/plain/2JUfnvEBM4seScScTh7nwd.jpg",
