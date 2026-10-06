@@ -9,7 +9,7 @@ v2で変わったこと
   水曜朝のGASが "draft" → "live" に書き換えると一覧に並ぶ（"release" が無い商品は従来どおり published で判断）
 - 売れた商品（status=sold）は一覧から消さずSOLDで残す（「売れた一点ものも見る」で表示）
 - サイズで探す（身幅±3cm）／店頭で見たい・取り置き（2日間）／こちらも一点もの
-- 価格：ADD_TAX=True で「Square登録価格（税抜）×1.1」を税込として表示。
+- 価格：ADD_TAX=True で「Square登録価格（税抜）×1.1 を10円単位に切り上げ」を税込として表示（2026-10-06 から True）。
   ※Squareのオンライン決済にも消費税がかかる設定にしてから True にする（表示と請求額をそろえるため）
 - アクセス解析：CF_BEACON_TOKEN に Cloudflare Web Analytics のトークンを入れると全ページに計測タグが入る
 - トップの写真：HERO_IMAGE（店内の写真）。写真の上にGoogleマップへのリンク
@@ -20,7 +20,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = 'https://kobanzame-site.pages.dev'   # 独自ドメイン取得後はここだけ差し替える
 TODAY = os.environ.get('SITE_TODAY') or datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%Y-%m-%d')
 
-ADD_TAX = False          # Squareのオンライン決済に消費税がかかる設定にしたら True（龍さん決定A・2026-10-04）
+ADD_TAX = True           # 2026-10-06 龍さん決定B：Square登録価格は税抜 → 表示・請求とも ×1.1 を10円単位に切り上げ（63番の QP.ADD_TAX と必ず同じにする）
 TAX_RATE = 0.10
 CF_BEACON_TOKEN = ''     # Cloudflare Web Analytics のトークン（空なら計測タグを入れない）
 HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）
@@ -162,7 +162,8 @@ def pre(lang):
 
 def site_price(p):
     base = int(p['prices']['site'])
-    return math.floor(base * (1 + TAX_RATE)) if ADD_TAX else base
+    # 税込＝税抜×1.1 を10円単位に切り上げ（小数の誤差を避けるため整数で計算：base*11/100 を切り上げて ×10）
+    return (-(-base * 11 // 100)) * 10 if ADD_TAX else base
 
 def money(n, lang):
     return f'¥{n:,}' if lang == 'en' else f'{n:,}円'
