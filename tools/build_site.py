@@ -23,6 +23,7 @@ TODAY = os.environ.get('SITE_TODAY') or datetime.datetime.now(datetime.timezone(
 ADD_TAX = True           # 2026-10-06 龍さん決定B：Square登録価格は税抜 → 表示・請求とも ×1.1 を10円単位に切り上げ（63番の QP.ADD_TAX と必ず同じにする）
 TAX_RATE = 0.10
 CF_BEACON_TOKEN = ''     # Cloudflare Web Analytics のトークン（空なら計測タグを入れない）
+ANALYTICS_URL = ''       # 64番（自前の簡易計測）のウェブアプリURL。空なら計測しない（2026-10-06 龍さん決定A）
 HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）
 HERO_IMAGE = '/assets/hero-shop.jpg'          # 店内の写真（例 '/assets/hero-shop.jpg'）。空なら掲載中のアウターの写真を使う
 
@@ -407,6 +408,23 @@ def other_path(path, lang):
     p = path[3:] if path.startswith('/en') else path
     return '/tokushoho/' if p == '/legal/' else (p or '/')
 
+# 64番：ページが開かれた時と、決まったボタン（購入・メルカリ・取り置き・Instagram・地図）が押された時に1件ずつ送る。
+# 個人を見分ける情報（Cookie・端末ID・IP等）は送らない。スタッフは一度 ?nolog=1 を付けて開くと、その端末からは送られない。
+TRACK_JS = """<script>
+(function(){var U='__URL__';if(!U||navigator.webdriver||/bot|crawl|spider|slurp|lighthouse|headless/i.test(navigator.userAgent))return;
+try{if(/[?&]nolog=1/.test(location.search))localStorage.setItem('kbz_nolog','1');if(/[?&]nolog=0/.test(location.search))localStorage.removeItem('kbz_nolog');if(localStorage.getItem('kbz_nolog')==='1')return;}catch(e){}
+function sku(){var el=document.querySelector('.sku');var m=el&&el.textContent.match(/[A-Z]{1,3}\\d{3,6}/);return m?m[0]:'';}
+function send(o){o.p=location.pathname;o.sku=sku();o.lang=document.documentElement.lang||'';o.dev=/Mobi|Android|iPhone/i.test(navigator.userAgent)?'m':'d';
+try{var h=document.referrer?new URL(document.referrer).hostname:'';o.ref=(h===location.hostname)?'':h;}catch(e){o.ref='';}
+var b=JSON.stringify(o);try{if(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([b],{type:'text/plain'})))return;}catch(e){}
+try{fetch(U,{method:'POST',body:b,mode:'no-cors',keepalive:true});}catch(e){}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){send({t:'pv'});});else send({t:'pv'});
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a,button');if(!a)return;var h=a.getAttribute('href')||'',k='';
+if(a.id==='holdbtn')k='hold';else if(/square\\.link/.test(h))k='buy';else if(/mercari/.test(h))k='mercari';else if(/instagram\\.com/.test(h))k='instagram';else if(/google\\.[a-z.]+\\/maps|maps\\.app\\.goo\\.gl|goo\\.gl\\/maps/.test(h))k='map';
+if(k)send({t:'click',btn:k});},true);
+})();
+</script>"""
+
 def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, noindex=False):
     t = T[lang]
     url = BASE + path
@@ -414,6 +432,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
     ld = extra_ld if extra_ld is not None else {'@context': 'https://schema.org', '@graph': [org_node()]}
     beacon = ('<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"token": "' + CF_BEACON_TOKEN + '"}\'></script>'
               if CF_BEACON_TOKEN else '')
+    track = TRACK_JS.replace('__URL__', ANALYTICS_URL) if ANALYTICS_URL else ''
     alt = other_path(path, lang)
     ja_url = BASE + (path if lang == 'ja' else alt)
     en_url = BASE + (path if lang == 'en' else alt)
@@ -446,7 +465,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 {jld(ld)}
-{beacon}
+{beacon}{track}
 </head>
 <body>
 <div class="util">{t['util']}</div>
