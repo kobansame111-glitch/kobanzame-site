@@ -24,6 +24,8 @@ ADD_TAX = True           # 2026-10-06 龍さん決定B：Square登録価格は�
 TAX_RATE = 0.10
 CF_BEACON_TOKEN = ''     # Cloudflare Web Analytics のトークン（空なら計測タグを入れない）
 ANALYTICS_URL = ''       # 64番（自前の簡易計測）のウェブアプリURL。空なら計測しない（2026-10-06 龍さん決定A）
+GSC_VERIFY = ''          # Google Search Console の確認コード（content="…" の中身だけ。空ならタグを入れない）
+BING_VERIFY = ''         # Bing Webmaster Tools の確認コード（同上。Search Consoleから取り込むなら空のままでよい）
 HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）
 HERO_IMAGE = '/assets/hero-shop.jpg'          # 店内の写真（例 '/assets/hero-shop.jpg'）。空なら掲載中のアウターの写真を使う
 
@@ -433,6 +435,8 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
     beacon = ('<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"token": "' + CF_BEACON_TOKEN + '"}\'></script>'
               if CF_BEACON_TOKEN else '')
     track = TRACK_JS.replace('__URL__', ANALYTICS_URL) if ANALYTICS_URL else ''
+    verify = ((f'<meta name="google-site-verification" content="{esc(GSC_VERIFY)}">\n' if GSC_VERIFY else '') +
+              (f'<meta name="msvalidate.01" content="{esc(BING_VERIFY)}">\n' if BING_VERIFY else '')) if path in ('/', '/en/') else ''
     alt = other_path(path, lang)
     ja_url = BASE + (path if lang == 'ja' else alt)
     en_url = BASE + (path if lang == 'en' else alt)
@@ -466,7 +470,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <link rel="stylesheet" href="/assets/site.css">
 {jld(ld)}
 {beacon}{track}
-</head>
+{verify}</head>
 <body>
 <div class="util">{t['util']}</div>
 <header class="site"><div class="wrap">
@@ -489,7 +493,7 @@ def foot(lang):
   <div>古着屋 小判鮫／{ADDR[lang]}／{hours}<br>
     {op}　・　{lic}<br>
     <a href="{SHOP['instagram']}" rel="noopener">Instagram</a>　・　<a href="{SHOP['mercari']}" rel="noopener">メルカリShops</a>　・　<a href="{SHOP['gmaps']}" rel="noopener">{t['gm']}</a><br>
-    {legal}
+    <a href="{'/en/guide/' if lang == 'en' else '/guide/'}">{'Kawagoe vintage guide' if lang == 'en' else '川越で古着屋を探している方へ'}</a>　・　{legal}
   </div>
 </div></footer>
 </body>
@@ -804,12 +808,87 @@ write('/en/legal/index.html', head('en', 'Legal notice & privacy | Kobanzame', '
 </main>
 ''' + foot('en'))
 
+# ---------- 川越で古着屋を探している人向けの案内ページ（AI検索・検索エンジン対策 2026-10-06） ----------
+# AIや検索で「川越 古着屋」と聞かれたときに、そのまま答えになる文章を1ページにまとめる。
+# 他店との比較や「川越で一番」などの言い切りは書かない（景表法・事実確認できないため）。
+_pr = sorted(site_price(p) for p in avail_live)
+GUIDE = {
+ 'ja': {
+  'path': '/guide/', 'title': '川越で古着屋を探している方へ｜古着屋 小判鮫（川越・元町の古民家）',
+  'desc': '埼玉県川越市元町の古民家古着屋 小判鮫の案内。場所・営業時間・定休日・扱っている古着・価格帯・取り置き・通販の買い方をまとめました。',
+  'h1': '川越で古着屋を探している方へ',
+  'lead': '古着屋 小判鮫（こばんざめ／KOBANZAME）は、埼玉県川越市元町にある古着屋です。築約80年の古民家をそのまま使った店内に、国内外で買い付けたヴィンテージ古着と、オリジナルのリメイクアクセサリー「GAW」を並べています。川越観光のついでに立ち寄っていただける場所です。',
+  'secs': [
+   ('場所と営業時間', f'住所は{ADDR["ja"]}。蔵造りの町並みと同じ、川越の元町エリアにあります。営業は12:00〜20:00、定休日は毎週月曜日・火曜日です。臨時の休みや営業時間の変更はInstagram（{SHOP["ig_handle"]}）でお知らせします。'),
+   ('どんな古着があるか', 'アメリカ・ヨーロッパなどのヴィンテージ古着を中心に、メンズ・レディースの両方を扱っています。アウター、シャツやTシャツ、ワンピース、靴、小物まで。ブランドや流行ではなく、素材・質感・その一点にしかない雰囲気で選んでいるので、すべて一点ものです。'),
+   ('価格の目安', (f'このサイトに掲載中の一点ものは、{money(_pr[0], "ja")}〜{money(_pr[-1], "ja")}（税込・送料込み）です。店頭の価格は商品ごとに異なります。' if _pr else '価格は商品ごとに異なります。サイトに掲載中の商品ページでご確認ください。')),
+   ('新着入荷', '毎週水曜日に新しい一点ものが入ります。このサイトにも水曜日の朝に新着を掲載しています。'),
+   ('GAW（オリジナルのリメイクアクセサリー）', '古いスプーンなどの素材を、ペンダントやバングルなどに作り直した、小判鮫オリジナルのアクセサリーです。こちらも一点ものです。'),
+   ('来店前に見たい・取り置きしたいとき', f'サイトの商品ページにある「店頭で見たい・取り置きする」から、InstagramのDMかメールでご連絡いただくと、店頭で{HOLD_DAYS}日間お取り置きします。'),
+   ('遠くて行けないとき', 'このサイトに載っている商品は、クレジットカード（Square決済）でそのまま購入できます。送料込みで、決済確認後3日以内（定休日を除く）に川越の店舗から発送します。メルカリShopsでも販売しています。'),
+   ('サイズ選びのコツ', '実寸は平置きで測っています。お手持ちのいちばん気に入っている服の身幅（脇の下から脇の下まで）を測って比べると、サイズの失敗が減ります。トップページの「手持ちの服の身幅」に数字を入れると、近いサイズの服だけを表示できます。'),
+  ],
+  'faq': [
+   ('川越の小判鮫はどこにありますか？', f'{ADDR["ja"]}にあります。築約80年の古民家で営業している古着屋です。'),
+   ('定休日はいつですか？', '毎週月曜日・火曜日が定休日です。営業時間は12:00〜20:00です。'),
+   ('メンズもレディースもありますか？', 'あります。メンズ・レディースどちらのヴィンテージ古着も扱っています。'),
+   ('新しい商品はいつ入りますか？', '毎週水曜日に新着が入ります。'),
+   ('川越まで行けなくても買えますか？', 'このサイトからクレジットカードで購入できます（送料込み）。メルカリShopsでも販売しています。'),
+  ],
+  'cta': '掲載中の一点ものを見る', 'back': '/#list', 'crumb': '川越の古着屋 案内',
+ },
+ 'en': {
+  'path': '/en/guide/', 'title': 'Looking for a vintage shop in Kawagoe? | Kobanzame',
+  'desc': 'A guide to Kobanzame, a vintage clothing shop in an old wooden house in Motomachi, Kawagoe, Saitama: location, hours, what we carry, prices, holds and buying online.',
+  'h1': 'Looking for a vintage shop in Kawagoe?',
+  'lead': 'Kobanzame is a vintage clothing shop in Motomachi, Kawagoe, Saitama, set in an 80-year-old wooden house. We carry vintage clothing sourced in Japan and abroad, and GAW, our own line of remade accessories. It is an easy stop while you explore Kawagoe.',
+  'secs': [
+   ('Location and hours', f'{ADDR["en"]}, in the Motomachi area of Kawagoe, the same area as Kawagoe’s old kurazukuri (clay-walled merchant house) streets. Open 12:00–20:00, closed every Monday and Tuesday. Changes are announced on Instagram ({SHOP["ig_handle"]}).'),
+   ('What you will find', 'Mostly vintage clothing from the US and Europe, for men and women: outerwear, shirts and tees, dresses, shoes and small goods. We choose by material, texture and the feel of each piece rather than brand or trend, so everything is one of a kind.'),
+   ('Prices', (f'Pieces listed on this site range from {money(_pr[0], "en")} to {money(_pr[-1], "en")} (tax and domestic shipping included). In-store prices vary by item.' if _pr else 'Prices vary by item. See each item page on this site.')),
+   ('New arrivals', 'New pieces arrive every Wednesday, and go up on this site on Wednesday morning.'),
+   ('GAW', 'Our own accessory line: old materials such as spoons remade into pendants, bangles and more. Each one is one of a kind.'),
+   ('Holding a piece', f'Use "See it in the shop / hold it" on any item page and send us an Instagram DM or email. We hold it at the shop for {HOLD_DAYS} days.'),
+   ('Buying online', 'Pieces on this site can be bought by credit card through Square. Online checkout ships within Japan; for overseas shipping, please contact us before buying.'),
+  ],
+  'faq': [
+   ('Where is Kobanzame?', f'At {ADDR["en"]}, in an 80-year-old wooden house.'),
+   ('When is it closed?', 'Every Monday and Tuesday. Open 12:00–20:00 on other days.'),
+   ('Do you have both men\'s and women\'s clothing?', 'Yes, both.'),
+   ('When do new pieces arrive?', 'Every Wednesday.'),
+  ],
+  'cta': 'See the pieces', 'back': '/en/#list', 'crumb': 'Kawagoe vintage guide',
+ },
+}
+for lang, g in GUIDE.items():
+    P = pre(lang)
+    g_faq_ld = {'@type': 'FAQPage', '@id': BASE + g['path'] + '#faq',
+                'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in g['faq']]}
+    g_ld = {'@context': 'https://schema.org', '@graph': [
+        org_node(), g_faq_ld,
+        {'@type': 'WebPage', '@id': BASE + g['path'] + '#page', 'url': BASE + g['path'], 'name': g['title'], 'inLanguage': lang,
+         'about': {'@id': BASE + '/#store'}, 'dateModified': TODAY},
+        {'@type': 'BreadcrumbList', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': 'HOME', 'item': BASE + P + '/'},
+            {'@type': 'ListItem', 'position': 2, 'name': g['crumb'], 'item': BASE + g['path']}]}]}
+    secs = ''.join(f'  <h2>{esc(h)}</h2><p>{esc(b)}</p>\n' for h, b in g['secs'])
+    gfaq = ''.join(f'  <details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>\n' for q, a in g['faq'])
+    write(g['path'] + 'index.html', head(lang, g['title'], g['desc'], g['path'], extra_ld=g_ld) + f'''
+<main class="wrap page">
+  <h1>{esc(g['h1'])}</h1>
+  <p>{esc(g['lead'])}</p>
+{secs}  <section class="faq" id="faq"><h2>Q&amp;A</h2>
+{gfaq}  </section>
+  <p style="margin-top:28px"><a class="btn" href="{g['back']}">{esc(g['cta'])}</a></p>
+</main>
+''' + foot(lang))
+
 # ---------- robots.txt / sitemap.xml / llms.txt ----------
 pages = []
 for lang in ('ja', 'en'):
     P = pre(lang)
     pages += [P + '/', P + '/journal/'] + [P + f"/journal/{p['slug']}/" for p in live]
-pages += ['/tokushoho/', '/privacy/', '/en/legal/']
+pages += ['/tokushoho/', '/privacy/', '/en/legal/', '/guide/', '/en/guide/']
 write('/robots.txt', f'''# 小判鮫 公式サイト：検索エンジン・AI検索のどちらにも公開
 User-agent: *
 Allow: /
@@ -855,6 +934,7 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 ## ページ
 - [トップ・よくある質問]({BASE}/)
 - [ジャーナル]({BASE}/journal/)
+- [川越で古着屋を探している方へ（案内）]({BASE}/guide/)
 - [English]({BASE}/en/)
 - [特定商取引法に基づく表記]({BASE}/tokushoho/)
 - [プライバシーポリシー]({BASE}/privacy/)
