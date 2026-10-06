@@ -218,6 +218,35 @@ def loc(p, key, lang):
 def has_en(p):
     return p['sku'] in EN
 
+NO_BRAND = ('表記なし', 'ノーブランド', 'TEST')
+
+def spec_of(p):
+    """仕様表（[[項目, 値], ...]）を辞書にする"""
+    return {k: v for k, v in p.get('spec', [])}
+
+def color_of(p):
+    """色：かっこ書きを外し、「×」区切りを「/」にする（Googleは100文字まで）"""
+    c = re.sub(r'[（(].*?[）)]', '', spec_of(p).get('色', '')).strip()
+    return re.sub(r'\s*[×✕]\s*', '/', c)[:100]
+
+def size_of(p):
+    """サイズ：表記サイズ（L・US 8.5 D など）を優先。表記が無ければ最初の実寸（身幅55.5cm など）"""
+    s = spec_of(p).get('サイズ', '').strip()
+    if not s:
+        return ''
+    head_ = re.split(r'[（(／/]', s)[0].strip()
+    head_ = re.sub(r'^(表記|タグ表記|タグ|実寸)\s*', '', head_).strip()
+    head_ = head_.split('・')[0].strip()
+    return head_[:100]
+
+def gender_of(p):
+    c = p.get('category', '')
+    return 'male' if c.startswith('メンズ') else 'female' if c.startswith('レディース') else 'unisex'
+
+def brand_of(p):
+    b = (p.get('brand') or '').strip()
+    return '' if (not b or any(b.startswith(x) for x in NO_BRAND)) else b
+
 def jld(obj):
     return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False, separators=(',', ':')) + '</script>'
 
@@ -231,6 +260,10 @@ def org_node():
                     'addressLocality': '川越市', 'streetAddress': '元町1-14-5', 'addressCountry': 'JP'},
         'openingHours': 'We-Su 12:00-20:00', 'currenciesAccepted': 'JPY', 'paymentAccepted': 'クレジットカード',
         'hasMap': SHOP['gmaps'],
+        'geo': {'@type': 'GeoCoordinates', 'latitude': 35.9253165, 'longitude': 139.4832435},   # Googleマップの店舗ページの座標（2026-10-06）
+        'openingHoursSpecification': [{'@type': 'OpeningHoursSpecification',
+                                       'dayOfWeek': ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                                       'opens': '12:00', 'closes': '20:00'}],
         'parentOrganization': {'@type': 'Organization', 'name': SHOP['company']},
         'sameAs': [SHOP['instagram'], SHOP['mercari']],
     }
@@ -670,6 +703,8 @@ for lang in ('ja', 'en'):
                  'availability': 'https://schema.org/SoldOut' if sold else 'https://schema.org/InStock',
                  'itemCondition': 'https://schema.org/' + p.get('item_condition', 'UsedCondition'), 'url': BASE + path,
                  'seller': {'@id': BASE + '/#store'},
+                 'hasMerchantReturnPolicy': {'@type': 'MerchantReturnPolicy', 'applicableCountry': 'JP',
+                                             'returnPolicyCategory': 'https://schema.org/MerchantReturnNotPermitted'},
                  'shippingDetails': {'@type': 'OfferShippingDetails',
                                      'shippingRate': {'@type': 'MonetaryAmount', 'value': '0', 'currency': 'JPY'},
                                      'shippingDestination': {'@type': 'DefinedRegion', 'addressCountry': 'JP'},
@@ -680,7 +715,10 @@ for lang in ('ja', 'en'):
         ld = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'Product', '@id': BASE + path + '#product', 'name': name, 'sku': p['sku'],
              'description': loc(p, 'summary_text', lang), 'image': p['images'], 'brand': {'@type': 'Brand', 'name': p['brand']},
-             'material': p.get('material', ''), 'category': p.get('category', ''), 'offers': offer},
+             'material': p.get('material', ''), 'category': p.get('category', ''), 'offers': offer,
+             **({'color': color_of(p)} if color_of(p) else {}), **({'size': size_of(p)} if size_of(p) else {}),
+             'audience': {'@type': 'PeopleAudience', 'suggestedGender': gender_of(p)},
+             'additionalProperty': [{'@type': 'PropertyValue', 'name': k, 'value': v} for k, v in p.get('spec', []) if k not in ('発送',)]},
             {'@type': 'BlogPosting', '@id': BASE + path + '#article', 'headline': loc(p, 'title', lang), 'image': p['images'][0],
              'datePublished': p.get('published_date', TODAY), 'dateModified': TODAY, 'inLanguage': lang,
              'author': author, 'publisher': {'@id': BASE + '/#store'}, 'about': {'@id': BASE + path + '#product'}, 'mainEntityOfPage': BASE + path},
@@ -942,4 +980,35 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 ## 掲載中の商品
 {items}
 ''')
-print('built', len(pages), 'pages')
+# ---------- Google Merchant Center 用の商品一覧（2026-10-06 龍さん決定A） ----------
+# Googleのショッピング・AIモード・Googleレンズに無料で載せるための商品データ。
+# 載せるのは「公開中・売れていない・購入ボタンがある」商品だけ。売れたら次の再生成で一覧から消える。
+# 価格はサイトの表示価格（税込・送料込み）と同じ。古着にはJANコードが無いので identifier_exists=no。
+def _x(s):
+    return html.escape(str(s), quote=True)
+feed_items = []
+for p in avail_live:
+    if not p['links'].get('square'):
+        continue
+    imgs = p['images'][:11]
+    cond = 'new' if p.get('item_condition') == 'NewCondition' else 'used'
+    b = brand_of(p)
+    fields = [
+        ('g:id', p['sku']), ('title', p['product_name'][:150]),
+        ('description', p['summary_text'][:5000]),
+        ('link', BASE + '/journal/' + p['slug'] + '/'), ('g:image_link', imgs[0]),
+    ] + [('g:additional_image_link', u) for u in imgs[1:]] + [
+        ('g:availability', 'in_stock'), ('g:price', f"{site_price(p)} JPY"), ('g:condition', cond),
+    ] + ([('g:brand', b)] if b else []) + [
+        ('g:identifier_exists', 'no'), ('g:product_type', p.get('category', '').replace('／', ' > ')),
+    ] + ([('g:gender', gender_of(p)), ('g:age_group', 'adult')] if not p.get('category', '').startswith('小物') else []) + ([('g:color', color_of(p))] if color_of(p) else []) + ([('g:size', size_of(p))] if size_of(p) else [])
+    xml = ''.join(f'      <{k}>{_x(v)}</{k}>\n' for k, v in fields)
+    xml += '      <g:shipping><g:country>JP</g:country><g:price>0 JPY</g:price></g:shipping>\n'
+    feed_items.append('    <item>\n' + xml + '    </item>\n')
+write('/feed/google.xml', '<?xml version="1.0" encoding="UTF-8"?>\n'
+      '<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n  <channel>\n'
+      f'    <title>{_x(SHOP["name"])}</title>\n    <link>{BASE}/</link>\n'
+      '    <description>古着屋 小判鮫の一点もの（税込・送料込み）</description>\n'
+      + ''.join(feed_items) + '  </channel>\n</rss>\n')
+
+print('built', len(pages), 'pages', '/ feed', len(feed_items), 'items')
