@@ -206,6 +206,10 @@ def cond_rank(p, lang):
             return t['rank_vin']
     return ''
 
+def abs_url(u):
+    """サイト内の画像（/assets/...）を https:// から始まる完全なURLにする（Google・SNSは完全なURLでないと読めない）"""
+    return BASE + u if isinstance(u, str) and u.startswith('/') else u
+
 def thumb_of(p):
     return p.get('thumb') or p['images'][0].replace('/large/', '/medium/')
 
@@ -463,7 +467,7 @@ if(k)send({t:'click',btn:k});},true);
 def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, noindex=False):
     t = T[lang]
     url = BASE + path
-    img = image or 'https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg'
+    img = abs_url(image) or 'https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg'
     ld = extra_ld if extra_ld is not None else {'@context': 'https://schema.org', '@graph': [org_node()]}
     beacon = ('<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"token": "' + CF_BEACON_TOKEN + '"}\'></script>'
               if CF_BEACON_TOKEN else '')
@@ -703,8 +707,6 @@ for lang in ('ja', 'en'):
                  'availability': 'https://schema.org/SoldOut' if sold else 'https://schema.org/InStock',
                  'itemCondition': 'https://schema.org/' + p.get('item_condition', 'UsedCondition'), 'url': BASE + path,
                  'seller': {'@id': BASE + '/#store'},
-                 'hasMerchantReturnPolicy': {'@type': 'MerchantReturnPolicy', 'applicableCountry': 'JP',
-                                             'returnPolicyCategory': 'https://schema.org/MerchantReturnNotPermitted'},
                  'shippingDetails': {'@type': 'OfferShippingDetails',
                                      'shippingRate': {'@type': 'MonetaryAmount', 'value': '0', 'currency': 'JPY'},
                                      'shippingDestination': {'@type': 'DefinedRegion', 'addressCountry': 'JP'},
@@ -714,12 +716,12 @@ for lang in ('ja', 'en'):
         author = {'@type': 'Person', 'name': '龍' if lang == 'ja' else 'Ryu', 'jobTitle': '小判鮫オーナー・専属バイヤー' if lang == 'ja' else 'Owner & buyer, Kobanzame', 'worksFor': {'@id': BASE + '/#store'}}
         ld = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'Product', '@id': BASE + path + '#product', 'name': name, 'sku': p['sku'],
-             'description': loc(p, 'summary_text', lang), 'image': p['images'], 'brand': {'@type': 'Brand', 'name': p['brand']},
+             'description': loc(p, 'summary_text', lang), 'image': [abs_url(u) for u in p['images']], 'brand': {'@type': 'Brand', 'name': p['brand']},
              'material': p.get('material', ''), 'category': p.get('category', ''), 'offers': offer,
              **({'color': color_of(p)} if color_of(p) else {}), **({'size': size_of(p)} if size_of(p) else {}),
              'audience': {'@type': 'PeopleAudience', 'suggestedGender': gender_of(p)},
              'additionalProperty': [{'@type': 'PropertyValue', 'name': k, 'value': v} for k, v in p.get('spec', []) if k not in ('発送',)]},
-            {'@type': 'BlogPosting', '@id': BASE + path + '#article', 'headline': loc(p, 'title', lang), 'image': p['images'][0],
+            {'@type': 'BlogPosting', '@id': BASE + path + '#article', 'headline': loc(p, 'title', lang), 'image': abs_url(p['images'][0]),
              'datePublished': p.get('published_date', TODAY), 'dateModified': TODAY, 'inLanguage': lang,
              'author': author, 'publisher': {'@id': BASE + '/#store'}, 'about': {'@id': BASE + path + '#product'}, 'mainEntityOfPage': BASE + path},
             {'@type': 'BreadcrumbList', 'itemListElement': [
@@ -990,7 +992,7 @@ feed_items = []
 for p in avail_live:
     if not p['links'].get('square'):
         continue
-    imgs = p['images'][:11]
+    imgs = [abs_url(u) for u in p['images'][:11]]
     cond = 'new' if p.get('item_condition') == 'NewCondition' else 'used'
     b = brand_of(p)
     fields = [
