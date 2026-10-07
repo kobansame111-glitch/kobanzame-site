@@ -23,7 +23,7 @@ TODAY = os.environ.get('SITE_TODAY') or datetime.datetime.now(datetime.timezone(
 ADD_TAX = True           # 2026-10-06 龍さん決定B：Square登録価格は税抜 → 表示・請求とも ×1.1 を10円単位に切り上げ（63番の QP.ADD_TAX と必ず同じにする）
 TAX_RATE = 0.10
 CF_BEACON_TOKEN = ''     # Cloudflare Web Analytics のトークン（空なら計測タグを入れない）
-ANALYTICS_URL = ''       # 64番（自前の簡易計測）のウェブアプリURL。空なら計測しない（2026-10-06 龍さん決定A）
+ANALYTICS_URL = 'https://script.google.com/macros/s/AKfycbxxYc9kZztdwiWOvefrpY6mPHlRUlqLb2SndthCdAUn7BeBXAgZO3i6_JoDxyFQiv3q/exec'       # 64番（自前の簡易計測）のウェブアプリURL。空なら計測しない（2026-10-06 龍さん決定A）
 GSC_VERIFY = ''          # Google Search Console の確認コード（content="…" の中身だけ。空ならタグを入れない）
 BING_VERIFY = ''         # Bing Webmaster Tools の確認コード（同上。Search Consoleから取り込むなら空のままでよい）
 HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）
