@@ -18,6 +18,7 @@
 ## ページ
 - [トップ・よくある質問](https://kobanzame-site.pages.dev/)
 - [ジャーナル](https://kobanzame-site.pages.dev/journal/)
+- [川越で古着屋を探している方へ（案内）](https://kobanzame-site.pages.dev/guide/)
 - [English](https://kobanzame-site.pages.dev/en/)
 - [特定商取引法に基づく表記](https://kobanzame-site.pages.dev/tokushoho/)
 - [プライバシーポリシー](https://kobanzame-site.pages.dev/privacy/)
