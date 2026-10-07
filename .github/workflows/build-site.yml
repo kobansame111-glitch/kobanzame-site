@@ -11,6 +11,11 @@ on:
       - 'data/products.json'
       - 'tools/build_site.py'
   workflow_dispatch:
+  # 2026-10-08：11月1日から毎日営業に切り替わるので、その日の0:05と3:05（日本時間）に作り直す
+  # （GitHubの時刻はUTC。10/31 15:05 UTC＝11/1 0:05 JST。毎年この日に動くが、変化が無ければ何もコミットしない）
+  schedule:
+    - cron: '5 15 31 10 *'
+    - cron: '5 18 31 10 *'
 
 permissions:
   contents: write

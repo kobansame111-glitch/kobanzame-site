@@ -59,6 +59,7 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .days b{color:var(--kin);font-weight:500}
 .days .today{border:1px solid var(--kin);color:var(--kin);font-size:11px;padding:1px 6px}
 .days .today.closed{border-color:var(--usu);color:var(--usu)}
+.days .soon{flex-basis:100%;order:3;color:var(--kin)}
 .maplink{display:inline-flex;align-items:center;gap:8px;background:rgba(21,19,15,.82);border:1px solid var(--kin);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:8px 12px;text-decoration:none}
 .maplink svg{width:14px;height:14px;flex:none}
 .hero-copy{padding:32px 0 40px}

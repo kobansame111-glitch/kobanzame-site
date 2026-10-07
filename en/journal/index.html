@@ -40,7 +40,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 </head>
 <body>
-<div class="util"><b>New arrivals every Wednesday</b>　Shipping included · Dispatched within 3 days of payment (closed Mon & Tue)</div>
+<div class="util"><b>New arrivals every Wednesday</b>　Shipping included · Dispatched within 3 days of payment (closed Mon & Tue)　<b>Open daily from 1 Nov</b></div>
 <header class="site"><div class="wrap">
   <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>Menu</button>
   <a class="logo" href="/en/"><b>小判鮫</b><span>KOBANZAME</span></a></div>
@@ -152,7 +152,7 @@ if(k)send({t:'click',btn:k});},true);
   document.getElementById('clear').addEventListener('click',function(){myw.value='';showsold.checked=false;filter=null;apply();});
   apply();
   var td=document.getElementById('today');
-  if(td){var j=new Date(Date.now()+(new Date().getTimezoneOffset()+540)*60000),dw=j.getDay(),open=dw!==1&&dw!==2;
+  if(td){var j=new Date(Date.now()+(new Date().getTimezoneOffset()+540)*60000),dw=j.getDay(),ymd=j.getFullYear()+'-'+('0'+(j.getMonth()+1)).slice(-2)+'-'+('0'+j.getDate()).slice(-2),open=ymd>='2026-11-01'||[1,2].indexOf(dw)<0;
     td.textContent=open?td.dataset.open:td.dataset.closed; if(!open) td.className='today closed'; td.hidden=false;}
 })();
 </script>
