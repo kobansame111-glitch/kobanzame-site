@@ -129,6 +129,34 @@ T = {
   'no_en': 'English description coming soon. The details below are in Japanese.',
  },
 }
+# ---------- ワークショップ（2026-10-07 龍さん決定A） ----------
+# 予約は外部の予約サイト（concentsocket.com）。このサイトには案内と「予約する」ボタンだけを置く。
+# WS_FROM より前の日付で作ったときは、ページもメニューの入り口も出さない（予約受付の開始日に合わせる）。
+# 料金は「期間限定価格」。終了時期は未定なので、比べる「通常価格」は書かない（二重価格表示にしない）。
+WS_FROM = '2026-10-21'
+WS_OPEN = TODAY >= WS_FROM
+RESERVE = 'https://www.concentsocket.com/location/kobanzame/reserve/'
+WORKSHOPS = [
+    {'id': 'brass-bangle', 'reserve': RESERVE + 'dedff258-e093-4b81-bc8e-0abf0ac5bf4a', 'price': 1500, 'minutes': 60, 'max': 2,
+     'ja': {'name': '真鍮バングルワークショップ',
+            'lead': '切り出した真鍮を、店主が目の前で腕の形に曲げます。仕上げの刻印（アルファベット・数字・記号）は、ご自身の手で打っていただきます。完成品はその場でお持ち帰りいただけます。',
+            'notes': ['1人1本・刻印つき', 'モニター募集中：作業中の写真を撮らせていただく場合があります（お顔を出したくない方は当日お伝えください。手元だけを撮ります）',
+                      '金属アレルギーのある方は、ご予約の前にご相談ください', '真鍮は使い込むと色が変化します']},
+     'en': {'name': 'Brass bangle workshop',
+            'lead': 'The owner bends a cut brass bar to the shape of your wrist in front of you, and you stamp the finishing marks (letters, numbers, symbols) yourself. Take it home the same day.',
+            'notes': ['One bangle per person, stamping included', 'We may take photos of your hands while you work (tell us if you prefer not)',
+                      'If you have a metal allergy, please ask us before booking', 'Brass changes colour as you wear it']}},
+    {'id': 'stone-beads', 'reserve': RESERVE + '381ebd3c-3e63-4c6c-8f93-2ec4ec346c7f', 'price': 1200, 'minutes': 30, 'max': 2,
+     'ja': {'name': '天然石ビーズブレスレットワークショップ',
+            'lead': '店頭にある天然石のビーズから1種類を選んで、ブレスレットを作ります。完成品はその場でお持ち帰りいただけます。',
+            'notes': ['料金には石1種類分が含まれます', '2種類以上使いたい場合は、1種類につき＋100円（当日店頭でお支払い）', '選べる石は、その日の店頭の在庫によって変わります']},
+     'en': {'name': 'Natural stone bead bracelet workshop',
+            'lead': 'Choose one kind of natural stone bead from what we have in the shop that day and make your own bracelet. Take it home the same day.',
+            'notes': ['The price includes one kind of stone', 'Each additional kind is +100 yen, paid in the shop on the day', 'The stones on offer depend on what is in stock that day']}},
+]
+if WS_OPEN:
+    T_WS_NAV = {'ja': ('/workshop/', 'ワークショップ'), 'en': ('/en/workshop/', 'Workshops')}
+
 CAT_EN = {'outer': 'Outer', 'tops': 'Tops', 'bottoms': 'Bottoms', 'shoes': 'Shoes', 'acc': 'Accessories', 'other': 'Goods'}
 
 FAQ = {
@@ -321,6 +349,14 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .hero p{font-family:var(--mincho);font-size:16px;margin-top:18px;max-width:28em;color:var(--kinari)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;letter-spacing:.12em;text-decoration:none;border:1px solid var(--kin);color:var(--kinari);font-size:14px;text-align:center}
 .btn:hover{background:rgba(184,148,90,.12)}
+.ws{display:grid;gap:20px;margin-top:24px}
+.ws article{border:1px solid var(--line);background:var(--susu);padding:22px 20px}
+.ws h2{font-family:var(--mincho);font-size:19px;margin:0 0 6px;color:var(--kinari)}
+.ws .price{font-family:var(--mincho);font-size:22px;color:var(--kin)}
+.ws .price small{font-size:12px;color:var(--usu);margin-left:8px;letter-spacing:.06em}
+.ws .meta{color:var(--usu);font-size:13px;margin:4px 0 12px}
+.ws ul{margin:10px 0 18px 1.2em;color:var(--usu);font-size:13px}
+@media(min-width:860px){.ws{grid-template-columns:1fr 1fr}}
 .btn.kin{background:var(--kin);color:var(--sumi);font-weight:700;width:100%}
 .btn.kin:hover{background:#c7a46a}
 .btn.ghost{width:100%}
@@ -477,7 +513,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
     alt = other_path(path, lang)
     ja_url = BASE + (path if lang == 'ja' else alt)
     en_url = BASE + (path if lang == 'en' else alt)
-    navs = ''.join(f'<a class="n" href="{h}">{l}</a>' for h, l in t['nav'])
+    navs = ''.join(f'<a class="n" href="{h}">{l}</a>' for h, l in t['nav'] + ([T_WS_NAV[lang]] if WS_OPEN else []))
     ja_cur = 'true' if lang == 'ja' else 'false'
     en_cur = 'true' if lang == 'en' else 'false'
     return f'''<!doctype html>
@@ -530,7 +566,7 @@ def foot(lang):
   <div>古着屋 小判鮫／{ADDR[lang]}／{hours}<br>
     {op}　・　{lic}<br>
     <a href="{SHOP['instagram']}" rel="noopener">Instagram</a>　・　<a href="{SHOP['mercari']}" rel="noopener">メルカリShops</a>　・　<a href="{SHOP['gmaps']}" rel="noopener">{t['gm']}</a><br>
-    <a href="{'/en/guide/' if lang == 'en' else '/guide/'}">{'Kawagoe vintage guide' if lang == 'en' else '川越で古着屋を探している方へ'}</a>　・　{legal}
+    {(chr(60) + 'a href="' + ('/en/workshop/' if lang == 'en' else '/workshop/') + '">' + ('Workshops' if lang == 'en' else 'ワークショップ') + chr(60) + '/a>　・　') if WS_OPEN else ''}<a href="{'/en/guide/' if lang == 'en' else '/guide/'}">{'Kawagoe vintage guide' if lang == 'en' else '川越で古着屋を探している方へ'}</a>　・　{legal}
   </div>
 </div></footer>
 </body>
@@ -848,6 +884,51 @@ write('/en/legal/index.html', head('en', 'Legal notice & privacy | Kobanzame', '
 </main>
 ''' + foot('en'))
 
+# ---------- ワークショップのページ（WS_FROM 以降だけ作る） ----------
+if WS_OPEN:
+    for lang in ('ja', 'en'):
+        P = pre(lang)
+        path = P + '/workshop/'
+        if lang == 'ja':
+            title = 'ワークショップ｜古着屋 小判鮫（川越・元町の古民家）'
+            desc = '川越・元町の古民家古着屋 小判鮫のワークショップ。真鍮バングル、天然石ビーズブレスレット。期間限定価格。ご予約はオンラインで。'
+            h1, intro = 'ワークショップ', '小判鮫の店内で、ものづくりの時間を。どちらも完成品はその場でお持ち帰りいただけます。'
+            limited = '期間限定価格（税込）'
+            end_note = '期間限定価格の終了時期は、決まり次第このページとInstagramでお知らせします。'
+            meta = '所要 約{m}分・1回 最大{n}名'
+            btn = '予約する（日時を選ぶ）'
+            place = f'会場：古着屋 小判鮫（{ADDR["ja"]}）／定休日 月曜・火曜'
+        else:
+            title = 'Workshops | Kobanzame, Kawagoe'
+            desc = 'Workshops at Kobanzame, a vintage shop in an old wooden house in Kawagoe: brass bangle and natural stone bead bracelet. Limited-time prices. Book online.'
+            h1, intro = 'Workshops', 'Make something in our old wooden shop. You take your piece home the same day.'
+            limited = 'limited-time price, tax incl.'
+            end_note = 'We will announce on this page and on Instagram when the limited-time prices end.'
+            meta = 'About {m} min · up to {n} people per session'
+            btn = 'Book a time'
+            place = f'Venue: Kobanzame, {ADDR["en"]} / closed Mondays and Tuesdays'
+        cards, svc = '', []
+        for w in WORKSHOPS:
+            x = w[lang]
+            notes = ''.join(f'<li>{esc(n)}</li>' for n in x['notes'])
+            cards += (f'<article id="{w["id"]}"><h2>{esc(x["name"])}</h2>'
+                      f'<div class="price">{money(w["price"], lang)}<small>{limited}</small></div>'
+                      f'<div class="meta">{meta.format(m=w["minutes"], n=w["max"])}</div>'
+                      f'<p>{esc(x["lead"])}</p><ul>{notes}</ul>'
+                      f'<a class="btn kin" href="{w["reserve"]}" rel="noopener">{btn}</a></article>')
+            svc.append({'@type': 'Service', 'name': x['name'], 'description': x['lead'], 'provider': {'@id': BASE + '/#store'},
+                        'areaServed': '川越市' if lang == 'ja' else 'Kawagoe',
+                        'offers': {'@type': 'Offer', 'price': str(w['price']), 'priceCurrency': 'JPY', 'url': w['reserve']}})
+        ld = {'@context': 'https://schema.org', '@graph': [org_node()] + svc}
+        write(path + 'index.html', head(lang, title, desc, path, extra_ld=ld) + f'''
+<main class="wrap page">
+  <h1>{h1}</h1>
+  <p>{esc(intro)}</p>
+  <div class="ws">{cards}</div>
+  <p style="color:var(--usu);font-size:13px;margin-top:20px">{esc(end_note)}<br>{esc(place)}</p>
+</main>
+''' + foot(lang))
+
 # ---------- 川越で古着屋を探している人向けの案内ページ（AI検索・検索エンジン対策 2026-10-06） ----------
 # AIや検索で「川越 古着屋」と聞かれたときに、そのまま答えになる文章を1ページにまとめる。
 # 他店との比較や「川越で一番」などの言い切りは書かない（景表法・事実確認できないため）。
@@ -928,7 +1009,7 @@ pages = []
 for lang in ('ja', 'en'):
     P = pre(lang)
     pages += [P + '/', P + '/journal/'] + [P + f"/journal/{p['slug']}/" for p in live]
-pages += ['/tokushoho/', '/privacy/', '/en/legal/', '/guide/', '/en/guide/']
+pages += ['/tokushoho/', '/privacy/', '/en/legal/', '/guide/', '/en/guide/'] + (['/workshop/', '/en/workshop/'] if WS_OPEN else [])
 write('/robots.txt', f'''# 小判鮫 公式サイト：検索エンジン・AI検索のどちらにも公開
 User-agent: *
 Allow: /
@@ -975,7 +1056,7 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 - [トップ・よくある質問]({BASE}/)
 - [ジャーナル]({BASE}/journal/)
 - [川越で古着屋を探している方へ（案内）]({BASE}/guide/)
-- [English]({BASE}/en/)
+{'- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・期間限定価格）](' + BASE + '/workshop/)' + chr(10) if WS_OPEN else ''}- [English]({BASE}/en/)
 - [特定商取引法に基づく表記]({BASE}/tokushoho/)
 - [プライバシーポリシー]({BASE}/privacy/)
 
