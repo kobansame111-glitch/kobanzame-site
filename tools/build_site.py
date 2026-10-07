@@ -8,7 +8,7 @@ v2で変わったこと
 - 公開の流れ（A案）：products.json の "release" が "draft" の商品は下書き＝ページは作るが検索に出さず一覧にも出さない。
   水曜朝のGASが "draft" → "live" に書き換えると一覧に並ぶ（"release" が無い商品は従来どおり published で判断）
 - 売れた商品（status=sold）は一覧から消さずSOLDで残す（「売れた一点ものも見る」で表示）
-- サイズで探す（身幅±3cm）／店頭で見たい・取り置き（2日間）／こちらも一点もの
+- サイズで探す（身幅±3cm）／こちらも一点もの（取り置きは2026-10-07に廃止）
 - 価格：ADD_TAX=True で「Square登録価格（税抜）×1.1 を10円単位に切り上げ」を税込として表示（2026-10-06 から True）。
   ※Squareのオンライン決済にも消費税がかかる設定にしてから True にする（表示と請求額をそろえるため）
 - アクセス解析：CF_BEACON_TOKEN に Cloudflare Web Analytics のトークンを入れると全ページに計測タグが入る
@@ -26,7 +26,8 @@ CF_BEACON_TOKEN = ''     # Cloudflare Web Analytics のトークン（空なら�
 ANALYTICS_URL = 'https://script.google.com/macros/s/AKfycbxxYc9kZztdwiWOvefrpY6mPHlRUlqLb2SndthCdAUn7BeBXAgZO3i6_JoDxyFQiv3q/exec'       # 64番（自前の簡易計測）のウェブアプリURL。空なら計測しない（2026-10-06 龍さん決定A）
 GSC_VERIFY = '2pVJ6dksHBkvBUmm0l3gbrdw8Rgpz4v7zoq4X3eL7ys'          # Google Search Console の確認コード（content="…" の中身だけ。空ならタグを入れない）
 BING_VERIFY = ''         # Bing Webmaster Tools の確認コード（同上。Search Consoleから取り込むなら空のままでよい）
-HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）
+HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）※2026-10-07 取り置きは廃止（HOLD_ENABLED=False）
+HOLD_ENABLED = False     # 2026-10-07 龍さん決定：一点物なのでサイトも店頭も取り置き不可・先着順
 HERO_IMAGE = '/assets/hero-shop.jpg'          # 店内の写真（例 '/assets/hero-shop.jpg'）。空なら掲載中のアウターの写真を使う
 
 SHOP = {
@@ -169,7 +170,7 @@ FAQ = {
     ('送料はかかりますか？', 'このサイトで購入した場合、表示価格は税込・送料込みです。'),
     ('いつ届きますか？', 'ご注文（決済）の確認後、3日以内（定休日を除く）に発送します。'),
     ('返品はできますか？', '古着・一点ものの性質上、お客様都合による返品はお受けしていません。商品説明と著しく異なる場合や発送間違いの場合は、到着後4日以内にメールでご連絡ください。'),
-    ('店頭で取り置きできますか？', f'できます。商品ページの「店頭で見たい・取り置きする」から、InstagramのDMかメールでご連絡ください。{HOLD_DAYS}日間お取り置きします。'),
+    ('取り置きはできますか？', '一点ものなので、サイト・店頭ともお取り置きはしていません。先着順でのご案内です。'),
  ],
  'en': [
     ('Where is Kobanzame?', 'At 1-14-5 Motomachi, Kawagoe, Saitama (350-0062), in an 80-year-old wooden house. The shop is run by Plug Inc.'),
@@ -180,7 +181,7 @@ FAQ = {
     ('Is shipping included?', 'Yes. Prices on this site include tax and domestic shipping.'),
     ('When will it arrive?', 'We dispatch within 3 days of payment (excluding our closed days).'),
     ('Can I return it?', 'As these are one-of-a-kind vintage items, we do not accept returns for change of mind. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival.'),
-    ('Can you hold a piece for me?', f'Yes. Use "See it in the shop / hold it" on the item page and contact us by Instagram DM or email. We hold it for {HOLD_DAYS} days.'),
+    ('Can you hold a piece for me?', 'Every piece is one of a kind, so we do not hold items, online or in the shop. First come, first served.'),
  ],
 }
 
@@ -782,7 +783,7 @@ for lang in ('ja', 'en'):
             bar = f'<div class="bar"><b>{money(price, lang)}</b><a class="btn kin" href="{sq}" rel="noopener">{t["buy_s"]}</a></div>'
         else:
             buy, bar = f'<span class="soldout">{t["prep"]}</span>', ''
-        hold = '' if sold else f'''<button type="button" class="btn ghost" id="holdbtn" aria-expanded="false" aria-controls="holdbox">{t['hold_btn'].format(n=HOLD_DAYS)}</button>
+        hold = '' if (sold or not HOLD_ENABLED) else f'''<button type="button" class="btn ghost" id="holdbtn" aria-expanded="false" aria-controls="holdbox">{t['hold_btn'].format(n=HOLD_DAYS)}</button>
         <div class="holdbox" id="holdbox" hidden>
           <p>{t['hold_p'].format(n=HOLD_DAYS)}</p>
           <p><code>{esc(t['hold_code'].format(sku=p['sku']))}</code></p>
@@ -860,8 +861,8 @@ write('/privacy/index.html', head('ja', 'プライバシーポリシー｜古着
 <main class="wrap page">
   <h1>プライバシーポリシー</h1>
   <p>古着屋 小判鮫（運営：{SHOP['company']}。以下「当店」）は、お客様の個人情報を適切に取り扱います。</p>
-  <h2>取得する情報</h2><p>ご注文・お問い合わせ・お取り置き・販売（外部プラットフォームを含む）に際して、お名前・連絡先・配送先など、取引に必要な範囲の情報を取得します。</p>
-  <h2>利用目的</h2><p>商品の発送、お取り置き、お問い合わせへの対応、取引に必要なご連絡のために利用し、目的の範囲を超えて利用しません。</p>
+  <h2>取得する情報</h2><p>ご注文・お問い合わせ・販売（外部プラットフォームを含む）に際して、お名前・連絡先・配送先など、取引に必要な範囲の情報を取得します。</p>
+  <h2>利用目的</h2><p>商品の発送、お問い合わせへの対応、取引に必要なご連絡のために利用し、目的の範囲を超えて利用しません。</p>
   <h2>決済について</h2><p>本サイトでのお支払いは Square 株式会社の決済ページで処理されます。当店はクレジットカード番号を取得・保存しません。</p>
   <h2>第三者提供</h2><p>法令に基づく場合を除き、ご本人の同意なく第三者に提供しません。配送など取引に必要な範囲で委託先に提供する場合があります。</p>
   <h2>アクセス解析</h2><p>サイトの改善のためアクセス状況を測定することがあります。個人を特定する情報は含みません。</p>
@@ -880,7 +881,7 @@ write('/en/legal/index.html', head('en', 'Legal notice & privacy | Kobanzame', '
   <h2>Delivery</h2><p>Dispatched within 3 days of payment (excluding closed days). Online checkout ships within Japan; contact us before buying for overseas shipping.</p>
   <h2>Returns</h2><p>No returns for change of mind on one-of-a-kind vintage items. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival; we cover return shipping and refund or exchange.</p>
   <h2>Licence</h2><p>Licensed secondhand dealer: Saitama Prefectural Public Safety Commission No. 431080060786.</p>
-  <h2>Privacy</h2><p>We collect only what an order, hold request or inquiry needs (name, contact, delivery address) and use it only for that purpose. Card details are processed by Square; we never receive or store card numbers. We do not share personal data without consent except as required by law or for delivery.</p>
+  <h2>Privacy</h2><p>We collect only what an order or inquiry needs (name, contact, delivery address) and use it only for that purpose. Card details are processed by Square; we never receive or store card numbers. We do not share personal data without consent except as required by law or for delivery.</p>
 </main>
 ''' + foot('en'))
 
@@ -936,7 +937,7 @@ _pr = sorted(site_price(p) for p in avail_live)
 GUIDE = {
  'ja': {
   'path': '/guide/', 'title': '川越で古着屋を探している方へ｜古着屋 小判鮫（川越・元町の古民家）',
-  'desc': '埼玉県川越市元町の古民家古着屋 小判鮫の案内。場所・営業時間・定休日・扱っている古着・価格帯・取り置き・通販の買い方をまとめました。',
+  'desc': '埼玉県川越市元町の古民家古着屋 小判鮫の案内。場所・営業時間・定休日・扱っている古着・価格帯・通販の買い方をまとめました。',
   'h1': '川越で古着屋を探している方へ',
   'lead': '古着屋 小判鮫（こばんざめ／KOBANZAME）は、埼玉県川越市元町にある古着屋です。築約80年の古民家をそのまま使った店内に、国内外で買い付けたヴィンテージ古着と、オリジナルのリメイクアクセサリー「GAW」を並べています。川越観光のついでに立ち寄っていただける場所です。',
   'secs': [
@@ -945,7 +946,7 @@ GUIDE = {
    ('価格の目安', (f'このサイトに掲載中の一点ものは、{money(_pr[0], "ja")}〜{money(_pr[-1], "ja")}（税込・送料込み）です。店頭の価格は商品ごとに異なります。' if _pr else '価格は商品ごとに異なります。サイトに掲載中の商品ページでご確認ください。')),
    ('新着入荷', '毎週水曜日に新しい一点ものが入ります。このサイトにも水曜日の朝に新着を掲載しています。'),
    ('GAW（オリジナルのリメイクアクセサリー）', '古いスプーンなどの素材を、ペンダントやバングルなどに作り直した、小判鮫オリジナルのアクセサリーです。こちらも一点ものです。'),
-   ('来店前に見たい・取り置きしたいとき', f'サイトの商品ページにある「店頭で見たい・取り置きする」から、InstagramのDMかメールでご連絡いただくと、店頭で{HOLD_DAYS}日間お取り置きします。'),
+   ('取り置きについて', 'すべて一点ものなので、サイト・店頭ともお取り置きはしていません。先着順です。気になる一点は、お早めにご来店いただくか、このサイトからご購入ください。'),
    ('遠くて行けないとき', 'このサイトに載っている商品は、クレジットカード（Square決済）でそのまま購入できます。送料込みで、決済確認後3日以内（定休日を除く）に川越の店舗から発送します。メルカリShopsでも販売しています。'),
    ('サイズ選びのコツ', '実寸は平置きで測っています。お手持ちのいちばん気に入っている服の身幅（脇の下から脇の下まで）を測って比べると、サイズの失敗が減ります。トップページの「手持ちの服の身幅」に数字を入れると、近いサイズの服だけを表示できます。'),
   ],
@@ -960,7 +961,7 @@ GUIDE = {
  },
  'en': {
   'path': '/en/guide/', 'title': 'Looking for a vintage shop in Kawagoe? | Kobanzame',
-  'desc': 'A guide to Kobanzame, a vintage clothing shop in an old wooden house in Motomachi, Kawagoe, Saitama: location, hours, what we carry, prices, holds and buying online.',
+  'desc': 'A guide to Kobanzame, a vintage clothing shop in an old wooden house in Motomachi, Kawagoe, Saitama: location, hours, what we carry, prices and buying online.',
   'h1': 'Looking for a vintage shop in Kawagoe?',
   'lead': 'Kobanzame is a vintage clothing shop in Motomachi, Kawagoe, Saitama, set in an 80-year-old wooden house. We carry vintage clothing sourced in Japan and abroad, and GAW, our own line of remade accessories. It is an easy stop while you explore Kawagoe.',
   'secs': [
@@ -969,7 +970,7 @@ GUIDE = {
    ('Prices', (f'Pieces listed on this site range from {money(_pr[0], "en")} to {money(_pr[-1], "en")} (tax and domestic shipping included). In-store prices vary by item.' if _pr else 'Prices vary by item. See each item page on this site.')),
    ('New arrivals', 'New pieces arrive every Wednesday, and go up on this site on Wednesday morning.'),
    ('GAW', 'Our own accessory line: old materials such as spoons remade into pendants, bangles and more. Each one is one of a kind.'),
-   ('Holding a piece', f'Use "See it in the shop / hold it" on any item page and send us an Instagram DM or email. We hold it at the shop for {HOLD_DAYS} days.'),
+   ('Holding a piece', 'Every piece is one of a kind, so we do not hold items, online or in the shop. First come, first served.'),
    ('Buying online', 'Pieces on this site can be bought by credit card through Square. Online checkout ships within Japan; for overseas shipping, please contact us before buying.'),
   ],
   'faq': [
@@ -1046,7 +1047,7 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 - 新着: 毎週水曜
 - 取扱い: ヴィンテージ古着（メンズ・レディース）、ヨーロッパ・アメリカの古着、オリジナルのリメイクアクセサリー「GAW」
 - 買い方: 店頭／このサイト（クレジットカード・Square決済・送料込み）／メルカリShops
-- 取り置き: 店頭で{HOLD_DAYS}日間（InstagramのDMかメールで依頼）
+- 取り置き: なし（一点ものなので、サイト・店頭とも先着順）
 - 発送: 決済確認後3日以内（月曜・火曜の定休日を除く）
 - 古物商許可: {SHOP['kobutsu']}
 - お問い合わせ: {SHOP['email']}
