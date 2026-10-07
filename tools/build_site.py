@@ -24,7 +24,7 @@ ADD_TAX = True           # 2026-10-06 龍さん決定B：Square登録価格は�
 TAX_RATE = 0.10
 CF_BEACON_TOKEN = ''     # Cloudflare Web Analytics のトークン（空なら計測タグを入れない）
 ANALYTICS_URL = 'https://script.google.com/macros/s/AKfycbxxYc9kZztdwiWOvefrpY6mPHlRUlqLb2SndthCdAUn7BeBXAgZO3i6_JoDxyFQiv3q/exec'       # 64番（自前の簡易計測）のウェブアプリURL。空なら計測しない（2026-10-06 龍さん決定A）
-GSC_VERIFY = ''          # Google Search Console の確認コード（content="…" の中身だけ。空ならタグを入れない）
+GSC_VERIFY = '2pVJ6dksHBkvBUmm0l3gbrdw8Rgpz4v7zoq4X3eL7ys'          # Google Search Console の確認コード（content="…" の中身だけ。空ならタグを入れない）
 BING_VERIFY = ''         # Bing Webmaster Tools の確認コード（同上。Search Consoleから取り込むなら空のままでよい）
 HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）
 HERO_IMAGE = '/assets/hero-shop.jpg'          # 店内の写真（例 '/assets/hero-shop.jpg'）。空なら掲載中のアウターの写真を使う
