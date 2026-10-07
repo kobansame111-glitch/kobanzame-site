@@ -42,11 +42,37 @@ if(k)send({t:'click',btn:k});},true);
 <body>
 <div class="util"><b>New arrivals every Wednesday</b>　Shipping included · Dispatched within 3 days of payment (closed Mon & Tue)</div>
 <header class="site"><div class="wrap">
-  <a class="logo" href="/en/"><b>小判鮫</b><span>KOBANZAME</span></a>
+  <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>Menu</button>
+  <a class="logo" href="/en/"><b>小判鮫</b><span>KOBANZAME</span></a></div>
   <div class="hnav"><a class="n" href="/en/#list">Shop</a><a class="n" href="/en/#store">Store</a><a class="n" href="/en/#faq">FAQ</a>
     <nav class="lang" aria-label="言語 / Language"><a href="/journal/" lang="ja" aria-current="false">日本語</a><a href="/en/journal/" lang="en" aria-current="true">EN</a></nav>
   </div>
 </div></header>
+<div class="drawer-bg" id="drawerbg" hidden></div>
+<nav class="drawer" id="drawer" aria-label="Menu" aria-hidden="true">
+  <div class="dh"><b>小判鮫</b><button type="button" class="x" id="drawerx">Close</button></div>
+  <h3>Shop by category</h3>
+  <ul><li><a href="/en/#list" data-cat="">All items<small>34</small></a></li><li><a href="/en/?cat=outer#list" data-cat="outer">Outerwear<small>6</small></a></li><li><a href="/en/?cat=tops#list" data-cat="tops">Tops<small>7</small></a></li><li><a href="/en/?cat=bottoms#list" data-cat="bottoms">Bottoms & dresses<small>5</small></a></li><li><a href="/en/?cat=shoes#list" data-cat="shoes">Shoes<small>6</small></a></li><li><a href="/en/?cat=acc#list" data-cat="acc">Accessories & GAW<small>8</small></a></li><li><a href="/en/?cat=other#list" data-cat="other">Goods<small>2</small></a></li></ul>
+  <h3>About the shop</h3>
+  <ul><li><a href="/en/#store">Store</a></li><li><a href="/en/#faq">FAQ</a></li></ul>
+</nav>
+<script>
+(function(){
+  var b=document.getElementById('menubtn'),d=document.getElementById('drawer'),bg=document.getElementById('drawerbg'),x=document.getElementById('drawerx');
+  function open(){d.classList.add('open');d.setAttribute('aria-hidden','false');bg.hidden=false;b.setAttribute('aria-expanded','true');var a=d.querySelector('a');if(a)a.focus();}
+  function close(){d.classList.remove('open');d.setAttribute('aria-hidden','true');bg.hidden=true;b.setAttribute('aria-expanded','false');}
+  b.addEventListener('click',function(){d.classList.contains('open')?close():open();});
+  x.addEventListener('click',function(){close();b.focus();}); bg.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&d.classList.contains('open')){close();b.focus();}});
+  d.querySelectorAll('a[data-cat]').forEach(function(a){a.addEventListener('click',function(e){
+    if(!document.getElementById('grid'))return;
+    e.preventDefault();close();
+    document.dispatchEvent(new CustomEvent('kz:cat',{detail:a.dataset.cat||null}));
+    history.replaceState(null,'',a.getAttribute('href'));
+    var l=document.getElementById('list');if(l)l.scrollIntoView();
+  });});
+})();
+</script>
 
 <main class="wrap">
   <div class="crumb"><a href="/en/">HOME</a><span>／</span><span>JOURNAL</span></div>
@@ -120,9 +146,14 @@ if(k)send({t:'click',btn:k});},true);
     document.querySelectorAll('.catrow button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
   }
   document.querySelectorAll('.catrow button').forEach(function(b){b.addEventListener('click',function(){filter=(filter===b.dataset.filter?null:b.dataset.filter);apply();});});
+  var q=(location.search.match(/[?&]cat=([a-z]+)/)||[])[1]; if(q&&document.querySelector('.catrow button[data-filter="'+q+'"]')) filter=q;
+  document.addEventListener('kz:cat',function(e){filter=e.detail||null;apply();});
   myw.addEventListener('input',apply); showsold.addEventListener('change',apply);
   document.getElementById('clear').addEventListener('click',function(){myw.value='';showsold.checked=false;filter=null;apply();});
   apply();
+  var td=document.getElementById('today');
+  if(td){var j=new Date(Date.now()+(new Date().getTimezoneOffset()+540)*60000),dw=j.getDay(),open=dw!==1&&dw!==2;
+    td.textContent=open?td.dataset.open:td.dataset.closed; if(!open) td.className='today closed'; td.hidden=false;}
 })();
 </script>
 <footer class="site"><div class="wrap">

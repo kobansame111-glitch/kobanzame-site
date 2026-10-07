@@ -56,6 +56,8 @@ T = {
   'hero_p': '埼玉・川越、築約80年の古民家から。国内外で買い付けたヴィンテージ古着と、オリジナルの「GAW」。どれも一点もので、同じものはありません。',
   'hero_btn': '一点ものを見る',
   'map': '地図を開く ／ 川越市元町1-14-5',
+  'days_h': '営業日', 'days': '水〜日 12:00–20:00（月・火 定休）', 'today_open': '本日営業', 'today_closed': '本日定休',
+  'menu': 'メニュー', 'menu_close': '閉じる', 'menu_cats': 'ジャンルで選ぶ', 'menu_all': 'すべての商品', 'menu_more': 'お店のこと',
   'list_h': 'In Stock', 'list_s': 'オンラインで買える一点もの（毎週水曜更新）', 'unit': '点',
   'finder_l': '手持ちの服の身幅', 'finder_u': 'cm ±3cmの服を表示', 'finder_sold': '売れた一点ものも見る', 'finder_clear': '条件をクリア',
   'finder_hint': '身幅＝脇の下から脇の下までを平らに置いて測った長さ。いちばん気に入っている服で測るのがおすすめです。',
@@ -96,6 +98,8 @@ T = {
   'hero_p': 'From an 80-year-old wooden house in Kawagoe, Saitama. Vintage clothing sourced in Japan and abroad, and our own remake line, GAW. Every piece is one of a kind.',
   'hero_btn': 'See the pieces',
   'map': 'Open map / 1-14-5 Motomachi, Kawagoe',
+  'days_h': 'Open', 'days': 'Wed–Sun 12:00–20:00 (closed Mon & Tue)', 'today_open': 'Open today', 'today_closed': 'Closed today',
+  'menu': 'Menu', 'menu_close': 'Close', 'menu_cats': 'Shop by category', 'menu_all': 'All items', 'menu_more': 'About the shop',
   'list_h': 'In Stock', 'list_s': 'One-of-a-kind pieces you can buy online (updated every Wednesday)', 'unit': ' items',
   'finder_l': 'Chest width of a piece you own', 'finder_u': 'cm — show pieces within ±3 cm', 'finder_sold': 'Show sold pieces', 'finder_clear': 'Clear',
   'finder_hint': 'Chest width = measured flat, armpit to armpit. Measure the piece you like best for the closest match.',
@@ -328,6 +332,7 @@ img{display:block;max-width:100%}a{color:inherit}button{font:inherit;color:inher
 .util b{color:var(--kin);font-weight:500}
 header.site{position:sticky;top:0;z-index:20;background:rgba(21,19,15,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
 header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.hl{display:flex;align-items:center;gap:14px}
 .logo{display:flex;align-items:baseline;gap:12px;text-decoration:none}
 .logo b{font-family:var(--mincho);font-weight:800;font-size:22px;letter-spacing:.14em}
 .logo span{font-family:var(--roman);font-size:14px;letter-spacing:.32em;color:var(--kin)}
@@ -335,14 +340,37 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .hnav a{font-size:13px;letter-spacing:.1em;text-decoration:none;color:var(--usu);white-space:nowrap}
 .hnav a:hover{color:var(--kinari)}
 .lang{display:flex;border:1px solid var(--line)}
+.menubtn{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--line);color:var(--kinari);font:inherit;font-size:12px;letter-spacing:.1em;padding:6px 10px;cursor:pointer}
+.menubtn i{display:block;width:16px;height:2px;background:currentColor;position:relative}
+.menubtn i::before,.menubtn i::after{content:"";position:absolute;left:0;width:16px;height:2px;background:currentColor}
+.menubtn i::before{top:-5px}.menubtn i::after{top:5px}
+.menubtn:hover{border-color:var(--kin)}
+.drawer-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40}
+.drawer{position:fixed;top:0;left:0;bottom:0;width:min(320px,86vw);background:var(--sumi);border-right:1px solid var(--line);z-index:41;padding:18px 20px 28px;overflow-y:auto;transform:translateX(-102%);transition:transform .2s ease}
+.drawer.open{transform:none}
+.drawer-bg[hidden]{display:none}
+.drawer .dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.drawer .dh b{font-family:var(--mincho);font-size:18px;letter-spacing:.14em}
+.drawer .x{background:none;border:1px solid var(--line);color:var(--kinari);font:inherit;font-size:12px;padding:5px 10px;cursor:pointer}
+.drawer h3{font-size:11px;letter-spacing:.2em;color:var(--kin);font-weight:500;margin:20px 0 6px}
+.drawer ul{list-style:none;margin:0;padding:0}
+.drawer li a{display:flex;justify-content:space-between;align-items:baseline;padding:12px 2px;border-bottom:1px solid var(--line);color:var(--kinari);text-decoration:none;font-size:15px}
+.drawer li a small{color:var(--usu);font-size:12px}
+.drawer li a:hover{color:var(--kin)}
+@media(prefers-reduced-motion:reduce){.drawer{transition:none}}
 .lang a{font-size:12px;padding:4px 10px;color:var(--usu)}
 .lang a[aria-current="true"]{background:var(--kinari);color:var(--sumi)}
-@media(max-width:760px){.logo span{display:none}.hnav{gap:12px}.hnav a.n{display:none}}
+@media(max-width:760px){.logo span{display:none}.hl{gap:10px}.hnav{gap:12px}.hnav a.n{display:none}}
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr)}
 .hero-ph{position:relative}
 .hero-img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:50% 50%}
-.maplink{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;background:rgba(21,19,15,.82);border:1px solid var(--kin);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:8px 12px;text-decoration:none}
+.herobox{position:absolute;left:12px;bottom:12px;right:12px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.days{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;background:rgba(21,19,15,.82);border:1px solid var(--line);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:7px 12px}
+.days b{color:var(--kin);font-weight:500}
+.days .today{border:1px solid var(--kin);color:var(--kin);font-size:11px;padding:1px 6px}
+.days .today.closed{border-color:var(--usu);color:var(--usu)}
+.maplink{display:inline-flex;align-items:center;gap:8px;background:rgba(21,19,15,.82);border:1px solid var(--kin);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:8px 12px;text-decoration:none}
 .maplink svg{width:14px;height:14px;flex:none}
 .hero-copy{padding:32px 0 40px}
 .hero h1{font-family:var(--roman);font-weight:500;font-style:italic;font-size:clamp(56px,11vw,120px);line-height:.92;letter-spacing:.01em}
@@ -548,11 +576,45 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <body>
 <div class="util">{t['util']}</div>
 <header class="site"><div class="wrap">
-  <a class="logo" href="{pre(lang)}/"><b>小判鮫</b><span>KOBANZAME</span></a>
+  <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button>
+  <a class="logo" href="{pre(lang)}/"><b>小判鮫</b><span>KOBANZAME</span></a></div>
   <div class="hnav">{navs}
     <nav class="lang" aria-label="言語 / Language"><a href="{alt if lang == 'en' else path}" lang="ja" aria-current="{ja_cur}">日本語</a><a href="{alt if lang == 'ja' else path}" lang="en" aria-current="{en_cur}">EN</a></nav>
   </div>
 </div></header>
+''' + drawer_html(lang)
+
+def drawer_html(lang):
+    t = T[lang]
+    P = pre(lang)
+    n_all = len([p for p in live if not is_sold(p)])
+    cats = ''.join(f'<li><a href="{P}/?cat={c}#list" data-cat="{c}">{t["cats"][c]}<small>{len([p for p in live if not is_sold(p) and cat_of(p) == c])}</small></a></li>' for c in CATS_PRESENT)
+    more = ''.join(f'<li><a href="{h}">{l}</a></li>' for h, l in t['nav'][1:] + ([T_WS_NAV[lang]] if WS_OPEN else []))
+    return f'''<div class="drawer-bg" id="drawerbg" hidden></div>
+<nav class="drawer" id="drawer" aria-label="{t['menu']}" aria-hidden="true">
+  <div class="dh"><b>小判鮫</b><button type="button" class="x" id="drawerx">{t['menu_close']}</button></div>
+  <h3>{t['menu_cats']}</h3>
+  <ul><li><a href="{P}/#list" data-cat="">{t['menu_all']}<small>{n_all}</small></a></li>{cats}</ul>
+  <h3>{t['menu_more']}</h3>
+  <ul>{more}</ul>
+</nav>
+<script>
+(function(){{
+  var b=document.getElementById('menubtn'),d=document.getElementById('drawer'),bg=document.getElementById('drawerbg'),x=document.getElementById('drawerx');
+  function open(){{d.classList.add('open');d.setAttribute('aria-hidden','false');bg.hidden=false;b.setAttribute('aria-expanded','true');var a=d.querySelector('a');if(a)a.focus();}}
+  function close(){{d.classList.remove('open');d.setAttribute('aria-hidden','true');bg.hidden=true;b.setAttribute('aria-expanded','false');}}
+  b.addEventListener('click',function(){{d.classList.contains('open')?close():open();}});
+  x.addEventListener('click',function(){{close();b.focus();}}); bg.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){{if(e.key==='Escape'&&d.classList.contains('open')){{close();b.focus();}}}});
+  d.querySelectorAll('a[data-cat]').forEach(function(a){{a.addEventListener('click',function(e){{
+    if(!document.getElementById('grid'))return;
+    e.preventDefault();close();
+    document.dispatchEvent(new CustomEvent('kz:cat',{{detail:a.dataset.cat||null}}));
+    history.replaceState(null,'',a.getAttribute('href'));
+    var l=document.getElementById('list');if(l)l.scrollIntoView();
+  }});}});
+}})();
+</script>
 '''
 
 def foot(lang):
@@ -638,9 +700,14 @@ def list_js(lang):
     document.querySelectorAll('.catrow button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
   }
   document.querySelectorAll('.catrow button').forEach(function(b){b.addEventListener('click',function(){filter=(filter===b.dataset.filter?null:b.dataset.filter);apply();});});
+  var q=(location.search.match(/[?&]cat=([a-z]+)/)||[])[1]; if(q&&document.querySelector('.catrow button[data-filter="'+q+'"]')) filter=q;
+  document.addEventListener('kz:cat',function(e){filter=e.detail||null;apply();});
   myw.addEventListener('input',apply); showsold.addEventListener('change',apply);
   document.getElementById('clear').addEventListener('click',function(){myw.value='';showsold.checked=false;filter=null;apply();});
   apply();
+  var td=document.getElementById('today');
+  if(td){var j=new Date(Date.now()+(new Date().getTimezoneOffset()+540)*60000),dw=j.getDay(),open=dw!==1&&dw!==2;
+    td.textContent=open?td.dataset.open:td.dataset.closed; if(!open) td.className='today closed'; td.hidden=false;}
 })();
 </script>'''
 
@@ -669,7 +736,10 @@ for lang in ('ja', 'en'):
     <div class="wrap">
       <div class="hero-ph">
         <img class="hero-img" src="{esc(HERO_SRC)}"{HERO_SRCSET} alt="{hero_alt}" fetchpriority="high">
-        <a class="maplink" href="{SHOP['gmaps']}" rel="noopener">{PIN}{t['map']}</a>
+        <div class="herobox">
+          <div class="days"><b>{t['days_h']}</b>{t['days']}<span class="today" id="today" hidden data-open="{t['today_open']}" data-closed="{t['today_closed']}"></span></div>
+          <a class="maplink" href="{SHOP['gmaps']}" rel="noopener">{PIN}{t['map']}</a>
+        </div>
       </div>
       <div class="hero-copy">
         <h1>{t['hero_h']}</h1>
