@@ -1519,19 +1519,19 @@
    }
   },
   "images": [
-   "https://assets.mercari-shops-static.com/-/large/plain/2JU6epy3UisztjnTMsWwMf.jpg",
+   "/assets/products/k10743/v2_front.jpg",
+   "/assets/products/k10743/v2_back.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq4ACyjpotSGjiucWd.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq4CiyZbkd5dDZeoiw.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6epzn85jQXPuxqrktdb.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq23faycAqYtSxr5aR.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6epzyCdWyopmYAQR9k3.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq2E7puQzfAaScdxrc.jpg",
-   "https://assets.mercari-shops-static.com/-/large/plain/2JU6epzuhcdyJtPHxoLkiH.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq24Jmu42jP9bDUDAm.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq2ERZan5BRYLaw8QN.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq29N4iFjbzq4RLEc5.jpg"
   ],
-  "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JU6epy3UisztjnTMsWwMf.jpg",
+  "thumb": "/assets/products/k10743/v2_front.jpg",
   "summary_text": "80年代 Karin Stevens のワンピース。ネイビー地の小花柄に縫い付けの白いレースカラー、パフスリーブとゴムシャーリングのウエスト。レーヨン100%・香港製、US10（日本M〜L相当）、状態A。",
   "summary_points": [
    "80年代 Karin Stevens の、ネイビー地小花柄に白いレースカラーのワンピース（香港製）",
@@ -1568,7 +1568,31 @@
   ],
   "sku_confidence": "推定",
   "genre": "dress",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "images_orig": [
+   "https://assets.mercari-shops-static.com/-/large/plain/2JU6epy3UisztjnTMsWwMf.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq4ACyjpotSGjiucWd.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq4CiyZbkd5dDZeoiw.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JU6epzn85jQXPuxqrktdb.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq23faycAqYtSxr5aR.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JU6epzyCdWyopmYAQR9k3.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq2E7puQzfAaScdxrc.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JU6epzuhcdyJtPHxoLkiH.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq24Jmu42jP9bDUDAm.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq2ERZan5BRYLaw8QN.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JU6eq29N4iFjbzq4RLEc5.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-09",
+   "front_i": 0,
+   "back_i": 7,
+   "front_url": "/assets/products/k10743/v2_front.jpg",
+   "back_url": "/assets/products/k10743/v2_back.jpg",
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k10743/v2_mannequin.jpg",
+   "mannequin_body": "身長165cm・バスト83cm",
+   "measures": {}
+  }
  },
  {
   "sku": "K10951",
@@ -2765,13 +2789,13 @@
   },
   "images": [
    "/assets/products/k11263/01.jpg",
+   "/assets/products/k11263/v2_back.jpg",
    "/assets/products/k11263/02.jpg",
    "/assets/products/k11263/03.jpg",
    "/assets/products/k11263/04.jpg",
    "/assets/products/k11263/05.jpg",
    "/assets/products/k11263/06.jpg",
    "/assets/products/k11263/07.jpg",
-   "/assets/products/k11263/08.jpg",
    "/assets/products/k11263/09.jpg",
    "/assets/products/k11263/10.jpg",
    "/assets/products/k11263/11.jpg"
@@ -2809,7 +2833,34 @@
   ],
   "sku_confidence": "確定",
   "genre": "outer",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "images_orig": [
+   "/assets/products/k11263/01.jpg",
+   "/assets/products/k11263/02.jpg",
+   "/assets/products/k11263/03.jpg",
+   "/assets/products/k11263/04.jpg",
+   "/assets/products/k11263/05.jpg",
+   "/assets/products/k11263/06.jpg",
+   "/assets/products/k11263/07.jpg",
+   "/assets/products/k11263/08.jpg",
+   "/assets/products/k11263/09.jpg",
+   "/assets/products/k11263/10.jpg",
+   "/assets/products/k11263/11.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-09",
+   "front_i": 0,
+   "back_i": 7,
+   "back_url": "/assets/products/k11263/v2_back.jpg",
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11263/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 50.0,
+    "着丈": 57.0,
+    "肩幅": 37.0
+   }
+  }
  },
  {
   "sku": "K10965",
