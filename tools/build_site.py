@@ -86,7 +86,7 @@ T = {
   'journal_h': 'Journal', 'journal_s': '一点ものの、成り立ちの記録',
   'legal': [('/tokushoho/', '特定商取引法に基づく表記'), ('/privacy/', 'プライバシーポリシー')],
   'gm': 'Googleマップ', 'rank_new': '新品・未使用', 'rank_vin': 'ヴィンテージ（経年あり）', 'rank': '状態 {r}',
-  'cats': {'outer': 'アウター', 'tops': 'トップス', 'bottoms': 'ボトムス・ワンピース', 'shoes': '靴', 'acc': 'アクセサリー・GAW', 'other': '小物・雑貨'},
+  'cats': {'outer': 'アウター', 'tops': 'トップス', 'bottoms': 'パンツ・スカート', 'dress': 'ワンピース', 'shoes': '靴', 'acc': 'アクセサリー・GAW', 'other': '小物・雑貨'},
   'nf_p': 'お探しのページは見つかりませんでした。売れた商品も、ふだんはSOLDとしてページを残しています。', 'nf_btn': 'オンラインで買える一点もの',
   'top_title': '古着屋 小判鮫 KOBANZAME｜埼玉・川越の古民家ヴィンテージ古着店',
   'top_desc': '埼玉県川越市元町、築約80年の古民家で営業する古着屋 小判鮫（KOBANZAME）。国内外で買い付けたヴィンテージ古着と、オリジナルのリメイクアクセサリー「GAW」。すべて一点もの。サイトからクレジットカードで購入できます（送料込み）。',
@@ -128,7 +128,7 @@ T = {
   'journal_h': 'Journal', 'journal_s': 'Where each piece comes from',
   'legal': [('/en/legal/', 'Legal notice & privacy')],
   'gm': 'Google Maps', 'rank_new': 'New, unused', 'rank_vin': 'Vintage (signs of age)', 'rank': 'Condition {r}',
-  'cats': {'outer': 'Outerwear', 'tops': 'Tops', 'bottoms': 'Bottoms & dresses', 'shoes': 'Shoes', 'acc': 'Accessories & GAW', 'other': 'Goods'},
+  'cats': {'outer': 'Outerwear', 'tops': 'Tops', 'bottoms': 'Pants & skirts', 'dress': 'Dresses', 'shoes': 'Shoes', 'acc': 'Accessories & GAW', 'other': 'Goods'},
   'nf_p': 'We could not find that page. Sold pieces usually stay on the site marked SOLD.', 'nf_btn': 'See the pieces',
   'top_title': 'Kobanzame | Vintage clothing in an old wooden house, Kawagoe, Japan',
   'top_desc': 'Kobanzame is a vintage clothing shop in an 80-year-old wooden house in Kawagoe, Saitama. Vintage clothing sourced in Japan and abroad, and our own remade accessories, GAW. Every piece is one of a kind. Buy online by credit card.',
@@ -164,7 +164,7 @@ WORKSHOPS = [
 if WS_OPEN:
     T_WS_NAV = {'ja': ('/workshop/', 'ワークショップ'), 'en': ('/en/workshop/', 'Workshops')}
 
-CAT_EN = {'outer': 'Outer', 'tops': 'Tops', 'bottoms': 'Bottoms', 'shoes': 'Shoes', 'acc': 'Accessories', 'other': 'Goods'}
+CAT_EN = {'outer': 'Outer', 'tops': 'Tops', 'bottoms': 'Bottoms', 'dress': 'Dresses', 'shoes': 'Shoes', 'acc': 'Accessories', 'other': 'Goods'}
 
 FAQ = {
  'ja': [
@@ -252,11 +252,15 @@ def is_sold(p):
     return p.get('status') == 'sold'
 
 def cat_of(p):
+    # 2026-10-08 products.json に genre（写真から判定したジャンル）があればそれを優先。無ければカテゴリの文字で判定
+    if p.get('genre') in ('outer', 'tops', 'bottoms', 'dress', 'shoes', 'acc', 'other'):
+        return p['genre']
     c = p.get('category', '')
+    if 'ワンピース' in c or 'ドレス' in c: return 'dress'
     if 'アクセサリー' in c: return 'acc'
     if 'アウター' in c or 'ジャケット' in c or 'コート' in c: return 'outer'
     if 'トップス' in c or 'シャツ' in c or 'ニット' in c or 'スウェット' in c: return 'tops'
-    if 'パンツ' in c or 'ボトムス' in c or 'スカート' in c or 'ワンピース' in c: return 'bottoms'
+    if 'パンツ' in c or 'ボトムス' in c or 'スカート' in c: return 'bottoms'
     if '靴' in c or 'シューズ' in c or 'ブーツ' in c: return 'shoes'
     return 'other'
 
@@ -756,7 +760,7 @@ write('/assets/site.css', CSS.strip() + '\n')
 # ---------- 一覧 ----------
 live = [p for p in products if release(p) == 'live']
 avail_live = [p for p in live if not is_sold(p)]
-CATS_PRESENT = [c for c in ['outer', 'tops', 'bottoms', 'shoes', 'acc', 'other'] if any(cat_of(p) == c for p in live)]
+CATS_PRESENT = [c for c in ['outer', 'tops', 'bottoms', 'dress', 'shoes', 'acc', 'other'] if any(cat_of(p) == c for p in live)]
 
 def card_html(p, lang, lazy=True):
     t = T[lang]
