@@ -30,7 +30,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PHOTO_V2_FROM: '2026-10-04'
           PHOTO_V2_MAX: '2'
-          PHOTO_V2_ONLY: 'K11263,K10743'
+          PHOTO_V2_ONLY: 'K11263'
+          PHOTO_V2_NO_MANNEQUIN: '1'
         run: python3 tools/photo_v2.py --check
       - name: Install photo tools
         if: steps.pv2.outputs.count != '0'
@@ -50,7 +51,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PHOTO_V2_FROM: '2026-10-04'
           PHOTO_V2_MAX: '2'
-          PHOTO_V2_ONLY: 'K11263,K10743'
+          PHOTO_V2_ONLY: 'K11263'
+          PHOTO_V2_NO_MANNEQUIN: '1'
         run: python3 tools/photo_v2.py
       - name: Build pages
         run: python3 tools/build_site.py

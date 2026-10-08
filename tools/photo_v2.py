@@ -252,7 +252,8 @@ def parse_measures(p):
     for row in p.get('spec', []):
         if len(row) >= 2 and row[0] == 'サイズ':
             size = row[1]
-    return {k: float(v) for k, v in re.findall(r'(肩幅|身幅|着丈|袖丈|裄丈|ウエスト|股下|総丈|ヒップ|わたり|裾幅)\s*([\d.]+)\s*cm', size)}
+    # 書き方がいろいろ（「身幅50cm・着丈57cm」「肩幅37／身幅49.5／着丈125cm」「平置き：ウエスト36／総丈78cm」）なので、cm は無くてもよい
+    return {k: float(v) for k, v in re.findall(r'(肩幅|身幅|着丈|袖丈|裄丈|ウエスト|股下|総丈|ヒップ|わたり|裾幅|すそ幅)\s*[:：]?\s*([\d]+(?:\.\d+)?)', size)}
 
 
 def body_for(p):
@@ -280,6 +281,8 @@ def fit_text(p, b, m):
                      + ('inside the mannequin shoulder line.' if d < -2 else 'on the shoulder line.' if d <= 3 else 'dropped below the shoulder.'))
     if '袖丈' in m:
         lines.append(f'Sleeve length is {m["袖丈"]:.0f} cm from the shoulder seam.')
+    if g == 'bottoms' and '総丈' in m and '股下' not in m:
+        lines.append(f'Total length is {m["総丈"]:.0f} cm from the waistband, so the hem ends about {b["waist"]-m["総丈"]:.0f} cm above the floor.')
     if g == 'bottoms' and '股下' in m:
         lines.append(f'Inseam is {m["股下"]:.0f} cm, so the hem ends about {b["crotch"]-m["股下"]:.0f} cm above the floor.')
     return ' '.join(lines)
@@ -374,14 +377,17 @@ def process(p, budget):
         if idx < 0:
             continue
         try:
+            import traceback
             place(cutout(images[idx], sku, budget), FIT_H, FIT_W).save(os.path.join(od, f'v2_{key}.jpg'), quality=88, optimize=True)
             urls[key] = f'{rel}/v2_{key}.jpg'
             log(f'{sku} {key}: 背景を揃えました')
         except Exception as e:
+            urls[key + '_error'] = repr(e)[:300]
             log(f'{sku} {key}: 失敗 → 元の写真のまま：{e!r}')
-    v = {'date': now_jst().strftime('%Y-%m-%d'), 'front_i': front_i, 'back_i': back_i, **{k + '_url': u for k, u in urls.items()}}
+    v = {'date': now_jst().strftime('%Y-%m-%d'), 'front_i': front_i, 'back_i': back_i,
+         **{(k if k.endswith('_error') else k + '_url'): u for k, u in urls.items()}}
     # マネキン（服のジャンルだけ・確認待ちで作る）
-    if p.get('genre') in CLOTHES and front_i >= 0 and not os.path.exists(STOP_FILE):
+    if p.get('genre') in CLOTHES and front_i >= 0 and not os.path.exists(STOP_FILE) and os.environ.get('PHOTO_V2_NO_MANNEQUIN') != '1':
         if not budget.can_spend(STOP_PER_IMAGE_YEN):
             log(f'{sku}: 今月のマネキン代が上限（{MONTH_CAP_YEN:.0f}円）に近いので作りません（使用 {budget.spent:.0f}円）')
             v['mannequin'] = 'skipped-budget'
@@ -401,7 +407,7 @@ def process(p, budget):
                 v['mannequin'] = 'error'
                 log(f'{sku}: マネキン画像 失敗：{e!r}')
     p['images_orig'] = list(p['images'])
-    p['images'] = new_image_list(p['images'], front_i, back_i, urls.get('front'), urls.get('back'))
+    p['images'] = new_image_list(p['images'], front_i, back_i, urls.get('front'), urls.get('back'))   # *_error は並びに使わない
     if urls.get('front'):
         p['thumb'] = urls['front']
     p['photo_v2'] = v
@@ -439,6 +445,10 @@ def main():
             except Exception as e:
                 log(f'{p["sku"]}: エラー（元の写真のまま。次回また試す）：{e!r}')
         log(f'今月のこの処理のAI代（概算）：{budget.spent:.1f}円／上限 {MONTH_CAP_YEN:.0f}円')
+    if changed and LOG_LINES:
+        os.makedirs(COST_DIR, exist_ok=True)
+        with open(os.path.join(COST_DIR, 'photo_v2_last_run.txt'), 'w', encoding='utf-8') as f:   # 直近の実行の記録（何をして何が失敗したか）
+            f.write(now_jst().strftime('%Y-%m-%d %H:%M') + '\n' + '\n'.join(LOG_LINES) + '\n')
     if changed:
         with open(DATA, 'w', encoding='utf-8') as f:
             f.write(json.dumps(products, ensure_ascii=False, indent=1) + '\n')
