@@ -33,6 +33,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      # 2026-10-08：ジャンルが空の新商品だけ、1枚目の写真からジャンルを判定して products.json に書く（鍵が無ければ何もしない）
+      - name: Genre from photo
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 tools/classify_genre.py
       - name: Build pages
         run: python3 tools/build_site.py
       - name: Commit generated pages (only if something changed)
