@@ -1,0 +1,164 @@
+[
+ {
+  "sku": "K10888",
+  "style": "A_torso",
+  "file": "K10888_A_torso.png",
+  "usage": {
+   "promptTokenCount": 383,
+   "candidatesTokenCount": 1290,
+   "totalTokenCount": 1673,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 125
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 258
+    }
+   ],
+   "candidatesTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1290
+    }
+   ],
+   "serviceTier": "standard"
+  }
+ },
+ {
+  "sku": "K10888",
+  "style": "B_full",
+  "file": "K10888_B_full.png",
+  "usage": {
+   "promptTokenCount": 381,
+   "candidatesTokenCount": 1290,
+   "totalTokenCount": 1671,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 123
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 258
+    }
+   ],
+   "candidatesTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1290
+    }
+   ],
+   "serviceTier": "standard"
+  }
+ },
+ {
+  "sku": "K10743",
+  "style": "A_torso",
+  "file": "K10743_A_torso.png",
+  "usage": {
+   "promptTokenCount": 383,
+   "candidatesTokenCount": 1290,
+   "totalTokenCount": 1673,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 125
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 258
+    }
+   ],
+   "candidatesTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1290
+    }
+   ],
+   "serviceTier": "standard"
+  }
+ },
+ {
+  "sku": "K10743",
+  "style": "B_full",
+  "file": "K10743_B_full.png",
+  "usage": {
+   "promptTokenCount": 381,
+   "candidatesTokenCount": 1290,
+   "totalTokenCount": 1671,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 123
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 258
+    }
+   ],
+   "candidatesTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1290
+    }
+   ],
+   "serviceTier": "standard"
+  }
+ },
+ {
+  "sku": "K11190",
+  "style": "A_torso",
+  "file": "K11190_A_torso.png",
+  "usage": {
+   "promptTokenCount": 383,
+   "candidatesTokenCount": 1290,
+   "totalTokenCount": 1673,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 125
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 258
+    }
+   ],
+   "candidatesTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1290
+    }
+   ],
+   "serviceTier": "standard"
+  }
+ },
+ {
+  "sku": "K11190",
+  "style": "B_full",
+  "file": "K11190_B_full.png",
+  "usage": {
+   "promptTokenCount": 381,
+   "candidatesTokenCount": 1290,
+   "totalTokenCount": 1671,
+   "promptTokensDetails": [
+    {
+     "modality": "TEXT",
+     "tokenCount": 123
+    },
+    {
+     "modality": "IMAGE",
+     "tokenCount": 258
+    }
+   ],
+   "candidatesTokensDetails": [
+    {
+     "modality": "IMAGE",
+     "tokenCount": 1290
+    }
+   ],
+   "serviceTier": "standard"
+  }
+ }
+]
