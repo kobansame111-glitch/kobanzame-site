@@ -13,7 +13,9 @@
 いつ動くか：GitHub Actions build-site の中（products.json が変わった時）。対象が0件ならすぐ終わる（AIも呼ばない）。
 変えるもの：products.json の対象商品の images／thumb と、新しい欄 photo_v2・images_orig。画像は assets/products/<sku>/v2_*.jpg。
 やらないこと：元の写真の削除・上書き／過去の商品／マネキン画像の自動公開。
-止める：data/ai_cost/STOP というファイルがあれば、AIを一切呼ばない（上限超えの時はこのファイルを自動で作る。再開は中身を確認してから人が消す）。
+止める：data/ai_cost/STOP というファイルがあれば、AIを一切呼ばない。次の2つの時に自動で作る（作られるとワークフローの最後の段が
+      失敗になり、GitHubから龍さんにメールが届く）：①マネキン画像1枚が STOP_PER_IMAGE_YEN を超えた ②この月の合計が MONTH_CAP_YEN に届いた。
+      再開は、中身を確認してから data/ai_cost/STOP を消す。
 鍵：GEMINI_API_KEY（GitHub Secrets・値はログに出さない）。無ければ何もしない。
 失敗：その商品は元の写真のまま。HTTP ステータスと本文の先頭をログに出す（握り潰さない）。
 """
@@ -79,8 +81,11 @@ class Budget:
         self.spent = 0.0
         with open(COST_CSV, encoding='utf-8') as f:
             for r in csv.DictReader(f):
-                if r['日時'].startswith(self.month):
-                    self.spent += float(r['概算円'] or 0)
+                if str(r.get('日時', '')).startswith(self.month):
+                    try:
+                        self.spent += float(r.get('概算円') or 0)
+                    except ValueError:
+                        log(f'台帳の読めない行を飛ばしました：{r}')
 
     @staticmethod
     def yen(model, usage):
@@ -108,6 +113,20 @@ class Budget:
 
 
 # ===== Gemini =====================================================================
+
+def gemini_logged(budget, sku, kind, model, parts, gen, images=0):
+    """Gemini を呼び、成功も失敗も台帳に1行残す（時間切れは料金が分からないので、画像なら1枚分を見込みで数える）"""
+    try:
+        res = gemini(model, parts, gen)
+    except Exception as e:
+        est = 0.0 if model == TEXT_MODEL else Budget.yen(model, {'promptTokenCount': 500, 'candidatesTokenCount': 1290})[2]
+        budget.spent += est
+        with open(COST_CSV, 'a', newline='', encoding='utf-8') as f:
+            csv.writer(f).writerow([now_jst().strftime('%Y-%m-%d %H:%M'), sku, kind + '（失敗・料金不明）', model, '', '', f'{est:.2f}', 0])
+        raise
+    y = budget.record(sku, kind, model, res, images)
+    return res, y
+
 
 def gemini(model, parts, gen):
     body = {'contents': [{'parts': parts}], 'generationConfig': gen}
@@ -145,11 +164,30 @@ def pick_full_shots(images, sku, budget):
     parts.append({'text': '古着の商品写真です。服の「全体」が写っている正面の写真と背面の写真を1枚ずつ選んでください。'
                           '寄りの細部・タグ・ダメージのアップは選ばない。無ければ -1。'
                           'JSONだけ：{"front":番号,"back":番号}'})
-    res = gemini(TEXT_MODEL, parts, {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 100,
-                                     'thinkingConfig': {'thinkingBudget': 0}})
-    budget.record(sku, '写真選び', TEXT_MODEL, res)
-    j = json_of(res)
-    return int(j.get('front', -1)), int(j.get('back', -1))
+    res, _ = gemini_logged(budget, sku, '写真選び', TEXT_MODEL, parts,
+                           {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 100,
+                            'thinkingConfig': {'thinkingBudget': 0}})
+    try:
+        j = json_of(res)
+        if isinstance(j, list):
+            j = j[0] if j else {}
+        return check_picks(j.get('front', -1), j.get('back', -1), len(images[:16]))
+    except Exception as e:
+        raise RuntimeError(f'写真選びの返事が読めない：{text_of(res)[:200]}') from e
+
+
+def check_picks(front, back, n):
+    """AIが選んだ番号が写真の枚数の範囲内か確かめる。正面と背面が同じなら背面は無し（純粋関数・テスト対象）"""
+    def ok(v):
+        try:
+            v = int(v)
+        except (TypeError, ValueError):
+            return -1
+        return v if 0 <= v < n else -1
+    f, b = ok(front), ok(back)
+    if b == f:
+        b = -1
+    return f, b
 
 
 def find_box(j):
@@ -187,10 +225,9 @@ def garment_box(im, sku, budget):
               'Answer JSON only: {"box_2d":[y0,x0,y1,x1]} normalized to 0-1000.')
     box4 = None
     for attempt in range(2):   # 返事の形が崩れることがある（2026-10-09：box_2d 以外の名前で返ってきた）ので1回だけやり直す
-        res = gemini(TEXT_MODEL, [img_part(small), {'text': prompt}],
-                     {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 200,
-                      'thinkingConfig': {'thinkingBudget': 0}})
-        budget.record(sku, '服の箱', TEXT_MODEL, res)
+        res, _ = gemini_logged(budget, sku, '服の箱', TEXT_MODEL, [img_part(small), {'text': prompt}],
+                               {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 200,
+                                'thinkingConfig': {'thinkingBudget': 0}})
         try:
             box4 = find_box(json_of(res))
         except Exception:
@@ -272,11 +309,13 @@ def quality_ok(img, sku, budget):
               'plaques, shelves, wall pieces, floor, or blotches of the old background? A clothes hanger is acceptable. '
               '(2) Is any part of the garment visibly cut off or missing (holes, chopped hem or sleeve)? '
               'Answer JSON only: {"clean": true or false, "problem": "short reason in Japanese or empty"}')
-    res = gemini(TEXT_MODEL, [img_part(small), {'text': prompt}],
-                 {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 120,
-                  'thinkingConfig': {'thinkingBudget': 0}})
-    budget.record(sku, '仕上がり確認', TEXT_MODEL, res)
-    j = json_of(res)
+    res, _ = gemini_logged(budget, sku, '仕上がり確認', TEXT_MODEL, [img_part(small), {'text': prompt}],
+                           {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 120,
+                            'thinkingConfig': {'thinkingBudget': 0}})
+    try:
+        j = json_of(res)
+    except Exception:
+        return False, f'確認の返事が読めない：{text_of(res)[:80]}'
     if isinstance(j, list):
         j = j[0] if j else {}
     return bool(j.get('clean')), str(j.get('problem', ''))[:100]
@@ -348,15 +387,16 @@ def mannequin_image(p, front, b, m, budget):
               'buttons (same number), stitching, fabric texture, fading, wear and proportions. Do not add, remove or redesign '
               'anything on it. Do not add other clothes except plain white simple trousers if the item is a top, no accessories, '
               'no people, no text. Plain flat off-white background (#F3F1EC), soft even studio light. ' + fit_text(p, b, m))
-    res = gemini(IMAGE_MODEL, [img_part(front), {'text': prompt}], {'responseModalities': ['IMAGE', 'TEXT']})
-    y = budget.record(p['sku'], 'マネキン画像', IMAGE_MODEL, res, images=1)
+    res, y = gemini_logged(budget, p['sku'], 'マネキン画像', IMAGE_MODEL, [img_part(front), {'text': prompt}],
+                           {'responseModalities': ['IMAGE', 'TEXT']}, images=1)
     if y > STOP_PER_IMAGE_YEN:
         Budget.stop(f'{p["sku"]} のマネキン画像1枚が {y:.1f}円（上限 {STOP_PER_IMAGE_YEN:.0f}円）')
     for part in ((res.get('candidates') or [{}])[0].get('content') or {}).get('parts', []):
         d = part.get('inlineData') or part.get('inline_data')
         if d and d.get('data'):
             return Image.open(io.BytesIO(base64.b64decode(d['data']))).convert('RGB')
-    raise RuntimeError('マネキン画像が返ってきません')
+    c = (res.get('candidates') or [{}])[0]
+    raise RuntimeError(f'マネキン画像が返ってきません finish={c.get("finishReason")} {json.dumps(res.get("promptFeedback", {}))[:200]} {text_of(res)[:120]}')
 
 
 def caption(im, text):
@@ -375,8 +415,12 @@ def caption(im, text):
 
 def is_target(p, start=None):
     start = start or PHOTO_V2_FROM
+    d = str(p.get('published_date', ''))
+    if not re.match(r'^\d{4}-\d{2}-\d{2}', d):   # 「2026/10/01」などの形は比べられないので対象にしない
+        return False
     return (p.get('status') == 'available' and p.get('published') is not False and not p.get('noindex')
-            and str(p.get('published_date', '')) >= start and not p.get('photo_v2') and bool(p.get('images')))
+            and d >= start and bool(p.get('images'))
+            and (not p.get('photo_v2') or (p['photo_v2'].get('error') and p['photo_v2'].get('tries', 0) < 2)))   # 失敗は2回まで
 
 
 def new_image_list(images, front_i, back_i, front_url, back_url, mannequin_url=None):
@@ -435,6 +479,8 @@ def process(p, budget):
                 raise RuntimeError(f'仕上がり確認で不合格：{why}')
             out.save(os.path.join(od, f'v2_{key}.jpg'), quality=88, optimize=True)
             urls[key] = f'{rel}/v2_{key}.jpg'
+            if key == 'front':   # 一覧用の小さい画像（スマホで重くならないように）
+                small = out.copy(); small.thumbnail((600, 750)); small.save(os.path.join(od, 'v2_thumb.jpg'), quality=82, optimize=True)
             log(f'{sku} {key}: 背景を揃えました')
         except Exception as e:
             urls[key + '_error'] = repr(e)[:300]
@@ -444,8 +490,8 @@ def process(p, budget):
     # マネキン（服のジャンルだけ・確認待ちで作る）
     if p.get('genre') in CLOTHES and front_i >= 0 and not os.path.exists(STOP_FILE) and os.environ.get('PHOTO_V2_NO_MANNEQUIN') != '1':
         if not budget.can_spend(STOP_PER_IMAGE_YEN):
-            log(f'{sku}: 今月のマネキン代が上限（{MONTH_CAP_YEN:.0f}円）に近いので作りません（使用 {budget.spent:.0f}円）')
             v['mannequin'] = 'skipped-budget'
+            Budget.stop(f'この月の写真v2のAI代が上限 {MONTH_CAP_YEN:.0f}円 に届きました（使用 {budget.spent:.0f}円）')
         else:
             b, m = body_for(p), parse_measures(p)
             try:
@@ -464,7 +510,7 @@ def process(p, budget):
     p['images_orig'] = list(p['images'])
     p['images'] = new_image_list(p['images'], front_i, back_i, urls.get('front'), urls.get('back'))   # *_error は並びに使わない
     if urls.get('front'):
-        p['thumb'] = urls['front']
+        p['thumb'] = f'{rel}/v2_thumb.jpg'
     p['photo_v2'] = v
 
 
@@ -473,7 +519,25 @@ def targets(products):
     return [p for p in products if is_target(p) and (not only or p['sku'] in only)]
 
 
+def save_products(products):
+    """一時ファイルに書いてから置き換える（書きかけで止まっても products.json が壊れない）"""
+    tmp = DATA + '.tmp'
+    with open(tmp, 'w', encoding='utf-8') as f:
+        f.write(json.dumps(products, ensure_ascii=False, indent=1) + '\n')
+    os.replace(tmp, DATA)
+
+
 def main():
+    try:
+        return _main()
+    except Exception as e:   # 写真の処理が失敗しても、サイトの作り直し（SOLDの反映）は止めない
+        import traceback
+        log(f'写真v2 全体のエラー（サイトの作り直しは続ける）：{e!r}')
+        log(traceback.format_exc()[-1500:])
+        return 0
+
+
+def _main():
     products = json.load(open(DATA, encoding='utf-8'))
     if '--check' in sys.argv:          # 対象の件数だけ出す（ワークフローが重い道具を入れるか決める）
         n = len(targets(products)) if os.environ.get('GEMINI_API_KEY') and not os.path.exists(STOP_FILE) else 0
@@ -494,19 +558,25 @@ def main():
         for p in targets(products)[:MAX_PER_RUN]:
             if os.path.exists(STOP_FILE):
                 break
+            before = json.dumps(p, ensure_ascii=False, sort_keys=True)
             try:
                 process(p, budget)
                 changed += 1
+                save_products(products)   # 1商品ごとに保存
             except Exception as e:
-                log(f'{p["sku"]}: エラー（元の写真のまま。次回また試す）：{e!r}')
+                p.clear(); p.update(json.loads(before))   # 途中まで書き換えた商品は元に戻す
+                tries = (p.get('photo_v2') or {}).get('tries', 0) + 1
+                p['photo_v2'] = {'error': repr(e)[:300], 'tries': tries, 'date': now_jst().strftime('%Y-%m-%d')}
+                save_products(products)
+                changed += 1
+                log(f'{p["sku"]}: エラー（元の写真のまま。{"次回もう一度試す" if tries < 2 else "2回失敗したのでやめる"}）：{e!r}')
         log(f'今月のこの処理のAI代（概算）：{budget.spent:.1f}円／上限 {MONTH_CAP_YEN:.0f}円')
     if changed and LOG_LINES:
         os.makedirs(COST_DIR, exist_ok=True)
         with open(os.path.join(COST_DIR, 'photo_v2_last_run.txt'), 'w', encoding='utf-8') as f:   # 直近の実行の記録（何をして何が失敗したか）
             f.write(now_jst().strftime('%Y-%m-%d %H:%M') + '\n' + '\n'.join(LOG_LINES) + '\n')
     if changed:
-        with open(DATA, 'w', encoding='utf-8') as f:
-            f.write(json.dumps(products, ensure_ascii=False, indent=1) + '\n')
+        save_products(products)
     return 0   # 止まった時の知らせは、ワークフローの最後の段（STOP があれば失敗＝GitHubからメール）で出す
 
 

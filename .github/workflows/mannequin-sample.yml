@@ -1,6 +1,5 @@
 name: mannequin-sample
 # 写真v2の通し試験。ブランチ mannequin-sample に push した時だけ動く（main は変えない）。
-# build-site と同じ手順を、対象日を 10/4 からに広げて最大2件で動かし、結果をこのブランチにコミットする。
 on:
   push:
     branches: [mannequin-sample]
@@ -23,21 +22,21 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python3 tools/classify_genre.py
       # 2026-10-09：新しい商品（PHOTO_V2_FROM 以降に公開）の写真の背景と大きさを揃え、マネキン着用イメージ（確認待ち）を作る。
-      #   対象0件なら重い道具は入れない。AI代は data/ai_cost/photo_v2.csv に記録し、上限を超えたら data/ai_cost/STOP で止める。
+      #   対象0件なら重い道具は入れない。AI代は data/ai_cost/photo_v2.csv に記録し、1枚15円超・月1,000円に届いたら data/ai_cost/STOP を作って止める（最後の段が失敗→メール）。
       - name: Photo v2 check
         id: pv2
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PHOTO_V2_FROM: '2026-10-04'
-          PHOTO_V2_MAX: '2'
-          PHOTO_V2_ONLY: 'K11263'
-          PHOTO_V2_NO_MANNEQUIN: '1'
+          PHOTO_V2_ONLY: 'K11190'
         run: python3 tools/photo_v2.py --check
       - name: Install photo tools
         if: steps.pv2.outputs.count != '0'
+        continue-on-error: true   # 道具が入らなくても、サイトの作り直し（SOLDの反映）は止めない
+        timeout-minutes: 8
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
-          pip install -q "rembg[cpu]" scipy numpy pillow
+          pip install -q "rembg[cpu]==2.0.85"   # 版を固定（2026-10-09 に試験した版。勝手に新しい版にならない）
       - name: Cache cutout models
         if: steps.pv2.outputs.count != '0'
         uses: actions/cache@v4
@@ -47,12 +46,12 @@ jobs:
             ~/.rembg
           key: rembg-models-v1
       - name: Photo v2
+        continue-on-error: true   # 写真の処理が失敗しても、サイトの作り直し（SOLDの反映）は止めない
+        timeout-minutes: 15
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PHOTO_V2_FROM: '2026-10-04'
-          PHOTO_V2_MAX: '2'
-          PHOTO_V2_ONLY: 'K11263'
-          PHOTO_V2_NO_MANNEQUIN: '1'
+          PHOTO_V2_ONLY: 'K11190'
         run: python3 tools/photo_v2.py
       - name: Build pages
         run: python3 tools/build_site.py
