@@ -2789,13 +2789,13 @@
   },
   "images": [
    "/assets/products/k11263/01.jpg",
-   "/assets/products/k11263/v2_back.jpg",
    "/assets/products/k11263/02.jpg",
    "/assets/products/k11263/03.jpg",
    "/assets/products/k11263/04.jpg",
    "/assets/products/k11263/05.jpg",
    "/assets/products/k11263/06.jpg",
    "/assets/products/k11263/07.jpg",
+   "/assets/products/k11263/08.jpg",
    "/assets/products/k11263/09.jpg",
    "/assets/products/k11263/10.jpg",
    "/assets/products/k11263/11.jpg"
@@ -2833,27 +2833,7 @@
   ],
   "sku_confidence": "確定",
   "genre": "outer",
-  "genre_by": "manual-photo-2026-10-08",
-  "images_orig": [
-   "/assets/products/k11263/01.jpg",
-   "/assets/products/k11263/02.jpg",
-   "/assets/products/k11263/03.jpg",
-   "/assets/products/k11263/04.jpg",
-   "/assets/products/k11263/05.jpg",
-   "/assets/products/k11263/06.jpg",
-   "/assets/products/k11263/07.jpg",
-   "/assets/products/k11263/08.jpg",
-   "/assets/products/k11263/09.jpg",
-   "/assets/products/k11263/10.jpg",
-   "/assets/products/k11263/11.jpg"
-  ],
-  "photo_v2": {
-   "date": "2026-10-09",
-   "front_i": 0,
-   "back_i": 7,
-   "front_error": "KeyError('box_2d')",
-   "back_url": "/assets/products/k11263/v2_back.jpg"
-  }
+  "genre_by": "manual-photo-2026-10-08"
  },
  {
   "sku": "K10965",

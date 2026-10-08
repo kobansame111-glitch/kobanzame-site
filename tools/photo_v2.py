@@ -152,6 +152,31 @@ def pick_full_shots(images, sku, budget):
     return int(j.get('front', -1)), int(j.get('back', -1))
 
 
+def find_box(j):
+    """返事のどこかにある [y0,x0,y1,x1]（0〜1000の数4つ）を探す（純粋関数・テスト対象）"""
+    if isinstance(j, dict):
+        for k in ('box_2d', 'box', 'bbox', 'bounding_box'):
+            if k in j:
+                r = find_box(j[k])
+                if r:
+                    return r
+        for v in j.values():
+            r = find_box(v)
+            if r:
+                return r
+    elif isinstance(j, list):
+        if len(j) == 4 and all(isinstance(v, (int, float)) for v in j):
+            y0, x0, y1, x1 = j
+            if 0 <= y0 < y1 <= 1000 and 0 <= x0 < x1 <= 1000:
+                return [float(v) for v in j]
+            return None
+        for v in j:
+            r = find_box(v)
+            if r:
+                return r
+    return None
+
+
 def garment_box(im, sku, budget):
     """Gemini に「売り物の服だけ」を囲む箱を出してもらう（輪郭マスクは返事が壊れやすいので使わない・2026-10-08 試験）"""
     import numpy as np
@@ -160,14 +185,22 @@ def garment_box(im, sku, budget):
               'The box must cover the whole garment from its top edge (shoulders/collar/waistband) to its hem and both sides, '
               'but exclude hangers, hooks, wall decorations, horns, shelves and mannequin stands as much as possible. '
               'Answer JSON only: {"box_2d":[y0,x0,y1,x1]} normalized to 0-1000.')
-    res = gemini(TEXT_MODEL, [img_part(small), {'text': prompt}],
-                 {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 200,
-                  'thinkingConfig': {'thinkingBudget': 0}})
-    budget.record(sku, '服の箱', TEXT_MODEL, res)
-    j = json_of(res)
-    if isinstance(j, list):
-        j = j[0]
-    y0, x0, y1, x1 = [v / 1000 for v in j['box_2d']]
+    box4 = None
+    for attempt in range(2):   # 返事の形が崩れることがある（2026-10-09：box_2d 以外の名前で返ってきた）ので1回だけやり直す
+        res = gemini(TEXT_MODEL, [img_part(small), {'text': prompt}],
+                     {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 200,
+                      'thinkingConfig': {'thinkingBudget': 0}})
+        budget.record(sku, '服の箱', TEXT_MODEL, res)
+        try:
+            box4 = find_box(json_of(res))
+        except Exception:
+            box4 = None
+        if box4:
+            break
+        log(f'  服の箱の返事が読めない（{attempt + 1}回目）：{text_of(res)[:120]}')
+    if not box4:
+        raise RuntimeError('服の箱が返ってきません')
+    y0, x0, y1, x1 = [v / 1000 for v in box4]
     W, H = im.size
     pad = 0.015
     box = np.zeros((H, W), dtype=bool)
@@ -377,7 +410,6 @@ def process(p, budget):
         if idx < 0:
             continue
         try:
-            import traceback
             place(cutout(images[idx], sku, budget), FIT_H, FIT_W).save(os.path.join(od, f'v2_{key}.jpg'), quality=88, optimize=True)
             urls[key] = f'{rel}/v2_{key}.jpg'
             log(f'{sku} {key}: 背景を揃えました')
