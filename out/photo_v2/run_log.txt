@@ -1,47 +1,7 @@
 K11263: 全体の写真 正面=0 背面=7（0から数える）
-K11263 1_front: 失敗 → 元の写真のまま使う：Error('Invalid base64-encoded string: number of data characters (25) cannot be 1 more than a multiple of 4')
-Traceback (most recent call last):
-  File "/home/runner/work/kobanzame-site/kobanzame-site/tools/photo_v2.py", line 244, in run
-    made[name] = place(cutout(images[idx]), FIT_H, FIT_W)
-                       ^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/kobanzame-site/kobanzame-site/tools/photo_v2.py", line 128, in cutout
-    region = garment_region(im) > 0.5
-             ^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/kobanzame-site/kobanzame-site/tools/photo_v2.py", line 108, in garment_region
-    m = Image.open(io.BytesIO(base64.b64decode(b64))).convert('L').resize((bx1 - bx0, by1 - by0), Image.BILINEAR)
-                              ^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/base64.py", line 88, in b64decode
-    return binascii.a2b_base64(s, strict_mode=validate)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-binascii.Error: Invalid base64-encoded string: number of data characters (25) cannot be 1 more than a multiple of 4
-
-K11263 3_back: 失敗 → 元の写真のまま使う：TimeoutError('The read operation timed out')
-gs)
-             ^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 1405, in https_open
-    return self.do_open(http.client.HTTPSConnection, req,
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/urllib/request.py", line 1361, in do_open
-    r = h.getresponse()
-        ^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/http/client.py", line 1478, in getresponse
-    response.begin()
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/http/client.py", line 343, in begin
-    version, status, reason = self._read_status()
-                              ^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/http/client.py", line 304, in _read_status
-    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/socket.py", line 720, in readinto
-    return self._sock.recv_into(b)
-           ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/ssl.py", line 1264, in recv_into
-    return self.read(nbytes, buffer)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/ssl.py", line 1116, in read
-    return self._sslobj.read(len, buffer)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TimeoutError: The read operation timed out
-
+  服の箱：[283, 222, 856, 799]
+K11263 1_front: 背景を揃えました（元 01.jpg）
+  服の箱：[250, 177, 846, 810]
+K11263 3_back: 背景を揃えました（元 08.jpg）
 K11263: 実寸 {'身幅': 50.0, '着丈': 57.0, '肩幅': 37.0} ／ マネキン 身長175cm・胸囲90cm
-終了：0枚
+終了：2枚
