@@ -177,6 +177,7 @@ FAQ = {
     ('いつ届きますか？', 'ご注文（決済）の確認後、3日以内（定休日を除く）に発送します。'),
     ('返品はできますか？', '古着・一点ものの性質上、お客様都合による返品はお受けしていません。商品説明と著しく異なる場合や発送間違いの場合は、到着後4日以内にメールでご連絡ください。'),
     ('取り置きはできますか？', '一点ものなので、サイト・店頭ともお取り置きはしていません。先着順でのご案内です。'),
+    ('店頭とネットの在庫は同じですか？', 'はい。このサイト・店頭・メルカリShopsで同じ一点を販売しています（在庫を共有しています）。売れた時点でほかの販路は自動で止まりますが、ごくまれに同時に売れた場合は、先に決済が完了したご注文を優先し、もう一方のお客様にはご連絡のうえ全額返金いたします。'),
  ],
  'en': [
     ('Where is Kobanzame?', 'At 1-14-5 Motomachi, Kawagoe, Saitama (350-0062), in an 80-year-old wooden house. The shop is run by Plug Inc.'),
@@ -188,6 +189,7 @@ FAQ = {
     ('When will it arrive?', 'We dispatch within 3 days of payment (excluding our closed days).'),
     ('Can I return it?', 'As these are one-of-a-kind vintage items, we do not accept returns for change of mind. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival.'),
     ('Can you hold a piece for me?', 'Every piece is one of a kind, so we do not hold items, online or in the shop. First come, first served.'),
+    ('Is online stock the same as in the shop?', 'Yes. The same one-of-a-kind pieces are sold on this site, in the shop and on Mercari Shops (shared stock). Other channels are stopped automatically once a piece sells; in the rare case that it sells in two places at once, the order paid first is honoured and the other customer is contacted and fully refunded.'),
  ],
 }
 
