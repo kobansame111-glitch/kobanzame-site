@@ -1,0 +1,27 @@
+name: mannequin-sample
+# マネキン着用イメージの見本づくり（お試し）。ブランチ mannequin-sample に push した時だけ動く。
+# サイト・products.json は変えない。できた画像は Actions の「Artifacts」に置くだけ。
+on:
+  push:
+    branches: [mannequin-sample]
+permissions:
+  contents: read
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Make mannequin samples
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python tools/mannequin_sample.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mannequin-sample
+          path: out/mannequin/
+          retention-days: 14
