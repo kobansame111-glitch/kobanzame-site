@@ -629,8 +629,8 @@
    }
   },
   "images": [
-   "https://assets.mercari-shops-static.com/-/large/plain/2JWrio4SyLUBkVfwTVKhaj.jpg",
-   "https://assets.mercari-shops-static.com/-/large/plain/2JWrioAup6VpFRFDZFfSzu.jpg",
+   "/assets/products/k11190/v2_front.jpg",
+   "/assets/products/k11190/v2_back.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JWrinsKMNzUyrzStZZRKt.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JWrioLYfNwdcAVWjwL8GV.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JWrioMH7a44Fcp5RY2LLK.jpg",
@@ -643,7 +643,7 @@
    "https://assets.mercari-shops-static.com/-/large/plain/2JWrioFzH4cspFDnevGJdn.jpg",
    "https://assets.mercari-shops-static.com/-/large/plain/2JWrio5dNHzdXn9ogHzo6R.jpg"
   ],
-  "thumb": "https://assets.mercari-shops-static.com/-/medium/plain/2JWrio4SyLUBkVfwTVKhaj.jpg",
+  "thumb": "/assets/products/k11190/v2_thumb.jpg",
   "summary_text": "90年代のChampion、USA製の半袖ラグランスウェット。グレー、袖のCワッペンと胸のCロゴ。サイズL（身幅64cm）、状態B（袖口内側に目立たないリペア跡）。",
   "summary_points": [
    "90年代のChampion、USA製の半袖ラグランスウェット（袖にCワッペン、胸に小さなCロゴ）",
@@ -676,7 +676,37 @@
   ],
   "sku_confidence": "推定",
   "genre": "tops",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "images_orig": [
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrio4SyLUBkVfwTVKhaj.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrioAup6VpFRFDZFfSzu.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrinsKMNzUyrzStZZRKt.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrioLYfNwdcAVWjwL8GV.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrioMH7a44Fcp5RY2LLK.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrinqYRXnmAxZ8f3nr7s.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrioLWTuMGDDHJho6BXp.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrioLLxGbded2Cae3dpA.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrioMAAT7uB86PKCiizL.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrioHPMiptPoFXConnoN.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrioFaEmC9ZLTc88gnvu.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrioFzH4cspFDnevGJdn.jpg",
+   "https://assets.mercari-shops-static.com/-/large/plain/2JWrio5dNHzdXn9ogHzo6R.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-09",
+   "front_i": 0,
+   "back_i": 1,
+   "front_url": "/assets/products/k11190/v2_front.jpg",
+   "back_url": "/assets/products/k11190/v2_back.jpg",
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11190/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 64.0,
+    "着丈": 69.0,
+    "袖丈": 44.0
+   }
+  }
  },
  {
   "sku": "K11203",
