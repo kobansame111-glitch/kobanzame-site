@@ -1,13 +1,15 @@
 name: mannequin-sample
-# 新しい商品写真の見た目を揃える処理（photo_v2）のお試し。ブランチ mannequin-sample に push した時だけ動く。
-# サイト・products.json は変えない。できた画像はこのブランチの out/photo_v2/ に保存（main には入れない）。
+# 写真v2の通し試験。ブランチ mannequin-sample に push した時だけ動く（main は変えない）。
+# build-site と同じ手順を、対象日を 10/4 からに広げて最大2件で動かし、結果をこのブランチにコミットする。
 on:
   push:
     branches: [mannequin-sample]
 permissions:
-  contents: write   # このブランチにだけ保存する
+  contents: write
+concurrency:
+  group: mannequin-sample
 jobs:
-  sample:
+  build:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -15,21 +17,58 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install tools
+      # 2026-10-08：ジャンルが空の新商品だけ、1枚目の写真からジャンルを判定して products.json に書く（鍵が無ければ何もしない）
+      - name: Genre from photo
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 tools/classify_genre.py
+      # 2026-10-09：新しい商品（PHOTO_V2_FROM 以降に公開）の写真の背景と大きさを揃え、マネキン着用イメージ（確認待ち）を作る。
+      #   対象0件なら重い道具は入れない。AI代は data/ai_cost/photo_v2.csv に記録し、上限を超えたら data/ai_cost/STOP で止める。
+      - name: Photo v2 check
+        id: pv2
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PHOTO_V2_FROM: '2026-10-04'
+          PHOTO_V2_MAX: '2'
+          PHOTO_V2_ONLY: 'K11263,K10743'
+        run: python3 tools/photo_v2.py --check
+      - name: Install photo tools
+        if: steps.pv2.outputs.count != '0'
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
           pip install -q "rembg[cpu]" scipy numpy pillow
-      - name: Make photo_v2 samples
+      - name: Cache cutout models
+        if: steps.pv2.outputs.count != '0'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.u2net
+            ~/.rembg
+          key: rembg-models-v1
+      - name: Photo v2
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          SAMPLE_SKUS: K11263
-          SKIP_MANNEQUIN: '1'
-        run: python tools/photo_v2.py
-      - name: Save samples to this branch only
-        if: always()
+          PHOTO_V2_FROM: '2026-10-04'
+          PHOTO_V2_MAX: '2'
+          PHOTO_V2_ONLY: 'K11263,K10743'
+        run: python3 tools/photo_v2.py
+      - name: Build pages
+        run: python3 tools/build_site.py
+      - name: Commit generated pages (only if something changed)
         run: |
           git config user.name "kobanzame-site-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add out/photo_v2
-          git commit -m "photo_v2 見本 $(date +%F)" || echo "変更なし"
-          git push origin HEAD:mannequin-sample
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "写真v2 通し試験"
+            git push origin HEAD:mannequin-sample
+          fi
+      - name: Alert if AI spending stopped
+        if: always()
+        run: |
+          if [ -f data/ai_cost/STOP ]; then
+            echo "::error::写真v2のAI代が上限を超えたので止まっています：$(head -1 data/ai_cost/STOP)"
+            exit 1
+          fi
