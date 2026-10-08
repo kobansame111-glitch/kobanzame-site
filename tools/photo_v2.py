@@ -80,33 +80,26 @@ def pick_full_shots(images):
 
 
 def garment_region(im):
-    """Gemini に「売り物の服だけ」の範囲（マスク）を出してもらう。ハンガー・壁の飾り・什器は含めない"""
+    """Gemini に「売り物の服だけ」を囲む箱を出してもらう（ハンガー・壁の飾り・什器は含めない）。
+    ※輪郭のマスクは返事が壊れやすかったので使わない（2026-10-08 試験）。輪郭は rembg が決める"""
     small = im.copy(); small.thumbnail((1024, 1024))
-    prompt = ('Give the segmentation mask for the single garment for sale in this photo (the clothing item only). '
-              'Exclude hangers, hooks, wall decorations, horns, shelves, mannequin stands and the background. '
-              'Output a JSON list where each entry has "box_2d" [y0,x0,y1,x1] normalized to 0-1000, '
-              '"mask" (base64 PNG of the probability map inside the box) and "label".')
+    prompt = ('Detect the single garment for sale in this photo (the clothing item only). '
+              'The box must cover the whole garment from its top edge (shoulders/collar/waistband) to its hem and both sides, '
+              'but exclude hangers, hooks, wall decorations, horns, shelves and mannequin stands as much as possible. '
+              'Answer JSON only: {"box_2d":[y0,x0,y1,x1]} normalized to 0-1000.')
     res = gemini(TEXT_MODEL, [img_part(small), {'text': prompt}],
-                 {'temperature': 0, 'responseMimeType': 'application/json', 'thinkingConfig': {'thinkingBudget': 0}})
-    raw = text_of(res)
-    items = json.loads(re.sub(r'^```(?:json)?|```$', '', raw.strip(), flags=re.M).strip() or '[]')
-    if isinstance(items, dict):
-        items = items.get('masks') or items.get('items') or [items]
-    if not items:
-        raise RuntimeError('服の範囲が返ってきません')
+                 {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 200,
+                  'thinkingConfig': {'thinkingBudget': 0}})
+    raw = text_of(res).strip()
+    j = json.loads(re.sub(r'^```(?:json)?|```$', '', raw, flags=re.M).strip())
+    if isinstance(j, list):
+        j = j[0]
+    y0, x0, y1, x1 = [v / 1000 for v in j['box_2d']]
     W, H = im.size
+    pad = 0.015
     full = np.zeros((H, W), dtype=float)
-    for it in items:
-        y0, x0, y1, x1 = [v / 1000 for v in it['box_2d']]
-        bx0, by0, bx1, by1 = int(x0 * W), int(y0 * H), int(x1 * W), int(y1 * H)
-        if bx1 - bx0 < 4 or by1 - by0 < 4:
-            continue
-        b64 = re.sub(r'^data:image/\w+;base64,', '', str(it.get('mask', '')))
-        if not b64:
-            full[by0:by1, bx0:bx1] = 1.0   # マスクが無ければ箱の中を服とみなす（輪郭は rembg が決める）
-            continue
-        m = Image.open(io.BytesIO(base64.b64decode(b64))).convert('L').resize((bx1 - bx0, by1 - by0), Image.BILINEAR)
-        full[by0:by1, bx0:bx1] = np.maximum(full[by0:by1, bx0:bx1], np.array(m) / 255)
+    full[max(0, int((y0 - pad) * H)):min(H, int((y1 + pad) * H)), max(0, int((x0 - pad) * W)):min(W, int((x1 + pad) * W))] = 1.0
+    log(f'  服の箱：{j["box_2d"]}')
     return full
 
 
@@ -124,17 +117,17 @@ def edge_alpha(im):
 
 
 def cutout(im):
-    """領域（Gemini）× 輪郭（rembg）＝ 服だけの透明度。服の画素は1つも描き換えない"""
-    region = garment_region(im) > 0.5
-    region = ndi.binary_closing(region, iterations=8)
-    lab, k = ndi.label(region)
+    """箱（Gemini）× 輪郭（rembg）＝ 服だけの透明度。服の画素は1つも描き換えない"""
+    box = garment_region(im) > 0.5
+    a = edge_alpha(im) * box
+    solid = a > 0.5
+    lab, k = ndi.label(solid)
     if k == 0:
-        raise RuntimeError('服の範囲が空です')
-    region = lab == (np.argmax(ndi.sum(region, lab, range(1, k + 1))) + 1)
-    region = ndi.binary_fill_holes(region)
-    region = ndi.binary_dilation(region, iterations=10)
-    soft = np.array(Image.fromarray((region * 255).astype('uint8')).filter(ImageFilter.GaussianBlur(3))) / 255
-    a = np.clip(edge_alpha(im) * soft, 0, 1)
+        raise RuntimeError('箱の中に服が見つかりません')
+    keep = lab == (np.argmax(ndi.sum(solid, lab, range(1, k + 1))) + 1)   # 一番大きい塊＝服
+    keep = ndi.binary_dilation(ndi.binary_fill_holes(keep), iterations=3)
+    soft = np.array(Image.fromarray((keep * 255).astype('uint8')).filter(ImageFilter.GaussianBlur(1.5))) / 255
+    a = np.clip(a * soft, 0, 1)
     rgba = im.convert('RGBA'); rgba.putalpha(Image.fromarray((a * 255).astype('uint8')))
     return rgba
 
