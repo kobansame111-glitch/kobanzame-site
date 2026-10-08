@@ -177,6 +177,7 @@ FAQ = {
     ('いつ届きますか？', 'ご注文（決済）の確認後、3日以内（定休日を除く）に発送します。'),
     ('返品はできますか？', '古着・一点ものの性質上、お客様都合による返品はお受けしていません。商品説明と著しく異なる場合や発送間違いの場合は、到着後4日以内にメールでご連絡ください。'),
     ('取り置きはできますか？', '一点ものなので、サイト・店頭ともお取り置きはしていません。先着順でのご案内です。'),
+    ('店頭とネットの在庫は同じですか？', 'はい。このサイト・店頭・メルカリShopsで同じ一点を販売しています（在庫を共有しています）。売れた時点でほかの販路は自動で止まりますが、ごくまれに同時に売れた場合は、先に決済が完了したご注文を優先し、もう一方のお客様にはご連絡のうえ全額返金いたします。'),
  ],
  'en': [
     ('Where is Kobanzame?', 'At 1-14-5 Motomachi, Kawagoe, Saitama (350-0062), in an 80-year-old wooden house. The shop is run by Plug Inc.'),
@@ -188,6 +189,7 @@ FAQ = {
     ('When will it arrive?', 'We dispatch within 3 days of payment (excluding our closed days).'),
     ('Can I return it?', 'As these are one-of-a-kind vintage items, we do not accept returns for change of mind. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival.'),
     ('Can you hold a piece for me?', 'Every piece is one of a kind, so we do not hold items, online or in the shop. First come, first served.'),
+    ('Is online stock the same as in the shop?', 'Yes. The same one-of-a-kind pieces are sold on this site, in the shop and on Mercari Shops (shared stock). Other channels are stopped automatically once a piece sells; in the rare case that it sells in two places at once, the order paid first is honoured and the other customer is contacted and fully refunded.'),
  ],
 }
 
@@ -346,17 +348,18 @@ def org_node():
 # ＋濃淡の4色目＝煤竹（写真の台紙や面の区切り。墨より一段明るい黒）。明るさの差で奥行きを出し、色の数は増やさない。
 CSS = r'''
 :root{
-  --sumi:#15130f;      /* ベース：墨（壁の黒） */
-  --susu:#1f1c17;      /* 4色目：煤竹（台紙・面の区切り） */
-  --kinari:#e9e2d2;    /* メイン：生成り（文字・紙） */
-  --kin:#b8945a;       /* アクセント：古金（値段・ボタン・細線） */
-  --usu:#a69d8b;       /* 生成りを墨に寄せた補助の文字 */
-  --line:#3a352d;      /* 罫線 */
-  --sold:#c46a4f;      /* SOLD（弁柄。売れた印だけに使う） */
-  --mincho:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
-  --roman:"Cormorant Garamond","Shippori Mincho B1",serif;
-  --gothic:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
-  --gutter:16px; color-scheme:dark;
+  /* 2026-10-08 見た目を「白地×黒・写真主役」のセレクトショップ調へ（変数名は旧のまま・中身だけ入れ替え） */
+  --sumi:#ffffff;      /* 地：白 */
+  --susu:#f3f3f1;      /* 面の区切り：ごく薄いグレー */
+  --kinari:#111111;    /* 文字：黒 */
+  --kin:#111111;       /* アクセント：黒（ボタン・細線） */
+  --usu:#686868;       /* 補助の文字（白地でコントラスト5.6） */
+  --line:#e2e2e2;      /* 罫線 */
+  --sold:#c0392b;      /* SOLD（売れた印だけに使う） */
+  --mincho:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --roman:"Libre Caslon Text","Zen Kaku Gothic New",serif;
+  --gothic:"Jost","Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --gutter:16px; color-scheme:light;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--sumi);color:var(--kinari);font-family:var(--gothic);font-size:15px;line-height:1.85;letter-spacing:.02em;-webkit-font-smoothing:antialiased}
@@ -366,7 +369,7 @@ img{display:block;max-width:100%}a{color:inherit}button{font:inherit;color:inher
 .hair{height:1px;background:linear-gradient(90deg,transparent,var(--kin),transparent);opacity:.7}
 .util{background:var(--susu);color:var(--usu);font-size:12px;letter-spacing:.08em;text-align:center;padding:8px var(--gutter);border-bottom:1px solid var(--line)}
 .util b{color:var(--kin);font-weight:500}
-header.site{position:sticky;top:0;z-index:20;background:rgba(21,19,15,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+header.site{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
 .hl{display:flex;align-items:center;gap:14px}
 .logo{display:flex;align-items:baseline;gap:12px;text-decoration:none}
@@ -402,19 +405,19 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .hero-ph{position:relative}
 .hero-img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:50% 50%}
 .herobox{position:absolute;left:12px;bottom:12px;right:12px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
-.days{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;background:rgba(21,19,15,.82);border:1px solid var(--line);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:7px 12px}
+.days{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;background:rgba(255,255,255,.9);border:1px solid var(--line);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:7px 12px}
 .days b{color:var(--kin);font-weight:500}
 .days .today{border:1px solid var(--kin);color:var(--kin);font-size:11px;padding:1px 6px}
 .days .today.closed{border-color:var(--usu);color:var(--usu)}
 .days .soon{flex-basis:100%;order:3;color:var(--kin)}
-.maplink{display:inline-flex;align-items:center;gap:8px;background:rgba(21,19,15,.82);border:1px solid var(--kin);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:8px 12px;text-decoration:none}
+.maplink{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.9);border:1px solid var(--kin);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:8px 12px;text-decoration:none}
 .maplink svg{width:14px;height:14px;flex:none}
 .hero-copy{padding:32px 0 40px}
 .hero h1{font-family:var(--roman);font-weight:500;font-style:italic;font-size:clamp(56px,11vw,120px);line-height:.92;letter-spacing:.01em}
 .hero h1 em{font-style:italic;color:var(--kin)}
 .hero p{font-family:var(--mincho);font-size:16px;margin-top:18px;max-width:28em;color:var(--kinari)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;letter-spacing:.12em;text-decoration:none;border:1px solid var(--kin);color:var(--kinari);font-size:14px;text-align:center}
-.btn:hover{background:rgba(184,148,90,.12)}
+.btn:hover{background:rgba(0,0,0,.05)}
 .ws{display:grid;gap:20px;margin-top:24px}
 .ws article{border:1px solid var(--line);background:var(--susu);padding:22px 20px}
 .ws h2{font-family:var(--mincho);font-size:19px;margin:0 0 6px;color:var(--kinari)}
@@ -424,7 +427,7 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .ws ul{margin:10px 0 18px 1.2em;color:var(--usu);font-size:13px}
 @media(min-width:860px){.ws{grid-template-columns:1fr 1fr}}
 .btn.kin{background:var(--kin);color:var(--sumi);font-weight:700;width:100%}
-.btn.kin:hover{background:#c7a46a}
+.btn.kin:hover{background:#333}
 .btn.ghost{width:100%}
 .hero .btn{margin-top:26px}
 @media(min-width:900px){.hero .wrap{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:center;gap:56px}.hero-img{aspect-ratio:4/5;max-height:680px}.hero-copy{padding:0}}
@@ -524,7 +527,7 @@ footer.site a{color:var(--kinari)}
 @media(min-width:900px){.related{padding-bottom:72px}}
 .related h2{font-size:36px;margin-bottom:20px}
 @media(max-width:600px){.related .grid>:nth-child(3){display:none}}
-.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(21,19,15,.96);border-top:1px solid var(--kin);padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:12px}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(255,255,255,.97);border-top:1px solid var(--kin);padding:10px var(--gutter) calc(10px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:12px}
 .bar b{font-family:var(--mincho);font-size:19px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .bar .btn{min-height:48px;flex:1}
 @media(min-width:900px){.bar{display:none!important}}
@@ -536,6 +539,76 @@ footer.site a{color:var(--kinari)}
 .nf{padding-block:72px;text-align:center}
 .nf h1{font-family:var(--roman);font-style:italic;font-weight:500;font-size:72px;line-height:1}
 .nf p{margin:18px auto 26px;max-width:28em;color:var(--usu)}
+/* ---- 2026-10-08 セレクトショップ調（白地・写真主役）の上書き ---- */
+body{font-size:15px;letter-spacing:.01em}
+.util{background:#111;color:#fff;border-bottom:0;font-size:11.5px;letter-spacing:.1em}
+.util b{color:#fff;font-weight:600}
+header.site .wrap{display:grid;grid-template-columns:1fr auto 1fr;min-height:68px}
+header.site .hnav{justify-self:end}
+.logo{flex-direction:column;align-items:center;gap:2px;line-height:1}
+.logo b{font-family:var(--roman);font-weight:700;font-size:22px;letter-spacing:.18em}
+.logo span{font-family:var(--gothic);font-size:9.5px;letter-spacing:.32em;color:var(--usu)}
+.hnav a{font-family:var(--gothic);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.menubtn{border-color:transparent;padding-left:0;white-space:nowrap;font-family:var(--gothic);letter-spacing:.14em}
+.menubtn:hover{border-color:transparent;opacity:.6}
+.lang{border-color:var(--line)}
+@media(max-width:760px){.logo span{display:block;font-size:8.5px}.logo b{font-size:18px}.hnav .lang a{padding:4px 7px}}
+.tiles{padding-top:10px}
+.tgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;max-width:none;padding-inline:6px}
+@media(min-width:640px){.tgrid{gap:10px;padding-inline:10px}}
+@media(min-width:1000px){.tgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.tile{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;background:var(--susu);text-decoration:none}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+.tile:hover img{transform:scale(1.03)}
+.tile:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.42))}
+.tile .tt{position:absolute;left:12px;right:12px;bottom:22px;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+.tile .tt b{font-family:var(--roman);font-weight:700;font-size:clamp(20px,2.3vw,28px);line-height:1.25;color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.35)}
+.tile .tt i{font-style:normal;font-family:var(--gothic);font-size:12px;letter-spacing:.12em;background:#fff;color:#111;padding:8px 18px}
+@media(max-width:639px){.tile .tt{bottom:12px;gap:8px}.tile .tt b{font-size:14px}.tile .tt i{font-size:10px;padding:6px 10px}.menubtn{font-size:0;gap:0}}
+.hero{border-bottom:0;margin-top:56px}
+.hero h1{font-family:var(--roman);font-style:normal;font-weight:400;font-size:clamp(44px,8vw,92px);letter-spacing:0}
+.hero h1 em{font-style:normal;color:var(--kinari)}
+.hero p{font-family:var(--mincho)}
+.days,.maplink{border-color:var(--line);color:#111}
+.days b{color:#111;font-weight:600}
+.days .today{border-color:#111;color:#111}
+.btn{border-color:#111;font-family:var(--gothic);letter-spacing:.14em;min-height:48px}
+.btn.kin{background:#111;color:#fff;font-weight:500}
+.sec-head h2,.store h2,.related h2{font-family:var(--gothic);font-weight:500;font-size:22px;letter-spacing:.16em;text-transform:uppercase}
+.sec-head h2 small,.related h2 small{font-family:var(--mincho);text-transform:none;letter-spacing:.06em}
+.catrow button{font-family:var(--gothic);color:#111}
+.catrow button small{font-family:var(--gothic);color:var(--usu);font-size:11px}
+.catrow button[aria-pressed="true"]{background:#111;color:#fff;border-color:#111}
+.catrow button[aria-pressed="true"] small{color:#ddd}
+.finder input[type=number]{background:#fff;border-color:#111}
+.card .ph{aspect-ratio:1/1}
+.card .brand{font-family:var(--gothic);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#111}
+.card .nm{color:var(--usu);font-size:13px}
+.card .pr{font-family:var(--gothic);font-weight:500;font-size:15px}
+.tag{background:#fff;color:#111;border:0;font-family:var(--gothic);font-size:10.5px;padding:3px 8px;top:8px;right:8px}
+.card.sold .ph:after{font-family:var(--gothic);font-size:20px;letter-spacing:.3em}
+.trust b{color:#111;font-family:var(--mincho)}
+.store dl{border-top-color:#111}
+.store dd a,.holdbox a{color:#111;text-decoration:underline}
+details summary{font-family:var(--mincho)}
+details summary:after{font-family:var(--gothic);color:#111}
+footer.site{background:#fff;border-top:1px solid var(--line);color:var(--usu);font-size:11.5px}
+footer.site .big{font-family:var(--roman);font-style:normal;font-weight:700;font-size:28px;letter-spacing:.18em}
+footer.site .hair{background:var(--line);opacity:1}
+.info .brand{font-family:var(--gothic);font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#111}
+.info h1{font-family:var(--mincho)}
+.info .price{font-family:var(--gothic);font-weight:500;font-size:26px}
+.info .sku{font-family:var(--gothic)}
+.facts span.one{border-color:#111;color:#111}
+.points{border-top-color:#111}
+.points li:before{background:#111}
+.story{font-family:var(--mincho)}
+.story h2,.page h2{color:#111}
+.bar{border-top-color:var(--line)}
+.bar b{font-family:var(--gothic);font-weight:500}
+.draftnote{background:#111;color:#fff}
+.nf h1{font-family:var(--roman);font-style:normal}
+.gal img{aspect-ratio:1/1}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 '''
 PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>'
@@ -590,7 +663,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
 {'<meta name="robots" content="noindex">' if noindex else ''}
-<meta name="theme-color" content="#15130f">
+<meta name="theme-color" content="#ffffff">
 <meta property="og:type" content="{og_type}">
 <meta property="og:title" content="{esc(title)}">
 <meta property="og:description" content="{esc(desc)}">
@@ -605,7 +678,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <link rel="alternate" hreflang="x-default" href="{ja_url}">
 <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Libre+Caslon+Text:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 {jld(ld)}
 {beacon}{track}
@@ -613,8 +686,8 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <body>
 <div class="util">{t['util']}</div>
 <header class="site"><div class="wrap">
-  <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button>
-  <a class="logo" href="{pre(lang)}/"><b>小判鮫</b><span>KOBANZAME</span></a></div>
+  <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button></div>
+  <a class="logo" href="{pre(lang)}/"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></a>
   <div class="hnav">{navs}
     <nav class="lang" aria-label="言語 / Language"><a href="{alt if lang == 'en' else path}" lang="ja" aria-current="{ja_cur}">日本語</a><a href="{alt if lang == 'ja' else path}" lang="en" aria-current="{en_cur}">EN</a></nav>
   </div>
@@ -698,6 +771,21 @@ def card_html(p, lang, lazy=True):
             f'<span class="fit" hidden></span>'
             f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small></div></a>')
 
+def tiles_html(lang):
+    """トップ最上段の写真タイル（カテゴリごとに新しい順の1枚目）。写真が主役・文字は最小限。"""
+    P = pre(lang)
+    out = []
+    for c in CATS_PRESENT:
+        ps = [p for p in avail_live if cat_of(p) == c]
+        if not ps:
+            continue
+        ps = sorted(ps, key=lambda p: p.get('published_date', ''), reverse=True)
+        img = thumb_of(ps[0])
+        lab = CAT_EN[c].upper()
+        out.append(f'<a class="tile" href="{P}/?cat={c}#list" data-cat="{c}"><img src="{esc(img)}" alt="{esc(T[lang]["cats"][c])}"'
+                   + (' fetchpriority="high"' if not out else ' loading="lazy"') + f'><span class="tt"><b>{lab} - NEW ARRIVAL</b><i>SHOP NOW</i></span></a>')
+    return ''.join(out[:6])
+
 def catrow(lang):
     t = T[lang]
     return ''.join(f'<button type="button" data-filter="{c}" aria-pressed="false">{t["cats"][c]}<small>{CAT_EN[c]}</small></button>' for c in CATS_PRESENT)
@@ -769,6 +857,9 @@ for lang in ('ja', 'en'):
     hero_alt = '小判鮫の店内（川越・元町の古民家）' if lang == 'ja' else 'Inside Kobanzame, an old wooden house in Kawagoe'
     top = head(lang, t['top_title'], t['top_desc'], P + '/', extra_ld=top_ld) + f'''
 <main>
+  <section class="tiles" aria-label="{'カテゴリ' if lang == 'ja' else 'Categories'}">
+    <div class="wrap tgrid">{tiles_html(lang)}</div>
+  </section>
   <section class="hero">
     <div class="wrap">
       <div class="hero-ph">
