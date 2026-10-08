@@ -32,8 +32,12 @@ BODY = {  # マネキンの寸法（床からの高さ cm）。175cmの男性マ
 }
 
 
+LOG_LINES = []
+
+
 def log(m):
     print(m, flush=True)
+    LOG_LINES.append(str(m))
 
 
 # ===== Gemini =====================================================================
@@ -84,7 +88,10 @@ def garment_region(im):
               '"mask" (base64 PNG of the probability map inside the box) and "label".')
     res = gemini(TEXT_MODEL, [img_part(small), {'text': prompt}],
                  {'temperature': 0, 'responseMimeType': 'application/json', 'thinkingConfig': {'thinkingBudget': 0}})
-    items = json.loads(text_of(res))
+    raw = text_of(res)
+    items = json.loads(re.sub(r'^```(?:json)?|```$', '', raw.strip(), flags=re.M).strip() or '[]')
+    if isinstance(items, dict):
+        items = items.get('masks') or items.get('items') or [items]
     if not items:
         raise RuntimeError('服の範囲が返ってきません')
     W, H = im.size
@@ -94,7 +101,10 @@ def garment_region(im):
         bx0, by0, bx1, by1 = int(x0 * W), int(y0 * H), int(x1 * W), int(y1 * H)
         if bx1 - bx0 < 4 or by1 - by0 < 4:
             continue
-        b64 = re.sub(r'^data:image/\w+;base64,', '', it['mask'])
+        b64 = re.sub(r'^data:image/\w+;base64,', '', str(it.get('mask', '')))
+        if not b64:
+            full[by0:by1, bx0:bx1] = 1.0   # マスクが無ければ箱の中を服とみなす（輪郭は rembg が決める）
+            continue
         m = Image.open(io.BytesIO(base64.b64decode(b64))).convert('L').resize((bx1 - bx0, by1 - by0), Image.BILINEAR)
         full[by0:by1, bx0:bx1] = np.maximum(full[by0:by1, bx0:bx1], np.array(m) / 255)
     return full
@@ -235,10 +245,12 @@ def run(sku):
             made[name].save(os.path.join(od, f'{name}.jpg'), quality=90)
             log(f'{sku} {name}: 背景を揃えました（元 {os.path.basename(paths[idx])}）')
         except Exception as e:
-            log(f'{sku} {name}: 失敗 → 元の写真のまま使う：{e}')
+            import traceback
+            log(f'{sku} {name}: 失敗 → 元の写真のまま使う：{e!r}')
+            log(traceback.format_exc()[-1500:])
     b, m = body_for(p), parse_measures(p)
     log(f'{sku}: 実寸 {m} ／ マネキン {b["label"]}')
-    if front >= 0:
+    if front >= 0 and os.environ.get('SKIP_MANNEQUIN') != '1':
         try:
             raw, prompt = mannequin_image(p, images[front], b, m)
             raw.save(os.path.join(od, '2_mannequin_raw.png'))
@@ -265,6 +277,8 @@ def main():
         except Exception as e:
             log(f'{s}: エラー {e}')
     log(f'終了：{ok}枚')
+    os.makedirs(OUT, exist_ok=True)
+    open(os.path.join(OUT, 'run_log.txt'), 'w', encoding='utf-8').write('\n'.join(LOG_LINES))
     return 0 if ok else 1
 
 

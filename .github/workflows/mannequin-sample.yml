@@ -23,6 +23,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           SAMPLE_SKUS: K11263
+          SKIP_MANNEQUIN: '1'
         run: python tools/photo_v2.py
       - name: Save samples to this branch only
         run: |
