@@ -263,6 +263,25 @@ def cutout(im, sku, budget):
     return rgba
 
 
+def quality_ok(img, sku, budget):
+    """できた画像をAIに見せて、服以外の物（壁の飾り・角・棚・切れ端）が残っていないか、服が欠けていないかを確かめる。
+    ダメなら元の写真のまま使う（本物の写真は確認なしで自動公開するので、その安全装置）。ハンガーは残っていてよい"""
+    small = img.copy(); small.thumbnail((768, 768))
+    prompt = ('This is an automatically cut-out product photo of a garment on a plain off-white background. '
+              'Check two things: (1) Is any leftover object other than the garment visible, such as wall decorations, horns, '
+              'plaques, shelves, wall pieces, floor, or blotches of the old background? A clothes hanger is acceptable. '
+              '(2) Is any part of the garment visibly cut off or missing (holes, chopped hem or sleeve)? '
+              'Answer JSON only: {"clean": true or false, "problem": "short reason in Japanese or empty"}')
+    res = gemini(TEXT_MODEL, [img_part(small), {'text': prompt}],
+                 {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 120,
+                  'thinkingConfig': {'thinkingBudget': 0}})
+    budget.record(sku, '仕上がり確認', TEXT_MODEL, res)
+    j = json_of(res)
+    if isinstance(j, list):
+        j = j[0] if j else {}
+    return bool(j.get('clean')), str(j.get('problem', ''))[:100]
+
+
 def place(rgba, fit_h, fit_w, shadow=True):
     """切り抜いた物を、同じ大きさ・同じ余白でキャンバスの真ん中に置く"""
     from PIL import Image, ImageFilter
@@ -410,7 +429,11 @@ def process(p, budget):
         if idx < 0:
             continue
         try:
-            place(cutout(images[idx], sku, budget), FIT_H, FIT_W).save(os.path.join(od, f'v2_{key}.jpg'), quality=88, optimize=True)
+            out = place(cutout(images[idx], sku, budget), FIT_H, FIT_W)
+            ok, why = quality_ok(out, sku, budget)
+            if not ok:
+                raise RuntimeError(f'仕上がり確認で不合格：{why}')
+            out.save(os.path.join(od, f'v2_{key}.jpg'), quality=88, optimize=True)
             urls[key] = f'{rel}/v2_{key}.jpg'
             log(f'{sku} {key}: 背景を揃えました')
         except Exception as e:
