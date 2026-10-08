@@ -200,13 +200,13 @@ header.site .hnav{justify-self:end}
 .logo b{font-family:var(--roman);font-weight:700;font-size:22px;letter-spacing:.18em}
 .logo span{font-family:var(--gothic);font-size:9.5px;letter-spacing:.32em;color:var(--usu)}
 .hnav a{font-family:var(--gothic);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
-.menubtn{border-color:transparent;padding-left:0;font-family:var(--gothic);letter-spacing:.14em}
+.menubtn{border-color:transparent;padding-left:0;white-space:nowrap;font-family:var(--gothic);letter-spacing:.14em}
 .menubtn:hover{border-color:transparent;opacity:.6}
 .lang{border-color:var(--line)}
 @media(max-width:760px){.logo span{display:block;font-size:8.5px}.logo b{font-size:18px}.hnav .lang a{padding:4px 7px}}
 .tiles{padding-top:10px}
-.tgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;max-width:none;padding-inline:10px}
-@media(min-width:640px){.tgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;max-width:none;padding-inline:6px}
+@media(min-width:640px){.tgrid{gap:10px;padding-inline:10px}}
 @media(min-width:1000px){.tgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .tile{position:relative;display:block;aspect-ratio:1/1;overflow:hidden;background:var(--susu);text-decoration:none}
 .tile img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
@@ -215,6 +215,7 @@ header.site .hnav{justify-self:end}
 .tile .tt{position:absolute;left:12px;right:12px;bottom:22px;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
 .tile .tt b{font-family:var(--roman);font-weight:700;font-size:clamp(20px,2.3vw,28px);line-height:1.25;color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.35)}
 .tile .tt i{font-style:normal;font-family:var(--gothic);font-size:12px;letter-spacing:.12em;background:#fff;color:#111;padding:8px 18px}
+@media(max-width:639px){.tile .tt{bottom:12px;gap:8px}.tile .tt b{font-size:14px}.tile .tt i{font-size:10px;padding:6px 10px}.menubtn{font-size:0;gap:0}}
 .hero{border-bottom:0;margin-top:56px}
 .hero h1{font-family:var(--roman);font-style:normal;font-weight:400;font-size:clamp(44px,8vw,92px);letter-spacing:0}
 .hero h1 em{font-style:normal;color:var(--kinari)}
