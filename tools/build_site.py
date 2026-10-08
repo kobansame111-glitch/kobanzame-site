@@ -28,6 +28,8 @@ GSC_VERIFY = '2pVJ6dksHBkvBUmm0l3gbrdw8Rgpz4v7zoq4X3eL7ys'          # Google Sea
 BING_VERIFY = ''         # Bing Webmaster Tools の確認コード（同上。Search Consoleから取り込むなら空のままでよい）
 HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）※2026-10-07 取り置きは廃止（HOLD_ENABLED=False）
 HOLD_ENABLED = False     # 2026-10-07 龍さん決定：一点物なのでサイトも店頭も取り置き不可・先着順
+EVERYDAY_FROM = '2026-11-01'   # 2026-10-08 龍さん決定：11月1日から毎日営業（月・火も営業）。この日以降のビルドで文言が切り替わる
+EVERYDAY = TODAY >= EVERYDAY_FROM
 HERO_IMAGE = '/assets/hero-shop.jpg'          # 店内の写真（例 '/assets/hero-shop.jpg'）。空なら掲載中のアウターの写真を使う
 
 SHOP = {
@@ -56,6 +58,8 @@ T = {
   'hero_p': '埼玉・川越、築約80年の古民家から。国内外で買い付けたヴィンテージ古着と、オリジナルの「GAW」。どれも一点もので、同じものはありません。',
   'hero_btn': '一点ものを見る',
   'map': '地図を開く ／ 川越市元町1-14-5',
+  'days_h': '営業日', 'days': '水〜日 12:00–20:00（月・火 定休）', 'today_open': '本日営業', 'today_closed': '本日定休',
+  'menu': 'メニュー', 'menu_close': '閉じる', 'menu_cats': 'ジャンルで選ぶ', 'menu_all': 'すべての商品', 'menu_more': 'お店のこと',
   'list_h': 'In Stock', 'list_s': 'オンラインで買える一点もの（毎週水曜更新）', 'unit': '点',
   'finder_l': '手持ちの服の身幅', 'finder_u': 'cm ±3cmの服を表示', 'finder_sold': '売れた一点ものも見る', 'finder_clear': '条件をクリア',
   'finder_hint': '身幅＝脇の下から脇の下までを平らに置いて測った長さ。いちばん気に入っている服で測るのがおすすめです。',
@@ -96,6 +100,8 @@ T = {
   'hero_p': 'From an 80-year-old wooden house in Kawagoe, Saitama. Vintage clothing sourced in Japan and abroad, and our own remake line, GAW. Every piece is one of a kind.',
   'hero_btn': 'See the pieces',
   'map': 'Open map / 1-14-5 Motomachi, Kawagoe',
+  'days_h': 'Open', 'days': 'Wed–Sun 12:00–20:00 (closed Mon & Tue)', 'today_open': 'Open today', 'today_closed': 'Closed today',
+  'menu': 'Menu', 'menu_close': 'Close', 'menu_cats': 'Shop by category', 'menu_all': 'All items', 'menu_more': 'About the shop',
   'list_h': 'In Stock', 'list_s': 'One-of-a-kind pieces you can buy online (updated every Wednesday)', 'unit': ' items',
   'finder_l': 'Chest width of a piece you own', 'finder_u': 'cm — show pieces within ±3 cm', 'finder_sold': 'Show sold pieces', 'finder_clear': 'Clear',
   'finder_hint': 'Chest width = measured flat, armpit to armpit. Measure the piece you like best for the closest match.',
@@ -184,6 +190,40 @@ FAQ = {
     ('Can you hold a piece for me?', 'Every piece is one of a kind, so we do not hold items, online or in the shop. First come, first served.'),
  ],
 }
+
+# ---------- 11月1日からの毎日営業（月・火も営業）----------
+# 切り替え前：今の定休日（月・火）の表示＋「11/1から毎日営業」のお知らせ
+# 切り替え後：定休日なしの表示（臨時休業はInstagramでお知らせ）
+if EVERYDAY:
+    T['ja'].update({
+        'util': '<b>毎週水曜 新着入荷</b>　送料込み・決済確認後3日以内に発送',
+        'days': '毎日 12:00–20:00（臨時休業はInstagram）',
+        'trust': [(a, '決済確認後に発送' if a == '3日以内に発送' else b) for a, b in T['ja']['trust']],
+        'store_dl': [(('営業日', '毎日（臨時休業はInstagramでお知らせ）') if a == '定休日' else (a, b)) for a, b in T['ja']['store_dl']],
+        'ship': T['ja']['ship'].replace('（月・火定休を除く）', ''),
+        'delivery_p': T['ja']['delivery_p'].replace('3日以内（月・火定休を除く）に', '3日以内に'),
+    })
+    T['en'].update({
+        'util': '<b>New arrivals every Wednesday</b>　Shipping included · Dispatched within 3 days of payment',
+        'days': 'Every day 12:00–20:00 (closures on Instagram)',
+        'trust': [(a, 'After payment' if a == 'Ships in 3 days' else b) for a, b in T['en']['trust']],
+        'store_dl': [(('Open', 'Every day (closures announced on Instagram)') if a == 'Closed' else (a, b)) for a, b in T['en']['store_dl']],
+        'delivery_p': T['en']['delivery_p'].replace(' (closed Mon & Tue)', ''),
+    })
+    FAQ['ja'] = [(q, '12:00〜20:00の営業で、定休日はありません（毎日営業）。臨時の休みや営業時間の変更はInstagramでお知らせします。') if q == '営業時間と定休日は？' else
+                 (q, 'ご注文（決済）の確認後、3日以内に発送します（臨時休業日を除く）。') if q == 'いつ届きますか？' else (q, a) for q, a in FAQ['ja']]
+    FAQ['en'] = [(q, 'Open every day, 12:00–20:00. Any closures or changes are announced on Instagram.') if q == 'Opening hours?' else
+                 (q, 'We dispatch within 3 days of payment (excluding any announced closures).') if q == 'When will it arrive?' else (q, a) for q, a in FAQ['en']]
+else:
+    T['ja']['util'] += '　<b>11/1から毎日営業</b>'
+    T['ja']['days'] += '<span class="soon">11月1日から月・火も営業（毎日営業）</span>'
+    T['en']['util'] += '　<b>Open daily from 1 Nov</b>'
+    T['en']['days'] += '<span class="soon">Open every day from 1 November</span>'
+    FAQ['ja'] = [(q, a + '2026年11月1日からは月曜・火曜も営業します（毎日営業）。') if q == '営業時間と定休日は？' else (q, a) for q, a in FAQ['ja']]
+    FAQ['en'] = [(q, a + ' From 1 November 2026 we are open every day.') if q == 'Opening hours?' else (q, a) for q, a in FAQ['en']]
+HOURS_LINE = {'ja': ('12:00–20:00・毎日営業' if EVERYDAY else '12:00–20:00・月曜・火曜定休'),
+              'en': ('12:00–20:00, open every day' if EVERYDAY else '12:00–20:00, closed Mon & Tue')}
+CLOSED_WEEKDAYS_JS = '[]' if EVERYDAY else '[1,2]'   # 本日営業/定休バッジ用（0=日 1=月 2=火）
 
 # ---------- 共通の小さな関数 ----------
 def esc(s):
@@ -291,11 +331,11 @@ def org_node():
         'url': BASE + '/', 'email': SHOP['email'],
         'address': {'@type': 'PostalAddress', 'postalCode': SHOP['postal'], 'addressRegion': '埼玉県',
                     'addressLocality': '川越市', 'streetAddress': '元町1-14-5', 'addressCountry': 'JP'},
-        'openingHours': 'We-Su 12:00-20:00', 'currenciesAccepted': 'JPY', 'paymentAccepted': 'クレジットカード',
+        'openingHours': ('Mo-Su 12:00-20:00' if EVERYDAY else 'We-Su 12:00-20:00'), 'currenciesAccepted': 'JPY', 'paymentAccepted': 'クレジットカード',
         'hasMap': SHOP['gmaps'],
         'geo': {'@type': 'GeoCoordinates', 'latitude': 35.9253165, 'longitude': 139.4832435},   # Googleマップの店舗ページの座標（2026-10-06）
         'openingHoursSpecification': [{'@type': 'OpeningHoursSpecification',
-                                       'dayOfWeek': ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                                       'dayOfWeek': (['Monday', 'Tuesday'] if EVERYDAY else []) + ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
                                        'opens': '12:00', 'closes': '20:00'}],
         'parentOrganization': {'@type': 'Organization', 'name': SHOP['company']},
         'sameAs': [SHOP['instagram'], SHOP['mercari']],
@@ -328,6 +368,7 @@ img{display:block;max-width:100%}a{color:inherit}button{font:inherit;color:inher
 .util b{color:var(--kin);font-weight:500}
 header.site{position:sticky;top:0;z-index:20;background:rgba(21,19,15,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
 header.site .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px}
+.hl{display:flex;align-items:center;gap:14px}
 .logo{display:flex;align-items:baseline;gap:12px;text-decoration:none}
 .logo b{font-family:var(--mincho);font-weight:800;font-size:22px;letter-spacing:.14em}
 .logo span{font-family:var(--roman);font-size:14px;letter-spacing:.32em;color:var(--kin)}
@@ -335,14 +376,38 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .hnav a{font-size:13px;letter-spacing:.1em;text-decoration:none;color:var(--usu);white-space:nowrap}
 .hnav a:hover{color:var(--kinari)}
 .lang{display:flex;border:1px solid var(--line)}
+.menubtn{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--line);color:var(--kinari);font:inherit;font-size:12px;letter-spacing:.1em;padding:6px 10px;cursor:pointer}
+.menubtn i{display:block;width:16px;height:2px;background:currentColor;position:relative}
+.menubtn i::before,.menubtn i::after{content:"";position:absolute;left:0;width:16px;height:2px;background:currentColor}
+.menubtn i::before{top:-5px}.menubtn i::after{top:5px}
+.menubtn:hover{border-color:var(--kin)}
+.drawer-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40}
+.drawer{position:fixed;top:0;left:0;bottom:0;width:min(320px,86vw);background:var(--sumi);border-right:1px solid var(--line);z-index:41;padding:18px 20px 28px;overflow-y:auto;transform:translateX(-102%);transition:transform .2s ease}
+.drawer.open{transform:none}
+.drawer-bg[hidden]{display:none}
+.drawer .dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.drawer .dh b{font-family:var(--mincho);font-size:18px;letter-spacing:.14em}
+.drawer .x{background:none;border:1px solid var(--line);color:var(--kinari);font:inherit;font-size:12px;padding:5px 10px;cursor:pointer}
+.drawer h3{font-size:11px;letter-spacing:.2em;color:var(--kin);font-weight:500;margin:20px 0 6px}
+.drawer ul{list-style:none;margin:0;padding:0}
+.drawer li a{display:flex;justify-content:space-between;align-items:baseline;padding:12px 2px;border-bottom:1px solid var(--line);color:var(--kinari);text-decoration:none;font-size:15px}
+.drawer li a small{color:var(--usu);font-size:12px}
+.drawer li a:hover{color:var(--kin)}
+@media(prefers-reduced-motion:reduce){.drawer{transition:none}}
 .lang a{font-size:12px;padding:4px 10px;color:var(--usu)}
 .lang a[aria-current="true"]{background:var(--kinari);color:var(--sumi)}
-@media(max-width:760px){.logo span{display:none}.hnav{gap:12px}.hnav a.n{display:none}}
+@media(max-width:760px){.logo span{display:none}.hl{gap:10px}.hnav{gap:12px}.hnav a.n{display:none}}
 .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr)}
 .hero-ph{position:relative}
 .hero-img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:50% 50%}
-.maplink{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;background:rgba(21,19,15,.82);border:1px solid var(--kin);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:8px 12px;text-decoration:none}
+.herobox{position:absolute;left:12px;bottom:12px;right:12px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.days{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;background:rgba(21,19,15,.82);border:1px solid var(--line);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:7px 12px}
+.days b{color:var(--kin);font-weight:500}
+.days .today{border:1px solid var(--kin);color:var(--kin);font-size:11px;padding:1px 6px}
+.days .today.closed{border-color:var(--usu);color:var(--usu)}
+.days .soon{flex-basis:100%;order:3;color:var(--kin)}
+.maplink{display:inline-flex;align-items:center;gap:8px;background:rgba(21,19,15,.82);border:1px solid var(--kin);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:8px 12px;text-decoration:none}
 .maplink svg{width:14px;height:14px;flex:none}
 .hero-copy{padding:32px 0 40px}
 .hero h1{font-family:var(--roman);font-weight:500;font-style:italic;font-size:clamp(56px,11vw,120px);line-height:.92;letter-spacing:.01em}
@@ -548,11 +613,45 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <body>
 <div class="util">{t['util']}</div>
 <header class="site"><div class="wrap">
-  <a class="logo" href="{pre(lang)}/"><b>小判鮫</b><span>KOBANZAME</span></a>
+  <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button>
+  <a class="logo" href="{pre(lang)}/"><b>小判鮫</b><span>KOBANZAME</span></a></div>
   <div class="hnav">{navs}
     <nav class="lang" aria-label="言語 / Language"><a href="{alt if lang == 'en' else path}" lang="ja" aria-current="{ja_cur}">日本語</a><a href="{alt if lang == 'ja' else path}" lang="en" aria-current="{en_cur}">EN</a></nav>
   </div>
 </div></header>
+''' + drawer_html(lang)
+
+def drawer_html(lang):
+    t = T[lang]
+    P = pre(lang)
+    n_all = len([p for p in live if not is_sold(p)])
+    cats = ''.join(f'<li><a href="{P}/?cat={c}#list" data-cat="{c}">{t["cats"][c]}<small>{len([p for p in live if not is_sold(p) and cat_of(p) == c])}</small></a></li>' for c in CATS_PRESENT)
+    more = ''.join(f'<li><a href="{h}">{l}</a></li>' for h, l in t['nav'][1:] + ([T_WS_NAV[lang]] if WS_OPEN else []))
+    return f'''<div class="drawer-bg" id="drawerbg" hidden></div>
+<nav class="drawer" id="drawer" aria-label="{t['menu']}" aria-hidden="true">
+  <div class="dh"><b>小判鮫</b><button type="button" class="x" id="drawerx">{t['menu_close']}</button></div>
+  <h3>{t['menu_cats']}</h3>
+  <ul><li><a href="{P}/#list" data-cat="">{t['menu_all']}<small>{n_all}</small></a></li>{cats}</ul>
+  <h3>{t['menu_more']}</h3>
+  <ul>{more}</ul>
+</nav>
+<script>
+(function(){{
+  var b=document.getElementById('menubtn'),d=document.getElementById('drawer'),bg=document.getElementById('drawerbg'),x=document.getElementById('drawerx');
+  function open(){{d.classList.add('open');d.setAttribute('aria-hidden','false');bg.hidden=false;b.setAttribute('aria-expanded','true');var a=d.querySelector('a');if(a)a.focus();}}
+  function close(){{d.classList.remove('open');d.setAttribute('aria-hidden','true');bg.hidden=true;b.setAttribute('aria-expanded','false');}}
+  b.addEventListener('click',function(){{d.classList.contains('open')?close():open();}});
+  x.addEventListener('click',function(){{close();b.focus();}}); bg.addEventListener('click',close);
+  document.addEventListener('keydown',function(e){{if(e.key==='Escape'&&d.classList.contains('open')){{close();b.focus();}}}});
+  d.querySelectorAll('a[data-cat]').forEach(function(a){{a.addEventListener('click',function(e){{
+    if(!document.getElementById('grid'))return;
+    e.preventDefault();close();
+    document.dispatchEvent(new CustomEvent('kz:cat',{{detail:a.dataset.cat||null}}));
+    history.replaceState(null,'',a.getAttribute('href'));
+    var l=document.getElementById('list');if(l)l.scrollIntoView();
+  }});}});
+}})();
+</script>
 '''
 
 def foot(lang):
@@ -560,7 +659,7 @@ def foot(lang):
     legal = '　・　'.join(f'<a href="{h}">{l}</a>' for h, l in t['legal'])
     lic = ('古物商許可：' + SHOP['kobutsu']) if lang == 'ja' else 'Licensed secondhand dealer: Saitama Prefectural Public Safety Commission No. 431080060786'
     op = ('運営：' + SHOP['company']) if lang == 'ja' else 'Operated by Plug Inc.'
-    hours = '12:00–20:00・月曜・火曜定休' if lang == 'ja' else '12:00–20:00, closed Mon & Tue'
+    hours = HOURS_LINE[lang]
     return f'''<footer class="site"><div class="wrap">
   <div class="big">Kobanzame</div>
   <div class="hair"></div>
@@ -638,9 +737,14 @@ def list_js(lang):
     document.querySelectorAll('.catrow button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
   }
   document.querySelectorAll('.catrow button').forEach(function(b){b.addEventListener('click',function(){filter=(filter===b.dataset.filter?null:b.dataset.filter);apply();});});
+  var q=(location.search.match(/[?&]cat=([a-z]+)/)||[])[1]; if(q&&document.querySelector('.catrow button[data-filter="'+q+'"]')) filter=q;
+  document.addEventListener('kz:cat',function(e){filter=e.detail||null;apply();});
   myw.addEventListener('input',apply); showsold.addEventListener('change',apply);
   document.getElementById('clear').addEventListener('click',function(){myw.value='';showsold.checked=false;filter=null;apply();});
   apply();
+  var td=document.getElementById('today');
+  if(td){var j=new Date(Date.now()+(new Date().getTimezoneOffset()+540)*60000),dw=j.getDay(),ymd=j.getFullYear()+'-'+('0'+(j.getMonth()+1)).slice(-2)+'-'+('0'+j.getDate()).slice(-2),open=ymd>='''+"'"+EVERYDAY_FROM+"'"+'''||'''+CLOSED_WEEKDAYS_JS+'''.indexOf(dw)<0;
+    td.textContent=open?td.dataset.open:td.dataset.closed; if(!open) td.className='today closed'; td.hidden=false;}
 })();
 </script>'''
 
@@ -669,7 +773,10 @@ for lang in ('ja', 'en'):
     <div class="wrap">
       <div class="hero-ph">
         <img class="hero-img" src="{esc(HERO_SRC)}"{HERO_SRCSET} alt="{hero_alt}" fetchpriority="high">
-        <a class="maplink" href="{SHOP['gmaps']}" rel="noopener">{PIN}{t['map']}</a>
+        <div class="herobox">
+          <div class="days"><b>{t['days_h']}</b>{t['days']}<span class="today" id="today" hidden data-open="{t['today_open']}" data-closed="{t['today_closed']}"></span></div>
+          <a class="maplink" href="{SHOP['gmaps']}" rel="noopener">{PIN}{t['map']}</a>
+        </div>
       </div>
       <div class="hero-copy">
         <h1>{t['hero_h']}</h1>
@@ -832,12 +939,17 @@ for lang in ('ja', 'en'):
 ''' + foot(lang)
         write(path + 'index.html', page)
 
-    # 404
+    # 404（日本語は /404.html、英語は /en/404.html。2026-10-08 英語切り替えのリンク切れを修正）
     if lang == 'ja':
         nf = head('ja', 'ページが見つかりません｜古着屋 小判鮫 KOBANZAME', 'お探しのページは見つかりませんでした。', '/404.html', noindex=True) + f'''
 <main class="wrap nf"><h1>Not Found</h1><p>{t['nf_p']}</p><a class="btn" href="/#list">{t['nf_btn']}</a></main>
 ''' + foot('ja')
         write('/404.html', nf)
+    else:
+        nf = head('en', 'Page not found | Kobanzame vintage, Kawagoe', 'We could not find that page.', '/en/404.html', noindex=True) + f'''
+<main class="wrap nf"><h1>Not Found</h1><p>{t['nf_p']}</p><a class="btn" href="/en/#list">{t['nf_btn']}</a></main>
+''' + foot('en')
+        write('/en/404.html', nf)
 
 # ---------- 特定商取引法に基づく表記（日本語） ----------
 LAW = [
@@ -846,7 +958,7 @@ LAW = [
     ('販売価格', '各商品ページに税込価格で表示しています。'),
     ('商品代金以外の必要料金', '送料は販売価格に含まれます（当店負担）。決済手数料はかかりません。'),
     ('支払方法', 'クレジットカード（Square の決済ページで決済）'), ('支払時期', 'ご注文時に決済が確定します。'),
-    ('引渡時期', 'ご注文（決済）の確認後、3日以内（定休日を除く）に発送します。'), ('販売数量', '各商品とも1点限りです。'),
+    ('引渡時期', 'ご注文（決済）の確認後、3日以内（' + ('臨時休業日' if EVERYDAY else '定休日') + 'を除く）に発送します。'), ('販売数量', '各商品とも1点限りです。'),
     ('返品・交換', '古着・一点ものの性質上、お客様都合による返品・交換はお受けしておりません。商品説明と著しく異なる場合や当店の発送間違いの場合は、商品到着後4日以内にメールでご連絡ください。返品送料は当店が負担し、返金または交換にて対応いたします。'),
     ('申込みの撤回・解除', '通信販売にはクーリング・オフ制度は適用されません。上記「返品・交換」の条件に従います。'),
     ('品切れの場合', '店頭・他の販路で先に売れた場合は、ご注文をお受けできないことがあります。その際はご連絡のうえ全額返金いたします。'),
@@ -898,7 +1010,7 @@ if WS_OPEN:
             end_note = '期間限定価格の終了時期は、決まり次第このページとInstagramでお知らせします。'
             meta = '所要 約{m}分・1回 最大{n}名'
             btn = '予約する（日時を選ぶ）'
-            place = f'会場：古着屋 小判鮫（{ADDR["ja"]}）／定休日 月曜・火曜'
+            place = f'会場：古着屋 小判鮫（{ADDR["ja"]}）／' + ('毎日営業' if EVERYDAY else '定休日 月曜・火曜')
         else:
             title = 'Workshops | Kobanzame, Kawagoe'
             desc = 'Workshops at Kobanzame, a vintage shop in an old wooden house in Kawagoe: brass bangle and natural stone bead bracelet. Limited-time prices. Book online.'
@@ -907,7 +1019,7 @@ if WS_OPEN:
             end_note = 'We will announce on this page and on Instagram when the limited-time prices end.'
             meta = 'About {m} min · up to {n} people per session'
             btn = 'Book a time'
-            place = f'Venue: Kobanzame, {ADDR["en"]} / closed Mondays and Tuesdays'
+            place = f'Venue: Kobanzame, {ADDR["en"]} / ' + ('open every day' if EVERYDAY else 'closed Mondays and Tuesdays')
         cards, svc = '', []
         for w in WORKSHOPS:
             x = w[lang]
@@ -941,18 +1053,18 @@ GUIDE = {
   'h1': '川越で古着屋を探している方へ',
   'lead': '古着屋 小判鮫（こばんざめ／KOBANZAME）は、埼玉県川越市元町にある古着屋です。築約80年の古民家をそのまま使った店内に、国内外で買い付けたヴィンテージ古着と、オリジナルのリメイクアクセサリー「GAW」を並べています。川越観光のついでに立ち寄っていただける場所です。',
   'secs': [
-   ('場所と営業時間', f'住所は{ADDR["ja"]}。蔵造りの町並みと同じ、川越の元町エリアにあります。営業は12:00〜20:00、定休日は毎週月曜日・火曜日です。臨時の休みや営業時間の変更はInstagram（{SHOP["ig_handle"]}）でお知らせします。'),
+   ('場所と営業時間', f'住所は{ADDR["ja"]}。蔵造りの町並みと同じ、川越の元町エリアにあります。営業は12:00〜20:00、' + ('定休日はなく毎日営業しています' if EVERYDAY else '定休日は毎週月曜日・火曜日です（2026年11月1日からは毎日営業）') + f'。臨時の休みや営業時間の変更はInstagram（{SHOP["ig_handle"]}）でお知らせします。'),
    ('どんな古着があるか', 'アメリカ・ヨーロッパなどのヴィンテージ古着を中心に、メンズ・レディースの両方を扱っています。アウター、シャツやTシャツ、ワンピース、靴、小物まで。ブランドや流行ではなく、素材・質感・その一点にしかない雰囲気で選んでいるので、すべて一点ものです。'),
    ('価格の目安', (f'このサイトに掲載中の一点ものは、{money(_pr[0], "ja")}〜{money(_pr[-1], "ja")}（税込・送料込み）です。店頭の価格は商品ごとに異なります。' if _pr else '価格は商品ごとに異なります。サイトに掲載中の商品ページでご確認ください。')),
    ('新着入荷', '毎週水曜日に新しい一点ものが入ります。このサイトにも水曜日の朝に新着を掲載しています。'),
    ('GAW（オリジナルのリメイクアクセサリー）', '古いスプーンなどの素材を、ペンダントやバングルなどに作り直した、小判鮫オリジナルのアクセサリーです。こちらも一点ものです。'),
    ('取り置きについて', 'すべて一点ものなので、サイト・店頭ともお取り置きはしていません。先着順です。気になる一点は、お早めにご来店いただくか、このサイトからご購入ください。'),
-   ('遠くて行けないとき', 'このサイトに載っている商品は、クレジットカード（Square決済）でそのまま購入できます。送料込みで、決済確認後3日以内（定休日を除く）に川越の店舗から発送します。メルカリShopsでも販売しています。'),
+   ('遠くて行けないとき', 'このサイトに載っている商品は、クレジットカード（Square決済）でそのまま購入できます。送料込みで、決済確認後3日以内（' + ('臨時休業日' if EVERYDAY else '定休日') + 'を除く）に川越の店舗から発送します。メルカリShopsでも販売しています。'),
    ('サイズ選びのコツ', '実寸は平置きで測っています。お手持ちのいちばん気に入っている服の身幅（脇の下から脇の下まで）を測って比べると、サイズの失敗が減ります。トップページの「手持ちの服の身幅」に数字を入れると、近いサイズの服だけを表示できます。'),
   ],
   'faq': [
    ('川越の小判鮫はどこにありますか？', f'{ADDR["ja"]}にあります。築約80年の古民家で営業している古着屋です。'),
-   ('定休日はいつですか？', '毎週月曜日・火曜日が定休日です。営業時間は12:00〜20:00です。'),
+   ('定休日はいつですか？', ('定休日はありません。毎日12:00〜20:00に営業しています（臨時休業はInstagramでお知らせします）。' if EVERYDAY else '毎週月曜日・火曜日が定休日です。営業時間は12:00〜20:00です。2026年11月1日からは月曜・火曜も営業します（毎日営業）。')),
    ('メンズもレディースもありますか？', 'あります。メンズ・レディースどちらのヴィンテージ古着も扱っています。'),
    ('新しい商品はいつ入りますか？', '毎週水曜日に新着が入ります。'),
    ('川越まで行けなくても買えますか？', 'このサイトからクレジットカードで購入できます（送料込み）。メルカリShopsでも販売しています。'),
@@ -965,7 +1077,7 @@ GUIDE = {
   'h1': 'Looking for a vintage shop in Kawagoe?',
   'lead': 'Kobanzame is a vintage clothing shop in Motomachi, Kawagoe, Saitama, set in an 80-year-old wooden house. We carry vintage clothing sourced in Japan and abroad, and GAW, our own line of remade accessories. It is an easy stop while you explore Kawagoe.',
   'secs': [
-   ('Location and hours', f'{ADDR["en"]}, in the Motomachi area of Kawagoe, the same area as Kawagoe’s old kurazukuri (clay-walled merchant house) streets. Open 12:00–20:00, closed every Monday and Tuesday. Changes are announced on Instagram ({SHOP["ig_handle"]}).'),
+   ('Location and hours', f'{ADDR["en"]}, in the Motomachi area of Kawagoe, the same area as Kawagoe’s old kurazukuri (clay-walled merchant house) streets. Open 12:00–20:00, ' + ('every day' if EVERYDAY else 'closed every Monday and Tuesday (open every day from 1 November 2026)') + f'. Changes are announced on Instagram ({SHOP["ig_handle"]}).'),
    ('What you will find', 'Mostly vintage clothing from the US and Europe, for men and women: outerwear, shirts and tees, dresses, shoes and small goods. We choose by material, texture and the feel of each piece rather than brand or trend, so everything is one of a kind.'),
    ('Prices', (f'Pieces listed on this site range from {money(_pr[0], "en")} to {money(_pr[-1], "en")} (tax and domestic shipping included). In-store prices vary by item.' if _pr else 'Prices vary by item. See each item page on this site.')),
    ('New arrivals', 'New pieces arrive every Wednesday, and go up on this site on Wednesday morning.'),
@@ -975,7 +1087,7 @@ GUIDE = {
   ],
   'faq': [
    ('Where is Kobanzame?', f'At {ADDR["en"]}, in an 80-year-old wooden house.'),
-   ('When is it closed?', 'Every Monday and Tuesday. Open 12:00–20:00 on other days.'),
+   ('When is it closed?', ('We are open every day, 12:00–20:00. Any closures are announced on Instagram.' if EVERYDAY else 'Every Monday and Tuesday. Open 12:00–20:00 on other days. From 1 November 2026 we are open every day.')),
    ('Do you have both men\'s and women\'s clothing?', 'Yes, both.'),
    ('When do new pieces arrive?', 'Every Wednesday.'),
   ],
@@ -1043,12 +1155,12 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 ## 基本情報
 - 店名: 古着屋 小判鮫（こばんざめ / KOBANZAME）
 - 所在地: {ADDR['ja']}（地図: {SHOP['gmaps']}）
-- 営業時間: 12:00〜20:00（月曜・火曜定休）
+- 営業時間: 12:00〜20:00（{'毎日営業・臨時休業はInstagramでお知らせ' if EVERYDAY else '月曜・火曜定休。2026年11月1日から毎日営業'}）
 - 新着: 毎週水曜
 - 取扱い: ヴィンテージ古着（メンズ・レディース）、ヨーロッパ・アメリカの古着、オリジナルのリメイクアクセサリー「GAW」
 - 買い方: 店頭／このサイト（クレジットカード・Square決済・送料込み）／メルカリShops
 - 取り置き: なし（一点ものなので、サイト・店頭とも先着順）
-- 発送: 決済確認後3日以内（月曜・火曜の定休日を除く）
+- 発送: 決済確認後3日以内（{'臨時休業日を除く' if EVERYDAY else '月曜・火曜の定休日を除く'}）
 - 古物商許可: {SHOP['kobutsu']}
 - お問い合わせ: {SHOP['email']}
 - Instagram: {SHOP['instagram']}
