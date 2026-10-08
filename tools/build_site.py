@@ -60,7 +60,7 @@ T = {
   'map': '地図を開く ／ 川越市元町1-14-5',
   'days_h': '営業日', 'days': '水〜日 12:00–20:00（月・火 定休）', 'today_open': '本日営業', 'today_closed': '本日定休',
   'menu': 'メニュー', 'menu_close': '閉じる', 'menu_cats': 'ジャンルで選ぶ', 'menu_all': 'すべての商品', 'menu_more': 'お店のこと',
-  'list_h': 'In Stock', 'list_s': 'オンラインで買える一点もの（毎週水曜更新）', 'unit': '点',
+  'list_h': 'In Stock', 'list_s': 'オンラインで買える一点もの（毎週水曜更新）', 'unit': '点', 'see_all': 'すべて見る', 'new_in': '新着',
   'finder_l': '手持ちの服の身幅', 'finder_u': 'cm ±3cmの服を表示', 'finder_sold': '売れた一点ものも見る', 'finder_clear': '条件をクリア',
   'finder_hint': '身幅＝脇の下から脇の下までを平らに置いて測った長さ。いちばん気に入っている服で測るのがおすすめです。',
   'empty_w': '身幅{w}cm前後の服は、いまはありません。毎週水曜に新着が入ります。', 'empty': '条件に合う一点ものは、いまはありません。',
@@ -102,7 +102,7 @@ T = {
   'map': 'Open map / 1-14-5 Motomachi, Kawagoe',
   'days_h': 'Open', 'days': 'Wed–Sun 12:00–20:00 (closed Mon & Tue)', 'today_open': 'Open today', 'today_closed': 'Closed today',
   'menu': 'Menu', 'menu_close': 'Close', 'menu_cats': 'Shop by category', 'menu_all': 'All items', 'menu_more': 'About the shop',
-  'list_h': 'In Stock', 'list_s': 'One-of-a-kind pieces you can buy online (updated every Wednesday)', 'unit': ' items',
+  'list_h': 'In Stock', 'list_s': 'One-of-a-kind pieces you can buy online (updated every Wednesday)', 'unit': ' items', 'see_all': 'See all', 'new_in': 'New in',
   'finder_l': 'Chest width of a piece you own', 'finder_u': 'cm — show pieces within ±3 cm', 'finder_sold': 'Show sold pieces', 'finder_clear': 'Clear',
   'finder_hint': 'Chest width = measured flat, armpit to armpit. Measure the piece you like best for the closest match.',
   'empty_w': 'Nothing around {w} cm right now. New pieces arrive every Wednesday.', 'empty': 'Nothing matches right now.',
@@ -391,6 +391,7 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .drawer-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40}
 .drawer{position:fixed;top:0;left:0;bottom:0;width:min(320px,86vw);background:var(--sumi);border-right:1px solid var(--line);z-index:41;padding:18px 20px 28px;overflow-y:auto;transform:translateX(-102%);transition:transform .2s ease}
 .drawer.open{transform:none}
+[hidden]{display:none!important}   /* 2026-10-09：.card{display:flex} などが hidden を上書きして、絞り込みで消したカードが見えたままだった不具合の修正 */
 .drawer-bg[hidden]{display:none}
 .drawer .dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
 .drawer .dh b{font-family:var(--mincho);font-size:18px;letter-spacing:.14em}
@@ -598,6 +599,16 @@ details summary{font-family:var(--mincho)}
 details summary:after{font-family:var(--gothic);color:#111}
 footer.site{background:#fff;border-top:1px solid var(--line);color:var(--usu);font-size:11.5px}
 footer.site .big{font-family:var(--roman);font-style:normal;font-weight:700;font-size:28px;letter-spacing:.18em}
+.blocks{display:flex;flex-direction:column;gap:56px}
+.block .bhead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:1px solid #111;padding-bottom:10px;margin-bottom:18px}
+.block h3{font-family:var(--gothic);font-weight:500;font-size:18px;letter-spacing:.18em;line-height:1}
+.block h3 small{display:block;font-family:var(--mincho);font-size:12.5px;letter-spacing:.06em;color:var(--usu);margin-top:8px}
+.ball{font-family:var(--gothic);font-size:12px;letter-spacing:.12em;color:#111;border:1px solid #111;padding:8px 14px;white-space:nowrap;min-height:40px}
+.ball span{margin-left:8px;color:var(--usu);font-variant-numeric:tabular-nums}
+.ball:hover{background:#111;color:#fff}.ball:hover span{color:#ddd}
+.brow{display:grid;grid-auto-flow:column;grid-auto-columns:46%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;-webkit-overflow-scrolling:touch}
+.brow .card{scroll-snap-align:start}
+@media(min-width:900px){.brow{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-columns:auto;overflow:visible;gap:40px 20px}}
 footer.site .hair{background:var(--line);opacity:1}
 .info .brand{font-family:var(--gothic);font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#111}
 .info h1{font-family:var(--mincho)}
@@ -790,6 +801,22 @@ def tiles_html(lang):
                    + (' fetchpriority="high"' if not out else ' loading="lazy"') + f'><span class="tt"><b>{lab} - NEW ARRIVAL</b><i>SHOP NOW</i></span></a>')
     return ''.join(out[:6])
 
+BLOCK_MAX = 8   # 1ジャンルのブロックに出す点数（新しい順）
+
+def blocks_html(lang):
+    """2026-10-09 トップの一覧をジャンルごとのブロックに分ける（絞り込み・身幅・SOLD表示を使った時は、今までどおり全部の一覧に切り替わる）"""
+    t = T[lang]
+    out = []
+    for c in CATS_PRESENT:
+        ps = sorted([p for p in avail_live if cat_of(p) == c], key=lambda p: p.get('published_date', ''), reverse=True)
+        if not ps:
+            continue
+        cards = ''.join(card_html(p, lang) for p in ps[:BLOCK_MAX])
+        out.append(f'<section class="block" data-cat="{c}"><div class="bhead"><h3>{CAT_EN[c].upper()}<small>{t["cats"][c]}</small></h3>'
+                   f'<button type="button" class="ball" data-filter="{c}">{t["see_all"]}<span>{len(ps)}{t["unit"]}</span></button></div>'
+                   f'<div class="brow">{cards}</div></section>')
+    return '\n'.join(out)
+
 def catrow(lang):
     t = T[lang]
     return ''.join(f'<button type="button" data-filter="{c}" aria-pressed="false">{t["cats"][c]}<small>{CAT_EN[c]}</small></button>' for c in CATS_PRESENT)
@@ -812,10 +839,12 @@ def list_js(lang):
 (function(){
   var M=''' + msg + ''';
   var filter=null, grid=document.getElementById('grid'); if(!grid) return;
-  var myw=document.getElementById('myw'), showsold=document.getElementById('showsold'), cnt=document.getElementById('count');
+  var myw=document.getElementById('myw'), showsold=document.getElementById('showsold'), cnt=document.getElementById('count'), blocks=document.getElementById('blocks');
   var empty=document.createElement('div'); empty.className='empty'; empty.hidden=true; grid.appendChild(empty);
   function apply(){
     var my=parseFloat(myw.value), n=0;
+    var plain=!filter&&isNaN(my)&&!showsold.checked;   // 何も絞っていない時はジャンルごとのブロックを見せる
+    if(blocks){blocks.hidden=!plain; grid.hidden=plain;}
     grid.querySelectorAll('.card').forEach(function(c){
       var ok=(!filter||c.dataset.cat===filter)&&(showsold.checked||c.dataset.sold!=='1');
       var w=c.dataset.w===''?null:parseFloat(c.dataset.w), fit=c.querySelector('.fit');
@@ -829,6 +858,7 @@ def list_js(lang):
     document.querySelectorAll('.catrow button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
   }
   document.querySelectorAll('.catrow button').forEach(function(b){b.addEventListener('click',function(){filter=(filter===b.dataset.filter?null:b.dataset.filter);apply();});});
+  document.querySelectorAll('.ball').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.filter;apply();var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});});
   var q=(location.search.match(/[?&]cat=([a-z]+)/)||[])[1]; if(q&&document.querySelector('.catrow button[data-filter="'+q+'"]')) filter=q;
   document.addEventListener('kz:cat',function(e){filter=e.detail||null;apply();});
   myw.addEventListener('input',apply); showsold.addEventListener('change',apply);
@@ -884,7 +914,10 @@ for lang in ('ja', 'en'):
     <div class="catrow" role="group">{catrow(lang)}</div>
     <div class="sec-head" id="list"><h2>{t['list_h']}<small>{t['list_s']}</small></h2><span class="count" id="count">{len(avail_live)}{t['unit']}</span></div>
     {finder(lang)}
-    <div class="grid" id="grid">
+    <div class="blocks" id="blocks">
+{blocks_html(lang)}
+    </div>
+    <div class="grid" id="grid" hidden>
 {cards}
     </div>
     <div class="trust">{trust}</div>
