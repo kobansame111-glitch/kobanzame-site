@@ -285,6 +285,11 @@ def abs_url(u):
     """サイト内の画像（/assets/...）を https:// から始まる完全なURLにする（Google・SNSは完全なURLでないと読めない）"""
     return BASE + u if isinstance(u, str) and u.startswith('/') else u
 
+def real_images(p):
+    """AIで作ったマネキン画像を除いた、本物の写真だけ（Googleの商品フィード・構造化データ用。AI画像・文字入り画像は不承認の恐れ）"""
+    mq = (p.get('photo_v2') or {}).get('mannequin_url')
+    return [u for u in p['images'] if u != mq] or p['images']
+
 def thumb_of(p):
     return p.get('thumb') or p['images'][0].replace('/large/', '/medium/')
 
@@ -955,7 +960,7 @@ for lang in ('ja', 'en'):
         author = {'@type': 'Person', 'name': '龍' if lang == 'ja' else 'Ryu', 'jobTitle': '小判鮫オーナー・専属バイヤー' if lang == 'ja' else 'Owner & buyer, Kobanzame', 'worksFor': {'@id': BASE + '/#store'}}
         ld = {'@context': 'https://schema.org', '@graph': [
             {'@type': 'Product', '@id': BASE + path + '#product', 'name': name, 'sku': p['sku'],
-             'description': loc(p, 'summary_text', lang), 'image': [abs_url(u) for u in p['images']], 'brand': {'@type': 'Brand', 'name': p['brand']},
+             'description': loc(p, 'summary_text', lang), 'image': [abs_url(u) for u in real_images(p)], 'brand': {'@type': 'Brand', 'name': p['brand']},
              'material': p.get('material', ''), 'category': p.get('category', ''), 'offers': offer,
              **({'color': color_of(p)} if color_of(p) else {}), **({'size': size_of(p)} if size_of(p) else {}),
              'audience': {'@type': 'PeopleAudience', 'suggestedGender': gender_of(p)},
@@ -1281,7 +1286,7 @@ feed_items = []
 for p in avail_live:
     if not p['links'].get('square'):
         continue
-    imgs = [abs_url(u) for u in p['images'][:11]]
+    imgs = [abs_url(u) for u in real_images(p)[:11]]
     cond = 'new' if p.get('item_condition') == 'NewCondition' else 'used'
     b = brand_of(p)
     fields = [
