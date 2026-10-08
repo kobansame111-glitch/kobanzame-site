@@ -26,6 +26,7 @@ jobs:
           SKIP_MANNEQUIN: '1'
         run: python tools/photo_v2.py
       - name: Save samples to this branch only
+        if: always()
         run: |
           git config user.name "kobanzame-site-bot"
           git config user.email "actions@users.noreply.github.com"
