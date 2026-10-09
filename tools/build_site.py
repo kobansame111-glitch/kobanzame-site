@@ -551,8 +551,8 @@ footer.site a{color:var(--kinari)}
 .nf p{margin:18px auto 26px;max-width:28em;color:var(--usu)}
 /* ---- 2026-10-08 セレクトショップ調（白地・写真主役）の上書き ---- */
 body{font-size:15px;letter-spacing:.01em}
-.util{background:#111;color:#fff;border-bottom:0;font-size:11.5px;letter-spacing:.1em}
-.util b{color:#fff;font-weight:600}
+.util{background:var(--kinari);color:var(--sumi);border-bottom:0;font-size:11.5px;letter-spacing:.1em}
+.util b{color:var(--kin2);font-weight:600}
 header.site .wrap{display:grid;grid-template-columns:1fr auto 1fr;min-height:68px}
 header.site .hnav{justify-self:end}
 .logo{flex-direction:column;align-items:center;gap:2px;line-height:1}
@@ -573,62 +573,80 @@ header.site .hnav{justify-self:end}
 .tile:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.42))}
 .tile .tt{position:absolute;left:12px;right:12px;bottom:22px;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
 .tile .tt b{font-family:var(--roman);font-weight:700;font-size:clamp(20px,2.3vw,28px);line-height:1.25;color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.35)}
-.tile .tt i{font-style:normal;font-family:var(--gothic);font-size:12px;letter-spacing:.12em;background:#fff;color:#111;padding:8px 18px}
+.tile .tt i{font-style:normal;font-family:var(--gothic);font-size:12px;letter-spacing:.12em;background:var(--sumi);color:var(--kinari);padding:8px 18px}
 @media(max-width:639px){.tile .tt{bottom:12px;gap:8px}.tile .tt b{font-size:14px}.tile .tt i{font-size:10px;padding:6px 10px}.menubtn{font-size:0;gap:0}}
 .hero{border-bottom:0;margin-top:56px}
 .hero h1{font-family:var(--roman);font-style:normal;font-weight:400;font-size:clamp(44px,8vw,92px);letter-spacing:0}
 .hero h1 em{font-style:normal;color:var(--kinari)}
 .hero p{font-family:var(--mincho)}
-.days,.maplink{border-color:var(--line);color:#111}
-.days b{color:#111;font-weight:600}
-.days .today{border-color:#111;color:#111}
-.btn{border-color:#111;font-family:var(--gothic);letter-spacing:.14em;min-height:48px}
-.btn.kin{background:#111;color:#fff;font-weight:500}
+.days,.maplink{border-color:var(--line);color:var(--kinari)}
+.days b{color:var(--kinari);font-weight:600}
+.days .today{border-color:var(--kinari);color:var(--kinari)}
+.btn{border-color:var(--kinari);font-family:var(--gothic);letter-spacing:.14em;min-height:48px}
+.btn.kin{background:var(--kin);color:#fff;font-weight:500}
 .sec-head h2,.store h2,.related h2{font-family:var(--gothic);font-weight:500;font-size:22px;letter-spacing:.16em;text-transform:uppercase}
 .sec-head h2 small,.related h2 small{font-family:var(--mincho);text-transform:none;letter-spacing:.06em}
-.catrow button{font-family:var(--gothic);color:#111}
+.catrow button{font-family:var(--gothic);color:var(--kinari)}
 .catrow button small{font-family:var(--gothic);color:var(--usu);font-size:11px}
-.catrow button[aria-pressed="true"]{background:#111;color:#fff;border-color:#111}
+.catrow button[aria-pressed="true"]{background:var(--kinari);color:var(--sumi);border-color:var(--kinari)}
 .catrow button[aria-pressed="true"] small{color:#ddd}
-.finder input[type=number]{background:#fff;border-color:#111}
+.finder input[type=number]{background:var(--sumi);border-color:var(--kinari)}
 .card .ph{aspect-ratio:1/1}
-.card .brand{font-family:var(--gothic);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#111}
+.card .brand{font-family:var(--gothic);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--kinari)}
 .card .nm{color:var(--usu);font-size:13px}
 .card .pr{font-family:var(--gothic);font-weight:500;font-size:15px}
-.tag{background:#fff;color:#111;border:0;font-family:var(--gothic);font-size:10.5px;padding:3px 8px;top:8px;right:8px}
+.tag{background:var(--sumi);color:var(--kinari);border:0;font-family:var(--gothic);font-size:10.5px;padding:3px 8px;top:8px;right:8px}
 .card.sold .ph:after{font-family:var(--gothic);font-size:20px;letter-spacing:.3em}
-.trust b{color:#111;font-family:var(--mincho)}
-.store dl{border-top-color:#111}
-.store dd a,.holdbox a{color:#111;text-decoration:underline}
+.trust b{color:var(--kinari);font-family:var(--mincho)}
+.store dl{border-top-color:var(--kinari)}
+.store dd a,.holdbox a{color:var(--kinari);text-decoration:underline}
 details summary{font-family:var(--mincho)}
-details summary:after{font-family:var(--gothic);color:#111}
-footer.site{background:#fff;border-top:1px solid var(--line);color:var(--usu);font-size:11.5px}
+details summary:after{font-family:var(--gothic);color:var(--kinari)}
+footer.site{background:var(--kinari);border-top:0;color:#c9bfae;font-size:11.5px}
 footer.site .big{font-family:var(--roman);font-style:normal;font-weight:700;font-size:28px;letter-spacing:.18em}
 .blocks{display:flex;flex-direction:column;gap:56px}
-.block .bhead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:1px solid #111;padding-bottom:10px;margin-bottom:18px}
+.block .bhead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:1px solid var(--kinari);padding-bottom:10px;margin-bottom:18px}
 .block h3{font-family:var(--gothic);font-weight:500;font-size:18px;letter-spacing:.18em;line-height:1}
 .block h3 small{display:block;font-family:var(--mincho);font-size:12.5px;letter-spacing:.06em;color:var(--usu);margin-top:8px}
-.ball{font-family:var(--gothic);font-size:12px;letter-spacing:.12em;color:#111;border:1px solid #111;padding:8px 14px;white-space:nowrap;min-height:40px}
+.ball{font-family:var(--gothic);font-size:12px;letter-spacing:.12em;color:var(--kinari);border:1px solid var(--kinari);padding:8px 14px;white-space:nowrap;min-height:40px}
 .ball span{margin-left:8px;color:var(--usu);font-variant-numeric:tabular-nums}
-.ball:hover{background:#111;color:#fff}.ball:hover span{color:#ddd}
+.ball:hover{background:var(--kinari);color:var(--sumi)}.ball:hover span{color:#ddd}
 .brow{display:grid;grid-auto-flow:column;grid-auto-columns:46%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;-webkit-overflow-scrolling:touch}
 .brow .card{scroll-snap-align:start}
 @media(min-width:900px){.brow{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-columns:auto;overflow:visible;gap:40px 20px}}
 footer.site .hair{background:var(--line);opacity:1}
-.info .brand{font-family:var(--gothic);font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#111}
+.info .brand{font-family:var(--gothic);font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--kinari)}
 .info h1{font-family:var(--mincho)}
 .info .price{font-family:var(--gothic);font-weight:500;font-size:26px}
 .info .sku{font-family:var(--gothic)}
-.facts span.one{border-color:#111;color:#111}
-.points{border-top-color:#111}
-.points li:before{background:#111}
+.facts span.one{border-color:var(--kinari);color:var(--kinari)}
+.points{border-top-color:var(--kinari)}
+.points li:before{background:var(--kinari)}
 .story{font-family:var(--mincho)}
-.story h2,.page h2{color:#111}
+.story h2,.page h2{color:var(--kinari)}
 .bar{border-top-color:var(--line)}
 .bar b{font-family:var(--gothic);font-weight:500}
-.draftnote{background:#111;color:#fff}
+.draftnote{background:var(--kinari);color:var(--sumi)}
 .nf h1{font-family:var(--roman);font-style:normal}
 .gal img{aspect-ratio:1/1}
+/* ---- 2026-10-09 A案「漆喰と墨」：店の壁と梁の色。地＝漆喰、文字＝墨、アクセント＝柿渋（買うボタン）と真鍮（細線） ---- */
+:root{--sumi:#F4F0E8;--susu:#EAE4D8;--kinari:#120A07;--kin:#7C4412;--kin2:#AD8951;--usu:#5E554C;--line:#DCD3C3}
+header.site{background:rgba(244,240,232,.94);border-bottom:1px solid var(--line)}
+.logo{flex-direction:row;align-items:center;gap:10px;text-decoration:none}
+.logo img{width:44px;height:44px;flex:none}
+.logo .wm{display:flex;flex-direction:column;gap:3px;line-height:1}
+@media(max-width:760px){.logo img{width:36px;height:36px}.logo{gap:8px}}
+.btn.kin:hover{background:var(--kinari)}
+.block .bhead{border-bottom-color:var(--kin2)}
+.card .pr{color:var(--kinari)}
+.tile:after{background:linear-gradient(180deg,transparent 45%,rgba(18,10,7,.5))}
+footer.site{position:relative;overflow:hidden;padding-block:56px 48px}
+footer.site .wrap{position:relative;z-index:1}
+footer.site a{color:var(--sumi)}
+footer.site .big{display:flex;align-items:center;gap:14px;color:var(--sumi)}
+footer.site .big img{width:64px;height:64px}
+footer.site .hair{background:var(--kin2);opacity:.6}
+footer.site:after{content:"";position:absolute;right:-40px;bottom:-30px;width:300px;height:288px;background:url(/assets/jaw-light-400.png) center/contain no-repeat;opacity:.07;pointer-events:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 '''
 PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>'
@@ -699,6 +717,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Libre+Caslon+Text:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/assets/favicon-48.png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 {jld(ld)}
 {beacon}{track}
@@ -707,7 +726,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <div class="util">{t['util']}</div>
 <header class="site"><div class="wrap">
   <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button></div>
-  <a class="logo" href="{pre(lang)}/"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></a>
+  <a class="logo" href="{pre(lang)}/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
   <div class="hnav">{navs}
     <nav class="lang" aria-label="言語 / Language"><a href="{alt if lang == 'en' else path}" lang="ja" aria-current="{ja_cur}">日本語</a><a href="{alt if lang == 'ja' else path}" lang="en" aria-current="{en_cur}">EN</a></nav>
   </div>
@@ -754,7 +773,7 @@ def foot(lang):
     op = ('運営：' + SHOP['company']) if lang == 'ja' else 'Operated by Plug Inc.'
     hours = HOURS_LINE[lang]
     return f'''<footer class="site"><div class="wrap">
-  <div class="big">Kobanzame</div>
+  <div class="big"><img src="/assets/seal-light-256.png" alt="" width="64" height="64" loading="lazy">Kobanzame</div>
   <div class="hair"></div>
   <div>古着屋 小判鮫／{ADDR[lang]}／{hours}<br>
     {op}　・　{lic}<br>
