@@ -646,7 +646,7 @@ footer.site a{color:var(--sumi)}
 footer.site .big{display:flex;align-items:center;gap:14px;color:var(--sumi)}
 footer.site .big img{width:64px;height:64px}
 footer.site .hair{background:var(--kin2);opacity:.6}
-footer.site:after{content:"";position:absolute;right:-40px;bottom:-30px;width:300px;height:288px;background:url(/assets/jaw-light-400.png) center/contain no-repeat;opacity:.07;pointer-events:none}
+footer.site:after{content:"";position:absolute;right:-40px;bottom:-30px;width:300px;height:288px;background:url(/assets/jaw-light-400.png) center/contain no-repeat;opacity:.05;pointer-events:none}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 '''
 PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>'
@@ -773,7 +773,7 @@ def foot(lang):
     op = ('運営：' + SHOP['company']) if lang == 'ja' else 'Operated by Plug Inc.'
     hours = HOURS_LINE[lang]
     return f'''<footer class="site"><div class="wrap">
-  <div class="big"><img src="/assets/seal-light-256.png" alt="" width="64" height="64" loading="lazy">Kobanzame</div>
+  <div class="big"><img src="/assets/seal-light-256.png" alt="" width="64" height="64">Kobanzame</div>
   <div class="hair"></div>
   <div>古着屋 小判鮫／{ADDR[lang]}／{hours}<br>
     {op}　・　{lic}<br>
