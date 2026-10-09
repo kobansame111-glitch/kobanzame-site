@@ -67,7 +67,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python3 tools/photo_v2.py
       - name: Build pages
-        run: python3 tools/build_site.py
+        run: |
+          pip install -q budoux==0.9.3 || true   # 日本語の改行位置をきれいにする（入らなくてもサイトは作る）
+          python3 tools/build_site.py
       - name: Commit generated pages (only if something changed)
         run: |
           git config user.name "kobanzame-site-bot"

@@ -289,4 +289,27 @@ footer.site .big{display:flex;align-items:center;gap:14px;color:var(--sumi)}
 footer.site .big img{width:64px;height:64px}
 footer.site .hair{background:var(--kin2);opacity:.6}
 footer.site:after{content:"";position:absolute;right:-40px;bottom:-30px;width:300px;height:288px;background:url(/assets/jaw-light-400.png) center/contain no-repeat;opacity:.05;pointer-events:none}
+/* ---- 2026-10-09 圧迫感を減らす・動きをつける ---- */
+html:lang(ja) body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+p,li,dd,.nm,.hero p{text-wrap:pretty}
+h1,h2,h3{text-wrap:balance}
+.card .ph{aspect-ratio:4/5}
+.gal img{aspect-ratio:4/5}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:opacity .45s ease,transform .9s ease}
+.card .ph img.alt{position:absolute;inset:0;opacity:0}
+@media(hover:hover){.card:hover .ph img.alt{opacity:1}.card:hover .ph img:not(.alt){transform:scale(1.02)}}
+.tgrid{gap:12px;padding-inline:var(--gutter)}
+@media(min-width:640px){.tgrid{gap:20px;padding-inline:24px}}
+.tile:after{background:linear-gradient(180deg,transparent 60%,rgba(18,10,7,.32))}
+.tile .tt b{font-family:var(--gothic);font-weight:500;letter-spacing:.14em;font-size:clamp(14px,1.6vw,20px)}
+.tile img{transition:transform 1.6s ease}
+.tile:hover img{transform:scale(1.05)}
+.blocks{gap:88px}
+.brow{gap:20px}
+@media(min-width:900px){.brow{gap:56px 28px}}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+header.site{transition:box-shadow .3s ease}
+header.site.sc{box-shadow:0 6px 20px -14px rgba(18,10,7,.35)}
+.btn,.ball{transition:background .25s ease,color .25s ease}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}

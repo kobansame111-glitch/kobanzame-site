@@ -68,7 +68,7 @@ T = {
   'one': '1点限り', 'tax': '税込', 'tax_ship': '税込・送料込み',
   'trust': [('送料込み', '表示価格は税込・送料込み'), ('3日以内に発送', '決済確認後（月・火定休を除く）'),
             ('川越の実店舗', '古物商許可 ' + SHOP['kobutsu']), ('お店の評判', '<a href="{gm}" rel="noopener">Googleマップでクチコミを見る</a>')],
-  'store_p': '古着屋 小判鮫（KOBANZAME）は、埼玉県川越市元町にある築約80年の古民家で営業している古着屋です。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱っています。ブランドや流行ではなく、素材・質感・その一点にしかない気配で選んでいます。サイトに載っている商品は、店頭にも並んでいます。',
+  'store_p': '古着屋 小判鮫（KOBANZAME）は、埼玉県川越市元町にある築約80年の古民家で営業している古着屋です。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱っています。ブランドや流行ではなく、素材・質感・その一点にしかない空気感で選んでいます。サイトに載っている商品は、店頭にも並んでいます。',
   'store_dl': [('住所', None), ('営業', '12:00–20:00'), ('定休日', '月曜・火曜'), ('運営', SHOP['company']), ('お問い合わせ', SHOP['email'])],
   'faq_s': 'よくある質問',
   'buy': '購入する（クレジットカード）', 'buy_s': '購入する', 'soldout': 'SOLD OUT（この一点は旅立ちました）', 'prep': '準備中（まもなく購入できるようになります）',
@@ -647,6 +647,29 @@ footer.site .big{display:flex;align-items:center;gap:14px;color:var(--sumi)}
 footer.site .big img{width:64px;height:64px}
 footer.site .hair{background:var(--kin2);opacity:.6}
 footer.site:after{content:"";position:absolute;right:-40px;bottom:-30px;width:300px;height:288px;background:url(/assets/jaw-light-400.png) center/contain no-repeat;opacity:.05;pointer-events:none}
+/* ---- 2026-10-09 圧迫感を減らす・動きをつける ---- */
+html:lang(ja) body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+p,li,dd,.nm,.hero p{text-wrap:pretty}
+h1,h2,h3{text-wrap:balance}
+.card .ph{aspect-ratio:4/5}
+.gal img{aspect-ratio:4/5}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:opacity .45s ease,transform .9s ease}
+.card .ph img.alt{position:absolute;inset:0;opacity:0}
+@media(hover:hover){.card:hover .ph img.alt{opacity:1}.card:hover .ph img:not(.alt){transform:scale(1.02)}}
+.tgrid{gap:12px;padding-inline:var(--gutter)}
+@media(min-width:640px){.tgrid{gap:20px;padding-inline:24px}}
+.tile:after{background:linear-gradient(180deg,transparent 60%,rgba(18,10,7,.32))}
+.tile .tt b{font-family:var(--gothic);font-weight:500;letter-spacing:.14em;font-size:clamp(14px,1.6vw,20px)}
+.tile img{transition:transform 1.6s ease}
+.tile:hover img{transform:scale(1.05)}
+.blocks{gap:88px}
+.brow{gap:20px}
+@media(min-width:900px){.brow{gap:56px 28px}}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+header.site{transition:box-shadow .3s ease}
+header.site.sc{box-shadow:0 6px 20px -14px rgba(18,10,7,.35)}
+.btn,.ball{transition:background .25s ease,color .25s ease}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 '''
 PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>'
@@ -733,6 +756,16 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 </div></header>
 ''' + drawer_html(lang)
 
+REVEAL_JS = '''<script>
+(function(){
+  var q=document.querySelectorAll('.card,.block,.sec-head,.store,.faq,.story,.trust,.tile');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+  q.forEach(function(el,i){el.classList.add('rv');el.style.transitionDelay=(i%4)*60+'ms';io.observe(el);});
+  var h=document.querySelector('header.site');addEventListener('scroll',function(){h.classList.toggle('sc',scrollY>40);},{passive:true});
+})();
+</script>'''
+
 def drawer_html(lang):
     t = T[lang]
     P = pre(lang)
@@ -781,11 +814,35 @@ def foot(lang):
     {(chr(60) + 'a href="' + ('/en/workshop/' if lang == 'en' else '/workshop/') + '">' + ('Workshops' if lang == 'en' else 'ワークショップ') + chr(60) + '/a>　・　') if WS_OPEN else ''}<a href="{'/en/guide/' if lang == 'en' else '/guide/'}">{'Kawagoe vintage guide' if lang == 'en' else '川越で古着屋を探している方へ'}</a>　・　{legal}
   </div>
 </div></footer>
+{REVEAL_JS}
 </body>
 </html>
 '''
 
+try:
+    import budoux
+    _BX = budoux.load_default_japanese_parser()
+except Exception:   # 入っていなくてもサイトは作る（改行が少し不自然になるだけ）
+    _BX = None
+_SKIP = re.compile(r'(<(script|style|title|textarea|code|option)\b.*?</\2>|<[^>]+>|&#?\w+;)', re.S | re.I)
+def wbr(html):
+    """本文の日本語の文節の切れ目に <wbr> を入れる（タグ・スクリプトの中は触らない）"""
+    if _BX is None or '<body' not in html:
+        return html
+    head, body = html.split('<body', 1)
+    parts, pos = [], 0
+    for m in _SKIP.finditer(body):
+        parts.append(_wbr_text(body[pos:m.start()])); parts.append(m.group(0)); pos = m.end()
+    parts.append(_wbr_text(body[pos:]))
+    return head + '<body' + ''.join(parts)
+def _wbr_text(t):
+    if not re.search(r'[ぁ-んァ-ヶ一-龯]', t) or len(t) < 8:
+        return t
+    return '<wbr>'.join(_BX.parse(t))
+
 def write(path, text):
+    if path.endswith('.html'):
+        text = wbr(text)
     full = os.path.join(ROOT, path.lstrip('/'))
     os.makedirs(os.path.dirname(full), exist_ok=True)
     open(full, 'w', encoding='utf-8').write(text)
@@ -797,6 +854,11 @@ live = [p for p in products if release(p) == 'live']
 avail_live = [p for p in live if not is_sold(p)]
 CATS_PRESENT = [c for c in ['outer', 'tops', 'bottoms', 'dress', 'shoes', 'acc', 'other'] if any(cat_of(p) == c for p in live)]
 
+def alt_img(p):
+    """2枚目の写真（PCでカーソルを乗せた時だけ見える）。マネキン画像は使わない"""
+    ims = [u for u in p.get('images', [])[1:] if u != (p.get('photo_v2') or {}).get('mannequin_url')]
+    return f'<img class="alt" src="{esc(ims[0].replace("/large/", "/medium/"))}" alt="" loading="lazy" aria-hidden="true">' if ims and not is_sold(p) else ''
+
 def card_html(p, lang, lazy=True):
     t = T[lang]
     w = body_width(p)
@@ -805,7 +867,7 @@ def card_html(p, lang, lazy=True):
     tag = '' if sold else f'<span class="tag">{t["one"]}</span>'
     wv = '' if w is None else f'{w:g}'
     return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-w="{wv}" data-sold="{1 if sold else 0}">'
-            f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{tag}</div>'
+            f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}</div>'
             f'<div class="brand">{esc(p["brand"])}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
             f'<span class="fit" hidden></span>'
             f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small></div></a>')
