@@ -132,10 +132,11 @@ if(k)send({t:'click',btn:k});},true);
 </div></footer>
 <script>
 (function(){
-  var q=document.querySelectorAll('.card,.block,.sec-head,.store,.faq,.story,.trust,.tile');
+  var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');
   if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
   q.forEach(function(el,i){el.classList.add('rv');el.style.transitionDelay=(i%4)*60+'ms';io.observe(el);});
+  setTimeout(function(){q.forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)el.classList.add('in');});},1500);  // 念のため：画面内のものは1.5秒後には必ず見せる
   var h=document.querySelector('header.site');addEventListener('scroll',function(){h.classList.toggle('sc',scrollY>40);},{passive:true});
 })();
 </script>
