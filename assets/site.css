@@ -38,6 +38,7 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .drawer-bg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:40}
 .drawer{position:fixed;top:0;left:0;bottom:0;width:min(320px,86vw);background:var(--sumi);border-right:1px solid var(--line);z-index:41;padding:18px 20px 28px;overflow-y:auto;transform:translateX(-102%);transition:transform .2s ease}
 .drawer.open{transform:none}
+[hidden]{display:none!important}   /* 2026-10-09：.card{display:flex} などが hidden を上書きして、絞り込みで消したカードが見えたままだった不具合の修正 */
 .drawer-bg[hidden]{display:none}
 .drawer .dh{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
 .drawer .dh b{font-family:var(--mincho);font-size:18px;letter-spacing:.14em}
@@ -245,6 +246,16 @@ details summary{font-family:var(--mincho)}
 details summary:after{font-family:var(--gothic);color:#111}
 footer.site{background:#fff;border-top:1px solid var(--line);color:var(--usu);font-size:11.5px}
 footer.site .big{font-family:var(--roman);font-style:normal;font-weight:700;font-size:28px;letter-spacing:.18em}
+.blocks{display:flex;flex-direction:column;gap:56px}
+.block .bhead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:1px solid #111;padding-bottom:10px;margin-bottom:18px}
+.block h3{font-family:var(--gothic);font-weight:500;font-size:18px;letter-spacing:.18em;line-height:1}
+.block h3 small{display:block;font-family:var(--mincho);font-size:12.5px;letter-spacing:.06em;color:var(--usu);margin-top:8px}
+.ball{font-family:var(--gothic);font-size:12px;letter-spacing:.12em;color:#111;border:1px solid #111;padding:8px 14px;white-space:nowrap;min-height:40px}
+.ball span{margin-left:8px;color:var(--usu);font-variant-numeric:tabular-nums}
+.ball:hover{background:#111;color:#fff}.ball:hover span{color:#ddd}
+.brow{display:grid;grid-auto-flow:column;grid-auto-columns:46%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;-webkit-overflow-scrolling:touch}
+.brow .card{scroll-snap-align:start}
+@media(min-width:900px){.brow{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-columns:auto;overflow:visible;gap:40px 20px}}
 footer.site .hair{background:var(--line);opacity:1}
 .info .brand{font-family:var(--gothic);font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#111}
 .info h1{font-family:var(--mincho)}

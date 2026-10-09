@@ -129,10 +129,12 @@ if(k)send({t:'click',btn:k});},true);
 (function(){
   var M={"empty_w": "Nothing around {w} cm right now. New pieces arrive every Wednesday.", "empty": "Nothing matches right now.", "fit": "Chest {w} cm ({d})", "same": "same", "unit": " items"};
   var filter=null, grid=document.getElementById('grid'); if(!grid) return;
-  var myw=document.getElementById('myw'), showsold=document.getElementById('showsold'), cnt=document.getElementById('count');
+  var myw=document.getElementById('myw'), showsold=document.getElementById('showsold'), cnt=document.getElementById('count'), blocks=document.getElementById('blocks');
   var empty=document.createElement('div'); empty.className='empty'; empty.hidden=true; grid.appendChild(empty);
   function apply(){
     var my=parseFloat(myw.value), n=0;
+    var plain=!filter&&isNaN(my)&&!showsold.checked;   // 何も絞っていない時はジャンルごとのブロックを見せる
+    if(blocks){blocks.hidden=!plain; grid.hidden=plain;}
     grid.querySelectorAll('.card').forEach(function(c){
       var ok=(!filter||c.dataset.cat===filter)&&(showsold.checked||c.dataset.sold!=='1');
       var w=c.dataset.w===''?null:parseFloat(c.dataset.w), fit=c.querySelector('.fit');
@@ -146,6 +148,7 @@ if(k)send({t:'click',btn:k});},true);
     document.querySelectorAll('.catrow button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
   }
   document.querySelectorAll('.catrow button').forEach(function(b){b.addEventListener('click',function(){filter=(filter===b.dataset.filter?null:b.dataset.filter);apply();});});
+  document.querySelectorAll('.ball').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.filter;apply();var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});});
   var q=(location.search.match(/[?&]cat=([a-z]+)/)||[])[1]; if(q&&document.querySelector('.catrow button[data-filter="'+q+'"]')) filter=q;
   document.addEventListener('kz:cat',function(e){filter=e.detail||null;apply();});
   myw.addEventListener('input',apply); showsold.addEventListener('change',apply);
