@@ -68,7 +68,7 @@ T = {
   'one': '1点限り', 'tax': '税込', 'tax_ship': '税込・送料込み',
   'trust': [('送料込み', '表示価格は税込・送料込み'), ('3日以内に発送', '決済確認後（月・火定休を除く）'),
             ('川越の実店舗', '古物商許可 ' + SHOP['kobutsu']), ('お店の評判', '<a href="{gm}" rel="noopener">Googleマップでクチコミを見る</a>')],
-  'store_p': '古着屋 小判鮫（KOBANZAME）は、埼玉県川越市元町にある築約80年の古民家で営業している古着屋です。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱っています。ブランドや流行ではなく、素材・質感・その一点にしかない気配で選んでいます。サイトに載っている商品は、店頭にも並んでいます。',
+  'store_p': '古着屋 小判鮫（KOBANZAME）は、埼玉県川越市元町にある築約80年の古民家で営業している古着屋です。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱っています。ブランドや流行ではなく、素材・質感・その一点にしかない空気感で選んでいます。サイトに載っている商品は、店頭にも並んでいます。',
   'store_dl': [('住所', None), ('営業', '12:00–20:00'), ('定休日', '月曜・火曜'), ('運営', SHOP['company']), ('お問い合わせ', SHOP['email'])],
   'faq_s': 'よくある質問',
   'buy': '購入する（クレジットカード）', 'buy_s': '購入する', 'soldout': 'SOLD OUT（この一点は旅立ちました）', 'prep': '準備中（まもなく購入できるようになります）',
@@ -551,8 +551,8 @@ footer.site a{color:var(--kinari)}
 .nf p{margin:18px auto 26px;max-width:28em;color:var(--usu)}
 /* ---- 2026-10-08 セレクトショップ調（白地・写真主役）の上書き ---- */
 body{font-size:15px;letter-spacing:.01em}
-.util{background:#111;color:#fff;border-bottom:0;font-size:11.5px;letter-spacing:.1em}
-.util b{color:#fff;font-weight:600}
+.util{background:var(--kinari);color:var(--sumi);border-bottom:0;font-size:11.5px;letter-spacing:.1em}
+.util b{color:var(--kin2);font-weight:600}
 header.site .wrap{display:grid;grid-template-columns:1fr auto 1fr;min-height:68px}
 header.site .hnav{justify-self:end}
 .logo{flex-direction:column;align-items:center;gap:2px;line-height:1}
@@ -573,62 +573,103 @@ header.site .hnav{justify-self:end}
 .tile:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.42))}
 .tile .tt{position:absolute;left:12px;right:12px;bottom:22px;z-index:1;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
 .tile .tt b{font-family:var(--roman);font-weight:700;font-size:clamp(20px,2.3vw,28px);line-height:1.25;color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.35)}
-.tile .tt i{font-style:normal;font-family:var(--gothic);font-size:12px;letter-spacing:.12em;background:#fff;color:#111;padding:8px 18px}
+.tile .tt i{font-style:normal;font-family:var(--gothic);font-size:12px;letter-spacing:.12em;background:var(--sumi);color:var(--kinari);padding:8px 18px}
 @media(max-width:639px){.tile .tt{bottom:12px;gap:8px}.tile .tt b{font-size:14px}.tile .tt i{font-size:10px;padding:6px 10px}.menubtn{font-size:0;gap:0}}
 .hero{border-bottom:0;margin-top:56px}
 .hero h1{font-family:var(--roman);font-style:normal;font-weight:400;font-size:clamp(44px,8vw,92px);letter-spacing:0}
 .hero h1 em{font-style:normal;color:var(--kinari)}
 .hero p{font-family:var(--mincho)}
-.days,.maplink{border-color:var(--line);color:#111}
-.days b{color:#111;font-weight:600}
-.days .today{border-color:#111;color:#111}
-.btn{border-color:#111;font-family:var(--gothic);letter-spacing:.14em;min-height:48px}
-.btn.kin{background:#111;color:#fff;font-weight:500}
+.days,.maplink{border-color:var(--line);color:var(--kinari)}
+.days b{color:var(--kinari);font-weight:600}
+.days .today{border-color:var(--kinari);color:var(--kinari)}
+.btn{border-color:var(--kinari);font-family:var(--gothic);letter-spacing:.14em;min-height:48px}
+.btn.kin{background:var(--kin);color:#fff;font-weight:500}
 .sec-head h2,.store h2,.related h2{font-family:var(--gothic);font-weight:500;font-size:22px;letter-spacing:.16em;text-transform:uppercase}
 .sec-head h2 small,.related h2 small{font-family:var(--mincho);text-transform:none;letter-spacing:.06em}
-.catrow button{font-family:var(--gothic);color:#111}
+.catrow button{font-family:var(--gothic);color:var(--kinari)}
 .catrow button small{font-family:var(--gothic);color:var(--usu);font-size:11px}
-.catrow button[aria-pressed="true"]{background:#111;color:#fff;border-color:#111}
+.catrow button[aria-pressed="true"]{background:var(--kinari);color:var(--sumi);border-color:var(--kinari)}
 .catrow button[aria-pressed="true"] small{color:#ddd}
-.finder input[type=number]{background:#fff;border-color:#111}
+.finder input[type=number]{background:var(--sumi);border-color:var(--kinari)}
 .card .ph{aspect-ratio:1/1}
-.card .brand{font-family:var(--gothic);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#111}
+.card .brand{font-family:var(--gothic);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--kinari)}
 .card .nm{color:var(--usu);font-size:13px}
 .card .pr{font-family:var(--gothic);font-weight:500;font-size:15px}
-.tag{background:#fff;color:#111;border:0;font-family:var(--gothic);font-size:10.5px;padding:3px 8px;top:8px;right:8px}
+.tag{background:var(--sumi);color:var(--kinari);border:0;font-family:var(--gothic);font-size:10.5px;padding:3px 8px;top:8px;right:8px}
 .card.sold .ph:after{font-family:var(--gothic);font-size:20px;letter-spacing:.3em}
-.trust b{color:#111;font-family:var(--mincho)}
-.store dl{border-top-color:#111}
-.store dd a,.holdbox a{color:#111;text-decoration:underline}
+.trust b{color:var(--kinari);font-family:var(--mincho)}
+.store dl{border-top-color:var(--kinari)}
+.store dd a,.holdbox a{color:var(--kinari);text-decoration:underline}
 details summary{font-family:var(--mincho)}
-details summary:after{font-family:var(--gothic);color:#111}
-footer.site{background:#fff;border-top:1px solid var(--line);color:var(--usu);font-size:11.5px}
+details summary:after{font-family:var(--gothic);color:var(--kinari)}
+footer.site{background:var(--kinari);border-top:0;color:#c9bfae;font-size:11.5px}
 footer.site .big{font-family:var(--roman);font-style:normal;font-weight:700;font-size:28px;letter-spacing:.18em}
 .blocks{display:flex;flex-direction:column;gap:56px}
-.block .bhead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:1px solid #111;padding-bottom:10px;margin-bottom:18px}
+.block .bhead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:1px solid var(--kinari);padding-bottom:10px;margin-bottom:18px}
 .block h3{font-family:var(--gothic);font-weight:500;font-size:18px;letter-spacing:.18em;line-height:1}
 .block h3 small{display:block;font-family:var(--mincho);font-size:12.5px;letter-spacing:.06em;color:var(--usu);margin-top:8px}
-.ball{font-family:var(--gothic);font-size:12px;letter-spacing:.12em;color:#111;border:1px solid #111;padding:8px 14px;white-space:nowrap;min-height:40px}
+.ball{font-family:var(--gothic);font-size:12px;letter-spacing:.12em;color:var(--kinari);border:1px solid var(--kinari);padding:8px 14px;white-space:nowrap;min-height:40px}
 .ball span{margin-left:8px;color:var(--usu);font-variant-numeric:tabular-nums}
-.ball:hover{background:#111;color:#fff}.ball:hover span{color:#ddd}
+.ball:hover{background:var(--kinari);color:var(--sumi)}.ball:hover span{color:#ddd}
 .brow{display:grid;grid-auto-flow:column;grid-auto-columns:46%;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;-webkit-overflow-scrolling:touch}
 .brow .card{scroll-snap-align:start}
 @media(min-width:900px){.brow{grid-auto-flow:row;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-columns:auto;overflow:visible;gap:40px 20px}}
 footer.site .hair{background:var(--line);opacity:1}
-.info .brand{font-family:var(--gothic);font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#111}
+.info .brand{font-family:var(--gothic);font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--kinari)}
 .info h1{font-family:var(--mincho)}
 .info .price{font-family:var(--gothic);font-weight:500;font-size:26px}
 .info .sku{font-family:var(--gothic)}
-.facts span.one{border-color:#111;color:#111}
-.points{border-top-color:#111}
-.points li:before{background:#111}
+.facts span.one{border-color:var(--kinari);color:var(--kinari)}
+.points{border-top-color:var(--kinari)}
+.points li:before{background:var(--kinari)}
 .story{font-family:var(--mincho)}
-.story h2,.page h2{color:#111}
+.story h2,.page h2{color:var(--kinari)}
 .bar{border-top-color:var(--line)}
 .bar b{font-family:var(--gothic);font-weight:500}
-.draftnote{background:#111;color:#fff}
+.draftnote{background:var(--kinari);color:var(--sumi)}
 .nf h1{font-family:var(--roman);font-style:normal}
 .gal img{aspect-ratio:1/1}
+/* ---- 2026-10-09 A案「漆喰と墨」：店の壁と梁の色。地＝漆喰、文字＝墨、アクセント＝柿渋（買うボタン）と真鍮（細線） ---- */
+:root{--sumi:#F4F0E8;--susu:#EAE4D8;--kinari:#120A07;--kin:#7C4412;--kin2:#AD8951;--usu:#5E554C;--line:#DCD3C3}
+header.site{background:rgba(244,240,232,.94);border-bottom:1px solid var(--line)}
+.logo{flex-direction:row;align-items:center;gap:10px;text-decoration:none}
+.logo img{width:44px;height:44px;flex:none}
+.logo .wm{display:flex;flex-direction:column;gap:3px;line-height:1}
+@media(max-width:760px){.logo img{width:36px;height:36px}.logo{gap:8px}}
+.btn.kin:hover{background:var(--kinari)}
+.block .bhead{border-bottom-color:var(--kin2)}
+.card .pr{color:var(--kinari)}
+.tile:after{background:linear-gradient(180deg,transparent 45%,rgba(18,10,7,.5))}
+footer.site{position:relative;overflow:hidden;padding-block:56px 48px}
+footer.site .wrap{position:relative;z-index:1}
+footer.site a{color:var(--sumi)}
+footer.site .big{display:flex;align-items:center;gap:14px;color:var(--sumi)}
+footer.site .big img{width:64px;height:64px}
+footer.site .hair{background:var(--kin2);opacity:.6}
+footer.site:after{content:"";position:absolute;right:-40px;bottom:-30px;width:300px;height:288px;background:url(/assets/jaw-light-400.png) center/contain no-repeat;opacity:.05;pointer-events:none}
+/* ---- 2026-10-09 圧迫感を減らす・動きをつける ---- */
+html:lang(ja) body{word-break:keep-all;overflow-wrap:anywhere;line-break:strict}
+p,li,dd,.nm,.hero p{text-wrap:pretty}
+h1,h2,h3{text-wrap:balance}
+.card .ph{aspect-ratio:4/5}
+.gal img{aspect-ratio:4/5}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:opacity .45s ease,transform .9s ease}
+.card .ph img.alt{position:absolute;inset:0;opacity:0}
+@media(hover:hover){.card:hover .ph img.alt{opacity:1}.card:hover .ph img:not(.alt){transform:scale(1.02)}}
+.tgrid{gap:12px;padding-inline:var(--gutter)}
+@media(min-width:640px){.tgrid{gap:20px;padding-inline:24px}}
+.tile:after{background:linear-gradient(180deg,transparent 60%,rgba(18,10,7,.32))}
+.tile .tt b{font-family:var(--gothic);font-weight:500;letter-spacing:.14em;font-size:clamp(14px,1.6vw,20px)}
+.tile img{transition:transform 1.6s ease}
+.tile:hover img{transform:scale(1.05)}
+.blocks{gap:88px}
+.brow{gap:20px}
+@media(min-width:900px){.brow{gap:56px 28px}}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+header.site{transition:box-shadow .3s ease}
+header.site.sc{box-shadow:0 6px 20px -14px rgba(18,10,7,.35)}
+.btn,.ball{transition:background .25s ease,color .25s ease}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 '''
 PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>'
@@ -699,6 +740,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Libre+Caslon+Text:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="/assets/favicon-48.png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
 {jld(ld)}
 {beacon}{track}
@@ -707,12 +749,23 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <div class="util">{t['util']}</div>
 <header class="site"><div class="wrap">
   <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button></div>
-  <a class="logo" href="{pre(lang)}/"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></a>
+  <a class="logo" href="{pre(lang)}/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
   <div class="hnav">{navs}
     <nav class="lang" aria-label="言語 / Language"><a href="{alt if lang == 'en' else path}" lang="ja" aria-current="{ja_cur}">日本語</a><a href="{alt if lang == 'ja' else path}" lang="en" aria-current="{en_cur}">EN</a></nav>
   </div>
 </div></header>
 ''' + drawer_html(lang)
+
+REVEAL_JS = '''<script>
+(function(){
+  var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -8% 0px'});
+  q.forEach(function(el,i){el.classList.add('rv');el.style.transitionDelay=(i%4)*60+'ms';io.observe(el);});
+  setTimeout(function(){q.forEach(function(el){if(el.getBoundingClientRect().top<innerHeight)el.classList.add('in');});},1500);  // 念のため：画面内のものは1.5秒後には必ず見せる
+  var h=document.querySelector('header.site');addEventListener('scroll',function(){h.classList.toggle('sc',scrollY>40);},{passive:true});
+})();
+</script>'''
 
 def drawer_html(lang):
     t = T[lang]
@@ -754,7 +807,7 @@ def foot(lang):
     op = ('運営：' + SHOP['company']) if lang == 'ja' else 'Operated by Plug Inc.'
     hours = HOURS_LINE[lang]
     return f'''<footer class="site"><div class="wrap">
-  <div class="big">Kobanzame</div>
+  <div class="big"><img src="/assets/seal-light-256.png" alt="" width="64" height="64">Kobanzame</div>
   <div class="hair"></div>
   <div>古着屋 小判鮫／{ADDR[lang]}／{hours}<br>
     {op}　・　{lic}<br>
@@ -762,11 +815,35 @@ def foot(lang):
     {(chr(60) + 'a href="' + ('/en/workshop/' if lang == 'en' else '/workshop/') + '">' + ('Workshops' if lang == 'en' else 'ワークショップ') + chr(60) + '/a>　・　') if WS_OPEN else ''}<a href="{'/en/guide/' if lang == 'en' else '/guide/'}">{'Kawagoe vintage guide' if lang == 'en' else '川越で古着屋を探している方へ'}</a>　・　{legal}
   </div>
 </div></footer>
+{REVEAL_JS}
 </body>
 </html>
 '''
 
+try:
+    import budoux
+    _BX = budoux.load_default_japanese_parser()
+except Exception:   # 入っていなくてもサイトは作る（改行が少し不自然になるだけ）
+    _BX = None
+_SKIP = re.compile(r'(<(script|style|title|textarea|code|option)\b.*?</\2>|<[^>]+>|&#?\w+;)', re.S | re.I)
+def wbr(html):
+    """本文の日本語の文節の切れ目に <wbr> を入れる（タグ・スクリプトの中は触らない）"""
+    if _BX is None or '<body' not in html:
+        return html
+    head, body = html.split('<body', 1)
+    parts, pos = [], 0
+    for m in _SKIP.finditer(body):
+        parts.append(_wbr_text(body[pos:m.start()])); parts.append(m.group(0)); pos = m.end()
+    parts.append(_wbr_text(body[pos:]))
+    return head + '<body' + ''.join(parts)
+def _wbr_text(t):
+    if not re.search(r'[ぁ-んァ-ヶ一-龯]', t) or len(t) < 8:
+        return t
+    return '<wbr>'.join(_BX.parse(t))
+
 def write(path, text):
+    if path.endswith('.html'):
+        text = wbr(text)
     full = os.path.join(ROOT, path.lstrip('/'))
     os.makedirs(os.path.dirname(full), exist_ok=True)
     open(full, 'w', encoding='utf-8').write(text)
@@ -778,6 +855,11 @@ live = [p for p in products if release(p) == 'live']
 avail_live = [p for p in live if not is_sold(p)]
 CATS_PRESENT = [c for c in ['outer', 'tops', 'bottoms', 'dress', 'shoes', 'acc', 'other'] if any(cat_of(p) == c for p in live)]
 
+def alt_img(p):
+    """2枚目の写真（PCでカーソルを乗せた時だけ見える）。マネキン画像は使わない"""
+    ims = [u for u in p.get('images', [])[1:] if u != (p.get('photo_v2') or {}).get('mannequin_url')]
+    return f'<img class="alt" src="{esc(ims[0].replace("/large/", "/medium/"))}" alt="" loading="lazy" aria-hidden="true">' if ims and not is_sold(p) else ''
+
 def card_html(p, lang, lazy=True):
     t = T[lang]
     w = body_width(p)
@@ -786,7 +868,7 @@ def card_html(p, lang, lazy=True):
     tag = '' if sold else f'<span class="tag">{t["one"]}</span>'
     wv = '' if w is None else f'{w:g}'
     return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-w="{wv}" data-sold="{1 if sold else 0}">'
-            f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{tag}</div>'
+            f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}</div>'
             f'<div class="brand">{esc(p["brand"])}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
             f'<span class="fit" hidden></span>'
             f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small></div></a>')
@@ -1341,3 +1423,23 @@ write('/feed/google.xml', '<?xml version="1.0" encoding="UTF-8"?>\n'
       + ''.join(feed_items) + '  </channel>\n</rss>\n')
 
 print('built', len(pages), 'pages', '/ feed', len(feed_items), 'items')
+
+# ---------- 文章の点検（2026-10-09 龍さん決定：語尾は「です・ます」で言い切る） ----------
+# 止めはしない（サイトは作る）。言い切っていない文があれば、作り直しのログに一覧を出す。
+_END_OK = re.compile(r'(です|ます|ました|ません|でした|ましょう|ください)[。！]?$')
+_vague = []
+for _p in products:
+    if release(_p) != 'live':
+        continue
+    for _k in ('summary_text', 'lead', 'body_html'):
+        _v = _p.get(_k) or ''
+        _chunks = re.findall(r'<p>(.*?)</p>', _v, re.S) if _k == 'body_html' else [_v]
+        for _c in _chunks:
+            for _s in re.split(r'(?<=。)', _c):
+                _s = _s.strip()
+                if _s and not _END_OK.search(re.sub(r'（[^（]*）(?=。?$)', '', re.sub(r'」+(?=。?$)', '', _s))):
+                    _vague.append(f"{_p['sku']} {_k}: {_s}")
+if _vague:
+    print(f'⚠ 言い切っていない文が {len(_vague)} 件あります（直すと良い）:')
+    for _l in _vague[:30]:
+        print('  ', _l)
