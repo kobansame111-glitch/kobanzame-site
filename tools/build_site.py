@@ -1423,3 +1423,23 @@ write('/feed/google.xml', '<?xml version="1.0" encoding="UTF-8"?>\n'
       + ''.join(feed_items) + '  </channel>\n</rss>\n')
 
 print('built', len(pages), 'pages', '/ feed', len(feed_items), 'items')
+
+# ---------- 文章の点検（2026-10-09 龍さん決定：語尾は「です・ます」で言い切る） ----------
+# 止めはしない（サイトは作る）。言い切っていない文があれば、作り直しのログに一覧を出す。
+_END_OK = re.compile(r'(です|ます|ました|ません|でした|ましょう|ください)[。！]?$')
+_vague = []
+for _p in products:
+    if release(_p) != 'live':
+        continue
+    for _k in ('summary_text', 'lead', 'body_html'):
+        _v = _p.get(_k) or ''
+        _chunks = re.findall(r'<p>(.*?)</p>', _v, re.S) if _k == 'body_html' else [_v]
+        for _c in _chunks:
+            for _s in re.split(r'(?<=。)', _c):
+                _s = _s.strip()
+                if _s and not _END_OK.search(re.sub(r'（[^（]*）(?=。?$)', '', re.sub(r'」+(?=。?$)', '', _s))):
+                    _vague.append(f"{_p['sku']} {_k}: {_s}")
+if _vague:
+    print(f'⚠ 言い切っていない文が {len(_vague)} 件あります（直すと良い）:')
+    for _l in _vague[:30]:
+        print('  ', _l)
