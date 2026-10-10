@@ -1351,7 +1351,8 @@
     "url": "https://square.link/u/8JjMcwss",
     "order_id": "rRrhqgIV4OHeLRtEdRhZqei2IREZY",
     "amount": 32780,
-    "created_at": "2026-10-06T02:19:32Z"
+    "created_at": "2026-10-06T02:19:32Z",
+    "closed": "deleted"
    }
   },
   "images": [
