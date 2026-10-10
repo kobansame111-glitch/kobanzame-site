@@ -1,5 +1,5 @@
 /**
- * 66_mercari_csv.gs  v1.0（2026-10-10 作成・未設置）  小判鮫 金曜のメルカリShops用CSVを作る
+ * 66_mercari_csv.gs  v1.0.1（2026-10-10 作成。v1.0.1：KMSの読み方を読むだけの権限で動く形に）  小判鮫 金曜のメルカリShops用CSVを作る
  *
  * 置き場：新規ファイル（既存ファイルは1文字も変えない）。どのApps Scriptプロジェクトに置いても動くよう、
  *         他ファイルの関数は使わない（自己完結）。推奨は「小判鮫_写真受付（21番）」と同じく単独のプロジェクト。
@@ -151,12 +151,19 @@ function mq_fetchProducts_() {
 
 /** INVENTORY → { 品番: {price, stock} }（読むだけ） */
 function mq_loadInventory_() {
-  var sh = SpreadsheetApp.openById(MQ.KMS_ID).getSheetByName(MQ.KMS_SHEET);
-  if (!sh) throw new Error('KMSに ' + MQ.KMS_SHEET + ' タブがありません');
-  var n = sh.getLastRow() - 1;
-  if (n < 1) throw new Error('KMSの ' + MQ.KMS_SHEET + ' が空です（読み取りの異常の可能性）');
+  // SpreadsheetApp.openById は読むだけでも「書ける権限」を要求するため、読むだけの権限で使える Sheets API で読む（v1.0.1 2026-10-10）
+  var range = encodeURIComponent(MQ.KMS_SHEET + '!A2:F');
+  var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + MQ.KMS_ID + '/values/' + range + '?valueRenderOption=UNFORMATTED_VALUE';
+  var r = UrlFetchApp.fetch(url, { headers: { Authorization: 'Bearer ' + ScriptApp.getOAuthToken() }, muteHttpExceptions: true });
+  if (r.getResponseCode() !== 200) throw new Error('KMSの ' + MQ.KMS_SHEET + ' が読めません HTTP ' + r.getResponseCode() + ' ' + r.getContentText().slice(0, 300));
+  var vals = JSON.parse(r.getContentText()).values || [];
+  if (!vals.length) throw new Error('KMSの ' + MQ.KMS_SHEET + ' が空です（読み取りの異常の可能性）');
+  return mq_inventoryMap_(vals);
+}
+
+/** INVENTORY の行（A〜F列）→ { 品番: {price, stock, dup?} }（純粋関数） */
+function mq_inventoryMap_(vals) {
   var map = {};
-  var vals = sh.getRange(2, 1, n, MQ.COL_STOCK).getValues();
   vals.forEach(function (r) {
     var sku = String(r[MQ.COL_SKU - 1] || '').trim().toUpperCase();
     if (!/^K\d{5}$/.test(sku)) return;
