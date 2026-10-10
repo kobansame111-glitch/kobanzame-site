@@ -2749,10 +2749,12 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 16800,
-   "site": 16800
+   "site": 16800,
+   "mercari": 18880
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
   "links": {
+   "mercari": "https://jp.mercari.com/shops/product/2JXj38GyZbq6NgGKb3A8BE",
    "square": "https://square.link/u/yNV1fWwY",
    "square_item": "https://square.link/u/ojW9ez0b",
    "square_qp": {
