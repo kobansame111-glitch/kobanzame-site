@@ -1,0 +1,51 @@
+# 火曜の「明日、公式サイトに新着」告知画像（2026-10-12・デザイン課／19 レイアウト担当）
+# 毎週火曜 21:05（日本時間）ごろ：水曜6時に公開される商品の画像を作り、assets/announce/ と data/announce.json にコミットする。
+# メールはサイト自動化GASの68番が data/announce.json を読んで送る（このワークフローは画像を作るだけ）。
+# data/products.json は変えないので build-site は動かない。
+name: announce
+
+on:
+  schedule:
+    - cron: '5 12 * * 2'     # 火曜 12:05 UTC ＝ 火曜 21:05 JST（20時台の公開OK反映のあと）
+  workflow_dispatch:
+    inputs:
+      announce_date:
+        description: '試験用：公開日（YYYY-MM-DD）。空なら明日'
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-site          # build-site と同時にコミットしない
+  cancel-in-progress: false
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
+          pip install -q pillow==11.0.0
+      - name: Make image
+        env:
+          ANNOUNCE_DATE: ${{ github.event.inputs.announce_date }}
+        run: python3 tools/announce.py
+      - name: Commit (only if something changed)
+        run: |
+          git config user.name "kobanzame-site-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add assets/announce data/announce.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "新着の告知画像（announce）"
+            git pull --rebase origin main
+            git push
+          fi
