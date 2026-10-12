@@ -2913,12 +2913,12 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-12",
   "links": {},
   "images": [
-   "/assets/products/k11265/01.jpg",
+   "/assets/products/k11265/v2_front.jpg",
+   "/assets/products/k11265/06.jpg",
    "/assets/products/k11265/02.jpg",
    "/assets/products/k11265/03.jpg",
    "/assets/products/k11265/04.jpg",
    "/assets/products/k11265/05.jpg",
-   "/assets/products/k11265/06.jpg",
    "/assets/products/k11265/07.jpg",
    "/assets/products/k11265/08.jpg",
    "/assets/products/k11265/09.jpg",
@@ -2926,7 +2926,7 @@
    "/assets/products/k11265/11.jpg",
    "/assets/products/k11265/12.jpg"
   ],
-  "thumb": "/assets/products/k11265/thumb.jpg",
+  "thumb": "/assets/products/k11265/v2_thumb.jpg",
   "summary_text": "1970〜80年代のブラックレザーベスト。ハウンドトゥース柄ライニングとサイドバックルの組み合わせが渋い、使い込まれた一枚です。",
   "summary_points": [
    "ブラック無地のレザーベスト（ライダース系）",
@@ -2977,6 +2977,35 @@
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
    ],
    "approved_at": "2026-10-12"
+  },
+  "images_orig": [
+   "/assets/products/k11265/01.jpg",
+   "/assets/products/k11265/02.jpg",
+   "/assets/products/k11265/03.jpg",
+   "/assets/products/k11265/04.jpg",
+   "/assets/products/k11265/05.jpg",
+   "/assets/products/k11265/06.jpg",
+   "/assets/products/k11265/07.jpg",
+   "/assets/products/k11265/08.jpg",
+   "/assets/products/k11265/09.jpg",
+   "/assets/products/k11265/10.jpg",
+   "/assets/products/k11265/11.jpg",
+   "/assets/products/k11265/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-12",
+   "front_i": 0,
+   "back_i": 5,
+   "front_url": "/assets/products/k11265/v2_front.jpg",
+   "back_error": "RuntimeError('仕上がり確認で不合格：裾が切り取られています。')",
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11265/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 52.0,
+    "着丈": 59.0,
+    "肩幅": 38.0
+   }
   }
  }
 ]
