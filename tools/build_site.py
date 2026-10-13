@@ -6,7 +6,7 @@ v2で変わったこと
 - 見た目：古民家の黒い壁に合わせた「墨・生成り・古金」の3色＋濃淡1色。見出しは明朝、本文は角ゴシック
 - 日本語／English の切り替え（英語ページは /en/ 以下。英語の商品説明は data/products_en.json）
 - 公開の流れ（A案）：products.json の "release" が "draft" の商品は下書き＝ページは作るが検索に出さず一覧にも出さない。
-  水曜朝のGASが "draft" → "live" に書き換えると一覧に並ぶ（"release" が無い商品は従来どおり published で判断）
+  水曜夜（20時台）のGASが "draft" → "live" に書き換えると一覧に並ぶ（"release" が無い商品は従来どおり published で判断）
 - 売れた商品（status=sold）は一覧から消さずSOLDで残す（「売れた一点ものも見る」で表示）
 - サイズで探す（身幅±3cm）／こちらも一点もの（取り置きは2026-10-07に廃止）
 - 価格：ADD_TAX=True で「Square登録価格（税抜）×1.1 を10円単位に切り上げ」を税込として表示（2026-10-06 から True）。
@@ -31,7 +31,7 @@ HOLD_ENABLED = False     # 2026-10-07 龍さん決定：一点物なのでサイ
 # 2026-10-13 龍さん決定（10/8の「毎日営業」を置き換え）：11月1日から 火〜日 13:00–20:00・月曜定休（祝日の月曜は営業）・7〜8月は22:00まで
 NEWHOURS_FROM = '2026-11-01'   # この日以降のビルドで文言が切り替わる
 NEWHOURS = TODAY >= NEWHOURS_FROM
-NOTICE_FROM = '2026-10-26'     # この日以降〜10/31のビルドで「11/1から」のお知らせを出す（龍さんの告知と合わせる）
+NOTICE_FROM = '2026-10-14'     # この日以降〜10/31のビルドで「11/1から」のお知らせを出す（龍さんの告知と合わせる）
 NOTICE = (not NEWHOURS) and TODAY >= NOTICE_FROM
 # 祝日の月曜（営業する日）。本日営業/定休バッジと案内文で使う。毎年1月に翌年分を足す
 HOLIDAY_MONDAYS = ['2026-11-23', '2027-01-11', '2027-03-22', '2027-05-03', '2027-07-19', '2027-09-20', '2027-10-11', '2027-11-22']
@@ -87,7 +87,7 @@ T = {
   'howto': '実寸は平置きで測っています。身幅＝脇の下から脇の下、着丈＝襟のつけ根から裾まで。お手持ちの服を同じように測って比べると、サイズの失敗が減ります。',
   'delivery_p': '送料込み。決済確認後3日以内（月・火定休を除く）に、川越の店舗から発送します。古着・一点ものの性質上、お客様都合の返品はお受けしていません。商品説明と著しく異なる場合や発送間違いの場合は、到着後4日以内にメールでご連絡ください。',
   'byline': '文：小判鮫オーナー・専属バイヤー 龍',
-  'related': 'こちらも一点もの', 'draft': '下書き（まだ公開していません）｜毎週水曜の朝に公開されます',
+  'related': 'こちらも一点もの', 'draft': '下書き（まだ公開していません）｜毎週水曜の夜（20時台）に公開されます',
   'journal_h': 'Journal', 'journal_s': '一点ものの、成り立ちの記録',
   'legal': [('/tokushoho/', '特定商取引法に基づく表記'), ('/privacy/', 'プライバシーポリシー')],
   'gm': 'Googleマップ', 'rank_new': '新品・未使用', 'rank_vin': 'ヴィンテージ（経年あり）', 'rank': '状態 {r}',
@@ -851,7 +851,22 @@ def write(path, text):
     os.makedirs(os.path.dirname(full), exist_ok=True)
     open(full, 'w', encoding='utf-8').write(text)
 
-write('/assets/site.css', CSS.strip() + '\n')
+# 2026-10-14 使いやすさの直し（龍さん決定A：デジタル庁デザインシステムの考え方＝押せる広さ44px以上・小さすぎる文字を使わない。見た目は変えない）
+A11Y_CSS = """
+.menubtn{min-width:44px;min-height:44px;justify-content:center;margin-inline:-8px}
+.lang a{min-height:44px;display:inline-flex;align-items:center}
+#drawerx,button.ball{min-height:44px}
+#myw{min-height:44px}
+footer.site a{display:inline-flex;align-items:center;min-height:44px}
+.finder button.clear{min-height:44px;padding-inline:8px}
+label.chk{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}
+label.chk input{width:20px;height:20px}
+.util{font-size:13px}
+footer.site{font-size:13px}
+.drawer h3,.days .today,.tag,.card .pr small,.catrow button small{font-size:12px}
+@media(max-width:639px){.tile .tt i{font-size:12px;padding:8px 14px}}
+"""
+write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n')
 
 # ---------- 一覧 ----------
 live = [p for p in products if release(p) == 'live']
@@ -1274,7 +1289,7 @@ GUIDE = {
    ('場所と営業時間', f'住所は{ADDR["ja"]}。蔵造りの町並みと同じ、川越の元町エリアにあります。' + ('営業は13:00〜20:00（7〜8月は22:00まで）、定休日は毎週月曜日です（祝日の月曜は営業）' if NEWHOURS else '営業は12:00〜20:00、定休日は毎週月曜日・火曜日です' + ('（2026年11月1日からは火曜〜日曜の13:00〜20:00・月曜定休）' if NOTICE else '')) + f'。臨時の休みや営業時間の変更はInstagram（{SHOP["ig_handle"]}）でお知らせします。'),
    ('どんな古着があるか', 'アメリカ・ヨーロッパなどのヴィンテージ古着を中心に、メンズ・レディースの両方を扱っています。アウター、シャツやTシャツ、ワンピース、靴、小物まで。ブランドや流行ではなく、素材・質感・その一点にしかない雰囲気で選んでいるので、すべて一点ものです。'),
    ('価格の目安', (f'このサイトに掲載中の一点ものは、{money(_pr[0], "ja")}〜{money(_pr[-1], "ja")}（税込・送料込み）です。店頭の価格は商品ごとに異なります。' if _pr else '価格は商品ごとに異なります。サイトに掲載中の商品ページでご確認ください。')),
-   ('新着入荷', '毎週水曜日に新しい一点ものが入ります。このサイトにも水曜日の朝に新着を掲載しています。'),
+   ('新着入荷', '毎週水曜日に新しい一点ものが入ります。このサイトにも水曜日の夜（20時台）に新着を掲載しています。'),
    ('GAW（オリジナルのリメイクアクセサリー）', '古いスプーンなどの素材を、ペンダントやバングルなどに作り直した、小判鮫オリジナルのアクセサリーです。こちらも一点ものです。'),
    ('取り置きについて', 'すべて一点ものなので、サイト・店頭ともお取り置きはしていません。先着順です。気になる一点は、お早めにご来店いただくか、このサイトからご購入ください。'),
    ('遠くて行けないとき', 'このサイトに載っている商品は、クレジットカード（Square決済）でそのまま購入できます。送料込みで、決済確認後3日以内（' + '定休日' + 'を除く）に川越の店舗から発送します。メルカリShopsでも販売しています。'),

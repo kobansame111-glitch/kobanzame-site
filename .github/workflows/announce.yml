@@ -1,5 +1,5 @@
 # 火曜の「明日、公式サイトに新着」告知画像（2026-10-12・デザイン課／19 レイアウト担当）
-# 毎週火曜 21:05（日本時間）ごろ：水曜6時に公開される商品の画像を作り、assets/announce/ と data/announce.json にコミットする。
+# 毎週火曜 21:05（日本時間）ごろ：水曜夜（20時台）に公開される商品の画像を作り、assets/announce/ と data/announce.json にコミットする。
 # メールはサイト自動化GASの68番が data/announce.json を読んで送る（このワークフローは画像を作るだけ）。
 # data/products.json は変えないので build-site は動かない。
 name: announce

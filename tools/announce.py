@@ -1,10 +1,10 @@
 """火曜の「明日、公式サイトに新着」告知画像（2026-10-12 v1.0・デザイン課／19 レイアウト担当）
 
-決定（龍さん 2026-10-12）：毎週火曜に、水曜6時に公開される商品の告知画像を作り、メールで送る（①A）。デザインは見本のまま（②A）。
+決定（龍さん 2026-10-12）：毎週火曜に、水曜夜（20時台）に公開される商品の告知画像を作り、メールで送る（①A）。デザインは見本のまま（②A）。
 規定：Project「嶋崎龍3」 claude/claude_デザイン課_レイアウト規定_v1_2026-10-12.md の「型1」
 
 いつ動くか：GitHub Actions announce（毎週火曜 21:05 JST ごろ。手動でも可）
-対象：data/products.json で published が true・release が "draft"・status が "available"（＝水曜6時に61番が公開する予定）
+対象：data/products.json で published が true・release が "draft"・status が "available"（＝水曜夜（20時台）に61番が公開する予定）
 作るもの：assets/announce/<公開日>.jpg と assets/announce/latest.jpg、data/announce.json（日付・点数・品番・画像の場所）
        対象が0点なら画像は作らず、data/announce.json に count:0 だけ書く（メール側が「今週の新着はありません」と送る）
 使わないもの：AIのマネキン画像（実物の写真だけ）。在庫0・SOLD の商品
@@ -114,7 +114,7 @@ def main():
     pub = (now + datetime.timedelta(days=1)).date()        # 火曜に動いて「明日（水曜）」の告知を作る
     if os.environ.get('ANNOUNCE_DATE'):                    # 試験用：公開日を指定
         pub = datetime.date.fromisoformat(os.environ['ANNOUNCE_DATE'])
-    label = f'{pub.month}/{pub.day}（{WEEK[pub.weekday()]}）6:00 公開'
+    label = f'{pub.month}/{pub.day}（{WEEK[pub.weekday()]}）20時台 公開'
     products = json.load(open(DATA, encoding='utf-8'))
     items, skipped = [], []
     for p in targets(products):
