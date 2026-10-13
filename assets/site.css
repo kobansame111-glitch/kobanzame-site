@@ -313,3 +313,15 @@ header.site{transition:box-shadow .3s ease}
 header.site.sc{box-shadow:0 6px 20px -14px rgba(18,10,7,.35)}
 .btn,.ball{transition:background .25s ease,color .25s ease}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+.menubtn{min-width:44px;min-height:44px;justify-content:center;margin-inline:-8px}
+.lang a{min-height:44px;display:inline-flex;align-items:center}
+#drawerx,button.ball{min-height:44px}
+#myw{min-height:44px}
+footer.site a{display:inline-flex;align-items:center;min-height:44px}
+.finder button.clear{min-height:44px;padding-inline:8px}
+label.chk{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}
+label.chk input{width:20px;height:20px}
+.util{font-size:13px}
+footer.site{font-size:13px}
+.drawer h3,.days .today,.tag,.card .pr small,.catrow button small{font-size:12px}
+@media(max-width:639px){.tile .tt i{font-size:12px;padding:8px 14px}}
