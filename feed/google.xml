@@ -819,5 +819,32 @@
       <g:color>シルバー</g:color>
       <g:shipping><g:country>JP</g:country><g:price>0 JPY</g:price></g:shipping>
     </item>
+    <item>
+      <g:id>K11265</g:id>
+      <title>Leather Utility Vest</title>
+      <description>1970〜80年代のブラックレザーベスト。ハウンドトゥース柄ライニングとサイドバックルの組み合わせが渋い、使い込まれた一枚です。</description>
+      <link>https://kobanzame-site.pages.dev/journal/k11265/</link>
+      <g:image_link>https://kobanzame-site.pages.dev/assets/products/k11265/v2_front.jpg</g:image_link>
+      <g:additional_image_link>https://kobanzame-site.pages.dev/assets/products/k11265/06.jpg</g:additional_image_link>
+      <g:additional_image_link>https://kobanzame-site.pages.dev/assets/products/k11265/02.jpg</g:additional_image_link>
+      <g:additional_image_link>https://kobanzame-site.pages.dev/assets/products/k11265/03.jpg</g:additional_image_link>
+      <g:additional_image_link>https://kobanzame-site.pages.dev/assets/products/k11265/04.jpg</g:additional_image_link>
+      <g:additional_image_link>https://kobanzame-site.pages.dev/assets/products/k11265/05.jpg</g:additional_image_link>
+      <g:additional_image_link>https://kobanzame-site.pages.dev/assets/products/k11265/07.jpg</g:additional_image_link>
+      <g:additional_image_link>https://kobanzame-site.pages.dev/assets/products/k11265/08.jpg</g:additional_image_link>
+      <g:additional_image_link>https://kobanzame-site.pages.dev/assets/products/k11265/09.jpg</g:additional_image_link>
+      <g:additional_image_link>https://kobanzame-site.pages.dev/assets/products/k11265/10.jpg</g:additional_image_link>
+      <g:additional_image_link>https://kobanzame-site.pages.dev/assets/products/k11265/11.jpg</g:additional_image_link>
+      <g:availability>in_stock</g:availability>
+      <g:price>25080 JPY</g:price>
+      <g:condition>used</g:condition>
+      <g:identifier_exists>no</g:identifier_exists>
+      <g:product_type>レザーベスト（ライダース系）</g:product_type>
+      <g:gender>unisex</g:gender>
+      <g:age_group>adult</g:age_group>
+      <g:color>ブラック無地</g:color>
+      <g:size>身幅52cm</g:size>
+      <g:shipping><g:country>JP</g:country><g:price>0 JPY</g:price></g:shipping>
+    </item>
   </channel>
 </rss>
