@@ -3041,7 +3041,7 @@
   "links": {},
   "images": [
    "/assets/products/k10614/01.jpg",
-   "/assets/products/k10614/02.jpg",
+   "/assets/products/k10614/v2_back.jpg",
    "/assets/products/k10614/03.jpg",
    "/assets/products/k10614/04.jpg",
    "/assets/products/k10614/05.jpg",
@@ -3102,7 +3102,34 @@
    ],
    "approved_at": "2026-10-14"
   },
-  "gender_by": "龍さん確認 2026-10-14（洗濯タグ「14 M」）"
+  "gender_by": "龍さん確認 2026-10-14（洗濯タグ「14 M」）",
+  "images_orig": [
+   "/assets/products/k10614/01.jpg",
+   "/assets/products/k10614/02.jpg",
+   "/assets/products/k10614/03.jpg",
+   "/assets/products/k10614/04.jpg",
+   "/assets/products/k10614/05.jpg",
+   "/assets/products/k10614/06.jpg",
+   "/assets/products/k10614/07.jpg",
+   "/assets/products/k10614/08.jpg",
+   "/assets/products/k10614/09.jpg",
+   "/assets/products/k10614/10.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-14",
+   "front_i": 0,
+   "back_i": 1,
+   "front_error": "RuntimeError('仕上がり確認で不合格：裾が切り取られています。')",
+   "back_url": "/assets/products/k10614/v2_back.jpg",
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k10614/v2_mannequin.jpg",
+   "mannequin_body": "身長165cm・バスト83cm",
+   "measures": {
+    "ウエスト": 74.0,
+    "股下": 78.5,
+    "裾幅": 19.5
+   }
+  }
  },
  {
   "sku": "K10917",
@@ -3124,8 +3151,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-14",
   "links": {},
   "images": [
-   "/assets/products/k10917/01.jpg",
-   "/assets/products/k10917/02.jpg",
+   "/assets/products/k10917/v2_front.jpg",
+   "/assets/products/k10917/v2_back.jpg",
    "/assets/products/k10917/03.jpg",
    "/assets/products/k10917/04.jpg",
    "/assets/products/k10917/05.jpg",
@@ -3137,7 +3164,7 @@
    "/assets/products/k10917/11.jpg",
    "/assets/products/k10917/12.jpg"
   ],
-  "thumb": "/assets/products/k10917/thumb.jpg",
+  "thumb": "/assets/products/k10917/v2_thumb.jpg",
   "summary_text": "1971年の契約番号が入った、米軍ヘリコプター搭乗員用のフライトトラウザーズです。オリーブの耐熱ナイロンに、脚まわりのジップポケットが並びます。",
   "summary_points": [
    "オリーブグリーン 106（無地）のU.S.アーミー ヘリコプタークルー用 フライトトラウザーズ（航空兵用耐熱パンツ）（ブランド：WYNN INDUSTRIES, INC. / 契約番号：DSA100-71-C-1467 / ジッパー：GENERAL（YKK系軍用））",
@@ -3189,7 +3216,36 @@
    ],
    "approved_at": "2026-10-14"
   },
-  "gender_by": "表記にメンズ"
+  "gender_by": "表記にメンズ",
+  "images_orig": [
+   "/assets/products/k10917/01.jpg",
+   "/assets/products/k10917/02.jpg",
+   "/assets/products/k10917/03.jpg",
+   "/assets/products/k10917/04.jpg",
+   "/assets/products/k10917/05.jpg",
+   "/assets/products/k10917/06.jpg",
+   "/assets/products/k10917/07.jpg",
+   "/assets/products/k10917/08.jpg",
+   "/assets/products/k10917/09.jpg",
+   "/assets/products/k10917/10.jpg",
+   "/assets/products/k10917/11.jpg",
+   "/assets/products/k10917/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-14",
+   "front_i": 0,
+   "back_i": 1,
+   "front_url": "/assets/products/k10917/v2_front.jpg",
+   "back_url": "/assets/products/k10917/v2_back.jpg",
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k10917/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "ウエスト": 66.0,
+    "股下": 64.0,
+    "裾幅": 23.5
+   }
+  }
  },
  {
   "sku": "K10153",
@@ -3211,20 +3267,20 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-14",
   "links": {},
   "images": [
-   "/assets/products/k10153/01.jpg",
+   "/assets/products/k10153/v2_front.jpg",
+   "/assets/products/k10153/v2_back.jpg",
    "/assets/products/k10153/02.jpg",
    "/assets/products/k10153/03.jpg",
    "/assets/products/k10153/04.jpg",
    "/assets/products/k10153/05.jpg",
    "/assets/products/k10153/06.jpg",
    "/assets/products/k10153/07.jpg",
-   "/assets/products/k10153/08.jpg",
    "/assets/products/k10153/09.jpg",
    "/assets/products/k10153/10.jpg",
    "/assets/products/k10153/11.jpg",
    "/assets/products/k10153/12.jpg"
   ],
-  "thumb": "/assets/products/k10153/thumb.jpg",
+  "thumb": "/assets/products/k10153/v2_thumb.jpg",
   "summary_text": "1996年のクレジットが入った、Joe's CrabshackのKILLER SEAFOOD Tシャツです。背中いっぱいのサメのプリントが主役の一枚です。",
   "summary_points": [
    "ホワイト地／バックプリント：シャーク＋「KILLER SEAFOOD」グラフィック、フロント左胸：Joe's Crabshackロゴの半袖Tシャツ（ブランド：HANES HEAVY（首タグ）／© 1996 Digital Screen, Inc. / Landry's Corp.（バックプリント内クレジット））",
@@ -3271,6 +3327,36 @@
    ],
    "approved_at": "2026-10-14"
   },
-  "gender_by": "実寸が大きめ（肩幅53・身幅57）"
+  "gender_by": "実寸が大きめ（肩幅53・身幅57）",
+  "images_orig": [
+   "/assets/products/k10153/01.jpg",
+   "/assets/products/k10153/02.jpg",
+   "/assets/products/k10153/03.jpg",
+   "/assets/products/k10153/04.jpg",
+   "/assets/products/k10153/05.jpg",
+   "/assets/products/k10153/06.jpg",
+   "/assets/products/k10153/07.jpg",
+   "/assets/products/k10153/08.jpg",
+   "/assets/products/k10153/09.jpg",
+   "/assets/products/k10153/10.jpg",
+   "/assets/products/k10153/11.jpg",
+   "/assets/products/k10153/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-14",
+   "front_i": 0,
+   "back_i": 7,
+   "front_url": "/assets/products/k10153/v2_front.jpg",
+   "back_url": "/assets/products/k10153/v2_back.jpg",
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k10153/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 57.0,
+    "着丈": 73.0,
+    "肩幅": 53.0,
+    "袖丈": 20.0
+   }
+  }
  }
 ]
