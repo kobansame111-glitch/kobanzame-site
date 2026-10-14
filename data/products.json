@@ -3023,7 +3023,7 @@
  {
   "sku": "K10614",
   "slug": "k10614-riveted-by-lee",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1990年代前後のストレートジーンズ",
@@ -3099,14 +3099,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-14"
   },
   "gender_by": "龍さん確認 2026-10-14（洗濯タグ「14 M」）"
  },
  {
   "sku": "K10917",
   "slug": "k10917-wynn-industries-inc-dsa100-71-c-1467-general-ykk",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1971年のヘリクルー フライトトラウザーズ",
@@ -3185,14 +3186,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-14"
   },
   "gender_by": "表記にメンズ"
  },
  {
   "sku": "K10153",
   "slug": "k10153-hanes-heavy-1996-digital-screen-inc-landry-s-corp",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1996年 Joe's Crabshack KILLER SEAFOOD Tシャツ",
@@ -3266,7 +3268,8 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-14"
   },
   "gender_by": "実寸が大きめ（肩幅53・身幅57）"
  }
