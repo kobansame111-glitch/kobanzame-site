@@ -3038,7 +3038,16 @@
    "mercari": 11880
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-14",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "N5T6HMAWGBOMS3YG",
+    "url": "https://square.link/u/NFnYpRYO",
+    "order_id": "3jPEGHlvtLW7gGuFL5qWjOjyA6UZY",
+    "amount": 11880,
+    "created_at": "2026-10-14T11:34:17Z"
+   },
+   "square": "https://square.link/u/NFnYpRYO"
+  },
   "images": [
    "/assets/products/k10614/01.jpg",
    "/assets/products/k10614/v2_back.jpg",
@@ -3125,7 +3134,7 @@
    "mannequin_url": "/assets/products/k10614/v2_mannequin.jpg",
    "mannequin_body": "身長165cm・バスト83cm",
    "measures": {
-    "ウエスト": 74.0,
+    "ウエスト": 74,
     "股下": 78.5,
     "裾幅": 19.5
    }
@@ -3149,7 +3158,16 @@
    "mercari": 9680
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-14",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "CUWCIFEIBP3KPVL2",
+    "url": "https://square.link/u/r3ebDNeE",
+    "order_id": "dWBfv5PI0tWWy3GHRHvVaSfK5EEZY",
+    "amount": 9680,
+    "created_at": "2026-10-14T11:34:17Z"
+   },
+   "square": "https://square.link/u/r3ebDNeE"
+  },
   "images": [
    "/assets/products/k10917/v2_front.jpg",
    "/assets/products/k10917/v2_back.jpg",
@@ -3241,8 +3259,8 @@
    "mannequin_url": "/assets/products/k10917/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
-    "ウエスト": 66.0,
-    "股下": 64.0,
+    "ウエスト": 66,
+    "股下": 64,
     "裾幅": 23.5
    }
   }
@@ -3265,7 +3283,16 @@
    "mercari": 7480
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-14",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "5ENX5VRF5FXYWMOX",
+    "url": "https://square.link/u/aJ5U80qM",
+    "order_id": "hwPItgSkkomAmi6G8FCb37kzI8GZY",
+    "amount": 7480,
+    "created_at": "2026-10-14T11:34:18Z"
+   },
+   "square": "https://square.link/u/aJ5U80qM"
+  },
   "images": [
    "/assets/products/k10153/v2_front.jpg",
    "/assets/products/k10153/v2_back.jpg",
@@ -3352,10 +3379,10 @@
    "mannequin_url": "/assets/products/k10153/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
-    "身幅": 57.0,
-    "着丈": 73.0,
-    "肩幅": 53.0,
-    "袖丈": 20.0
+    "身幅": 57,
+    "着丈": 73,
+    "肩幅": 53,
+    "袖丈": 20
    }
   }
  }
