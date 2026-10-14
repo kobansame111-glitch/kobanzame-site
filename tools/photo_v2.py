@@ -45,7 +45,7 @@ MONTH_CAP_YEN = 1000.0                # この処理の1か月の上限（Google
 
 BG = (243, 241, 236)                  # サイト共通の背景色（オフホワイト）
 CANVAS = (1200, 1500)                 # 4:5
-FIT_H, FIT_W = 0.80, 0.78             # 本物の写真：服が占める高さ・幅の上限
+FIT_H, FIT_W = 0.64, 0.62             # 本物の写真：服が占める高さ・幅の上限（2026-10-14 龍さん決定A：寄りすぎなので 0.80/0.78 から下げて余白を広く）
 MANNEQUIN_H = 0.86                    # マネキン：頭から足までをキャンバスの高さの86%に固定（＝商品どうしで縮尺が揃う）
 FONT = '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'
 
@@ -386,7 +386,12 @@ def mannequin_image(p, front, b, m, budget):
               'Show the whole mannequin from head to feet. Keep the garment identical: same color, pattern, print, logos, tags, '
               'buttons (same number), stitching, fabric texture, fading, wear and proportions. Do not add, remove or redesign '
               'anything on it. Do not add other clothes except plain white simple trousers if the item is a top, no accessories, '
-              'no people, no text. Plain flat off-white background (#F3F1EC), soft even studio light. ' + fit_text(p, b, m))
+              'no people, no text. Plain flat off-white background (#F3F1EC), soft even studio light. '
+              # 2026-10-14 追加：K11265 で汚れが消え・値札が描かれ・脚が短くなったため
+              'Keep every stain, paint mark, scratch, crack and other damage exactly where it is on the original; never clean or repair it. '
+              'Do not draw price tags, paper tags, labels hanging from the garment, or hangers. '
+              'The mannequin must have realistic adult proportions: legs are about half of the total height, crotch at about 47% of the height from the floor. '
+              + fit_text(p, b, m))
     res, y = gemini_logged(budget, p['sku'], 'マネキン画像', IMAGE_MODEL, [img_part(front), {'text': prompt}],
                            {'responseModalities': ['IMAGE', 'TEXT']}, images=1)
     if y > STOP_PER_IMAGE_YEN:
@@ -514,9 +519,44 @@ def process(p, budget):
     p['photo_v2'] = v
 
 
+def is_mannequin_retry(p):
+    """photo_v2.mannequin が "retry" の商品は、マネキン画像だけを1回作り直す（2026-10-14 追加・人がNGにした時用）"""
+    v = p.get('photo_v2') or {}
+    return (p.get('status') == 'available' and v.get('mannequin') == 'retry' and v.get('mannequin_retries', 0) < 1
+            and p.get('genre') in CLOTHES and bool(p.get('images_orig') or p.get('images')))
+
+
 def targets(products):
     only = [x.strip() for x in os.environ.get('PHOTO_V2_ONLY', '').split(',') if x.strip()]   # 試験用：品番を絞る
-    return [p for p in products if is_target(p) and (not only or p['sku'] in only)]
+    return [p for p in products if (is_target(p) or is_mannequin_retry(p)) and (not only or p['sku'] in only)]
+
+
+def remake_mannequin(p, budget):
+    """マネキン画像だけ作り直す。背景をそろえた写真・並びは変えない。結果は確認待ち（pending）に戻す"""
+    v = p['photo_v2']
+    v['mannequin_retries'] = v.get('mannequin_retries', 0) + 1
+    if not budget.can_spend(STOP_PER_IMAGE_YEN):
+        Budget.stop(f'この月の写真v2のAI代が上限 {MONTH_CAP_YEN:.0f}円 に届きました（使用 {budget.spent:.0f}円）')
+        return
+    src = p.get('images_orig') or p['images']
+    fi = v.get('front_i', 0)
+    front = load_image(src[fi] if 0 <= fi < len(src) else src[0])
+    b, m = body_for(p), parse_measures(p)
+    rel = f'/assets/products/{p["sku"].lower()}'
+    od = os.path.join(ROOT, rel.lstrip('/'))
+    try:
+        raw = mannequin_image(p, front, b, m, budget)
+        from PIL import Image
+        rgba = raw.convert('RGBA'); rgba.putalpha(Image.fromarray((edge_alpha(raw) * 255).astype('uint8')))
+        caption(place(rgba, MANNEQUIN_H, 0.9, shadow=False),
+                f'{b["label"]}のマネキン着用イメージ（AI作成／サイズ感は実寸からの推定）').save(
+            os.path.join(od, 'v2_mannequin.jpg'), quality=88, optimize=True)
+        v.update({'mannequin': 'pending', 'mannequin_url': f'{rel}/v2_mannequin.jpg', 'mannequin_body': b['label'], 'measures': m,
+                  'mannequin_date': now_jst().strftime('%Y-%m-%d')})
+        log(f'{p["sku"]}: マネキン画像を作り直しました（確認待ち）')
+    except Exception as e:
+        v['mannequin'] = 'error'
+        log(f'{p["sku"]}: マネキン画像の作り直し 失敗：{e!r}')
 
 
 def save_products(products):
@@ -560,7 +600,10 @@ def _main():
                 break
             before = json.dumps(p, ensure_ascii=False, sort_keys=True)
             try:
-                process(p, budget)
+                if is_mannequin_retry(p):
+                    remake_mannequin(p, budget)
+                else:
+                    process(p, budget)
                 changed += 1
                 save_products(products)   # 1商品ごとに保存
             except Exception as e:
