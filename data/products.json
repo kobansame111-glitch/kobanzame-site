@@ -3188,5 +3188,86 @@
    ]
   },
   "gender_by": "表記にメンズ"
+ },
+ {
+  "sku": "K10153",
+  "slug": "k10153-hanes-heavy-1996-digital-screen-inc-landry-s-corp",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "1996年 Joe's Crabshack KILLER SEAFOOD Tシャツ",
+  "product_name": "1996年 Joe's Crabshack KILLER SEAFOOD Tシャツ",
+  "brand": "HANES HEAVY（首タグ）／© 1996 Digital Screen, Inc. / Landry's Corp.（バックプリント内クレジット）",
+  "category": "メンズ／トップス／Tシャツ",
+  "material": "",
+  "published_date": "2026-10-14",
+  "prices": {
+   "store": 6800,
+   "site": 6800,
+   "mercari": 7480
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-14",
+  "links": {},
+  "images": [
+   "/assets/products/k10153/01.jpg",
+   "/assets/products/k10153/02.jpg",
+   "/assets/products/k10153/03.jpg",
+   "/assets/products/k10153/04.jpg",
+   "/assets/products/k10153/05.jpg",
+   "/assets/products/k10153/06.jpg",
+   "/assets/products/k10153/07.jpg",
+   "/assets/products/k10153/08.jpg",
+   "/assets/products/k10153/09.jpg",
+   "/assets/products/k10153/10.jpg",
+   "/assets/products/k10153/11.jpg",
+   "/assets/products/k10153/12.jpg"
+  ],
+  "thumb": "/assets/products/k10153/thumb.jpg",
+  "summary_text": "1996年のクレジットが入った、Joe's CrabshackのKILLER SEAFOOD Tシャツです。背中いっぱいのサメのプリントが主役の一枚です。",
+  "summary_points": [
+   "ホワイト地／バックプリント：シャーク＋「KILLER SEAFOOD」グラフィック、フロント左胸：Joe's Crabshackロゴの半袖Tシャツ（ブランド：HANES HEAVY（首タグ）／© 1996 Digital Screen, Inc. / Landry's Corp.（バックプリント内クレジット））",
+   "実寸 身幅57cm・着丈73cm・肩幅53cm・袖丈20cm"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。アメリカのシーフードレストラン、Joe's Crabshackのために作られたTシャツです。",
+  "body_html": "<h2>この一着のこと</h2><p>前世。</p><p>アメリカのシーフードレストラン、Joe's Crabshackのために作られたTシャツです。首のタグはHANES HEAVY。背中のプリントの中に「© 1996」の表記があります。胸には小さなCATCH'EM Joe'sのロゴ、背中にはサメと「KILLER SEAFOOD」「Never go Eating alone!」の文字が入っています。首まわりのステッチのほつれ、裾の小さな穴、前身頃の裾近くの小さな汚れがあります。</p><p>転生。</p><p>タイでの買い付けで、仲良くしているディーラーの家に遊びに行ったときに見つけた一枚です。白地に、プリントの赤と黄色がよく残っています。</p><p>灯。</p><p>身幅57cm、着丈73cmのゆったりしたサイズです。デニムやチノに一枚で着るだけで、背中のプリントがそのまま主役になります。古民家の縁側にも、川越の街歩きにも似合う一枚です。</p><h2>状態</h2><p>状態：首元ステッチほつれ・裾部分に小穴あり・フロント裾付近に複数の小汚れ・全体的に使用感あり。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "HANES HEAVY（首タグ）／© 1996 Digital Screen, Inc. / Landry's Corp.（バックプリント内クレジット）"
+   ],
+   [
+    "色",
+    "ホワイト地／バックプリント：シャーク＋「KILLER SEAFOOD」グラフィック、フロント左胸：Joe's Crabshackロゴ"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅57cm・着丈73cm・肩幅53cm・袖丈20cm"
+   ],
+   [
+    "年代・生産",
+    "1996年（バックプリントの著作権表記より）"
+   ],
+   [
+    "状態",
+    "首元ステッチほつれ・裾部分に小穴あり・フロント裾付近に複数の小汚れ・全体的に使用感あり"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "tops",
+  "genre_by": "auto-keyword-2026-10-14",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.3",
+   "made_at": "2026-10-14",
+   "needs": [
+    "性別は自動判定：メンズ（実寸が大きめ（肩幅53・身幅57））→ 違えばClaudeへ",
+    "素材が確定していない（推定のまま or 不明）→ 仕様表に載せていない",
+    "見出し（title）は物語の一言から自動で作った → 気に入らなければClaudeへ",
+    "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "実寸が大きめ（肩幅53・身幅57）"
  }
 ]
