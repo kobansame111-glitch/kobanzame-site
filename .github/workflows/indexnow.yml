@@ -1,0 +1,55 @@
+# IndexNow でサイトの更新を検索エンジン（Bing・Yandex など）に知らせる（2026-10-15）
+# ChatGPT などのAI検索は Bing の検索結果を使うことが多いので、Bing に早く載るようにするための仕組み。無料・ログイン不要。
+# 動くとき：サイトの自動再生成（build-site）が終わったあと／手で実行したとき。
+# Cloudflare Pages への反映を待つため3分待ってから、サイトマップに載っている全ページを1回で知らせる。
+# 鍵は tools/build_site.py の INDEXNOW_KEY。鍵ファイル /<鍵>.txt がサイトに無いときは知らせない（失敗を記録して終わる）。
+name: indexnow
+
+on:
+  workflow_run:
+    workflows: [build-site]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Wait for Cloudflare Pages
+        run: sleep 180
+      - name: Send IndexNow
+        run: |
+          python3 - <<'PY'
+          import json, re, sys, urllib.request
+          src = open('tools/build_site.py', encoding='utf-8').read()
+          key = re.search(r"^INDEXNOW_KEY = '([0-9a-f]{32})'", src, re.M).group(1)
+          base = re.search(r"^BASE = '([^']+)'", src, re.M).group(1).rstrip('/')
+          host = base.split('://', 1)[1]
+          # 鍵ファイルが公開されているか確認（無ければ送らない）
+          try:
+              got = urllib.request.urlopen(f'{base}/{key}.txt', timeout=30).read().decode().strip()
+          except Exception as e:
+              print('鍵ファイルを読めませんでした:', e); sys.exit(1)
+          if got != key:
+              print('鍵ファイルの中身が違います'); sys.exit(1)
+          sm = urllib.request.urlopen(f'{base}/sitemap.xml', timeout=30).read().decode()
+          urls = re.findall(r'<loc>([^<]+)</loc>', sm)
+          body = json.dumps({'host': host, 'key': key, 'keyLocation': f'{base}/{key}.txt', 'urlList': urls}).encode()
+          req = urllib.request.Request('https://api.indexnow.org/indexnow', data=body,
+                                       headers={'Content-Type': 'application/json; charset=utf-8'})
+          try:
+              r = urllib.request.urlopen(req, timeout=30)
+              print('IndexNow:', r.status, len(urls), 'URLs')
+          except urllib.error.HTTPError as e:
+              # 200/202 以外は失敗として記録する（握り潰さない）
+              print('IndexNow 失敗:', e.code, e.read().decode()[:500]); sys.exit(1)
+          PY
