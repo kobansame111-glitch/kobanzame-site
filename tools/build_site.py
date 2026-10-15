@@ -47,7 +47,12 @@ SHOP = {
     'ig_handle': '@remora__used372',
     'mercari': 'https://jp.mercari.com/shops/profile/mCEGcCeE7gengRWWZYg9zV',
     'gmaps': 'https://www.google.com/maps/search/%E5%8F%A4%E7%9D%80%E5%B1%8B+%E5%B0%8F%E5%88%A4%E9%AE%AB+%E5%B7%9D%E8%B6%8A',
+    # 2026-10-15 GoogleマップのGBP（古着屋 小判鮫）を直接指すURL。AIが「サイトの店＝マップの店」と結び付けられるよう構造化データに入れる
+    'gplace': 'https://www.google.com/maps?cid=18204266440623225705',
 }
+# 2026-10-15 IndexNow（Bing・Yandexなどに「ページが更新された」と直接知らせる仕組み・無料）の鍵。
+# 鍵ファイル /<鍵>.txt をサイトに置き、.github/workflows/indexnow.yml が更新のたびに知らせる。秘密情報ではない（公開して使うもの）
+INDEXNOW_KEY = 'b3c3d1957f5e906d6ace2608040a7e04'
 ADDR = {'ja': '〒350-0062 埼玉県川越市元町1-14-5', 'en': '1-14-5 Motomachi, Kawagoe, Saitama 350-0062, Japan'}
 
 products = json.load(open(os.path.join(ROOT, 'data/products.json'), encoding='utf-8'))
@@ -346,13 +351,13 @@ def org_node():
         'address': {'@type': 'PostalAddress', 'postalCode': SHOP['postal'], 'addressRegion': '埼玉県',
                     'addressLocality': '川越市', 'streetAddress': '元町1-14-5', 'addressCountry': 'JP'},
         'openingHours': ('Tu-Su 13:00-20:00' if NEWHOURS else 'We-Su 12:00-20:00'), 'currenciesAccepted': 'JPY', 'paymentAccepted': 'クレジットカード',
-        'hasMap': SHOP['gmaps'],
+        'hasMap': SHOP['gplace'],
         'geo': {'@type': 'GeoCoordinates', 'latitude': 35.9253165, 'longitude': 139.4832435},   # Googleマップの店舗ページの座標（2026-10-06）
         'openingHoursSpecification': [{'@type': 'OpeningHoursSpecification',
                                        'dayOfWeek': (['Tuesday'] if NEWHOURS else []) + ['Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
                                        'opens': ('13:00' if NEWHOURS else '12:00'), 'closes': '20:00'}],
         'parentOrganization': {'@type': 'Organization', 'name': SHOP['company']},
-        'sameAs': [SHOP['instagram'], SHOP['mercari']],
+        'sameAs': [SHOP['instagram'], SHOP['mercari'], SHOP['gplace']],
     }
 
 # ---------- 見た目 ----------
@@ -1377,6 +1382,7 @@ Allow: /
 
 Sitemap: {BASE}/sitemap.xml
 ''')
+write(f'/{INDEXNOW_KEY}.txt', INDEXNOW_KEY)
 write('/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
       ''.join(f'  <url><loc>{BASE}{u}</loc><lastmod>{TODAY}</lastmod></url>\n' for u in pages) + '</urlset>\n')
 items = '\n'.join(f"- [{p['title']}]({BASE}/journal/{p['slug']}/): {p['product_name']}。{money(site_price(p), 'ja')}（税込・送料込み）。{'販売終了' if is_sold(p) else '在庫1点'}"
