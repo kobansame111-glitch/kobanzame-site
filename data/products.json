@@ -270,7 +270,8 @@
     "url": "https://square.link/u/Ukb3GF9U",
     "order_id": "BGAzPYnDTmtj3CAF0I3mqmL8ZwEZY",
     "amount": 27280,
-    "created_at": "2026-10-06T02:19:20Z"
+    "created_at": "2026-10-06T02:19:20Z",
+    "closed": "deleted"
    }
   },
   "mercari_status": "private",
