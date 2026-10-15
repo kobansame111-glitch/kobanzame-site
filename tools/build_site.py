@@ -196,7 +196,8 @@ T = {
 # ---------- ワークショップ（2026-10-07 龍さん決定A） ----------
 # 予約は外部の予約サイト（concentsocket.com）。このサイトには案内と「予約する」ボタンだけを置く。
 # WS_FROM より前の日付で作ったときは、ページもメニューの入り口も出さない（予約受付の開始日に合わせる）。
-# 料金は「期間限定価格」。終了時期は未定なので、比べる「通常価格」は書かない（二重価格表示にしない）。
+# 料金は「10/24開催分」として書く（2026-10-15 龍さんGO・案A）。「期間限定」は終了日が未定だと有利誤認のおそれがあるため使わない。
+# 比べる「通常価格」も書かない（二重価格表示にしない）。
 WS_FROM = '2026-10-21'
 WS_OPEN = TODAY >= WS_FROM
 RESERVE = 'https://www.concentsocket.com/location/kobanzame/reserve/'
@@ -1353,19 +1354,19 @@ if WS_OPEN:
         path = P + '/workshop/'
         if lang == 'ja':
             title = 'ワークショップ｜古着屋 小判鮫（川越・元町の古民家）'
-            desc = '川越・元町の古民家古着屋 小判鮫のワークショップ。真鍮バングル、天然石ビーズブレスレット。期間限定価格。ご予約はオンラインで。'
+            desc = '川越・元町の古民家古着屋 小判鮫のワークショップ。真鍮バングル、天然石ビーズブレスレット。10月24日（土）開催。ご予約はオンラインで。'
             h1, intro = 'ワークショップ', '小判鮫の店内で、ものづくりの時間を。どちらも完成品はその場でお持ち帰りいただけます。'
-            limited = '期間限定価格（税込）'
-            end_note = '期間限定価格の終了時期は、決まり次第このページとInstagramでお知らせします。'
+            limited = '税込・10/24開催分'
+            end_note = '10/25以降の開催日と料金は、決まり次第このページとInstagramでお知らせします。'
             meta = '所要 約{m}分・1回 最大{n}名'
             btn = '予約する（日時を選ぶ）'
             place = f'会場：古着屋 小判鮫（{ADDR["ja"]}）／' + ('定休日 月曜（祝日は営業）' if NEWHOURS else '定休日 月曜・火曜')
         else:
             title = 'Workshops | Kobanzame, Kawagoe'
-            desc = 'Workshops at Kobanzame, a vintage shop in an old wooden house in Kawagoe: brass bangle and natural stone bead bracelet. Limited-time prices. Book online.'
+            desc = 'Workshops at Kobanzame, a vintage shop in an old wooden house in Kawagoe: brass bangle and natural stone bead bracelet. Held on Saturday 24 October. Book online.'
             h1, intro = 'Workshops', 'Make something in our old wooden shop. You take your piece home the same day.'
-            limited = 'limited-time price, tax incl.'
-            end_note = 'We will announce on this page and on Instagram when the limited-time prices end.'
+            limited = 'tax incl., for the 24 Oct sessions'
+            end_note = 'Dates and prices after 24 October will be announced on this page and on Instagram.'
             meta = 'About {m} min · up to {n} people per session'
             btn = 'Book a time'
             place = f'Venue: Kobanzame, {ADDR["en"]} / ' + ('closed Mondays (open on holidays)' if NEWHOURS else 'closed Mondays and Tuesdays')
@@ -1547,7 +1548,7 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 - [ジャーナル]({BASE}/journal/)
 - [川越で古着屋を探している方へ（案内）]({BASE}/guide/)
 - [ブログ]({BASE}/blog/)
-{'- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・期間限定価格）](' + BASE + '/workshop/)' + chr(10) if WS_OPEN else ''}- [English]({BASE}/en/)
+{'- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・10/24開催）](' + BASE + '/workshop/)' + chr(10) if WS_OPEN else ''}- [English]({BASE}/en/)
 - [特定商取引法に基づく表記]({BASE}/tokushoho/)
 - [プライバシーポリシー]({BASE}/privacy/)
 
