@@ -345,7 +345,7 @@ def jld(obj):
 def org_node():
     return {
         '@type': 'ClothingStore', '@id': BASE + '/#store',
-        'name': SHOP['name'], 'alternateName': ['小判鮫', 'KOBANZAME', 'こばんざめ'],
+        'name': SHOP['name'], 'alternateName': ['小判鮫', 'KOBANZAME', 'こばんざめ', 'Remora', 'Remora Vintage Clothing Kawagoe'],   # Remora＝小判鮫の英名（2026-10-15 龍さん）。Bingマップ等にこの名前で載っているため
         'description': '埼玉県川越市、築約80年の古民家で営業する古着屋。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱う。商品はすべて一点もの。',
         'url': BASE + '/', 'email': SHOP['email'],
         'address': {'@type': 'PostalAddress', 'postalCode': SHOP['postal'], 'addressRegion': '埼玉県',
@@ -1392,7 +1392,7 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 > 埼玉県川越市元町1-14-5の、築約80年の古民家で営業している古着屋。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱う。商品はすべて一点もの。運営は{SHOP['company']}。英語ページは {BASE}/en/ 。
 
 ## 基本情報
-- 店名: 古着屋 小判鮫（こばんざめ / KOBANZAME）
+- 店名: 古着屋 小判鮫（こばんざめ / KOBANZAME）。英名は Remora（Remora Vintage Clothing Kawagoe）
 - 所在地: {ADDR['ja']}（地図: {SHOP['gmaps']}）
 - 営業時間: {'13:00〜20:00（7〜8月は22:00まで）・月曜定休（祝日は営業）・臨時休業はInstagramでお知らせ' if NEWHOURS else '12:00〜20:00・月曜・火曜定休' + ('。2026年11月1日から火〜日 13:00〜20:00・月曜定休' if NOTICE else '')}
 - 新着: 毎週水曜
