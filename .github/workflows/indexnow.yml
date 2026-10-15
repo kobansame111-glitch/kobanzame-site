@@ -2,7 +2,7 @@
 # ChatGPT などのAI検索は Bing の検索結果を使うことが多いので、Bing に早く載るようにするための仕組み。無料・ログイン不要。
 # 動くとき：サイトの自動再生成（build-site）が終わったあと／手で実行したとき。
 # Cloudflare Pages への反映を待つため3分待ってから、サイトマップに載っている全ページを1回で知らせる。
-# 鍵は tools/build_site.py の INDEXNOW_KEY。鍵ファイル /<鍵>.txt がサイトに無いときは知らせない（失敗を記録して終わる）。
+# 鍵は tools/build_site.py の INDEXNOW_KEY。鍵ファイル /<鍵>.txt がリポジトリに無いときは知らせない（失敗を記録して終わる）。
 name: indexnow
 
 on:
@@ -26,6 +26,15 @@ jobs:
           ref: main
       - name: Wait for Cloudflare Pages
         run: sleep 180
+      - name: Check which crawlers can read the site (diagnosis only)
+        # 2026-10-15：GitHub から鍵ファイルを読むと 403 だったため、検索・AIのロボット名ごとにサイトマップが読めるかを記録する。
+        # 送信には影響しない（失敗してもこの段は止まらない）。ロボット名を名乗っても本物の判定はIPで行われるので、目安として見る。
+        continue-on-error: true
+        run: |
+          for ua in "python-urllib/3" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)" "Mozilla/5.0 (compatible; GPTBot/1.2; +https://openai.com/gptbot)" "Mozilla/5.0 (compatible; OAI-SearchBot/1.0; +https://openai.com/searchbot)" "Mozilla/5.0 (compatible; ClaudeBot/1.0; +claudebot@anthropic.com)" "Mozilla/5.0 (compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot)" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36"; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' -A "$ua" https://kobanzame-site.pages.dev/sitemap.xml)
+            echo "$code  $ua"
+          done
       - name: Send IndexNow
         run: |
           python3 - <<'PY'
@@ -34,14 +43,13 @@ jobs:
           key = re.search(r"^INDEXNOW_KEY = '([0-9a-f]{32})'", src, re.M).group(1)
           base = re.search(r"^BASE = '([^']+)'", src, re.M).group(1).rstrip('/')
           host = base.split('://', 1)[1]
-          # 鍵ファイルが公開されているか確認（無ければ送らない）
-          try:
-              got = urllib.request.urlopen(f'{base}/{key}.txt', timeout=30).read().decode().strip()
-          except Exception as e:
-              print('鍵ファイルを読めませんでした:', e); sys.exit(1)
-          if got != key:
-              print('鍵ファイルの中身が違います'); sys.exit(1)
-          sm = urllib.request.urlopen(f'{base}/sitemap.xml', timeout=30).read().decode()
+          # 2026-10-15 修正：GitHub の実行環境からサイトを読むと Cloudflare が 403 で拒否するため、
+          # 鍵ファイルとサイトマップはサイトではなくリポジトリの中身（checkout した main）から読む。
+          # 鍵ファイルの公開確認は Bing 側が行う（失敗すると下の送信が 4xx になって記録される）。
+          import os
+          if not os.path.exists(f'{key}.txt') or open(f'{key}.txt').read().strip() != key:
+              print('鍵ファイルがリポジトリに無い、または中身が違います'); sys.exit(1)
+          sm = open('sitemap.xml', encoding='utf-8').read()
           urls = re.findall(r'<loc>([^<]+)</loc>', sm)
           body = json.dumps({'host': host, 'key': key, 'keyLocation': f'{base}/{key}.txt', 'urlList': urls}).encode()
           req = urllib.request.Request('https://api.indexnow.org/indexnow', data=body,
