@@ -3131,13 +3131,18 @@
    "back_i": 1,
    "front_error": "RuntimeError('仕上がり確認で不合格：裾が切り取られています。')",
    "back_url": "/assets/products/k10614/v2_back.jpg",
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k10614/v2_mannequin.jpg",
    "mannequin_body": "身長165cm・バスト83cm",
    "measures": {
     "ウエスト": 74,
     "股下": 78.5,
     "裾幅": 19.5
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-16",
+    "note": "小銭ポケットの「Riveted by Lee」金属プレートがAI画像に無い（ロゴ欠落）。生地にも本物に無い細かい模様が出ている"
    }
   }
  },
@@ -3376,7 +3381,7 @@
    "back_i": 7,
    "front_url": "/assets/products/k10153/v2_front.jpg",
    "back_url": "/assets/products/k10153/v2_back.jpg",
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k10153/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
@@ -3384,6 +3389,11 @@
     "着丈": 73,
     "肩幅": 53,
     "袖丈": 20
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-16",
+    "note": "胸ロゴの「CRABSHACK」が崩れた別の文字になり「at」も消えている。着丈73cmにしては裾がやや短く見える"
    }
   }
  }
