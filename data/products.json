@@ -550,7 +550,8 @@
     "url": "https://square.link/u/2CwEBVeJ",
     "order_id": "p6YR8sNzRGFQOdIaWJbKNnX92gSZY",
     "amount": 2860,
-    "created_at": "2026-10-06T02:19:23Z"
+    "created_at": "2026-10-06T02:19:23Z",
+    "closed": "deleted"
    }
   },
   "images": [
