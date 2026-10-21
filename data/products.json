@@ -3429,7 +3429,8 @@
     "brighten": 0.0,
     "garment_l": 199.4,
     "bg": "normal"
-   }
+   },
+   "redo_cutout": true
   }
  },
  {
