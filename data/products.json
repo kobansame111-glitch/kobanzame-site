@@ -3423,14 +3423,13 @@
    "front_check": {
     "brighten": 0.0,
     "garment_l": 197.0,
-    "bg": "normal"
+    "bg": "light_item"
    },
    "back_check": {
     "brighten": 0.0,
     "garment_l": 199.4,
-    "bg": "normal"
-   },
-   "redo_cutout": true
+    "bg": "light_item"
+   }
   }
  },
  {
