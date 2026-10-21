@@ -3021,7 +3021,12 @@
    "mannequin_note": "2026-10-14 龍さんNG→1回作り直し（10:06）。脚・値札は直ったが、右の胸下ポケットのフラップと白い塗料の汚れが消え、左右とも切りポケットに変わった→決定どおりこの商品はマネキンなし",
    "mannequin_retries": 1,
    "mannequin_date": "2026-10-14",
-   "redo_cutout": true
+   "front_check": {
+    "brighten": 0.5,
+    "garment_l": 49.2,
+    "bg": "normal"
+   },
+   "redone": "2026-10-22"
   }
  },
  {
@@ -3132,7 +3137,7 @@
    "date": "2026-10-14",
    "front_i": 0,
    "back_i": 1,
-   "front_error": "RuntimeError('仕上がり確認で不合格：裾が切り取られています。')",
+   "front_error": "RuntimeError('仕上がり確認で不合格：裾が切り取られています')",
    "back_url": "/assets/products/k10614/v2_back.jpg",
    "mannequin": "ng",
    "mannequin_url": "/assets/products/k10614/v2_mannequin.jpg",
@@ -3152,8 +3157,7 @@
     "brighten": 0.1,
     "garment_l": 95.1,
     "bg": "normal"
-   },
-   "redo_cutout": true
+   }
   }
  },
  {
@@ -3683,8 +3687,7 @@
     "brighten": 0.2,
     "garment_l": 166.0,
     "bg": "normal"
-   },
-   "redo_cutout": true
+   }
   }
  }
 ]
