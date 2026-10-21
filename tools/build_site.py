@@ -946,7 +946,10 @@ NEWS_CSS = """
 .newsnone{font-size:14px;color:var(--usu);padding:14px 0}
 .util .nb b{font-weight:600}
 """
-write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n')
+# 2026-10-22 龍さん「彩度が上がりすぎ」：メルカリに載せた屋外の写真（日なた・赤いトタン）は色が強いので、表示だけ少し落とす。
+# 写真そのものは変えない（元に戻すときはこの行を消す）。新しい写真（サイトに保存した写真）には効かせない
+TONE_CSS = 'img[src*="mercari-shops-static.com"]{filter:saturate(.85)}'
+write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n' + TONE_CSS + '\n')
 
 # ---------- 一覧 ----------
 # 2026-10-21 龍さん「新着が一番上に出てこない」：一覧（全部・絞り込み・ジャーナル）を公開日の新しい順に。同じ日は products.json の順
