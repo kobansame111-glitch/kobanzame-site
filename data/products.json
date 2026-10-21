@@ -3020,7 +3020,8 @@
    },
    "mannequin_note": "2026-10-14 龍さんNG→1回作り直し（10:06）。脚・値札は直ったが、右の胸下ポケットのフラップと白い塗料の汚れが消え、左右とも切りポケットに変わった→決定どおりこの商品はマネキンなし",
    "mannequin_retries": 1,
-   "mannequin_date": "2026-10-14"
+   "mannequin_date": "2026-10-14",
+   "redo_cutout": true
   }
  },
  {
@@ -3151,7 +3152,8 @@
     "brighten": 0.1,
     "garment_l": 95.1,
     "bg": "normal"
-   }
+   },
+   "redo_cutout": true
   }
  },
  {
@@ -3681,7 +3683,8 @@
     "brighten": 0.2,
     "garment_l": 166.0,
     "bg": "normal"
-   }
+   },
+   "redo_cutout": true
   }
  }
 ]

@@ -840,7 +840,8 @@ def drawer_html(lang):
     t = T[lang]
     P = pre(lang)
     n_all = len([p for p in live if not is_sold(p)])
-    cats = ''.join(f'<li><a href="{P}/?cat={c}#list" data-cat="{c}">{t["cats"][c]}<small>{len([p for p in live if not is_sold(p) and cat_of(p) == c])}</small></a></li>' for c in CATS_PRESENT)
+    n_new = len([p for p in avail_live if is_new(p)])
+    cats = (f'<li><a href="{P}/?cat=new#list" data-cat="new">{NEW_LABEL[lang]}<small>{n_new}</small></a></li>' if n_new else '') + ''.join(f'<li><a href="{P}/?cat={c}#list" data-cat="{c}">{t["cats"][c]}<small>{len([p for p in live if not is_sold(p) and cat_of(p) == c])}</small></a></li>' for c in CATS_PRESENT)
     more = ''.join(f'<li><a href="{h}">{l}</a></li>' for h, l in t['nav'][1:] + ([T_WS_NAV[lang]] if WS_OPEN else []))
     return f'''<div class="drawer-bg" id="drawerbg" hidden></div>
 <nav class="drawer" id="drawer" aria-label="{t['menu']}" aria-hidden="true">
@@ -978,7 +979,7 @@ def card_html(p, lang, lazy=True):
     if not sold and is_new(p):   # 2026-10-22 龍さん：新着が分かるように（公開から NEW_DAYS 日以内）
         tag += '<span class="newtag">NEW</span>'
     wv = '' if w is None else f'{w:g}'
-    return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-w="{wv}" data-sold="{1 if sold else 0}">'
+    return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}">'
             f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}</div>'
             f'<div class="brand">{esc(p["brand"])}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
             f'<span class="fit" hidden></span>'
@@ -1005,6 +1006,12 @@ def blocks_html(lang):
     """2026-10-09 トップの一覧をジャンルごとのブロックに分ける（絞り込み・身幅・SOLD表示を使った時は、今までどおり全部の一覧に切り替わる）"""
     t = T[lang]
     out = []
+    news = [p for p in avail_live if is_new(p)]   # 2026-10-22 龍さん：トップのジャンル別の一番上に「新着」のブロック
+    if news:
+        cards = ''.join(card_html(p, lang) for p in news[:BLOCK_MAX])
+        out.append(f'<section class="block" data-cat="new"><div class="bhead"><h3>NEW ARRIVAL<small>{NEW_LABEL[lang]}</small></h3>'
+                   f'<button type="button" class="ball" data-filter="new">{t["see_all"]}<span>{len(news)}{t["unit"]}</span></button></div>'
+                   f'<div class="brow">{cards}</div></section>')
     for c in CATS_PRESENT:
         ps = sorted([p for p in avail_live if cat_of(p) == c], key=lambda p: p.get('published_date', ''), reverse=True)
         if not ps:
@@ -1015,9 +1022,13 @@ def blocks_html(lang):
                    f'<div class="brow">{cards}</div></section>')
     return '\n'.join(out)
 
+NEW_LABEL = {'ja': '新着', 'en': 'New in'}   # 2026-10-22 龍さん「NEWだけを見る欄がない」
+
 def catrow(lang):
     t = T[lang]
-    return ''.join(f'<button type="button" data-filter="{c}" aria-pressed="false">{t["cats"][c]}<small>{CAT_EN[c]}</small></button>' for c in CATS_PRESENT)
+    new = (f'<button type="button" data-filter="new" aria-pressed="false">{NEW_LABEL[lang]}<small>NEW</small></button>'
+           if any(is_new(p) for p in avail_live) else '')
+    return new + ''.join(f'<button type="button" data-filter="{c}" aria-pressed="false">{t["cats"][c]}<small>{CAT_EN[c]}</small></button>' for c in CATS_PRESENT)
 
 def finder(lang):
     t = T[lang]
@@ -1044,7 +1055,7 @@ def list_js(lang):
     var plain=!filter&&isNaN(my)&&!showsold.checked;   // 何も絞っていない時はジャンルごとのブロックを見せる
     if(blocks){blocks.hidden=!plain; grid.hidden=plain;}
     grid.querySelectorAll('.card').forEach(function(c){
-      var ok=(!filter||c.dataset.cat===filter)&&(showsold.checked||c.dataset.sold!=='1');
+      var ok=(!filter||(filter==='new'?c.dataset.new==='1':c.dataset.cat===filter))&&(showsold.checked||c.dataset.sold!=='1');
       var w=c.dataset.w===''?null:parseFloat(c.dataset.w), fit=c.querySelector('.fit');
       if(!isNaN(my)) ok=ok&&w!==null&&Math.abs(w-my)<=3;
       if(!isNaN(my)&&w!==null){var d=w-my; fit.textContent=M.fit.replace('{w}',w).replace('{d}',d===0?M.same:(d>0?'+':'')+d.toFixed(1)+'cm'); fit.hidden=false;} else fit.hidden=true;
