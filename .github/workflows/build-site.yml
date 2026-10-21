@@ -9,6 +9,7 @@ on:
     branches: [main]
     paths:
       - 'data/products.json'
+      - 'data/news.json'      # 2026-10-21 お知らせ（サイト自動化GASがLINEのお知らせを書き込む）
       - 'tools/build_site.py'
   workflow_dispatch:
   # 2026-10-13 龍さん決定：11月1日から 火〜日 13:00–20:00・月曜定休。10/26 0:05（お知らせ開始）と 11/1 0:05・3:05（日本時間）に作り直す
