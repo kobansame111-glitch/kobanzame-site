@@ -295,10 +295,10 @@ def cutout(im, sku, budget):
     soft = np.array(Image.fromarray((reg * 255).astype('uint8')).filter(ImageFilter.GaussianBlur(2))) / 255
     a = np.clip(edge_alpha(im) * soft, 0, 1)
     # 2026-10-21 龍さん「白くなりすぎ」：輪郭のモデルが服の内側を半透明と判定すると、背景のオフホワイトが透けて服が白っぽくなる。
-    # 服の内側（輪郭から12画素以上内側）で少しでも服と判定された所は、透明度をなくす（元の写真の色のまま）。
-    # 本当に背景が見えている穴（えりの内側など＝ほぼ0）はそのまま透明にする。
+    # 服の内側（輪郭から12画素以上内側）は透明度をなくす（元の写真の色のまま）。
     core = ndi.binary_erosion(reg, iterations=12)
-    a = np.where(core & (a > 0.12), 1.0, a)
+    # 2026-10-21 22:1x：服と背景が同じような灰色だと、内側に完全な透明（穴）が残った（K11314）。内側は全部不透明にする
+    a = np.where(core, 1.0, a)
     if a.sum() < 0.05 * a.size:
         raise RuntimeError('切り抜いた服が小さすぎます（失敗の可能性）')
     rgba = im.convert('RGBA'); rgba.putalpha(Image.fromarray((a * 255).astype('uint8')))
