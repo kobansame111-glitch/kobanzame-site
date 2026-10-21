@@ -44,6 +44,9 @@ STOP_PER_IMAGE_YEN = 15.0             # 画像1枚を作るのにこれを超え
 MONTH_CAP_YEN = 1000.0                # この処理の1か月の上限（Googleの上限1,500円の内側。21番・ジャンル判定の分を残す）
 
 BG = (243, 241, 236)                  # サイト共通の背景色（オフホワイト）
+BG_LIGHT_ITEM = (226, 222, 214)       # 2026-10-22 龍さんA：白・生成りの服は、この少し濃いグレージュの背景にする（服のふちが溶けないように）
+WHITE_ITEM_L = 200                    # 服の明るさ（0〜255・中央値）がこれ以上なら「白い服」とみなす
+MAX_BRIGHTEN = 5.0                    # 背景が透けて服が明るくなった量（平均・0〜255）がこれ以上なら白飛びとみなし、元の写真のまま使う
 CANVAS = (1200, 1500)                 # 4:5
 FIT_H, FIT_W = 0.64, 0.62             # 本物の写真：服が占める高さ・幅の上限（2026-10-14 龍さん決定A：寄りすぎなので 0.80/0.78 から下げて余白を広く）
 MANNEQUIN_H = 0.86                    # マネキン：頭から足までをキャンバスの高さの86%に固定（＝商品どうしで縮尺が揃う）
@@ -305,6 +308,43 @@ def cutout(im, sku, budget):
     return rgba
 
 
+def tone_check(rgba):
+    """2026-10-22 龍さんA：AIを使わない数字の検査（無料・毎回同じ答え）。
+    ①服の内側で、背景が透けて元の写真より明るくなった量（平均）＝ brighten
+    ②服の明るさ（中央値）＝ garment_l（白い服かどうか）
+    服の画素は元の写真のまま使うので、明るさが変わるのは「透けた分」だけ。だからこの差＝白飛びの量になる"""
+    import numpy as np
+    from scipy import ndimage as ndi
+    arr = np.asarray(rgba).astype(float)
+    a = arr[..., 3] / 255
+    lum = arr[..., 0] * 0.299 + arr[..., 1] * 0.587 + arr[..., 2] * 0.114
+    region = ndi.binary_fill_holes(a > 0.05)            # 服の範囲（半透明の所も含む）
+    inner = ndi.binary_erosion(region, iterations=6)    # ふち（もともと半透明でよい所）を除いた内側
+    if inner.sum() < 1000:
+        inner = region
+    bg_l = BG[0] * 0.299 + BG[1] * 0.587 + BG[2] * 0.114
+    brighten = float(np.mean((1 - a[inner]) * np.clip(bg_l - lum[inner], 0, None))) if inner.any() else 0.0
+    garment_l = float(np.median(lum[inner])) if inner.any() else 0.0
+    return round(brighten, 1), round(garment_l, 1)
+
+
+def make_v2(im, sku, budget):
+    """切り抜き → 数字の検査 → 置く → AIの仕上がり確認。だめなら RuntimeError（元の写真のまま使う）。
+    戻り値：(画像, 検査の記録)"""
+    rgba = cutout(im, sku, budget)
+    brighten, garment_l = tone_check(rgba)
+    info = {'brighten': brighten, 'garment_l': garment_l}
+    if brighten >= MAX_BRIGHTEN:
+        raise RuntimeError(f'数字の検査で不合格：背景が透けて明るくなった量 {brighten}（{MAX_BRIGHTEN}以上）＝白飛び')
+    white = garment_l >= WHITE_ITEM_L
+    info['bg'] = 'light_item' if white else 'normal'
+    out = place(rgba, FIT_H, FIT_W, bg=BG_LIGHT_ITEM if white else None)
+    ok, why = quality_ok(out, sku, budget)
+    if not ok:
+        raise RuntimeError(f'仕上がり確認で不合格：{why}')
+    return out, info
+
+
 def quality_ok(img, sku, budget):
     """できた画像をAIに見せて、服以外の物（壁の飾り・角・棚・切れ端）が残っていないか、服が欠けていないかを確かめる。
     ダメなら元の写真のまま使う（本物の写真は確認なしで自動公開するので、その安全装置）。ハンガーは残っていてよい"""
@@ -326,13 +366,13 @@ def quality_ok(img, sku, budget):
     return bool(j.get('clean')), str(j.get('problem', ''))[:100]
 
 
-def place(rgba, fit_h, fit_w, shadow=True):
+def place(rgba, fit_h, fit_w, shadow=True, bg=None):
     """切り抜いた物を、同じ大きさ・同じ余白でキャンバスの真ん中に置く"""
     from PIL import Image, ImageFilter
     obj = rgba.crop(rgba.getbbox())
     s = min(CANVAS[1] * fit_h / obj.height, CANVAS[0] * fit_w / obj.width)
     obj = obj.resize((max(1, int(obj.width * s)), max(1, int(obj.height * s))), Image.LANCZOS)
-    canvas = Image.new('RGBA', CANVAS, BG + (255,))
+    canvas = Image.new('RGBA', CANVAS, (bg or BG) + (255,))
     x, y = (CANVAS[0] - obj.width) // 2, (CANVAS[1] - obj.height) // 2
     if shadow:
         sh = Image.new('RGBA', obj.size, (60, 50, 40, 0)); sh.putalpha(obj.split()[-1].point(lambda v: int(v * 0.16)))
@@ -483,12 +523,10 @@ def process(p, budget):
         if idx < 0:
             continue
         try:
-            out = place(cutout(images[idx], sku, budget), FIT_H, FIT_W)
-            ok, why = quality_ok(out, sku, budget)
-            if not ok:
-                raise RuntimeError(f'仕上がり確認で不合格：{why}')
+            out, info = make_v2(images[idx], sku, budget)
             out.save(os.path.join(od, f'v2_{key}.jpg'), quality=88, optimize=True)
             urls[key] = f'{rel}/v2_{key}.jpg'
+            urls[key + '_check'] = info
             if key == 'front':   # 一覧用の小さい画像（スマホで重くならないように）
                 small = out.copy(); small.thumbnail((600, 750)); small.save(os.path.join(od, 'v2_thumb.jpg'), quality=82, optimize=True)
             log(f'{sku} {key}: 背景を揃えました')
@@ -496,7 +534,7 @@ def process(p, budget):
             urls[key + '_error'] = repr(e)[:300]
             log(f'{sku} {key}: 失敗 → 元の写真のまま：{e!r}')
     v = {'date': now_jst().strftime('%Y-%m-%d'), 'front_i': front_i, 'back_i': back_i,
-         **{(k if k.endswith('_error') else k + '_url'): u for k, u in urls.items()}}
+         **{(k if k.endswith(('_error', '_check')) else k + '_url'): u for k, u in urls.items()}}
     # マネキン（服のジャンルだけ・確認待ちで作る）
     if p.get('genre') in CLOTHES and front_i >= 0 and not os.path.exists(STOP_FILE) and os.environ.get('PHOTO_V2_NO_MANNEQUIN') != '1':
         if not budget.can_spend(STOP_PER_IMAGE_YEN):
@@ -557,10 +595,8 @@ def redo_cutout(p, budget):
         if not (isinstance(idx, int) and 0 <= idx < len(src)):
             continue
         try:
-            out = place(cutout(load_image(src[idx]), sku, budget), FIT_H, FIT_W)
-            ok, why = quality_ok(out, sku, budget)
-            if not ok:
-                raise RuntimeError(f'仕上がり確認で不合格：{why}')
+            out, info = make_v2(load_image(src[idx]), sku, budget)
+            v[key + '_check'] = info
             out.save(os.path.join(od, f'v2_{key}.jpg'), quality=88, optimize=True)
             urls[key] = f'{rel}/v2_{key}.jpg'
             if key == 'front':

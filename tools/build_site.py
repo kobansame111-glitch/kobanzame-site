@@ -945,6 +945,7 @@ NEWS_CSS = """
 .newslist p{margin:0;overflow-wrap:anywhere}
 .newsnone{font-size:14px;color:var(--usu);padding:14px 0}
 .util .nb b{font-weight:600}
+.newtag{position:absolute;left:8px;top:8px;background:var(--kin);color:#fff;font-family:var(--gothic);font-size:10.5px;font-weight:600;letter-spacing:.14em;padding:3px 8px}
 """
 write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n')
 
@@ -959,12 +960,23 @@ def alt_img(p):
     ims = [u for u in p.get('images', [])[1:] if u != (p.get('photo_v2') or {}).get('mannequin_url')]
     return f'<img class="alt" src="{esc(ims[0].replace("/large/", "/medium/"))}" alt="" loading="lazy" aria-hidden="true">' if ims and not is_sold(p) else ''
 
+NEW_DAYS = 6   # 2026-10-22 龍さん：水曜の公開から次の水曜の公開の前日まで「NEW」を付ける（毎週水曜に作り直されるので、先週分は自然に外れる）
+
+def is_new(p):
+    try:
+        d = datetime.date.fromisoformat(str(p.get('published_date', ''))[:10])
+        return (datetime.date.fromisoformat(TODAY) - d).days <= NEW_DAYS
+    except ValueError:
+        return False
+
 def card_html(p, lang, lazy=True):
     t = T[lang]
     w = body_width(p)
     sold = is_sold(p)
     lz = ' loading="lazy"' if lazy else ''
     tag = '' if sold else f'<span class="tag">{t["one"]}</span>'
+    if not sold and is_new(p):   # 2026-10-22 龍さん：新着が分かるように（公開から NEW_DAYS 日以内）
+        tag += '<span class="newtag">NEW</span>'
     wv = '' if w is None else f'{w:g}'
     return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-w="{wv}" data-sold="{1 if sold else 0}">'
             f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}</div>'
