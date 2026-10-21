@@ -3403,5 +3403,162 @@
     "note": "胸ロゴの「CRABSHACK」が崩れた別の文字になり「at」も消えている。着丈73cmにしては裾がやや短く見える"
    }
   }
+ },
+ {
+  "sku": "K11314",
+  "slug": "k11314-zucca-trvail-zucca-made-in-france",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "フランス製のZUCCA TRAVAILのジャケットです",
+  "product_name": "ZUCCA TRAVAIL フランス製 オリーブのジャケット",
+  "brand": "ZUCCA TRVAIL（ZUCCAトラバイユ）・made in France",
+  "category": "レディース／ジャケット・アウター／ロングコート",
+  "material": "",
+  "published_date": "2026-10-21",
+  "prices": {
+   "store": 7800,
+   "site": 7800,
+   "mercari": 8580
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-21",
+  "links": {},
+  "images": [
+   "/assets/products/k11314/01.jpg",
+   "/assets/products/k11314/02.jpg",
+   "/assets/products/k11314/03.jpg",
+   "/assets/products/k11314/04.jpg",
+   "/assets/products/k11314/05.jpg",
+   "/assets/products/k11314/06.jpg",
+   "/assets/products/k11314/07.jpg",
+   "/assets/products/k11314/08.jpg",
+   "/assets/products/k11314/09.jpg",
+   "/assets/products/k11314/10.jpg",
+   "/assets/products/k11314/11.jpg",
+   "/assets/products/k11314/12.jpg"
+  ],
+  "thumb": "/assets/products/k11314/thumb.jpg",
+  "summary_text": "フランス製のZUCCA TRAVAILのジャケットです。オリーブのツイルが落ち着いた、一枚で決まるアウターです。",
+  "summary_points": [
+   "オリーブグリーン／カーキ系・無地ツイル織りのジャケット／コート類（トラバイユ・作業着系アウター）（ブランド：ZUCCA TRVAIL（ZUCCAトラバイユ）・made in France）",
+   "実寸 身幅41.5cm・着丈51cm・肩幅39cm・袖丈61cm"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。どんな一着か。",
+  "body_html": "<h2>この一着のこと</h2><p>どんな一着か。</p><p>タグはZUCCA TRAVAIL（ズッカ トラバイユ）、フランス製です。色はオリーブグリーンからカーキ寄りの無地で、生地はツイル織りです。素材はコットン、またはコットン混のツイルと思われます。作られたのは1990年代から2000年代の初めごろと思われます。</p><p>いまの状態。</p><p>タグが付いたままで、写真で見る限り、生地に目立つダメージはありません。肩幅39cm、身幅41.5cm、着丈51cm、袖丈61cmです。丈は短めで、すっきりした形です。</p><p>着方。</p><p>白いTシャツやシャツの上に羽織るだけで、まとまります。丈が短いので、太めのパンツにもスカートにも合わせやすい一枚です。川越の古民家に掛けると、オリーブの色がやわらかく見えます。</p><h2>状態</h2><p>状態は写真でご確認ください。気になる点は、お問い合わせからお尋ねください。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "ZUCCA TRVAIL（ZUCCAトラバイユ）・made in France"
+   ],
+   [
+    "色",
+    "オリーブグリーン／カーキ系・無地ツイル織り"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅41.5cm・着丈51cm・肩幅39cm・袖丈61cm"
+   ],
+   [
+    "状態",
+    "写真でご確認ください（傷・汚れの詳細は未確認）"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "outer",
+  "genre_by": "auto-keyword-2026-10-21",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.3",
+   "made_at": "2026-10-21",
+   "needs": [
+    "性別は自動判定：レディース（実寸が小さめ（肩幅39・身幅41.5））→ 違えばClaudeへ",
+    "素材が確定していない（推定のまま or 不明）→ 仕様表に載せていない",
+    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
+    "見出し（title）は物語の一言から自動で作った → 気に入らなければClaudeへ",
+    "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "実寸が小さめ（肩幅39・身幅41.5）"
+ },
+ {
+  "sku": "K10990",
+  "slug": "k10990-chico-s-design",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "CHICO'S DESIGNのシルクのジャケットです",
+  "product_name": "CHICO'S DESIGN シルクのボーダージャケット",
+  "brand": "CHICO'S DESIGN",
+  "category": "メンズ／アウター／ジャケット",
+  "material": "シルク（絹）",
+  "published_date": "2026-10-21",
+  "prices": {
+   "store": 15800,
+   "site": 15800,
+   "mercari": 17380
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-21",
+  "links": {},
+  "images": [
+   "/assets/products/k10990/01.jpg",
+   "/assets/products/k10990/02.jpg",
+   "/assets/products/k10990/03.jpg",
+   "/assets/products/k10990/04.jpg",
+   "/assets/products/k10990/05.jpg",
+   "/assets/products/k10990/06.jpg",
+   "/assets/products/k10990/07.jpg",
+   "/assets/products/k10990/08.jpg",
+   "/assets/products/k10990/09.jpg",
+   "/assets/products/k10990/10.jpg"
+  ],
+  "thumb": "/assets/products/k10990/thumb.jpg",
+  "summary_text": "CHICO'S DESIGNのシルクのジャケットです。ベージュ、カーキ、チャコールのボーダーが、楽に羽織れる一枚です。",
+  "summary_points": [
+   "ベージュ・カーキ・チャコールグレーのマルチボーダー柄のシルクジャケット（シャツジャケット）（ブランド：CHICO'S DESIGN）",
+   "素材：シルク（絹）",
+   "実寸 身幅59.5cm・着丈72cm・肩幅48cm・袖丈49.5cm"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。どんな一着か。",
+  "body_html": "<h2>この一着のこと</h2><p>どんな一着か。</p><p>タグはCHICO'S DESIGNです。素材はシルクで、シャツジャケットの形をしています。柄はベージュ、カーキ、チャコールグレーが重なるマルチボーダーです。作られたのは1990年代から2000年代前半ごろと思われます。</p><p>いまの状態。</p><p>全体にシワと使用感があります。袖付けのステッチにほつれ、裾に少し汚れ、ところどころにほつれ糸があります。肩幅48cm、身幅59.5cm、着丈72cm、袖丈49.5cmと、ゆったりしたサイズです。</p><p>着方。</p><p>シャツのように一枚で羽織るだけで、ボーダーの色合いが主役になります。無地のパンツやデニムに合わせると、すっきり決まります。シルクなので軽く、古民家の縁側で過ごすような、楽な日に向いている一枚です。</p><h2>状態</h2><p>状態：全体的にシワあり・袖付け部分のステッチほつれ・裾部分に若干の汚れ・ほつれ糸あり・使用感あり。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "CHICO'S DESIGN"
+   ],
+   [
+    "素材",
+    "シルク（絹）"
+   ],
+   [
+    "色",
+    "ベージュ・カーキ・チャコールグレーのマルチボーダー柄"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅59.5cm・着丈72cm・肩幅48cm・袖丈49.5cm"
+   ],
+   [
+    "状態",
+    "全体的にシワあり・袖付け部分のステッチほつれ・裾部分に若干の汚れ・ほつれ糸あり・使用感あり"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "outer",
+  "genre_by": "auto-keyword-2026-10-21",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.3",
+   "made_at": "2026-10-21",
+   "needs": [
+    "性別は自動判定：メンズ（実寸が大きめ（肩幅48・身幅59.5））→ 違えばClaudeへ",
+    "見出し（title）は物語の一言から自動で作った → 気に入らなければClaudeへ",
+    "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "実寸が大きめ（肩幅48・身幅59.5）"
  }
 ]
