@@ -3407,7 +3407,7 @@
  {
   "sku": "K11314",
   "slug": "k11314-zucca-trvail-zucca-made-in-france",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "フランス製のZUCCA TRAVAILのジャケットです",
@@ -3478,14 +3478,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-21"
   },
   "gender_by": "実寸が小さめ（肩幅39・身幅41.5）"
  },
  {
   "sku": "K10990",
   "slug": "k10990-chico-s-design",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "CHICO'S DESIGNのシルクのジャケットです",
@@ -3557,7 +3558,8 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-21"
   },
   "gender_by": "龍さん確認 2026-10-21（CHICO'Sは女性向けブランド）"
  }
