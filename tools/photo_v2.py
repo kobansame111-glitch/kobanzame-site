@@ -294,6 +294,11 @@ def cutout(im, sku, budget):
     reg = ndi.binary_dilation(ndi.binary_fill_holes(reg), iterations=4)
     soft = np.array(Image.fromarray((reg * 255).astype('uint8')).filter(ImageFilter.GaussianBlur(2))) / 255
     a = np.clip(edge_alpha(im) * soft, 0, 1)
+    # 2026-10-21 龍さん「白くなりすぎ」：輪郭のモデルが服の内側を半透明と判定すると、背景のオフホワイトが透けて服が白っぽくなる。
+    # 服の内側（輪郭から12画素以上内側）で少しでも服と判定された所は、透明度をなくす（元の写真の色のまま）。
+    # 本当に背景が見えている穴（えりの内側など＝ほぼ0）はそのまま透明にする。
+    core = ndi.binary_erosion(reg, iterations=12)
+    a = np.where(core & (a > 0.12), 1.0, a)
     if a.sum() < 0.05 * a.size:
         raise RuntimeError('切り抜いた服が小さすぎます（失敗の可能性）')
     rgba = im.convert('RGBA'); rgba.putalpha(Image.fromarray((a * 255).astype('uint8')))
@@ -526,9 +531,49 @@ def is_mannequin_retry(p):
             and p.get('genre') in CLOTHES and bool(p.get('images_orig') or p.get('images')))
 
 
+def is_cutout_redo(p):
+    """photo_v2.redo_cutout が true の商品は、背景を揃えた正面・背面の写真だけを作り直す（2026-10-21 追加・切り抜きの直し用）。
+    マネキン画像と、その確認の状態（pending/ok/ng）は変えない。1回だけ（終わったら redo_cutout を消す）"""
+    v = p.get('photo_v2') or {}
+    return (p.get('status') == 'available' and v.get('redo_cutout') is True and bool(p.get('images_orig')))
+
+
 def targets(products):
     only = [x.strip() for x in os.environ.get('PHOTO_V2_ONLY', '').split(',') if x.strip()]   # 試験用：品番を絞る
-    return [p for p in products if (is_target(p) or is_mannequin_retry(p)) and (not only or p['sku'] in only)]
+    return [p for p in products if (is_target(p) or is_mannequin_retry(p) or is_cutout_redo(p)) and (not only or p['sku'] in only)]
+
+
+def redo_cutout(p, budget):
+    """背景を揃えた写真（正面・背面）だけを、元の写真から作り直す。並びは「正面／（OKならマネキン）／背面／残り」に組み直す"""
+    v = p['photo_v2']
+    v.pop('redo_cutout', None)
+    sku = p['sku']
+    rel = f'/assets/products/{sku.lower()}'
+    od = os.path.join(ROOT, rel.lstrip('/')); os.makedirs(od, exist_ok=True)
+    src = p['images_orig']
+    urls = {}
+    for key in ('front', 'back'):
+        idx = v.get(key + '_i', -1)
+        if not (isinstance(idx, int) and 0 <= idx < len(src)):
+            continue
+        try:
+            out = place(cutout(load_image(src[idx]), sku, budget), FIT_H, FIT_W)
+            ok, why = quality_ok(out, sku, budget)
+            if not ok:
+                raise RuntimeError(f'仕上がり確認で不合格：{why}')
+            out.save(os.path.join(od, f'v2_{key}.jpg'), quality=88, optimize=True)
+            urls[key] = f'{rel}/v2_{key}.jpg'
+            if key == 'front':
+                small = out.copy(); small.thumbnail((600, 750)); small.save(os.path.join(od, 'v2_thumb.jpg'), quality=82, optimize=True)
+            v.pop(key + '_error', None); v[key + '_url'] = urls[key]
+            log(f'{sku} {key}: 作り直しました')
+        except Exception as e:
+            v.pop(key + '_url', None); v[key + '_error'] = repr(e)[:300]
+            log(f'{sku} {key}: 作り直し失敗 → 元の写真のまま：{e!r}')
+    mq = v.get('mannequin_url') if v.get('mannequin') == 'ok' else None
+    p['images'] = new_image_list(src, v.get('front_i', -1), v.get('back_i', -1), urls.get('front'), urls.get('back'), mq)
+    p['thumb'] = f'{rel}/v2_thumb.jpg' if urls.get('front') else (f'{rel}/thumb.jpg' if os.path.exists(os.path.join(od, 'thumb.jpg')) else p.get('thumb'))
+    v['redone'] = now_jst().strftime('%Y-%m-%d')
 
 
 def remake_mannequin(p, budget):
@@ -600,7 +645,9 @@ def _main():
                 break
             before = json.dumps(p, ensure_ascii=False, sort_keys=True)
             try:
-                if is_mannequin_retry(p):
+                if is_cutout_redo(p):
+                    redo_cutout(p, budget)
+                elif is_mannequin_retry(p):
                     remake_mannequin(p, budget)
                 else:
                     process(p, budget)

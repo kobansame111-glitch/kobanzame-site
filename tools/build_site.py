@@ -949,7 +949,8 @@ NEWS_CSS = """
 write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n')
 
 # ---------- 一覧 ----------
-live = [p for p in products if release(p) == 'live']
+# 2026-10-21 龍さん「新着が一番上に出てこない」：一覧（全部・絞り込み・ジャーナル）を公開日の新しい順に。同じ日は products.json の順
+live = sorted([p for p in products if release(p) == 'live'], key=lambda p: str(p.get('published_date', '')), reverse=True)
 avail_live = [p for p in live if not is_sold(p)]
 CATS_PRESENT = [c for c in ['outer', 'tops', 'bottoms', 'dress', 'shoes', 'acc', 'other'] if any(cat_of(p) == c for p in live)]
 
