@@ -3424,9 +3424,9 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-21",
   "links": {},
   "images": [
-   "/assets/products/k11314/01.jpg",
-   "/assets/products/k11314/02.jpg",
+   "/assets/products/k11314/v2_front.jpg",
    "/assets/products/k11314/03.jpg",
+   "/assets/products/k11314/02.jpg",
    "/assets/products/k11314/04.jpg",
    "/assets/products/k11314/05.jpg",
    "/assets/products/k11314/06.jpg",
@@ -3437,7 +3437,7 @@
    "/assets/products/k11314/11.jpg",
    "/assets/products/k11314/12.jpg"
   ],
-  "thumb": "/assets/products/k11314/thumb.jpg",
+  "thumb": "/assets/products/k11314/v2_thumb.jpg",
   "summary_text": "フランス製のZUCCA TRAVAILのジャケットです。オリーブのツイルが落ち着いた、一枚で決まるアウターです。",
   "summary_points": [
    "オリーブグリーン／カーキ系・無地ツイル織りのジャケット／コート類（トラバイユ・作業着系アウター）（ブランド：ZUCCA TRVAIL（ZUCCAトラバイユ）・made in France）",
@@ -3481,7 +3481,37 @@
    ],
    "approved_at": "2026-10-21"
   },
-  "gender_by": "実寸が小さめ（肩幅39・身幅41.5）"
+  "gender_by": "実寸が小さめ（肩幅39・身幅41.5）",
+  "images_orig": [
+   "/assets/products/k11314/01.jpg",
+   "/assets/products/k11314/02.jpg",
+   "/assets/products/k11314/03.jpg",
+   "/assets/products/k11314/04.jpg",
+   "/assets/products/k11314/05.jpg",
+   "/assets/products/k11314/06.jpg",
+   "/assets/products/k11314/07.jpg",
+   "/assets/products/k11314/08.jpg",
+   "/assets/products/k11314/09.jpg",
+   "/assets/products/k11314/10.jpg",
+   "/assets/products/k11314/11.jpg",
+   "/assets/products/k11314/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-21",
+   "front_i": 0,
+   "back_i": 2,
+   "front_url": "/assets/products/k11314/v2_front.jpg",
+   "back_error": "RuntimeError('仕上がり確認で不合格：背景の白い部分が残っています。')",
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11314/v2_mannequin.jpg",
+   "mannequin_body": "身長165cm・バスト83cm",
+   "measures": {
+    "身幅": 41.5,
+    "着丈": 51.0,
+    "肩幅": 39.0,
+    "袖丈": 61.0
+   }
+  }
  },
  {
   "sku": "K10990",
@@ -3504,13 +3534,13 @@
   "links": {},
   "images": [
    "/assets/products/k10990/01.jpg",
+   "/assets/products/k10990/v2_back.jpg",
    "/assets/products/k10990/02.jpg",
    "/assets/products/k10990/03.jpg",
    "/assets/products/k10990/04.jpg",
    "/assets/products/k10990/05.jpg",
    "/assets/products/k10990/06.jpg",
    "/assets/products/k10990/07.jpg",
-   "/assets/products/k10990/08.jpg",
    "/assets/products/k10990/09.jpg",
    "/assets/products/k10990/10.jpg"
   ],
@@ -3561,6 +3591,34 @@
    ],
    "approved_at": "2026-10-21"
   },
-  "gender_by": "龍さん確認 2026-10-21（CHICO'Sは女性向けブランド）"
+  "gender_by": "龍さん確認 2026-10-21（CHICO'Sは女性向けブランド）",
+  "images_orig": [
+   "/assets/products/k10990/01.jpg",
+   "/assets/products/k10990/02.jpg",
+   "/assets/products/k10990/03.jpg",
+   "/assets/products/k10990/04.jpg",
+   "/assets/products/k10990/05.jpg",
+   "/assets/products/k10990/06.jpg",
+   "/assets/products/k10990/07.jpg",
+   "/assets/products/k10990/08.jpg",
+   "/assets/products/k10990/09.jpg",
+   "/assets/products/k10990/10.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-21",
+   "front_i": 0,
+   "back_i": 7,
+   "front_error": "RuntimeError('仕上がり確認で不合格：裾が切り取られています')",
+   "back_url": "/assets/products/k10990/v2_back.jpg",
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k10990/v2_mannequin.jpg",
+   "mannequin_body": "身長165cm・バスト83cm",
+   "measures": {
+    "身幅": 59.5,
+    "着丈": 72.0,
+    "肩幅": 48.0,
+    "袖丈": 49.5
+   }
+  }
  }
 ]
