@@ -75,10 +75,14 @@ def load_news():
     try:
         raw = json.load(open(path, encoding='utf-8'))
     except Exception as e:
-        print('⚠ data/news.json が読めません（お知らせなしで作ります）:', e)
+        print('::warning::data/news.json が読めません（お知らせなしで作ります）:', e)
+        return []
+    items = raw.get('items') if isinstance(raw, dict) else None
+    if not isinstance(items, list):
+        print('::warning::data/news.json の items が一覧になっていません（お知らせなしで作ります）')
         return []
     out = []
-    for it in (raw.get('items') or []) if isinstance(raw, dict) else []:
+    for it in items:
         if not isinstance(it, dict):
             print('⚠ お知らせ：形が違う1件を飛ばしました'); continue
         nid, d, text = str(it.get('id', '')), str(it.get('date', '')), it.get('text')
