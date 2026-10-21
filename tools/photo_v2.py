@@ -218,7 +218,7 @@ def find_box(j):
     return None
 
 
-def garment_box(im, sku, budget):
+def garment_box(im, sku, budget, pad=0.015):
     """Gemini に「売り物の服だけ」を囲む箱を出してもらう（輪郭マスクは返事が壊れやすいので使わない・2026-10-08 試験）"""
     import numpy as np
     small = im.copy(); small.thumbnail((1024, 1024))
@@ -242,7 +242,6 @@ def garment_box(im, sku, budget):
         raise RuntimeError('服の箱が返ってきません')
     y0, x0, y1, x1 = [v / 1000 for v in box4]
     W, H = im.size
-    pad = 0.015
     box = np.zeros((H, W), dtype=bool)
     box[max(0, int((y0 - pad) * H)):min(H, int((y1 + pad) * H)), max(0, int((x0 - pad) * W)):min(W, int((x1 + pad) * W))] = True
     return box
@@ -280,12 +279,12 @@ def cloth_mask(im):
     return np.array(out.resize(im.size)) > 100
 
 
-def cutout(im, sku, budget):
+def cutout(im, sku, budget, pad=0.015):
     """箱（Gemini）∩ 服の形（cloth_seg）× 輪郭（isnet）＝ 服だけの透明度"""
     import numpy as np
     from PIL import Image, ImageFilter
     from scipy import ndimage as ndi
-    box = garment_box(im, sku, budget)
+    box = garment_box(im, sku, budget, pad)
     reg = ndi.binary_closing(cloth_mask(im) & box, iterations=6)
     if reg.sum() < 0.03 * box.sum():          # 服の形が取れない時は箱だけで（ハンガーが少し残ることがある）
         reg = box
@@ -328,10 +327,24 @@ def tone_check(rgba):
     return round(brighten, 1), round(garment_l, 1)
 
 
-def make_v2(im, sku, budget):
+def make_v2(im, sku, budget, rejected_path=None):
     """切り抜き → 数字の検査 → 置く → AIの仕上がり確認。だめなら RuntimeError（元の写真のまま使う）。
+    2026-10-22：「裾・袖が切れる」で不合格なら、服の箱を広げて（余白1.5%→6%）1回だけやり直す。
+    不合格の画像は rejected_path に残す（サイトには使わない・あとで目で確かめる用）
     戻り値：(画像, 検査の記録)"""
-    rgba = cutout(im, sku, budget)
+    try:
+        return _make_v2(im, sku, budget, 0.015, rejected_path)
+    except RuntimeError as e:
+        if '切' not in str(e) and '欠' not in str(e):
+            raise
+        log(f'  {sku}: 「{e}」→ 服の箱を広げてもう1回')
+        out, info = _make_v2(im, sku, budget, 0.06, rejected_path)
+        info['pad'] = 0.06
+        return out, info
+
+
+def _make_v2(im, sku, budget, pad, rejected_path):
+    rgba = cutout(im, sku, budget, pad)
     brighten, garment_l = tone_check(rgba)
     info = {'brighten': brighten, 'garment_l': garment_l}
     if brighten >= MAX_BRIGHTEN:
@@ -341,6 +354,11 @@ def make_v2(im, sku, budget):
     out = place(rgba, FIT_H, FIT_W, bg=BG_LIGHT_ITEM if white else None)
     ok, why = quality_ok(out, sku, budget)
     if not ok:
+        if rejected_path:
+            try:
+                out.save(rejected_path, quality=80, optimize=True)
+            except Exception as e2:
+                log(f'  不合格の画像を残せない：{e2!r}')
         raise RuntimeError(f'仕上がり確認で不合格：{why}')
     return out, info
 
@@ -523,7 +541,7 @@ def process(p, budget):
         if idx < 0:
             continue
         try:
-            out, info = make_v2(images[idx], sku, budget)
+            out, info = make_v2(images[idx], sku, budget, os.path.join(od, f'v2_{key}_rejected.jpg'))
             out.save(os.path.join(od, f'v2_{key}.jpg'), quality=88, optimize=True)
             urls[key] = f'{rel}/v2_{key}.jpg'
             urls[key + '_check'] = info
@@ -595,7 +613,7 @@ def redo_cutout(p, budget):
         if not (isinstance(idx, int) and 0 <= idx < len(src)):
             continue
         try:
-            out, info = make_v2(load_image(src[idx]), sku, budget)
+            out, info = make_v2(load_image(src[idx]), sku, budget, os.path.join(od, f'v2_{key}_rejected.jpg'))
             v[key + '_check'] = info
             out.save(os.path.join(od, f'v2_{key}.jpg'), quality=88, optimize=True)
             urls[key] = f'{rel}/v2_{key}.jpg'
