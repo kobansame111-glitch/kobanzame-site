@@ -494,6 +494,10 @@ def is_target(p, start=None):
 def new_image_list(images, front_i, back_i, front_url, back_url, mannequin_url=None):
     """並び：1 正面（背景を揃えた）／2 マネキン（OKの時だけ）／3 背面（背景を揃えた）／4〜 残りの本物の写真（元のまま）"""
     rest = [u for k, u in enumerate(images) if k not in (front_i, back_i)]
+    if not front_url and back_url:
+        # 2026-10-22 龍さん「1枚目は背景をそろえて統一したい」：正面が失敗して背面ができた時は、背面を1枚目にし、元の正面は2枚目に
+        head = [back_url] + ([mannequin_url] if mannequin_url else []) + ([images[front_i]] if front_i >= 0 else [])
+        return head + rest
     head = [front_url] if front_url else ([images[front_i]] if front_i >= 0 else [])
     if mannequin_url:
         head.append(mannequin_url)
@@ -575,7 +579,10 @@ def process(p, budget):
                 log(f'{sku}: マネキン画像 失敗：{e!r}')
     p['images_orig'] = list(p['images'])
     p['images'] = new_image_list(p['images'], front_i, back_i, urls.get('front'), urls.get('back'))   # *_error は並びに使わない
-    if urls.get('front'):
+    if urls.get('front') or urls.get('back'):
+        if not urls.get('front'):   # 正面が失敗→背面で一覧の小さい画像を作る（1枚目と同じ写真にする）
+            from PIL import Image
+            small = Image.open(os.path.join(od, 'v2_back.jpg')); small.thumbnail((600, 750)); small.save(os.path.join(od, 'v2_thumb.jpg'), quality=82, optimize=True)
         p['thumb'] = f'{rel}/v2_thumb.jpg'
     p['photo_v2'] = v
 
@@ -626,7 +633,10 @@ def redo_cutout(p, budget):
             log(f'{sku} {key}: 作り直し失敗 → 元の写真のまま：{e!r}')
     mq = v.get('mannequin_url') if v.get('mannequin') == 'ok' else None
     p['images'] = new_image_list(src, v.get('front_i', -1), v.get('back_i', -1), urls.get('front'), urls.get('back'), mq)
-    p['thumb'] = f'{rel}/v2_thumb.jpg' if urls.get('front') else (f'{rel}/thumb.jpg' if os.path.exists(os.path.join(od, 'thumb.jpg')) else p.get('thumb'))
+    if not urls.get('front') and urls.get('back'):   # 正面が失敗→背面で一覧の小さい画像（1枚目と同じ写真）
+        from PIL import Image
+        small = Image.open(os.path.join(od, 'v2_back.jpg')); small.thumbnail((600, 750)); small.save(os.path.join(od, 'v2_thumb.jpg'), quality=82, optimize=True)
+    p['thumb'] = f'{rel}/v2_thumb.jpg' if (urls.get('front') or urls.get('back')) else (f'{rel}/thumb.jpg' if os.path.exists(os.path.join(od, 'thumb.jpg')) else p.get('thumb'))
     v['redone'] = now_jst().strftime('%Y-%m-%d')
 
 
