@@ -59,6 +59,42 @@ products = json.load(open(os.path.join(ROOT, 'data/products.json'), encoding='ut
 _en_path = os.path.join(ROOT, 'data/products_en.json')
 EN = json.load(open(_en_path, encoding='utf-8')) if os.path.exists(_en_path) else {}
 
+# ---------- お知らせ（2026-10-21 龍さん決定A：LINE（AI秘書）→シート→サイト自動化GAS→ data/news.json）----------
+# data/news.json の形：{"items":[{"id":"N001","date":"2026-10-21","text":"本文","until":"2026-11-20","band":false}, ...]}
+#   id：番号（N＋数字）／date：お知らせの日付／text：本文（文字だけ・HTMLは使わない）／until：この日まで出す（空なら期限なし）
+#   band：true なら、いちばん上の帯にも出す（臨時休業など）
+# 形がおかしい1件は飛ばす（サイトの作り直しは止めない）。理由はログに出す。期限切れはここで外す。
+NEWS_MAX_TEXT = 200      # GAS側の上限（120字）より少し大きめ。超えたら飛ばす（壊れたデータの防止）
+NEWS_TOP = 3             # トップに出す件数（新しい順）
+NEWS_BAND_MAX = 2        # 上の帯に出す件数
+_DATE_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+def load_news():
+    path = os.path.join(ROOT, 'data/news.json')
+    if not os.path.exists(path):
+        return []
+    try:
+        raw = json.load(open(path, encoding='utf-8'))
+    except Exception as e:
+        print('⚠ data/news.json が読めません（お知らせなしで作ります）:', e)
+        return []
+    out = []
+    for it in (raw.get('items') or []) if isinstance(raw, dict) else []:
+        if not isinstance(it, dict):
+            print('⚠ お知らせ：形が違う1件を飛ばしました'); continue
+        nid, d, text = str(it.get('id', '')), str(it.get('date', '')), it.get('text')
+        until = str(it.get('until') or '')
+        if not re.match(r'^N\d{1,6}$', nid) or not _DATE_RE.match(d) or (until and not _DATE_RE.match(until)):
+            print('⚠ お知らせ：番号・日付の形が違うので飛ばしました', nid); continue
+        if not isinstance(text, str) or not text.strip() or len(text) > NEWS_MAX_TEXT:
+            print('⚠ お知らせ：本文が空か長すぎるので飛ばしました', nid); continue
+        if until and until < TODAY:
+            continue   # 期限切れ
+        out.append({'id': nid, 'date': d, 'text': re.sub(r'\s+', ' ', text).strip(), 'until': until, 'band': it.get('band') is True})
+    out.sort(key=lambda n: (n['date'], int(n['id'][1:])), reverse=True)
+    return out
+NEWS = load_news()
+NEWS_BAND = [n for n in NEWS if n['band']][:NEWS_BAND_MAX]
+
 # ---------- 文言（日本語／英語） ----------
 T = {
  'ja': {
@@ -234,6 +270,11 @@ elif NOTICE:
 HOURS_LINE = {'ja': ('13:00–20:00・月曜定休' if NEWHOURS else '12:00–20:00・月曜・火曜定休'),
               'en': ('13:00–20:00, closed Mon' if NEWHOURS else '12:00–20:00, closed Mon & Tue')}
 CLOSED_WEEKDAYS_JS = '[1]' if NEWHOURS else '[1,2]'   # 本日営業/定休バッジ用（0=日 1=月 2=火）
+
+# お知らせ（帯）：「帯に出す」印のお知らせを、上の帯の先頭に足す（日本語ページだけ）。期限の日を過ぎたら画面側でも隠す
+if NEWS_BAND:
+    T['ja']['util'] = ''.join(
+        f'<span class="nb" data-until="{n["until"]}"><b>{html.escape(n["text"])}</b>　</span>' for n in NEWS_BAND) + T['ja']['util']
 
 # ---------- 共通の小さな関数 ----------
 def esc(s):
@@ -708,6 +749,15 @@ if(k)send({t:'click',btn:k});},true);
 })();
 </script>"""
 
+# お知らせ：期限（data-until）の日を過ぎたものを、見ている人のスマホ側で隠す（日本時間で判定。作り直しが遅れても出しっぱなしにしない）
+NEWS_JS = '''<script>document.addEventListener('DOMContentLoaded',function(){try{var d=new Date(Date.now()+324e5).toISOString().slice(0,10);document.querySelectorAll('[data-until]').forEach(function(e){var u=e.getAttribute('data-until');if(u&&u<d)e.hidden=true;});}catch(x){}});</script>'''
+
+def news_items_html(items):
+    """お知らせの一覧（<li>）。本文は文字として出す（HTMLにしない）"""
+    return '\n'.join(
+        f'      <li data-until="{n["until"]}"><time datetime="{n["date"]}">{n["date"].replace("-", ".")}</time><p>{html.escape(n["text"])}</p></li>'
+        for n in items)
+
 def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, noindex=False):
     t = T[lang]
     url = BASE + path
@@ -754,7 +804,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 {beacon}{track}
 {verify}</head>
 <body>
-<div class="util">{t['util']}</div>
+<div class="util">{t['util']}</div>{NEWS_JS if NEWS else ''}
 <header class="site"><div class="wrap">
   <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button></div>
   <a class="logo" href="{pre(lang)}/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
@@ -871,7 +921,21 @@ footer.site{font-size:13px}
 .drawer h3,.days .today,.tag,.card .pr small,.catrow button small{font-size:12px}
 @media(max-width:639px){.tile .tt i{font-size:12px;padding:8px 14px}}
 """
-write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n')
+# 2026-10-21 お知らせ欄（トップの営業日の下・/news/）。見出しは既存の .sec-head h2 と同じ見た目にそろえる
+NEWS_CSS = """
+.news .sec-head{margin-top:32px}
+.news .sec-head h1{font-family:var(--gothic);font-weight:500;font-size:22px;line-height:1;letter-spacing:.16em;text-transform:uppercase}
+.news .sec-head h1 small{display:block;font-family:var(--mincho);font-size:14px;margin-top:10px;color:var(--usu);letter-spacing:.06em;text-transform:none}
+.news .sec-head .more{font-size:13px;color:var(--kin);min-height:44px;display:inline-flex;align-items:center}
+.newslist{list-style:none;margin:0 0 8px;padding:0;border-top:1px solid var(--kin)}
+.newslist li{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.8}
+@media(min-width:640px){.newslist li{grid-template-columns:7.5em minmax(0,1fr);gap:16px}}
+.newslist time{font-family:var(--roman);font-size:13px;letter-spacing:.08em;color:var(--usu)}
+.newslist p{margin:0;overflow-wrap:anywhere}
+.newsnone{font-size:14px;color:var(--usu);padding:14px 0}
+.util .nb b{font-weight:600}
+"""
+write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n')
 
 # ---------- 一覧 ----------
 live = [p for p in products if release(p) == 'live']
@@ -999,6 +1063,16 @@ for lang in ('ja', 'en'):
     trust = ''.join(f'<div><b>{h}</b><span>{s.format(gm=SHOP["gmaps"])}</span></div>' for h, s in t['trust'])
     store_dl = ''.join(f'<dt>{k}</dt><dd>{ADDR[lang] + " ・ <a href=" + chr(34) + SHOP["gmaps"] + chr(34) + " rel=" + chr(34) + "noopener" + chr(34) + ">" + t["gm"] + "</a>" if v is None else v}</dd>' for k, v in t['store_dl'])
     hero_alt = '小判鮫の店内（川越・元町の古民家）' if lang == 'ja' else 'Inside Kobanzame, an old wooden house in Kawagoe'
+    # お知らせ欄（日本語のトップだけ・お知らせが1件以上あるときだけ出す）
+    news_section = '' if (lang != 'ja' or not NEWS) else f'''  <section class="news" id="news" aria-labelledby="news-h">
+    <div class="wrap">
+      <div class="sec-head"><h2 id="news-h">News<small>お知らせ</small></h2>{'<a class="more" href="/news/">すべて見る</a>' if len(NEWS) > NEWS_TOP else ''}</div>
+      <ul class="newslist">
+{news_items_html(NEWS[:NEWS_TOP])}
+      </ul>
+    </div>
+  </section>
+'''
     top = head(lang, t['top_title'], t['top_desc'], P + '/', extra_ld=top_ld) + f'''
 <main>
   <section class="tiles" aria-label="{'カテゴリ' if lang == 'ja' else 'Categories'}">
@@ -1020,7 +1094,7 @@ for lang in ('ja', 'en'):
       </div>
     </div>
   </section>
-  <div class="wrap">
+{news_section}  <div class="wrap">
     <div class="catrow" role="group">{catrow(lang)}</div>
     <div class="sec-head" id="list"><h2>{t['list_h']}<small>{t['list_s']}</small></h2><span class="count" id="count">{len(avail_live)}{t['unit']}</span></div>
     {finder(lang)}
@@ -1355,12 +1429,33 @@ for lang, g in GUIDE.items():
 </main>
 ''' + foot(lang))
 
+# ---------- お知らせ一覧（/news/・/en/news/）----------
+# お知らせが0件でもページは作る（古いページが残って期限切れの文が出続けないように、毎回上書きする）
+for lang in ('ja', 'en'):
+    P = pre(lang)
+    if lang == 'ja':
+        nt, nd = 'お知らせ｜古着屋 小判鮫 KOBANZAME', '古着屋 小判鮫（川越・元町）からのお知らせです。臨時休業・営業時間の変更・イベントなどをお知らせします。'
+        empty, note = '今お知らせはありません。', ''
+    else:
+        nt, nd = 'News | Kobanzame', 'News from Kobanzame, a vintage clothing shop in Kawagoe (posted in Japanese).'
+        empty, note = 'There is no news at the moment.', '<p class="noen">News is posted in Japanese. Opening hours in English are on the <a href="/en/#store">top page</a>.</p>'
+    body = (f'<ul class="newslist" lang="ja">\n{news_items_html(NEWS)}\n  </ul>' if NEWS else f'<p class="newsnone">{empty}</p>')
+    write(P + '/news/index.html', head(lang, nt, nd, P + '/news/') + f'''
+<main class="wrap news">
+  <div class="crumb"><a href="{P}/">HOME</a><span>／</span><span>NEWS</span></div>
+  <div class="sec-head"><h1 id="news-h">News<small>{'お知らせ' if lang == 'ja' else 'Shop news'}</small></h1></div>
+  {note}
+  {body}
+</main>
+''' + foot(lang))
+
 # ---------- robots.txt / sitemap.xml / llms.txt ----------
 pages = []
 for lang in ('ja', 'en'):
     P = pre(lang)
     pages += [P + '/', P + '/journal/'] + [P + f"/journal/{p['slug']}/" for p in live]
 pages += ['/tokushoho/', '/privacy/', '/en/legal/', '/guide/', '/en/guide/'] + (['/workshop/', '/en/workshop/'] if WS_OPEN else [])
+pages += ['/news/', '/en/news/']
 write('/robots.txt', f'''# 小判鮫 公式サイト：検索エンジン・AI検索のどちらにも公開
 User-agent: *
 Allow: /
@@ -1404,8 +1499,9 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 - お問い合わせ: {SHOP['email']}
 - Instagram: {SHOP['instagram']}
 
-## ページ
+{('## お知らせ（' + TODAY + ' 時点）' + chr(10) + chr(10).join('- ' + n['date'] + ': ' + n['text'] + ('（' + n['until'] + 'まで）' if n['until'] else '') for n in NEWS) + chr(10) + chr(10)) if NEWS else ''}## ページ
 - [トップ・よくある質問]({BASE}/)
+- [お知らせ]({BASE}/news/)
 - [ジャーナル]({BASE}/journal/)
 - [川越で古着屋を探している方へ（案内）]({BASE}/guide/)
 {'- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・期間限定価格）](' + BASE + '/workshop/)' + chr(10) if WS_OPEN else ''}- [English]({BASE}/en/)
