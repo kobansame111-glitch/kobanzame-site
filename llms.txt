@@ -17,6 +17,7 @@
 
 ## ページ
 - [トップ・よくある質問](https://kobanzame-site.pages.dev/)
+- [お知らせ](https://kobanzame-site.pages.dev/news/)
 - [ジャーナル](https://kobanzame-site.pages.dev/journal/)
 - [川越で古着屋を探している方へ（案内）](https://kobanzame-site.pages.dev/guide/)
 - [ワークショップ（真鍮バングル・天然石ビーズブレスレット・期間限定価格）](https://kobanzame-site.pages.dev/workshop/)

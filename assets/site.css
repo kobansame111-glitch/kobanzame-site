@@ -325,3 +325,14 @@ label.chk input{width:20px;height:20px}
 footer.site{font-size:13px}
 .drawer h3,.days .today,.tag,.card .pr small,.catrow button small{font-size:12px}
 @media(max-width:639px){.tile .tt i{font-size:12px;padding:8px 14px}}
+.news .sec-head{margin-top:32px}
+.news .sec-head h1{font-family:var(--gothic);font-weight:500;font-size:22px;line-height:1;letter-spacing:.16em;text-transform:uppercase}
+.news .sec-head h1 small{display:block;font-family:var(--mincho);font-size:14px;margin-top:10px;color:var(--usu);letter-spacing:.06em;text-transform:none}
+.news .sec-head .more{font-size:13px;color:var(--kin);min-height:44px;display:inline-flex;align-items:center}
+.newslist{list-style:none;margin:0 0 8px;padding:0;border-top:1px solid var(--kin)}
+.newslist li{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:14px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.8}
+@media(min-width:640px){.newslist li{grid-template-columns:7.5em minmax(0,1fr);gap:16px}}
+.newslist time{font-family:var(--roman);font-size:13px;letter-spacing:.08em;color:var(--usu)}
+.newslist p{margin:0;overflow-wrap:anywhere}
+.newsnone{font-size:14px;color:var(--usu);padding:14px 0}
+.util .nb b{font-weight:600}
