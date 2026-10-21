@@ -3146,8 +3146,12 @@
     "date": "2026-10-16",
     "note": "小銭ポケットの「Riveted by Lee」金属プレートがAI画像に無い（ロゴ欠落）。生地にも本物に無い細かい模様が出ている"
    },
-   "redone": "2026-10-21",
-   "redo_cutout": true
+   "redone": "2026-10-22",
+   "back_check": {
+    "brighten": 0.1,
+    "garment_l": 95.1,
+    "bg": "normal"
+   }
   }
  },
  {
@@ -3278,8 +3282,17 @@
     "date": "2026-10-17",
     "note": "すね横のファスナーが本物より約14cm低い・前ももの当て布が本物より長く膝下まである・裾の広がりが本物より細い（色・ボタン・フラップポケットは一致）→ 2026-10-17 龍さん決定：作り直さず、この商品はマネキンなし"
    },
-   "redone": "2026-10-21",
-   "redo_cutout": true
+   "redone": "2026-10-22",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 110.7,
+    "bg": "normal"
+   },
+   "back_check": {
+    "brighten": 0.1,
+    "garment_l": 113.7,
+    "bg": "normal"
+   }
   }
  },
  {
@@ -3406,8 +3419,17 @@
     "date": "2026-10-16",
     "note": "胸ロゴの「CRABSHACK」が崩れた別の文字になり「at」も消えている。着丈73cmにしては裾がやや短く見える"
    },
-   "redone": "2026-10-21",
-   "redo_cutout": true
+   "redone": "2026-10-22",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 197.0,
+    "bg": "normal"
+   },
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 199.4,
+    "bg": "normal"
+   }
   }
  },
  {
@@ -3526,8 +3548,17 @@
     "袖丈": 61
    },
    "back_url": "/assets/products/k11314/v2_back.jpg",
-   "redone": "2026-10-21",
-   "redo_cutout": true
+   "redone": "2026-10-22",
+   "front_check": {
+    "brighten": 0.5,
+    "garment_l": 119.7,
+    "bg": "normal"
+   },
+   "back_check": {
+    "brighten": 0.3,
+    "garment_l": 108.1,
+    "bg": "normal"
+   }
   }
  },
  {
@@ -3634,7 +3665,7 @@
    "date": "2026-10-21",
    "front_i": 0,
    "back_i": 7,
-   "front_error": "RuntimeError('仕上がり確認で不合格：裾と袖の一部が切り取られています。')",
+   "front_error": "RuntimeError('仕上がり確認で不合格：裾が切り取られています')",
    "back_url": "/assets/products/k10990/v2_back.jpg",
    "mannequin": "pending",
    "mannequin_url": "/assets/products/k10990/v2_mannequin.jpg",
@@ -3645,8 +3676,12 @@
     "肩幅": 48,
     "袖丈": 49.5
    },
-   "redone": "2026-10-21",
-   "redo_cutout": true
+   "redone": "2026-10-22",
+   "back_check": {
+    "brighten": 0.2,
+    "garment_l": 166.0,
+    "bg": "normal"
+   }
   }
  }
 ]

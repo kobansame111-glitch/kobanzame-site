@@ -336,3 +336,4 @@ footer.site{font-size:13px}
 .newslist p{margin:0;overflow-wrap:anywhere}
 .newsnone{font-size:14px;color:var(--usu);padding:14px 0}
 .util .nb b{font-weight:600}
+.newtag{position:absolute;left:8px;top:8px;background:var(--kin);color:#fff;font-family:var(--gothic);font-size:10.5px;font-weight:600;letter-spacing:.14em;padding:3px 8px}
