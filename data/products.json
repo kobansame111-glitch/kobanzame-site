@@ -3058,7 +3058,7 @@
    "square": "https://square.link/u/NFnYpRYO"
   },
   "images": [
-   "/assets/products/k10614/01.jpg",
+   "/assets/products/k10614/v2_front.jpg",
    "/assets/products/k10614/v2_back.jpg",
    "/assets/products/k10614/03.jpg",
    "/assets/products/k10614/04.jpg",
@@ -3069,7 +3069,7 @@
    "/assets/products/k10614/09.jpg",
    "/assets/products/k10614/10.jpg"
   ],
-  "thumb": "/assets/products/k10614/thumb.jpg",
+  "thumb": "/assets/products/k10614/v2_thumb.jpg",
   "summary_text": "1990年代前後に作られた、Riveted by Leeのストレートジーンズです。ストーンウォッシュの落ち着いた青で、一本で決まります。",
   "summary_points": [
    "ミディアムブルー・ストーンウォッシュ加工のデニムパンツ（ストレートジーンズ）（ブランド：Riveted by Lee（リベッテッド バイ リー））",
@@ -3137,7 +3137,6 @@
    "date": "2026-10-14",
    "front_i": 0,
    "back_i": 1,
-   "front_error": "RuntimeError('仕上がり確認で不合格：裾が切り取られています')",
    "back_url": "/assets/products/k10614/v2_back.jpg",
    "mannequin": "ng",
    "mannequin_url": "/assets/products/k10614/v2_mannequin.jpg",
@@ -3157,7 +3156,9 @@
     "brighten": 0.1,
     "garment_l": 95.1,
     "bg": "normal"
-   }
+   },
+   "front_url": "/assets/products/k10614/v2_front.jpg",
+   "front_accepted_by": "目視で採用 2026-10-22（AI確認は「裾が切れる」で不合格）"
   }
  },
  {
@@ -3596,8 +3597,8 @@
    "square": "https://square.link/u/qe5ndjKv"
   },
   "images": [
-   "/assets/products/k10990/01.jpg",
    "/assets/products/k10990/v2_back.jpg",
+   "/assets/products/k10990/01.jpg",
    "/assets/products/k10990/02.jpg",
    "/assets/products/k10990/03.jpg",
    "/assets/products/k10990/04.jpg",
@@ -3607,7 +3608,7 @@
    "/assets/products/k10990/09.jpg",
    "/assets/products/k10990/10.jpg"
   ],
-  "thumb": "/assets/products/k10990/thumb.jpg",
+  "thumb": "/assets/products/k10990/v2_thumb.jpg",
   "summary_text": "CHICO'S DESIGNのシルクのジャケットです。ベージュ、カーキ、チャコールのボーダーが、楽に羽織れる一枚です。",
   "summary_points": [
    "ベージュ・カーキ・チャコールグレーのマルチボーダー柄のシルクジャケット（シャツジャケット）（ブランド：CHICO'S DESIGN）",
