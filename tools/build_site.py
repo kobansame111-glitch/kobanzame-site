@@ -68,6 +68,10 @@ NEWS_MAX_TEXT = 200      # GAS側の上限（120字）より少し大きめ。�
 NEWS_TOP = 3             # トップに出す件数（新しい順）
 NEWS_BAND_MAX = 2        # 上の帯に出す件数
 _DATE_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+_NEWS_ODD = re.compile('[\u200b-\u200f\u202a-\u202e\u2066-\u2069\ufeff]')
+def news_plain(t):
+    """llms.txt（AI向けの説明・Markdown）に入れる用：見出し・リンク・箇条書きの記号を全角にして、文として読ませる"""
+    return t.translate(str.maketrans({'#': '＃', '[': '［', ']': '］', '(': '（', ')': '）', '*': '＊', '`': '｀', '<': '＜', '>': '＞'}))
 def load_news():
     path = os.path.join(ROOT, 'data/news.json')
     if not os.path.exists(path):
@@ -93,7 +97,10 @@ def load_news():
             print('⚠ お知らせ：本文が空か長すぎるので飛ばしました', nid); continue
         if until and until < TODAY:
             continue   # 期限切れ
-        out.append({'id': nid, 'date': d, 'text': re.sub(r'\s+', ' ', text).strip(), 'until': until, 'band': it.get('band') is True})
+        text = re.sub(r'\s+', ' ', _NEWS_ODD.sub('', text)).strip()   # 文字の向きを変える記号・幅ゼロの文字は取り除く
+        if not text:
+            continue
+        out.append({'id': nid, 'date': d, 'text': text, 'until': until, 'band': it.get('band') is True})
     out.sort(key=lambda n: (n['date'], int(n['id'][1:])), reverse=True)
     return out
 NEWS = load_news()
@@ -1503,7 +1510,7 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 - お問い合わせ: {SHOP['email']}
 - Instagram: {SHOP['instagram']}
 
-{('## お知らせ（' + TODAY + ' 時点）' + chr(10) + chr(10).join('- ' + n['date'] + ': ' + n['text'] + ('（' + n['until'] + 'まで）' if n['until'] else '') for n in NEWS) + chr(10) + chr(10)) if NEWS else ''}## ページ
+{('## お知らせ（' + TODAY + ' 時点）' + chr(10) + chr(10).join('- ' + n['date'] + ': ' + news_plain(n['text']) + ('（' + n['until'] + 'まで）' if n['until'] else '') for n in NEWS) + chr(10) + chr(10)) if NEWS else ''}## ページ
 - [トップ・よくある質問]({BASE}/)
 - [お知らせ]({BASE}/news/)
 - [ジャーナル]({BASE}/journal/)
