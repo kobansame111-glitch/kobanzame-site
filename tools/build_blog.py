@@ -76,6 +76,17 @@ def _esc(s):
     return _html.escape(str(s), quote=True)
 
 
+# ---------- 表紙の写真の場所（2026-10-22：cover が photos の file と同じなら、その src を使う。一覧の表紙が出ない不具合の直し） ----------
+def cover_src(p):
+    cover = p.get('cover', '')
+    if not cover:
+        return ''
+    for ph in p.get('photos', []):
+        if ph.get('file') == cover and ph.get('src'):
+            return ph['src']
+    return f"{BLOG_ASSETS}/{p['slug']}/{cover}"
+
+
 # ---------- 記事の写真を <figure> に ----------
 def photo_html(photo, slug):
     """1枚の写真を <figure> で返す"""
@@ -158,7 +169,7 @@ def build_post(p):
     author = p.get('author', '小判鮫')
 
     # OG画像
-    og_image = f'{BLOG_ASSETS}/{slug}/{cover}' if cover else None
+    og_image = cover_src(p) or None
 
     # 構造化データ（BlogPosting）
     ld = {
@@ -177,7 +188,7 @@ def build_post(p):
         ]
     }
     if og_image:
-        ld['@graph'][1]['image'] = f'{BASE}{og_image}'
+        ld['@graph'][1]['image'] = og_image if og_image.startswith('http') else f'{BASE}{og_image}'
 
     # 日付の表示
     try:
@@ -256,7 +267,7 @@ def build_index(posts):
 
         img_html = ''
         if cover:
-            img_html = f'<div class="blog-card-img"><img src="{BLOG_ASSETS}/{slug}/{cover}" alt="" loading="lazy" decoding="async"></div>'
+            img_html = f'<div class="blog-card-img"><img src="{cover_src(p)}" alt="" loading="lazy" decoding="async"></div>'
 
         tags_html = ''
         if tags:
