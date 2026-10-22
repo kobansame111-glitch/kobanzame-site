@@ -138,8 +138,36 @@ _NG_WORDS = ['レア', '希少', '激レア', '最強', '世界に一つ', '気�
              'と思われます', 'ではないでしょうか', 'よく見られる']
 
 
+_PRODUCTS = None
+
+
+def _products():
+    global _PRODUCTS
+    if _PRODUCTS is None:
+        try:
+            _PRODUCTS = {x.get('slug'): x for x in json.load(open(os.path.join(ROOT, 'data/products.json'), encoding='utf-8'))}
+        except Exception:
+            _PRODUCTS = {}
+    return _PRODUCTS
+
+
 def lint_post(p):
     text = re.sub(r'<[^>]+>', '', (p.get('teaser', '') or '') + (p.get('body', '') or ''))
+    # 2026-10-22：商品の記事は、記事の slug＝商品の slug（違うと週1の自動作成が「記事が無い」と思い二重に書く・URL も変わる）
+    slug = p.get('slug', '')
+    prods = _products()
+    if re.match(r'^k\d', slug) and prods and slug not in prods:
+        print(f'  [blog] {slug}: ⚠ 記事の slug が商品の slug と違う（商品の slug に合わせる）')
+    # 2026-10-22：価格が商品ページと違えばログに出す（税抜×1.1 を10円単位に切り上げ・整数だけで計算）
+    pr = prods.get(slug)
+    try:
+        site = int(pr['prices']['site'])
+        exp = ((site * 11 + 99) // 100) * 10
+        got = [int(x.replace(',', '')) for x in re.findall(r'¥([\d,]+)', text)]
+        if got and exp not in got:
+            print(f'  [blog] {slug}: ⚠ 価格が商品ページと違う（記事 {got}・商品ページ ¥{exp:,}）')
+    except Exception:
+        pass
     hits = [(w, text.count(w)) for w in _NG_WORDS if w in text]
     if hits:
         print(f'  [blog] {p["slug"]}: 点検で見つかった言葉 ' + '・'.join(f'{w}×{n}' for w, n in hits))

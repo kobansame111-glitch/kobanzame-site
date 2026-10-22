@@ -10,18 +10,71 @@
   "teaser": "<p>1970年代から80年代にかけて作られた、ブラックレザーベストです。</p><!--photo:01.jpg--><p>外はブラックの本革、前を開けると内側にハウンドトゥース柄のライニングが見えます。</p>",
   "body": "<h2>どんな一着か</h2><!--photo:03.jpg,04.jpg--><p>サイドにバックルが付いていて、身幅を絞れます。革の厚みと柔らかさがしっかり残っています。手に取ると、革の重さが伝わってきます。</p><h2>ディテール</h2><!--photo:05.jpg--><p>外側はブラック無地ですが、内側のハウンドトゥース柄が、見えるとこに来たときに効きます。</p><h2>合わせ方</h2><p>Tシャツ一枚の上に羽織るだけで決まります。ウエスタンシャツにも、無地の白シャツにも合います。バックルで身幅を調整できるので、体型に合わせてシルエットを変えられます。</p><h2>状態（正直に）</h2><!--photo:06.jpg--><p>全体的な使用感があります。前身頃下部に白色塗料系の汚れ・シミがあります。革の経年劣化によるシワ・色褪せ、金属バックルに錆があります。</p><h2>この1点の情報</h2><table class=\"blog-spec\"><tr><th>ブランド</th><td>表記なし</td></tr><tr><th>素材</th><td>本革／内側ハウンドトゥース柄布地ライニング</td></tr><tr><th>色</th><td>ブラック</td></tr><tr><th>サイズ</th><td>実寸 身幅52cm・着丈59cm・肩幅38cm</td></tr><tr><th>年代</th><td>1970年代〜1980年代</td></tr><tr><th>状態</th><td>使用感あり。前身頃下部に白色塗料系の汚れ・シミ、革のシワ・色褪せ、バックルに錆あり</td></tr><tr><th>価格</th><td>¥25,080（税込）</td></tr><tr><th>商品ページ</th><td><a href=\"https://kobanzame-site.pages.dev/journal/k11265/\">小判鮫のサイトで見る</a></td></tr></table>",
   "photos": [
-    {"file": "01.jpg", "src": "/assets/products/k11265/v2_front.jpg", "alt": "ブラックレザーベスト 正面", "caption": "正面"},
-    {"file": "02.jpg", "src": "/assets/products/k11265/06.jpg", "alt": "ブラックレザーベスト 背面"},
-    {"file": "03.jpg", "src": "/assets/products/k11265/02.jpg", "alt": "ブラックレザーベスト ディテール"},
-    {"file": "04.jpg", "src": "/assets/products/k11265/03.jpg", "alt": "ブラックレザーベスト ハウンドトゥース裏地"},
-    {"file": "05.jpg", "src": "/assets/products/k11265/04.jpg", "alt": "ブラックレザーベスト ディテール"},
-    {"file": "06.jpg", "src": "/assets/products/k11265/05.jpg", "alt": "ブラックレザーベスト 状態"},
-    {"file": "07.jpg", "src": "/assets/products/k11265/07.jpg", "alt": "ブラックレザーベスト ディテール"},
-    {"file": "08.jpg", "src": "/assets/products/k11265/08.jpg", "alt": "ブラックレザーベスト ディテール"},
-    {"file": "09.jpg", "src": "/assets/products/k11265/09.jpg", "alt": "ブラックレザーベスト ディテール"},
-    {"file": "10.jpg", "src": "/assets/products/k11265/10.jpg", "alt": "ブラックレザーベスト ディテール"},
-    {"file": "11.jpg", "src": "/assets/products/k11265/11.jpg", "alt": "ブラックレザーベスト ディテール"},
-    {"file": "12.jpg", "src": "/assets/products/k11265/12.jpg", "alt": "ブラックレザーベスト ディテール"}
+    {
+      "file": "01.jpg",
+      "src": "/assets/products/k11265/v2_front.jpg",
+      "alt": "ブラックレザーベスト 正面",
+      "caption": "正面"
+    },
+    {
+      "file": "02.jpg",
+      "src": "/assets/products/k11265/06.jpg",
+      "alt": "ブラックレザーベスト 背面"
+    },
+    {
+      "file": "03.jpg",
+      "src": "/assets/products/k11265/02.jpg",
+      "alt": "ブラックレザーベスト ディテール"
+    },
+    {
+      "file": "04.jpg",
+      "src": "/assets/products/k11265/03.jpg",
+      "alt": "ブラックレザーベスト ハウンドトゥース裏地"
+    },
+    {
+      "file": "05.jpg",
+      "src": "/assets/products/k11265/04.jpg",
+      "alt": "ブラックレザーベスト ディテール"
+    },
+    {
+      "file": "06.jpg",
+      "src": "/assets/products/k11265/05.jpg",
+      "alt": "ブラックレザーベスト 状態"
+    },
+    {
+      "file": "07.jpg",
+      "src": "/assets/products/k11265/07.jpg",
+      "alt": "ブラックレザーベスト ディテール"
+    },
+    {
+      "file": "08.jpg",
+      "src": "/assets/products/k11265/08.jpg",
+      "alt": "ブラックレザーベスト ディテール"
+    },
+    {
+      "file": "09.jpg",
+      "src": "/assets/products/k11265/09.jpg",
+      "alt": "ブラックレザーベスト ディテール"
+    },
+    {
+      "file": "10.jpg",
+      "src": "/assets/products/k11265/10.jpg",
+      "alt": "ブラックレザーベスト ディテール"
+    },
+    {
+      "file": "11.jpg",
+      "src": "/assets/products/k11265/11.jpg",
+      "alt": "ブラックレザーベスト ディテール"
+    },
+    {
+      "file": "12.jpg",
+      "src": "/assets/products/k11265/12.jpg",
+      "alt": "ブラックレザーベスト ディテール"
+    }
   ],
-  "tags": ["ベスト", "レザー", "70s-80s"]
+  "tags": [
+    "ベスト",
+    "レザー",
+    "70s-80s"
+  ]
 }
