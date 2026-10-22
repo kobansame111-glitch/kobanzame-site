@@ -10,19 +10,76 @@
   "teaser": "<p>90年代のChampion、USA製の半袖ラグランスウェットです。色はグレーで、サイズはLです。</p><!--photo:01.jpg--><p>袖にCワッペン、胸に小さなCロゴが付いています。ひと目でChampionとわかる一枚です。</p>",
   "body": "<h2>90年代を示すタグ</h2><!--photo:08.jpg--><p>首の内側に「IT TAKES A LITTLE MORE TO MAKE A CHAMPION U.S.A.」のタグが付いています。90年代のChampionに見られるタグです。</p><h2>ラグランスリーブとリブ</h2><!--photo:05.jpg--><p>ラグランスリーブのゆったりしたシルエットを、リブの効いた袖口と裾が引き締めています。裾リブが効いているので、着丈の数値ほど長く感じません。半袖のスウェットなので、春や秋の一枚にちょうどいいです。</p><h2>サイズと状態</h2><!--photo:02.jpg--><p>サイズはL（身幅64cm・着丈69cm・袖丈44cm）。ラグランのため肩幅は採寸していません。経年の色褪せと生地のこなれ感があります。袖口の内側に目立たないリペア跡がありますが、大きなダメージはありません。</p><h2>この1点の情報</h2><table class=\"blog-spec\"><tr><th>ブランド</th><td>Champion</td></tr><tr><th>サイズ表記</th><td>L</td></tr><tr><th>実寸</th><td>身幅64／着丈69／袖丈44cm（ラグランのため肩幅採寸なし）</td></tr><tr><th>素材の表示</th><td>（表示の確認中）</td></tr><tr><th>生産国</th><td>USA製</td></tr><tr><th>年代</th><td>1990年代（首タグの書体から）</td></tr><tr><th>状態</th><td>B：経年の色褪せ・こなれ感あり。袖口内側に目立たないリペア跡。大きなダメージなし</td></tr><tr><th>価格</th><td>¥9,680（税込）</td></tr><tr><th>商品ページ</th><td><a href=\"https://kobanzame-site.pages.dev/journal/k11190-champion-90s-ss-raglan-sweat/\">小判鮫のサイトで見る</a></td></tr></table>",
   "photos": [
-    {"file": "01.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrio4SyLUBkVfwTVKhaj.jpg", "alt": "Champion 半袖ラグランスウェット 正面", "caption": "正面"},
-    {"file": "02.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrioAup6VpFRFDZFfSzu.jpg", "alt": "Champion 半袖ラグランスウェット 別角度"},
-    {"file": "03.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrinsKMNzUyrzStZZRKt.jpg", "alt": "Champion 半袖ラグランスウェット ディテール"},
-    {"file": "04.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrioLYfNwdcAVWjwL8GV.jpg", "alt": "Champion 半袖ラグランスウェット ディテール"},
-    {"file": "05.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrioMH7a44Fcp5RY2LLK.jpg", "alt": "Champion 半袖ラグランスウェット ディテール"},
-    {"file": "06.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrinqYRXnmAxZ8f3nr7s.jpg", "alt": "Champion 半袖ラグランスウェット ディテール"},
-    {"file": "07.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrioLWTuMGDDHJho6BXp.jpg", "alt": "Champion 半袖ラグランスウェット ディテール"},
-    {"file": "08.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrioLLxGbded2Cae3dpA.jpg", "alt": "Champion 半袖ラグランスウェット タグ"},
-    {"file": "09.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrioMAAT7uB86PKCiizL.jpg", "alt": "Champion 半袖ラグランスウェット ディテール"},
-    {"file": "10.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrioHPMiptPoFXConnoN.jpg", "alt": "Champion 半袖ラグランスウェット ディテール"},
-    {"file": "11.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrioFaEmC9ZLTc88gnvu.jpg", "alt": "Champion 半袖ラグランスウェット ディテール"},
-    {"file": "12.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrioFzH4cspFDnevGJdn.jpg", "alt": "Champion 半袖ラグランスウェット ディテール"},
-    {"file": "13.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWrio5dNHzdXn9ogHzo6R.jpg", "alt": "Champion 半袖ラグランスウェット ディテール"}
+    {
+      "file": "01.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/01.jpg",
+      "alt": "Champion 半袖ラグランスウェット 正面",
+      "caption": "正面"
+    },
+    {
+      "file": "02.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/02.jpg",
+      "alt": "Champion 半袖ラグランスウェット 別角度"
+    },
+    {
+      "file": "03.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/03.jpg",
+      "alt": "Champion 半袖ラグランスウェット ディテール"
+    },
+    {
+      "file": "04.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/04.jpg",
+      "alt": "Champion 半袖ラグランスウェット ディテール"
+    },
+    {
+      "file": "05.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/05.jpg",
+      "alt": "Champion 半袖ラグランスウェット ディテール"
+    },
+    {
+      "file": "06.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/06.jpg",
+      "alt": "Champion 半袖ラグランスウェット ディテール"
+    },
+    {
+      "file": "07.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/07.jpg",
+      "alt": "Champion 半袖ラグランスウェット ディテール"
+    },
+    {
+      "file": "08.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/08.jpg",
+      "alt": "Champion 半袖ラグランスウェット タグ"
+    },
+    {
+      "file": "09.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/09.jpg",
+      "alt": "Champion 半袖ラグランスウェット ディテール"
+    },
+    {
+      "file": "10.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/10.jpg",
+      "alt": "Champion 半袖ラグランスウェット ディテール"
+    },
+    {
+      "file": "11.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/11.jpg",
+      "alt": "Champion 半袖ラグランスウェット ディテール"
+    },
+    {
+      "file": "12.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/12.jpg",
+      "alt": "Champion 半袖ラグランスウェット ディテール"
+    },
+    {
+      "file": "13.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/13.jpg",
+      "alt": "Champion 半袖ラグランスウェット ディテール"
+    }
   ],
-  "tags": ["スウェット", "Champion", "トップス"]
+  "tags": [
+    "スウェット",
+    "Champion",
+    "トップス"
+  ]
 }

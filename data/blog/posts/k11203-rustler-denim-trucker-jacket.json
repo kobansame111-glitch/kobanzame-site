@@ -10,20 +10,81 @@
   "teaser": "<p>Wranglerの姉妹ブランド、RUSTLERのデニムトラッカージャケットです。70〜80年代、USA製。</p><!--photo:01.jpg--><p>インディゴの濃い色がまだしっかり残っています。これから自分の着方で色を育てていけるデニムジャケットです。</p>",
   "body": "<h2>RUSTLERというブランド</h2><!--photo:07.jpg--><p>RUSTLERは、Wranglerの姉妹ブランドとして、手の届く価格のワークウェアを作っていたブランドです。この1着は70〜80年代のもので、タグにはXLの表記があります。</p><h2>13オンスのデニム</h2><!--photo:05.jpg,06.jpg--><p>13オンスのしっかりした厚みのあるデニムです。胸に2つのフラップポケットとハンドポケット、RUSTLERの刻印入りボタンが付いています。無骨で、クラシックな作りです。</p><h2>状態</h2><!--photo:04.jpg--><p>衿元・肩まわりに数カ所の小さな傷み・スレがあります。全体の色落ちは少なく、生地はしっかりしています。実寸は肩幅38cm・身幅48cm・着丈52.5cm・袖丈54cmです。タグはXLですが、この実寸なので試着をおすすめします。</p><h2>この1点の情報</h2><table class=\"blog-spec\"><tr><th>ブランド</th><td>RUSTLER（Wrangler姉妹ブランド）</td></tr><tr><th>素材</th><td>デニム（13オンス）</td></tr><tr><th>色</th><td>インディゴ（濃色）</td></tr><tr><th>サイズ表記</th><td>XL</td></tr><tr><th>実寸</th><td>肩幅38／身幅48／着丈52.5／袖丈54cm</td></tr><tr><th>生産国</th><td>USA製</td></tr><tr><th>年代</th><td>1970〜80年代</td></tr><tr><th>状態</th><td>B：衿元・肩まわりに小さな傷み・スレ数カ所。色落ちは少なく生地はしっかり</td></tr><tr><th>価格</th><td>¥10,780（税込）</td></tr><tr><th>商品ページ</th><td><a href=\"https://kobanzame-site.pages.dev/journal/k11203-rustler-denim-trucker-jacket/\">小判鮫のサイトで見る</a></td></tr></table>",
   "photos": [
-    {"file": "01.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbcbnfEEvJXHSLhkW6.jpg", "alt": "RUSTLER デニムトラッカージャケット 正面", "caption": "正面"},
-    {"file": "02.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbd3TQQibRsZ7hFDAH.jpg", "alt": "RUSTLER デニムトラッカージャケット 別角度"},
-    {"file": "03.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbpWLZzr544axwpTmj.jpg", "alt": "RUSTLER デニムトラッカージャケット ディテール"},
-    {"file": "04.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbojNciWxoftY4yAnQ.jpg", "alt": "RUSTLER デニムトラッカージャケット ディテール"},
-    {"file": "05.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbnr4epfBsMEGThXM5.jpg", "alt": "RUSTLER デニムトラッカージャケット ポケット"},
-    {"file": "06.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbpxuarxcSpDfdePr6.jpg", "alt": "RUSTLER デニムトラッカージャケット ボタン"},
-    {"file": "07.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCboFqfWk8aNRdYtjWR.jpg", "alt": "RUSTLER デニムトラッカージャケット タグ"},
-    {"file": "08.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbq6FDWTnAEyjCZFQj.jpg", "alt": "RUSTLER デニムトラッカージャケット ディテール"},
-    {"file": "09.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbq6YJnyudiRpwF3ec.jpg", "alt": "RUSTLER デニムトラッカージャケット ディテール"},
-    {"file": "10.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbqUgZvMuQtFV46tWu.jpg", "alt": "RUSTLER デニムトラッカージャケット ディテール"},
-    {"file": "11.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbq4xHZ3ep3ZcyHubK.jpg", "alt": "RUSTLER デニムトラッカージャケット ディテール"},
-    {"file": "12.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbqGMCx2qF4WBc8BVf.jpg", "alt": "RUSTLER デニムトラッカージャケット ディテール"},
-    {"file": "13.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbqKDLDbhE5rFL7Y6P.jpg", "alt": "RUSTLER デニムトラッカージャケット ディテール"},
-    {"file": "14.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JWiCbpo7XRQRkNR4H4oo2.jpg", "alt": "RUSTLER デニムトラッカージャケット ディテール"}
+    {
+      "file": "01.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/01.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット 正面",
+      "caption": "正面"
+    },
+    {
+      "file": "02.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/02.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット 別角度"
+    },
+    {
+      "file": "03.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/03.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット ディテール"
+    },
+    {
+      "file": "04.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/04.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット ディテール"
+    },
+    {
+      "file": "05.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/05.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット ポケット"
+    },
+    {
+      "file": "06.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/06.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット ボタン"
+    },
+    {
+      "file": "07.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/07.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット タグ"
+    },
+    {
+      "file": "08.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/08.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット ディテール"
+    },
+    {
+      "file": "09.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/09.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット ディテール"
+    },
+    {
+      "file": "10.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/10.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット ディテール"
+    },
+    {
+      "file": "11.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/11.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット ディテール"
+    },
+    {
+      "file": "12.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/12.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット ディテール"
+    },
+    {
+      "file": "13.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/13.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット ディテール"
+    },
+    {
+      "file": "14.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/14.jpg",
+      "alt": "RUSTLER デニムトラッカージャケット ディテール"
+    }
   ],
-  "tags": ["デニムジャケット", "RUSTLER", "アウター"]
+  "tags": [
+    "デニムジャケット",
+    "RUSTLER",
+    "アウター"
+  ]
 }

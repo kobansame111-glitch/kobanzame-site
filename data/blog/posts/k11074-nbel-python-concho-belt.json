@@ -10,21 +10,86 @@
   "teaser": "<p>イタリア製、nbel のパイソンレザーベルトです。</p><!--photo:01.jpg--><p>オレンジ・イエロー・ナチュラルの蛇革を継いだ配色に、燻し銀のコンチョが等間隔に並んでいます。</p>",
   "body": "<h2>蛇革の配色</h2><!--photo:03.jpg,05.jpg--><p>3色のパイソン革を継いだ配色です。バックルはウエスタン調の花柄で、使い込まれた革の表情がそのまま雰囲気になっています。</p><h2>使い方</h2><!--photo:06.jpg--><p>幅2cmの細身タイプです。デニムのベルトループにはもちろん、ワンピースやシャツワンピのウエストマークにも合わせやすいデザインです。男女問わず使えます。</p><p>装着できるウエストは穴の位置で変わるので、全長からバックルの内側までを目安に、お手持ちのベルトと比べてご確認ください。</p><h2>状態</h2><!--photo:04.jpg--><p>状態は B です。レザー表面にヴィンテージらしいシボ・アタリ、パイソン部分に経年の使用感があります。ダメージではなく、風合いとして楽しめる状態です。</p><h2>この1点の情報</h2><table class=\"blog-spec\"><tr><th>ブランド</th><td>nbel</td></tr><tr><th>素材</th><td>レザー × パイソン（蛇革）</td></tr><tr><th>色</th><td>ブラウン／マルチカラー（オレンジ・イエロー・ナチュラル）</td></tr><tr><th>サイズ</th><td>全長 約97cm（バックル除く）／バックル 約5cm／ベルト幅 約2cm</td></tr><tr><th>生産国</th><td>イタリア製</td></tr><tr><th>状態</th><td>B：レザー表面にシボ・アタリ、パイソン部分に経年の使用感</td></tr><tr><th>発送</th><td>国内のみ（パイソン革のため海外発送はお受けしていません）</td></tr><tr><th>価格</th><td>¥8,580（税込）</td></tr><tr><th>商品ページ</th><td><a href=\"https://kobanzame-site.pages.dev/journal/k11074-nbel-python-concho-belt/\">小判鮫のサイトで見る</a></td></tr></table>",
   "photos": [
-    {"file": "01.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN8z9ygibGgb32aexR5.jpg", "alt": "nbel コンチョベルト 全体", "caption": "全体"},
-    {"file": "02.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN94bkkMkxhbXhoopNV.jpg", "alt": "nbel コンチョベルト 別角度"},
-    {"file": "03.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN99K26tppxJswwPUfv.jpg", "alt": "nbel コンチョベルト パイソン革の配色"},
-    {"file": "04.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN9CSjHYDWSxa2ZhHBR.jpg", "alt": "nbel コンチョベルト ディテール"},
-    {"file": "05.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN99QzxDtGhHPFnsQWy.jpg", "alt": "nbel コンチョベルト コンチョ"},
-    {"file": "06.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B4MB4B9q3YST4Pvu.jpg", "alt": "nbel コンチョベルト バックル"},
-    {"file": "07.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B3PzFPYdaDo3AkRm.jpg", "alt": "nbel コンチョベルト ディテール"},
-    {"file": "08.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B7CAN5mSuxdQowru.jpg", "alt": "nbel コンチョベルト ディテール"},
-    {"file": "09.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN9AzBEiBKMtMYMQehr.jpg", "alt": "nbel コンチョベルト ディテール"},
-    {"file": "10.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B3PDuPVpPvPQrv94.jpg", "alt": "nbel コンチョベルト ディテール"},
-    {"file": "11.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN9C8Pmjtisrqcky5jy.jpg", "alt": "nbel コンチョベルト ディテール"},
-    {"file": "12.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B5uRzwMRg33TJ9RN.jpg", "alt": "nbel コンチョベルト ディテール"},
-    {"file": "13.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B4xLscAvd8tANZTf.jpg", "alt": "nbel コンチョベルト ディテール"},
-    {"file": "14.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN99X3FUFYtAVWhayFd.jpg", "alt": "nbel コンチョベルト ディテール"},
-    {"file": "15.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JTmN99tY84v65Q6X8Xn8E.jpg", "alt": "nbel コンチョベルト ディテール"}
+    {
+      "file": "01.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/01.jpg",
+      "alt": "nbel コンチョベルト 全体",
+      "caption": "全体"
+    },
+    {
+      "file": "02.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/02.jpg",
+      "alt": "nbel コンチョベルト 別角度"
+    },
+    {
+      "file": "03.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/03.jpg",
+      "alt": "nbel コンチョベルト パイソン革の配色"
+    },
+    {
+      "file": "04.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/04.jpg",
+      "alt": "nbel コンチョベルト ディテール"
+    },
+    {
+      "file": "05.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/05.jpg",
+      "alt": "nbel コンチョベルト コンチョ"
+    },
+    {
+      "file": "06.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/06.jpg",
+      "alt": "nbel コンチョベルト バックル"
+    },
+    {
+      "file": "07.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/07.jpg",
+      "alt": "nbel コンチョベルト ディテール"
+    },
+    {
+      "file": "08.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/08.jpg",
+      "alt": "nbel コンチョベルト ディテール"
+    },
+    {
+      "file": "09.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/09.jpg",
+      "alt": "nbel コンチョベルト ディテール"
+    },
+    {
+      "file": "10.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/10.jpg",
+      "alt": "nbel コンチョベルト ディテール"
+    },
+    {
+      "file": "11.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/11.jpg",
+      "alt": "nbel コンチョベルト ディテール"
+    },
+    {
+      "file": "12.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/12.jpg",
+      "alt": "nbel コンチョベルト ディテール"
+    },
+    {
+      "file": "13.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/13.jpg",
+      "alt": "nbel コンチョベルト ディテール"
+    },
+    {
+      "file": "14.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/14.jpg",
+      "alt": "nbel コンチョベルト ディテール"
+    },
+    {
+      "file": "15.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/15.jpg",
+      "alt": "nbel コンチョベルト ディテール"
+    }
   ],
-  "tags": ["ベルト", "nbel", "アクセサリー"]
+  "tags": [
+    "ベルト",
+    "nbel",
+    "アクセサリー"
+  ]
 }

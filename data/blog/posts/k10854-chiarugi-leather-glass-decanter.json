@@ -10,13 +10,46 @@
   "teaser": "<p>古着屋をやっていると、服以外のものに出会うこともあります。</p><!--photo:01.jpg--><p>フィレンツェの革工房Chiarugi（キアルージ）が手がけた、本革張りのガラスボトルです。1980年代のイタリア製です。</p>",
   "body": "<h2>革と型押し</h2><!--photo:03.jpg,04.jpg--><p>グリーンガラスのボトルに革を張り込み、葡萄と葉の意匠を型押しで打ち込んであります。首元は紐巻きで仕上げています。底にはMADE IN ITALYの箔押しと、Chiarugi & C. s.r.l. Firenze のシールが残っています。</p><h2>大きさと使い方</h2><!--photo:02.jpg--><p>高さ約22cm、最大幅約18cm、底の直径約10.5cmです。口は約2.2cmで、細口の花を一輪挿すのにちょうどいい大きさです。ワインやオリーブオイルのデカンタとしても、空のままオブジェとしても使えます。</p><h2>状態</h2><!--photo:05.jpg--><p>革は経年で色が抜け、擦れや部分的な欠けがあります。ガラス本体に割れ・ヒビは見当たりません。</p><h2>この1点の情報</h2><table class=\"blog-spec\"><tr><th>ブランド</th><td>Chiarugi & C. s.r.l.（フィレンツェ）</td></tr><tr><th>素材</th><td>本革／ガラス</td></tr><tr><th>色</th><td>ブラウン × グリーン</td></tr><tr><th>サイズ</th><td>高さ約22cm／最大幅約18cm／底径約10.5cm／口径約2.2cm</td></tr><tr><th>年代・生産</th><td>1980年代・イタリア製</td></tr><tr><th>状態</th><td>B：革表面に色抜け・擦れ・部分的な欠けあり。ガラスに割れ・ヒビは見当たらず</td></tr><tr><th>価格</th><td>¥7,480（税込）</td></tr><tr><th>商品ページ</th><td><a href=\"https://kobanzame-site.pages.dev/journal/k10854-chiarugi-leather-glass-decanter/\">小判鮫のサイトで見る</a></td></tr></table>",
   "photos": [
-    {"file": "01.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JUfpZvgPXcz4TkC4s9uPz.jpg", "alt": "Chiarugi 本革張りガラスデカンタ 全体", "caption": "全体"},
-    {"file": "02.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JUfpZuZV9sALKhZEi5SKG.jpg", "alt": "Chiarugi 本革張りガラスデカンタ 別角度"},
-    {"file": "03.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JUfpZvWGwmCnktp5fbUPN.jpg", "alt": "Chiarugi 本革張りガラスデカンタ 型押し"},
-    {"file": "04.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JUfpZvG2hLJNiyXAHbJb7.jpg", "alt": "Chiarugi 本革張りガラスデカンタ ディテール"},
-    {"file": "05.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JUfpZvFiXciLEEzQZs62q.jpg", "alt": "Chiarugi 本革張りガラスデカンタ 状態"},
-    {"file": "06.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JUfpZvE93pRcesDFoygR5.jpg", "alt": "Chiarugi 本革張りガラスデカンタ ディテール"},
-    {"file": "07.jpg", "src": "https://assets.mercari-shops-static.com/-/large/plain/2JUfpZu2AzfakWQRu37NTf.jpg", "alt": "Chiarugi 本革張りガラスデカンタ 底"}
+    {
+      "file": "01.jpg",
+      "src": "/assets/blog/k10854-chiarugi-leather-glass-decanter/01.jpg",
+      "alt": "Chiarugi 本革張りガラスデカンタ 全体",
+      "caption": "全体"
+    },
+    {
+      "file": "02.jpg",
+      "src": "/assets/blog/k10854-chiarugi-leather-glass-decanter/02.jpg",
+      "alt": "Chiarugi 本革張りガラスデカンタ 別角度"
+    },
+    {
+      "file": "03.jpg",
+      "src": "/assets/blog/k10854-chiarugi-leather-glass-decanter/03.jpg",
+      "alt": "Chiarugi 本革張りガラスデカンタ 型押し"
+    },
+    {
+      "file": "04.jpg",
+      "src": "/assets/blog/k10854-chiarugi-leather-glass-decanter/04.jpg",
+      "alt": "Chiarugi 本革張りガラスデカンタ ディテール"
+    },
+    {
+      "file": "05.jpg",
+      "src": "/assets/blog/k10854-chiarugi-leather-glass-decanter/05.jpg",
+      "alt": "Chiarugi 本革張りガラスデカンタ 状態"
+    },
+    {
+      "file": "06.jpg",
+      "src": "/assets/blog/k10854-chiarugi-leather-glass-decanter/06.jpg",
+      "alt": "Chiarugi 本革張りガラスデカンタ ディテール"
+    },
+    {
+      "file": "07.jpg",
+      "src": "/assets/blog/k10854-chiarugi-leather-glass-decanter/07.jpg",
+      "alt": "Chiarugi 本革張りガラスデカンタ 底"
+    }
   ],
-  "tags": ["雑貨", "Chiarugi", "イタリア製"]
+  "tags": [
+    "雑貨",
+    "Chiarugi",
+    "イタリア製"
+  ]
 }
