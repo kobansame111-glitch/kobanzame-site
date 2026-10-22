@@ -26,14 +26,22 @@ build_site.py が先に head(), foot(), write() などを定義しているの�
 """
 import json, os, html as _html, glob, datetime
 
-# build_site.py から呼ばれるときは ROOT, BASE, TODAY, head, foot, write, esc, SHOP, jld, org_node が使える
-# 単体テスト用のフォールバック
-try:
-    ROOT
-except NameError:
-    ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    BASE = 'https://kobanzame-site.pages.dev'
-    TODAY = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%Y-%m-%d')
+# build_site.py から import されるとき、build_site のグローバルは見えない。
+# 必要な変数・関数は build_site から明示的に取得する。
+import importlib, sys
+
+def _get_site():
+    """build_site.py のモジュールを返す（すでに読み込み済みならそれを使う）"""
+    mod = sys.modules.get('build_site') or sys.modules.get('__main__')
+    return mod
+
+def _site_var(name, default=None):
+    mod = _get_site()
+    return getattr(mod, name, default)
+
+ROOT = _site_var('ROOT') or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE = _site_var('BASE') or 'https://kobanzame-site.pages.dev'
+TODAY = _site_var('TODAY') or os.environ.get('SITE_TODAY') or datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%Y-%m-%d')
 
 BLOG_DIR = os.path.join(ROOT, 'data/blog/posts')
 BLOG_ASSETS = '/assets/blog'   # URL上のパス
@@ -62,10 +70,10 @@ def load_posts():
 
 def _esc(s):
     """html.escape のショートカット（build_site.py の esc が無いとき用）"""
-    try:
-        return esc(s)
-    except NameError:
-        return _html.escape(str(s), quote=True)
+    fn = _site_var('esc')
+    if fn:
+        return fn(s)
+    return _html.escape(str(s), quote=True)
 
 
 # ---------- 記事の写真を <figure> に ----------
@@ -116,8 +124,8 @@ def build_post(p):
                 '@type': 'BlogPosting',
                 'headline': title,
                 'datePublished': date,
-                'author': {'@type': 'Organization', 'name': SHOP.get('name', '古着屋 小判鮫 KOBANZAME')},
-                'publisher': {'@type': 'Organization', 'name': SHOP.get('name', '古着屋 小判鮫 KOBANZAME')},
+                'author': {'@type': 'Organization', 'name': _site_var('SHOP', {}).get('name', '古着屋 小判鮫 KOBANZAME')},
+                'publisher': {'@type': 'Organization', 'name': _site_var('SHOP', {}).get('name', '古着屋 小判鮫 KOBANZAME')},
                 'description': desc,
                 'mainEntityOfPage': {'@type': 'WebPage', '@id': f'{BASE}/blog/{slug}/'},
             }
@@ -232,30 +240,31 @@ def build_index(posts):
 
 # ---------- build_site.py の関数を安全に呼ぶラッパー ----------
 def try_head(*a, **kw):
-    try:
-        return head(*a, **kw)
-    except NameError:
-        return f'<!doctype html><html lang="ja"><head><title>{a[1] if len(a) > 1 else ""}</title></head><body>'
+    fn = _site_var('head')
+    if fn:
+        return fn(*a, **kw)
+    return f'<!doctype html><html lang="ja"><head><title>{a[1] if len(a) > 1 else ""}</title></head><body>'
 
 def try_foot(*a, **kw):
-    try:
-        return foot(*a, **kw)
-    except NameError:
-        return '</body></html>'
+    fn = _site_var('foot')
+    if fn:
+        return fn(*a, **kw)
+    return '</body></html>'
 
 def try_write(path, text):
-    try:
-        write(path, text)
-    except NameError:
+    fn = _site_var('write')
+    if fn:
+        fn(path, text)
+    else:
         full = os.path.join(ROOT, path.lstrip('/'))
         os.makedirs(os.path.dirname(full), exist_ok=True)
         open(full, 'w', encoding='utf-8').write(text)
 
 def try_org_node():
-    try:
-        return org_node()
-    except NameError:
-        return {'@type': 'Organization', 'name': '古着屋 小判鮫 KOBANZAME'}
+    fn = _site_var('org_node')
+    if fn:
+        return fn()
+    return {'@type': 'Organization', 'name': '古着屋 小判鮫 KOBANZAME'}
 
 
 # ---------- CSS（build_site.py に追記用） ----------
