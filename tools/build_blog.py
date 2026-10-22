@@ -24,7 +24,7 @@ build_site.py が先に head(), foot(), write() などを定義しているの�
   "tags": ["ダウンジャケット", "Abercrombie & Fitch"]
 }
 """
-import json, os, html as _html, glob, datetime
+import json, os, re, html as _html, glob, datetime
 
 # build_site.py から import されるとき、build_site のグローバルは見えない。
 # 必要な変数・関数は build_site から明示的に取得する。
@@ -89,6 +89,46 @@ def photo_html(photo, slug):
     return fig
 
 
+# ---------- 本文の中に写真を差し込む（2026-10-22 龍さん「文章の間に写真」） ----------
+# 本文（teaser・body）に <!--photo:05.jpg--> と書くと、その場所に写真1枚。
+# <!--photo:05.jpg,09.jpg--> と2枚書くと横並び。ファイル名は photos[] の file と同じ。
+# 差し込んだ写真は、最後のギャラリーには出さない。
+_PHOTO_MARK = re.compile(r'<!--\s*photo:\s*([^>]+?)\s*-->')
+
+
+def inline_photos(html, photos, slug, used):
+    by_file = {ph['file']: ph for ph in photos}
+
+    def rep(m):
+        files = [f.strip() for f in m.group(1).split(',') if f.strip()]
+        figs = []
+        for f in files:
+            ph = by_file.get(f)
+            if not ph:
+                print(f'  [blog] {slug}: 本文の写真 {f} が photos に無い（飛ばした）')
+                continue
+            used.add(f)
+            figs.append(photo_html(ph, slug))
+        if not figs:
+            return ''
+        cls = 'blog-inline blog-inline-2' if len(figs) > 1 else 'blog-inline'
+        return f'<div class="{cls}">' + ''.join(figs) + '</div>'
+
+    return _PHOTO_MARK.sub(rep, html or '')
+
+
+# ---------- 公開前の点検（ブログの書き方ルール v0 §2-6：数えてログに出すだけ・止めない） ----------
+_NG_WORDS = ['レア', '希少', '激レア', '最強', '世界に一つ', '気配', '前世', '転生', '取り置き', '予約', '俺',
+             'と思われます', 'ではないでしょうか', 'よく見られる']
+
+
+def lint_post(p):
+    text = re.sub(r'<[^>]+>', '', (p.get('teaser', '') or '') + (p.get('body', '') or ''))
+    hits = [(w, text.count(w)) for w in _NG_WORDS if w in text]
+    if hits:
+        print(f'  [blog] {p["slug"]}: 点検で見つかった言葉 ' + '・'.join(f'{w}×{n}' for w, n in hits))
+
+
 def gallery_html(photos, slug):
     """写真の一覧をギャラリー風に並べる"""
     if not photos:
@@ -141,7 +181,11 @@ def build_post(p):
     except ValueError:
         date_display = date
 
-    # 本文の組み立て
+    # 本文の組み立て（本文中の <!--photo:…--> を写真に差し替える）
+    used = set()
+    teaser = inline_photos(teaser, photos, slug, used)
+    body = inline_photos(body, photos, slug, used) if access == 'free' else body
+    lint_post(p)
     content_parts = []
     if teaser:
         content_parts.append(f'<div class="blog-teaser">{teaser}</div>')
@@ -154,9 +198,11 @@ def build_post(p):
         # 有料記事（将来用）：teaser だけ出して、残りはプレースホルダー
         content_parts.append('<div class="blog-paywall"><p>続きは会員向けの記事です。</p></div>')
 
-    # 写真ギャラリー（本文の後）
-    if photos:
-        content_parts.append(gallery_html(photos, slug))
+    # 写真ギャラリー（本文の後）：本文に差し込まなかった写真だけ
+    rest = [ph for ph in photos if ph['file'] not in used]
+    if rest:
+        head = '<h2 class="blog-gallery-head">そのほかの写真</h2>' if used else ''
+        content_parts.append(head + gallery_html(rest, slug))
 
     # タグ
     tags_html = ''
@@ -284,6 +330,14 @@ BLOG_CSS = """
 .blog-photo{margin:1.5em 0}
 .blog-photo img{width:100%;height:auto;border-radius:6px;display:block}
 .blog-photo figcaption{font-size:.82rem;color:var(--usu);margin-top:.4em;line-height:1.5}
+.blog-inline{margin:1.6em 0}
+.blog-inline .blog-photo{margin:0}
+.blog-inline-2{display:grid;gap:12px}
+@media(min-width:560px){.blog-inline-2{grid-template-columns:1fr 1fr}}
+.blog-gallery-head{font-size:1.1rem;margin:2.4em 0 .4em}
+.blog-spec{width:100%;border-collapse:collapse;font-size:.92rem;margin:1em 0}
+.blog-spec th,.blog-spec td{border-bottom:1px solid var(--line);padding:.55em .4em;text-align:left;vertical-align:top}
+.blog-spec th{width:7.5em;color:var(--usu);font-weight:normal;white-space:nowrap}
 .blog-gallery{display:grid;gap:16px;margin:2em 0}
 @media(min-width:560px){.blog-gallery{grid-template-columns:1fr 1fr}}
 .blog-tags{margin:2em 0 0;display:flex;flex-wrap:wrap;gap:8px}
