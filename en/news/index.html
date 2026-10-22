@@ -41,7 +41,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 </head>
 <body>
-<div class="util"><b>New arrivals every Wednesday</b>　Shipping included · Dispatched within 3 days of payment (closed Mon & Tue)　<b>New hours from 1 Nov</b></div>
+<div class="util"><b>New arrivals every Wednesday</b>　Shipping included · Dispatched within 3 days of payment (closed Mon & Tue)　<b>New hours from 1 Nov</b></div><script>document.addEventListener('DOMContentLoaded',function(){try{var d=new Date(Date.now()+324e5).toISOString().slice(0,10);document.querySelectorAll('[data-until]').forEach(function(e){var u=e.getAttribute('data-until');if(u&&u<d)e.hidden=true;});}catch(x){}});</script>
 <header class="site"><div class="wrap">
   <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>Menu</button></div>
   <a class="logo" href="/en/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
@@ -79,7 +79,9 @@ if(k)send({t:'click',btn:k});},true);
   <div class="crumb"><a href="/en/">HOME</a><span>／</span><span>NEWS</span></div>
   <div class="sec-head"><h1 id="news-h">News<small>Shop news</small></h1></div>
   <p class="noen">News is posted in Japanese. Opening hours in English are on the <a href="/en/#store">top page</a>.</p>
-  <p class="newsnone">There is no news at the moment.</p>
+  <ul class="newslist" lang="ja">
+      <li data-until="2026-10-23"><time datetime="2026-10-22">2026.10.22</time><p>テストの<wbr>お知らせです。</p></li>
+  </ul>
 </main>
 <footer class="site"><div class="wrap">
   <div class="big"><img src="/assets/seal-light-256.png" alt="" width="64" height="64">Kobanzame</div>
