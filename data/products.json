@@ -3708,7 +3708,7 @@
   "release": "draft",
   "status": "available",
   "title": "1970年代頃のスエードレザーパンツ",
-  "product_name": "Sued leather Pants",
+  "product_name": "Suede leather Pants",
   "brand": "表記なし",
   "category": "メンズ／パンツ／パンツ",
   "material": "",
@@ -4024,7 +4024,7 @@
   "title": "DUKEDOMの日本製ニットカーディガン",
   "product_name": "Japan Acrylic Wool Cardigan",
   "brand": "DUKEDOM（日本製）",
-  "category": "トップス／ニット",
+  "category": "メンズ／トップス／ニット",
   "material": "アクリル70%・毛（ウール）30%",
   "published_date": "2026-10-22",
   "prices": {
@@ -4077,8 +4077,8 @@
    ]
   ],
   "sku_confidence": "確定",
-  "genre": "acc",
-  "genre_by": "auto-keyword-2026-10-22",
+  "genre": "tops",
+  "genre_by": "龍さん確認 2026-10-22",
   "draft_meta": {
    "made_by": "67_draft_maker_v1",
    "version": "v1.3",
@@ -4088,7 +4088,7 @@
     "見出し（title）は物語の一言から自動で作った → 気に入らなければClaudeへ",
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
-    "ジャンルはキーワードで自動判定（acc）→ 違えばClaudeへ"
+    "ジャンル：tops（龍さん確認 2026-10-22）"
    ]
   },
   "gender_by": "アクセサリー・小物は性別なし"
