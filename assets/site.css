@@ -337,3 +337,34 @@ footer.site{font-size:13px}
 .newsnone{font-size:14px;color:var(--usu);padding:14px 0}
 .util .nb b{font-weight:600}
 .newtag{position:absolute;left:8px;top:8px;background:var(--kin);color:#fff;font-family:var(--gothic);font-size:10.5px;font-weight:600;letter-spacing:.14em;padding:3px 8px}
+/* ---------- ブログ ---------- */
+.blog-main{max-width:760px;margin:0 auto;padding:32px 16px 64px}
+.blog-article{margin-top:24px}
+.blog-header{margin-bottom:32px}
+.blog-header time{font-family:'Jost',sans-serif;font-size:.85rem;color:var(--usu);letter-spacing:.04em}
+.blog-header h1{font-family:'Libre Caslon Text','Zen Kaku Gothic New',serif;font-size:1.6rem;line-height:1.5;margin:.4em 0 .3em;color:var(--kinari)}
+.blog-header .blog-author{font-size:.85rem;color:var(--usu)}
+.blog-teaser,.blog-body{font-size:1rem;line-height:1.85;color:var(--kinari)}
+.blog-teaser p,.blog-body p{margin:1.2em 0}
+.blog-teaser h2,.blog-body h2{font-family:'Libre Caslon Text','Zen Kaku Gothic New',serif;font-size:1.25rem;margin:2em 0 .6em;border-bottom:1px solid var(--line);padding-bottom:.3em}
+.blog-teaser h3,.blog-body h3{font-size:1.1rem;margin:1.6em 0 .4em}
+.blog-paywall{background:var(--susu);border-radius:8px;padding:24px;margin:2em 0;text-align:center;color:var(--usu)}
+.blog-photo{margin:1.5em 0}
+.blog-photo img{width:100%;height:auto;border-radius:6px;display:block}
+.blog-photo figcaption{font-size:.82rem;color:var(--usu);margin-top:.4em;line-height:1.5}
+.blog-gallery{display:grid;gap:16px;margin:2em 0}
+@media(min-width:560px){.blog-gallery{grid-template-columns:1fr 1fr}}
+.blog-tags{margin:2em 0 0;display:flex;flex-wrap:wrap;gap:8px}
+.blog-tags .tag{font-size:.78rem;background:var(--susu);color:var(--usu);padding:4px 12px;border-radius:20px}
+.blog-card{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:8px;overflow:hidden;transition:box-shadow .2s}
+.blog-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.blog-card-img img{width:100%;height:200px;object-fit:cover;display:block}
+.blog-card-body{padding:16px}
+.blog-card-body time{font-family:'Jost',sans-serif;font-size:.78rem;color:var(--usu)}
+.blog-card-body h2{font-size:1.05rem;line-height:1.4;margin:.3em 0;color:var(--kinari)}
+.blog-card-body p{font-size:.85rem;color:var(--usu);line-height:1.5;margin:.3em 0 0}
+.blog-card-tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px}
+.blog-card-tags .tag{font-size:.72rem;background:var(--susu);color:var(--usu);padding:2px 8px;border-radius:12px}
+.blog-grid{display:grid;gap:24px;margin-top:24px}
+@media(min-width:640px){.blog-grid{grid-template-columns:1fr 1fr}}
+.blog-empty{color:var(--usu);text-align:center;padding:48px 0}
