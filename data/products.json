@@ -3545,7 +3545,7 @@
    "front_i": 0,
    "back_i": 2,
    "front_url": "/assets/products/k11314/v2_front.jpg",
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k11314/v2_mannequin.jpg",
    "mannequin_body": "身長165cm・バスト83cm",
    "measures": {
@@ -3565,6 +3565,11 @@
     "brighten": 0.3,
     "garment_l": 108.1,
     "bg": "normal"
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-22",
+    "note": "丈が長い：実寸の着丈51cmに対しAI画像は裾が股のあたりまであり約60cm相当（本物の短丈感が出ていない）。色・襟の飾り・1つボタン・両脇の玉縁ポケットは一致"
    }
   }
  },
@@ -3674,7 +3679,7 @@
    "back_i": 7,
    "front_error": "RuntimeError('仕上がり確認で不合格：裾が切り取られています')",
    "back_url": "/assets/products/k10990/v2_back.jpg",
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k10990/v2_mannequin.jpg",
    "mannequin_body": "身長165cm・バスト83cm",
    "measures": {
@@ -3688,6 +3693,11 @@
     "brighten": 0.2,
     "garment_l": 166.0,
     "bg": "normal"
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-22",
+    "note": "本物に無い胸ポケットをAIが足している（本物は腰の貼りポケット2つだけ）。色・ボーダー柄・ボタン5つ・腰ポケット2つは一致"
    }
   }
  }
