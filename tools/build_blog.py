@@ -79,7 +79,12 @@ def _esc(s):
 # ---------- 記事の写真を <figure> に ----------
 def photo_html(photo, slug):
     """1枚の写真を <figure> で返す"""
-    src = f'{BLOG_ASSETS}/{slug}/{photo["file"]}'
+    # photos[] に src があればそれを使う（外部URL や /journal/... など）
+    # 無ければ既存の BLOG_ASSETS/{slug}/{file} で組み立てる
+    if 'src' in photo and photo['src']:
+        src = photo['src']
+    else:
+        src = f'{BLOG_ASSETS}/{slug}/{photo["file"]}'
     alt = _esc(photo.get('alt', ''))
     caption = photo.get('caption', photo.get('alt', ''))
     fig = f'<figure class="blog-photo"><img src="{src}" alt="{alt}" loading="lazy" decoding="async">'
