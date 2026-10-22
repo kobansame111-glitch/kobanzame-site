@@ -3,24 +3,73 @@
   "title": "MATCH レザーベスト（前革・背面布地・キルティング裏地）",
   "date": "2026-10-22",
   "author": "小判鮫",
-  "description": "MATCH のワークスタイルレザーベスト。前身頃はダークブラウンのレザー、背中は布地、内側はキルティング。背中の尾錠で胴回りを絞れます。身幅50cm・着丈57cm。",
+  "description": "MATCH のレザーベスト。前身頃がレザー、背面は布地、裏地はキルティング。ダークブラウン。写真と一緒に紹介します。",
   "cover": "01.jpg",
   "access": "free",
   "paid_from": "",
-  "teaser": "<p>MATCH のレザーベストです。</p><!--photo:01.jpg--><p>前はシボのあるダークブラウンのレザー、背中はしっかりした布地。ハンガーに掛けると、表と裏でまるで別の服に見えます。</p>",
-  "body": "<h2>つくり</h2><!--photo:03.jpg,04.jpg--><p>前はダークブラウンのレザー、背中は布地で、内側はひし形のキルティングです。前は革、背中は布という、ワークベストによくある組み合わせです。背中の尾錠で胴回りを少し絞れます。</p><h2>革の表情</h2><!--photo:05.jpg--><p>レザーには着用によるシワと艶があります。新品の均一な色ではなく、光の当たり方で茶色が浮かぶ色です。ボタンまわりに使い込みの跡があります。</p><h2>こんな人に</h2><p>白いシャツやスウェットの上に一枚足して、シルエットに縦の線を入れたい人に向いています。ジャケットほど構えず、でも上半身に重さを出したい季節に向いています。</p><h2>この1点の情報</h2><table class=\"blog-spec\"><tr><th>ブランド</th><td>MATCH</td></tr><tr><th>素材</th><td>前身頃 レザー／背面 布地／裏地 キルティング</td></tr><tr><th>色</th><td>ダークブラウン × ベージュ</td></tr><tr><th>サイズ</th><td>実寸 身幅50cm・着丈57cm・肩幅37cm</td></tr><tr><th>状態</th><td>使用感あり（レザーのシワ・スレ）</td></tr><tr><th>価格</th><td>¥18,480（税込）</td></tr><tr><th>商品ページ</th><td><a href=\"https://kobanzame-site.pages.dev/journal/k11263-match-leather-work-vest/\">小判鮫のサイトで見る</a></td></tr></table>",
+  "teaser": "<p>今日は MATCH のレザーベストです。</p><!--photo:01.jpg--><p>前身頃がレザー、背面が布地という作りのワークベストなんです。</p>",
+  "body": "<!--photo:03.jpg,04.jpg--><p>この色のダークブラウン、いいですね。レザーの前身頃にキルティングの裏地が付いてます。背面は布地なので、見た目より軽いと思います。</p><!--photo:07.jpg,08.jpg--><p>身幅50cm、着丈57cm、肩幅37cm。レザーにシワやスレの使用感はありますが、それがワークベストとしての味になってます。シャツやスウェットの上に重ねるだけでコーデが締まりますね。</p><!--photo:10.jpg--><p>こういう1枚を持っていると、秋冬のレイヤードが楽しくなるんです。気になった方、試してみてはいかがでしょうか。</p><h2>この1点の情報</h2><table class=\"blog-spec\"><tr><th>ブランド</th><td>MATCH</td></tr><tr><th>素材</th><td>前身頃 レザー／背面 布地／裏地 キルティング</td></tr><tr><th>色</th><td>ダークブラウン × ベージュ</td></tr><tr><th>サイズ</th><td>実寸 身幅50cm・着丈57cm・肩幅37cm</td></tr><tr><th>状態</th><td>使用感あり（レザーのシワ・スレ）</td></tr><tr><th>価格</th><td>¥18,480（税込）</td></tr><tr><th>商品ページ</th><td><a href=\"https://kobanzame-site.pages.dev/journal/k11263-match-leather-work-vest/\">小判鮫のサイトで見る</a></td></tr></table><p>お店で見てみてください。では、また。</p>",
   "photos": [
-    {"file": "01.jpg", "src": "/assets/products/k11263/01.jpg", "alt": "MATCH レザーベスト 正面", "caption": "正面"},
-    {"file": "02.jpg", "src": "/assets/products/k11263/02.jpg", "alt": "MATCH レザーベスト 背面"},
-    {"file": "03.jpg", "src": "/assets/products/k11263/03.jpg", "alt": "MATCH レザーベスト ディテール"},
-    {"file": "04.jpg", "src": "/assets/products/k11263/04.jpg", "alt": "MATCH レザーベスト キルティング"},
-    {"file": "05.jpg", "src": "/assets/products/k11263/05.jpg", "alt": "MATCH レザーベスト 革の表情"},
-    {"file": "06.jpg", "src": "/assets/products/k11263/06.jpg", "alt": "MATCH レザーベスト ディテール"},
-    {"file": "07.jpg", "src": "/assets/products/k11263/07.jpg", "alt": "MATCH レザーベスト ディテール"},
-    {"file": "08.jpg", "src": "/assets/products/k11263/08.jpg", "alt": "MATCH レザーベスト ディテール"},
-    {"file": "09.jpg", "src": "/assets/products/k11263/09.jpg", "alt": "MATCH レザーベスト ディテール"},
-    {"file": "10.jpg", "src": "/assets/products/k11263/10.jpg", "alt": "MATCH レザーベスト ディテール"},
-    {"file": "11.jpg", "src": "/assets/products/k11263/11.jpg", "alt": "MATCH レザーベスト ディテール"}
+    {
+      "file": "01.jpg",
+      "src": "/assets/products/k11263/01.jpg",
+      "alt": "MATCH レザーベスト 正面",
+      "caption": "正面"
+    },
+    {
+      "file": "02.jpg",
+      "src": "/assets/products/k11263/02.jpg",
+      "alt": "MATCH レザーベスト 背面"
+    },
+    {
+      "file": "03.jpg",
+      "src": "/assets/products/k11263/03.jpg",
+      "alt": "MATCH レザーベスト ディテール"
+    },
+    {
+      "file": "04.jpg",
+      "src": "/assets/products/k11263/04.jpg",
+      "alt": "MATCH レザーベスト キルティング"
+    },
+    {
+      "file": "05.jpg",
+      "src": "/assets/products/k11263/05.jpg",
+      "alt": "MATCH レザーベスト 革の表情"
+    },
+    {
+      "file": "06.jpg",
+      "src": "/assets/products/k11263/06.jpg",
+      "alt": "MATCH レザーベスト ディテール"
+    },
+    {
+      "file": "07.jpg",
+      "src": "/assets/products/k11263/07.jpg",
+      "alt": "MATCH レザーベスト ディテール"
+    },
+    {
+      "file": "08.jpg",
+      "src": "/assets/products/k11263/08.jpg",
+      "alt": "MATCH レザーベスト ディテール"
+    },
+    {
+      "file": "09.jpg",
+      "src": "/assets/products/k11263/09.jpg",
+      "alt": "MATCH レザーベスト ディテール"
+    },
+    {
+      "file": "10.jpg",
+      "src": "/assets/products/k11263/10.jpg",
+      "alt": "MATCH レザーベスト ディテール"
+    },
+    {
+      "file": "11.jpg",
+      "src": "/assets/products/k11263/11.jpg",
+      "alt": "MATCH レザーベスト ディテール"
+    }
   ],
-  "tags": ["ベスト", "MATCH", "レザー"]
+  "tags": [
+    "ベスト",
+    "MATCH",
+    "レザー"
+  ]
 }
