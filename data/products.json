@@ -3721,12 +3721,12 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-22",
   "links": {},
   "images": [
-   "/assets/products/k11395/01.jpg",
+   "/assets/products/k11395/v2_front.jpg",
+   "/assets/products/k11395/v2_back.jpg",
    "/assets/products/k11395/02.jpg",
    "/assets/products/k11395/03.jpg",
    "/assets/products/k11395/04.jpg",
    "/assets/products/k11395/05.jpg",
-   "/assets/products/k11395/06.jpg",
    "/assets/products/k11395/07.jpg",
    "/assets/products/k11395/08.jpg",
    "/assets/products/k11395/09.jpg",
@@ -3734,7 +3734,7 @@
    "/assets/products/k11395/11.jpg",
    "/assets/products/k11395/12.jpg"
   ],
-  "thumb": "/assets/products/k11395/thumb.jpg",
+  "thumb": "/assets/products/k11395/v2_thumb.jpg",
   "summary_text": "1970年代頃のスエードレザーパンツ。タン／キャメルブラウンの5ポケット・ストレートシルエットで、使い込まれた色ムラと毛足がそのまま残っています。",
   "summary_points": [
    "タン／キャメルブラウン・無地のスエードレザーパンツ（5ポケット・ストレート）",
@@ -3778,7 +3778,45 @@
    ],
    "approved_at": "2026-10-22"
   },
-  "gender_by": "写真の見立て：メンズ（ボタン留めが着る人から見て右側、ウエスト・シルエットからも男性向け）"
+  "gender_by": "写真の見立て：メンズ（ボタン留めが着る人から見て右側、ウエスト・シルエットからも男性向け）",
+  "images_orig": [
+   "/assets/products/k11395/01.jpg",
+   "/assets/products/k11395/02.jpg",
+   "/assets/products/k11395/03.jpg",
+   "/assets/products/k11395/04.jpg",
+   "/assets/products/k11395/05.jpg",
+   "/assets/products/k11395/06.jpg",
+   "/assets/products/k11395/07.jpg",
+   "/assets/products/k11395/08.jpg",
+   "/assets/products/k11395/09.jpg",
+   "/assets/products/k11395/10.jpg",
+   "/assets/products/k11395/11.jpg",
+   "/assets/products/k11395/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-22",
+   "front_i": 0,
+   "back_i": 5,
+   "front_url": "/assets/products/k11395/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 87.8,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11395/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 92.1,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11395/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "ウエスト": 72.0,
+    "股下": 85.0
+   }
+  }
  },
  {
   "sku": "K11308",
@@ -3800,19 +3838,19 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-22",
   "links": {},
   "images": [
+   "/assets/products/k11308/v2_back.jpg",
    "/assets/products/k11308/01.jpg",
    "/assets/products/k11308/02.jpg",
    "/assets/products/k11308/03.jpg",
    "/assets/products/k11308/04.jpg",
    "/assets/products/k11308/05.jpg",
-   "/assets/products/k11308/06.jpg",
    "/assets/products/k11308/07.jpg",
    "/assets/products/k11308/08.jpg",
    "/assets/products/k11308/09.jpg",
    "/assets/products/k11308/10.jpg",
    "/assets/products/k11308/11.jpg"
   ],
-  "thumb": "/assets/products/k11308/thumb.jpg",
+  "thumb": "/assets/products/k11308/v2_thumb.jpg",
   "summary_text": "スウェード調レザーの5ポケットパンツ。1980〜1990年代頃のもので、経年による色ムラや油染みが全体に刻まれ、それ自体がこのパンツの顔になっています。",
   "summary_points": [
    "グレージュ／オリーブグレー・無地（経年による斑ムラあり）のレザーパンツ（スウェードレザー／5ポケットジーンズ型）",
@@ -3856,7 +3894,39 @@
    ],
    "approved_at": "2026-10-22"
   },
-  "gender_by": "龍さん確認 2026-10-22（メンズ）"
+  "gender_by": "龍さん確認 2026-10-22（メンズ）",
+  "images_orig": [
+   "/assets/products/k11308/01.jpg",
+   "/assets/products/k11308/02.jpg",
+   "/assets/products/k11308/03.jpg",
+   "/assets/products/k11308/04.jpg",
+   "/assets/products/k11308/05.jpg",
+   "/assets/products/k11308/06.jpg",
+   "/assets/products/k11308/07.jpg",
+   "/assets/products/k11308/08.jpg",
+   "/assets/products/k11308/09.jpg",
+   "/assets/products/k11308/10.jpg",
+   "/assets/products/k11308/11.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-22",
+   "front_i": 0,
+   "back_i": 5,
+   "front_error": "RuntimeError('仕上がり確認で不合格：衣服の一部が切り取られています')",
+   "back_url": "/assets/products/k11308/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 136.8,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11308/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "ウエスト": 64.0,
+    "股下": 82.0
+   }
+  }
  },
  {
   "sku": "K11309",
@@ -3878,7 +3948,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-22",
   "links": {},
   "images": [
-   "/assets/products/k11309/01.jpg",
+   "/assets/products/k11309/v2_front.jpg",
+   "/assets/products/k11309/v2_back.jpg",
    "/assets/products/k11309/02.jpg",
    "/assets/products/k11309/03.jpg",
    "/assets/products/k11309/04.jpg",
@@ -3886,12 +3957,11 @@
    "/assets/products/k11309/06.jpg",
    "/assets/products/k11309/07.jpg",
    "/assets/products/k11309/08.jpg",
-   "/assets/products/k11309/09.jpg",
    "/assets/products/k11309/10.jpg",
    "/assets/products/k11309/11.jpg",
    "/assets/products/k11309/12.jpg"
   ],
-  "thumb": "/assets/products/k11309/thumb.jpg",
+  "thumb": "/assets/products/k11309/v2_thumb.jpg",
   "summary_text": "豚スエードのボディに牛革の衿とカフスを合わせた、A&F INTERNATIONALのカーコート丈ジャケットです。タン×ダークネイビーの配色が、着るだけで表情をつくります。",
   "summary_points": [
    "タン/キャメルブラウン（ボディ）× ダークネイビー/ブラック（カラー・カフス）のスエードレザージャケット（カーコート丈）（ブランド：A&F INTERNATIONAL）",
@@ -3939,7 +4009,46 @@
    ],
    "approved_at": "2026-10-22"
   },
-  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）"
+  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）",
+  "images_orig": [
+   "/assets/products/k11309/01.jpg",
+   "/assets/products/k11309/02.jpg",
+   "/assets/products/k11309/03.jpg",
+   "/assets/products/k11309/04.jpg",
+   "/assets/products/k11309/05.jpg",
+   "/assets/products/k11309/06.jpg",
+   "/assets/products/k11309/07.jpg",
+   "/assets/products/k11309/08.jpg",
+   "/assets/products/k11309/09.jpg",
+   "/assets/products/k11309/10.jpg",
+   "/assets/products/k11309/11.jpg",
+   "/assets/products/k11309/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-22",
+   "front_i": 0,
+   "back_i": 8,
+   "front_url": "/assets/products/k11309/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 93.2,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11309/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 103.7,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11309/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 45.0,
+    "着丈": 84.5,
+    "肩幅": 48.0
+   }
+  }
  },
  {
   "sku": "K11389",
@@ -3961,20 +4070,20 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-22",
   "links": {},
   "images": [
-   "/assets/products/k11389/01.jpg",
+   "/assets/products/k11389/v2_front.jpg",
+   "/assets/products/k11389/v2_back.jpg",
    "/assets/products/k11389/02.jpg",
    "/assets/products/k11389/03.jpg",
    "/assets/products/k11389/04.jpg",
    "/assets/products/k11389/05.jpg",
    "/assets/products/k11389/06.jpg",
-   "/assets/products/k11389/07.jpg",
    "/assets/products/k11389/08.jpg",
    "/assets/products/k11389/09.jpg",
    "/assets/products/k11389/10.jpg",
    "/assets/products/k11389/11.jpg",
    "/assets/products/k11389/12.jpg"
   ],
-  "thumb": "/assets/products/k11389/thumb.jpg",
+  "thumb": "/assets/products/k11389/v2_thumb.jpg",
   "summary_text": "TOURの象ロゴが入った、タン/キャメルブラウンのスエードレザージャケット。1990年代〜2000年代前半頃のもので、経年変化した表情がそのまま残っています。",
   "summary_points": [
    "タン/キャメルブラウン・無地のスエードレザージャケット（ハリントン/ワークジャケット型）（ブランド：TOUR（象のロゴマーク付きブランドタグ、内側タグ・背面に象のメタルピン））",
@@ -4017,7 +4126,46 @@
    ],
    "approved_at": "2026-10-22"
   },
-  "gender_by": "表記にメンズ・写真の見立て：メンズ（ジップが着る人から見て右開き、全体的なシルエット・サイズ感）・実寸が大きめ（肩幅52・身幅63）"
+  "gender_by": "表記にメンズ・写真の見立て：メンズ（ジップが着る人から見て右開き、全体的なシルエット・サイズ感）・実寸が大きめ（肩幅52・身幅63）",
+  "images_orig": [
+   "/assets/products/k11389/01.jpg",
+   "/assets/products/k11389/02.jpg",
+   "/assets/products/k11389/03.jpg",
+   "/assets/products/k11389/04.jpg",
+   "/assets/products/k11389/05.jpg",
+   "/assets/products/k11389/06.jpg",
+   "/assets/products/k11389/07.jpg",
+   "/assets/products/k11389/08.jpg",
+   "/assets/products/k11389/09.jpg",
+   "/assets/products/k11389/10.jpg",
+   "/assets/products/k11389/11.jpg",
+   "/assets/products/k11389/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-22",
+   "front_i": 0,
+   "back_i": 6,
+   "front_url": "/assets/products/k11389/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 119.0,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11389/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 126.3,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11389/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 63.0,
+    "着丈": 72.0,
+    "肩幅": 52.0
+   }
+  }
  },
  {
   "sku": "K11437",
@@ -4039,17 +4187,17 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-22",
   "links": {},
   "images": [
-   "/assets/products/k11437/01.jpg",
+   "/assets/products/k11437/v2_front.jpg",
+   "/assets/products/k11437/v2_back.jpg",
    "/assets/products/k11437/02.jpg",
    "/assets/products/k11437/03.jpg",
    "/assets/products/k11437/04.jpg",
    "/assets/products/k11437/05.jpg",
    "/assets/products/k11437/06.jpg",
    "/assets/products/k11437/07.jpg",
-   "/assets/products/k11437/08.jpg",
    "/assets/products/k11437/09.jpg"
   ],
-  "thumb": "/assets/products/k11437/thumb.jpg",
+  "thumb": "/assets/products/k11437/v2_thumb.jpg",
   "summary_text": "DUKEDOMの日本製ニットカーディガン。バーガンディ×ブラックのパネル切り替えにホワイトラインが入った、ボーリングシャツ型の一枚です。",
   "summary_points": [
    "バーガンディ（ワインレッド）×ブラック 切り替えパネル＋ホワイトラインのニットカーディガン（ボーリングシャツ型）（ブランド：DUKEDOM（日本製））",
@@ -4096,7 +4244,43 @@
    ],
    "approved_at": "2026-10-22"
   },
-  "gender_by": "アクセサリー・小物は性別なし"
+  "gender_by": "アクセサリー・小物は性別なし",
+  "images_orig": [
+   "/assets/products/k11437/01.jpg",
+   "/assets/products/k11437/02.jpg",
+   "/assets/products/k11437/03.jpg",
+   "/assets/products/k11437/04.jpg",
+   "/assets/products/k11437/05.jpg",
+   "/assets/products/k11437/06.jpg",
+   "/assets/products/k11437/07.jpg",
+   "/assets/products/k11437/08.jpg",
+   "/assets/products/k11437/09.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-22",
+   "front_i": 0,
+   "back_i": 7,
+   "front_url": "/assets/products/k11437/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 55.7,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11437/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 48.8,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11437/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 47.0,
+    "着丈": 63.5,
+    "肩幅": 43.0
+   }
+  }
  },
  {
   "sku": "K11438",
