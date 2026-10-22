@@ -14,6 +14,7 @@ on:
       - 'tools/build_blog.py'    # 2026-10-22 ブログ（PR #37）
       - 'data/blog/**'           # 2026-10-22 ブログ記事のデータ
       - 'assets/blog/**'         # 2026-10-22 ブログの写真
+      - 'tools/blog_photos.py'   # 2026-10-22 ブログの写真をサイトに保存
   workflow_dispatch:
   # 2026-10-13 龍さん決定：11月1日から 火〜日 13:00–20:00・月曜定休。10/26 0:05（お知らせ開始）と 11/1 0:05・3:05（日本時間）に作り直す
   # （GitHubの時刻はUTC。10/25 15:05 UTC＝10/26 0:05 JST、10/31 15:05 UTC＝11/1 0:05 JST。毎年この日に動くが、変化が無ければ何もコミットしない）
@@ -73,6 +74,13 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python3 tools/photo_v2.py
+      # 2026-10-22 龍さん「サイト側に写真を残す」：ブログの写真で外（メルカリ等）を見ているものを assets/blog/ に保存して差し替える
+      - name: Blog photos to site
+        continue-on-error: true   # 失敗しても元の URL のまま表示される。サイトの作り直しは止めない
+        timeout-minutes: 10
+        run: |
+          pip install -q pillow==11.0.0 || true
+          python3 tools/blog_photos.py
       - name: Build pages
         run: |
           pip install -q budoux==0.9.3 || true   # 日本語の改行位置をきれいにする（入らなくてもサイトは作る）
