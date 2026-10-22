@@ -3704,7 +3704,7 @@
  {
   "sku": "K11395",
   "slug": "k11395",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1970年代頃のスエードレザーパンツ",
@@ -3775,14 +3775,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-22"
   },
   "gender_by": "写真の見立て：メンズ（ボタン留めが着る人から見て右側、ウエスト・シルエットからも男性向け）"
  },
  {
   "sku": "K11308",
   "slug": "k11308",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "スウェード調レザーの5ポケットパンツ",
@@ -3852,14 +3853,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-22"
   },
   "gender_by": "龍さん確認 2026-10-22（メンズ）"
  },
  {
   "sku": "K11309",
   "slug": "k11309-a-f-international",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "Suede leather Blouson",
@@ -3934,14 +3936,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-22"
   },
   "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）"
  },
  {
   "sku": "K11389",
   "slug": "k11389-tour",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "Leather JKT bulldogs embroid",
@@ -4011,14 +4014,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-22"
   },
   "gender_by": "表記にメンズ・写真の見立て：メンズ（ジップが着る人から見て右開き、全体的なシルエット・サイズ感）・実寸が大きめ（肩幅52・身幅63）"
  },
  {
   "sku": "K11437",
   "slug": "k11437-dukedom",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "DUKEDOMの日本製ニットカーディガン",
@@ -4089,14 +4093,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンル：tops（龍さん確認 2026-10-22）"
-   ]
+   ],
+   "approved_at": "2026-10-22"
   },
   "gender_by": "アクセサリー・小物は性別なし"
  },
  {
   "sku": "K11438",
   "slug": "k11438-uniqlo-504-0403",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "90's old Uniqlo Cardigan",
@@ -4166,14 +4171,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-22"
   },
   "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いている＝メンズ仕様、かつタグに性別記載なしだがボタン配置で確定）"
  },
  {
   "sku": "K11409",
   "slug": "k11409-hch-muermann-k-g-minden",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "60's German Army Wool cargo Pants",
@@ -4243,14 +4249,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-22"
   },
   "gender_by": "写真：メンズ（ボタンが着る人から見て右側・ミリタリー男性用制式品の構造）"
  },
  {
   "sku": "K11411",
   "slug": "k11411",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "山羊革のスエードでできたA-1タイプのボンバージャケット",
@@ -4323,7 +4330,8 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-22"
   },
   "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いており、サイズ54はメンズ欧州サイズ）"
  }
