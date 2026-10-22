@@ -4356,16 +4356,16 @@
    "square": "https://square.link/u/34EPBt2M"
   },
   "images": [
-   "/assets/products/k11438/01.jpg",
+   "/assets/products/k11438/v2_front.jpg",
+   "/assets/products/k11438/v2_back.jpg",
    "/assets/products/k11438/02.jpg",
    "/assets/products/k11438/03.jpg",
    "/assets/products/k11438/04.jpg",
    "/assets/products/k11438/05.jpg",
    "/assets/products/k11438/06.jpg",
-   "/assets/products/k11438/07.jpg",
    "/assets/products/k11438/08.jpg"
   ],
-  "thumb": "/assets/products/k11438/thumb.jpg",
+  "thumb": "/assets/products/k11438/v2_thumb.jpg",
   "summary_text": "2000年代初頭頃のユニクロ、旧ロゴタグ付きのコットンVネックカーディガンです。バターイエローの無地で、一枚でさらっと着られる春夏の定番になります。",
   "summary_points": [
    "淡イエロー（バター/クリームイエロー）無地のニットカーディガン（Vネック・ボタンフロント・ポケット付き）（ブランド：UNIQLO（ユニクロ）、品番504-0403、中国製）",
@@ -4412,7 +4412,42 @@
    ],
    "approved_at": "2026-10-22"
   },
-  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いている＝メンズ仕様、かつタグに性別記載なしだがボタン配置で確定）"
+  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いている＝メンズ仕様、かつタグに性別記載なしだがボタン配置で確定）",
+  "images_orig": [
+   "/assets/products/k11438/01.jpg",
+   "/assets/products/k11438/02.jpg",
+   "/assets/products/k11438/03.jpg",
+   "/assets/products/k11438/04.jpg",
+   "/assets/products/k11438/05.jpg",
+   "/assets/products/k11438/06.jpg",
+   "/assets/products/k11438/07.jpg",
+   "/assets/products/k11438/08.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-22",
+   "front_i": 0,
+   "back_i": 6,
+   "front_url": "/assets/products/k11438/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 187.9,
+    "bg": "light_item"
+   },
+   "back_url": "/assets/products/k11438/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 199.0,
+    "bg": "light_item"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11438/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 55.0,
+    "着丈": 62.5,
+    "肩幅": 48.5
+   }
+  }
  },
  {
   "sku": "K11409",
@@ -4443,8 +4478,8 @@
    "square": "https://square.link/u/nGlVkE3u"
   },
   "images": [
-   "/assets/products/k11409/01.jpg",
-   "/assets/products/k11409/02.jpg",
+   "/assets/products/k11409/v2_front.jpg",
+   "/assets/products/k11409/v2_back.jpg",
    "/assets/products/k11409/03.jpg",
    "/assets/products/k11409/04.jpg",
    "/assets/products/k11409/05.jpg",
@@ -4456,7 +4491,7 @@
    "/assets/products/k11409/11.jpg",
    "/assets/products/k11409/12.jpg"
   ],
-  "thumb": "/assets/products/k11409/thumb.jpg",
+  "thumb": "/assets/products/k11409/v2_thumb.jpg",
   "summary_text": "西ドイツ・ミンデンの製造者刻印が入った、1950〜60年代前半頃のウールミリタリーパンツです。オリーブドラブの無地、使用感ある一本をそのままお届けします。",
   "summary_points": [
    "オリーブドラブ（OD）無地のミリタリーウールカーゴトラウザーズ（軍用ウールパンツ）（ブランド：HCH. MUERMANN K.-G. MINDEN（製造者名・西ドイツ・ミンデン））",
@@ -4499,7 +4534,44 @@
    ],
    "approved_at": "2026-10-22"
   },
-  "gender_by": "写真：メンズ（ボタンが着る人から見て右側・ミリタリー男性用制式品の構造）"
+  "gender_by": "写真：メンズ（ボタンが着る人から見て右側・ミリタリー男性用制式品の構造）",
+  "images_orig": [
+   "/assets/products/k11409/01.jpg",
+   "/assets/products/k11409/02.jpg",
+   "/assets/products/k11409/03.jpg",
+   "/assets/products/k11409/04.jpg",
+   "/assets/products/k11409/05.jpg",
+   "/assets/products/k11409/06.jpg",
+   "/assets/products/k11409/07.jpg",
+   "/assets/products/k11409/08.jpg",
+   "/assets/products/k11409/09.jpg",
+   "/assets/products/k11409/10.jpg",
+   "/assets/products/k11409/11.jpg",
+   "/assets/products/k11409/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-22",
+   "front_i": 0,
+   "back_i": 1,
+   "front_url": "/assets/products/k11409/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 100.8,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11409/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.1,
+    "garment_l": 105.1,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11409/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "ウエスト": 86.0
+   }
+  }
  },
  {
   "sku": "K11411",
@@ -4530,9 +4602,9 @@
    "square": "https://square.link/u/91pRWoGU"
   },
   "images": [
-   "/assets/products/k11411/01.jpg",
+   "/assets/products/k11411/v2_front.jpg",
+   "/assets/products/k11411/v2_back.jpg",
    "/assets/products/k11411/02.jpg",
-   "/assets/products/k11411/03.jpg",
    "/assets/products/k11411/04.jpg",
    "/assets/products/k11411/05.jpg",
    "/assets/products/k11411/06.jpg",
@@ -4541,7 +4613,7 @@
    "/assets/products/k11411/09.jpg",
    "/assets/products/k11411/10.jpg"
   ],
-  "thumb": "/assets/products/k11411/thumb.jpg",
+  "thumb": "/assets/products/k11411/v2_thumb.jpg",
   "summary_text": "山羊革のスエードでできたA-1タイプのボンバージャケット。タバコブラウンの本体に、キャメルとオリーブが混ざったリブが合わさった、1980〜90年代前半頃と思われる一着です。",
   "summary_points": [
    "タバコブラウン／リブ部分はキャメル・オリーブ混合ニットのスエードレザーボンバージャケット（A-1タイプ）",
@@ -4589,6 +4661,43 @@
    ],
    "approved_at": "2026-10-22"
   },
-  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いており、サイズ54はメンズ欧州サイズ）"
+  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いており、サイズ54はメンズ欧州サイズ）",
+  "images_orig": [
+   "/assets/products/k11411/01.jpg",
+   "/assets/products/k11411/02.jpg",
+   "/assets/products/k11411/03.jpg",
+   "/assets/products/k11411/04.jpg",
+   "/assets/products/k11411/05.jpg",
+   "/assets/products/k11411/06.jpg",
+   "/assets/products/k11411/07.jpg",
+   "/assets/products/k11411/08.jpg",
+   "/assets/products/k11411/09.jpg",
+   "/assets/products/k11411/10.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-22",
+   "front_i": 0,
+   "back_i": 2,
+   "front_url": "/assets/products/k11411/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 74.7,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11411/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 79.1,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11411/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 65.5,
+    "着丈": 67.5,
+    "肩幅": 60.5
+   }
+  }
  }
 ]
