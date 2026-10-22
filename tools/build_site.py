@@ -110,7 +110,7 @@ NEWS_BAND = [n for n in NEWS if n['band']][:NEWS_BAND_MAX]
 T = {
  'ja': {
   'util': '<b>毎週水曜 新着入荷</b>　送料込み・決済確認後3日以内に発送（月・火定休を除く）',
-  'nav': [('/#list', '商品一覧'), ('/#store', '店舗'), ('/#faq', 'Q&amp;A')],
+  'nav': [('/#list', '商品一覧'), ('/blog/', 'ブログ'), ('/#store', '店舗'), ('/#faq', 'Q&amp;A')],
   'hero_h': 'One<br>of <em>One.</em>',
   'hero_p': '埼玉・川越、築約80年の古民家から。国内外で買い付けたヴィンテージ古着と、オリジナルの「GAW」。どれも一点もので、同じものはありません。',
   'hero_btn': '一点ものを見る',
@@ -152,7 +152,7 @@ T = {
  },
  'en': {
   'util': '<b>New arrivals every Wednesday</b>　Shipping included · Dispatched within 3 days of payment (closed Mon & Tue)',
-  'nav': [('/en/#list', 'Shop'), ('/en/#store', 'Store'), ('/en/#faq', 'FAQ')],
+  'nav': [('/en/#list', 'Shop'), ('/blog/', 'Blog'), ('/en/#store', 'Store'), ('/en/#faq', 'FAQ')],
   'hero_h': 'One<br>of <em>One.</em>',
   'hero_p': 'From an 80-year-old wooden house in Kawagoe, Saitama. Vintage clothing sourced in Japan and abroad, and our own remake line, GAW. Every piece is one of a kind.',
   'hero_btn': 'See the pieces',
@@ -882,7 +882,7 @@ def foot(lang):
   <div>古着屋 小判鮫／{ADDR[lang]}／{hours}<br>
     {op}　・　{lic}<br>
     <a href="{SHOP['instagram']}" rel="noopener">Instagram</a>　・　<a href="{SHOP['mercari']}" rel="noopener">メルカリShops</a>　・　<a href="{SHOP['gmaps']}" rel="noopener">{t['gm']}</a><br>
-    {(chr(60) + 'a href="' + ('/en/workshop/' if lang == 'en' else '/workshop/') + '">' + ('Workshops' if lang == 'en' else 'ワークショップ') + chr(60) + '/a>　・　') if WS_OPEN else ''}<a href="{'/en/guide/' if lang == 'en' else '/guide/'}">{'Kawagoe vintage guide' if lang == 'en' else '川越で古着屋を探している方へ'}</a>　・　{legal}
+    <a href="/blog/">{'Blog' if lang == 'en' else 'ブログ'}</a>　・　{(chr(60) + 'a href="' + ('/en/workshop/' if lang == 'en' else '/workshop/') + '">' + ('Workshops' if lang == 'en' else 'ワークショップ') + chr(60) + '/a>　・　') if WS_OPEN else ''}<a href="{'/en/guide/' if lang == 'en' else '/guide/'}">{'Kawagoe vintage guide' if lang == 'en' else '川越で古着屋を探している方へ'}</a>　・　{legal}
   </div>
 </div></footer>
 {REVEAL_JS}
@@ -948,7 +948,9 @@ NEWS_CSS = """
 .util .nb b{font-weight:600}
 .newtag{position:absolute;left:8px;top:8px;background:var(--kin);color:#fff;font-family:var(--gothic);font-size:10.5px;font-weight:600;letter-spacing:.14em;padding:3px 8px}
 """
-write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n')
+# ブログのCSSを先に読み込む（build_blog.py は ROOT, BASE 等を参照するので、ここで import できる）
+from build_blog import BLOG_CSS
+write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n' + BLOG_CSS.strip() + '\n')
 
 # ---------- 一覧 ----------
 # 2026-10-21 龍さん「新着が一番上に出てこない」：一覧（全部・絞り込み・ジャーナル）を公開日の新しい順に。同じ日は products.json の順
@@ -1484,6 +1486,10 @@ for lang in ('ja', 'en'):
 </main>
 ''' + foot(lang))
 
+# ---------- ブログ ----------
+from build_blog import build_blog
+blog_urls = build_blog()
+
 # ---------- robots.txt / sitemap.xml / llms.txt ----------
 pages = []
 for lang in ('ja', 'en'):
@@ -1491,6 +1497,7 @@ for lang in ('ja', 'en'):
     pages += [P + '/', P + '/journal/'] + [P + f"/journal/{p['slug']}/" for p in live]
 pages += ['/tokushoho/', '/privacy/', '/en/legal/', '/guide/', '/en/guide/'] + (['/workshop/', '/en/workshop/'] if WS_OPEN else [])
 pages += ['/news/', '/en/news/']
+pages += blog_urls   # ブログのページ
 write('/robots.txt', f'''# 小判鮫 公式サイト：検索エンジン・AI検索のどちらにも公開
 User-agent: *
 Allow: /
@@ -1539,6 +1546,7 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 - [お知らせ]({BASE}/news/)
 - [ジャーナル]({BASE}/journal/)
 - [川越で古着屋を探している方へ（案内）]({BASE}/guide/)
+- [ブログ]({BASE}/blog/)
 {'- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・期間限定価格）](' + BASE + '/workshop/)' + chr(10) if WS_OPEN else ''}- [English]({BASE}/en/)
 - [特定商取引法に基づく表記]({BASE}/tokushoho/)
 - [プライバシーポリシー]({BASE}/privacy/)
