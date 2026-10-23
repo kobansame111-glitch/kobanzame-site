@@ -208,8 +208,12 @@ def build_post(p):
                 '@type': 'BlogPosting',
                 'headline': title,
                 'datePublished': date,
-                'author': {'@type': 'Organization', 'name': _site_var('SHOP', {}).get('name', '古着屋 小判鮫 KOBANZAME')},
-                'publisher': {'@type': 'Organization', 'name': _site_var('SHOP', {}).get('name', '古着屋 小判鮫 KOBANZAME')},
+                '@id': f'{BASE}/blog/{slug}/#article',
+                'author': {'@type': 'Organization', '@id': f'{BASE}/#store', 'name': _site_var('SHOP', {}).get('name', '古着屋 小判鮫 KOBANZAME')},
+                'publisher': {'@id': f'{BASE}/#store'},
+                'dateModified': date, 'inLanguage': 'ja',
+                'isPartOf': {'@type': 'Blog', '@id': f'{BASE}/blog/#blog'},
+                **({'about': {'@id': f'{BASE}/journal/{slug}/#product'}} if slug in _products() else {}),
                 'description': desc,
                 'mainEntityOfPage': {'@type': 'WebPage', '@id': f'{BASE}/blog/{slug}/'},
             }
@@ -316,7 +320,11 @@ def build_index(posts):
     else:
         body_html = '<div class="blog-grid">\n' + '\n'.join(cards) + '\n</div>'
 
-    page_html = try_head('ja', 'ブログ | 古着屋 小判鮫', '小判鮫の商品紹介・コラム。', '/blog/')
+    blog_ld = {'@context': 'https://schema.org', '@graph': [try_org_node(), {
+        '@type': 'Blog', '@id': f'{BASE}/blog/#blog', 'name': '小判鮫ブログ', 'url': f'{BASE}/blog/', 'inLanguage': 'ja', 'publisher': {'@id': f'{BASE}/#store'},
+        'blogPost': [{'@type': 'BlogPosting', '@id': f'{BASE}/blog/{p["slug"]}/#article', 'headline': p['title'], 'url': f'{BASE}/blog/{p["slug"]}/', 'datePublished': p['date']} for p in visible]}]}
+    page_html = try_head('ja', 'ブログ｜古着屋 小判鮫（川越の古着・ヴィンテージ）',
+                         '川越・元町の古民家古着屋「小判鮫」のブログ。店頭とサイトに並ぶヴィンテージ古着や一点ものを、写真と一緒に1点ずつ紹介しています。', '/blog/', extra_ld=blog_ld)
     page_html += f'''<main class="blog-main">
   <div class="crumb"><a href="/">HOME</a><span>／</span><span>ブログ</span></div>
   <div class="sec-head"><h1>Blog<small>ブログ</small></h1></div>
