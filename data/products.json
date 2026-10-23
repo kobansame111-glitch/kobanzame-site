@@ -4754,6 +4754,7 @@
   "links": {},
   "images": [
    "/assets/products/k11201/01.jpg",
+   "/assets/products/k11201/09.jpg",
    "/assets/products/k11201/02.jpg",
    "/assets/products/k11201/03.jpg",
    "/assets/products/k11201/04.jpg",
@@ -4761,7 +4762,6 @@
    "/assets/products/k11201/06.jpg",
    "/assets/products/k11201/07.jpg",
    "/assets/products/k11201/08.jpg",
-   "/assets/products/k11201/09.jpg",
    "/assets/products/k11201/10.jpg",
    "/assets/products/k11201/11.jpg",
    "/assets/products/k11201/12.jpg"
@@ -4811,7 +4811,34 @@
    ],
    "approved_at": "2026-10-23"
   },
-  "gender_by": "手がかりなし"
+  "gender_by": "手がかりなし",
+  "images_orig": [
+   "/assets/products/k11201/01.jpg",
+   "/assets/products/k11201/02.jpg",
+   "/assets/products/k11201/03.jpg",
+   "/assets/products/k11201/04.jpg",
+   "/assets/products/k11201/05.jpg",
+   "/assets/products/k11201/06.jpg",
+   "/assets/products/k11201/07.jpg",
+   "/assets/products/k11201/08.jpg",
+   "/assets/products/k11201/09.jpg",
+   "/assets/products/k11201/10.jpg",
+   "/assets/products/k11201/11.jpg",
+   "/assets/products/k11201/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-23",
+   "front_i": 0,
+   "back_i": 8,
+   "front_error": "RuntimeError('仕上がり確認で不合格：裾が切り取られています')",
+   "back_error": "RuntimeError('仕上がり確認で不合格：ズボンの裾が切り取られています。')",
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11201/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "ウエスト": 78.0
+   }
+  }
  },
  {
   "sku": "K11388",
@@ -4833,7 +4860,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-23",
   "links": {},
   "images": [
-   "/assets/products/k11388/01.jpg",
+   "/assets/products/k11388/v2_front.jpg",
+   "/assets/products/k11388/v2_back.jpg",
    "/assets/products/k11388/02.jpg",
    "/assets/products/k11388/03.jpg",
    "/assets/products/k11388/04.jpg",
@@ -4841,12 +4869,11 @@
    "/assets/products/k11388/06.jpg",
    "/assets/products/k11388/07.jpg",
    "/assets/products/k11388/08.jpg",
-   "/assets/products/k11388/09.jpg",
    "/assets/products/k11388/10.jpg",
    "/assets/products/k11388/11.jpg",
    "/assets/products/k11388/12.jpg"
   ],
-  "thumb": "/assets/products/k11388/thumb.jpg",
+  "thumb": "/assets/products/k11388/v2_thumb.jpg",
   "summary_text": "イタリアブランド「Sicoll」のオリーブグリーンのレザーライダース。1980年代頃のヴィンテージで、色も作りも見かけることが少ない一着です。",
   "summary_points": [
    "オリーブグリーン無地（リブ・裏地もオリーブ）のレザージャケット（シングルライダース型・リブ襟・リブ袖口・裾ゴム）（ブランド：Sicoll（襟裏タグ「Sicoll OF EUROPE」・内ポケットのタグ「Sicoll MADE IN ITALY」））",
@@ -4890,7 +4917,46 @@
    ],
    "approved_at": "2026-10-23"
   },
-  "gender_by": "写真の見立て：メンズ（ヨーロッパのメンズサイズ50の表記から）"
+  "gender_by": "写真の見立て：メンズ（ヨーロッパのメンズサイズ50の表記から）",
+  "images_orig": [
+   "/assets/products/k11388/01.jpg",
+   "/assets/products/k11388/02.jpg",
+   "/assets/products/k11388/03.jpg",
+   "/assets/products/k11388/04.jpg",
+   "/assets/products/k11388/05.jpg",
+   "/assets/products/k11388/06.jpg",
+   "/assets/products/k11388/07.jpg",
+   "/assets/products/k11388/08.jpg",
+   "/assets/products/k11388/09.jpg",
+   "/assets/products/k11388/10.jpg",
+   "/assets/products/k11388/11.jpg",
+   "/assets/products/k11388/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-23",
+   "front_i": 0,
+   "back_i": 8,
+   "front_url": "/assets/products/k11388/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 114.8,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11388/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.1,
+    "garment_l": 113.0,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11388/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 53.0,
+    "着丈": 64.5,
+    "肩幅": 43.5
+   }
+  }
  },
  {
   "sku": "K11415",
@@ -4912,7 +4978,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-23",
   "links": {},
   "images": [
-   "/assets/products/k11415/01.jpg",
+   "/assets/products/k11415/v2_front.jpg",
+   "/assets/products/k11415/v2_back.jpg",
    "/assets/products/k11415/02.jpg",
    "/assets/products/k11415/03.jpg",
    "/assets/products/k11415/04.jpg",
@@ -4920,12 +4987,11 @@
    "/assets/products/k11415/06.jpg",
    "/assets/products/k11415/07.jpg",
    "/assets/products/k11415/08.jpg",
-   "/assets/products/k11415/09.jpg",
    "/assets/products/k11415/10.jpg",
    "/assets/products/k11415/11.jpg",
    "/assets/products/k11415/12.jpg"
   ],
-  "thumb": "/assets/products/k11415/thumb.jpg",
+  "thumb": "/assets/products/k11415/v2_thumb.jpg",
   "summary_text": "NIKEのコットンスウェット。ラベンダーパープルの地にフロントの大判レッドスター、胸元のホワイトスウッシュ。2000年代前後と思われる一枚で、色褪せと使用感がそのまま残っています。",
   "summary_points": [
    "ラベンダーパープル地・フロントに大判レッドスター・胸元にホワイトスウッシュのスウェットシャツ（クルーネック・長袖）（ブランド：NIKE（ネックタグ・スウッシュロゴ・洗濯表示タグで確認））",
@@ -4972,6 +5038,45 @@
    ],
    "approved_at": "2026-10-23"
   },
-  "gender_by": "手がかりなし"
+  "gender_by": "手がかりなし",
+  "images_orig": [
+   "/assets/products/k11415/01.jpg",
+   "/assets/products/k11415/02.jpg",
+   "/assets/products/k11415/03.jpg",
+   "/assets/products/k11415/04.jpg",
+   "/assets/products/k11415/05.jpg",
+   "/assets/products/k11415/06.jpg",
+   "/assets/products/k11415/07.jpg",
+   "/assets/products/k11415/08.jpg",
+   "/assets/products/k11415/09.jpg",
+   "/assets/products/k11415/10.jpg",
+   "/assets/products/k11415/11.jpg",
+   "/assets/products/k11415/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-23",
+   "front_i": 0,
+   "back_i": 8,
+   "front_url": "/assets/products/k11415/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 180.0,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11415/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 177.9,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11415/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 55.5,
+    "着丈": 63.5,
+    "肩幅": 44.5
+   }
+  }
  }
 ]
