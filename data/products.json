@@ -4836,7 +4836,7 @@
    "mannequin_url": "/assets/products/k11201/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
-    "ウエスト": 78.0
+    "ウエスト": 78
    }
   }
  },
@@ -4845,7 +4845,7 @@
   "slug": "k11388-sicoll-sicoll-of-europe-sicoll-made-in-italy",
   "published": true,
   "release": "draft",
-  "status": "available",
+  "status": "sold",
   "title": "Euro Leather JKT green",
   "product_name": "Euro Leather JKT green",
   "brand": "Sicoll（襟裏タグ「Sicoll OF EUROPE」・内ポケットのタグ「Sicoll MADE IN ITALY」）",
@@ -4945,14 +4945,14 @@
    "back_url": "/assets/products/k11388/v2_back.jpg",
    "back_check": {
     "brighten": 0.1,
-    "garment_l": 113.0,
+    "garment_l": 113,
     "bg": "normal"
    },
    "mannequin": "pending",
    "mannequin_url": "/assets/products/k11388/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
-    "身幅": 53.0,
+    "身幅": 53,
     "着丈": 64.5,
     "肩幅": 43.5
    }
@@ -5059,13 +5059,13 @@
    "back_i": 8,
    "front_url": "/assets/products/k11415/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
-    "garment_l": 180.0,
+    "brighten": 0,
+    "garment_l": 180,
     "bg": "normal"
    },
    "back_url": "/assets/products/k11415/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 177.9,
     "bg": "normal"
    },
