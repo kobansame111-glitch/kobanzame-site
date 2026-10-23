@@ -4736,7 +4736,7 @@
  {
   "sku": "K11201",
   "slug": "k11201",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "ROTHCO cargo pants",
@@ -4808,14 +4808,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-23"
   },
   "gender_by": "手がかりなし"
  },
  {
   "sku": "K11388",
   "slug": "k11388-sicoll-sicoll-of-europe-sicoll-made-in-italy",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "Euro Leather JKT green",
@@ -4886,14 +4887,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-23"
   },
   "gender_by": "写真の見立て：メンズ（ヨーロッパのメンズサイズ50の表記から）"
  },
  {
   "sku": "K11415",
   "slug": "k11415-nike",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "NIKEのコットンスウェット",
@@ -4967,7 +4969,8 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-23"
   },
   "gender_by": "手がかりなし"
  }
