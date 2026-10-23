@@ -45,17 +45,17 @@ if(k)send({t:'click',btn:k});},true);
 <header class="site"><div class="wrap">
   <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>Menu</button></div>
   <a class="logo" href="/en/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
-  <div class="hnav"><a class="n" href="/en/#list">Shop</a><a class="n" href="/blog/">Blog</a><a class="n" href="/en/#store">Store</a><a class="n" href="/en/#faq">FAQ</a><a class="n" href="/en/workshop/">Workshops</a>
+  <div class="hnav"><a class="n" href="/en/#list">Shop</a><a class="n" href="/blog/">Blog</a><a class="n" href="/en/#store">Store</a><a class="n" href="/en/#faq">FAQ</a><a class="n" href="/en/workshop/">Workshops (coming soon)</a>
     <nav class="lang" aria-label="言語 / Language"><a href="/journal/k10837-finn-comfort-leather-boots/" lang="ja" aria-current="false">日本語</a><a href="/en/journal/k10837-finn-comfort-leather-boots/" lang="en" aria-current="true">EN</a></nav>
   </div>
-</div></header>
+</div><nav class="tabs" aria-label="Main"><a href="/en/#list" data-cat="">Shop</a><a href="/en/?cat=new#list" data-cat="new">New in</a><a href="/blog/">Blog</a><a href="/en/#store">Store</a></nav></header>
 <div class="drawer-bg" id="drawerbg" hidden></div>
 <nav class="drawer" id="drawer" aria-label="Menu" aria-hidden="true">
   <div class="dh"><b>小判鮫</b><button type="button" class="x" id="drawerx">Close</button></div>
   <h3>Shop by category</h3>
   <ul><li><a href="/en/#list" data-cat="">All items<small>34</small></a></li><li><a href="/en/?cat=new#list" data-cat="new">New in<small>5</small></a></li><li><a href="/en/?cat=outer#list" data-cat="outer">Outerwear<small>7</small></a></li><li><a href="/en/?cat=tops#list" data-cat="tops">Tops<small>8</small></a></li><li><a href="/en/?cat=bottoms#list" data-cat="bottoms">Pants & skirts<small>3</small></a></li><li><a href="/en/?cat=dress#list" data-cat="dress">Dresses<small>3</small></a></li><li><a href="/en/?cat=shoes#list" data-cat="shoes">Shoes<small>5</small></a></li><li><a href="/en/?cat=acc#list" data-cat="acc">Accessories & GAW<small>6</small></a></li><li><a href="/en/?cat=other#list" data-cat="other">Goods<small>2</small></a></li></ul>
   <h3>About the shop</h3>
-  <ul><li><a href="/blog/">Blog</a></li><li><a href="/en/#store">Store</a></li><li><a href="/en/#faq">FAQ</a></li><li><a href="/en/workshop/">Workshops</a></li></ul>
+  <ul><li><a href="/blog/">Blog</a></li><li><a href="/en/#store">Store</a></li><li><a href="/en/#faq">FAQ</a></li><li><a href="/en/workshop/">Workshops (coming soon)</a></li></ul>
 </nav>
 <script>
 (function(){
@@ -65,7 +65,7 @@ if(k)send({t:'click',btn:k});},true);
   b.addEventListener('click',function(){d.classList.contains('open')?close():open();});
   x.addEventListener('click',function(){close();b.focus();}); bg.addEventListener('click',close);
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&d.classList.contains('open')){close();b.focus();}});
-  d.querySelectorAll('a[data-cat]').forEach(function(a){a.addEventListener('click',function(e){
+  document.querySelectorAll('#drawer a[data-cat],header.site .tabs a[data-cat]').forEach(function(a){a.addEventListener('click',function(e){
     if(!document.getElementById('grid'))return;
     e.preventDefault();close();
     document.dispatchEvent(new CustomEvent('kz:cat',{detail:a.dataset.cat||null}));
@@ -118,11 +118,11 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 <footer class="site"><div class="wrap">
   <div class="big"><img src="/assets/seal-light-256.png" alt="" width="64" height="64">Kobanzame</div>
+  <nav class="fcols" aria-label="Site map"><div class="fcol"><h3>Shop</h3><ul><li><a href="/en/#list">All items</a></li><li><a href="/en/?cat=new#list">New in</a></li><li><a href="/en/?cat=outer#list">Outerwear</a></li><li><a href="/en/?cat=tops#list">Tops</a></li><li><a href="/en/?cat=bottoms#list">Pants & skirts</a></li><li><a href="/en/?cat=dress#list">Dresses</a></li><li><a href="/en/?cat=shoes#list">Shoes</a></li><li><a href="/en/?cat=acc#list">Accessories & GAW</a></li><li><a href="/en/?cat=other#list">Goods</a></li><li><a href="https://jp.mercari.com/shops/profile/mCEGcCeE7gengRWWZYg9zV" rel="noopener">Mercari Shops</a></li></ul></div><div class="fcol"><h3>Read</h3><ul><li><a href="/blog/">Blog (Japanese)</a></li><li><a href="/en/guide/">Kawagoe vintage guide</a></li></ul></div><div class="fcol"><h3>The shop</h3><ul><li><a href="/en/#store">Address & hours</a></li><li><a href="/en/#faq">FAQ</a></li><li><a href="/en/workshop/">Workshops (coming soon)</a></li><li><a href="https://www.google.com/maps/search/%E5%8F%A4%E7%9D%80%E5%B1%8B+%E5%B0%8F%E5%88%A4%E9%AE%AB+%E5%B7%9D%E8%B6%8A" rel="noopener">Google Maps</a></li><li><a href="https://www.instagram.com/remora__used372/" rel="noopener">Instagram</a></li></ul></div></nav>
   <div class="hair"></div>
   <div>古着屋 小判鮫／1-14-5 Motomachi, Kawagoe, Saitama 350-0062, Japan／12:00–20:00, closed Mon & Tue<br>
     Operated by Plug Inc.　・　Licensed secondhand dealer: Saitama Prefectural Public Safety Commission No. 431080060786<br>
-    <a href="https://www.instagram.com/remora__used372/" rel="noopener">Instagram</a>　・　<a href="https://jp.mercari.com/shops/profile/mCEGcCeE7gengRWWZYg9zV" rel="noopener">メルカリShops</a>　・　<a href="https://www.google.com/maps/search/%E5%8F%A4%E7%9D%80%E5%B1%8B+%E5%B0%8F%E5%88%A4%E9%AE%AB+%E5%B7%9D%E8%B6%8A" rel="noopener">Google Maps</a><br>
-    <a href="/blog/">Blog</a>　・　<a href="/en/workshop/">Workshops</a>　・　<a href="/en/guide/">Kawagoe vintage guide</a>　・　<a href="/en/legal/">Legal notice & privacy</a>
+    <a href="/en/legal/">Legal notice & privacy</a>
   </div>
 </div></footer>
 <script>
