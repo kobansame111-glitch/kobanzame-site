@@ -45,17 +45,17 @@ if(k)send({t:'click',btn:k});},true);
 <header class="site"><div class="wrap">
   <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>Menu</button></div>
   <a class="logo" href="/en/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
-  <div class="hnav"><a class="n" href="/en/#list">Shop</a><a class="n" href="/blog/">Blog</a><a class="n" href="/en/#store">Store</a><a class="n" href="/en/#faq">FAQ</a><a class="n" href="/en/workshop/">Workshops</a>
+  <div class="hnav"><a class="n" href="/en/#list">Shop</a><a class="n" href="/blog/">Blog</a><a class="n" href="/en/#store">Store</a><a class="n" href="/en/#faq">FAQ</a><a class="n" href="/en/workshop/">Workshops (coming soon)</a>
     <nav class="lang" aria-label="言語 / Language"><a href="/journal/k11308/" lang="ja" aria-current="false">日本語</a><a href="/en/journal/k11308/" lang="en" aria-current="true">EN</a></nav>
   </div>
-</div></header>
+</div><nav class="tabs" aria-label="Main"><a href="/en/#list" data-cat="">Shop</a><a href="/en/?cat=new#list" data-cat="new">New in</a><a href="/blog/">Blog</a><a href="/en/#store">Store</a></nav></header>
 <div class="drawer-bg" id="drawerbg" hidden></div>
 <nav class="drawer" id="drawer" aria-label="Menu" aria-hidden="true">
   <div class="dh"><b>小判鮫</b><button type="button" class="x" id="drawerx">Close</button></div>
   <h3>Shop by category</h3>
   <ul><li><a href="/en/#list" data-cat="">All items<small>34</small></a></li><li><a href="/en/?cat=new#list" data-cat="new">New in<small>5</small></a></li><li><a href="/en/?cat=outer#list" data-cat="outer">Outerwear<small>7</small></a></li><li><a href="/en/?cat=tops#list" data-cat="tops">Tops<small>8</small></a></li><li><a href="/en/?cat=bottoms#list" data-cat="bottoms">Pants & skirts<small>3</small></a></li><li><a href="/en/?cat=dress#list" data-cat="dress">Dresses<small>3</small></a></li><li><a href="/en/?cat=shoes#list" data-cat="shoes">Shoes<small>5</small></a></li><li><a href="/en/?cat=acc#list" data-cat="acc">Accessories & GAW<small>6</small></a></li><li><a href="/en/?cat=other#list" data-cat="other">Goods<small>2</small></a></li></ul>
   <h3>About the shop</h3>
-  <ul><li><a href="/blog/">Blog</a></li><li><a href="/en/#store">Store</a></li><li><a href="/en/#faq">FAQ</a></li><li><a href="/en/workshop/">Workshops</a></li></ul>
+  <ul><li><a href="/blog/">Blog</a></li><li><a href="/en/#store">Store</a></li><li><a href="/en/#faq">FAQ</a></li><li><a href="/en/workshop/">Workshops (coming soon)</a></li></ul>
 </nav>
 <script>
 (function(){
@@ -65,7 +65,7 @@ if(k)send({t:'click',btn:k});},true);
   b.addEventListener('click',function(){d.classList.contains('open')?close():open();});
   x.addEventListener('click',function(){close();b.focus();}); bg.addEventListener('click',close);
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&d.classList.contains('open')){close();b.focus();}});
-  d.querySelectorAll('a[data-cat]').forEach(function(a){a.addEventListener('click',function(e){
+  document.querySelectorAll('#drawer a[data-cat],header.site .tabs a[data-cat]').forEach(function(a){a.addEventListener('click',function(e){
     if(!document.getElementById('grid'))return;
     e.preventDefault();close();
     document.dispatchEvent(new CustomEvent('kz:cat',{detail:a.dataset.cat||null}));
@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 <div class="draftnote">Draft (not yet published) | goes live on Wednesday morning</div>
 <main class="wrap">
-  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/#list">Pants & skirts</a><span>／</span><span>K11308</span></div>
+  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/?cat=bottoms#list">Pants & skirts</a><span>／</span><span>K11308</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="/assets/products/k11308/v2_back.jpg" alt="Suede leather pants 1" fetchpriority="high"><img src="/assets/products/k11308/01.jpg" alt="Suede leather pants 2" loading="lazy"><img src="/assets/products/k11308/02.jpg" alt="Suede leather pants 3" loading="lazy"><img src="/assets/products/k11308/03.jpg" alt="Suede leather pants 4" loading="lazy"><img src="/assets/products/k11308/04.jpg" alt="Suede leather pants 5" loading="lazy"><img src="/assets/products/k11308/05.jpg" alt="Suede leather pants 6" loading="lazy"><img src="/assets/products/k11308/07.jpg" alt="Suede leather pants 7" loading="lazy"><img src="/assets/products/k11308/08.jpg" alt="Suede leather pants 8" loading="lazy"><img src="/assets/products/k11308/09.jpg" alt="Suede leather pants 9" loading="lazy"><img src="/assets/products/k11308/10.jpg" alt="Suede leather pants 10" loading="lazy"><img src="/assets/products/k11308/11.jpg" alt="Suede leather pants 11" loading="lazy"></div>
@@ -85,7 +85,7 @@ if(k)send({t:'click',btn:k});},true);
     <div class="info">
       <div class="brand">表記なし</div>
       <h1>Suede leather pants</h1>
-      <div class="ttl">スウェード調レザーの<wbr>5ポケットパンツ</div>
+      <div class="ttl">スウェード調レザーの5ポケットパンツ</div>
       <div class="sku">ITEM NO. K11308</div>
       <div class="price">¥19,580<small>tax & shipping incl.</small></div>
       <div class="facts"><span class="one">1 in stock</span><span>Vintage (signs of age)</span></div>
@@ -95,15 +95,15 @@ if(k)send({t:'click',btn:k});},true);
         
         <div class="ship"><b>One of a kind, 1 in stock.</b> You will go to Square's secure checkout. If it sells first elsewhere we may not be able to accept your order, and you will get a full refund.<br>Online checkout ships within Japan. For overseas shipping, please contact us before buying.</div>
       </div>
-      <ul class="points"><li>グレージュ／オリーブグレー・無地<wbr>（経年に<wbr>よる<wbr>斑ムラあり）の<wbr>レザーパンツ<wbr>（スウェードレザー／5ポケットジーンズ型）</li><li>実寸 ウエスト64cm・股上35cm・股下82cm</li></ul>
-      <details open><summary>The story</summary><div class="story"><p>川越の<wbr>古民家で<wbr>古着屋を<wbr>している、<wbr>小判鮫です。<wbr>5ポケットジーンズと<wbr>同じ型で<wbr>作られた、<wbr>スウェード調レザーの<wbr>パンツです。</p>
-<h2>この一着のこと</h2><p>5ポケットジーンズと<wbr>同じ型で<wbr>作られた、<wbr>スウェード調レザーの<wbr>パンツです。<wbr>豚革または<wbr>牛革の<wbr>床革を<wbr>裏毛面で<wbr>使った<wbr>ものと<wbr>思われます。<wbr>フロントは<wbr>ボタン留め、<wbr>リベット配置も<wbr>ジーンズの<wbr>それに<wbr>倣っていて、<wbr>1980〜1990年代頃の<wbr>メンズ向けの<wbr>一本と<wbr>思われます。</p><p>いまは<wbr>小判鮫の<wbr>棚に<wbr>掛かっています。<wbr>グレージュと<wbr>オリーブグレーの<wbr>間を<wbr>揺れるような<wbr>色は、<wbr>経年の<wbr>色ムラと<wbr>油染みが<wbr>重なって<wbr>できた<wbr>ものです。<wbr>スウェード表面には<wbr>擦れが<wbr>入り、<wbr>裾は<wbr>切りっぱなしの<wbr>ほつれ、<wbr>パネルの<wbr>縫い目には<wbr>軽度の<wbr>剥離も<wbr>あります。<wbr>使用感は<wbr>強めで、<wbr>それを<wbr>隠していません。<wbr>この<wbr>状態<wbr>その<wbr>ものが、<wbr>この<wbr>パンツの<wbr>持っている<wbr>風合いです。</p><p>ウエスト約74〜78cm程度と<wbr>思われます。<wbr>メンズSから<wbr>Mあたり、<wbr>レディースであれば<wbr>フリーに<wbr>近い<wbr>サイズ感です。</p><p>着方は<wbr>シンプルに、<wbr>白や<wbr>黒の<wbr>無地Tシャツ一枚と<wbr>合わせるだけで<wbr>十分です。<wbr>パンツ自体の<wbr>色と<wbr>質感が<wbr>強いので、<wbr>上は<wbr>引き算で<wbr>選ぶ<wbr>ほうが<wbr>よく<wbr>似合います。<wbr>足元は<wbr>ブーツでも、くたびれた<wbr>スニーカーでも、<wbr>どちらも<wbr>この<wbr>パンツの<wbr>空気感と<wbr>合います。<wbr>一枚で<wbr>さらっと<wbr>穿いて、<wbr>それだけで<wbr>完結する<wbr>着方が<wbr>一番しっくりきます。</p><h2>状態</h2><p>状態：全体的に<wbr>経年に<wbr>よる<wbr>色ムラ・油染み・スウェード表面の<wbr>擦れあり。<wbr>裾部分に<wbr>切りっぱなしの<wbr>ほつれ・パネル縫い目に<wbr>軽度の<wbr>剥離あり。<wbr>使用感は<wbr>強め。</p></div></details>
-      <details><summary>Details & size</summary><dl class="spec"><dt>ブランド</dt><dd>表記なし</dd><dt>色</dt><dd>グレージュ／オリーブグレー・無地<wbr>（経年に<wbr>よる<wbr>斑ムラあり）</dd><dt>サイズ</dt><dd>実寸 ウエスト64cm・股上35cm・股下82cm</dd><dt>状態</dt><dd>全体的に<wbr>経年に<wbr>よる<wbr>色ムラ・油染み・スウェード表面の<wbr>擦れあり。<wbr>裾部分に<wbr>切りっぱなしの<wbr>ほつれ・パネル縫い目に<wbr>軽度の<wbr>剥離あり。<wbr>使用感は<wbr>強め</dd></dl><p class="howto">Measured flat. Chest = armpit to armpit; length = base of collar to hem. Measure a piece you own the same way to compare.</p></details>
+      <ul class="points"><li>グレージュ／オリーブグレー・無地（経年による斑ムラあり）のレザーパンツ（スウェードレザー／5ポケットジーンズ型）</li><li>実寸 ウエスト64cm・股上35cm・股下82cm</li></ul>
+      <details open><summary>The story</summary><div class="story"><p>川越の古民家で古着屋をしている、小判鮫です。5ポケットジーンズと同じ型で作られた、スウェード調レザーのパンツです。</p>
+<h2>この一着のこと</h2><p>5ポケットジーンズと同じ型で作られた、スウェード調レザーのパンツです。豚革または牛革の床革を裏毛面で使ったものと思われます。フロントはボタン留め、リベット配置もジーンズのそれに倣っていて、1980〜1990年代頃のメンズ向けの一本と思われます。</p><p>いまは小判鮫の棚に掛かっています。グレージュとオリーブグレーの間を揺れるような色は、経年の色ムラと油染みが重なってできたものです。スウェード表面には擦れが入り、裾は切りっぱなしのほつれ、パネルの縫い目には軽度の剥離もあります。使用感は強めで、それを隠していません。この状態そのものが、このパンツの持っている風合いです。</p><p>ウエスト約74〜78cm程度と思われます。メンズSからMあたり、レディースであればフリーに近いサイズ感です。</p><p>着方はシンプルに、白や黒の無地Tシャツ一枚と合わせるだけで十分です。パンツ自体の色と質感が強いので、上は引き算で選ぶほうがよく似合います。足元はブーツでも、くたびれたスニーカーでも、どちらもこのパンツの空気感と合います。一枚でさらっと穿いて、それだけで完結する着方が一番しっくりきます。</p><h2>状態</h2><p>状態：全体的に経年による色ムラ・油染み・スウェード表面の擦れあり。裾部分に切りっぱなしのほつれ・パネル縫い目に軽度の剥離あり。使用感は強め。</p></div></details>
+      <details><summary>Details & size</summary><dl class="spec"><dt>ブランド</dt><dd>表記なし</dd><dt>色</dt><dd>グレージュ／オリーブグレー・無地（経年による斑ムラあり）</dd><dt>サイズ</dt><dd>実寸 ウエスト64cm・股上35cm・股下82cm</dd><dt>状態</dt><dd>全体的に経年による色ムラ・油染み・スウェード表面の擦れあり。裾部分に切りっぱなしのほつれ・パネル縫い目に軽度の剥離あり。使用感は強め</dd></dl><p class="howto">Measured flat. Chest = armpit to armpit; length = base of collar to hem. Measure a piece you own the same way to compare.</p></details>
       <details><summary>Shipping & returns</summary><div class="story"><p>Domestic shipping included. Dispatched from our Kawagoe shop within 3 days of payment (closed Mon & Tue). As these are one-of-a-kind vintage items, we do not accept returns for change of mind. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival.</p></div></details>
       <div class="byline">Words: Ryu, owner & buyer at Kobanzame</div>
     </div>
   </div>
-  <section class="related"><h2>Also One of One<small>Also one of one</small></h2><div class="grid"><a class="card" href="/en/journal/k10614-riveted-by-lee/" data-cat="bottoms" data-new="1" data-w="" data-sold="0"><div class="ph"><img src="/assets/products/k10614/v2_thumb.jpg" alt="90s Riveted by Lee ストレートジーンズ" loading="lazy"><img class="alt" src="/assets/products/k10614/v2_back.jpg" alt="" loading="lazy" aria-hidden="true"><span class="tag">Only 1</span><span class="newtag">NEW</span></div><div class="brand">Riveted by Lee<wbr>（リベッテッド バイ リー）</div><div class="nm">90s Riveted by Lee ストレートジーンズ</div><span class="fit" hidden></span><div class="pr">¥11,880<small>tax incl.</small></div></a><a class="card" href="/en/journal/k10917-wynn-industries-inc-dsa100-71-c-1467-general-ykk/" data-cat="bottoms" data-new="1" data-w="" data-sold="0"><div class="ph"><img src="/assets/products/k10917/v2_thumb.jpg" alt="1971年 U.S.アーミー ヘリクルー フライトトラウザーズ" loading="lazy"><img class="alt" src="/assets/products/k10917/v2_back.jpg" alt="" loading="lazy" aria-hidden="true"><span class="tag">Only 1</span><span class="newtag">NEW</span></div><div class="brand">WYNN INDUSTRIES<wbr>（U.S.アーミー）</div><div class="nm">1971年 U.S.アーミー ヘリクルー フライトトラウザーズ</div><span class="fit" hidden></span><div class="pr">¥9,680<small>tax incl.</small></div></a><a class="card" href="/en/journal/k11060-levis-505-usa-denim/" data-cat="bottoms" data-new="0" data-w="" data-sold="0"><div class="ph"><img src="https://assets.mercari-shops-static.com/-/medium/plain/2JTriApaLU2yeRyxRW4wr9.jpg" alt="Levi&#x27;s 505-0217 denim jeans (indigo, W30 L36, made in USA)" loading="lazy"><img class="alt" src="https://assets.mercari-shops-static.com/-/medium/plain/2JTriApaxdwM4aXsrNjcLG.jpg" alt="" loading="lazy" aria-hidden="true"><span class="tag">Only 1</span></div><div class="brand">Levi&#x27;s</div><div class="nm">Levi&#x27;s 505-0217 denim jeans (indigo, W30 L36, made in USA)</div><span class="fit" hidden></span><div class="pr">¥15,180<small>tax incl.</small></div></a></div></section>
+  <section class="related"><h2>Also One of One<small>Also one of one</small></h2><div class="grid"><a class="card" href="/en/journal/k10614-riveted-by-lee/" data-cat="bottoms" data-new="1" data-w="" data-sold="0"><div class="ph"><img src="/assets/products/k10614/v2_thumb.jpg" alt="90s Riveted by Lee ストレートジーンズ" loading="lazy"><img class="alt" src="/assets/products/k10614/v2_back.jpg" alt="" loading="lazy" aria-hidden="true"><span class="tag">Only 1</span><span class="newtag">NEW</span></div><div class="brand">Riveted by Lee（リベッテッド バイ リー）</div><div class="nm">90s Riveted by Lee ストレートジーンズ</div><span class="fit" hidden></span><div class="pr">¥11,880<small>tax incl.</small></div></a><a class="card" href="/en/journal/k10917-wynn-industries-inc-dsa100-71-c-1467-general-ykk/" data-cat="bottoms" data-new="1" data-w="" data-sold="0"><div class="ph"><img src="/assets/products/k10917/v2_thumb.jpg" alt="1971年 U.S.アーミー ヘリクルー フライトトラウザーズ" loading="lazy"><img class="alt" src="/assets/products/k10917/v2_back.jpg" alt="" loading="lazy" aria-hidden="true"><span class="tag">Only 1</span><span class="newtag">NEW</span></div><div class="brand">WYNN INDUSTRIES（U.S.アーミー）</div><div class="nm">1971年 U.S.アーミー ヘリクルー フライトトラウザーズ</div><span class="fit" hidden></span><div class="pr">¥9,680<small>tax incl.</small></div></a><a class="card" href="/en/journal/k11060-levis-505-usa-denim/" data-cat="bottoms" data-new="0" data-w="" data-sold="0"><div class="ph"><img src="https://assets.mercari-shops-static.com/-/medium/plain/2JTriApaLU2yeRyxRW4wr9.jpg" alt="Levi&#x27;s 505-0217 denim jeans (indigo, W30 L36, made in USA)" loading="lazy"><img class="alt" src="https://assets.mercari-shops-static.com/-/medium/plain/2JTriApaxdwM4aXsrNjcLG.jpg" alt="" loading="lazy" aria-hidden="true"><span class="tag">Only 1</span></div><div class="brand">Levi&#x27;s</div><div class="nm">Levi&#x27;s 505-0217 denim jeans (indigo, W30 L36, made in USA)</div><span class="fit" hidden></span><div class="pr">¥15,180<small>tax incl.</small></div></a></div></section>
 </main>
 <div class="bar"><b>¥19,580</b><a class="btn kin" href="https://square.link/u/LXkI8uJb" rel="noopener">Buy now</a></div>
 <script>
@@ -118,13 +118,26 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 <footer class="site"><div class="wrap">
   <div class="big"><img src="/assets/seal-light-256.png" alt="" width="64" height="64">Kobanzame</div>
+  <nav class="fcols" aria-label="Site map"><div class="fcol"><h3>Shop</h3><ul><li><a href="/en/#list">All items</a></li><li><a href="/en/?cat=new#list">New in</a></li><li><a href="/en/?cat=outer#list">Outerwear</a></li><li><a href="/en/?cat=tops#list">Tops</a></li><li><a href="/en/?cat=bottoms#list">Pants & skirts</a></li><li><a href="/en/?cat=dress#list">Dresses</a></li><li><a href="/en/?cat=shoes#list">Shoes</a></li><li><a href="/en/?cat=acc#list">Accessories & GAW</a></li><li><a href="/en/?cat=other#list">Goods</a></li><li><a href="https://jp.mercari.com/shops/profile/mCEGcCeE7gengRWWZYg9zV" rel="noopener">Mercari Shops</a></li></ul></div><div class="fcol"><h3>Read</h3><ul><li><a href="/blog/">Blog (Japanese)</a></li><li><a href="/en/guide/">Kawagoe vintage guide</a></li></ul></div><div class="fcol"><h3>The shop</h3><ul><li><a href="/en/#store">Address & hours</a></li><li><a href="/en/#faq">FAQ</a></li><li><a href="/en/workshop/">Workshops (coming soon)</a></li><li><a href="https://www.google.com/maps/search/%E5%8F%A4%E7%9D%80%E5%B1%8B+%E5%B0%8F%E5%88%A4%E9%AE%AB+%E5%B7%9D%E8%B6%8A" rel="noopener">Google Maps</a></li><li><a href="https://www.instagram.com/remora__used372/" rel="noopener">Instagram</a></li></ul></div></nav>
   <div class="hair"></div>
   <div>古着屋 小判鮫／1-14-5 Motomachi, Kawagoe, Saitama 350-0062, Japan／12:00–20:00, closed Mon & Tue<br>
     Operated by Plug Inc.　・　Licensed secondhand dealer: Saitama Prefectural Public Safety Commission No. 431080060786<br>
-    <a href="https://www.instagram.com/remora__used372/" rel="noopener">Instagram</a>　・　<a href="https://jp.mercari.com/shops/profile/mCEGcCeE7gengRWWZYg9zV" rel="noopener">メルカリShops</a>　・　<a href="https://www.google.com/maps/search/%E5%8F%A4%E7%9D%80%E5%B1%8B+%E5%B0%8F%E5%88%A4%E9%AE%AB+%E5%B7%9D%E8%B6%8A" rel="noopener">Google Maps</a><br>
-    <a href="/blog/">Blog</a>　・　<a href="/en/workshop/">Workshops</a>　・　<a href="/en/guide/">Kawagoe vintage guide</a>　・　<a href="/en/legal/">Legal notice & privacy</a>
+    <a href="/en/legal/">Legal notice & privacy</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

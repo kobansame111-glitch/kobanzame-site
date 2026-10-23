@@ -41,21 +41,21 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 </head>
 <body>
-<div class="util"><b>毎週<wbr>水曜 新着入荷</b>　送料込み・決済確認後<wbr>3日以内に<wbr>発送<wbr>（月・火定休を<wbr>除く）　<b>11/1から<wbr> 月曜定休・13時開店</b></div><script>document.addEventListener('DOMContentLoaded',function(){try{var d=new Date(Date.now()+324e5).toISOString().slice(0,10);document.querySelectorAll('[data-until]').forEach(function(e){var u=e.getAttribute('data-until');if(u&&u<d)e.hidden=true;});}catch(x){}});</script>
+<div class="util"><b>毎週水曜 新着入荷</b>　送料込み・決済確認後3日以内に発送（月・火定休を除く）　<b>11/1から 月曜定休・13時開店</b></div><script>document.addEventListener('DOMContentLoaded',function(){try{var d=new Date(Date.now()+324e5).toISOString().slice(0,10);document.querySelectorAll('[data-until]').forEach(function(e){var u=e.getAttribute('data-until');if(u&&u<d)e.hidden=true;});}catch(x){}});</script>
 <header class="site"><div class="wrap">
   <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>メニュー</button></div>
   <a class="logo" href="/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
-  <div class="hnav"><a class="n" href="/#list">商品一覧</a><a class="n" href="/blog/">ブログ</a><a class="n" href="/#store">店舗</a><a class="n" href="/#faq">Q&amp;A</a><a class="n" href="/workshop/">ワークショップ</a>
+  <div class="hnav"><a class="n" href="/#list">商品一覧</a><a class="n" href="/blog/">ブログ</a><a class="n" href="/#store">店舗</a><a class="n" href="/#faq">Q&amp;A</a><a class="n" href="/workshop/">ワークショップ（準備中）</a>
     <nav class="lang" aria-label="言語 / Language"><a href="/blog/k10990-chico-s-design/" lang="ja" aria-current="true">日本語</a><a href="/en/blog/k10990-chico-s-design/" lang="en" aria-current="false">EN</a></nav>
   </div>
-</div></header>
+</div><nav class="tabs" aria-label="メイン"><a href="/#list" data-cat="">商品</a><a href="/?cat=new#list" data-cat="new">新着</a><a href="/blog/" aria-current="page">ブログ</a><a href="/#store">お店</a></nav></header>
 <div class="drawer-bg" id="drawerbg" hidden></div>
 <nav class="drawer" id="drawer" aria-label="メニュー" aria-hidden="true">
   <div class="dh"><b>小判鮫</b><button type="button" class="x" id="drawerx">閉じる</button></div>
   <h3>ジャンルで選ぶ</h3>
-  <ul><li><a href="/#list" data-cat="">すべての商品<small>34</small></a></li><li><a href="/?cat=new#list" data-cat="new">新着<small>5</small></a></li><li><a href="/?cat=outer#list" data-cat="outer">アウター<small>7</small></a></li><li><a href="/?cat=tops#list" data-cat="tops">トップス<small>8</small></a></li><li><a href="/?cat=bottoms#list" data-cat="bottoms">パンツ・スカート<small>3</small></a></li><li><a href="/?cat=dress#list" data-cat="dress">ワンピース<small>3</small></a></li><li><a href="/?cat=shoes#list" data-cat="shoes">靴<small>5</small></a></li><li><a href="/?cat=acc#list" data-cat="acc">アクセサリー・<wbr>GAW<small>6</small></a></li><li><a href="/?cat=other#list" data-cat="other">小物・雑貨<small>2</small></a></li></ul>
+  <ul><li><a href="/#list" data-cat="">すべての商品<small>34</small></a></li><li><a href="/?cat=new#list" data-cat="new">新着<small>5</small></a></li><li><a href="/?cat=outer#list" data-cat="outer">アウター<small>7</small></a></li><li><a href="/?cat=tops#list" data-cat="tops">トップス<small>8</small></a></li><li><a href="/?cat=bottoms#list" data-cat="bottoms">パンツ・スカート<small>3</small></a></li><li><a href="/?cat=dress#list" data-cat="dress">ワンピース<small>3</small></a></li><li><a href="/?cat=shoes#list" data-cat="shoes">靴<small>5</small></a></li><li><a href="/?cat=acc#list" data-cat="acc">アクセサリー・GAW<small>6</small></a></li><li><a href="/?cat=other#list" data-cat="other">小物・雑貨<small>2</small></a></li></ul>
   <h3>お店のこと</h3>
-  <ul><li><a href="/blog/">ブログ</a></li><li><a href="/#store">店舗</a></li><li><a href="/#faq">Q&amp;A</a></li><li><a href="/workshop/">ワークショップ</a></li></ul>
+  <ul><li><a href="/blog/">ブログ</a></li><li><a href="/#store">店舗</a></li><li><a href="/#faq">Q&amp;A</a></li><li><a href="/workshop/">ワークショップ（準備中）</a></li></ul>
 </nav>
 <script>
 (function(){
@@ -65,7 +65,7 @@ if(k)send({t:'click',btn:k});},true);
   b.addEventListener('click',function(){d.classList.contains('open')?close():open();});
   x.addEventListener('click',function(){close();b.focus();}); bg.addEventListener('click',close);
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&d.classList.contains('open')){close();b.focus();}});
-  d.querySelectorAll('a[data-cat]').forEach(function(a){a.addEventListener('click',function(e){
+  document.querySelectorAll('#drawer a[data-cat],header.site .tabs a[data-cat]').forEach(function(a){a.addEventListener('click',function(e){
     if(!document.getElementById('grid'))return;
     e.preventDefault();close();
     document.dispatchEvent(new CustomEvent('kz:cat',{detail:a.dataset.cat||null}));
@@ -75,14 +75,14 @@ if(k)send({t:'click',btn:k});},true);
 })();
 </script>
 <main class="blog-main">
-  <div class="crumb"><a href="/">HOME</a><span>／</span><a href="/blog/">ブログ</a><span>／</span><span>CHICO&#x27;S DESIGN シルクの<wbr>ボーダージャケット<wbr>（シルク100%）</span></div>
+  <div class="crumb"><a href="/">HOME</a><span>／</span><a href="/blog/">ブログ</a><span>／</span><span>CHICO&#x27;S DESIGN シルクのボーダージャケット（シルク100%）</span></div>
   <article class="blog-article">
     <div class="blog-header">
       <time datetime="2026-10-22">2026.10.22</time>
-      <h1>CHICO&#x27;S DESIGN シルクの<wbr>ボーダージャケット<wbr>（シルク100%）</h1>
+      <h1>CHICO&#x27;S DESIGN シルクのボーダージャケット（シルク100%）</h1>
       <p class="blog-author">小判鮫</p>
     </div>
-    <div class="blog-teaser"><p>今日は<wbr> CHICO'S DESIGN の<wbr>シルクジャケットです。</p><div class="blog-inline"><figure class="blog-photo"><img src="/assets/products/k10990/01.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット 正面" loading="lazy" decoding="async"><figcaption>正面</figcaption></figure></div><p>ベージュ、<wbr>カーキ、<wbr>チャコールグレーの<wbr>マルチボーダー。<wbr>シルク100%なんです。</p></div><div class="blog-body"><div class="blog-inline blog-inline-2"><figure class="blog-photo"><img src="/assets/products/k10990/02.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット シルエット" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット シルエット</figcaption></figure><figure class="blog-photo"><img src="/assets/products/k10990/03.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット 状態" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット 状態</figcaption></figure></div><p>シルクの<wbr>光沢が<wbr>ボーダーの<wbr>色を<wbr>きれいに<wbr>見せてますね。<wbr>手触りも<wbr>軽くて、<wbr>羽織りものとして<wbr>ちょうど<wbr>いいと<wbr>思います。</p><div class="blog-inline blog-inline-2"><figure class="blog-photo"><img src="/assets/products/k10990/05.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット ディテール" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット ディテール</figcaption></figure><figure class="blog-photo"><img src="/assets/products/k10990/06.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット ディテール" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット ディテール</figcaption></figure></div><p>身幅59.5cm・着丈72cm・肩幅48cm。<wbr>ゆったりめの<wbr>シルエットですね。<wbr>袖丈は<wbr>49.5cmです。<wbr>海外の<wbr>古着の<wbr>販売ページでも、<wbr>CHICO'S DESIGN の<wbr>シルクジャケットは<wbr>1990年代頃の<wbr>ものとして<wbr>紹介されてるんです。</p><div class="blog-inline"><figure class="blog-photo"><img src="/assets/products/k10990/07.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット ディテール" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット ディテール</figcaption></figure></div><p>全体的に<wbr>シワが<wbr>あるのと、<wbr>袖付け部分に<wbr>ステッチの<wbr>ほつれ、<wbr>裾に<wbr>若干の<wbr>汚れが<wbr>あります。<wbr>正直に<wbr>お伝えしておきます。<wbr>使用感は<wbr>ありますが、<wbr>シルクの<wbr>質感は<wbr>十分<wbr>残ってるんです。</p><p>シンプルな<wbr>カットソーの<wbr>上に<wbr>さらっと<wbr>羽織るのが<wbr>おすすめ。<wbr>こういう<wbr>シルクの<wbr>1枚、<wbr>持っていると<wbr>便利だと<wbr>思いませんか。</p><h2>この1点の情報</h2><table class="blog-spec"><tr><th>ブランド</th><td>CHICO'S DESIGN</td></tr><tr><th>素材</th><td>シルク（絹）</td></tr><tr><th>色</th><td>ベージュ・カーキ・チャコールグレーの<wbr>マルチボーダー柄</td></tr><tr><th>サイズ</th><td>身幅59.5／着丈72／肩幅48／袖丈49.5cm</td></tr><tr><th>年代</th><td>1990年代頃<wbr>（海外の<wbr>古着の<wbr>販売ページでの<wbr>見立て）</td></tr><tr><th>状態</th><td>シワ・袖付けステッチほつれ・裾に<wbr>若干の<wbr>汚れあり・<wbr>使用感あり</td></tr><tr><th>価格</th><td>¥17,380<wbr>（税込）</td></tr><tr><th>商品ページ</th><td><a href="https://kobanzame-site.pages.dev/journal/k10990-chicos-design-silk-jacket/">小判鮫の<wbr>サイトで<wbr>見る</a></td></tr></table><h2>参考</h2><ul><li><a href="https://www.ebay.de/itm/157333701946">Vintage Chico's Design Jacke 100% Seide Indien 90er - eBay</a></li><li><a href="https://poshmark.com/brand/Chicos%20Design">Chicos Design - Poshmark<wbr>（90s Chico's Design Silk Patchwork Jacket など）</a></li></ul><p>お店で<wbr>見てみてください。<wbr>では、<wbr>また。</p></div><h2 class="blog-gallery-head">そのほかの写真</h2><div class="blog-gallery">
+    <div class="blog-teaser"><p>今日は CHICO'S DESIGN のシルクジャケットです。</p><div class="blog-inline"><figure class="blog-photo"><img src="/assets/products/k10990/01.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット 正面" loading="lazy" decoding="async"><figcaption>正面</figcaption></figure></div><p>ベージュ、カーキ、チャコールグレーのマルチボーダー。シルク100%なんです。</p></div><div class="blog-body"><div class="blog-inline blog-inline-2"><figure class="blog-photo"><img src="/assets/products/k10990/02.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット シルエット" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット シルエット</figcaption></figure><figure class="blog-photo"><img src="/assets/products/k10990/03.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット 状態" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット 状態</figcaption></figure></div><p>シルクの光沢がボーダーの色をきれいに見せてますね。手触りも軽くて、羽織りものとしてちょうどいいと思います。</p><div class="blog-inline blog-inline-2"><figure class="blog-photo"><img src="/assets/products/k10990/05.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット ディテール" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット ディテール</figcaption></figure><figure class="blog-photo"><img src="/assets/products/k10990/06.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット ディテール" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット ディテール</figcaption></figure></div><p>身幅59.5cm・着丈72cm・肩幅48cm。ゆったりめのシルエットですね。袖丈は49.5cmです。海外の古着の販売ページでも、CHICO'S DESIGN のシルクジャケットは1990年代頃のものとして紹介されてるんです。</p><div class="blog-inline"><figure class="blog-photo"><img src="/assets/products/k10990/07.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット ディテール" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット ディテール</figcaption></figure></div><p>全体的にシワがあるのと、袖付け部分にステッチのほつれ、裾に若干の汚れがあります。正直にお伝えしておきます。使用感はありますが、シルクの質感は十分残ってるんです。</p><p>シンプルなカットソーの上にさらっと羽織るのがおすすめ。こういうシルクの1枚、持っていると便利だと思いませんか。</p><h2>この1点の情報</h2><table class="blog-spec"><tr><th>ブランド</th><td>CHICO'S DESIGN</td></tr><tr><th>素材</th><td>シルク（絹）</td></tr><tr><th>色</th><td>ベージュ・カーキ・チャコールグレーのマルチボーダー柄</td></tr><tr><th>サイズ</th><td>身幅59.5／着丈72／肩幅48／袖丈49.5cm</td></tr><tr><th>年代</th><td>1990年代頃（海外の古着の販売ページでの見立て）</td></tr><tr><th>状態</th><td>シワ・袖付けステッチほつれ・裾に若干の汚れあり・使用感あり</td></tr><tr><th>価格</th><td>¥17,380（税込）</td></tr><tr><th>商品ページ</th><td><a href="https://kobanzame-site.pages.dev/journal/k10990-chicos-design-silk-jacket/">小判鮫のサイトで見る</a></td></tr></table><h2>参考</h2><ul><li><a href="https://www.ebay.de/itm/157333701946">Vintage Chico's Design Jacke 100% Seide Indien 90er - eBay</a></li><li><a href="https://poshmark.com/brand/Chicos%20Design">Chicos Design - Poshmark（90s Chico's Design Silk Patchwork Jacket など）</a></li></ul><p>お店で見てみてください。では、また。</p></div><h2 class="blog-gallery-head">そのほかの写真</h2><div class="blog-gallery">
 <figure class="blog-photo"><img src="/assets/products/k10990/v2_back.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット 背面" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット 背面</figcaption></figure>
 <figure class="blog-photo"><img src="/assets/products/k10990/04.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット ディテール" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット ディテール</figcaption></figure>
 <figure class="blog-photo"><img src="/assets/products/k10990/09.jpg" alt="CHICO&#x27;S DESIGN シルクジャケット ディテール" loading="lazy" decoding="async"><figcaption>CHICO&#x27;S DESIGN シルクジャケット ディテール</figcaption></figure>
@@ -93,13 +93,26 @@ if(k)send({t:'click',btn:k});},true);
 </main>
 <footer class="site"><div class="wrap">
   <div class="big"><img src="/assets/seal-light-256.png" alt="" width="64" height="64">Kobanzame</div>
+  <nav class="fcols" aria-label="サイトの案内"><div class="fcol"><h3>お買い物</h3><ul><li><a href="/#list">すべての商品</a></li><li><a href="/?cat=new#list">新着</a></li><li><a href="/?cat=outer#list">アウター</a></li><li><a href="/?cat=tops#list">トップス</a></li><li><a href="/?cat=bottoms#list">パンツ・スカート</a></li><li><a href="/?cat=dress#list">ワンピース</a></li><li><a href="/?cat=shoes#list">靴</a></li><li><a href="/?cat=acc#list">アクセサリー・GAW</a></li><li><a href="/?cat=other#list">小物・雑貨</a></li><li><a href="https://jp.mercari.com/shops/profile/mCEGcCeE7gengRWWZYg9zV" rel="noopener">メルカリShops</a></li></ul></div><div class="fcol"><h3>読みもの</h3><ul><li><a href="/blog/">ブログ</a></li><li><a href="/guide/">川越で古着屋を探している方へ</a></li><li><a href="/news/">お知らせ</a></li></ul></div><div class="fcol"><h3>お店</h3><ul><li><a href="/#store">場所・営業時間</a></li><li><a href="/#faq">よくある質問</a></li><li><a href="/workshop/">ワークショップ（準備中）</a></li><li><a href="https://www.google.com/maps/search/%E5%8F%A4%E7%9D%80%E5%B1%8B+%E5%B0%8F%E5%88%A4%E9%AE%AB+%E5%B7%9D%E8%B6%8A" rel="noopener">Googleマップ</a></li><li><a href="https://www.instagram.com/remora__used372/" rel="noopener">Instagram</a></li></ul></div></nav>
   <div class="hair"></div>
   <div>古着屋 小判鮫／〒350-0062 埼玉県川越市元町1-14-5／12:00–20:00・月曜・火曜定休<br>
     運営：株式会社プラグ　・　古物商許可：埼玉県公安委員会 第431080060786号<br>
-    <a href="https://www.instagram.com/remora__used372/" rel="noopener">Instagram</a>　・　<a href="https://jp.mercari.com/shops/profile/mCEGcCeE7gengRWWZYg9zV" rel="noopener">メルカリShops</a>　・　<a href="https://www.google.com/maps/search/%E5%8F%A4%E7%9D%80%E5%B1%8B+%E5%B0%8F%E5%88%A4%E9%AE%AB+%E5%B7%9D%E8%B6%8A" rel="noopener">Googleマップ</a><br>
-    <a href="/blog/">ブログ</a>　・　<a href="/workshop/">ワークショップ</a>　・　<a href="/guide/">川越で<wbr>古着屋を<wbr>探している<wbr>方へ</a>　・　<a href="/tokushoho/">特定商取引法に<wbr>基づく<wbr>表記</a>　・　<a href="/privacy/">プライバシーポリシー</a>
+    <a href="/tokushoho/">特定商取引法に基づく表記</a>　・　<a href="/privacy/">プライバシーポリシー</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

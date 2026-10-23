@@ -200,6 +200,10 @@ T = {
 # 比べる「通常価格」も書かない（二重価格表示にしない）。
 WS_FROM = '2026-10-21'
 WS_OPEN = TODAY >= WS_FROM
+# 予約の受付（2026-10-23 龍さん決定B「予約サイトはまだ準備中にしておいて」）。
+# False の間は「予約する」ボタンを出さず「予約は準備中です」と表示し、メニューも「（準備中）」付きにする。
+# 予約サイトが整ったら True に戻す（RESERVE の行き先も新しいサイトに）。
+WS_BOOKING = False
 RESERVE = 'https://www.concentsocket.com/location/kobanzame/reserve/'
 WORKSHOPS = [
     {'id': 'brass-bangle', 'reserve': RESERVE + 'dedff258-e093-4b81-bc8e-0abf0ac5bf4a', 'price': 1500, 'minutes': 60, 'max': 2,
@@ -220,7 +224,8 @@ WORKSHOPS = [
             'notes': ['The price includes one kind of stone', 'Each additional kind is +100 yen, paid in the shop on the day', 'The stones on offer depend on what is in stock that day']}},
 ]
 if WS_OPEN:
-    T_WS_NAV = {'ja': ('/workshop/', 'ワークショップ'), 'en': ('/en/workshop/', 'Workshops')}
+    T_WS_NAV = ({'ja': ('/workshop/', 'ワークショップ'), 'en': ('/en/workshop/', 'Workshops')} if WS_BOOKING else
+                {'ja': ('/workshop/', 'ワークショップ（準備中）'), 'en': ('/en/workshop/', 'Workshops (coming soon)')})
 
 CAT_EN = {'outer': 'Outer', 'tops': 'Tops', 'bottoms': 'Bottoms', 'dress': 'Dresses', 'shoes': 'Shoes', 'acc': 'Accessories', 'other': 'Goods'}
 
@@ -786,6 +791,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
     navs = ''.join(f'<a class="n" href="{h}">{l}</a>' for h, l in t['nav'] + ([T_WS_NAV[lang]] if WS_OPEN else []))
     ja_cur = 'true' if lang == 'ja' else 'false'
     en_cur = 'true' if lang == 'en' else 'false'
+    tabs = tabs_html(lang, path)
     return f'''<!doctype html>
 <html lang="{lang}">
 <head>
@@ -823,10 +829,23 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
   <div class="hnav">{navs}
     <nav class="lang" aria-label="言語 / Language"><a href="{alt if lang == 'en' else path}" lang="ja" aria-current="{ja_cur}">日本語</a><a href="{alt if lang == 'ja' else path}" lang="en" aria-current="{en_cur}">EN</a></nav>
   </div>
-</div></header>
+</div>{tabs}</header>
 ''' + drawer_html(lang)
 
-REVEAL_JS = '''<script>
+REVEAL_JS = '''<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
+<script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');
   if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
@@ -836,6 +855,18 @@ REVEAL_JS = '''<script>
   var h=document.querySelector('header.site');addEventListener('scroll',function(){h.classList.toggle('sc',scrollY>40);},{passive:true});
 })();
 </script>'''
+
+# 2026-10-23 龍さん決定A：スマホでもメニューが見えるように、ロゴの下に文字のタブを常に出す（古着屋 BerBerJin などの「上に SHOP・BLOG」の形）
+TABS = {'ja': [('list', '商品'), ('new', '新着'), ('blog', 'ブログ'), ('store', 'お店')],
+        'en': [('list', 'Shop'), ('new', 'New in'), ('blog', 'Blog'), ('store', 'Store')]}
+def tabs_html(lang, path):
+    P = pre(lang)
+    href = {'list': f'{P}/#list', 'new': f'{P}/?cat=new#list', 'blog': '/blog/', 'store': f'{P}/#store'}
+    has_new = any(is_new(p) for p in avail_live)
+    cur = 'blog' if path.startswith('/blog') else ''
+    items = ''.join(f'<a href="{href[k]}"' + (' data-cat="new"' if k == 'new' else (' data-cat=""' if k == 'list' else '')) + (' aria-current="page"' if k == cur else '') + f'>{l}</a>'
+                    for k, l in TABS[lang] if k != 'new' or has_new)
+    return f'<nav class="tabs" aria-label="{"メイン" if lang == "ja" else "Main"}">{items}</nav>'
 
 def drawer_html(lang):
     t = T[lang]
@@ -860,7 +891,7 @@ def drawer_html(lang):
   b.addEventListener('click',function(){{d.classList.contains('open')?close():open();}});
   x.addEventListener('click',function(){{close();b.focus();}}); bg.addEventListener('click',close);
   document.addEventListener('keydown',function(e){{if(e.key==='Escape'&&d.classList.contains('open')){{close();b.focus();}}}});
-  d.querySelectorAll('a[data-cat]').forEach(function(a){{a.addEventListener('click',function(e){{
+  document.querySelectorAll('#drawer a[data-cat],header.site .tabs a[data-cat]').forEach(function(a){{a.addEventListener('click',function(e){{
     if(!document.getElementById('grid'))return;
     e.preventDefault();close();
     document.dispatchEvent(new CustomEvent('kz:cat',{{detail:a.dataset.cat||null}}));
@@ -873,17 +904,29 @@ def drawer_html(lang):
 
 def foot(lang):
     t = T[lang]
-    legal = '　・　'.join(f'<a href="{h}">{l}</a>' for h, l in t['legal'])
-    lic = ('古物商許可：' + SHOP['kobutsu']) if lang == 'ja' else 'Licensed secondhand dealer: Saitama Prefectural Public Safety Commission No. 431080060786'
-    op = ('運営：' + SHOP['company']) if lang == 'ja' else 'Operated by Plug Inc.'
+    P = pre(lang)
+    ja = lang == 'ja'
+    lic = ('古物商許可：' + SHOP['kobutsu']) if ja else 'Licensed secondhand dealer: Saitama Prefectural Public Safety Commission No. 431080060786'
+    op = ('運営：' + SHOP['company']) if ja else 'Operated by Plug Inc.'
     hours = HOURS_LINE[lang]
+    def col(h, links):
+        return f'<div class="fcol"><h3>{h}</h3><ul>' + ''.join(f'<li><a href="{u}"' + (' rel="noopener"' if u.startswith('http') else '') + f'>{l}</a></li>' for u, l in links) + '</ul></div>'
+    # 2026-10-23 龍さん「一番下に小さいメニューしかない」→ お買い物／読みもの／お店 の3列に分ける
+    shop = [(f'{P}/#list', t['menu_all'])] + ([(f'{P}/?cat=new#list', NEW_LABEL[lang])] if any(is_new(p) for p in avail_live) else []) \
+         + [(f'{P}/?cat={c}#list', t['cats'][c]) for c in CATS_PRESENT] + [(SHOP['mercari'], 'メルカリShops' if ja else 'Mercari Shops')]
+    read = [('/blog/', 'ブログ' if ja else 'Blog (Japanese)'), ('/guide/' if ja else '/en/guide/', '川越で古着屋を探している方へ' if ja else 'Kawagoe vintage guide')] \
+         + ([('/news/', 'お知らせ')] if ja and NEWS else [])
+    store = [(f'{P}/#store', '場所・営業時間' if ja else 'Address & hours'), (f'{P}/#faq', 'よくある質問' if ja else 'FAQ')] \
+          + ([T_WS_NAV[lang]] if WS_OPEN else []) + [(SHOP['gmaps'], t['gm']), (SHOP['instagram'], 'Instagram')]
+    cols = col('お買い物' if ja else 'Shop', shop) + col('読みもの' if ja else 'Read', read) + col('お店' if ja else 'The shop', store)
+    legal = '　・　'.join(f'<a href="{h}">{l}</a>' for h, l in t['legal'])
     return f'''<footer class="site"><div class="wrap">
   <div class="big"><img src="/assets/seal-light-256.png" alt="" width="64" height="64">Kobanzame</div>
+  <nav class="fcols" aria-label="{'サイトの案内' if ja else 'Site map'}">{cols}</nav>
   <div class="hair"></div>
   <div>古着屋 小判鮫／{ADDR[lang]}／{hours}<br>
     {op}　・　{lic}<br>
-    <a href="{SHOP['instagram']}" rel="noopener">Instagram</a>　・　<a href="{SHOP['mercari']}" rel="noopener">メルカリShops</a>　・　<a href="{SHOP['gmaps']}" rel="noopener">{t['gm']}</a><br>
-    <a href="/blog/">{'Blog' if lang == 'en' else 'ブログ'}</a>　・　{(chr(60) + 'a href="' + ('/en/workshop/' if lang == 'en' else '/workshop/') + '">' + ('Workshops' if lang == 'en' else 'ワークショップ') + chr(60) + '/a>　・　') if WS_OPEN else ''}<a href="{'/en/guide/' if lang == 'en' else '/guide/'}">{'Kawagoe vintage guide' if lang == 'en' else '川越で古着屋を探している方へ'}</a>　・　{legal}
+    {legal}
   </div>
 </div></footer>
 {REVEAL_JS}
@@ -935,6 +978,48 @@ footer.site{font-size:13px}
 @media(max-width:639px){.tile .tt i{font-size:12px;padding:8px 14px}}
 """
 # 2026-10-21 お知らせ欄（トップの営業日の下・/news/）。見出しは既存の .sec-head h2 と同じ見た目にそろえる
+# 2026-10-23 メニューを分かりやすく（スマホの文字タブ・3列のフッター・トップのブログ欄・ブログ一覧の見出し・WSの準備中）
+NAV_CSS = """
+header.site .tabs{display:none}
+@media(max-width:760px){
+  header.site .tabs{display:flex;border-top:1px solid var(--line)}
+  header.site .tabs a{flex:1;display:flex;align-items:center;justify-content:center;min-height:44px;font-family:var(--gothic);font-size:13px;letter-spacing:.12em;color:var(--kinari);text-decoration:none}
+  header.site .tabs a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--kin)}
+  [id]{scroll-margin-top:calc(var(--hh,112px) + 56px)}
+}
+/* 今いる場所（パンくず）をヘッダーの下に貼りつける。ジャンルを押すとその一覧に戻れる */
+.crumb{position:sticky;top:var(--hh,68px);z-index:15;background:var(--sumi);box-shadow:0 0 0 100vmax var(--sumi);clip-path:inset(0 -100vmax);padding-block:10px;align-items:center}
+.crumb>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.crumb{flex-wrap:nowrap}
+.crumb a{min-height:32px;display:inline-flex;align-items:center;white-space:nowrap}
+.herebar{position:sticky;top:var(--hh,68px);z-index:15;display:flex;gap:8px;align-items:center;justify-content:space-between;background:var(--sumi);box-shadow:0 0 0 100vmax var(--sumi);clip-path:inset(0 -100vmax);padding-block:8px;border-bottom:1px solid var(--line)}
+.herebar[hidden]{display:none}
+.herebar button{font:inherit;font-size:13px;background:none;border:0;color:var(--kinari);min-height:40px;cursor:pointer;padding:0 4px}
+.herebar .back{border:1px solid var(--line);padding:0 12px;white-space:nowrap}
+/* トースト（画面の下に少しだけ出る短いお知らせ） */
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);background:var(--kinari);color:var(--sumi);font-size:13px;padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* スケルトン（写真が読み込まれるまで、灰色の枠を光らせる） */
+@keyframes kzsk{0%{background-position:100% 0}100%{background-position:-100% 0}}
+.ph:not(.ld),.tile:not(.ld),.blog-card-img:not(.ld){background:linear-gradient(90deg,#e7e0d4 25%,#f2ede4 50%,#e7e0d4 75%);background-size:200% 100%;animation:kzsk 1.3s linear infinite}
+.blog-card-img{min-height:200px;background:var(--susu)}
+@media(prefers-reduced-motion:reduce){.ph,.tile,.blog-card-img{animation:none!important}}
+footer.site .fcols{display:grid;gap:24px 32px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:8px 0 4px}
+footer.site .fcols h3{font-family:var(--gothic);font-size:12px;font-weight:500;letter-spacing:.16em;color:#fff;margin:0 0 6px}
+footer.site .fcols ul{list-style:none;margin:0;padding:0}
+footer.site .fcols li a{display:inline-flex;align-items:center;min-height:32px;font-size:13px;text-decoration:none}
+footer.site .fcols li a:hover{text-decoration:underline}
+.blogtop .sec-head .more{font-size:13px;color:var(--kin);min-height:44px;display:inline-flex;align-items:center}
+.blog-grid-3{margin-top:8px}
+@media(min-width:900px){.blog-grid-3{grid-template-columns:repeat(3,1fr)}}
+.blog-card-body h3{font-size:1rem;line-height:1.5;margin:.3em 0 0;color:var(--kinari)}
+.blog-main .sec-head h1{font-family:var(--gothic);font-weight:500;font-size:22px;line-height:1;letter-spacing:.16em;text-transform:uppercase}
+.blog-main .sec-head h1 small{display:block;font-family:var(--mincho);font-size:14px;margin-top:10px;color:var(--usu);letter-spacing:.06em;text-transform:none}
+/* ブログのタグが、商品カードの「1点限り」の位置指定を受けて画面の右上に浮いていたのを直す */
+.blog-card-tags .tag,.blog-tags .tag{position:static;inset:auto;transform:none}
+.ws-off{margin-top:12px;padding:12px 14px;border:1px dashed var(--line);color:var(--usu);font-size:14px}
+"""
+
 NEWS_CSS = """
 .news .sec-head{margin-top:32px}
 .news .sec-head h1{font-family:var(--gothic);font-weight:500;font-size:22px;line-height:1;letter-spacing:.16em;text-transform:uppercase}
@@ -951,7 +1036,27 @@ NEWS_CSS = """
 """
 # ブログのCSSを先に読み込む（build_blog.py は ROOT, BASE 等を参照するので、ここで import できる）
 from build_blog import BLOG_CSS
-write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n' + BLOG_CSS.strip() + '\n')
+write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n' + BLOG_CSS.strip() + '\n' + NAV_CSS.strip() + '\n')
+
+# 2026-10-23 龍さん決定：トップにブログの新着3本を写真つきで出す（日本語だけ。ブログは日本語のみのため）
+def blog_top_html(lang, n=3):
+    if lang != 'ja':
+        return ''
+    try:
+        from build_blog import load_posts, cover_src
+    except Exception:
+        return ''
+    posts = [p for p in load_posts() if not p.get('_draft')]
+    posts.sort(key=lambda p: (p['date'], p['slug']), reverse=True)
+    if not posts:
+        return ''
+    cards = ''.join(f'''<a href="/blog/{p['slug']}/" class="blog-card"><div class="blog-card-img"><img src="{esc(cover_src(p))}" alt="" loading="lazy" decoding="async"></div>'''
+                    f'''<div class="blog-card-body"><time datetime="{p['date']}">{p['date'].replace('-', '.')}</time><h3>{esc(p['title'])}</h3></div></a>''' for p in posts[:n])
+    return f'''    <section class="blogtop" aria-labelledby="blog-h">
+      <div class="sec-head"><h2 id="blog-h">Blog<small>ブログ</small></h2><a class="more" href="/blog/">すべて見る</a></div>
+      <div class="blog-grid blog-grid-3">{cards}</div>
+    </section>
+'''
 
 # ---------- 一覧 ----------
 # 2026-10-21 龍さん「新着が一番上に出てこない」：一覧（全部・絞り込み・ジャーナル）を公開日の新しい順に。同じ日は products.json の順
@@ -1046,7 +1151,9 @@ def finder(lang):
 
 def list_js(lang):
     t = T[lang]
-    msg = json.dumps({'empty_w': t['empty_w'], 'empty': t['empty'], 'fit': t['fit'], 'same': t['same'], 'unit': t['unit']}, ensure_ascii=False)
+    msg = json.dumps({'empty_w': t['empty_w'], 'empty': t['empty'], 'fit': t['fit'], 'same': t['same'], 'unit': t['unit'],
+                      'labels': dict(t['cats'], new=NEW_LABEL[lang]), 'here': 'いま見ているのは' if lang == 'ja' else 'Showing',
+                      'shown': '{c}を表示（{n}）' if lang == 'ja' else 'Showing {c} ({n})', 'all': 'すべての商品を表示' if lang == 'ja' else 'Showing all items'}, ensure_ascii=False)
     return '''<script>
 (function(){
   var M=''' + msg + ''';
@@ -1068,11 +1175,17 @@ def list_js(lang):
     empty.textContent=!isNaN(my)?M.empty_w.replace('{w}',my):M.empty;
     if(cnt) cnt.textContent=n+M.unit;
     document.querySelectorAll('.catrow button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
+    var hb=document.getElementById('herebar');
+    if(hb){hb.hidden=!filter; if(filter) document.getElementById('herego').innerHTML=M.here+' <b>'+(M.labels[filter]||filter)+'</b>（'+n+M.unit+'）';}
+    return n;
   }
-  document.querySelectorAll('.catrow button').forEach(function(b){b.addEventListener('click',function(){filter=(filter===b.dataset.filter?null:b.dataset.filter);apply();});});
-  document.querySelectorAll('.ball').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.filter;apply();var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});});
+  function tell(){var n=apply(); if(window.kzToast) kzToast(filter?M.shown.replace('{c}',M.labels[filter]||filter).replace('{n}',n+M.unit):M.all);}
+  var hg=document.getElementById('herego'); if(hg) hg.addEventListener('click',function(){var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});
+  var hbk=document.getElementById('hereback'); if(hbk) hbk.addEventListener('click',function(){filter=null;tell();history.replaceState(null,'',location.pathname+'#list');});
+  document.querySelectorAll('.catrow button').forEach(function(b){b.addEventListener('click',function(){filter=(filter===b.dataset.filter?null:b.dataset.filter);tell();});});
+  document.querySelectorAll('.ball').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.filter;tell();var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});});
   var q=(location.search.match(/[?&]cat=([a-z]+)/)||[])[1]; if(q&&document.querySelector('.catrow button[data-filter="'+q+'"]')) filter=q;
-  document.addEventListener('kz:cat',function(e){filter=e.detail||null;apply();});
+  document.addEventListener('kz:cat',function(e){filter=e.detail||null;tell();});
   myw.addEventListener('input',apply); showsold.addEventListener('change',apply);
   document.getElementById('clear').addEventListener('click',function(){myw.value='';showsold.checked=false;filter=null;apply();});
   apply();
@@ -1133,6 +1246,7 @@ for lang in ('ja', 'en'):
     </div>
   </section>
 {news_section}  <div class="wrap">
+    <div class="herebar" id="herebar" hidden><button type="button" class="here" id="herego"></button><button type="button" class="back" id="hereback">{'すべての商品に戻る' if lang == 'ja' else 'Show all'}</button></div>
     <div class="catrow" role="group">{catrow(lang)}</div>
     <div class="sec-head" id="list"><h2>{t['list_h']}<small>{t['list_s']}</small></h2><span class="count" id="count">{len(avail_live)}{t['unit']}</span></div>
     {finder(lang)}
@@ -1142,7 +1256,7 @@ for lang in ('ja', 'en'):
     <div class="grid" id="grid" hidden>
 {cards}
     </div>
-    <div class="trust">{trust}</div>
+{blog_top_html(lang)}    <div class="trust">{trust}</div>
     <section class="store" id="store">
       <div><h2>The Shop</h2><p>{t['store_p']}</p></div>
       <dl>{store_dl}</dl>
@@ -1255,7 +1369,7 @@ for lang in ('ja', 'en'):
         page = head(lang, f"{loc(p, 'title', lang)}｜{SHOP['name']}", loc(p, 'summary_text', lang), path, og_type='article',
                     image=imgs[0], extra_ld=ld, noindex=(p.get('noindex', False) or rel == 'draft')) + f'''{draft_banner}
 <main class="wrap">
-  <div class="crumb"><a href="{P}/">HOME</a><span>／</span><a href="{P}/#list">{t['cats'][cat_of(p)]}</a><span>／</span><span>{esc(p['sku'])}</span></div>
+  <div class="crumb"><a href="{P}/">HOME</a><span>／</span><a href="{P}/?cat={cat_of(p)}#list">{t['cats'][cat_of(p)]}</a><span>／</span><span>{esc(p['sku'])}</span></div>
   <div class="pdp">
     <div>
       <div class="gal{' one' if len(imgs) == 1 else ''}" id="gal">{gallery}</div>
@@ -1354,21 +1468,23 @@ if WS_OPEN:
         path = P + '/workshop/'
         if lang == 'ja':
             title = 'ワークショップ｜古着屋 小判鮫（川越・元町の古民家）'
-            desc = '川越・元町の古民家古着屋 小判鮫のワークショップ。真鍮バングル、天然石ビーズブレスレット。10月24日（土）開催。ご予約はオンラインで。'
+            desc = '川越・元町の古民家古着屋 小判鮫のワークショップ。真鍮バングル、天然石ビーズブレスレット。' + ('10月24日（土）開催。ご予約はオンラインで。' if WS_BOOKING else '予約の受付は準備中です。')
             h1, intro = 'ワークショップ', '小判鮫の店内で、ものづくりの時間を。どちらも完成品はその場でお持ち帰りいただけます。'
             limited = '税込・10/24開催分'
             end_note = '10/25以降の開催日と料金は、決まり次第このページとInstagramでお知らせします。'
             meta = '所要 約{m}分・1回 最大{n}名'
             btn = '予約する（日時を選ぶ）'
+            btn_off = '予約は準備中です（受付を始めたら、このページと Instagram でお知らせします）'
             place = f'会場：古着屋 小判鮫（{ADDR["ja"]}）／' + ('定休日 月曜（祝日は営業）' if NEWHOURS else '定休日 月曜・火曜')
         else:
             title = 'Workshops | Kobanzame, Kawagoe'
-            desc = 'Workshops at Kobanzame, a vintage shop in an old wooden house in Kawagoe: brass bangle and natural stone bead bracelet. Held on Saturday 24 October. Book online.'
+            desc = 'Workshops at Kobanzame, a vintage shop in an old wooden house in Kawagoe: brass bangle and natural stone bead bracelet. ' + ('Held on Saturday 24 October. Book online.' if WS_BOOKING else 'Online booking is coming soon.')
             h1, intro = 'Workshops', 'Make something in our old wooden shop. You take your piece home the same day.'
             limited = 'tax incl., for the 24 Oct sessions'
             end_note = 'Dates and prices after 24 October will be announced on this page and on Instagram.'
             meta = 'About {m} min · up to {n} people per session'
             btn = 'Book a time'
+            btn_off = 'Booking is coming soon (we will announce it here and on Instagram)'
             place = f'Venue: Kobanzame, {ADDR["en"]} / ' + ('closed Mondays (open on holidays)' if NEWHOURS else 'closed Mondays and Tuesdays')
         cards, svc = '', []
         for w in WORKSHOPS:
@@ -1378,10 +1494,11 @@ if WS_OPEN:
                       f'<div class="price">{money(w["price"], lang)}<small>{limited}</small></div>'
                       f'<div class="meta">{meta.format(m=w["minutes"], n=w["max"])}</div>'
                       f'<p>{esc(x["lead"])}</p><ul>{notes}</ul>'
-                      f'<a class="btn kin" href="{w["reserve"]}" rel="noopener">{btn}</a></article>')
+                      + (f'<a class="btn kin" href="{w["reserve"]}" rel="noopener">{btn}</a>' if WS_BOOKING else f'<p class="ws-off" role="note">{btn_off}</p>')
+                      + '</article>')
             svc.append({'@type': 'Service', 'name': x['name'], 'description': x['lead'], 'provider': {'@id': BASE + '/#store'},
                         'areaServed': '川越市' if lang == 'ja' else 'Kawagoe',
-                        'offers': {'@type': 'Offer', 'price': str(w['price']), 'priceCurrency': 'JPY', 'url': w['reserve']}})
+                        'offers': dict({'@type': 'Offer', 'price': str(w['price']), 'priceCurrency': 'JPY'}, **({'url': w['reserve']} if WS_BOOKING else {}))})
         ld = {'@context': 'https://schema.org', '@graph': [org_node()] + svc}
         write(path + 'index.html', head(lang, title, desc, path, extra_ld=ld) + f'''
 <main class="wrap page">
