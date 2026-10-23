@@ -14,7 +14,7 @@ v2で変わったこと
 - アクセス解析：CF_BEACON_TOKEN に Cloudflare Web Analytics のトークンを入れると全ページに計測タグが入る
 - トップの写真：HERO_IMAGE（店内の写真）。写真の上にGoogleマップへのリンク
 """
-import json, os, html, re, math, datetime
+import json, os, html, re, math, datetime, glob
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = 'https://kobanzame-site.pages.dev'   # 独自ドメイン取得後はここだけ差し替える
@@ -187,8 +187,8 @@ T = {
   'gm': 'Google Maps', 'rank_new': 'New, unused', 'rank_vin': 'Vintage (signs of age)', 'rank': 'Condition {r}',
   'cats': {'outer': 'Outerwear', 'tops': 'Tops', 'bottoms': 'Pants & skirts', 'dress': 'Dresses', 'shoes': 'Shoes', 'acc': 'Accessories & GAW', 'other': 'Goods'},
   'nf_p': 'We could not find that page. Sold pieces usually stay on the site marked SOLD.', 'nf_btn': 'See the pieces',
-  'top_title': 'Kobanzame | Vintage clothing in an old wooden house, Kawagoe, Japan',
-  'top_desc': 'Kobanzame is a vintage clothing shop in an 80-year-old wooden house in Kawagoe, Saitama. Vintage clothing sourced in Japan and abroad, and our own remade accessories, GAW. Every piece is one of a kind. Buy online by credit card.',
+  'top_title': 'Kobanzame | Vintage clothing shop in Kawagoe, Japan',
+  'top_desc': 'Vintage clothing shop in an 80-year-old wooden house in Kawagoe, Saitama. One-of-a-kind pieces from Japan and abroad, plus our remade GAW accessories.',
   'jr_title': 'Journal | Kobanzame, Kawagoe', 'jr_desc': 'Where each one-of-a-kind piece comes from. Listed pieces can be bought online.',
   'no_en': 'English description coming soon. The details below are in Japanese.',
  },
@@ -397,6 +397,29 @@ def brand_of(p):
     b = (p.get('brand') or '').strip()
     return '' if (not b or any(b.startswith(x) for x in NO_BRAND)) else b
 
+CRUMB_NAMES = {'blog': ('ブログ', 'Blog'), 'journal': ('ジャーナル', 'Journal'), 'news': ('お知らせ', 'News'),
+               'workshop': ('ワークショップ', 'Workshops'), 'tokushoho': ('特定商取引法に基づく表記', ''), 'privacy': ('プライバシーポリシー', ''),
+               'guide': ('川越で古着屋を探している方へ', 'Kawagoe vintage guide'), 'legal': ('', 'Legal notice & privacy')}
+def add_crumb_ld(ld, lang, title, path):
+    """2026-10-23 SEO：パンくず（BreadcrumbList）が無いページに、URL から作って足す"""
+    if path in ('/', '/en/') or path.endswith('404.html'):
+        return ld
+    g = ld.get('@graph') if isinstance(ld, dict) else None
+    if g is None or any(n.get('@type') == 'BreadcrumbList' for n in g):
+        return ld
+    P = pre(lang)
+    segs = [x for x in path[len(P):].strip('/').split('/') if x] if path.startswith(P + '/') else [x for x in path.strip('/').split('/') if x]
+    items = [{'@type': 'ListItem', 'position': 1, 'name': 'HOME', 'item': BASE + P + '/'}]
+    url = P if segs and segs[0] in ('journal', 'news', 'workshop', 'guide', 'legal') else ''
+    for i, sg in enumerate(segs):
+        url += '/' + sg
+        nm = CRUMB_NAMES.get(sg, ('', ''))[0 if lang == 'ja' else 1] or CRUMB_NAMES.get(sg, ('', ''))[0]
+        if i == len(segs) - 1 and (i > 0 or not nm):
+            nm = re.split(r'｜| \| ', title)[0]
+        items.append({'@type': 'ListItem', 'position': len(items) + 1, 'name': nm or sg, 'item': BASE + url + '/'})
+    g.append({'@type': 'BreadcrumbList', 'itemListElement': items})
+    return ld
+
 def jld(obj):
     return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False, separators=(',', ':')) + '</script>'
 
@@ -406,6 +429,8 @@ def org_node():
         'name': SHOP['name'], 'alternateName': ['小判鮫', 'KOBANZAME', 'こばんざめ', 'Remora', 'Remora Vintage Clothing Kawagoe'],   # Remora＝小判鮫の英名（2026-10-15 龍さん）。Bingマップ等にこの名前で載っているため
         'description': '埼玉県川越市、築約80年の古民家で営業する古着屋。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱う。商品はすべて一点もの。',
         'url': BASE + '/', 'email': SHOP['email'],
+        'image': BASE + '/assets/hero-shop.jpg', 'logo': BASE + '/assets/seal-256.png' if os.path.exists(os.path.join(ROOT, 'assets/seal-256.png')) else BASE + '/assets/seal-128.png',
+        'priceRange': PRICE_RANGE,
         'address': {'@type': 'PostalAddress', 'postalCode': SHOP['postal'], 'addressRegion': '埼玉県',
                     'addressLocality': '川越市', 'streetAddress': '元町1-14-5', 'addressCountry': 'JP'},
         'openingHours': ('Tu-Su 13:00-20:00' if NEWHOURS else 'We-Su 12:00-20:00'), 'currenciesAccepted': 'JPY', 'paymentAccepted': 'クレジットカード',
@@ -777,6 +802,8 @@ def news_items_html(items):
 
 def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, noindex=False):
     t = T[lang]
+    if len(desc) > 160:   # 2026-10-23 SEO：検索結果で切れないよう説明文は160字まで
+        desc = desc[:157].rstrip() + '…'
     url = BASE + path
     img = abs_url(image) or 'https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg'
     ld = extra_ld if extra_ld is not None else {'@context': 'https://schema.org', '@graph': [org_node()]}
@@ -818,7 +845,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Libre+Caslon+Text:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="/assets/favicon-48.png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
-{jld(ld)}
+{jld(add_crumb_ld(ld, lang, title, path))}
 {beacon}{track}
 {verify}</head>
 <body>
@@ -1019,6 +1046,9 @@ footer.site .fcols li a:hover{text-decoration:underline}
 .blog-card-tags .tag,.blog-tags .tag{position:static;inset:auto;transform:none}
 /* 2026-10-23 龍さん「横にスクロールする商品の列が上下にも少し動いて、縦のスクロールが引っかかる」→ 列の中は縦に動かさない */
 @media(max-width:899px){.brow,.gal{overflow-y:hidden;overscroll-behavior-x:contain}}
+.jhead h1{font-family:var(--gothic);font-weight:500;font-size:22px;line-height:1;letter-spacing:.16em;text-transform:uppercase}
+.jhead h1 small{display:block;font-family:var(--mincho);font-size:14px;margin-top:10px;color:var(--usu);letter-spacing:.06em;text-transform:none}
+.toblog{margin-top:20px}.toblog a{color:var(--kin);min-height:44px;display:inline-flex;align-items:center}
 .ws-off{margin-top:12px;padding:12px 14px;border:1px dashed var(--line);color:var(--usu);font-size:14px}
 """
 
@@ -1062,8 +1092,11 @@ def blog_top_html(lang, n=3):
 
 # ---------- 一覧 ----------
 # 2026-10-21 龍さん「新着が一番上に出てこない」：一覧（全部・絞り込み・ジャーナル）を公開日の新しい順に。同じ日は products.json の順
+BLOG_SLUGS = {os.path.splitext(os.path.basename(f))[0] for f in glob.glob(os.path.join(ROOT, 'data/blog/posts/*.json'))}
 live = sorted([p for p in products if release(p) == 'live'], key=lambda p: str(p.get('published_date', '')), reverse=True)
 avail_live = [p for p in live if not is_sold(p)]
+_prices = sorted(site_price(p) for p in avail_live) or [0]
+PRICE_RANGE = f'¥{_prices[0]:,}〜¥{_prices[-1]:,}'
 CATS_PRESENT = [c for c in ['outer', 'tops', 'bottoms', 'dress', 'shoes', 'acc', 'other'] if any(cat_of(p) == c for p in live)]
 
 def alt_img(p):
@@ -1283,7 +1316,7 @@ for lang in ('ja', 'en'):
 <main class="wrap">
   <div class="crumb"><a href="{P}/">HOME</a><span>／</span><span>JOURNAL</span></div>
   <div class="catrow" role="group" style="margin-top:4px">{catrow(lang)}</div>
-  <div class="sec-head"><h2>{t['journal_h']}<small>{t['journal_s']}</small></h2><span class="count" id="count">{len(avail_live)}{t['unit']}</span></div>
+  <div class="sec-head jhead"><h1>{t['journal_h']}<small>{t['journal_s']}</small></h1><span class="count" id="count">{len(avail_live)}{t['unit']}</span></div>
   {finder(lang)}
   <div class="grid" id="grid">
 {cards}
@@ -1317,6 +1350,7 @@ for lang in ('ja', 'en'):
                  'availability': 'https://schema.org/SoldOut' if sold else 'https://schema.org/InStock',
                  'itemCondition': 'https://schema.org/' + p.get('item_condition', 'UsedCondition'), 'url': BASE + path,
                  'seller': {'@id': BASE + '/#store'},
+                 'hasMerchantReturnPolicy': {'@type': 'MerchantReturnPolicy', 'applicableCountry': 'JP', 'returnPolicyCategory': 'https://schema.org/MerchantReturnNotPermitted'},
                  'shippingDetails': {'@type': 'OfferShippingDetails',
                                      'shippingRate': {'@type': 'MonetaryAmount', 'value': '0', 'currency': 'JPY'},
                                      'shippingDestination': {'@type': 'DefinedRegion', 'addressCountry': 'JP'},
@@ -1330,13 +1364,14 @@ for lang in ('ja', 'en'):
              'material': p.get('material', ''), 'category': p.get('category', ''), 'offers': offer,
              **({'color': color_of(p)} if color_of(p) else {}), **({'size': size_of(p)} if size_of(p) else {}),
              'audience': {'@type': 'PeopleAudience', 'suggestedGender': gender_of(p)},
-             'additionalProperty': [{'@type': 'PropertyValue', 'name': k, 'value': v} for k, v in p.get('spec', []) if k not in ('発送',)]},
+             'additionalProperty': [{'@type': 'PropertyValue', 'name': k, 'value': v} for k, v in p.get('spec', []) if k not in ('発送',)],
+             **({'subjectOf': {'@type': 'BlogPosting', 'url': BASE + '/blog/' + p['slug'] + '/'}} if p['slug'] in BLOG_SLUGS else {})},
             {'@type': 'BlogPosting', '@id': BASE + path + '#article', 'headline': loc(p, 'title', lang), 'image': abs_url(p['images'][0]),
              'datePublished': p.get('published_date', TODAY), 'dateModified': TODAY, 'inLanguage': lang,
              'author': author, 'publisher': {'@id': BASE + '/#store'}, 'about': {'@id': BASE + path + '#product'}, 'mainEntityOfPage': BASE + path},
             {'@type': 'BreadcrumbList', 'itemListElement': [
                 {'@type': 'ListItem', 'position': 1, 'name': 'HOME', 'item': BASE + P + '/'},
-                {'@type': 'ListItem', 'position': 2, 'name': t['cats'][cat_of(p)], 'item': BASE + P + '/#list'},
+                {'@type': 'ListItem', 'position': 2, 'name': t['cats'][cat_of(p)], 'item': BASE + P + f'/?cat={cat_of(p)}'},
                 {'@type': 'ListItem', 'position': 3, 'name': name, 'item': BASE + path}]},
             org_node()]}
         imgs = p['images']
@@ -1368,7 +1403,17 @@ for lang in ('ja', 'en'):
         relp = sorted([x for x in avail_live if x['sku'] != p['sku']], key=lambda x: cat_of(x) != cat_of(p))[:3]
         rel_cards = ''.join(card_html(x, lang) for x in relp)
         related = f'<section class="related"><h2>Also One of One<small>{t["related"]}</small></h2><div class="grid">{rel_cards}</div></section>' if rel_cards else ''
-        page = head(lang, f"{loc(p, 'title', lang)}｜{SHOP['name']}", loc(p, 'summary_text', lang), path, og_type='article',
+        ttl = loc(p, 'title', lang)
+        if lang == 'en' and not has_en(p):
+            _b = p['brand'] if str(p.get('brand', '')).isascii() and p.get('brand') else 'Vintage'
+            ttl = f"{_b} {CAT_EN.get(cat_of(p), '')} ({p['sku']})".replace('  ', ' ').strip()
+        suf = f"｜{SHOP['name']}" if lang == 'ja' else ' | Kobanzame Vintage, Kawagoe'
+        if len(ttl + suf) > 60:
+            suf = '｜小判鮫 川越' if lang == 'ja' else ' | Kobanzame'
+        pdesc = loc(p, 'summary_text', lang)
+        if lang == 'en' and not has_en(p):   # 訳が無い商品の英語ページは、日本語ページと同じ説明文にしない
+            pdesc = f"{_b} {CAT_EN.get(cat_of(p), 'item')} ({p['sku']}), one of a kind, at Kobanzame vintage clothing shop in Kawagoe, Japan. Full description in Japanese."
+        page = head(lang, ttl + suf, pdesc, path, og_type='article',
                     image=imgs[0], extra_ld=ld, noindex=(p.get('noindex', False) or rel == 'draft')) + f'''{draft_banner}
 <main class="wrap">
   <div class="crumb"><a href="{P}/">HOME</a><span>／</span><a href="{P}/?cat={cat_of(p)}#list">{t['cats'][cat_of(p)]}</a><span>／</span><span>{esc(p['sku'])}</span></div>
@@ -1396,6 +1441,7 @@ for lang in ('ja', 'en'):
       <details><summary>{t['specs']}</summary><dl class="spec">{spec}</dl><p class="howto">{t['howto']}</p></details>
       <details><summary>{t['delivery']}</summary><div class="story"><p>{t['delivery_p']}</p></div></details>
       <div class="byline">{t['byline']}</div>
+      {('<p class="toblog"><a href="/blog/' + p['slug'] + '/">' + ('この一着のことをブログで読む →' if lang == 'ja' else 'Read about this piece on our blog (Japanese) →') + '</a></p>') if p['slug'] in BLOG_SLUGS else ''}
     </div>
   </div>
   {related}
@@ -1431,11 +1477,11 @@ LAW = [
     ('古物商許可', f"{SHOP['kobutsu']}（{SHOP['company']}）"),
 ]
 law_html = ''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in LAW)
-write('/tokushoho/index.html', head('ja', '特定商取引法に基づく表記｜古着屋 小判鮫', '古着屋 小判鮫（運営：株式会社プラグ）の特定商取引法に基づく表記。', '/tokushoho/') + f'''
+write('/tokushoho/index.html', head('ja', '特定商取引法に基づく表記｜古着屋 小判鮫', '古着屋 小判鮫（運営：株式会社プラグ）の特定商取引法に基づく表記。販売価格（税込・送料込み）、支払い方法、発送の時期、返品・交換の条件、古物商許可番号を載せています。', '/tokushoho/') + f'''
 <main class="wrap page lawtable"><h1>特定商取引法に基づく表記</h1><dl>{law_html}</dl><p style="color:var(--usu);font-size:13px;margin-top:24px">制定：2026年9月30日</p></main>
 ''' + foot('ja'))
 
-write('/privacy/index.html', head('ja', 'プライバシーポリシー｜古着屋 小判鮫', '古着屋 小判鮫（運営：株式会社プラグ）のプライバシーポリシー。', '/privacy/') + f'''
+write('/privacy/index.html', head('ja', 'プライバシーポリシー｜古着屋 小判鮫', '古着屋 小判鮫（運営：株式会社プラグ）のプライバシーポリシー。ご注文やお問い合わせでお預かりする個人情報の使い道と、カード情報の扱い（Square が処理し、当店は持たない）について。', '/privacy/') + f'''
 <main class="wrap page">
   <h1>プライバシーポリシー</h1>
   <p>古着屋 小判鮫（運営：{SHOP['company']}。以下「当店」）は、お客様の個人情報を適切に取り扱います。</p>
@@ -1642,6 +1688,8 @@ Sitemap: {BASE}/sitemap.xml
 write(f'/{INDEXNOW_KEY}.txt', INDEXNOW_KEY)
 write('/sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
       ''.join(f'  <url><loc>{BASE}{u}</loc><lastmod>{TODAY}</lastmod></url>\n' for u in pages) + '</urlset>\n')
+from build_blog import load_posts as _lp
+blog_llms = '\n'.join(f"- [{b['title']}]({BASE}/blog/{b['slug']}/): {b.get('description', '')}" for b in _lp() if not b.get('_draft'))
 items = '\n'.join(f"- [{p['title']}]({BASE}/journal/{p['slug']}/): {p['product_name']}。{money(site_price(p), 'ja')}（税込・送料込み）。{'販売終了' if is_sold(p) else '在庫1点'}"
                   for p in live)
 write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
@@ -1667,9 +1715,15 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 - [ジャーナル]({BASE}/journal/)
 - [川越で古着屋を探している方へ（案内）]({BASE}/guide/)
 - [ブログ]({BASE}/blog/)
-{'- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・10/24開催）](' + BASE + '/workshop/)' + chr(10) if WS_OPEN else ''}- [English]({BASE}/en/)
+{'- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・' + ('10/24開催' if WS_BOOKING else '予約は準備中') + '）](' + BASE + '/workshop/)' + chr(10) if WS_OPEN else ''}- [English]({BASE}/en/)
 - [特定商取引法に基づく表記]({BASE}/tokushoho/)
 - [プライバシーポリシー]({BASE}/privacy/)
+
+## よくある質問
+{chr(10).join('- ' + q + ' — ' + a for q, a in FAQ['ja'])}
+
+## ブログ（商品の紹介・読みもの）
+{blog_llms}
 
 ## 掲載中の商品
 {items}
