@@ -4452,21 +4452,21 @@
    "back_i": 6,
    "front_url": "/assets/products/k11438/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 187.9,
     "bg": "light_item"
    },
    "back_url": "/assets/products/k11438/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
-    "garment_l": 199.0,
+    "brighten": 0,
+    "garment_l": 199,
     "bg": "light_item"
    },
    "mannequin": "pending",
    "mannequin_url": "/assets/products/k11438/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
-    "身幅": 55.0,
+    "身幅": 55,
     "着丈": 62.5,
     "肩幅": 48.5
    }
@@ -4592,7 +4592,7 @@
    "mannequin_url": "/assets/products/k11409/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
-    "ウエスト": 86.0
+    "ウエスト": 86
    },
    "mannequin_review": {
     "by": "03出品担当(AI)",
@@ -4708,13 +4708,13 @@
    "back_i": 2,
    "front_url": "/assets/products/k11411/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 74.7,
     "bg": "normal"
    },
    "back_url": "/assets/products/k11411/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 79.1,
     "bg": "normal"
    },
@@ -4732,5 +4732,243 @@
     "note": "②③襟が違う：本物はリブ編みの立ち襟、AIはスエードの折り襟（シャツ襟）になっている"
    }
   }
+ },
+ {
+  "sku": "K11201",
+  "slug": "k11201",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "ROTHCO cargo pants",
+  "product_name": "ROTHCO cargo pants",
+  "brand": "表記なし",
+  "category": "パンツ／パンツ",
+  "material": "",
+  "published_date": "2026-10-23",
+  "prices": {
+   "store": 6800,
+   "site": 6800,
+   "mercari": 7480
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-23",
+  "links": {},
+  "images": [
+   "/assets/products/k11201/01.jpg",
+   "/assets/products/k11201/02.jpg",
+   "/assets/products/k11201/03.jpg",
+   "/assets/products/k11201/04.jpg",
+   "/assets/products/k11201/05.jpg",
+   "/assets/products/k11201/06.jpg",
+   "/assets/products/k11201/07.jpg",
+   "/assets/products/k11201/08.jpg",
+   "/assets/products/k11201/09.jpg",
+   "/assets/products/k11201/10.jpg",
+   "/assets/products/k11201/11.jpg",
+   "/assets/products/k11201/12.jpg"
+  ],
+  "thumb": "/assets/products/k11201/thumb.jpg",
+  "summary_text": "ベージュ・グレー・オフホワイトのマルチストライプが涼しげな、1980〜1990年代頃のヴィンテージパンツです。退色した風合いがそのまま味になっています。",
+  "summary_points": [
+   "ベージュ・グレー・オフホワイトのマルチストライプのパンツ（ボトムス）",
+   "実寸 ウエスト78cm・股上29.5cm・わたり幅20cm"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。ベージュ、グレー、オフホワイトの三色が縦に並ぶマルチストライプのパンツです。",
+  "body_html": "<h2>この一着のこと</h2><p>ベージュ、グレー、オフホワイトの三色が縦に並ぶマルチストライプのパンツです。コットン、またはコットンとリネンの混紡と思われる素材で、1980〜1990年代頃のものと思われます。この三色の組み合わせはよくあるようで、実際に手に取ると配色のバランスがなかなか珍しく、単純な白黒ストライプとも、定番のブルー系とも違う落ち着いた表情をしています。</p><p>ウエスト78cm、レングス77.5cm、裾幅20cmというサイズで、股上は29.5cmとゆとりがあります。全体に使用感と退色が見られますが、それがかえってこの色合いとよく合っていて、目立つ破損はありません。古民家の光の中で見ると、ベージュとオフホワイトの境目がやわらかくなじんで見えます。</p><p>着方はシンプルに、白や生成りのTシャツ一枚をインして、そのまま出かける格好が一番です。ストライプの縦線がすっきりと脚を見せてくれるので、トップスは余計なものを足さず、このパンツに任せてしまうのがちょうどいいと思います。サンダルでも、スニーカーでも、足元を選ばずに決まります。</p><h2>状態</h2><p>状態は写真でご確認ください。気になる点は、お問い合わせからお尋ねください。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "表記なし"
+   ],
+   [
+    "色",
+    "ベージュ・グレー・オフホワイトのマルチストライプ"
+   ],
+   [
+    "サイズ",
+    "実寸 ウエスト78cm・股上29.5cm・わたり幅20cm"
+   ],
+   [
+    "状態",
+    "写真でご確認ください（傷・汚れの詳細は未確認）"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "bottoms",
+  "genre_by": "auto-keyword-2026-10-23",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.3",
+   "made_at": "2026-10-23",
+   "needs": [
+    "性別を決められなかった（手がかりなし）→ 性別なしの分類にしてある。マネキンはメンズ、メルカリのカテゴリは空欄になる",
+    "ブランド（刻印・タグ）が確定していない → 「表記なし」にしてある",
+    "素材が確定していない（推定のまま or 不明）→ 仕様表に載せていない",
+    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
+    "見出し（title）は物語の一言から自動で作った → 気に入らなければClaudeへ",
+    "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "手がかりなし"
+ },
+ {
+  "sku": "K11388",
+  "slug": "k11388-sicoll-sicoll-of-europe-sicoll-made-in-italy",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "Euro Leather JKT green",
+  "product_name": "Euro Leather JKT green",
+  "brand": "Sicoll（襟裏タグ「Sicoll OF EUROPE」・内ポケットのタグ「Sicoll MADE IN ITALY」）",
+  "category": "メンズ／アウター／ジャケット",
+  "material": "",
+  "published_date": "2026-10-23",
+  "prices": {
+   "store": 22800,
+   "site": 22800,
+   "mercari": 25080
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-23",
+  "links": {},
+  "images": [
+   "/assets/products/k11388/01.jpg",
+   "/assets/products/k11388/02.jpg",
+   "/assets/products/k11388/03.jpg",
+   "/assets/products/k11388/04.jpg",
+   "/assets/products/k11388/05.jpg",
+   "/assets/products/k11388/06.jpg",
+   "/assets/products/k11388/07.jpg",
+   "/assets/products/k11388/08.jpg",
+   "/assets/products/k11388/09.jpg",
+   "/assets/products/k11388/10.jpg",
+   "/assets/products/k11388/11.jpg",
+   "/assets/products/k11388/12.jpg"
+  ],
+  "thumb": "/assets/products/k11388/thumb.jpg",
+  "summary_text": "イタリアブランド「Sicoll」のオリーブグリーンのレザーライダース。1980年代頃のヴィンテージで、色も作りも見かけることが少ない一着です。",
+  "summary_points": [
+   "オリーブグリーン無地（リブ・裏地もオリーブ）のレザージャケット（シングルライダース型・リブ襟・リブ袖口・裾ゴム）（ブランド：Sicoll（襟裏タグ「Sicoll OF EUROPE」・内ポケットのタグ「Sicoll MADE IN ITALY」））",
+   "実寸 身幅53cm・着丈64.5cm・肩幅43.5cm"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。「Sicoll OF EUROPE」の襟裏タグと「Sicoll MADE IN ITALY」の内タグを持つ、シングルライダース型のレザージャケットです。",
+  "body_html": "<h2>この一着のこと</h2><p>「Sicoll OF EUROPE」の襟裏タグと「Sicoll MADE IN ITALY」の内タグを持つ、シングルライダース型のレザージャケットです。ヨーロッパサイズ50表記のメンズサイズで、1980年代頃のものと思われます。</p><p>本革と思われる素材はやわらかく薄手で、リブはニット、裏地は光沢のある化繊仕立て。リブ襟・リブ袖口・裾ゴムという構成で、全体がオリーブグリーンで統一されています。リブも裏地も同じオリーブで揃えているところに、作り手の意図がはっきり出ています。</p><p>状態は、革全体にシワと経年のツヤムラがあります。袖に小さな点状の跡が1か所ありますが、写真で確認できる範囲に目立つ破れはありません。ツヤムラは使い込まれた革が持つ表情で、新品にはない落ち着きがあります。</p><p>オリーブのレザーライダースはそれだけで主役になります。白や生成りのTシャツ一枚に合わせて、シンプルに着てください。色が主張しすぎず、でも確かに存在感がある。そういう着方が、この一着には合っています。</p><h2>状態</h2><p>状態は写真でご確認ください。気になる点は、お問い合わせからお尋ねください。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "Sicoll（襟裏タグ「Sicoll OF EUROPE」・内ポケットのタグ「Sicoll MADE IN ITALY」）"
+   ],
+   [
+    "色",
+    "オリーブグリーン無地（リブ・裏地もオリーブ）"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅53cm・着丈64.5cm・肩幅43.5cm"
+   ],
+   [
+    "状態",
+    "写真でご確認ください（傷・汚れの詳細は未確認）"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "outer",
+  "genre_by": "auto-keyword-2026-10-23",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.3",
+   "made_at": "2026-10-23",
+   "needs": [
+    "性別は自動判定：メンズ（写真の見立て：メンズ（ヨーロッパのメンズサイズ50の表記から））→ 違えばClaudeへ",
+    "素材が確定していない（推定のまま or 不明）→ 仕様表に載せていない",
+    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
+    "見出し（title）は物語の一言から自動で作った → 気に入らなければClaudeへ",
+    "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "写真の見立て：メンズ（ヨーロッパのメンズサイズ50の表記から）"
+ },
+ {
+  "sku": "K11415",
+  "slug": "k11415-nike",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "NIKEのコットンスウェット",
+  "product_name": "Star Sweat",
+  "brand": "NIKE（ネックタグ・スウッシュロゴ・洗濯表示タグで確認）",
+  "category": "トップス／スウェット",
+  "material": "100%コットン（洗濯表示タグに100% KATUN／100%면の表記あり）",
+  "published_date": "2026-10-23",
+  "prices": {
+   "store": 6800,
+   "site": 6800,
+   "mercari": 7480
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-23",
+  "links": {},
+  "images": [
+   "/assets/products/k11415/01.jpg",
+   "/assets/products/k11415/02.jpg",
+   "/assets/products/k11415/03.jpg",
+   "/assets/products/k11415/04.jpg",
+   "/assets/products/k11415/05.jpg",
+   "/assets/products/k11415/06.jpg",
+   "/assets/products/k11415/07.jpg",
+   "/assets/products/k11415/08.jpg",
+   "/assets/products/k11415/09.jpg",
+   "/assets/products/k11415/10.jpg",
+   "/assets/products/k11415/11.jpg",
+   "/assets/products/k11415/12.jpg"
+  ],
+  "thumb": "/assets/products/k11415/thumb.jpg",
+  "summary_text": "NIKEのコットンスウェット。ラベンダーパープルの地にフロントの大判レッドスター、胸元のホワイトスウッシュ。2000年代前後と思われる一枚で、色褪せと使用感がそのまま残っています。",
+  "summary_points": [
+   "ラベンダーパープル地・フロントに大判レッドスター・胸元にホワイトスウッシュのスウェットシャツ（クルーネック・長袖）（ブランド：NIKE（ネックタグ・スウッシュロゴ・洗濯表示タグで確認））",
+   "素材：100%コットン（洗濯表示タグに100% KATUN／100%면の表記あり）",
+   "実寸 身幅55.5cm・着丈63.5cm・肩幅44.5cm"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。NIKEのクルーネックスウェットシャツです。",
+  "body_html": "<h2>この一着のこと</h2><p>NIKEのクルーネックスウェットシャツです。ラベンダーパープルの地に、フロントへ大判のレッドスターがプリントされ、胸元にはホワイトのスウッシュ刺繍が入っています。素材は洗濯表示タグに「100% KATUN／100%면」の表記があり、コットン100%です。ネックタグのデザイン様式やフォント、スウッシュの位置感から、2000年代前後のものと思われます。</p><p>いまの状態をそのままお伝えします。全体に使用感と色褪せがあり、フロントのレッドスタープリントには一部剥がれがあります。目立つ破れや汚れはありません。古着として手に取るなら、この経年の表情ごと受け取ってください。</p><p>サイズはネックタグに「L G G」の表記があり、Lサイズです。タグにMENS／LADIESの明示はなく、シルエットからも性別の断定はできません。ユニセックスで着られる一枚と思われます。</p><p>着方はシンプルです。このスウェット一枚で着てください。ラベンダーとレッドの組み合わせはそれだけで目を引きます。デニムでも、ワイドなチノパンでも、下に合わせるものを選びすぎなくていいです。色褪せと剥がれがあるからこそ、きれいめなボトムスと合わせると全体のバランスが取れます。</p><h2>状態</h2><p>状態：全体的に使用感あり・フロントのレッドスタープリントに一部剥がれ・色褪せ感あり・目立つ破れや汚れなし。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "NIKE（ネックタグ・スウッシュロゴ・洗濯表示タグで確認）"
+   ],
+   [
+    "素材",
+    "100%コットン（洗濯表示タグに100% KATUN／100%면の表記あり）"
+   ],
+   [
+    "色",
+    "ラベンダーパープル地・フロントに大判レッドスター・胸元にホワイトスウッシュ"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅55.5cm・着丈63.5cm・肩幅44.5cm"
+   ],
+   [
+    "状態",
+    "全体的に使用感あり・フロントのレッドスタープリントに一部剥がれ・色褪せ感あり・目立つ破れや汚れなし"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "tops",
+  "genre_by": "auto-keyword-2026-10-23",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.3",
+   "made_at": "2026-10-23",
+   "needs": [
+    "性別を決められなかった（手がかりなし）→ 性別なしの分類にしてある。マネキンはメンズ、メルカリのカテゴリは空欄になる",
+    "見出し（title）は物語の一言から自動で作った → 気に入らなければClaudeへ",
+    "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "手がかりなし"
  }
 ]
