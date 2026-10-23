@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 
 <main class="wrap">
-  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/#list">Accessories & GAW</a><span>／</span><span>K11074</span></div>
+  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/?cat=acc#list">Accessories & GAW</a><span>／</span><span>K11074</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN8z9ygibGgb32aexR5.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 1" fetchpriority="high"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN94bkkMkxhbXhoopNV.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 2" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN99K26tppxJswwPUfv.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 3" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN9CSjHYDWSxa2ZhHBR.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 4" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN99QzxDtGhHPFnsQWy.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 5" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B4MB4B9q3YST4Pvu.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 6" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B3PzFPYdaDo3AkRm.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 7" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B7CAN5mSuxdQowru.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 8" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN9AzBEiBKMtMYMQehr.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 9" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B3PDuPVpPvPQrv94.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 10" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN9C8Pmjtisrqcky5jy.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 11" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B5uRzwMRg33TJ9RN.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 12" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN9B4xLscAvd8tANZTf.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 13" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN99X3FUFYtAVWhayFd.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 14" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTmN99tY84v65Q6X8Xn8E.jpg" alt="nbel python leather concho belt (brown × multicolour, approx. 2 cm wide, made in Italy) 15" loading="lazy"></div>
@@ -125,6 +125,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/en/legal/">Legal notice & privacy</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

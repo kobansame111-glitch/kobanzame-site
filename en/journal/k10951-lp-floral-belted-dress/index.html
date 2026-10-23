@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 
 <main class="wrap">
-  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/#list">Dresses</a><span>／</span><span>K10951</span></div>
+  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/?cat=dress#list">Dresses</a><span>／</span><span>K10951</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6dwcLRUmTnc5nRVVRMS.jpg" alt="LP multicolour floral dress with matching belt (white × multi, UK16, made in England) 1" fetchpriority="high"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6dwcQXfS7C3eLTBF6Q6.jpg" alt="LP multicolour floral dress with matching belt (white × multi, UK16, made in England) 2" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6dwcPthm4Nz6Hv6kgHH.jpg" alt="LP multicolour floral dress with matching belt (white × multi, UK16, made in England) 3" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6dwcYkShYFbyx4qtPZu.jpg" alt="LP multicolour floral dress with matching belt (white × multi, UK16, made in England) 4" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6dwcY7bqwEMvzsLEaFR.jpg" alt="LP multicolour floral dress with matching belt (white × multi, UK16, made in England) 5" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6dwb6YrTrqDze82gWjU.jpg" alt="LP multicolour floral dress with matching belt (white × multi, UK16, made in England) 6" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6dwcY7iduxSyW8B46nQ.jpg" alt="LP multicolour floral dress with matching belt (white × multi, UK16, made in England) 7" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6dwcThC6PAUSSsgnhRd.jpg" alt="LP multicolour floral dress with matching belt (white × multi, UK16, made in England) 8" loading="lazy"></div>
@@ -125,6 +125,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/en/legal/">Legal notice & privacy</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 
 <main class="wrap">
-  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/#list">Tops</a><span>／</span><span>K11190</span></div>
+  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/?cat=tops#list">Tops</a><span>／</span><span>K11190</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrio4SyLUBkVfwTVKhaj.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 1" fetchpriority="high"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrioAup6VpFRFDZFfSzu.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 2" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrinsKMNzUyrzStZZRKt.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 3" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrioLYfNwdcAVWjwL8GV.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 4" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrioMH7a44Fcp5RY2LLK.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 5" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrinqYRXnmAxZ8f3nr7s.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 6" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrioLWTuMGDDHJho6BXp.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 7" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrioLLxGbded2Cae3dpA.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 8" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrioMAAT7uB86PKCiizL.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 9" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrioHPMiptPoFXConnoN.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 10" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrioFaEmC9ZLTc88gnvu.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 11" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrioFzH4cspFDnevGJdn.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 12" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWrio5dNHzdXn9ogHzo6R.jpg" alt="Champion 1990s short-sleeve raglan sweatshirt (grey, L, made in USA) 13" loading="lazy"></div>
@@ -125,6 +125,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/en/legal/">Legal notice & privacy</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

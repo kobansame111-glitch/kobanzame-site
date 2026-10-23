@@ -832,7 +832,20 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 </div>{tabs}</header>
 ''' + drawer_html(lang)
 
-REVEAL_JS = '''<script>
+REVEAL_JS = '''<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
+<script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');
   if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
@@ -972,8 +985,25 @@ header.site .tabs{display:none}
   header.site .tabs{display:flex;border-top:1px solid var(--line)}
   header.site .tabs a{flex:1;display:flex;align-items:center;justify-content:center;min-height:44px;font-family:var(--gothic);font-size:13px;letter-spacing:.12em;color:var(--kinari);text-decoration:none}
   header.site .tabs a[aria-current="page"]{box-shadow:inset 0 -2px 0 var(--kin)}
-  [id]{scroll-margin-top:124px}
+  [id]{scroll-margin-top:calc(var(--hh,112px) + 56px)}
 }
+/* 今いる場所（パンくず）をヘッダーの下に貼りつける。ジャンルを押すとその一覧に戻れる */
+.crumb{position:sticky;top:var(--hh,68px);z-index:15;background:var(--sumi);box-shadow:0 0 0 100vmax var(--sumi);clip-path:inset(0 -100vmax);padding-block:10px;align-items:center}
+.crumb>span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1}
+.crumb{flex-wrap:nowrap}
+.crumb a{min-height:32px;display:inline-flex;align-items:center;white-space:nowrap}
+.herebar{position:sticky;top:var(--hh,68px);z-index:15;display:flex;gap:8px;align-items:center;justify-content:space-between;background:var(--sumi);box-shadow:0 0 0 100vmax var(--sumi);clip-path:inset(0 -100vmax);padding-block:8px;border-bottom:1px solid var(--line)}
+.herebar[hidden]{display:none}
+.herebar button{font:inherit;font-size:13px;background:none;border:0;color:var(--kinari);min-height:40px;cursor:pointer;padding:0 4px}
+.herebar .back{border:1px solid var(--line);padding:0 12px;white-space:nowrap}
+/* トースト（画面の下に少しだけ出る短いお知らせ） */
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,16px);background:var(--kinari);color:var(--sumi);font-size:13px;padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:50;max-width:calc(100% - 32px);text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* スケルトン（写真が読み込まれるまで、灰色の枠を光らせる） */
+@keyframes kzsk{0%{background-position:100% 0}100%{background-position:-100% 0}}
+.ph:not(.ld),.tile:not(.ld),.blog-card-img:not(.ld){background:linear-gradient(90deg,#e7e0d4 25%,#f2ede4 50%,#e7e0d4 75%);background-size:200% 100%;animation:kzsk 1.3s linear infinite}
+.blog-card-img{min-height:200px;background:var(--susu)}
+@media(prefers-reduced-motion:reduce){.ph,.tile,.blog-card-img{animation:none!important}}
 footer.site .fcols{display:grid;gap:24px 32px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin:8px 0 4px}
 footer.site .fcols h3{font-family:var(--gothic);font-size:12px;font-weight:500;letter-spacing:.16em;color:#fff;margin:0 0 6px}
 footer.site .fcols ul{list-style:none;margin:0;padding:0}
@@ -985,6 +1015,8 @@ footer.site .fcols li a:hover{text-decoration:underline}
 .blog-card-body h3{font-size:1rem;line-height:1.5;margin:.3em 0 0;color:var(--kinari)}
 .blog-main .sec-head h1{font-family:var(--gothic);font-weight:500;font-size:22px;line-height:1;letter-spacing:.16em;text-transform:uppercase}
 .blog-main .sec-head h1 small{display:block;font-family:var(--mincho);font-size:14px;margin-top:10px;color:var(--usu);letter-spacing:.06em;text-transform:none}
+/* ブログのタグが、商品カードの「1点限り」の位置指定を受けて画面の右上に浮いていたのを直す */
+.blog-card-tags .tag,.blog-tags .tag{position:static;inset:auto;transform:none}
 .ws-off{margin-top:12px;padding:12px 14px;border:1px dashed var(--line);color:var(--usu);font-size:14px}
 """
 
@@ -1119,7 +1151,9 @@ def finder(lang):
 
 def list_js(lang):
     t = T[lang]
-    msg = json.dumps({'empty_w': t['empty_w'], 'empty': t['empty'], 'fit': t['fit'], 'same': t['same'], 'unit': t['unit']}, ensure_ascii=False)
+    msg = json.dumps({'empty_w': t['empty_w'], 'empty': t['empty'], 'fit': t['fit'], 'same': t['same'], 'unit': t['unit'],
+                      'labels': dict(t['cats'], new=NEW_LABEL[lang]), 'here': 'いま見ているのは' if lang == 'ja' else 'Showing',
+                      'shown': '{c}を表示（{n}）' if lang == 'ja' else 'Showing {c} ({n})', 'all': 'すべての商品を表示' if lang == 'ja' else 'Showing all items'}, ensure_ascii=False)
     return '''<script>
 (function(){
   var M=''' + msg + ''';
@@ -1141,11 +1175,17 @@ def list_js(lang):
     empty.textContent=!isNaN(my)?M.empty_w.replace('{w}',my):M.empty;
     if(cnt) cnt.textContent=n+M.unit;
     document.querySelectorAll('.catrow button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
+    var hb=document.getElementById('herebar');
+    if(hb){hb.hidden=!filter; if(filter) document.getElementById('herego').innerHTML=M.here+' <b>'+(M.labels[filter]||filter)+'</b>（'+n+M.unit+'）';}
+    return n;
   }
-  document.querySelectorAll('.catrow button').forEach(function(b){b.addEventListener('click',function(){filter=(filter===b.dataset.filter?null:b.dataset.filter);apply();});});
-  document.querySelectorAll('.ball').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.filter;apply();var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});});
+  function tell(){var n=apply(); if(window.kzToast) kzToast(filter?M.shown.replace('{c}',M.labels[filter]||filter).replace('{n}',n+M.unit):M.all);}
+  var hg=document.getElementById('herego'); if(hg) hg.addEventListener('click',function(){var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});
+  var hbk=document.getElementById('hereback'); if(hbk) hbk.addEventListener('click',function(){filter=null;tell();history.replaceState(null,'',location.pathname+'#list');});
+  document.querySelectorAll('.catrow button').forEach(function(b){b.addEventListener('click',function(){filter=(filter===b.dataset.filter?null:b.dataset.filter);tell();});});
+  document.querySelectorAll('.ball').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.filter;tell();var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});});
   var q=(location.search.match(/[?&]cat=([a-z]+)/)||[])[1]; if(q&&document.querySelector('.catrow button[data-filter="'+q+'"]')) filter=q;
-  document.addEventListener('kz:cat',function(e){filter=e.detail||null;apply();});
+  document.addEventListener('kz:cat',function(e){filter=e.detail||null;tell();});
   myw.addEventListener('input',apply); showsold.addEventListener('change',apply);
   document.getElementById('clear').addEventListener('click',function(){myw.value='';showsold.checked=false;filter=null;apply();});
   apply();
@@ -1206,6 +1246,7 @@ for lang in ('ja', 'en'):
     </div>
   </section>
 {news_section}  <div class="wrap">
+    <div class="herebar" id="herebar" hidden><button type="button" class="here" id="herego"></button><button type="button" class="back" id="hereback">{'すべての商品に戻る' if lang == 'ja' else 'Show all'}</button></div>
     <div class="catrow" role="group">{catrow(lang)}</div>
     <div class="sec-head" id="list"><h2>{t['list_h']}<small>{t['list_s']}</small></h2><span class="count" id="count">{len(avail_live)}{t['unit']}</span></div>
     {finder(lang)}
@@ -1328,7 +1369,7 @@ for lang in ('ja', 'en'):
         page = head(lang, f"{loc(p, 'title', lang)}｜{SHOP['name']}", loc(p, 'summary_text', lang), path, og_type='article',
                     image=imgs[0], extra_ld=ld, noindex=(p.get('noindex', False) or rel == 'draft')) + f'''{draft_banner}
 <main class="wrap">
-  <div class="crumb"><a href="{P}/">HOME</a><span>／</span><a href="{P}/#list">{t['cats'][cat_of(p)]}</a><span>／</span><span>{esc(p['sku'])}</span></div>
+  <div class="crumb"><a href="{P}/">HOME</a><span>／</span><a href="{P}/?cat={cat_of(p)}#list">{t['cats'][cat_of(p)]}</a><span>／</span><span>{esc(p['sku'])}</span></div>
   <div class="pdp">
     <div>
       <div class="gal{' one' if len(imgs) == 1 else ''}" id="gal">{gallery}</div>

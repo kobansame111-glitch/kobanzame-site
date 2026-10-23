@@ -90,6 +90,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/tokushoho/">特定商取引法に基づく表記</a>　・　<a href="/privacy/">プライバシーポリシー</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

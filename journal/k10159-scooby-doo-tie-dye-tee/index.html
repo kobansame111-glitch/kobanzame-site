@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 
 <main class="wrap">
-  <div class="crumb"><a href="/">HOME</a><span>／</span><a href="/#list">トップス</a><span>／</span><span>K10159</span></div>
+  <div class="crumb"><a href="/">HOME</a><span>／</span><a href="/?cat=tops#list">トップス</a><span>／</span><span>K10159</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkKyvpKMJrNqqiYAQK.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 1" fetchpriority="high"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkXwy8QtFzNtEky4nS.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 2" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkSwvsVTHGjoxkfEMW.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 3" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkTn5dac9chMCpucar.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 4" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkTqsHEB4BKcbZ9Exi.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 5" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkUuJcuKyznfnvCuYi.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 6" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkTpvi2R9txaL9oWkE.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 7" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkSmpnSdN2cJ9Xe7Yi.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 8" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkV2JvzrB6TFRkz6F2.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 9" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkUNcZHxq7jiQiznjc.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 10" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkTagYPk428NJJmxGr.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 11" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkUoJB6tCQ7PxVLHxF.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 12" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkVAY8fAqUfqcoZN39.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 13" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkUPZqUbz3RNtCFfmZ.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 14" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkTQG6QuJDLNFECM6c.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 15" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkUbGPwDGyKam6XPte.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 16" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JQiYkTcGppvKGYrvxTt2Q.jpg" alt="1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製） 17" loading="lazy"></div>
@@ -125,6 +125,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/tokushoho/">特定商取引法に基づく表記</a>　・　<a href="/privacy/">プライバシーポリシー</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 <div class="draftnote">Draft (not yet published) | goes live on Wednesday morning</div>
 <main class="wrap">
-  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/#list">Pants & skirts</a><span>／</span><span>K11395</span></div>
+  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/?cat=bottoms#list">Pants & skirts</a><span>／</span><span>K11395</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="/assets/products/k11395/v2_front.jpg" alt="Suede leather Pants 1" fetchpriority="high"><img src="/assets/products/k11395/v2_back.jpg" alt="Suede leather Pants 2" loading="lazy"><img src="/assets/products/k11395/02.jpg" alt="Suede leather Pants 3" loading="lazy"><img src="/assets/products/k11395/03.jpg" alt="Suede leather Pants 4" loading="lazy"><img src="/assets/products/k11395/04.jpg" alt="Suede leather Pants 5" loading="lazy"><img src="/assets/products/k11395/05.jpg" alt="Suede leather Pants 6" loading="lazy"><img src="/assets/products/k11395/07.jpg" alt="Suede leather Pants 7" loading="lazy"><img src="/assets/products/k11395/08.jpg" alt="Suede leather Pants 8" loading="lazy"><img src="/assets/products/k11395/09.jpg" alt="Suede leather Pants 9" loading="lazy"><img src="/assets/products/k11395/10.jpg" alt="Suede leather Pants 10" loading="lazy"><img src="/assets/products/k11395/11.jpg" alt="Suede leather Pants 11" loading="lazy"><img src="/assets/products/k11395/12.jpg" alt="Suede leather Pants 12" loading="lazy"></div>
@@ -125,6 +125,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/en/legal/">Legal notice & privacy</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

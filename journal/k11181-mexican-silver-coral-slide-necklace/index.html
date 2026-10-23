@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 
 <main class="wrap">
-  <div class="crumb"><a href="/">HOME</a><span>／</span><a href="/#list">アクセサリー・GAW</a><span>／</span><span>K11181</span></div>
+  <div class="crumb"><a href="/">HOME</a><span>／</span><a href="/?cat=acc#list">アクセサリー・GAW</a><span>／</span><span>K11181</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JVgb2meF6zWNrq9Y7hN6x.jpg" alt="ヴィンテージ シルバー925 コーラル スライドトップネックレス（メキシコ・55cm） 1" fetchpriority="high"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JVgb2gKrgtwU2u9Mn3XBg.jpg" alt="ヴィンテージ シルバー925 コーラル スライドトップネックレス（メキシコ・55cm） 2" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JVgb2f7uZKGYz3UF43k6u.jpg" alt="ヴィンテージ シルバー925 コーラル スライドトップネックレス（メキシコ・55cm） 3" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JVgb2fqfNJxKwCBJUYbSc.jpg" alt="ヴィンテージ シルバー925 コーラル スライドトップネックレス（メキシコ・55cm） 4" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JVgb2gRsUX6NeGEHjhLp8.jpg" alt="ヴィンテージ シルバー925 コーラル スライドトップネックレス（メキシコ・55cm） 5" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JVgb2iEzjvVrgYzf3Rge9.jpg" alt="ヴィンテージ シルバー925 コーラル スライドトップネックレス（メキシコ・55cm） 6" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JVgb2fLFvFpbwhPA8Bb6z.jpg" alt="ヴィンテージ シルバー925 コーラル スライドトップネックレス（メキシコ・55cm） 7" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JVgb2g2n9Uv39V2bpNv93.jpg" alt="ヴィンテージ シルバー925 コーラル スライドトップネックレス（メキシコ・55cm） 8" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JVgb2gGQ3eiDpZLWByBPH.jpg" alt="ヴィンテージ シルバー925 コーラル スライドトップネックレス（メキシコ・55cm） 9" loading="lazy"></div>
@@ -125,6 +125,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/tokushoho/">特定商取引法に基づく表記</a>　・　<a href="/privacy/">プライバシーポリシー</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

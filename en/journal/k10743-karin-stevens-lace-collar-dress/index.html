@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 
 <main class="wrap">
-  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/#list">Dresses</a><span>／</span><span>K10743</span></div>
+  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/?cat=dress#list">Dresses</a><span>／</span><span>K10743</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6epy3UisztjnTMsWwMf.jpg" alt="1980s Karin Stevens floral dress with lace collar (navy, US10, made in Hong Kong) 1" fetchpriority="high"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6eq4ACyjpotSGjiucWd.jpg" alt="1980s Karin Stevens floral dress with lace collar (navy, US10, made in Hong Kong) 2" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6eq4CiyZbkd5dDZeoiw.jpg" alt="1980s Karin Stevens floral dress with lace collar (navy, US10, made in Hong Kong) 3" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6epzn85jQXPuxqrktdb.jpg" alt="1980s Karin Stevens floral dress with lace collar (navy, US10, made in Hong Kong) 4" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6eq23faycAqYtSxr5aR.jpg" alt="1980s Karin Stevens floral dress with lace collar (navy, US10, made in Hong Kong) 5" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6epzyCdWyopmYAQR9k3.jpg" alt="1980s Karin Stevens floral dress with lace collar (navy, US10, made in Hong Kong) 6" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6eq2E7puQzfAaScdxrc.jpg" alt="1980s Karin Stevens floral dress with lace collar (navy, US10, made in Hong Kong) 7" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6epzuhcdyJtPHxoLkiH.jpg" alt="1980s Karin Stevens floral dress with lace collar (navy, US10, made in Hong Kong) 8" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6eq24Jmu42jP9bDUDAm.jpg" alt="1980s Karin Stevens floral dress with lace collar (navy, US10, made in Hong Kong) 9" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6eq2ERZan5BRYLaw8QN.jpg" alt="1980s Karin Stevens floral dress with lace collar (navy, US10, made in Hong Kong) 10" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JU6eq29N4iFjbzq4RLEc5.jpg" alt="1980s Karin Stevens floral dress with lace collar (navy, US10, made in Hong Kong) 11" loading="lazy"></div>
@@ -125,6 +125,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/en/legal/">Legal notice & privacy</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

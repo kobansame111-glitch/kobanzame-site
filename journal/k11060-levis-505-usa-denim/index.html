@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 
 <main class="wrap">
-  <div class="crumb"><a href="/">HOME</a><span>／</span><a href="/#list">パンツ・スカート</a><span>／</span><span>K11060</span></div>
+  <div class="crumb"><a href="/">HOME</a><span>／</span><a href="/?cat=bottoms#list">パンツ・スカート</a><span>／</span><span>K11060</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriApaLU2yeRyxRW4wr9.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 1" fetchpriority="high"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriApaxdwM4aXsrNjcLG.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 2" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriAqTd3BCAbEsyvTL6J.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 3" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriAp8hq5o9Qs5V3UG95.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 4" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriApa2i9hZVz2vjrBoU.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 5" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriAoZSys9S2yaDazev3.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 6" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriApXBM4DsaVwyKivEH.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 7" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriApZ5NrH6NpLkcAaM9.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 8" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriApUwuZJvt3HgX4gLm.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 9" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriAob2pxhULTzancR4c.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 10" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriAkd7MvuSQ2pLfMaRn.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 11" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriAkfwBxRSqgHgjJweX.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 12" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTriAkZvNntrPSawbWxpj.jpg" alt="Levi&#x27;s 505-0217 デニムパンツ（インディゴ・W30 L36・USA製） 13" loading="lazy"></div>
@@ -125,6 +125,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/tokushoho/">特定商取引法に基づく表記</a>　・　<a href="/privacy/">プライバシーポリシー</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

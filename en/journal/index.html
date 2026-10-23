@@ -134,7 +134,7 @@ if(k)send({t:'click',btn:k});},true);
 </main>
 <script>
 (function(){
-  var M={"empty_w": "Nothing around {w} cm right now. New pieces arrive every Wednesday.", "empty": "Nothing matches right now.", "fit": "Chest {w} cm ({d})", "same": "same", "unit": " items"};
+  var M={"empty_w": "Nothing around {w} cm right now. New pieces arrive every Wednesday.", "empty": "Nothing matches right now.", "fit": "Chest {w} cm ({d})", "same": "same", "unit": " items", "labels": {"outer": "Outerwear", "tops": "Tops", "bottoms": "Pants & skirts", "dress": "Dresses", "shoes": "Shoes", "acc": "Accessories & GAW", "other": "Goods", "new": "New in"}, "here": "Showing", "shown": "Showing {c} ({n})", "all": "Showing all items"};
   var filter=null, grid=document.getElementById('grid'); if(!grid) return;
   var myw=document.getElementById('myw'), showsold=document.getElementById('showsold'), cnt=document.getElementById('count'), blocks=document.getElementById('blocks');
   var empty=document.createElement('div'); empty.className='empty'; empty.hidden=true; grid.appendChild(empty);
@@ -153,11 +153,17 @@ if(k)send({t:'click',btn:k});},true);
     empty.textContent=!isNaN(my)?M.empty_w.replace('{w}',my):M.empty;
     if(cnt) cnt.textContent=n+M.unit;
     document.querySelectorAll('.catrow button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
+    var hb=document.getElementById('herebar');
+    if(hb){hb.hidden=!filter; if(filter) document.getElementById('herego').innerHTML=M.here+' <b>'+(M.labels[filter]||filter)+'</b>（'+n+M.unit+'）';}
+    return n;
   }
-  document.querySelectorAll('.catrow button').forEach(function(b){b.addEventListener('click',function(){filter=(filter===b.dataset.filter?null:b.dataset.filter);apply();});});
-  document.querySelectorAll('.ball').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.filter;apply();var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});});
+  function tell(){var n=apply(); if(window.kzToast) kzToast(filter?M.shown.replace('{c}',M.labels[filter]||filter).replace('{n}',n+M.unit):M.all);}
+  var hg=document.getElementById('herego'); if(hg) hg.addEventListener('click',function(){var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});
+  var hbk=document.getElementById('hereback'); if(hbk) hbk.addEventListener('click',function(){filter=null;tell();history.replaceState(null,'',location.pathname+'#list');});
+  document.querySelectorAll('.catrow button').forEach(function(b){b.addEventListener('click',function(){filter=(filter===b.dataset.filter?null:b.dataset.filter);tell();});});
+  document.querySelectorAll('.ball').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.filter;tell();var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});});
   var q=(location.search.match(/[?&]cat=([a-z]+)/)||[])[1]; if(q&&document.querySelector('.catrow button[data-filter="'+q+'"]')) filter=q;
-  document.addEventListener('kz:cat',function(e){filter=e.detail||null;apply();});
+  document.addEventListener('kz:cat',function(e){filter=e.detail||null;tell();});
   myw.addEventListener('input',apply); showsold.addEventListener('change',apply);
   document.getElementById('clear').addEventListener('click',function(){myw.value='';showsold.checked=false;filter=null;apply();});
   apply();
@@ -175,6 +181,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/en/legal/">Legal notice & privacy</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 
 <main class="wrap">
-  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/#list">Shoes</a><span>／</span><span>K10837</span></div>
+  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/?cat=shoes#list">Shoes</a><span>／</span><span>K10837</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKStBACoatjPT7MWAFz.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 1" fetchpriority="high"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKSyPVsjSFvLCnfURpJ.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 2" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKStDzTuXPgyGjeZTXv.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 3" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKSt8K4Ax7fGjYDw8Fq.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 4" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKSt73acoMkH9GREmYF.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 5" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKStACesiwQGgig8jA2.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 6" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKSt7yrGuAgPvHfRRah.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 7" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKStbBjch35B2bTVgBS.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 8" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKSsMwwFmtqZwBpuaeQ.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 9" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKSsWotn8SfAtEZcJpf.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 10" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKSsy6EPQo43eszyNaA.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 11" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKStFa2ABJTC6TZWNuW.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 12" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JTKKStPAabHr26EinQFxC.jpg" alt="Finn Comfort leather boots (black, EU38 / 24 cm, made in Germany, deadstock) 13" loading="lazy"></div>
@@ -125,6 +125,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/en/legal/">Legal notice & privacy</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 
 <main class="wrap">
-  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/#list">Outerwear</a><span>／</span><span>K10889</span></div>
+  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/?cat=outer#list">Outerwear</a><span>／</span><span>K10889</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JRMi8D4LG5G3uouLwyVYH.jpg" alt="70s–80s Bon Vivant linen-blend tailored jacket (deadstock, JCPenney tag attached) 1" fetchpriority="high"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JRMi8CN79hdQ6fMnAnasC.jpg" alt="70s–80s Bon Vivant linen-blend tailored jacket (deadstock, JCPenney tag attached) 2" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JRMi8Bb9rNYPsbDA6AnFs.jpg" alt="70s–80s Bon Vivant linen-blend tailored jacket (deadstock, JCPenney tag attached) 3" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JRMi8CCw2ceWKPmTALeiL.jpg" alt="70s–80s Bon Vivant linen-blend tailored jacket (deadstock, JCPenney tag attached) 4" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JRMi8D2SiSge2nwx6GTDe.jpg" alt="70s–80s Bon Vivant linen-blend tailored jacket (deadstock, JCPenney tag attached) 5" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JRMi8DPKiwGZDa3mwAnpK.jpg" alt="70s–80s Bon Vivant linen-blend tailored jacket (deadstock, JCPenney tag attached) 6" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JRMi8CzoJY2Lafn4PihPy.jpg" alt="70s–80s Bon Vivant linen-blend tailored jacket (deadstock, JCPenney tag attached) 7" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JRMi8CzBCapCFVS4rcTGx.jpg" alt="70s–80s Bon Vivant linen-blend tailored jacket (deadstock, JCPenney tag attached) 8" loading="lazy"></div>
@@ -125,6 +125,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/en/legal/">Legal notice & privacy</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');

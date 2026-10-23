@@ -76,7 +76,7 @@ if(k)send({t:'click',btn:k});},true);
 </script>
 
 <main class="wrap">
-  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/#list">Shoes</a><span>／</span><span>K11163</span></div>
+  <div class="crumb"><a href="/en/">HOME</a><span>／</span><a href="/en/?cat=shoes#list">Shoes</a><span>／</span><span>K11163</span></div>
   <div class="pdp">
     <div>
       <div class="gal" id="gal"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KG7oYM68F5rgDmYum.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 1" fetchpriority="high"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KGMjTKJj78atKrobN.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 2" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KHud7xaFC82gram2g.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 3" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KFzoYUPerBuUYnCp3.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 4" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KG8TNzFm4GsJ45sZ5.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 5" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KGRr6JaYUdisFL8Xr.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 6" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KFravkJsQzpawdjQL.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 7" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KEsbG6ZKZe8ARdmty.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 8" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KGPdDFZywJaZ9AAWk.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 9" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KFVh46qTovN3FUFEU.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 10" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KFBfvBM7MrpZsDitH.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 11" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KG4LLMm6MKrNmWj64.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 12" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KFsr3eESQqtKooddr.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 13" loading="lazy"><img src="https://assets.mercari-shops-static.com/-/large/plain/2JWY7KEPSeuo5SXrZUWXzZ.jpg" alt="ARIAT Pecos (roper) boots (black, US 8.5 D / approx. 25.5 cm) 14" loading="lazy"></div>
@@ -125,6 +125,19 @@ if(k)send({t:'click',btn:k});},true);
     <a href="/en/legal/">Legal notice & privacy</a>
   </div>
 </div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var h=document.querySelector('header.site');
+  function hh(){if(h)document.documentElement.style.setProperty('--hh',h.offsetHeight+'px');} hh(); addEventListener('resize',hh);
+  var to=document.getElementById('toast'),tm;
+  window.kzToast=function(m){if(!to)return;to.textContent=m;to.classList.add('on');clearTimeout(tm);tm=setTimeout(function(){to.classList.remove('on');},2200);};
+  document.querySelectorAll('.ph>img:first-child,.tile img,.blog-card-img img').forEach(function(i){
+    var p=i.parentNode; function d(){p.classList.add('ld');}
+    if(i.complete&&i.naturalWidth)d(); else {i.addEventListener('load',d);i.addEventListener('error',d);}
+  });
+})();
+</script>
 <script>
 (function(){
   var q=document.querySelectorAll('.card,.sec-head,.block .bhead,.store,.faq,.story,.trust,.tile');
