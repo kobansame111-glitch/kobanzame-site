@@ -3818,12 +3818,17 @@
     "garment_l": 92.1,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k11395/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "ウエスト": 72,
     "股下": 85
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-23",
+    "note": "③前のボタンが本物は2つ並び、AIは1つ。本物に無い小銭ポケットと鋲をAIが足している"
    }
   }
  },
@@ -4067,13 +4072,18 @@
     "garment_l": 103.7,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ok",
    "mannequin_url": "/assets/products/k11309/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 45,
     "着丈": 84.5,
     "肩幅": 48
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-23",
+    "note": "4点一致"
    }
   }
  },
@@ -4193,13 +4203,18 @@
     "garment_l": 126.3,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ok",
    "mannequin_url": "/assets/products/k11389/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 63,
     "着丈": 72,
     "肩幅": 52
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-23",
+    "note": "4点一致"
    }
   }
  },
@@ -4317,13 +4332,18 @@
     "garment_l": 48.8,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ok",
    "mannequin_url": "/assets/products/k11437/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 47,
     "着丈": 63.5,
     "肩幅": 43
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-23",
+    "note": "4点一致"
    }
   }
  },
@@ -4565,11 +4585,16 @@
     "garment_l": 105.1,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k11409/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "ウエスト": 86.0
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-23",
+    "note": "③腰前のボタンが本物は2つ、AIは1つ。脇の調整ベルトのボタン（片側3つ）と腰ポケットのボタンがAIに無い"
    }
   }
  },
@@ -4690,13 +4715,18 @@
     "garment_l": 79.1,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k11411/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 65.5,
     "着丈": 67.5,
     "肩幅": 60.5
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-23",
+    "note": "②③襟が違う：本物はリブ編みの立ち襟、AIはスエードの折り襟（シャツ襟）になっている"
    }
   }
  }
