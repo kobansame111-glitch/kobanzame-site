@@ -4751,7 +4751,16 @@
    "mercari": 7480
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-23",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "JPP6ZRDXMMLH4AEA",
+    "url": "https://square.link/u/pdntqgi2",
+    "order_id": "pYHduqj19yk7sfXaOnTqFnfsUU9YY",
+    "amount": 7480,
+    "created_at": "2026-10-23T11:34:15Z"
+   },
+   "square": "https://square.link/u/pdntqgi2"
+  },
   "images": [
    "/assets/products/k11201/01.jpg",
    "/assets/products/k11201/09.jpg",
@@ -4976,7 +4985,16 @@
    "mercari": 7480
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-23",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "DMTLSYDZZB6LAQEJ",
+    "url": "https://square.link/u/KL2bXBUa",
+    "order_id": "bNXm2C4jlq39MfulLWxrmkxpFpOZY",
+    "amount": 7480,
+    "created_at": "2026-10-23T11:34:16Z"
+   },
+   "square": "https://square.link/u/KL2bXBUa"
+  },
   "images": [
    "/assets/products/k11415/v2_front.jpg",
    "/assets/products/k11415/v2_back.jpg",
