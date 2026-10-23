@@ -1017,6 +1017,8 @@ footer.site .fcols li a:hover{text-decoration:underline}
 .blog-main .sec-head h1 small{display:block;font-family:var(--mincho);font-size:14px;margin-top:10px;color:var(--usu);letter-spacing:.06em;text-transform:none}
 /* ブログのタグが、商品カードの「1点限り」の位置指定を受けて画面の右上に浮いていたのを直す */
 .blog-card-tags .tag,.blog-tags .tag{position:static;inset:auto;transform:none}
+/* 2026-10-23 龍さん「横にスクロールする商品の列が上下にも少し動いて、縦のスクロールが引っかかる」→ 列の中は縦に動かさない */
+@media(max-width:899px){.brow,.gal{overflow-y:hidden;overscroll-behavior-x:contain}}
 .ws-off{margin-top:12px;padding:12px 14px;border:1px dashed var(--line);color:var(--usu);font-size:14px}
 """
 
