@@ -5087,13 +5087,18 @@
     "garment_l": 177.9,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ok",
    "mannequin_url": "/assets/products/k11415/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 55.5,
     "着丈": 63.5,
     "肩幅": 44.5
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-24",
+    "note": "4点一致"
    }
   }
  }
