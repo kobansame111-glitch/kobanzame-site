@@ -5124,9 +5124,9 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-24",
   "links": {},
   "images": [
+   "/assets/products/k11418/v2_back.jpg",
    "/assets/products/k11418/01.jpg",
    "/assets/products/k11418/02.jpg",
-   "/assets/products/k11418/03.jpg",
    "/assets/products/k11418/04.jpg",
    "/assets/products/k11418/05.jpg",
    "/assets/products/k11418/06.jpg",
@@ -5137,7 +5137,7 @@
    "/assets/products/k11418/11.jpg",
    "/assets/products/k11418/12.jpg"
   ],
-  "thumb": "/assets/products/k11418/thumb.jpg",
+  "thumb": "/assets/products/k11418/v2_thumb.jpg",
   "summary_text": "Levi'sのブーツカットデニムに、フロント全面の大判グラフィックプリントが目を引く一本です。ライトウォッシュのストレッチ混デニムに、2000年代前半頃の空気感がそのまま残っています。",
   "summary_points": [
    "ライトブルーウォッシュ地／フロントに大判ブラック×ホワイトグラフィックプリント（人物・ロゴ・「moon gathering」文字）のデニムパンツ（ブーツカット／フレア）（ブランド：Levi's（赤タブ・ジッパー刻印・洗濯タグ・リベット刻印すべてLevi's確認））",
@@ -5184,7 +5184,40 @@
    ],
    "approved_at": "2026-10-24"
   },
-  "gender_by": "写真：レディース（ボタンが着る人から見て左側に付いており、レディース仕様と確認）"
+  "gender_by": "写真：レディース（ボタンが着る人から見て左側に付いており、レディース仕様と確認）",
+  "images_orig": [
+   "/assets/products/k11418/01.jpg",
+   "/assets/products/k11418/02.jpg",
+   "/assets/products/k11418/03.jpg",
+   "/assets/products/k11418/04.jpg",
+   "/assets/products/k11418/05.jpg",
+   "/assets/products/k11418/06.jpg",
+   "/assets/products/k11418/07.jpg",
+   "/assets/products/k11418/08.jpg",
+   "/assets/products/k11418/09.jpg",
+   "/assets/products/k11418/10.jpg",
+   "/assets/products/k11418/11.jpg",
+   "/assets/products/k11418/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-24",
+   "front_i": 0,
+   "back_i": 2,
+   "front_error": "RuntimeError('仕上がり確認で不合格：衣服の一部が切り取られています')",
+   "back_url": "/assets/products/k11418/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 146.3,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11418/v2_mannequin.jpg",
+   "mannequin_body": "身長165cm・バスト83cm",
+   "measures": {
+    "ウエスト": 83.0,
+    "股下": 72.5
+   }
+  }
  },
  {
   "sku": "K11419",
@@ -5206,20 +5239,20 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-24",
   "links": {},
   "images": [
-   "/assets/products/k11419/01.jpg",
+   "/assets/products/k11419/v2_front.jpg",
+   "/assets/products/k11419/v2_back.jpg",
    "/assets/products/k11419/02.jpg",
    "/assets/products/k11419/03.jpg",
    "/assets/products/k11419/04.jpg",
    "/assets/products/k11419/05.jpg",
    "/assets/products/k11419/06.jpg",
    "/assets/products/k11419/07.jpg",
-   "/assets/products/k11419/08.jpg",
    "/assets/products/k11419/09.jpg",
    "/assets/products/k11419/10.jpg",
    "/assets/products/k11419/11.jpg",
    "/assets/products/k11419/12.jpg"
   ],
-  "thumb": "/assets/products/k11419/thumb.jpg",
+  "thumb": "/assets/products/k11419/v2_thumb.jpg",
   "summary_text": "スウェーデンのワークウェアブランドFristadsの、1950〜1960年代頃と思われるワークパンツです。オリーブグレーの落ち着いた色合いと、使い込まれた風合いが持ち味の一本です。",
   "summary_points": [
    "グレーグリーン（オリーブグレー）無地のワークパンツ／トラウザーズ（ブランド：FRISTADS（スウェーデンのワークウェアブランド）/ St 56 / SANFOR表記）",
@@ -5262,7 +5295,45 @@
    ],
    "approved_at": "2026-10-24"
   },
-  "gender_by": "写真の見立て：メンズ（ボタンフライが着る人から見て右側開き、かつワークウェアブランドの大サイズ）"
+  "gender_by": "写真の見立て：メンズ（ボタンフライが着る人から見て右側開き、かつワークウェアブランドの大サイズ）",
+  "images_orig": [
+   "/assets/products/k11419/01.jpg",
+   "/assets/products/k11419/02.jpg",
+   "/assets/products/k11419/03.jpg",
+   "/assets/products/k11419/04.jpg",
+   "/assets/products/k11419/05.jpg",
+   "/assets/products/k11419/06.jpg",
+   "/assets/products/k11419/07.jpg",
+   "/assets/products/k11419/08.jpg",
+   "/assets/products/k11419/09.jpg",
+   "/assets/products/k11419/10.jpg",
+   "/assets/products/k11419/11.jpg",
+   "/assets/products/k11419/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-24",
+   "front_i": 0,
+   "back_i": 7,
+   "front_url": "/assets/products/k11419/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 115.1,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11419/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.1,
+    "garment_l": 121.1,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11419/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "ウエスト": 96.0,
+    "股下": 72.0
+   }
+  }
  },
  {
   "sku": "K11463",
@@ -5284,16 +5355,16 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-24",
   "links": {},
   "images": [
+   "/assets/products/k11463/v2_back.jpg",
    "/assets/products/k11463/01.jpg",
    "/assets/products/k11463/02.jpg",
    "/assets/products/k11463/03.jpg",
    "/assets/products/k11463/04.jpg",
    "/assets/products/k11463/05.jpg",
-   "/assets/products/k11463/06.jpg",
    "/assets/products/k11463/07.jpg",
    "/assets/products/k11463/08.jpg"
   ],
-  "thumb": "/assets/products/k11463/thumb.jpg",
+  "thumb": "/assets/products/k11463/v2_thumb.jpg",
   "summary_text": "1981年前後の米軍実物支給品。ナイトカモフラージュデザートパターンのミリタリーパーカで、グリッドと不規則迷彩スポットが重なる独特の柄が目を引きます。",
   "summary_points": [
    "オリーブグリーン×ライトグリーン・グリッド（格子）柄＋不規則迷彩スポットのミリタリーパーカ（米軍実物支給品・ナイトカモフラージュデザート）（ブランド：LANCER CLOTHING CORP.（製造メーカー）／DLA100-81-C-2532（契約番号）／NSN: 8415-01-102-6281）",
@@ -5345,6 +5416,28 @@
    ],
    "approved_at": "2026-10-24"
   },
-  "gender_by": "写真：メンズ（タグにLARGE 41-45インチ表記・ミリタリー規格品でメンズ向けサイズ体系）"
+  "gender_by": "写真：メンズ（タグにLARGE 41-45インチ表記・ミリタリー規格品でメンズ向けサイズ体系）",
+  "images_orig": [
+   "/assets/products/k11463/01.jpg",
+   "/assets/products/k11463/02.jpg",
+   "/assets/products/k11463/03.jpg",
+   "/assets/products/k11463/04.jpg",
+   "/assets/products/k11463/05.jpg",
+   "/assets/products/k11463/06.jpg",
+   "/assets/products/k11463/07.jpg",
+   "/assets/products/k11463/08.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-24",
+   "front_i": 0,
+   "back_i": 5,
+   "front_error": "RuntimeError('仕上がり確認で不合格：裾が破れています')",
+   "back_url": "/assets/products/k11463/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.4,
+    "garment_l": 82.9,
+    "bg": "normal"
+   }
+  }
  }
 ]
