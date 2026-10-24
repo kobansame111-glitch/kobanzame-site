@@ -5107,7 +5107,7 @@
  {
   "sku": "K11418",
   "slug": "k11418-levi-s-levi-s",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "Jesus",
@@ -5181,14 +5181,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-24"
   },
   "gender_by": "写真：レディース（ボタンが着る人から見て左側に付いており、レディース仕様と確認）"
  },
  {
   "sku": "K11419",
   "slug": "k11419-fristads-st-56-sanfor",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "80's Prisoner Pants",
@@ -5258,14 +5259,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-24"
   },
   "gender_by": "写真の見立て：メンズ（ボタンフライが着る人から見て右側開き、かつワークウェアブランドの大サイズ）"
  },
  {
   "sku": "K11463",
   "slug": "k11463-lancer-clothing-corp-dla100-81-c-2532-nsn-8415-01-102-6281",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1981年前後の米軍実物支給品",
@@ -5340,7 +5342,8 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（other）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-24"
   },
   "gender_by": "写真：メンズ（タグにLARGE 41-45インチ表記・ミリタリー規格品でメンズ向けサイズ体系）"
  }
