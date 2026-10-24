@@ -5122,7 +5122,16 @@
    "mercari": 6380
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-24",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "7JVZKTAQFKY5763J",
+    "url": "https://square.link/u/U4MR6QKY",
+    "order_id": "ZKsVgePbeth2YP3bmdq1UnPCHhWZY",
+    "amount": 6380,
+    "created_at": "2026-10-24T11:34:16Z"
+   },
+   "square": "https://square.link/u/U4MR6QKY"
+  },
   "images": [
    "/assets/products/k11418/v2_back.jpg",
    "/assets/products/k11418/01.jpg",
@@ -5206,7 +5215,7 @@
    "front_error": "RuntimeError('仕上がり確認で不合格：衣服の一部が切り取られています')",
    "back_url": "/assets/products/k11418/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 146.3,
     "bg": "normal"
    },
@@ -5214,7 +5223,7 @@
    "mannequin_url": "/assets/products/k11418/v2_mannequin.jpg",
    "mannequin_body": "身長165cm・バスト83cm",
    "measures": {
-    "ウエスト": 83.0,
+    "ウエスト": 83,
     "股下": 72.5
    }
   }
@@ -5237,7 +5246,16 @@
    "mercari": 18480
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-24",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "CNVPNCFAJI6SQJ4P",
+    "url": "https://square.link/u/7RN6dCMm",
+    "order_id": "BYBNW6kxESj0aEdH9C4GOClmnBUZY",
+    "amount": 18480,
+    "created_at": "2026-10-24T11:34:16Z"
+   },
+   "square": "https://square.link/u/7RN6dCMm"
+  },
   "images": [
    "/assets/products/k11419/v2_front.jpg",
    "/assets/products/k11419/v2_back.jpg",
@@ -5330,8 +5348,8 @@
    "mannequin_url": "/assets/products/k11419/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
-    "ウエスト": 96.0,
-    "股下": 72.0
+    "ウエスト": 96,
+    "股下": 72
    }
   }
  },
@@ -5353,7 +5371,16 @@
    "mercari": 21780
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-24",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "V6UISPMS6SRGMRWX",
+    "url": "https://square.link/u/pWnTAz89",
+    "order_id": "RIvEXmzcvibNLXMsZKiW5O9hcJ8YY",
+    "amount": 21780,
+    "created_at": "2026-10-24T11:34:17Z"
+   },
+   "square": "https://square.link/u/pWnTAz89"
+  },
   "images": [
    "/assets/products/k11463/v2_back.jpg",
    "/assets/products/k11463/01.jpg",
