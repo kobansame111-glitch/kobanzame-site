@@ -5495,7 +5495,16 @@
    "mercari": 7480
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-25",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "53K2FYRT7RY6FSRJ",
+    "url": "https://square.link/u/tFimOzT4",
+    "order_id": "tcOYKGdbSp87iL2ipwJ2ioF2rzXZY",
+    "amount": 7480,
+    "created_at": "2026-10-25T11:34:16Z"
+   },
+   "square": "https://square.link/u/tFimOzT4"
+  },
   "images": [
    "/assets/products/k11464/v2_back.jpg",
    "/assets/products/k11464/01.jpg",
@@ -5571,15 +5580,15 @@
    "front_error": "RuntimeError('仕上がり確認で不合格：服の一部が切り取られています。')",
    "back_url": "/assets/products/k11464/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
-    "garment_l": 116.0,
+    "brighten": 0,
+    "garment_l": 116,
     "bg": "normal"
    },
    "mannequin": "pending",
    "mannequin_url": "/assets/products/k11464/v2_mannequin.jpg",
    "mannequin_body": "身長165cm・バスト83cm",
    "measures": {
-    "ウエスト": 76.0
+    "ウエスト": 76
    }
   }
  },
@@ -5601,7 +5610,16 @@
    "mercari": 7480
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-25",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "VULWR6FHEJWEUD3C",
+    "url": "https://square.link/u/uY7ssC9z",
+    "order_id": "FYuYaRNdUvnM3hJCWk8v2hfEkJ8YY",
+    "amount": 7480,
+    "created_at": "2026-10-25T11:34:16Z"
+   },
+   "square": "https://square.link/u/uY7ssC9z"
+  },
   "images": [
    "/assets/products/k11191/v2_front.jpg",
    "/assets/products/k11191/v2_back.jpg",
@@ -5685,13 +5703,13 @@
    "back_i": 10,
    "front_url": "/assets/products/k11191/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 175.8,
     "bg": "normal"
    },
    "back_url": "/assets/products/k11191/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 178.7,
     "bg": "normal"
    },
@@ -5699,9 +5717,9 @@
    "mannequin_url": "/assets/products/k11191/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
-    "身幅": 63.0,
+    "身幅": 63,
     "着丈": 70.5,
-    "肩幅": 68.0
+    "肩幅": 68
    }
   }
  },
@@ -5723,7 +5741,16 @@
    "mercari": 7480
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-25",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "KAPWGMTHM7FCEREQ",
+    "url": "https://square.link/u/LHi5zhxm",
+    "order_id": "1CnAUsg4U45qGP5V3WLNyTgROAHZY",
+    "amount": 7480,
+    "created_at": "2026-10-25T11:34:17Z"
+   },
+   "square": "https://square.link/u/LHi5zhxm"
+  },
   "images": [
    "/assets/products/k11253/01.jpg",
    "/assets/products/k11253/05.jpg",
