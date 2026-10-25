@@ -5497,18 +5497,18 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-25",
   "links": {},
   "images": [
+   "/assets/products/k11464/v2_back.jpg",
    "/assets/products/k11464/01.jpg",
    "/assets/products/k11464/02.jpg",
    "/assets/products/k11464/03.jpg",
    "/assets/products/k11464/04.jpg",
    "/assets/products/k11464/05.jpg",
-   "/assets/products/k11464/06.jpg",
    "/assets/products/k11464/07.jpg",
    "/assets/products/k11464/08.jpg",
    "/assets/products/k11464/09.jpg",
    "/assets/products/k11464/10.jpg"
   ],
-  "thumb": "/assets/products/k11464/thumb.jpg",
+  "thumb": "/assets/products/k11464/v2_thumb.jpg",
   "summary_text": "赤・青・黄・オリーブ・オレンジ・紫・グレーのブロックチェックに、白のグリッドステッチが全面に走るクロップドイージーパンツ。AMORのタグが入った、使い込まれた一本です。",
   "summary_points": [
    "マルチカラー・ブロックチェック柄（赤・青・黄・オリーブ・オレンジ・紫・グレー）＋白のグリッドステッチのパンツ（クロップド丈・イージーパンツ）（ブランド：AMOR（内側タグに明記））",
@@ -5551,7 +5551,37 @@
    ],
    "approved_at": "2026-10-25"
   },
-  "gender_by": "写真：レディース（サイズ表記が10Rという婦人服サイズ、かつジッパー前立てとボタンの位置から着る人から見て左合わせ）"
+  "gender_by": "写真：レディース（サイズ表記が10Rという婦人服サイズ、かつジッパー前立てとボタンの位置から着る人から見て左合わせ）",
+  "images_orig": [
+   "/assets/products/k11464/01.jpg",
+   "/assets/products/k11464/02.jpg",
+   "/assets/products/k11464/03.jpg",
+   "/assets/products/k11464/04.jpg",
+   "/assets/products/k11464/05.jpg",
+   "/assets/products/k11464/06.jpg",
+   "/assets/products/k11464/07.jpg",
+   "/assets/products/k11464/08.jpg",
+   "/assets/products/k11464/09.jpg",
+   "/assets/products/k11464/10.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-25",
+   "front_i": 0,
+   "back_i": 5,
+   "front_error": "RuntimeError('仕上がり確認で不合格：服の一部が切り取られています。')",
+   "back_url": "/assets/products/k11464/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 116.0,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11464/v2_mannequin.jpg",
+   "mannequin_body": "身長165cm・バスト83cm",
+   "measures": {
+    "ウエスト": 76.0
+   }
+  }
  },
  {
   "sku": "K11191",
@@ -5573,7 +5603,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-25",
   "links": {},
   "images": [
-   "/assets/products/k11191/01.jpg",
+   "/assets/products/k11191/v2_front.jpg",
+   "/assets/products/k11191/v2_back.jpg",
    "/assets/products/k11191/02.jpg",
    "/assets/products/k11191/03.jpg",
    "/assets/products/k11191/04.jpg",
@@ -5583,10 +5614,9 @@
    "/assets/products/k11191/08.jpg",
    "/assets/products/k11191/09.jpg",
    "/assets/products/k11191/10.jpg",
-   "/assets/products/k11191/11.jpg",
    "/assets/products/k11191/12.jpg"
   ],
-  "thumb": "/assets/products/k11191/thumb.jpg",
+  "thumb": "/assets/products/k11191/v2_thumb.jpg",
   "summary_text": "2021年製、スマーフのオフィシャルライセンスパーカー。ラベンダーとホワイトのタイダイ染めに、レトロカートゥーンのグラフィックが乗った一枚です。",
   "summary_points": [
    "ラベンダー×ホワイト タイダイ染めのプルオーバーパーカー（フーディー）（ブランド：© Peyo 2021 / Lic. Lafig Belgium / SMURF™ www.smurf.com / C-LIFE GROUP LTD c-lifegroup.com）",
@@ -5634,7 +5664,46 @@
    ],
    "approved_at": "2026-10-25"
   },
-  "gender_by": "実寸が大きめ（肩幅68・身幅63）"
+  "gender_by": "実寸が大きめ（肩幅68・身幅63）",
+  "images_orig": [
+   "/assets/products/k11191/01.jpg",
+   "/assets/products/k11191/02.jpg",
+   "/assets/products/k11191/03.jpg",
+   "/assets/products/k11191/04.jpg",
+   "/assets/products/k11191/05.jpg",
+   "/assets/products/k11191/06.jpg",
+   "/assets/products/k11191/07.jpg",
+   "/assets/products/k11191/08.jpg",
+   "/assets/products/k11191/09.jpg",
+   "/assets/products/k11191/10.jpg",
+   "/assets/products/k11191/11.jpg",
+   "/assets/products/k11191/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-25",
+   "front_i": 0,
+   "back_i": 10,
+   "front_url": "/assets/products/k11191/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 175.8,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11191/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 178.7,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11191/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 63.0,
+    "着丈": 70.5,
+    "肩幅": 68.0
+   }
+  }
  },
  {
   "sku": "K11253",
@@ -5657,10 +5726,10 @@
   "links": {},
   "images": [
    "/assets/products/k11253/01.jpg",
+   "/assets/products/k11253/05.jpg",
    "/assets/products/k11253/02.jpg",
    "/assets/products/k11253/03.jpg",
    "/assets/products/k11253/04.jpg",
-   "/assets/products/k11253/05.jpg",
    "/assets/products/k11253/06.jpg",
    "/assets/products/k11253/07.jpg",
    "/assets/products/k11253/08.jpg",
@@ -5711,6 +5780,29 @@
    ],
    "approved_at": "2026-10-25"
   },
-  "gender_by": "表記にメンズ・写真の見立て：メンズ（タグにXL表記・ハンティングウェア・ゆったりシルエットから）"
+  "gender_by": "表記にメンズ・写真の見立て：メンズ（タグにXL表記・ハンティングウェア・ゆったりシルエットから）",
+  "images_orig": [
+   "/assets/products/k11253/01.jpg",
+   "/assets/products/k11253/02.jpg",
+   "/assets/products/k11253/03.jpg",
+   "/assets/products/k11253/04.jpg",
+   "/assets/products/k11253/05.jpg",
+   "/assets/products/k11253/06.jpg",
+   "/assets/products/k11253/07.jpg",
+   "/assets/products/k11253/08.jpg",
+   "/assets/products/k11253/09.jpg",
+   "/assets/products/k11253/10.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-25",
+   "front_i": 0,
+   "back_i": 4,
+   "front_error": "RuntimeError('仕上がり確認で不合格：裾と袖口が切り取られています。')",
+   "back_error": "RuntimeError('仕上がり確認で不合格：服の首元と裾が切り取られています。')",
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11253/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {}
+  }
  }
 ]
