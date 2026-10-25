@@ -5219,12 +5219,17 @@
     "garment_l": 146.3,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k11418/v2_mannequin.jpg",
    "mannequin_body": "身長165cm・バスト83cm",
    "measures": {
     "ウエスト": 83,
     "股下": 72.5
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-25",
+    "note": "②前の大判プリントの文字が崩れている：本物は「(r)ebirth」の下に「new moon gathering」と読めるが、AIは左端の「e」が消え、下段が読めない別の文字になっている（拡大して確認）。①ライトブルー・③5ポケットとボタン1・④裾の位置は合っている"
    }
   }
  },
@@ -5344,12 +5349,17 @@
     "garment_l": 121.1,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k11419/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "ウエスト": 96,
     "股下": 72
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-25",
+    "note": "③本物は両脇の縫い目に斜めの脇ポケットがあるが、AIには脇ポケットが無い。タックも本物は片側1本ずつ、AIは2本ずつ。ウエスト脇のギャザーも消えている。①グレーグリーン・④裾くるぶし付近は合っている"
    }
   }
  },
