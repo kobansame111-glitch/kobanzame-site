@@ -5480,7 +5480,7 @@
  {
   "sku": "K11464",
   "slug": "k11464-amor",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "Checkered Balloon Pants",
@@ -5548,14 +5548,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-25"
   },
   "gender_by": "写真：レディース（サイズ表記が10Rという婦人服サイズ、かつジッパー前立てとボタンの位置から着る人から見て左合わせ）"
  },
  {
   "sku": "K11191",
   "slug": "k11191-peyo-2021-lic-lafig-belgium-smurf-www-smurf-com-c-life-group-ltd-c-lifegroup-com",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "2021年製、スマーフのオフィシャルライセンスパーカー",
@@ -5630,14 +5631,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-25"
   },
   "gender_by": "実寸が大きめ（肩幅68・身幅63）"
  },
  {
   "sku": "K11253",
   "slug": "k11253-bear-river",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "BEAR RIVERのリアルツリーカモ柄ジップアップパーカー",
@@ -5706,7 +5708,8 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-25"
   },
   "gender_by": "表記にメンズ・写真の見立て：メンズ（タグにXL表記・ハンティングウェア・ゆったりシルエットから）"
  }
