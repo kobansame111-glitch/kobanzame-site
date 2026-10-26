@@ -5858,20 +5858,20 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-26",
   "links": {},
   "images": [
-   "/assets/products/k11449/01.jpg",
+   "/assets/products/k11449/v2_front.jpg",
+   "/assets/products/k11449/v2_back.jpg",
    "/assets/products/k11449/02.jpg",
    "/assets/products/k11449/03.jpg",
    "/assets/products/k11449/04.jpg",
    "/assets/products/k11449/05.jpg",
    "/assets/products/k11449/06.jpg",
    "/assets/products/k11449/07.jpg",
-   "/assets/products/k11449/08.jpg",
    "/assets/products/k11449/09.jpg",
    "/assets/products/k11449/10.jpg",
    "/assets/products/k11449/11.jpg",
    "/assets/products/k11449/12.jpg"
   ],
-  "thumb": "/assets/products/k11449/thumb.jpg",
+  "thumb": "/assets/products/k11449/v2_thumb.jpg",
   "summary_text": "Abercrombie & FitchのKEMPSHALL JACKETが入荷しました。マスタードイエローのパファーは、一枚羽織るだけで冬のコーディネートを決めてくれます。",
   "summary_points": [
    "マスタードイエロー（無地）のダウンジャケット（フーディー付きパファージャケット）（ブランド：Abercrombie & Fitch / KEMPSHALL JACKET / XL / Made in China（タグ読み取り））",
@@ -5919,7 +5919,46 @@
    ],
    "approved_at": "2026-10-26"
   },
-  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いており、メンズ仕様）"
+  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いており、メンズ仕様）",
+  "images_orig": [
+   "/assets/products/k11449/01.jpg",
+   "/assets/products/k11449/02.jpg",
+   "/assets/products/k11449/03.jpg",
+   "/assets/products/k11449/04.jpg",
+   "/assets/products/k11449/05.jpg",
+   "/assets/products/k11449/06.jpg",
+   "/assets/products/k11449/07.jpg",
+   "/assets/products/k11449/08.jpg",
+   "/assets/products/k11449/09.jpg",
+   "/assets/products/k11449/10.jpg",
+   "/assets/products/k11449/11.jpg",
+   "/assets/products/k11449/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-26",
+   "front_i": 0,
+   "back_i": 7,
+   "front_url": "/assets/products/k11449/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.2,
+    "garment_l": 145.0,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11449/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.1,
+    "garment_l": 145.0,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11449/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 63.5,
+    "着丈": 68.0,
+    "肩幅": 47.0
+   }
+  }
  },
  {
   "sku": "K11420",
@@ -5941,8 +5980,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-26",
   "links": {},
   "images": [
+   "/assets/products/k11420/v2_back.jpg",
    "/assets/products/k11420/01.jpg",
-   "/assets/products/k11420/02.jpg",
    "/assets/products/k11420/03.jpg",
    "/assets/products/k11420/04.jpg",
    "/assets/products/k11420/05.jpg",
@@ -5954,7 +5993,7 @@
    "/assets/products/k11420/11.jpg",
    "/assets/products/k11420/12.jpg"
   ],
-  "thumb": "/assets/products/k11420/thumb.jpg",
+  "thumb": "/assets/products/k11420/v2_thumb.jpg",
   "summary_text": "Levi's 517のブーツカットに、ライオンと「birth new moon gathering」のグラフィックが入ったカスタムデニム。使い込まれた風合いと独自のプリントが、そのまま個性になっています。",
   "summary_points": [
    "ライトインディゴブルー・左脚前面に黒インクプリント（ライオン図像＋\"birth new moon gathering\"文字グラフィック）のデニムパンツ（ブーツカット/フレアジーンズ）（ブランド：Levi Strauss & Co. / 517 / W32 L36）",
@@ -6001,6 +6040,39 @@
    ],
    "approved_at": "2026-10-26"
   },
-  "gender_by": "写真：メンズ（タグにW32 L36のメンズサイズ表記、かつジッパーフライ仕様）"
+  "gender_by": "写真：メンズ（タグにW32 L36のメンズサイズ表記、かつジッパーフライ仕様）",
+  "images_orig": [
+   "/assets/products/k11420/01.jpg",
+   "/assets/products/k11420/02.jpg",
+   "/assets/products/k11420/03.jpg",
+   "/assets/products/k11420/04.jpg",
+   "/assets/products/k11420/05.jpg",
+   "/assets/products/k11420/06.jpg",
+   "/assets/products/k11420/07.jpg",
+   "/assets/products/k11420/08.jpg",
+   "/assets/products/k11420/09.jpg",
+   "/assets/products/k11420/10.jpg",
+   "/assets/products/k11420/11.jpg",
+   "/assets/products/k11420/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-10-26",
+   "front_i": 0,
+   "back_i": 1,
+   "front_error": "RuntimeError('仕上がり確認で不合格：背景に白い斑点があります。')",
+   "back_url": "/assets/products/k11420/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.1,
+    "garment_l": 163.1,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11420/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "ウエスト": 82.0,
+    "股下": 88.5
+   }
+  }
  }
 ]
