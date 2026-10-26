@@ -5841,7 +5841,7 @@
  {
   "sku": "K11449",
   "slug": "k11449-abercrombie-fitch-kempshall-jacket-xl-made-in-china",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "feather down Jacket",
@@ -5916,14 +5916,15 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-26"
   },
   "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いており、メンズ仕様）"
  },
  {
   "sku": "K11420",
   "slug": "k11420-levi-strauss-co-517-w32-l36",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "小判鮫 \"Jesus\"",
@@ -5997,7 +5998,8 @@
     "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
     "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-10-26"
   },
   "gender_by": "写真：メンズ（タグにW32 L36のメンズサイズ表記、かつジッパーフライ仕様）"
  }
