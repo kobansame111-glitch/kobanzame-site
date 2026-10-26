@@ -5837,5 +5837,168 @@
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {}
   }
+ },
+ {
+  "sku": "K11449",
+  "slug": "k11449-abercrombie-fitch-kempshall-jacket-xl-made-in-china",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "feather down Jacket",
+  "product_name": "feather down Jacket",
+  "brand": "Abercrombie & Fitch / KEMPSHALL JACKET / XL / Made in China（タグ読み取り）",
+  "category": "メンズ／アウター／ジャケット",
+  "material": "表地：100%ポリエステル、裏地：100%ポリエステル、中綿：65%フェザー・35%ダウン（洗濯表示より）",
+  "published_date": "2026-10-26",
+  "prices": {
+   "store": 15800,
+   "site": 15800,
+   "mercari": 17380
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-26",
+  "links": {},
+  "images": [
+   "/assets/products/k11449/01.jpg",
+   "/assets/products/k11449/02.jpg",
+   "/assets/products/k11449/03.jpg",
+   "/assets/products/k11449/04.jpg",
+   "/assets/products/k11449/05.jpg",
+   "/assets/products/k11449/06.jpg",
+   "/assets/products/k11449/07.jpg",
+   "/assets/products/k11449/08.jpg",
+   "/assets/products/k11449/09.jpg",
+   "/assets/products/k11449/10.jpg",
+   "/assets/products/k11449/11.jpg",
+   "/assets/products/k11449/12.jpg"
+  ],
+  "thumb": "/assets/products/k11449/thumb.jpg",
+  "summary_text": "Abercrombie & FitchのKEMPSHALL JACKETが入荷しました。マスタードイエローのパファーは、一枚羽織るだけで冬のコーディネートを決めてくれます。",
+  "summary_points": [
+   "マスタードイエロー（無地）のダウンジャケット（フーディー付きパファージャケット）（ブランド：Abercrombie & Fitch / KEMPSHALL JACKET / XL / Made in China（タグ読み取り））",
+   "素材：表地：100%ポリエステル、裏地：100%ポリエステル、中綿：65%フェザー・35%ダウン（洗濯表示より）",
+   "実寸 身幅63.5cm・着丈68cm・肩幅47cm"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。Abercrombie & FitchのKEMPSHALL JACKETです。",
+  "body_html": "<h2>この一着のこと</h2><p>Abercrombie &amp; FitchのKEMPSHALL JACKETです。表地・裏地ともにポリエステル、中綿はフェザー65%・ダウン35%の構成で、フード付きのパファーシルエットに仕上がっています。タグにはXLとあり、ゆったりとしたオーバーサイズの着丈と身幅が確認できます。ボタンが着る人から見て右側に付いているメンズ仕様です。A&amp;Fのリブランド後スタイルと思われ、2020年代初頭頃のものと推測されます。</p><p>いまは川越の古民家の店内に掛かっています。目立った傷や汚れはなく、全体的に良好なコンディションです。マスタードイエローという色は、くすんだ黄みのある色調で、古民家の木の壁の前でもしっかりと存在感を放っています。KEMPSHALL名義のA&amp;Fアイテムは数が多くなく、この配色はなおさら見かける機会が限られます。</p><p>着方はシンプルに、これ一枚でそのまま外へ出るだけで十分です。インナーはTシャツでも厚手のスウェットでも、ゆったりしたシルエットが余裕よく受け止めてくれます。ボトムスはデニムでもチノでも合わせやすく、マスタードイエローが全体の軸になるので、上下を同系色でまとめる必要はありません。アメカジのベースにアウトドアの空気感を自然に乗せてくれる一着です。</p><h2>状態</h2><p>状態は写真でご確認ください。気になる点は、お問い合わせからお尋ねください。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "Abercrombie & Fitch / KEMPSHALL JACKET / XL / Made in China（タグ読み取り）"
+   ],
+   [
+    "素材",
+    "表地：100%ポリエステル、裏地：100%ポリエステル、中綿：65%フェザー・35%ダウン（洗濯表示より）"
+   ],
+   [
+    "色",
+    "マスタードイエロー（無地）"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅63.5cm・着丈68cm・肩幅47cm"
+   ],
+   [
+    "状態",
+    "写真でご確認ください（傷・汚れの詳細は未確認）"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "outer",
+  "genre_by": "auto-keyword-2026-10-26",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.3",
+   "made_at": "2026-10-26",
+   "needs": [
+    "性別は自動判定：メンズ（写真：メンズ（ボタンが着る人から見て右側に付いており、メンズ仕様））→ 違えばClaudeへ",
+    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
+    "見出し（title）は物語の一言から自動で作った → 気に入らなければClaudeへ",
+    "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いており、メンズ仕様）"
+ },
+ {
+  "sku": "K11420",
+  "slug": "k11420-levi-strauss-co-517-w32-l36",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "小判鮫 \"Jesus\"",
+  "product_name": "小判鮫 \"Jesus\"",
+  "brand": "Levi Strauss & Co. / 517 / W32 L36",
+  "category": "メンズ／パンツ／デニム",
+  "material": "100% コットン",
+  "published_date": "2026-10-26",
+  "prices": {
+   "store": 7800,
+   "site": 7800,
+   "mercari": 8580
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-26",
+  "links": {},
+  "images": [
+   "/assets/products/k11420/01.jpg",
+   "/assets/products/k11420/02.jpg",
+   "/assets/products/k11420/03.jpg",
+   "/assets/products/k11420/04.jpg",
+   "/assets/products/k11420/05.jpg",
+   "/assets/products/k11420/06.jpg",
+   "/assets/products/k11420/07.jpg",
+   "/assets/products/k11420/08.jpg",
+   "/assets/products/k11420/09.jpg",
+   "/assets/products/k11420/10.jpg",
+   "/assets/products/k11420/11.jpg",
+   "/assets/products/k11420/12.jpg"
+  ],
+  "thumb": "/assets/products/k11420/thumb.jpg",
+  "summary_text": "Levi's 517のブーツカットに、ライオンと「birth new moon gathering」のグラフィックが入ったカスタムデニム。使い込まれた風合いと独自のプリントが、そのまま個性になっています。",
+  "summary_points": [
+   "ライトインディゴブルー・左脚前面に黒インクプリント（ライオン図像＋\"birth new moon gathering\"文字グラフィック）のデニムパンツ（ブーツカット/フレアジーンズ）（ブランド：Levi Strauss & Co. / 517 / W32 L36）",
+   "素材：100% コットン",
+   "実寸 ウエスト82cm・股上28cm・股下88.5cm"
+  ],
+  "lead": "川越の古民家で古着屋をしている、小判鮫です。Levi's 517は、ブーツカットのシルエットで知られるモデルです。",
+  "body_html": "<h2>この一着のこと</h2><p>Levi's 517は、ブーツカットのシルエットで知られるモデルです。ジッパーフライ、W32 L36のメンズサイズ。内側タグに「For over 145 years」の表記があり、2018年頃の製造と思われます。素材はコットン100%と思われます。</p><p>そこに施されているのが、左脚前面のグラフィックです。ライオンの図像と「birth new moon gathering」の文字をあわせたスクリーンプリント風のデザインで、イベントの記念として作られたカスタム品と思われます。プリントの一部には剥がれがあり、それも含めて今の顔になっています。全体的に使用感があり、フロントのコイン部分に擦れ、ウエスト裁断端にほつれ、股部分に軽度のダメージがあります。</p><p>ブーツカットのラインは、裾に向かってゆるやかに広がります。レングスが長めなので、厚底やブーツと合わせると裾のシルエットが自然に決まります。グラフィックが主役なので、上はシンプルな白Tやタンクトップ一枚で十分です。色落ちしたライトインディゴに、黒インクのプリントがよく映えます。</p><h2>状態</h2><p>状態：全体的に使用感あり・フロントコイン部分に擦れ・ウエスト裁断端がほつれ・プリントの一部剥がれ・股部分に軽度のダメージ。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "Levi Strauss & Co. / 517 / W32 L36"
+   ],
+   [
+    "素材",
+    "100% コットン"
+   ],
+   [
+    "色",
+    "ライトインディゴブルー・左脚前面に黒インクプリント（ライオン図像＋\"birth new moon gathering\"文字グラフィック）"
+   ],
+   [
+    "サイズ",
+    "実寸 ウエスト82cm・股上28cm・股下88.5cm"
+   ],
+   [
+    "状態",
+    "全体的に使用感あり・フロントコイン部分に擦れ・ウエスト裁断端がほつれ・プリントの一部剥がれ・股部分に軽度のダメージ"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "bottoms",
+  "genre_by": "auto-keyword-2026-10-26",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.3",
+   "made_at": "2026-10-26",
+   "needs": [
+    "性別は自動判定：メンズ（写真：メンズ（タグにW32 L36のメンズサイズ表記、かつジッパーフライ仕様））→ 違えばClaudeへ",
+    "見出し（title）は物語の一言から自動で作った → 気に入らなければClaudeへ",
+    "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "写真：メンズ（タグにW32 L36のメンズサイズ表記、かつジッパーフライ仕様）"
  }
 ]
