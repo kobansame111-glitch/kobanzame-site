@@ -5713,13 +5713,18 @@
     "garment_l": 178.7,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ok",
    "mannequin_url": "/assets/products/k11191/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 63,
     "着丈": 70.5,
     "肩幅": 68
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-26",
+    "note": "4点一致"
    }
   }
  },
