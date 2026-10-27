@@ -3943,17 +3943,12 @@
     "garment_l": 136.8,
     "bg": "normal"
    },
-   "mannequin": "ok",
+   "mannequin": "pending",
    "mannequin_url": "/assets/products/k11308/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "ウエスト": 64,
     "股下": 82
-   },
-   "mannequin_review": {
-    "by": "03出品担当(AI)",
-    "date": "2026-10-27",
-    "note": "4点一致"
    }
   }
  },
@@ -4468,18 +4463,13 @@
     "garment_l": 199,
     "bg": "light_item"
    },
-   "mannequin": "ok",
+   "mannequin": "pending",
    "mannequin_url": "/assets/products/k11438/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 55,
     "着丈": 62.5,
     "肩幅": 48.5
-   },
-   "mannequin_review": {
-    "by": "03出品担当(AI)",
-    "date": "2026-10-27",
-    "note": "4点一致"
    }
   }
  },
@@ -4968,18 +4958,13 @@
     "garment_l": 113,
     "bg": "normal"
    },
-   "mannequin": "ok",
+   "mannequin": "pending",
    "mannequin_url": "/assets/products/k11388/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 53,
     "着丈": 64.5,
     "肩幅": 43.5
-   },
-   "mannequin_review": {
-    "by": "03出品担当(AI)",
-    "date": "2026-10-27",
-    "note": "4点一致"
    }
   }
  },
