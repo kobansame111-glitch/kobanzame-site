@@ -24,6 +24,7 @@ ADD_TAX = True           # 2026-10-06 龍さん決定B：Square登録価格は�
 TAX_RATE = 0.10
 CF_BEACON_TOKEN = ''     # Cloudflare Web Analytics のトークン（空なら計測タグを入れない）
 ANALYTICS_URL = 'https://script.google.com/macros/s/AKfycbxxYc9kZztdwiWOvefrpY6mPHlRUlqLb2SndthCdAUn7BeBXAgZO3i6_JoDxyFQiv3q/exec'       # 64番（自前の簡易計測）のウェブアプリURL。空なら計測しない（2026-10-06 龍さん決定A）
+CONTACT_URL = ''         # 2026-10-27 お問い合わせフォームの送信先（69番 問い合わせ受付GAS のウェブアプリURL）。空ならフォームの代わりに「メールで問い合わせる」ボタンを出す
 GSC_VERIFY = '2pVJ6dksHBkvBUmm0l3gbrdw8Rgpz4v7zoq4X3eL7ys'          # Google Search Console の確認コード（content="…" の中身だけ。空ならタグを入れない）
 BING_VERIFY = ''         # Bing Webmaster Tools の確認コード（同上。Search Consoleから取り込むなら空のままでよい）
 HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）※2026-10-07 取り置きは廃止（HOLD_ENABLED=False）
@@ -399,7 +400,8 @@ def brand_of(p):
 
 CRUMB_NAMES = {'blog': ('ブログ', 'Blog'), 'journal': ('ジャーナル', 'Journal'), 'news': ('お知らせ', 'News'),
                'workshop': ('ワークショップ', 'Workshops'), 'tokushoho': ('特定商取引法に基づく表記', ''), 'privacy': ('プライバシーポリシー', ''),
-               'guide': ('川越で古着屋を探している方へ', 'Kawagoe vintage guide'), 'legal': ('', 'Legal notice & privacy')}
+               'guide': ('川越で古着屋を探している方へ', 'Kawagoe vintage guide'), 'legal': ('', 'Legal notice & privacy'),
+               'contact': ('お問い合わせ', '')}
 def add_crumb_ld(ld, lang, title, path):
     """2026-10-23 SEO：パンくず（BreadcrumbList）が無いページに、URL から作って足す"""
     if path in ('/', '/en/') or path.endswith('404.html'):
@@ -944,7 +946,7 @@ def foot(lang):
     read = [('/blog/', 'ブログ' if ja else 'Blog (Japanese)'), ('/guide/' if ja else '/en/guide/', '川越で古着屋を探している方へ' if ja else 'Kawagoe vintage guide')] \
          + ([('/news/', 'お知らせ')] if ja and NEWS else [])
     store = [(f'{P}/#store', '場所・営業時間' if ja else 'Address & hours'), (f'{P}/#faq', 'よくある質問' if ja else 'FAQ')] \
-          + ([T_WS_NAV[lang]] if WS_OPEN else []) + [(SHOP['gmaps'], t['gm']), (SHOP['instagram'], 'Instagram')]
+          + ([T_WS_NAV[lang]] if WS_OPEN else []) + [('/contact/', 'お問い合わせ（衣装提供・撮影・取材）' if ja else 'Contact (form in Japanese)')] + [(SHOP['gmaps'], t['gm']), (SHOP['instagram'], 'Instagram')]
     cols = col('お買い物' if ja else 'Shop', shop) + col('読みもの' if ja else 'Read', read) + col('お店' if ja else 'The shop', store)
     legal = '　・　'.join(f'<a href="{h}">{l}</a>' for h, l in t['legal'])
     return f'''<footer class="site"><div class="wrap">
@@ -1495,6 +1497,10 @@ write('/privacy/index.html', head('ja', 'プライバシーポリシー｜古着
 </main>
 ''' + foot('ja'))
 
+# ---------- お問い合わせ（衣装提供・撮影・取材など）2026-10-27 ----------
+from contact_page import build_contact
+build_contact(write, head, foot, esc, SHOP, CONTACT_URL)
+
 # ---------- 英語の法務ページ（要約。正式な表記は日本語ページ） ----------
 write('/en/legal/index.html', head('en', 'Legal notice & privacy | Kobanzame', 'Seller information and privacy summary for Kobanzame (Plug Inc.).', '/en/legal/') + f'''
 <main class="wrap page">
@@ -1662,7 +1668,7 @@ for lang in ('ja', 'en'):
     P = pre(lang)
     pages += [P + '/', P + '/journal/'] + [P + f"/journal/{p['slug']}/" for p in live]
 pages += ['/tokushoho/', '/privacy/', '/en/legal/', '/guide/', '/en/guide/'] + (['/workshop/', '/en/workshop/'] if WS_OPEN else [])
-pages += ['/news/', '/en/news/']
+pages += ['/news/', '/en/news/', '/contact/']
 pages += blog_urls   # ブログのページ
 write('/robots.txt', f'''# 小判鮫 公式サイト：検索エンジン・AI検索のどちらにも公開
 User-agent: *
