@@ -3943,12 +3943,17 @@
     "garment_l": 136.8,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ok",
    "mannequin_url": "/assets/products/k11308/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "ウエスト": 64,
     "股下": 82
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-27",
+    "note": "4点一致"
    }
   }
  },
@@ -4463,13 +4468,18 @@
     "garment_l": 199,
     "bg": "light_item"
    },
-   "mannequin": "pending",
+   "mannequin": "ok",
    "mannequin_url": "/assets/products/k11438/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 55,
     "着丈": 62.5,
     "肩幅": 48.5
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-27",
+    "note": "4点一致"
    }
   }
  },
@@ -4958,13 +4968,18 @@
     "garment_l": 113,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ok",
    "mannequin_url": "/assets/products/k11388/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 53,
     "着丈": 64.5,
     "肩幅": 43.5
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-27",
+    "note": "4点一致"
    }
   }
  },
@@ -5959,13 +5974,18 @@
     "garment_l": 145,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ok",
    "mannequin_url": "/assets/products/k11449/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 63.5,
     "着丈": 68,
     "肩幅": 47
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-27",
+    "note": "4点一致"
    }
   }
  },
@@ -6084,12 +6104,17 @@
     "garment_l": 163.1,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k11420/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "ウエスト": 82,
     "股下": 88.5
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-10-27",
+    "note": "丈が短い（股下88.5cmなら175cmで裾が床まで届くが、AIは足首の上で終わり形も細身）。左脚プリントの文字が崩れて読めない"
    }
   }
  }
