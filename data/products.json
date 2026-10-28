@@ -3708,8 +3708,8 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "1970年代頃のスエードレザーパンツ",
-  "product_name": "Suede leather Pants",
+  "title": "1970年代頃 スエードレザーパンツ タンブラウン 5ポケット メンズ 古着",
+  "product_name": "1970年代頃 スエードレザーパンツ タンブラウン 5ポケット メンズ 古着",
   "brand": "表記なし",
   "category": "メンズ／パンツ／パンツ",
   "material": "",
@@ -3756,6 +3756,10 @@
    [
     "ブランド",
     "表記なし"
+   ],
+   [
+    "店頭での名前",
+    "Suede leather Pants"
    ],
    [
     "色",
@@ -3839,10 +3843,10 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "スウェード調レザーの5ポケットパンツ",
-  "product_name": "Suede leather pants",
+  "title": "1980〜90年代頃 スエードレザーパンツ グレージュ 5ポケット 古着",
+  "product_name": "1980〜90年代頃 スエードレザーパンツ グレージュ 5ポケット 古着",
   "brand": "表記なし",
-  "category": "メンズ／パンツ／デニム",
+  "category": "メンズ／パンツ／パンツ",
   "material": "",
   "published_date": "2026-10-28",
   "prices": {
@@ -3887,6 +3891,10 @@
    [
     "ブランド",
     "表記なし"
+   ],
+   [
+    "店頭での名前",
+    "Suede leather pants"
    ],
    [
     "色",
@@ -3959,8 +3967,8 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "Suede leather Blouson",
-  "product_name": "Suede leather Blouson",
+  "title": "A&F INTERNATIONAL スエードレザー カーコート タン×ネイビー メンズ",
+  "product_name": "A&F INTERNATIONAL スエードレザー カーコート タン×ネイビー メンズ",
   "brand": "A&F INTERNATIONAL",
   "category": "メンズ／ジャケット・アウター／ロングコート",
   "material": "表地：豚革（スエード）／衿・カフス：牛革（スムースレザー）／裏地：ナイロン50%・アセテート50%／中綿：ポリエステル100%",
@@ -4009,6 +4017,10 @@
    [
     "ブランド",
     "A&F INTERNATIONAL"
+   ],
+   [
+    "店頭での名前",
+    "Suede leather Blouson"
    ],
    [
     "素材",
@@ -4096,9 +4108,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "Leather JKT bulldogs embroid",
-  "product_name": "Leather JKT bulldogs embroid",
-  "brand": "TOUR（象のロゴマーク付きブランドタグ、内側タグ・背面に象のメタルピン）",
+  "title": "1990年代頃 TOUR スエードレザージャケット ブルドッグ刺繍 タンブラウン メンズ",
+  "product_name": "1990年代頃 TOUR スエードレザージャケット ブルドッグ刺繍 タンブラウン メンズ",
+  "brand": "TOUR",
   "category": "メンズ／アウター／ジャケット",
   "material": "",
   "published_date": "2026-10-28",
@@ -4136,7 +4148,7 @@
   "thumb": "/assets/products/k11389/v2_thumb.jpg",
   "summary_text": "TOURの象ロゴが入った、タン/キャメルブラウンのスエードレザージャケット。1990年代〜2000年代前半頃のもので、経年変化した表情がそのまま残っています。",
   "summary_points": [
-   "タン/キャメルブラウン・無地のスエードレザージャケット（ハリントン/ワークジャケット型）（ブランド：TOUR（象のロゴマーク付きブランドタグ、内側タグ・背面に象のメタルピン））",
+   "タン/キャメルブラウン・無地のスエードレザージャケット（ハリントン/ワークジャケット型）（ブランド：TOUR）",
    "実寸 身幅63cm・着丈72cm・肩幅52cm"
   ],
   "lead": "川越の古民家で古着屋をしている、小判鮫です。TOURというブランド名と象のロゴマークが内側タグに刻まれ、背面には象のメタルピンが付いています。",
@@ -4144,7 +4156,15 @@
   "spec": [
    [
     "ブランド",
+    "TOUR"
+   ],
+   [
+    "タグの表記",
     "TOUR（象のロゴマーク付きブランドタグ、内側タグ・背面に象のメタルピン）"
+   ],
+   [
+    "店頭での名前",
+    "Leather JKT bulldogs embroid"
    ],
    [
     "色",
@@ -4228,9 +4248,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "DUKEDOMの日本製ニットカーディガン",
-  "product_name": "Japan Acrylic Wool Cardigan",
-  "brand": "DUKEDOM（日本製）",
+  "title": "DUKEDOM 日本製 ニットカーディガン バーガンディ×ブラック ボウリング型 メンズ",
+  "product_name": "DUKEDOM 日本製 ニットカーディガン バーガンディ×ブラック ボウリング型 メンズ",
+  "brand": "DUKEDOM",
   "category": "メンズ／トップス／ニット",
   "material": "アクリル70%・毛（ウール）30%",
   "published_date": "2026-10-28",
@@ -4265,7 +4285,7 @@
   "thumb": "/assets/products/k11437/v2_thumb.jpg",
   "summary_text": "DUKEDOMの日本製ニットカーディガン。バーガンディ×ブラックのパネル切り替えにホワイトラインが入った、ボーリングシャツ型の一枚です。",
   "summary_points": [
-   "バーガンディ（ワインレッド）×ブラック 切り替えパネル＋ホワイトラインのニットカーディガン（ボーリングシャツ型）（ブランド：DUKEDOM（日本製））",
+   "バーガンディ（ワインレッド）×ブラック 切り替えパネル＋ホワイトラインのニットカーディガン（ボーリングシャツ型）（ブランド：DUKEDOM）",
    "素材：アクリル70%・毛（ウール）30%",
    "実寸 身幅47cm・着丈63.5cm・肩幅43cm"
   ],
@@ -4274,7 +4294,15 @@
   "spec": [
    [
     "ブランド",
+    "DUKEDOM"
+   ],
+   [
+    "タグの表記",
     "DUKEDOM（日本製）"
+   ],
+   [
+    "店頭での名前",
+    "Japan Acrylic Wool Cardigan"
    ],
    [
     "素材",
@@ -4358,9 +4386,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "90's old Uniqlo Cardigan",
-  "product_name": "90's old Uniqlo Cardigan",
-  "brand": "UNIQLO（ユニクロ）、品番504-0403、中国製",
+  "title": "オールドユニクロ コットン Vネックカーディガン バターイエロー 旧タグ メンズ",
+  "product_name": "オールドユニクロ コットン Vネックカーディガン バターイエロー 旧タグ メンズ",
+  "brand": "UNIQLO",
   "category": "メンズ／トップス／ニット",
   "material": "綿100%",
   "published_date": "2026-10-28",
@@ -4394,7 +4422,7 @@
   "thumb": "/assets/products/k11438/v2_thumb.jpg",
   "summary_text": "2000年代初頭頃のユニクロ、旧ロゴタグ付きのコットンVネックカーディガンです。バターイエローの無地で、一枚でさらっと着られる春夏の定番になります。",
   "summary_points": [
-   "淡イエロー（バター/クリームイエロー）無地のニットカーディガン（Vネック・ボタンフロント・ポケット付き）（ブランド：UNIQLO（ユニクロ）、品番504-0403、中国製）",
+   "淡イエロー（バター/クリームイエロー）無地のニットカーディガン（Vネック・ボタンフロント・ポケット付き）（ブランド：UNIQLO）",
    "素材：綿100%",
    "実寸 身幅55cm・着丈62.5cm・肩幅48.5cm"
   ],
@@ -4403,7 +4431,15 @@
   "spec": [
    [
     "ブランド",
+    "UNIQLO"
+   ],
+   [
+    "タグの表記",
     "UNIQLO（ユニクロ）、品番504-0403、中国製"
+   ],
+   [
+    "店頭での名前",
+    "90's old Uniqlo Cardigan"
    ],
    [
     "素材",
@@ -4423,8 +4459,8 @@
    ]
   ],
   "sku_confidence": "確定",
-  "genre": "outer",
-  "genre_by": "auto-keyword-2026-10-22",
+  "genre": "tops",
+  "genre_by": "manual-2026-10-28",
   "draft_meta": {
    "made_by": "67_draft_maker_v1",
    "version": "v1.3",
@@ -4481,9 +4517,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "60's German Army Wool cargo Pants",
-  "product_name": "60's German Army Wool cargo Pants",
-  "brand": "HCH. MUERMANN K.-G. MINDEN（製造者名・西ドイツ・ミンデン）",
+  "title": "1950〜60年代頃 西ドイツ軍 ウールカーゴパンツ オリーブドラブ ミリタリー メンズ",
+  "product_name": "1950〜60年代頃 西ドイツ軍 ウールカーゴパンツ オリーブドラブ ミリタリー メンズ",
+  "brand": "HCH. MUERMANN K.-G.",
   "category": "メンズ／パンツ／パンツ",
   "material": "",
   "published_date": "2026-10-28",
@@ -4520,7 +4556,7 @@
   "thumb": "/assets/products/k11409/v2_thumb.jpg",
   "summary_text": "西ドイツ・ミンデンの製造者刻印が入った、1950〜60年代前半頃のウールミリタリーパンツです。オリーブドラブの無地、使用感ある一本をそのままお届けします。",
   "summary_points": [
-   "オリーブドラブ（OD）無地のミリタリーウールカーゴトラウザーズ（軍用ウールパンツ）（ブランド：HCH. MUERMANN K.-G. MINDEN（製造者名・西ドイツ・ミンデン））",
+   "オリーブドラブ（OD）無地のミリタリーウールカーゴトラウザーズ（軍用ウールパンツ）（ブランド：HCH. MUERMANN K.-G.）",
    "実寸 ウエスト86cm"
   ],
   "lead": "川越の古民家で古着屋をしている、小判鮫です。HCH. MUERMANN K.-G. MINDENという製造者名がウエスト帯に刻まれています。",
@@ -4528,7 +4564,15 @@
   "spec": [
    [
     "ブランド",
+    "HCH. MUERMANN K.-G."
+   ],
+   [
+    "タグの表記",
     "HCH. MUERMANN K.-G. MINDEN（製造者名・西ドイツ・ミンデン）"
+   ],
+   [
+    "店頭での名前",
+    "60's German Army Wool cargo Pants"
    ],
    [
     "色",
@@ -4610,8 +4654,8 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "山羊革のスエードでできたA-1タイプのボンバージャケット",
-  "product_name": "Euro Valstar Jacket",
+  "title": "1980〜90年代頃 ゴートスエード A-1タイプ ボンバージャケット タバコブラウン メンズ",
+  "product_name": "1980〜90年代頃 ゴートスエード A-1タイプ ボンバージャケット タバコブラウン メンズ",
   "brand": "表記なし",
   "category": "メンズ／アウター／ジャケット",
   "material": "本体：ジェニュインゴートスエード（山羊革）、裏地：100%ビスコース、リブ：ニット（素材不明）",
@@ -4657,6 +4701,10 @@
    [
     "ブランド",
     "表記なし"
+   ],
+   [
+    "店頭での名前",
+    "Euro Valstar Jacket"
    ],
    [
     "素材",
@@ -4742,8 +4790,8 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "ROTHCO cargo pants",
-  "product_name": "ROTHCO cargo pants",
+  "title": "1980〜90年代頃 マルチストライプ カーゴパンツ ベージュ×グレー メンズ 古着",
+  "product_name": "1980〜90年代頃 マルチストライプ カーゴパンツ ベージュ×グレー メンズ 古着",
   "brand": "表記なし",
   "category": "メンズ／パンツ／パンツ",
   "material": "",
@@ -4790,6 +4838,10 @@
    [
     "ブランド",
     "表記なし"
+   ],
+   [
+    "店頭での名前",
+    "ROTHCO cargo pants"
    ],
    [
     "色",
@@ -4977,9 +5029,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "NIKEのコットンスウェット",
-  "product_name": "Star Sweat",
-  "brand": "NIKE（ネックタグ・スウッシュロゴ・洗濯表示タグで確認）",
+  "title": "NIKE スター スウェット ラベンダー×レッド 2000年代頃 メンズ",
+  "product_name": "NIKE スター スウェット ラベンダー×レッド 2000年代頃 メンズ",
+  "brand": "NIKE",
   "category": "トップス／スウェット",
   "material": "100%コットン（洗濯表示タグに100% KATUN／100%면の表記あり）",
   "published_date": "2026-10-28",
@@ -5017,7 +5069,7 @@
   "thumb": "/assets/products/k11415/v2_thumb.jpg",
   "summary_text": "NIKEのコットンスウェット。ラベンダーパープルの地にフロントの大判レッドスター、胸元のホワイトスウッシュ。2000年代前後と思われる一枚で、色褪せと使用感がそのまま残っています。",
   "summary_points": [
-   "ラベンダーパープル地・フロントに大判レッドスター・胸元にホワイトスウッシュのスウェットシャツ（クルーネック・長袖）（ブランド：NIKE（ネックタグ・スウッシュロゴ・洗濯表示タグで確認））",
+   "ラベンダーパープル地・フロントに大判レッドスター・胸元にホワイトスウッシュのスウェットシャツ（クルーネック・長袖）（ブランド：NIKE）",
    "素材：100%コットン（洗濯表示タグに100% KATUN／100%면の表記あり）",
    "実寸 身幅55.5cm・着丈63.5cm・肩幅44.5cm"
   ],
@@ -5026,7 +5078,15 @@
   "spec": [
    [
     "ブランド",
+    "NIKE"
+   ],
+   [
+    "タグの表記",
     "NIKE（ネックタグ・スウッシュロゴ・洗濯表示タグで確認）"
+   ],
+   [
+    "店頭での名前",
+    "Star Sweat"
    ],
    [
     "素材",
@@ -5113,9 +5173,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "Jesus",
-  "product_name": "Jesus",
-  "brand": "Levi's（赤タブ・ジッパー刻印・洗濯タグ・リベット刻印すべてLevi's確認）",
+  "title": "Levi's グラフィックプリント ブーツカットデニム ライトブルー 2000年代頃 レディース",
+  "product_name": "Levi's グラフィックプリント ブーツカットデニム ライトブルー 2000年代頃 レディース",
+  "brand": "Levi's",
   "category": "レディース／パンツ／デニム",
   "material": "コットン99%・エラスタン1%（洗濯タグに cotton・elastane 表記確認）",
   "published_date": "2026-10-28",
@@ -5152,7 +5212,7 @@
   "thumb": "/assets/products/k11418/v2_thumb.jpg",
   "summary_text": "Levi'sのブーツカットデニムに、フロント全面の大判グラフィックプリントが目を引く一本です。ライトウォッシュのストレッチ混デニムに、2000年代前半頃の空気感がそのまま残っています。",
   "summary_points": [
-   "ライトブルーウォッシュ地／フロントに大判ブラック×ホワイトグラフィックプリント（人物・ロゴ・「moon gathering」文字）のデニムパンツ（ブーツカット／フレア）（ブランド：Levi's（赤タブ・ジッパー刻印・洗濯タグ・リベット刻印すべてLevi's確認））",
+   "ライトブルーウォッシュ地／フロントに大判ブラック×ホワイトグラフィックプリント（人物・ロゴ・「moon gathering」文字）のデニムパンツ（ブーツカット／フレア）（ブランド：Levi's）",
    "素材：コットン99%・エラスタン1%（洗濯タグに cotton・elastane 表記確認）",
    "実寸 ウエスト83cm・股上22cm・股下72.5cm"
   ],
@@ -5161,7 +5221,15 @@
   "spec": [
    [
     "ブランド",
+    "Levi's"
+   ],
+   [
+    "タグの表記",
     "Levi's（赤タブ・ジッパー刻印・洗濯タグ・リベット刻印すべてLevi's確認）"
+   ],
+   [
+    "店頭での名前",
+    "Jesus"
    ],
    [
     "素材",
@@ -5242,9 +5310,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "80's Prisoner Pants",
-  "product_name": "80's Prisoner Pants",
-  "brand": "FRISTADS（スウェーデンのワークウェアブランド）/ St 56 / SANFOR表記",
+  "title": "FRISTADS ワークパンツ（プリズナーパンツ） グレーグリーン スウェーデン メンズ",
+  "product_name": "FRISTADS ワークパンツ（プリズナーパンツ） グレーグリーン スウェーデン メンズ",
+  "brand": "FRISTADS",
   "category": "メンズ／パンツ／パンツ",
   "material": "",
   "published_date": "2026-10-28",
@@ -5281,7 +5349,7 @@
   "thumb": "/assets/products/k11419/v2_thumb.jpg",
   "summary_text": "スウェーデンのワークウェアブランドFristadsの、1950〜1960年代頃と思われるワークパンツです。オリーブグレーの落ち着いた色合いと、使い込まれた風合いが持ち味の一本です。",
   "summary_points": [
-   "グレーグリーン（オリーブグレー）無地のワークパンツ／トラウザーズ（ブランド：FRISTADS（スウェーデンのワークウェアブランド）/ St 56 / SANFOR表記）",
+   "グレーグリーン（オリーブグレー）無地のワークパンツ／トラウザーズ（ブランド：FRISTADS）",
    "実寸 ウエスト96cm・股上35cm・股下72cm"
   ],
   "lead": "川越の古民家で古着屋をしている、小判鮫です。FristadsはスウェーデンのワークウェアブランドでSANFOR表記があることから、コットンのSanforized加工生地を使ったワークパンツと思われます。",
@@ -5289,7 +5357,15 @@
   "spec": [
    [
     "ブランド",
+    "FRISTADS"
+   ],
+   [
+    "タグの表記",
     "FRISTADS（スウェーデンのワークウェアブランド）/ St 56 / SANFOR表記"
+   ],
+   [
+    "店頭での名前",
+    "80's Prisoner Pants"
    ],
    [
     "色",
@@ -5372,10 +5448,10 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "1981年前後の米軍実物支給品",
-  "product_name": "1981年 U.S. Army desert night camo parka L size",
-  "brand": "LANCER CLOTHING CORP.（製造メーカー）／DLA100-81-C-2532（契約番号）／NSN: 8415-01-102-6281",
-  "category": "メンズ／その他／ミリタリーパーカ",
+  "title": "1981年頃 米軍 デザートナイトカモ パーカー 実物 Lサイズ ミリタリー メンズ",
+  "product_name": "1981年頃 米軍 デザートナイトカモ パーカー 実物 Lサイズ ミリタリー メンズ",
+  "brand": "LANCER CLOTHING CORP.",
+  "category": "メンズ／アウター／ミリタリージャケット",
   "material": "50%コットン／50%ナイロン",
   "published_date": "2026-10-28",
   "prices": {
@@ -5407,7 +5483,7 @@
   "thumb": "/assets/products/k11463/v2_thumb.jpg",
   "summary_text": "1981年前後の米軍実物支給品。ナイトカモフラージュデザートパターンのミリタリーパーカで、グリッドと不規則迷彩スポットが重なる独特の柄が目を引きます。",
   "summary_points": [
-   "オリーブグリーン×ライトグリーン・グリッド（格子）柄＋不規則迷彩スポットのミリタリーパーカ（米軍実物支給品・ナイトカモフラージュデザート）（ブランド：LANCER CLOTHING CORP.（製造メーカー）／DLA100-81-C-2532（契約番号）／NSN: 8415-01-102-6281）",
+   "オリーブグリーン×ライトグリーン・グリッド（格子）柄＋不規則迷彩スポットのミリタリーパーカ（米軍実物支給品・ナイトカモフラージュデザート）（ブランド：LANCER CLOTHING CORP.）",
    "素材：50%コットン／50%ナイロン",
    "実寸 身幅67cm・着丈111cm・肩幅53.5cm・袖丈70cm"
   ],
@@ -5416,7 +5492,15 @@
   "spec": [
    [
     "ブランド",
+    "LANCER CLOTHING CORP."
+   ],
+   [
+    "タグの表記",
     "LANCER CLOTHING CORP.（製造メーカー）／DLA100-81-C-2532（契約番号）／NSN: 8415-01-102-6281"
+   ],
+   [
+    "店頭での名前",
+    "1981年 U.S. Army desert night camo parka L size"
    ],
    [
     "素材",
@@ -5440,8 +5524,8 @@
    ]
   ],
   "sku_confidence": "確定",
-  "genre": "other",
-  "genre_by": "auto-keyword-2026-10-24",
+  "genre": "outer",
+  "genre_by": "manual-2026-10-28",
   "draft_meta": {
    "made_by": "67_draft_maker_v1",
    "version": "v1.3",
@@ -5486,9 +5570,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "Checkered Balloon Pants",
-  "product_name": "Checkered Balloon Pants",
-  "brand": "AMOR（内側タグに明記）",
+  "title": "AMOR ブロックチェック バルーンパンツ マルチカラー イージーパンツ レディース",
+  "product_name": "AMOR ブロックチェック バルーンパンツ マルチカラー イージーパンツ レディース",
+  "brand": "AMOR",
   "category": "レディース／パンツ／パンツ",
   "material": "",
   "published_date": "2026-10-28",
@@ -5523,7 +5607,7 @@
   "thumb": "/assets/products/k11464/v2_thumb.jpg",
   "summary_text": "赤・青・黄・オリーブ・オレンジ・紫・グレーのブロックチェックに、白のグリッドステッチが全面に走るクロップドイージーパンツ。AMORのタグが入った、使い込まれた一本です。",
   "summary_points": [
-   "マルチカラー・ブロックチェック柄（赤・青・黄・オリーブ・オレンジ・紫・グレー）＋白のグリッドステッチのパンツ（クロップド丈・イージーパンツ）（ブランド：AMOR（内側タグに明記））",
+   "マルチカラー・ブロックチェック柄（赤・青・黄・オリーブ・オレンジ・紫・グレー）＋白のグリッドステッチのパンツ（クロップド丈・イージーパンツ）（ブランド：AMOR）",
    "実寸 ウエスト76cm・股上38cm"
   ],
   "lead": "川越の古民家で古着屋をしている、小判鮫です。赤、青、黄、オリーブ、オレンジ、紫、グレー。",
@@ -5531,7 +5615,15 @@
   "spec": [
    [
     "ブランド",
+    "AMOR"
+   ],
+   [
+    "タグの表記",
     "AMOR（内側タグに明記）"
+   ],
+   [
+    "店頭での名前",
+    "Checkered Balloon Pants"
    ],
    [
     "色",
@@ -5601,9 +5693,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "2021年製、スマーフのオフィシャルライセンスパーカー",
-  "product_name": "the SMURFS Tie-dye hoodie",
-  "brand": "© Peyo 2021 / Lic. Lafig Belgium / SMURF™ www.smurf.com / C-LIFE GROUP LTD c-lifegroup.com",
+  "title": "2021年製 スマーフ タイダイ パーカー ラベンダー 公式ライセンス メンズ",
+  "product_name": "2021年製 スマーフ タイダイ パーカー ラベンダー 公式ライセンス メンズ",
+  "brand": "THE SMURFS",
   "category": "メンズ／トップス／スウェット",
   "material": "",
   "published_date": "2026-10-28",
@@ -5641,7 +5733,7 @@
   "thumb": "/assets/products/k11191/v2_thumb.jpg",
   "summary_text": "2021年製、スマーフのオフィシャルライセンスパーカー。ラベンダーとホワイトのタイダイ染めに、レトロカートゥーンのグラフィックが乗った一枚です。",
   "summary_points": [
-   "ラベンダー×ホワイト タイダイ染めのプルオーバーパーカー（フーディー）（ブランド：© Peyo 2021 / Lic. Lafig Belgium / SMURF™ www.smurf.com / C-LIFE GROUP LTD c-lifegroup.com）",
+   "ラベンダー×ホワイト タイダイ染めのプルオーバーパーカー（フーディー）（ブランド：THE SMURFS）",
    "実寸 身幅63cm・着丈70.5cm・肩幅68cm"
   ],
   "lead": "川越の古民家で古着屋をしている、小判鮫です。2021年製、© Peyo・Lafig Belgiumのオフィシャルライセンスを受けたスマーフのプルオーバーパーカーです。",
@@ -5649,7 +5741,15 @@
   "spec": [
    [
     "ブランド",
+    "THE SMURFS"
+   ],
+   [
+    "タグの表記",
     "© Peyo 2021 / Lic. Lafig Belgium / SMURF™ www.smurf.com / C-LIFE GROUP LTD c-lifegroup.com"
+   ],
+   [
+    "店頭での名前",
+    "the SMURFS Tie-dye hoodie"
    ],
    [
     "色",
@@ -5669,8 +5769,8 @@
    ]
   ],
   "sku_confidence": "確定",
-  "genre": "outer",
-  "genre_by": "auto-keyword-2026-10-25",
+  "genre": "tops",
+  "genre_by": "manual-2026-10-28",
   "draft_meta": {
    "made_by": "67_draft_maker_v1",
    "version": "v1.3",
@@ -5738,9 +5838,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "BEAR RIVERのリアルツリーカモ柄ジップアップパーカー",
-  "product_name": "Real tree camo zip up hoodie",
-  "brand": "BEAR RIVER（ブランドタグ確認）",
+  "title": "BEAR RIVER リアルツリーカモ ジップアップパーカー フリース裏 メンズ",
+  "product_name": "BEAR RIVER リアルツリーカモ ジップアップパーカー フリース裏 メンズ",
+  "brand": "BEAR RIVER",
   "category": "メンズ／アウター／ジャケット",
   "material": "100%ポリエステル（フリース裏地付き）",
   "published_date": "2026-10-28",
@@ -5775,7 +5875,7 @@
   "thumb": "/assets/products/k11253/thumb.jpg",
   "summary_text": "BEAR RIVERのリアルツリーカモ柄ジップアップパーカー。ブラウンとオリーブグリーンが混ざり合う柄と、フリース裏地の厚みが、一枚でしっかり存在感を出します。",
   "summary_points": [
-   "リアルツリー系カモフラージュ柄（ブラウン・オリーブグリーン・ホワイト、葉・枝模様）のジップアップパーカー（フーディー）/ ハンティングジャケット（ブランド：BEAR RIVER（ブランドタグ確認））",
+   "リアルツリー系カモフラージュ柄（ブラウン・オリーブグリーン・ホワイト、葉・枝模様）のジップアップパーカー（フーディー）/ ハンティングジャケット（ブランド：BEAR RIVER）",
    "素材：100%ポリエステル（フリース裏地付き）"
   ],
   "lead": "川越の古民家で古着屋をしている、小判鮫です。BEAR RIVERのタグが付いた、リアルツリー系カモフラージュ柄のジップアップパーカーです。",
@@ -5783,7 +5883,15 @@
   "spec": [
    [
     "ブランド",
+    "BEAR RIVER"
+   ],
+   [
+    "タグの表記",
     "BEAR RIVER（ブランドタグ確認）"
+   ],
+   [
+    "店頭での名前",
+    "Real tree camo zip up hoodie"
    ],
    [
     "素材",
@@ -5847,9 +5955,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "feather down Jacket",
-  "product_name": "feather down Jacket",
-  "brand": "Abercrombie & Fitch / KEMPSHALL JACKET / XL / Made in China（タグ読み取り）",
+  "title": "Abercrombie & Fitch KEMPSHALL ダウンジャケット マスタードイエロー XL メンズ",
+  "product_name": "Abercrombie & Fitch KEMPSHALL ダウンジャケット マスタードイエロー XL メンズ",
+  "brand": "Abercrombie & Fitch",
   "category": "メンズ／アウター／ジャケット",
   "material": "表地：100%ポリエステル、裏地：100%ポリエステル、中綿：65%フェザー・35%ダウン（洗濯表示より）",
   "published_date": "2026-10-28",
@@ -5887,7 +5995,7 @@
   "thumb": "/assets/products/k11449/v2_thumb.jpg",
   "summary_text": "Abercrombie & FitchのKEMPSHALL JACKETが入荷しました。マスタードイエローのパファーは、一枚羽織るだけで冬のコーディネートを決めてくれます。",
   "summary_points": [
-   "マスタードイエロー（無地）のダウンジャケット（フーディー付きパファージャケット）（ブランド：Abercrombie & Fitch / KEMPSHALL JACKET / XL / Made in China（タグ読み取り））",
+   "マスタードイエロー（無地）のダウンジャケット（フーディー付きパファージャケット）（ブランド：Abercrombie & Fitch）",
    "素材：表地：100%ポリエステル、裏地：100%ポリエステル、中綿：65%フェザー・35%ダウン（洗濯表示より）",
    "実寸 身幅63.5cm・着丈68cm・肩幅47cm"
   ],
@@ -5896,7 +6004,15 @@
   "spec": [
    [
     "ブランド",
+    "Abercrombie & Fitch"
+   ],
+   [
+    "タグの表記",
     "Abercrombie & Fitch / KEMPSHALL JACKET / XL / Made in China（タグ読み取り）"
+   ],
+   [
+    "店頭での名前",
+    "feather down Jacket"
    ],
    [
     "素材",
@@ -5984,9 +6100,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "小判鮫 \"Jesus\"",
-  "product_name": "小判鮫 \"Jesus\"",
-  "brand": "Levi Strauss & Co. / 517 / W32 L36",
+  "title": "Levi's 517 ブーツカット カスタムプリントデニム ライトインディゴ W32 メンズ",
+  "product_name": "Levi's 517 ブーツカット カスタムプリントデニム ライトインディゴ W32 メンズ",
+  "brand": "Levi's",
   "category": "メンズ／パンツ／デニム",
   "material": "100% コットン",
   "published_date": "2026-10-28",
@@ -6023,7 +6139,7 @@
   "thumb": "/assets/products/k11420/v2_thumb.jpg",
   "summary_text": "Levi's 517のブーツカットに、ライオンと「birth new moon gathering」のグラフィックが入ったカスタムデニム。使い込まれた風合いと独自のプリントが、そのまま個性になっています。",
   "summary_points": [
-   "ライトインディゴブルー・左脚前面に黒インクプリント（ライオン図像＋\"birth new moon gathering\"文字グラフィック）のデニムパンツ（ブーツカット/フレアジーンズ）（ブランド：Levi Strauss & Co. / 517 / W32 L36）",
+   "ライトインディゴブルー・左脚前面に黒インクプリント（ライオン図像＋\"birth new moon gathering\"文字グラフィック）のデニムパンツ（ブーツカット/フレアジーンズ）（ブランド：Levi's）",
    "素材：100% コットン",
    "実寸 ウエスト82cm・股上28cm・股下88.5cm"
   ],
@@ -6032,7 +6148,15 @@
   "spec": [
    [
     "ブランド",
+    "Levi's"
+   ],
+   [
+    "タグの表記",
     "Levi Strauss & Co. / 517 / W32 L36"
+   ],
+   [
+    "店頭での名前",
+    "小判鮫 \"Jesus\""
    ],
    [
     "素材",
