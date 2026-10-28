@@ -775,6 +775,7 @@ def other_path(path, lang):
     return '/tokushoho/' if p == '/legal/' else (p or '/')
 
 # 64番：ページが開かれた時と、決まったボタン（購入・メルカリ・取り置き・Instagram・地図）が押された時に1件ずつ送る。
+# 2026-10-28：リンクに ?utm_source=threads&utm_campaign=new-20261028 のような印があれば、流入元（ref）をその印にする（Threads からのクリック数を数えるため）。
 # 個人を見分ける情報（Cookie・端末ID・IP等）は送らない。スタッフは一度 ?nolog=1 を付けて開くと、その端末からは送られない。
 TRACK_JS = """<script>
 (function(){var U='__URL__';if(!U||navigator.webdriver||/bot|crawl|spider|slurp|lighthouse|headless/i.test(navigator.userAgent))return;
@@ -782,6 +783,7 @@ try{if(/[?&]nolog=1/.test(location.search))localStorage.setItem('kbz_nolog','1')
 function sku(){var el=document.querySelector('.sku');var m=el&&el.textContent.match(/[A-Z]{1,3}\\d{3,6}/);return m?m[0]:'';}
 function send(o){o.p=location.pathname;o.sku=sku();o.lang=document.documentElement.lang||'';o.dev=/Mobi|Android|iPhone/i.test(navigator.userAgent)?'m':'d';
 try{var h=document.referrer?new URL(document.referrer).hostname:'';o.ref=(h===location.hostname)?'':h;}catch(e){o.ref='';}
+try{var us=(location.search.match(/[?&]utm_source=([A-Za-z0-9-]{1,30})/)||[])[1];if(us){var uc=(location.search.match(/[?&]utm_campaign=([A-Za-z0-9-]{1,40})/)||[])[1];o.ref=(us+(uc?'-'+uc:'')).toLowerCase();}}catch(e){}
 var b=JSON.stringify(o);try{if(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([b],{type:'text/plain'})))return;}catch(e){}
 try{fetch(U,{method:'POST',body:b,mode:'no-cors',keepalive:true});}catch(e){}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){send({t:'pv'});});else send({t:'pv'});
