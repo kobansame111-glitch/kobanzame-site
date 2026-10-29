@@ -14,7 +14,7 @@ v2で変わったこと
 - アクセス解析：CF_BEACON_TOKEN に Cloudflare Web Analytics のトークンを入れると全ページに計測タグが入る
 - トップの写真：HERO_IMAGE（店内の写真）。写真の上にGoogleマップへのリンク
 """
-import json, os, html, re, math, datetime, glob
+import json, os, html, re, math, datetime, glob, unicodedata
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = 'https://kobanzame-site.pages.dev'   # 独自ドメイン取得後はここだけ差し替える
@@ -393,29 +393,41 @@ def size_of(p):
 
 PRICE_BANDS = [(0, 10000), (10000, 20000), (20000, 10**9)]   # 2026-10-29 値段の絞り込み（税込・下限以上〜上限未満）
 
-def decade_of(p):
-    """年代（90s・1980s・2000年代 など）を「1990s」の形にそろえる。分からなければ空"""
+def decades_of(p):
+    """年代を {'1990s', ...} の形で返す。仕様表の「年代・生産」「年代」だけを読む（商品名の「40s」サイズ等を年代と取り違えないため）。
+    「1980〜90年代」のような幅は両方の年代を入れる。Y2K は 2000s。分からなければ空"""
     sp = spec_of(p)
-    txt = ' '.join([sp.get('年代・生産', ''), sp.get('年代', ''), p.get('product_name', ''), p.get('title', '')])
-    m = re.search(r'(?<!\d)(19|20)?(\d)0\s*(?:s|’s|\'s|年代)', txt)
-    if not m:
-        return ''
-    c = m.group(1) or ('20' if m.group(2) in '012' else '19')
-    return f'{c}{m.group(2)}0s'
+    txt = unicodedata.normalize('NFKC', ' '.join([sp.get('年代・生産', ''), sp.get('年代', '')]))
+    out = set()
+    if re.search(r'y2k', txt, re.I):
+        out.add('2000s')
+    for m in re.finditer(r'(?<!\d)(19|20)?(\d)0\s*(?:s|\'s|年代)', txt):
+        c = m.group(1) or ('20' if m.group(2) in '012' else '19')
+        out.add(f'{c}{m.group(2)}0s')
+    m = re.search(r'(?<!\d)(19|20)?(\d)0\s*[〜~\-–]\s*(?:19|20)?(\d)0\s*(?:s|\'s|年代)', txt)   # 「1980〜90年代」の前の方
+    if m:
+        c = m.group(1) or ('20' if m.group(2) in '012' else '19')
+        out.add(f'{c}{m.group(2)}0s')
+    return out
+
+def norm_q(x):
+    """検索用にそろえる：全角→半角（NFKC）・小文字・アポストロフィを消す（Levi's／LEVI’S／levis を同じにする）"""
+    return re.sub(r"['’`]", '', unicodedata.normalize('NFKC', x).lower())
 
 def search_text(p):
-    """一覧の文字検索に使う文字（ブランド・商品名・英語名・年代・色・素材・ジャンル）。小文字にそろえる"""
+    """一覧の文字検索に使う文字（ブランド・商品名・英語名・年代・色・素材・ジャンル）。同じ言葉は1回だけ（ページを重くしない）"""
     sp = spec_of(p)
-    parts = [p.get('brand', ''), p.get('product_name', ''), p.get('title', ''), sp.get('年代・生産', ''), sp.get('年代', ''),
-             sp.get('色', ''), sp.get('素材', ''), sp.get('タグの表記', ''), sp.get('店頭での名前', ''), p.get('category', ''),
-             decade_of(p), T['ja']['cats'].get(cat_of(p), ''), CAT_EN.get(cat_of(p), '')]
+    parts = [p.get('brand'), p.get('product_name'), p.get('title'), sp.get('年代・生産'), sp.get('年代'),
+             sp.get('色'), sp.get('素材'), sp.get('タグの表記'), sp.get('店頭での名前'), p.get('category'),
+             ' '.join(sorted(decades_of(p))), T['ja']['cats'].get(cat_of(p), ''), CAT_EN.get(cat_of(p), '')]
     if has_en(p):
-        parts += [EN[p['sku']].get('product_name', ''), EN[p['sku']].get('title', '')]
-    return re.sub(r'\s+', ' ', ' '.join(x for x in parts if isinstance(x, str))).lower()[:600]
+        parts += [EN[p['sku']].get('product_name'), EN[p['sku']].get('title')]
+    words = norm_q(' '.join(str(x) for x in parts if x is not None)).split()
+    return ' '.join(dict.fromkeys(words))[:600]
 
 def reco_score(a, b):
     """2026-10-29 「こういうのもおすすめです」の点数（数字のルールだけ。AIは使わない）
-    同じジャンル+4／身幅の差3cm以内+2・6cm以内+1／値段が0.7〜1.4倍+2・0.5〜2倍+1／同じ年代+2／同じブランド+2"""
+    同じジャンル+4／身幅の差3cm以内+2・6cm以内+1／値段が0.7〜1.4倍+2・0.5〜2倍+1／年代が重なる+2／同じブランド（大文字小文字は区別しない）+2"""
     s = 4 if cat_of(a) == cat_of(b) else 0
     wa, wb = body_width(a), body_width(b)
     if wa is not None and wb is not None:
@@ -425,11 +437,10 @@ def reco_score(a, b):
     if pa > 0 and pb > 0:
         r = pb / pa
         s += 2 if 0.7 <= r <= 1.4 else (1 if 0.5 <= r <= 2 else 0)
-    da = decade_of(a)
-    if da and da == decade_of(b):
+    if decades_of(a) & decades_of(b):
         s += 2
     ba = (a.get('brand') or '').strip()
-    if ba and ba not in NO_BRAND and ba == (b.get('brand') or '').strip():
+    if ba and ba not in NO_BRAND and ba.casefold() == (b.get('brand') or '').strip().casefold():
         s += 2
     return s
 
@@ -596,7 +607,7 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .finder .frow{flex-basis:100%;display:flex;align-items:center;gap:10px}
 .finder .fgrp{display:inline-flex;align-items:center;gap:8px;margin-right:8px}
 .finder input[type=search]{flex:1 1 auto;min-width:0}
-.finder input[type=number]{width:5.5em;height:40px;background:var(--susu);color:var(--kinari);border:1px solid var(--kin);border-radius:0;padding:0 8px;font:inherit}
+.finder input[type=number]{width:5.5em;height:40px;background:var(--susu);color:var(--kinari);border:1px solid var(--kin);border-radius:0;padding:0 8px;font:inherit;font-size:16px}
 .finder .hint{font-size:12px;color:var(--usu);flex-basis:100%}
 .finder .chk{display:flex;align-items:center;gap:6px;color:var(--usu)}
 .finder .chk input{accent-color:var(--kin)}
@@ -1171,7 +1182,7 @@ def is_new(p):
     except ValueError:
         return False
 
-def card_html(p, lang, lazy=True):
+def card_html(p, lang, lazy=True, findable=False):
     t = T[lang]
     w = body_width(p)
     sold = is_sold(p)
@@ -1180,7 +1191,7 @@ def card_html(p, lang, lazy=True):
     if not sold and is_new(p):   # 2026-10-22 龍さん：新着が分かるように（公開から NEW_DAYS 日以内）
         tag += '<span class="newtag">NEW</span>'
     wv = '' if w is None else f'{w:g}'
-    return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}" data-p="{site_price(p)}" data-q="{esc(search_text(p))}">'
+    return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}"' + (f' data-p="{site_price(p)}" data-q="{esc(search_text(p))}"' if findable else '') + '>'
             f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}</div>'
             f'<div class="brand">{esc(p["brand"])}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
             f'<span class="fit" hidden></span>'
@@ -1257,14 +1268,14 @@ def list_js(lang):
   var empty=document.createElement('div'); empty.className='empty'; empty.hidden=true; grid.appendChild(empty);
   function apply(){
     var my=parseFloat(myw.value), n=0;
-    var words=(kw?kw.value:'').normalize('NFKC').toLowerCase().split(/\\s+/).filter(Boolean), band=(pr&&pr.value!=='')?M.bands[+pr.value]:null;
+    var words=(kw?kw.value:'').normalize('NFKC').toLowerCase().replace(/['’`]/g,'').split(/\\s+/).filter(Boolean), band=(pr&&pr.value!=='')?M.bands[+pr.value]:null;
     var plain=!filter&&isNaN(my)&&!showsold.checked&&!words.length&&!band;   // 何も絞っていない時はジャンルごとのブロックを見せる
     if(blocks){blocks.hidden=!plain; grid.hidden=plain;}
     grid.querySelectorAll('.card').forEach(function(c){
       var ok=(!filter||(filter==='new'?c.dataset.new==='1':c.dataset.cat===filter))&&(showsold.checked||c.dataset.sold!=='1');
       var w=c.dataset.w===''?null:parseFloat(c.dataset.w), fit=c.querySelector('.fit');
       if(!isNaN(my)) ok=ok&&w!==null&&Math.abs(w-my)<=3;
-      if(words.length){var q=(c.dataset.q||'').normalize('NFKC'); ok=ok&&words.every(function(x){return q.indexOf(x)>=0;});}
+      if(words.length){var q=c.dataset.q||''; ok=ok&&words.every(function(x){return q.indexOf(x)>=0;});}
       if(band){var pv=parseInt(c.dataset.p,10)||0; ok=ok&&pv>=band[0]&&pv<band[1];}
       if(!isNaN(my)&&w!==null){var d=w-my; fit.textContent=M.fit.replace('{w}',w).replace('{d}',d===0?M.same:(d>0?'+':'')+d.toFixed(1)+'cm'); fit.hidden=false;} else fit.hidden=true;
       c.hidden=!ok; if(ok) n++;
@@ -1304,7 +1315,7 @@ HERO_SRC = HERO_IMAGE or (hero_p['images'][0] if hero_p else 'https://assets.mer
 for lang in ('ja', 'en'):
     t = T[lang]
     P = pre(lang)
-    cards = '\n'.join(card_html(p, lang) for p in live)
+    cards = '\n'.join(card_html(p, lang, findable=True) for p in live)   # 検索用の文字は絞り込む一覧のカードだけに付ける（ページを重くしない）
     top_ld = {'@context': 'https://schema.org', '@graph': [org_node(), faq_ld(lang),
               {'@type': 'WebSite', '@id': BASE + P + '/#website', 'url': BASE + P + '/', 'name': SHOP['name'], 'inLanguage': lang,
                'publisher': {'@id': BASE + '/#store'}}]}
