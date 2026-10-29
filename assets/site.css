@@ -92,7 +92,11 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .sec-head h2 small,.related h2 small{display:block;font-family:var(--mincho);font-size:14px;margin-top:10px;color:var(--usu);letter-spacing:.08em}
 .sec-head .count{font-size:13px;color:var(--usu);font-variant-numeric:tabular-nums}
 .finder{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:24px;padding:14px 0;border-block:1px solid var(--line);font-size:13px}
-.finder input[type=number]{width:5.5em;height:40px;background:var(--susu);color:var(--kinari);border:1px solid var(--kin);border-radius:0;padding:0 8px;font:inherit}
+.finder input[type=search],.finder select{height:40px;background:var(--susu);color:var(--kinari);border:1px solid var(--kin);border-radius:0;padding:0 8px;font:inherit;font-size:16px}
+.finder .frow{flex-basis:100%;display:flex;align-items:center;gap:10px}
+.finder .fgrp{display:inline-flex;align-items:center;gap:8px;margin-right:8px}
+.finder input[type=search]{flex:1 1 auto;min-width:0}
+.finder input[type=number]{width:5.5em;height:40px;background:var(--susu);color:var(--kinari);border:1px solid var(--kin);border-radius:0;padding:0 8px;font:inherit;font-size:16px}
 .finder .hint{font-size:12px;color:var(--usu);flex-basis:100%}
 .finder .chk{display:flex;align-items:center;gap:6px;color:var(--usu)}
 .finder .chk input{accent-color:var(--kin)}
@@ -233,6 +237,7 @@ header.site .hnav{justify-self:end}
 .catrow button[aria-pressed="true"]{background:var(--kinari);color:var(--sumi);border-color:var(--kinari)}
 .catrow button[aria-pressed="true"] small{color:#ddd}
 .finder input[type=number]{background:var(--sumi);border-color:var(--kinari)}
+.finder input[type=search],.finder select{background:var(--sumi);border-color:var(--kinari)}
 .card .ph{aspect-ratio:1/1}
 .card .brand{font-family:var(--gothic);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--kinari)}
 .card .nm{color:var(--usu);font-size:13px}
