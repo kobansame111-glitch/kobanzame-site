@@ -14,7 +14,7 @@ v2で変わったこと
 - アクセス解析：CF_BEACON_TOKEN に Cloudflare Web Analytics のトークンを入れると全ページに計測タグが入る
 - トップの写真：HERO_IMAGE（店内の写真）。写真の上にGoogleマップへのリンク
 """
-import json, os, html, re, math, datetime, glob
+import json, os, html, re, math, datetime, glob, unicodedata
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = 'https://kobanzame-site.pages.dev'   # 独自ドメイン取得後はここだけ差し替える
@@ -118,7 +118,8 @@ T = {
   'days_h': '営業日', 'days': '水〜日 12:00–20:00（月・火 定休）', 'today_open': '本日営業', 'today_closed': '本日定休',
   'menu': 'メニュー', 'menu_close': '閉じる', 'menu_cats': 'ジャンルで選ぶ', 'menu_all': 'すべての商品', 'menu_more': 'お店のこと',
   'list_h': 'In Stock', 'list_s': 'オンラインで買える一点もの（毎週水曜更新）', 'unit': '点', 'see_all': 'すべて見る', 'new_in': '新着',
-  'finder_l': '手持ちの服の身幅', 'finder_u': 'cm ±3cmの服を表示', 'finder_sold': '売れた一点ものも見る', 'finder_clear': '条件をクリア',
+  'kw_l': '文字で探す', 'kw_ph': '例：Levi\'s　90s　デニム', 'pr_l': '値段', 'pr_all': 'すべて',
+  'pr_bands': ['〜1万円', '1万〜2万円', '2万円〜'], 'finder_l': '手持ちの服の身幅', 'finder_u': 'cm ±3cmの服を表示', 'finder_sold': '売れた一点ものも見る', 'finder_clear': '条件をクリア',
   'finder_hint': '身幅＝脇の下から脇の下までを平らに置いて測った長さ。いちばん気に入っている服で測るのがおすすめです。',
   'empty_w': '身幅{w}cm前後の服は、いまはありません。毎週水曜に新着が入ります。', 'empty': '条件に合う一点ものは、いまはありません。',
   'fit': '身幅{w}cm（{d}）', 'same': '同じ',
@@ -139,7 +140,7 @@ T = {
   'howto': '実寸は平置きで測っています。身幅＝脇の下から脇の下、着丈＝襟のつけ根から裾まで。お手持ちの服を同じように測って比べると、サイズの失敗が減ります。',
   'delivery_p': '送料込み。決済確認後3日以内（月・火定休を除く）に、川越の店舗から発送します。古着・一点ものの性質上、お客様都合の返品はお受けしていません。商品説明と著しく異なる場合や発送間違いの場合は、到着後4日以内にメールでご連絡ください。',
   'byline': '文：小判鮫オーナー・専属バイヤー 龍',
-  'related': 'こちらも一点もの', 'draft': '下書き（まだ公開していません）｜毎週水曜の夜（20時台）に公開されます',
+  'related': 'こういうのもおすすめです', 'draft': '下書き（まだ公開していません）｜毎週水曜の夜（20時台）に公開されます',
   'journal_h': 'Journal', 'journal_s': '一点ものの、成り立ちの記録',
   'legal': [('/tokushoho/', '特定商取引法に基づく表記'), ('/privacy/', 'プライバシーポリシー')],
   'gm': 'Googleマップ', 'rank_new': '新品・未使用', 'rank_vin': 'ヴィンテージ（経年あり）', 'rank': '状態 {r}',
@@ -160,7 +161,8 @@ T = {
   'days_h': 'Open', 'days': 'Wed–Sun 12:00–20:00 (closed Mon & Tue)', 'today_open': 'Open today', 'today_closed': 'Closed today',
   'menu': 'Menu', 'menu_close': 'Close', 'menu_cats': 'Shop by category', 'menu_all': 'All items', 'menu_more': 'About the shop',
   'list_h': 'In Stock', 'list_s': 'One-of-a-kind pieces you can buy online (updated every Wednesday)', 'unit': ' items', 'see_all': 'See all', 'new_in': 'New in',
-  'finder_l': 'Chest width of a piece you own', 'finder_u': 'cm — show pieces within ±3 cm', 'finder_sold': 'Show sold pieces', 'finder_clear': 'Clear',
+  'kw_l': 'Search', 'kw_ph': 'e.g. Levi\'s 90s denim', 'pr_l': 'Price', 'pr_all': 'Any',
+  'pr_bands': ['Under ¥10,000', '¥10,000–20,000', '¥20,000 and up'], 'finder_l': 'Chest width of a piece you own', 'finder_u': 'cm — show pieces within ±3 cm', 'finder_sold': 'Show sold pieces', 'finder_clear': 'Clear',
   'finder_hint': 'Chest width = measured flat, armpit to armpit. Measure the piece you like best for the closest match.',
   'empty_w': 'Nothing around {w} cm right now. New pieces arrive every Wednesday.', 'empty': 'Nothing matches right now.',
   'fit': 'Chest {w} cm ({d})', 'same': 'same',
@@ -181,7 +183,7 @@ T = {
   'howto': 'Measured flat. Chest = armpit to armpit; length = base of collar to hem. Measure a piece you own the same way to compare.',
   'delivery_p': 'Domestic shipping included. Dispatched from our Kawagoe shop within 3 days of payment (closed Mon & Tue). As these are one-of-a-kind vintage items, we do not accept returns for change of mind. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival.',
   'byline': 'Words: Ryu, owner & buyer at Kobanzame',
-  'related': 'Also one of one', 'draft': 'Draft (not yet published) | goes live on Wednesday morning',
+  'related': 'You might also like these', 'draft': 'Draft (not yet published) | goes live on Wednesday morning',
   'journal_h': 'Journal', 'journal_s': 'Where each piece comes from',
   'legal': [('/en/legal/', 'Legal notice & privacy')],
   'gm': 'Google Maps', 'rank_new': 'New, unused', 'rank_vin': 'Vintage (signs of age)', 'rank': 'Condition {r}',
@@ -389,6 +391,66 @@ def size_of(p):
     head_ = head_.split('・')[0].strip()
     return head_[:100]
 
+PRICE_BANDS = [(0, 10000), (10000, 20000), (20000, 10**9)]   # 2026-10-29 値段の絞り込み（税込・下限以上〜上限未満）
+
+def decades_of(p):
+    """年代を {'1990s', ...} の形で返す。仕様表の「年代・生産」「年代」だけを読む（商品名の「40s」サイズ等を年代と取り違えないため）。
+    「1980〜90年代」のような幅は両方の年代を入れる。Y2K は 2000s。分からなければ空"""
+    sp = spec_of(p)
+    txt = unicodedata.normalize('NFKC', ' '.join([sp.get('年代・生産', ''), sp.get('年代', '')]))
+    out = set()
+    if re.search(r'y2k', txt, re.I):
+        out.add('2000s')
+    for m in re.finditer(r'(?<!\d)(19|20)?(\d)0\s*(?:s|\'s|年代)', txt):
+        c = m.group(1) or ('20' if m.group(2) in '012' else '19')
+        out.add(f'{c}{m.group(2)}0s')
+    m = re.search(r'(?<!\d)(19|20)?(\d)0\s*[〜~\-–]\s*(?:19|20)?(\d)0\s*(?:s|\'s|年代)', txt)   # 「1980〜90年代」の前の方
+    if m:
+        c = m.group(1) or ('20' if m.group(2) in '012' else '19')
+        out.add(f'{c}{m.group(2)}0s')
+    return out
+
+def norm_q(x):
+    """検索用にそろえる：全角→半角（NFKC）・小文字・アポストロフィを消す（Levi's／LEVI’S／levis を同じにする）"""
+    return re.sub(r"['’`]", '', unicodedata.normalize('NFKC', x).lower())
+
+def search_text(p):
+    """一覧の文字検索に使う文字（ブランド・商品名・英語名・年代・色・素材・ジャンル）。同じ言葉は1回だけ（ページを重くしない）"""
+    sp = spec_of(p)
+    parts = [p.get('brand'), p.get('product_name'), p.get('title'), sp.get('年代・生産'), sp.get('年代'),
+             sp.get('色'), sp.get('素材'), sp.get('タグの表記'), sp.get('店頭での名前'), p.get('category'),
+             ' '.join(sorted(decades_of(p))), T['ja']['cats'].get(cat_of(p), ''), CAT_EN.get(cat_of(p), '')]
+    if has_en(p):
+        parts += [EN[p['sku']].get('product_name'), EN[p['sku']].get('title')]
+    words = norm_q(' '.join(str(x) for x in parts if x is not None)).split()
+    return ' '.join(dict.fromkeys(words))[:600]
+
+def reco_score(a, b):
+    """2026-10-29 「こういうのもおすすめです」の点数（数字のルールだけ。AIは使わない）
+    同じジャンル+4／身幅の差3cm以内+2・6cm以内+1／値段が0.7〜1.4倍+2・0.5〜2倍+1／年代が重なる+2／同じブランド（大文字小文字は区別しない）+2"""
+    s = 4 if cat_of(a) == cat_of(b) else 0
+    wa, wb = body_width(a), body_width(b)
+    if wa is not None and wb is not None:
+        d = abs(wa - wb)
+        s += 2 if d <= 3 else (1 if d <= 6 else 0)
+    pa, pb = site_price(a), site_price(b)
+    if pa > 0 and pb > 0:
+        r = pb / pa
+        s += 2 if 0.7 <= r <= 1.4 else (1 if 0.5 <= r <= 2 else 0)
+    if decades_of(a) & decades_of(b):
+        s += 2
+    ba = (a.get('brand') or '').strip()
+    if ba and ba not in NO_BRAND and ba.casefold() == (b.get('brand') or '').strip().casefold():
+        s += 2
+    return s
+
+def reco_of(p, pool, n=3):
+    """点数の高い順。同点なら新しく公開した順"""
+    cands = [x for x in pool if x['sku'] != p['sku']]
+    cands.sort(key=lambda x: x.get('published_date', ''), reverse=True)
+    cands.sort(key=lambda x: reco_score(p, x), reverse=True)   # 安定ソートなので同点は新しい順のまま
+    return cands[:n]
+
 def gender_of(p):
     c = p.get('category', '')
     return 'male' if c.startswith('メンズ') else 'female' if c.startswith('レディース') else 'unisex'
@@ -541,7 +603,11 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .sec-head h2 small,.related h2 small{display:block;font-family:var(--mincho);font-size:14px;margin-top:10px;color:var(--usu);letter-spacing:.08em}
 .sec-head .count{font-size:13px;color:var(--usu);font-variant-numeric:tabular-nums}
 .finder{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:24px;padding:14px 0;border-block:1px solid var(--line);font-size:13px}
-.finder input[type=number]{width:5.5em;height:40px;background:var(--susu);color:var(--kinari);border:1px solid var(--kin);border-radius:0;padding:0 8px;font:inherit}
+.finder input[type=search],.finder select{height:40px;background:var(--susu);color:var(--kinari);border:1px solid var(--kin);border-radius:0;padding:0 8px;font:inherit;font-size:16px}
+.finder .frow{flex-basis:100%;display:flex;align-items:center;gap:10px}
+.finder .fgrp{display:inline-flex;align-items:center;gap:8px;margin-right:8px}
+.finder input[type=search]{flex:1 1 auto;min-width:0}
+.finder input[type=number]{width:5.5em;height:40px;background:var(--susu);color:var(--kinari);border:1px solid var(--kin);border-radius:0;padding:0 8px;font:inherit;font-size:16px}
 .finder .hint{font-size:12px;color:var(--usu);flex-basis:100%}
 .finder .chk{display:flex;align-items:center;gap:6px;color:var(--usu)}
 .finder .chk input{accent-color:var(--kin)}
@@ -682,6 +748,7 @@ header.site .hnav{justify-self:end}
 .catrow button[aria-pressed="true"]{background:var(--kinari);color:var(--sumi);border-color:var(--kinari)}
 .catrow button[aria-pressed="true"] small{color:#ddd}
 .finder input[type=number]{background:var(--sumi);border-color:var(--kinari)}
+.finder input[type=search],.finder select{background:var(--sumi);border-color:var(--kinari)}
 .card .ph{aspect-ratio:1/1}
 .card .brand{font-family:var(--gothic);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--kinari)}
 .card .nm{color:var(--usu);font-size:13px}
@@ -1115,7 +1182,7 @@ def is_new(p):
     except ValueError:
         return False
 
-def card_html(p, lang, lazy=True):
+def card_html(p, lang, lazy=True, findable=False):
     t = T[lang]
     w = body_width(p)
     sold = is_sold(p)
@@ -1124,7 +1191,7 @@ def card_html(p, lang, lazy=True):
     if not sold and is_new(p):   # 2026-10-22 龍さん：新着が分かるように（公開から NEW_DAYS 日以内）
         tag += '<span class="newtag">NEW</span>'
     wv = '' if w is None else f'{w:g}'
-    return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}">'
+    return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}"' + (f' data-p="{site_price(p)}" data-q="{esc(search_text(p))}"' if findable else '') + '>'
             f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}</div>'
             f'<div class="brand">{esc(p["brand"])}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
             f'<span class="fit" hidden></span>'
@@ -1178,6 +1245,8 @@ def catrow(lang):
 def finder(lang):
     t = T[lang]
     return f'''<div class="finder">
+  <div class="frow"><label for="kw">{t['kw_l']}</label><input type="search" id="kw" maxlength="40" autocomplete="off" placeholder="{esc(t['kw_ph'])}"></div>
+  <span class="fgrp"><label for="pr">{t['pr_l']}</label><select id="pr"><option value="">{t['pr_all']}</option>{''.join(f'<option value="{i}">{b}</option>' for i, b in enumerate(t['pr_bands']))}</select></span>
   <label for="myw">{t['finder_l']}</label>
   <input type="number" id="myw" inputmode="decimal" min="30" max="90" step="0.5" placeholder="55">
   <span>{t['finder_u']}</span>
@@ -1190,21 +1259,24 @@ def list_js(lang):
     t = T[lang]
     msg = json.dumps({'empty_w': t['empty_w'], 'empty': t['empty'], 'fit': t['fit'], 'same': t['same'], 'unit': t['unit'],
                       'labels': dict(t['cats'], new=NEW_LABEL[lang]), 'here': 'いま見ているのは' if lang == 'ja' else 'Showing',
-                      'shown': '{c}を表示（{n}）' if lang == 'ja' else 'Showing {c} ({n})', 'all': 'すべての商品を表示' if lang == 'ja' else 'Showing all items'}, ensure_ascii=False)
+                      'shown': '{c}を表示（{n}）' if lang == 'ja' else 'Showing {c} ({n})', 'all': 'すべての商品を表示' if lang == 'ja' else 'Showing all items', 'bands': PRICE_BANDS}, ensure_ascii=False)
     return '''<script>
 (function(){
   var M=''' + msg + ''';
   var filter=null, grid=document.getElementById('grid'); if(!grid) return;
-  var myw=document.getElementById('myw'), showsold=document.getElementById('showsold'), cnt=document.getElementById('count'), blocks=document.getElementById('blocks');
+  var kw=document.getElementById('kw'), pr=document.getElementById('pr'), myw=document.getElementById('myw'), showsold=document.getElementById('showsold'), cnt=document.getElementById('count'), blocks=document.getElementById('blocks');
   var empty=document.createElement('div'); empty.className='empty'; empty.hidden=true; grid.appendChild(empty);
   function apply(){
     var my=parseFloat(myw.value), n=0;
-    var plain=!filter&&isNaN(my)&&!showsold.checked;   // 何も絞っていない時はジャンルごとのブロックを見せる
+    var words=(kw?kw.value:'').normalize('NFKC').toLowerCase().replace(/['’`]/g,'').split(/\\s+/).filter(Boolean), band=(pr&&pr.value!=='')?M.bands[+pr.value]:null;
+    var plain=!filter&&isNaN(my)&&!showsold.checked&&!words.length&&!band;   // 何も絞っていない時はジャンルごとのブロックを見せる
     if(blocks){blocks.hidden=!plain; grid.hidden=plain;}
     grid.querySelectorAll('.card').forEach(function(c){
       var ok=(!filter||(filter==='new'?c.dataset.new==='1':c.dataset.cat===filter))&&(showsold.checked||c.dataset.sold!=='1');
       var w=c.dataset.w===''?null:parseFloat(c.dataset.w), fit=c.querySelector('.fit');
       if(!isNaN(my)) ok=ok&&w!==null&&Math.abs(w-my)<=3;
+      if(words.length){var q=c.dataset.q||''; ok=ok&&words.every(function(x){return q.indexOf(x)>=0;});}
+      if(band){var pv=parseInt(c.dataset.p,10)||0; ok=ok&&pv>=band[0]&&pv<band[1];}
       if(!isNaN(my)&&w!==null){var d=w-my; fit.textContent=M.fit.replace('{w}',w).replace('{d}',d===0?M.same:(d>0?'+':'')+d.toFixed(1)+'cm'); fit.hidden=false;} else fit.hidden=true;
       c.hidden=!ok; if(ok) n++;
     });
@@ -1223,8 +1295,8 @@ def list_js(lang):
   document.querySelectorAll('.ball').forEach(function(b){b.addEventListener('click',function(){filter=b.dataset.filter;tell();var l=document.getElementById('list');if(l)l.scrollIntoView({behavior:'smooth'});});});
   var q=(location.search.match(/[?&]cat=([a-z]+)/)||[])[1]; if(q&&document.querySelector('.catrow button[data-filter="'+q+'"]')) filter=q;
   document.addEventListener('kz:cat',function(e){filter=e.detail||null;tell();});
-  myw.addEventListener('input',apply); showsold.addEventListener('change',apply);
-  document.getElementById('clear').addEventListener('click',function(){myw.value='';showsold.checked=false;filter=null;apply();});
+  myw.addEventListener('input',apply); showsold.addEventListener('change',apply); if(kw) kw.addEventListener('input',apply); if(pr) pr.addEventListener('change',apply);
+  document.getElementById('clear').addEventListener('click',function(){myw.value='';if(kw)kw.value='';if(pr)pr.value='';showsold.checked=false;filter=null;apply();});
   apply();
   var td=document.getElementById('today');
   if(td){var j=new Date(Date.now()+(new Date().getTimezoneOffset()+540)*60000),dw=j.getDay(),ymd=j.getFullYear()+'-'+('0'+(j.getMonth()+1)).slice(-2)+'-'+('0'+j.getDate()).slice(-2),hol='''+json.dumps(HOLIDAY_MONDAYS)+''',open=(ymd>='''+"'"+NEWHOURS_FROM+"'"+'''?[1]:'''+CLOSED_WEEKDAYS_JS+''').indexOf(dw)<0||hol.indexOf(ymd)>=0;
@@ -1243,7 +1315,7 @@ HERO_SRC = HERO_IMAGE or (hero_p['images'][0] if hero_p else 'https://assets.mer
 for lang in ('ja', 'en'):
     t = T[lang]
     P = pre(lang)
-    cards = '\n'.join(card_html(p, lang) for p in live)
+    cards = '\n'.join(card_html(p, lang, findable=True) for p in live)   # 検索用の文字は絞り込む一覧のカードだけに付ける（ページを重くしない）
     top_ld = {'@context': 'https://schema.org', '@graph': [org_node(), faq_ld(lang),
               {'@type': 'WebSite', '@id': BASE + P + '/#website', 'url': BASE + P + '/', 'name': SHOP['name'], 'inLanguage': lang,
                'publisher': {'@id': BASE + '/#store'}}]}
@@ -1402,9 +1474,9 @@ for lang in ('ja', 'en'):
         </div>'''
         noen = f'<p class="noen">{t["no_en"]}</p>' if (lang == 'en' and not has_en(p)) else ''
         draft_banner = f'<div class="draftnote">{t["draft"]}</div>' if rel == 'draft' else ''
-        relp = sorted([x for x in avail_live if x['sku'] != p['sku']], key=lambda x: cat_of(x) != cat_of(p))[:3]
+        relp = reco_of(p, avail_live)   # 2026-10-29 点数づけ（reco_score）に変更
         rel_cards = ''.join(card_html(x, lang) for x in relp)
-        related = f'<section class="related"><h2>Also One of One<small>{t["related"]}</small></h2><div class="grid">{rel_cards}</div></section>' if rel_cards else ''
+        related = f'<section class="related"><h2>Recommended<small>{t["related"]}</small></h2><div class="grid">{rel_cards}</div></section>' if rel_cards else ''
         ttl = loc(p, 'title', lang)
         if lang == 'en' and not has_en(p):
             _b = p['brand'] if str(p.get('brand', '')).isascii() and p.get('brand') else 'Vintage'
