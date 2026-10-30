@@ -175,6 +175,7 @@ footer.site a{color:var(--kinari)}
 .story{padding-bottom:16px;font-family:var(--mincho);font-size:15px;line-height:2}
 .story h2{font-size:14px;font-weight:700;margin:18px 0 4px;color:var(--kin)}
 .story h2:first-child{margin-top:0}
+.story p{margin:0 0 1em}   /* 2026-10-29 龍さん：文が詰まって見えるので段落の間をあける */
 .spec{display:grid;grid-template-columns:6.5em minmax(0,1fr);gap:8px 12px;font-size:14px;padding-bottom:12px}
 .spec dt{color:var(--usu)}
 .howto{font-size:12.5px;color:var(--usu);padding-bottom:16px}
