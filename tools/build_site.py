@@ -925,12 +925,43 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
   <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button></div>
   <a class="logo" href="{pre(lang)}/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
   <div class="hnav">{navs}
+    <a class="favlink" href="{pre(lang)}/favorites/" aria-label="{FAV_T[lang]['fav']}">♡<b id="favn" hidden></b></a>
     <nav class="lang" aria-label="言語 / Language"><a href="{alt if lang == 'en' else path}" lang="ja" aria-current="{ja_cur}">日本語</a><a href="{alt if lang == 'ja' else path}" lang="en" aria-current="{en_cur}">EN</a></nav>
   </div>
 </div>{tabs}</header>
 ''' + drawer_html(lang)
 
-REVEAL_JS = '''<div class="toast" id="toast" role="status" aria-live="polite"></div>
+REVEAL_JS = '''<div class="cmpbar" id="cmpbar" hidden><span id="cmpbar-n"></span><a id="cmpbar-go" href="/compare/"></a><button type="button" id="cmpbar-x"></button></div>
+<script>
+(function(){
+  var en=location.pathname.indexOf('/en/')===0, L=en?{go:'Compare',x:'Clear',max:'You can compare up to 3 items',add:'Added to favorites',rm:'Removed from favorites'}:{go:'比較する',x:'クリア',max:'比較は3点までです',add:'お気に入りに追加しました',rm:'お気に入りから外しました'};
+  function get(k){try{return JSON.parse(localStorage.getItem(k)||'[]')||[];}catch(e){return [];}}
+  function set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  window.kzList={get:get,set:set};
+  function paint(){
+    var f=get('kbz_fav'),c=get('kbz_cmp');
+    document.querySelectorAll('[data-fav]').forEach(function(b){var on=f.indexOf(b.dataset.fav)>=0;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false');});
+    document.querySelectorAll('[data-cmp]').forEach(function(b){var on=c.indexOf(b.dataset.cmp)>=0;b.classList.toggle('on',on);b.setAttribute('aria-checked',on?'true':'false');});
+    var n=document.getElementById('favn');if(n){n.textContent=f.length;n.hidden=!f.length;}
+    var bar=document.getElementById('cmpbar'),onCmp=location.pathname.indexOf('/compare/')>=0;
+    if(bar){bar.hidden=!c.length||onCmp;document.getElementById('cmpbar-n').textContent=c.length+'/3';var g=document.getElementById('cmpbar-go');g.textContent=L.go;g.href=(en?'/en':'')+'/compare/';document.getElementById('cmpbar-x').textContent=L.x;}
+  }
+  window.kzPaint=paint;
+  function act(e){
+    var t=e.target.closest('[data-fav],[data-cmp]');if(!t)return;
+    if(e.type==='keydown'&&e.key!=='Enter'&&e.key!==' ')return;
+    e.preventDefault();e.stopPropagation();
+    if(t.dataset.fav){var f=get('kbz_fav'),i=f.indexOf(t.dataset.fav);if(i>=0){f.splice(i,1);window.kzToast&&kzToast(L.rm);}else{f.unshift(t.dataset.fav);window.kzToast&&kzToast(L.add);}set('kbz_fav',f);}
+    else{var c=get('kbz_cmp'),j=c.indexOf(t.dataset.cmp);if(j>=0)c.splice(j,1);else{if(c.length>=3){window.kzToast&&kzToast(L.max);return;}c.push(t.dataset.cmp);}set('kbz_cmp',c);}
+    paint();
+  }
+  document.addEventListener('click',act,true);document.addEventListener('keydown',act,true);
+  document.getElementById('cmpbar-x').addEventListener('click',function(){set('kbz_cmp',[]);paint();});
+  addEventListener('storage',paint);
+  paint();
+})();
+</script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 (function(){
   var h=document.querySelector('header.site');
@@ -1139,7 +1170,41 @@ NEWS_CSS = """
 """
 # ブログのCSSを先に読み込む（build_blog.py は ROOT, BASE 等を参照するので、ここで import できる）
 from build_blog import BLOG_CSS
-write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n' + BLOG_CSS.strip() + '\n' + NAV_CSS.strip() + '\n')
+FAV_CSS = """
+.ph{position:relative}
+.favb{position:absolute;right:8px;bottom:8px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.92);border:1px solid #ddd;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;z-index:2}
+.favb::before{content:"♡";color:#111}
+.favb.on::before{content:"♥";color:#c0392b}
+.favb.big{position:static;width:auto;height:auto;border-radius:999px;padding:6px 14px;font-size:14px;gap:6px}
+.favb.big::after{content:"お気に入り";font-size:13px}
+html[lang=en] .favb.big::after{content:"Favorite"}
+.cmpb{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--usu);margin:6px 0 2px;cursor:pointer;user-select:none}
+.cmpb::before{content:"";width:14px;height:14px;border:1px solid #888;border-radius:3px;background:#fff}
+.cmpb.on{color:var(--kinari)}
+.cmpb.on::before{background:#111;border-color:#111;box-shadow:inset 0 0 0 2px #fff}
+.pdpacts{display:flex;align-items:center;gap:16px;margin:10px 0 4px}
+.pdpacts .cmpb{margin:0;font-size:13px}
+.favlink{position:relative;font-size:20px;line-height:1;text-decoration:none;color:inherit;margin-right:10px}
+.favlink b{position:absolute;top:-6px;right:-10px;background:#111;color:#fff;font-size:10px;border-radius:999px;padding:1px 5px;font-weight:600}
+.cmpbar{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:50;background:#111;color:#fff;border-radius:999px;padding:8px 10px 8px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 6px 24px rgba(0,0,0,.2);font-size:14px;white-space:nowrap;width:max-content}
+body:has(.bar) .cmpbar{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+.toast{z-index:60}
+.kzpage .sec-head h1 small{display:block;margin-top:8px;font-size:13px;font-weight:400;letter-spacing:.04em;color:var(--usu);line-height:1.6}
+.cmpbar[hidden]{display:none}
+.cmpbar a{background:#fff;color:#111;border-radius:999px;padding:6px 16px;text-decoration:none;font-weight:600}
+.cmpbar button{background:none;border:0;color:#bbb;font-size:12px;cursor:pointer}
+.kzempty{color:var(--usu);padding:24px 0}
+.kzrm{background:none;border:1px solid #ccc;border-radius:999px;font-size:12px;padding:3px 10px;margin-top:6px;cursor:pointer}
+.kzcmp{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.kzcmp table{border-collapse:collapse;width:100%;font-size:13px;table-layout:fixed}
+.kzcmp tr:first-child th{border-bottom:0}
+.kzcmp th,.kzcmp td{border-bottom:1px solid #eee;padding:10px 8px;vertical-align:top;text-align:left}
+.kzcmp th{width:72px;color:var(--usu);font-weight:500;white-space:nowrap}
+.kzcmp td{width:auto}
+.kzcmp img{width:100%;max-width:160px;aspect-ratio:4/5;object-fit:cover;display:block;margin-bottom:6px;background:#f4f4f4}
+.kzcmp b{font-weight:500;display:block;font-size:12px;line-height:1.5}
+"""
+write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n' + BLOG_CSS.strip() + '\n' + NAV_CSS.strip() + '\n' + FAV_CSS.strip() + '\n')
 
 # 2026-10-23 龍さん決定：トップにブログの新着3本を写真つきで出す（日本語だけ。ブログは日本語のみのため）
 def blog_top_html(lang, n=3):
@@ -1184,6 +1249,35 @@ def is_new(p):
     except ValueError:
         return False
 
+# ---------- お気に入り・比較（2026-10-30 龍さん：IKEA の「比較する」とログイン不要のお気に入り）----------
+# 中身はこの端末のブラウザ（localStorage）だけに保存。ログイン・送信なし。比較は3点まで。
+FAV_T = {'ja': {'fav': 'お気に入り', 'add': 'お気に入りに追加', 'cmp': '比較する', 'cmp_go': '比較する', 'cmp_max': '比較は3点までです', 'clear': 'クリア',
+                'fav_h': 'お気に入り', 'fav_s': 'この端末だけに保存しています（ログイン不要）', 'fav_empty': 'まだありません。商品の ♡ を押すと、ここに並びます。',
+                'cmp_h': '比較', 'cmp_s': '3点まで並べて見られます', 'cmp_empty': '比較する商品がありません。商品の「比較する」にチェックを入れてください。',
+                'sold': 'この商品は売れました', 'remove': '外す', 'rows': ['価格', 'ブランド', 'サイズ', '素材', '年代', '色', '状態'], 'tax': '税込・送料込み', 'back': '商品一覧へ'},
+         'en': {'fav': 'Favorites', 'add': 'Add to favorites', 'cmp': 'Compare', 'cmp_go': 'Compare', 'cmp_max': 'You can compare up to 3 items', 'clear': 'Clear',
+                'fav_h': 'Favorites', 'fav_s': 'Saved on this device only (no login)', 'fav_empty': 'Nothing yet. Tap ♡ on an item to keep it here.',
+                'cmp_h': 'Compare', 'cmp_s': 'Up to 3 items side by side', 'cmp_empty': 'Nothing to compare. Tick “Compare” on an item.',
+                'sold': 'This item has sold', 'remove': 'Remove', 'rows': ['Price', 'Brand', 'Size', 'Material', 'Era', 'Colour', 'Condition'], 'tax': 'tax & shipping incl.', 'back': 'Back to shop'}}
+def fav_btn(p, lang):
+    return f'<span class="favb" role="button" tabindex="0" aria-pressed="false" data-fav="{esc(p["slug"])}" aria-label="{FAV_T[lang]["add"]}"></span>'
+def cmp_btn(p, lang):
+    return f'<span class="cmpb" role="checkbox" tabindex="0" aria-checked="false" data-cmp="{esc(p["slug"])}">{FAV_T[lang]["cmp"]}</span>'
+def _spec_pick(p, keys):
+    for k, v in p.get('spec') or []:
+        if k in keys:
+            return v
+    return ''
+def items_json():
+    """お気に入り・比較のページが読む、販売中の商品の一覧（/items.json）"""
+    out = {}
+    for p in avail_live:
+        out[p['slug']] = {'sku': p['sku'], 'brand': p.get('brand', ''), 'ja': loc(p, 'product_name', 'ja'), 'en': loc(p, 'product_name', 'en'),
+                          'price': site_price(p), 'img': thumb_of(p),
+                          'size': _spec_pick(p, ('サイズ',)), 'mat': _spec_pick(p, ('素材',)), 'era': _spec_pick(p, ('年代・生産', '年代')),
+                          'color': _spec_pick(p, ('色',)), 'cond': _spec_pick(p, ('状態',))}
+    return json.dumps(out, ensure_ascii=False, separators=(',', ':'))
+
 def card_html(p, lang, lazy=True, findable=False):
     t = T[lang]
     w = body_width(p)
@@ -1194,7 +1288,8 @@ def card_html(p, lang, lazy=True, findable=False):
         tag += '<span class="newtag">NEW</span>'
     wv = '' if w is None else f'{w:g}'
     return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}"' + (f' data-p="{site_price(p)}" data-q="{esc(search_text(p))}"' if findable else '') + '>'
-            f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}</div>'
+            f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}{"" if sold else fav_btn(p, lang)}</div>'
+            + ('' if sold else cmp_btn(p, lang)) +
             f'<div class="brand">{esc(p["brand"])}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
             f'<span class="fit" hidden></span>'
             f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small></div></a>')
@@ -1504,6 +1599,7 @@ for lang in ('ja', 'en'):
       <div class="ttl">{esc(loc(p, 'title', lang))}</div>
       <div class="sku">ITEM NO. {esc(p['sku'])}</div>
       <div class="price">{money(price, lang)}<small>{t['tax_ship']}</small></div>
+      {'' if sold else '<div class="pdpacts">' + fav_btn(p, lang).replace('class="favb"', 'class="favb big"') + cmp_btn(p, lang) + '</div>'}
       <div class="facts">{facts}</div>
       {noen}
       <div class="buybox">
@@ -1726,6 +1822,52 @@ for lang in ('ja', 'en'):
   {note}
   {body}
 </main>
+''' + foot(lang))
+
+# ---------- お気に入り（/favorites/）・比較（/compare/）----------
+write('/items.json', items_json())
+LIST_JS = """<script>
+(function(){
+  var root=document.getElementById('kzlist'),mode=root.dataset.mode,lang=root.dataset.lang,T=JSON.parse(root.dataset.t),P=lang==='en'?'/en':'';
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function yen(n){return lang==='en'?'¥'+Number(n).toLocaleString('en'):Number(n).toLocaleString('ja')+'円';}
+  fetch('/items.json').then(function(r){return r.json();}).then(function(D){
+    function draw(){
+      var key=mode==='fav'?'kbz_fav':'kbz_cmp',L=kzList.get(key);
+      if(!L.length){root.innerHTML='<p class="kzempty">'+esc(mode==='fav'?T.fav_empty:T.cmp_empty)+'</p>';return;}
+      if(mode==='fav'){
+        root.innerHTML='<div class="grid">'+L.map(function(s){var d=D[s];
+          if(!d)return '<div class="card sold kzgone"><div class="ph"></div><div class="nm">'+esc(T.sold)+'</div><button type="button" class="kzrm" data-rm="'+esc(s)+'">'+esc(T.remove)+'</button></div>';
+          return '<a class="card" href="'+P+'/journal/'+esc(s)+'/"><div class="ph ld"><img src="'+esc(d.img)+'" alt="'+esc(d[lang]||d.ja)+'" loading="lazy"><span class="favb on" role="button" tabindex="0" aria-pressed="true" data-fav="'+esc(s)+'"></span></div><span class="cmpb" role="checkbox" tabindex="0" aria-checked="false" data-cmp="'+esc(s)+'">'+esc(T.cmp)+'</span><div class="brand">'+esc(d.brand)+'</div><div class="nm">'+esc(d[lang]||d.ja)+'</div><div class="pr">'+yen(d.price)+'<small>'+esc(T.tax)+'</small></div></a>';}).join('')+'</div>';
+      }else{
+        var cols=L.map(function(s){return [s,D[s]];});
+        var head='<tr><th></th>'+cols.map(function(c){var s=c[0],d=c[1];if(!d)return '<td class="kzgone">'+esc(T.sold)+'<br><button type="button" class="kzrm" data-rm="'+esc(s)+'">'+esc(T.remove)+'</button></td>';
+          return '<td><a href="'+P+'/journal/'+esc(s)+'/"><img src="'+esc(d.img)+'" alt="" loading="lazy"><b>'+esc(d[lang]||d.ja)+'</b></a><button type="button" class="kzrm" data-rm="'+esc(s)+'">'+esc(T.remove)+'</button></td>';}).join('')+'</tr>';
+        var keys=[function(d){return yen(d.price)},'brand','size','mat','era','color','cond'];
+        var body=T.rows.map(function(r,i){return '<tr><th>'+esc(r)+'</th>'+cols.map(function(c){var d=c[1];if(!d)return '<td></td>';var k=keys[i];return '<td>'+(typeof k==='function'?k(d):esc(d[k]||'—'))+'</td>';}).join('')+'</tr>';}).join('');
+        root.innerHTML='<div class="kzcmp"><table style="min-width:'+(80+150*cols.length)+'px"><colgroup><col style="width:72px">'+cols.map(function(){return '<col>';}).join('')+'</colgroup>'+head+body+'</table></div>';
+      }
+    }
+    root.addEventListener('click',function(e){var b=e.target.closest('[data-rm]');if(!b)return;var key=mode==='fav'?'kbz_fav':'kbz_cmp',L=kzList.get(key);L.splice(L.indexOf(b.dataset.rm),1);kzList.set(key,L);draw();kzPaint();});
+    if(mode==='fav')root.addEventListener('click',function(e){if(e.target.closest('[data-fav]'))setTimeout(draw,0);});
+    draw();
+  }).catch(function(err){root.innerHTML='<p class="kzempty">読み込めませんでした（'+esc(err&&err.message)+'）</p>';});
+})();
+</script>"""
+for lang in ('ja', 'en'):
+    P = pre(lang)
+    F = FAV_T[lang]
+    for mode, slug in (('fav', 'favorites'), ('cmp', 'compare')):
+        h, sub = (F['fav_h'], F['fav_s']) if mode == 'fav' else (F['cmp_h'], F['cmp_s'])
+        title = (h + '｜古着屋 小判鮫 KOBANZAME') if lang == 'ja' else (h + ' | Kobanzame')
+        write(P + f'/{slug}/index.html', head(lang, title, sub, P + f'/{slug}/', noindex=True) + f'''
+<main class="wrap kzpage">
+  <div class="crumb"><a href="{P}/">HOME</a><span>／</span><span>{h}</span></div>
+  <div class="sec-head"><h1>{h}<small>{sub}</small></h1></div>
+  <div id="kzlist" data-mode="{mode}" data-lang="{lang}" data-t="{esc(json.dumps(F, ensure_ascii=False))}"><p class="kzempty">…</p></div>
+  <p style="margin-top:28px"><a class="btn" href="{P}/#list">{F['back']}</a></p>
+</main>
+{LIST_JS}
 ''' + foot(lang))
 
 # ---------- ブログ ----------
