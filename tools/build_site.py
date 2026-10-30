@@ -134,7 +134,7 @@ T = {
   'hold_p': '川越・元町の店頭で{n}日間お取り置きします。下の内容をInstagramのDMかメールで送ってください。',
   'hold_code': '取り置き希望／{sku}／来店予定日：　月　日／お名前：',
   'hold_to': '送り先', 'hold_mail': 'メール', 'hold_note': '店頭やネットで先に売れていた場合は、こちらからご連絡します。',
-  'ship': '<b>一点もの・在庫1点。</b>Squareの安全な決済ページへ進みます。店頭・他の販路で先に売れた場合は、ご注文をお受けできないことがあります（その際は全額返金いたします）。<br>決済確認後3日以内に発送（月・火定休を除く）',
+  'ship': '<b>一点もの・在庫1点。</b>Squareの安全な決済ページへ進みます。<br>先に店頭などで売れていた場合は、全額返金いたします。<br>決済確認後3日以内に発送（月・火定休を除く）',
   'stock1': '在庫1点', 'width': '身幅 {w}cm',
   'story': 'この一着の話', 'specs': '仕様・サイズ', 'delivery': '配送・返品',
   'howto': '実寸は平置きで測っています。身幅＝脇の下から脇の下、着丈＝襟のつけ根から裾まで。お手持ちの服を同じように測って比べると、サイズの失敗が減ります。',
@@ -687,6 +687,7 @@ footer.site a{color:var(--kinari)}
 .story{padding-bottom:16px;font-family:var(--mincho);font-size:15px;line-height:2}
 .story h2{font-size:14px;font-weight:700;margin:18px 0 4px;color:var(--kin)}
 .story h2:first-child{margin-top:0}
+.story p{margin:0 0 1em}   /* 2026-10-29 龍さん：文が詰まって見えるので段落の間をあける */
 .spec{display:grid;grid-template-columns:6.5em minmax(0,1fr);gap:8px 12px;font-size:14px;padding-bottom:12px}
 .spec dt{color:var(--usu)}
 .howto{font-size:12.5px;color:var(--usu);padding-bottom:16px}
