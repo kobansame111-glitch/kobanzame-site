@@ -274,6 +274,7 @@ if NEWHOURS:
     T['en'].update({
         'util': '<b>New arrivals every Wednesday</b>　Shipping included · Dispatched within 3 days of payment (closed Mondays)',
         'days': 'Tue–Sun 13:00–20:00 (closed Mon, open on holidays)',
+        'trust': [(a, 'After payment (closed Mondays)' if a == 'Ships in 3 days' else b) for a, b in T['en']['trust']],  # 2026-10-30 英語版の「3日以内に発送」の欄が月火定休のまま残っていたので追加
         'store_dl': [('Hours', '13:00–20:00 (until 22:00 in Jul–Aug)') if a == 'Hours' else ('Closed', 'Mondays (open on public holidays)') if a == 'Closed' else (a, b) for a, b in T['en']['store_dl']],
         'delivery_p': T['en']['delivery_p'].replace(' (closed Mon & Tue)', ' (closed Mondays)'),
     })
