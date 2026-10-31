@@ -12,7 +12,7 @@ import base64, json, os, sys, urllib.request, urllib.error
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, 'data', 'products.json')
-SITE = 'https://kobanzame-site.pages.dev'
+SITE = 'https://kobanzame-kawagoe.com'
 MODEL = os.environ.get('GENRE_MODEL', 'gemini-2.5-flash')
 MIN_CONF = 0.7
 GENRES = {

@@ -40,7 +40,7 @@ def _site_var(name, default=None):
     return getattr(mod, name, default)
 
 ROOT = _site_var('ROOT') or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE = _site_var('BASE') or 'https://kobanzame-site.pages.dev'
+BASE = _site_var('BASE') or 'https://kobanzame-kawagoe.com'
 TODAY = _site_var('TODAY') or os.environ.get('SITE_TODAY') or datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%Y-%m-%d')
 
 BLOG_DIR = os.path.join(ROOT, 'data/blog/posts')

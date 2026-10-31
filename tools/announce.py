@@ -105,7 +105,7 @@ def draw(items, total, date_label, out):
     d.line((MARGIN, H - 160, W - MARGIN, H - 160), fill=RULE, width=2)
     more = f'　ほか {total - len(shown)} 点' if total > len(shown) else ''
     d.text((MARGIN, H - 140), f'全 {total} 点・すべて一点ものです{more}', font=font(SANS, 30), fill=INK)
-    d.text((MARGIN, H - 92), 'kobanzame-site.pages.dev ／ 川越の古民家の古着屋', font=font(SANS, 26), fill=USU)
+    d.text((MARGIN, H - 92), 'kobanzame-kawagoe.com ／ 川越の古民家の古着屋', font=font(SANS, 26), fill=USU)
     im.save(out, quality=90, optimize=True)
 
 
