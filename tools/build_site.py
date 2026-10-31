@@ -972,7 +972,7 @@ def drawer_html(lang):
     n_all = len([p for p in live if not is_sold(p)])
     n_new = len([p for p in avail_live if is_new(p)])
     cats = (f'<li><a href="{P}/?cat=new#list" data-cat="new">{NEW_LABEL[lang]}<small>{n_new}</small></a></li>' if n_new else '') + ''.join(f'<li><a href="{P}/?cat={c}#list" data-cat="{c}">{t["cats"][c]}<small>{len([p for p in live if not is_sold(p) and cat_of(p) == c])}</small></a></li>' for c in CATS_PRESENT)
-    more = ''.join(f'<li><a href="{h}">{l}</a></li>' for h, l in t['nav'][1:] + ([T_WS_NAV[lang]] if WS_OPEN else []))
+    more = ''.join(f'<li><a href="{h}">{l}</a></li>' for h, l in t['nav'][1:] + ([T_WS_NAV[lang]] if WS_OPEN else []) + [(f'{P}/favorites/', '♡ ' + KX.TX[lang]['fav_title'])])
     return f'''<div class="drawer-bg" id="drawerbg" hidden></div>
 <nav class="drawer" id="drawer" aria-label="{t['menu']}" aria-hidden="true">
   <div class="dh"><b>小判鮫</b><button type="button" class="x" id="drawerx">{t['menu_close']}</button></div>
@@ -1158,7 +1158,8 @@ ZOOM_CSS = """
 .lb.zoom .lbh,.lb.zoom .lbp,.lb.zoom .lbn{display:none}
 @media(max-width:640px){.lb .lbp,.lb .lbn{display:none}}
 """
-write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n' + BLOG_CSS.strip() + '\n' + NAV_CSS.strip() + '\n' + ZOOM_CSS.strip() + '\n')
+import site_extras as KX   # 2026-10-31 お気に入り＋比較・店頭で見たい・手持ちの服と比べる（中身は tools/site_extras.py）
+write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n' + BLOG_CSS.strip() + '\n' + NAV_CSS.strip() + '\n' + ZOOM_CSS.strip() + '\n' + KX.EXTRAS_CSS.strip() + '\n')
 
 # 2026-10-23 龍さん決定：トップにブログの新着3本を写真つきで出す（日本語だけ。ブログは日本語のみのため）
 def blog_top_html(lang, n=3):
@@ -1594,12 +1595,14 @@ for lang in ('ja', 'en'):
       <div class="buybox">
         {buy}
         {hold}
+        {KX.product_buy_html(p, lang, sold, HOURS_LINE[lang], ADDR[lang], SHOP['gmaps'])}
         <div class="ship">{t['ship']}</div>
       </div>
       <ul class="points">{points}</ul>
       <details open><summary>{t['story']}</summary><div class="story"><p>{esc(loc(p, 'lead', lang))}</p>
 {loc(p, 'body_html', lang)}</div></details>
       <details><summary>{t['specs']}</summary><dl class="spec">{spec}</dl><p class="howto">{t['howto']}</p></details>
+      {KX.product_fit_html(p, lang, cat_of(p))}
       <details><summary>{t['delivery']}</summary><div class="story"><p>{t['delivery_p']}</p></div></details>
       <div class="byline">{t['byline']}</div>
       {('<p class="toblog"><a href="/blog/' + p['slug'] + '/">' + ('この一着のことをブログで読む →' if lang == 'ja' else 'Read about this piece on our blog (Japanese) →') + '</a></p>') if p['slug'] in BLOG_SLUGS else ''}
@@ -1609,6 +1612,7 @@ for lang in ('ja', 'en'):
 </main>
 {bar}
 {GAL_JS}
+{KX.extras_js(lang, HOLIDAY_MONDAYS, NEWHOURS_FROM, CLOSED_WEEKDAYS_JS)}
 ''' + foot(lang)
         write(path + 'index.html', page)
 
@@ -1812,6 +1816,13 @@ for lang in ('ja', 'en'):
   {body}
 </main>
 ''' + foot(lang))
+
+# ---------- お気に入り（2026-10-31・tools/site_extras.py）：人ごとのページなので検索には出さない（noindex・sitemap に入れない）----------
+write('/assets/items.json', KX.items_json(live, loc, site_price, is_sold, thumb_of, cat_of))
+for lang in ('ja', 'en'):
+    _t = KX.TX[lang]
+    write(pre(lang) + '/favorites/index.html', head(lang, _t['fav_title'] + ('｜' + SHOP['name'] if lang == 'ja' else ' | Kobanzame'), _t['fav_local'], pre(lang) + '/favorites/', noindex=True)
+          + KX.favorites_page_main(lang) + KX.favorites_js(lang) + foot(lang))
 
 # ---------- ブログ ----------
 from build_blog import build_blog
