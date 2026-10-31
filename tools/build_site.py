@@ -17,7 +17,7 @@ v2で変わったこと
 import json, os, html, re, math, datetime, glob, unicodedata
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE = 'https://kobanzame-site.pages.dev'   # 独自ドメイン取得後はここだけ差し替える
+BASE = 'https://kobanzame-kawagoe.com'   # 独自ドメイン取得後はここだけ差し替える
 TODAY = os.environ.get('SITE_TODAY') or datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%Y-%m-%d')
 
 ADD_TAX = True           # 2026-10-06 龍さん決定B：Square登録価格は税抜 → 表示・請求とも ×1.1 を10円単位に切り上げ（63番の QP.ADD_TAX と必ず同じにする）
@@ -972,7 +972,7 @@ def drawer_html(lang):
     n_all = len([p for p in live if not is_sold(p)])
     n_new = len([p for p in avail_live if is_new(p)])
     cats = (f'<li><a href="{P}/?cat=new#list" data-cat="new">{NEW_LABEL[lang]}<small>{n_new}</small></a></li>' if n_new else '') + ''.join(f'<li><a href="{P}/?cat={c}#list" data-cat="{c}">{t["cats"][c]}<small>{len([p for p in live if not is_sold(p) and cat_of(p) == c])}</small></a></li>' for c in CATS_PRESENT)
-    more = ''.join(f'<li><a href="{h}">{l}</a></li>' for h, l in t['nav'][1:] + ([T_WS_NAV[lang]] if WS_OPEN else []))
+    more = ''.join(f'<li><a href="{h}">{l}</a></li>' for h, l in t['nav'][1:] + ([T_WS_NAV[lang]] if WS_OPEN else []) + [(f'{P}/favorites/', '♡ ' + KX.TX[lang]['fav_title'])])
     return f'''<div class="drawer-bg" id="drawerbg" hidden></div>
 <nav class="drawer" id="drawer" aria-label="{t['menu']}" aria-hidden="true">
   <div class="dh"><b>小判鮫</b><button type="button" class="x" id="drawerx">{t['menu_close']}</button></div>
@@ -1139,7 +1139,27 @@ NEWS_CSS = """
 """
 # ブログのCSSを先に読み込む（build_blog.py は ROOT, BASE 等を参照するので、ここで import できる）
 from build_blog import BLOG_CSS
-write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n' + BLOG_CSS.strip() + '\n' + NAV_CSS.strip() + '\n')
+# 2026-10-31 龍さん要望：商品写真をクリック（タップ）すると大きく開き、もう一度押すとズーム（Amazonのような見え方）
+ZOOM_CSS = """
+.gal img{cursor:zoom-in}
+.lb{position:fixed;inset:0;z-index:1000;background:#120A07;display:flex;align-items:center;justify-content:center;touch-action:none}
+.lb[hidden]{display:none}
+.lb .lbv{width:100%;height:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.lb .lbv img{max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in;transition:transform .25s ease;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
+.lb.zoom .lbv img{cursor:zoom-out}
+.lb.pan .lbv img{transition:none}
+.lb.single .lbp,.lb.single .lbn{display:none}
+.lb button{position:absolute;background:rgba(244,240,232,.92);color:#120A07;border:0;width:48px;height:48px;font-size:22px;line-height:48px;cursor:pointer;font-family:var(--gothic)}
+.lb .lbx{top:12px;right:12px}
+.lb .lbp{left:12px;top:50%;transform:translateY(-50%)}
+.lb .lbn{right:12px;top:50%;transform:translateY(-50%)}
+.lb .lbc{position:absolute;left:12px;top:12px;line-height:24px;color:#F4F0E8;font-size:13px;font-variant-numeric:tabular-nums;background:rgba(18,10,7,.6);padding:4px 12px}
+.lb .lbh{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);color:#F4F0E8;font-size:12px;opacity:.8;white-space:nowrap}
+.lb.zoom .lbh,.lb.zoom .lbp,.lb.zoom .lbn{display:none}
+@media(max-width:640px){.lb .lbp,.lb .lbn{display:none}}
+"""
+import site_extras as KX   # 2026-10-31 お気に入り＋比較・店頭で見たい・手持ちの服と比べる（中身は tools/site_extras.py）
+write('/assets/site.css', CSS.strip() + '\n' + A11Y_CSS.strip() + '\n' + NEWS_CSS.strip() + '\n' + BLOG_CSS.strip() + '\n' + NAV_CSS.strip() + '\n' + ZOOM_CSS.strip() + '\n' + KX.EXTRAS_CSS.strip() + '\n')
 
 # 2026-10-23 龍さん決定：トップにブログの新着3本を写真つきで出す（日本語だけ。ブログは日本語のみのため）
 def blog_top_html(lang, n=3):
@@ -1413,6 +1433,72 @@ for lang in ('ja', 'en'):
   var hb=document.getElementById('holdbtn'), hx=document.getElementById('holdbox');
   if(hb&&hx){hb.addEventListener('click',function(){hx.hidden=!hx.hidden; hb.setAttribute('aria-expanded',String(!hx.hidden));});}
 })();
+/* 2026-10-31 写真の拡大表示：写真を押す→全画面で開く／もう一度押す→2.5倍ズーム（PCはマウスを動かすと見る場所が動く・スマホは指でなぞる）／左右で次の写真／Escか×か写真の外の黒い所で閉じる */
+(function(){
+  var g=document.getElementById('gal'); if(!g) return;
+  var ims=[].slice.call(g.querySelectorAll('img')); if(!ims.length) return;
+  var en=document.documentElement.lang==='en', S=2.5, lb, view, big, cnt, cur=0, zoomed=false, ox=50, oy=50, dn=null;
+  function build(){
+    lb=document.createElement('div'); lb.className='lb'; lb.hidden=true;
+    lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true'); lb.setAttribute('aria-label',en?'Photo viewer':'写真の拡大表示');
+    lb.innerHTML='<div class="lbv"><img alt=""></div><div class="lbh"></div><div class="lbc"></div>'
+      +'<button type="button" class="lbp" aria-label="'+(en?'Previous photo':'前の写真')+'">&#8249;</button>'
+      +'<button type="button" class="lbn" aria-label="'+(en?'Next photo':'次の写真')+'">&#8250;</button>'
+      +'<button type="button" class="lbx" aria-label="'+(en?'Close':'閉じる')+'">&#10005;</button>';
+    document.body.appendChild(lb);
+    view=lb.querySelector('.lbv'); big=view.querySelector('img'); cnt=lb.querySelector('.lbc');
+    lb.querySelector('.lbh').textContent=en?'Click or tap the photo to zoom':'写真を押すとズームします';
+    if(ims.length===1) lb.classList.add('single');
+    big.draggable=false; big.addEventListener('dragstart',function(e){e.preventDefault();});
+    lb.querySelector('.lbx').addEventListener('click',close);
+    lb.querySelector('.lbp').addEventListener('click',function(){show(cur-1);});
+    lb.querySelector('.lbn').addEventListener('click',function(){show(cur+1);});
+    view.addEventListener('pointerdown',function(e){if(!e.isPrimary) return; dn={x:e.clientX,y:e.clientY,ox:ox,oy:oy};});
+    view.addEventListener('pointermove',function(e){
+      if(!zoomed||!e.isPrimary) return; lb.classList.add('pan');
+      if(e.pointerType==='mouse'&&!dn){ /* PC：マウスの位置を見る（Amazonと同じ） */
+        var w=big.offsetWidth, h=big.offsetHeight, L=(view.clientWidth-w)/2, T=(view.clientHeight-h)/2, vr=view.getBoundingClientRect();
+        setO((e.clientX-vr.left-L)/w*100,(e.clientY-vr.top-T)/h*100); return; }
+      if(dn){ /* 指（またはマウスのドラッグ）でなぞる：なぞった方向に写真が動く */
+        setO(dn.ox-(e.clientX-dn.x)/big.offsetWidth*100/(S-1), dn.oy-(e.clientY-dn.y)/big.offsetHeight*100/(S-1)); }
+    });
+    view.addEventListener('pointerup',function(e){
+      if(!dn||!e.isPrimary) return; var dx=e.clientX-dn.x, dy=e.clientY-dn.y, moved=Math.abs(dx)>10||Math.abs(dy)>10; dn=null;
+      if(!moved){ if(e.target===big) toggle(e); else if(!zoomed) close(); return; }
+      if(!zoomed&&Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)) show(cur+(dx<0?1:-1));
+    });
+    view.addEventListener('pointercancel',function(){dn=null;});
+    document.addEventListener('keydown',function(e){
+      if(lb.hidden) return;
+      if(e.key==='Escape'){ zoomed?unzoom():close(); }
+      else if(e.key==='ArrowRight') show(cur+1);
+      else if(e.key==='ArrowLeft') show(cur-1);
+    });
+  }
+  function setO(x,y){ ox=Math.max(0,Math.min(100,x)); oy=Math.max(0,Math.min(100,y)); big.style.transformOrigin=ox+'% '+oy+'%'; }
+  function toggle(e){
+    if(zoomed){ unzoom(); return; }
+    var w=big.offsetWidth, h=big.offsetHeight, vr=view.getBoundingClientRect(), L=(view.clientWidth-w)/2, T=(view.clientHeight-h)/2;
+    setO((e.clientX-vr.left-L)/w*100,(e.clientY-vr.top-T)/h*100);
+    zoomed=true; lb.classList.remove('pan'); lb.classList.add('zoom'); big.style.transform='scale('+S+')';
+  }
+  function unzoom(){ zoomed=false; lb.classList.remove('zoom','pan'); big.style.transform=''; }
+  function show(i){
+    var n=ims.length; cur=(i%n+n)%n; unzoom(); setO(50,50);
+    big.src=ims[cur].currentSrc||ims[cur].src; big.alt=ims[cur].alt||''; cnt.textContent=(cur+1)+' / '+n;
+  }
+  var opener=null;
+  function open(i){ if(!lb) build(); opener=document.activeElement; show(i); lb.hidden=false; document.documentElement.style.overflow='hidden'; lb.querySelector('.lbx').focus(); }
+  function close(){ unzoom(); lb.hidden=true; try{ g.scrollTo({left:ims[cur].offsetLeft-g.offsetLeft-(g.clientWidth-ims[cur].offsetWidth)/2}); }catch(x){} /* スマホ：一覧の写真をビューアで見ていた写真に合わせる */ document.documentElement.style.overflow=''; if(opener&&opener.focus) opener.focus(); }
+  ims.forEach(function(im,i){
+    im.setAttribute('tabindex','0'); im.setAttribute('role','button');
+    im.setAttribute('aria-label',(im.alt||'')+(en?' (open larger)':'（拡大して見る）'));
+    var sx=null, sy=null;
+    im.addEventListener('pointerdown',function(e){sx=e.clientX; sy=e.clientY;});
+    im.addEventListener('click',function(e){ var moved=(sx!==null&&e.detail!==0)&&(Math.abs(e.clientX-sx)>10||Math.abs(e.clientY-sy)>10); sx=sy=null; if(moved) return; open(i); }); /* スマホで横にめくった時は開かない */
+    im.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(i);} });
+  });
+})();
 </script>'''
     for p in products:
         rel = release(p)
@@ -1509,12 +1595,14 @@ for lang in ('ja', 'en'):
       <div class="buybox">
         {buy}
         {hold}
+        {KX.product_buy_html(p, lang, sold, HOURS_LINE[lang], ADDR[lang], SHOP['gmaps'])}
         <div class="ship">{t['ship']}</div>
       </div>
       <ul class="points">{points}</ul>
       <details open><summary>{t['story']}</summary><div class="story"><p>{esc(loc(p, 'lead', lang))}</p>
 {loc(p, 'body_html', lang)}</div></details>
       <details><summary>{t['specs']}</summary><dl class="spec">{spec}</dl><p class="howto">{t['howto']}</p></details>
+      {KX.product_fit_html(p, lang, cat_of(p))}
       <details><summary>{t['delivery']}</summary><div class="story"><p>{t['delivery_p']}</p></div></details>
       <div class="byline">{t['byline']}</div>
       {('<p class="toblog"><a href="/blog/' + p['slug'] + '/">' + ('この一着のことをブログで読む →' if lang == 'ja' else 'Read about this piece on our blog (Japanese) →') + '</a></p>') if p['slug'] in BLOG_SLUGS else ''}
@@ -1524,6 +1612,7 @@ for lang in ('ja', 'en'):
 </main>
 {bar}
 {GAL_JS}
+{KX.extras_js(lang, HOLIDAY_MONDAYS, NEWHOURS_FROM, CLOSED_WEEKDAYS_JS)}
 ''' + foot(lang)
         write(path + 'index.html', page)
 
@@ -1727,6 +1816,13 @@ for lang in ('ja', 'en'):
   {body}
 </main>
 ''' + foot(lang))
+
+# ---------- お気に入り（2026-10-31・tools/site_extras.py）：人ごとのページなので検索には出さない（noindex・sitemap に入れない）----------
+write('/assets/items.json', KX.items_json(live, loc, site_price, is_sold, thumb_of))
+for lang in ('ja', 'en'):
+    _t = KX.TX[lang]
+    write(pre(lang) + '/favorites/index.html', head(lang, _t['fav_title'] + ('｜' + SHOP['name'] if lang == 'ja' else ' | Kobanzame'), _t['fav_local'], pre(lang) + '/favorites/', noindex=True)
+          + KX.favorites_page_main(lang) + KX.favorites_js(lang) + foot(lang))
 
 # ---------- ブログ ----------
 from build_blog import build_blog
