@@ -1,6 +1,6 @@
 # 古着屋 小判鮫（KOBANZAME）
 
-> 埼玉県川越市元町1-14-5の、築約80年の古民家で営業している古着屋。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱う。商品はすべて一点もの。運営は株式会社プラグ。英語ページは https://kobanzame-site.pages.dev/en/ 。
+> 埼玉県川越市元町1-14-5の、築約80年の古民家で営業している古着屋。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱う。商品はすべて一点もの。運営は株式会社プラグ。英語ページは https://kobanzame-kawagoe.com/en/ 。
 
 ## 基本情報
 - 店名: 古着屋 小判鮫（こばんざめ / KOBANZAME）。英名は Remora（Remora Vintage Clothing Kawagoe）
@@ -19,15 +19,15 @@
 - 2026-10-30: 11月1日より営業時間が13時〜20時に変わり、定休日も月曜日に変更となります（祝日の月曜日は営業いたします）。（2026-11-21まで）
 
 ## ページ
-- [トップ・よくある質問](https://kobanzame-site.pages.dev/)
-- [お知らせ](https://kobanzame-site.pages.dev/news/)
-- [ジャーナル](https://kobanzame-site.pages.dev/journal/)
-- [川越で古着屋を探している方へ（案内）](https://kobanzame-site.pages.dev/guide/)
-- [ブログ](https://kobanzame-site.pages.dev/blog/)
-- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・予約は準備中）](https://kobanzame-site.pages.dev/workshop/)
-- [English](https://kobanzame-site.pages.dev/en/)
-- [特定商取引法に基づく表記](https://kobanzame-site.pages.dev/tokushoho/)
-- [プライバシーポリシー](https://kobanzame-site.pages.dev/privacy/)
+- [トップ・よくある質問](https://kobanzame-kawagoe.com/)
+- [お知らせ](https://kobanzame-kawagoe.com/news/)
+- [ジャーナル](https://kobanzame-kawagoe.com/journal/)
+- [川越で古着屋を探している方へ（案内）](https://kobanzame-kawagoe.com/guide/)
+- [ブログ](https://kobanzame-kawagoe.com/blog/)
+- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・予約は準備中）](https://kobanzame-kawagoe.com/workshop/)
+- [English](https://kobanzame-kawagoe.com/en/)
+- [特定商取引法に基づく表記](https://kobanzame-kawagoe.com/tokushoho/)
+- [プライバシーポリシー](https://kobanzame-kawagoe.com/privacy/)
 
 ## よくある質問
 - 小判鮫はどこにある古着屋ですか？ — 埼玉県川越市元町1-14-5（〒350-0062）にある、築約80年の古民家で営業している古着屋です。運営は株式会社プラグです。
@@ -42,105 +42,105 @@
 - 店頭とネットの在庫は同じですか？ — はい。このサイト・店頭・メルカリShopsで同じ一点を販売しています（在庫を共有しています）。売れた時点でほかの販路は自動で止まりますが、ごくまれに同時に売れた場合は、先に決済が完了したご注文を優先し、もう一方のお客様にはご連絡のうえ全額返金いたします。
 
 ## ブログ（商品の紹介・読みもの）
-- [川越でスエード・レザーの古着を探している方へ（ジャケット・パンツ・ベスト・ブーツ）](https://kobanzame-site.pages.dev/blog/kawagoe-suede-leather/): 川越の古民家古着屋・小判鮫にある、1970〜90年代頃のスエードレザーのジャケットやパンツ、レザーのベストとブーツをまとめて紹介します。サイズの目安と価格つきです。
-- [ゴートスエード A-1タイプ ボンバージャケット（1980〜90年代頃・タバコブラウン）](https://kobanzame-site.pages.dev/blog/k11411/): 山羊革のスエードを使ったA-1タイプのボンバージャケットが入荷。タバコブラウンの本体にキャメルとオリーブのリブ。1980〜90年代頃の一着です。
-- [BEAR RIVER リアルツリーカモ ジップアップパーカー（フリース裏地）](https://kobanzame-site.pages.dev/blog/k11253-bear-river/): BEAR RIVERのリアルツリーカモ柄ジップアップパーカーが入荷。ポリエステル素材にフリース裏地付き。ブラウンとオリーブグリーンの柄を紹介します。
-- [DUKEDOM ニットカーディガン（バーガンディ×ブラック・日本製）](https://kobanzame-site.pages.dev/blog/k11437-dukedom/): DUKEDOMの日本製ニットカーディガンが入荷。バーガンディ×ブラックのパネル切り替えにホワイトラインが入った、ボウリングシャツ型です。写真と一緒に紹介します。
-- [Levi's 517 ブーツカット カスタムプリントデニム（ライトインディゴ・W32）](https://kobanzame-site.pages.dev/blog/k11420-levi-strauss-co-517-w32-l36/): Levi's 517のブーツカットデニムが入荷。左脚にライオンと文字のカスタムプリントが入った、ライトインディゴのW32サイズを写真と一緒に紹介します。
-- [NIKE スタープリント スウェット（ラベンダー×レッド・2000年代頃）](https://kobanzame-site.pages.dev/blog/k11415-nike/): NIKEのコットンスウェットが入荷。ラベンダーパープルの地にレッドのスタープリントと胸元にホワイトスウッシュ。2000年代頃の一着を紹介します。
-- [オールドユニクロ Vネックカーディガン（バターイエロー・旧タグ）](https://kobanzame-site.pages.dev/blog/k11438-uniqlo-504-0403/): 旧ロゴタグ付きのオールドユニクロ、綿100%のVネックカーディガンが入荷。バターイエローの無地で、経年の風合いがあります。写真と一緒に紹介します。
-- [A&F INTERNATIONAL スエードレザー カーコート（タン×ネイビー）](https://kobanzame-site.pages.dev/blog/k11309-a-f-international/): A&F INTERNATIONALのスエードレザーカーコートが入荷。豚革のボディに牛革の衿とカフスを合わせた、タン×ネイビーの配色を写真と一緒に紹介します。
-- [Levi's グラフィックプリント ブーツカットデニム（2000年代頃・レディース）](https://kobanzame-site.pages.dev/blog/k11418-levi-s-levi-s/): Levi'sのブーツカットデニムが入荷。フロントに大判のグラフィックプリントが入った、2000年代頃のレディースデニムを写真と一緒に紹介します。
-- [Abercrombie & Fitch KEMPSHALL ダウンジャケット（マスタードイエロー・XL）](https://kobanzame-site.pages.dev/blog/k11449-abercrombie-fitch-kempshall-jacket-xl-made-in-china/): Abercrombie & FitchのKEMPSHALLダウンジャケットが入荷。マスタードイエローのパファー、フェザー×ダウンの中綿でXLサイズです。写真と一緒に紹介します。
-- [米軍 デザートナイトカモ パーカー（1980年代頃・実物）](https://kobanzame-site.pages.dev/blog/k11463-lancer-clothing-corp-dla100-81-c-2532-nsn-8415-01-102-6281/): 1980年代頃の米軍デザートナイトカモパーカーが入荷。LANCER CLOTHING CORP.製造の実物支給品。独特のグリッド柄を写真と一緒に紹介します。
-- [メキシコ製 シルバー925 コーラルのスライドトップネックレス](https://kobanzame-site.pages.dev/blog/k11181-mexican-silver-coral-slide-necklace/): メキシコ製のシルバー925ネックレス。コーラル（珊瑚）のスライドトップ付き、チェーン約55cm。写真と一緒に紹介します。
-- [MACHUPICCHU ARTESANOS 純銀装飾のショットグラス（ペルー製）](https://kobanzame-site.pages.dev/blog/k11054-peru-silver-shot-glass/): ペルー製のショットグラス。MACHUPICCHU ARTESANOS、ガラスに純銀（Silver 990）の装飾。写真と一緒に紹介します。
-- [Blackstone by Petris sport タッセルローファー（イタリア製）](https://kobanzame-site.pages.dev/blog/k10780-blackstone-petris-tassel-loafer/): Blackstone by Petris sport のタッセルローファー。本革、ブラック、イタリア製。EU40（約25.5cm）。¥17,380（税込）。
-- [Finn Comfort レザーブーツ（ドイツ製・デッドストック）](https://kobanzame-site.pages.dev/blog/k10837-finn-comfort-leather-boots/): ドイツの Finn Comfort のレザーブーツ。未使用のデッドストック。EU38（24cm）、ブラック。写真と一緒に紹介します。
-- [Dragon Ball Z ©2001 プリントTシャツ（FUNimation／Olaes Design）](https://kobanzame-site.pages.dev/blog/k10857-dragon-ball-z-2001-tee/): 2000年代頃の Dragon Ball Z 公式ライセンスTシャツ（背中のプリントに © 2001）。イエローのボディに悟飯のプリント。綿100%、メキシコ製。写真と一緒に紹介します。
-- [スクービー・ドゥー タイダイTシャツ（1990年代頃・USA製）](https://kobanzame-site.pages.dev/blog/k10159-scooby-doo-tie-dye-tee/): 1990年代頃（プリントに © 1997）、USA製のスクービー・ドゥーTシャツ。ブルーとパープルのタイダイ染め。Changes ボディ。サイズ L。¥9,440（税込）。
-- [CHICO'S DESIGN シルクのボーダージャケット（シルク100%）](https://kobanzame-site.pages.dev/blog/k10990-chico-s-design/): CHICO'S DESIGN のシルクジャケット。ベージュ・カーキ・チャコールグレーのマルチボーダー柄。絹100%。写真と一緒に紹介します。
-- [トルコ製 シルバー925 フィリグリーのフラワーペンダント](https://kobanzame-site.pages.dev/blog/k10965-turkish-silver-filigree-flower/): トルコ製のシルバー925フィリグリーネックレス。銀の糸で編まれた花のトップ、チェーン40cm。写真と一緒に紹介します。
-- [Denim & Supply Ralph Lauren 花柄ロングワンピース](https://kobanzame-site.pages.dev/blog/k10909-denim-supply-floral-dress/): Ralph Lauren の短命ライン Denim & Supply のワンピース（2010年代頃）。黒地に小花柄、ビスコース100%。インド製、サイズS。写真と一緒に紹介します。
-- [Harley-Davidson 1990年代頃 イーグル プリントTシャツ（USA製）](https://kobanzame-site.pages.dev/blog/k10856-harley-davidson-eagle-green-tee/): 1990年代頃・USA製の Harley-Davidson Tシャツ。深いグリーンの BEEFY-T ボディにイーグルのプリント。綿100%、サイズL。写真と一緒に紹介します。
-- [Adams Boots パイソン×レザーのウエスタンブーツ（メキシコ製）](https://kobanzame-site.pages.dev/blog/k11212-adams-python-western-boots/): Adams Boots のパイソン×レザー ウエスタンブーツ。メキシコ製、US 8 E（26〜26.5cm相当）。写真と一緒に紹介します。
-- [nbel パイソンレザー コンチョベルト（イタリア製）](https://kobanzame-site.pages.dev/blog/k11074-nbel-python-concho-belt/): イタリア製 nbel のパイソン×レザーのコンチョベルト。燻し銀のコンチョが並んだ細ベルト。全長約97cm。写真と一緒に紹介します。
-- [Papillio by Birkenstock サンダル（ポルトガル製・デッドストック）](https://kobanzame-site.pages.dev/blog/k10835-papillio-birkenstock-green-sandals/): Birkenstock のレディースライン Papillio のサンダル。ダークグリーンの型押し、ポルトガル製。デッドストック。写真と一緒に紹介します。
-- [トルコ製 シルバー925 レース細工のブレスレット（アンカラ買付）](https://kobanzame-site.pages.dev/blog/k10965-turkish-silver-lace-bracelet/): トルコ・アンカラの職人によるシルバー925ブレスレット。花びらを銀線で組んだレースのようなデザイン。新品未使用。写真と一緒に紹介します。
-- [1980年代頃 Karin Stevens 小花柄レースカラーワンピース](https://kobanzame-site.pages.dev/blog/k10743-karin-stevens-lace-collar-dress/): Karin Stevens のレースカラーワンピース。レーヨン100%、ネイビーに花柄。1980年代頃の香港製。¥10,780（税込）。
-- [1990年代頃 Sumo Connection「Surf Sumo」Tシャツ（USA製）](https://kobanzame-site.pages.dev/blog/k11021-sumo-connection-surf-tee/): 1990年代頃、ハワイの Sumo Connection「Surf Sumo」Tシャツ。背中に波に乗る力士のプリント、綿100%、USA製。写真と一緒に紹介します。
-- [ブラックレザーベスト（1970〜80年代頃・ハウンドトゥース裏地）](https://kobanzame-site.pages.dev/blog/k11265/): ブラックレザーベスト。1970〜80年代頃、ハウンドトゥース裏地。金属バックル付き。写真と一緒に紹介します。
-- [Chiarugi 本革張りガラスデカンタ（1980年代頃・イタリア製）](https://kobanzame-site.pages.dev/blog/k10854-chiarugi-leather-glass-decanter/): フィレンツェの革工房 Chiarugi が手がけた本革張りのガラスボトル。1980年代頃のイタリア製。葡萄の型押し入り。写真と一緒に紹介します。
-- [1970年代頃 U.S.アーミー ヘリクルー フライトトラウザーズ（耐熱ナイロン・オリーブ）](https://kobanzame-site.pages.dev/blog/k10917-wynn-industries-inc-dsa100-71-c-1467-general-ykk/): 1970年代頃（タグに1971年の製造表記）の米陸軍フライトトラウザーズ。高耐熱ナイロン100%、オリーブグリーン。ヘリコプタークルー用の支給品。写真と一緒に紹介します。
-- [1990年代頃 Champion USA製の半袖ラグランスウェット](https://kobanzame-site.pages.dev/blog/k11190-champion-90s-ss-raglan-sweat/): 1990年代頃の Champion、USA製の半袖ラグランスウェット。グレー、サイズL。ゆったりしたシルエット。写真と一緒に紹介します。
-- [Riveted by Lee ストレートジーンズ（1980〜90年代頃・コットン100%デニム）](https://kobanzame-site.pages.dev/blog/k10614-riveted-by-lee/): Riveted by Lee のデニム。コットン100%のストーンウォッシュ加工。1980〜90年代頃。ウエスト74cm。¥11,880（税込）。
-- [ZUCCA TRAVAIL オリーブのジャケット（フランス製・ツイル）](https://kobanzame-site.pages.dev/blog/k11314-zucca-trvail-zucca-made-in-france/): ZUCCA TRAVAIL のオリーブジャケット。フランス製、ツイル織り。コンパクトなシルエット。写真と一緒に紹介します。
-- [Disney DESIGNS Tシャツ（1990年代頃・USA製・The Walt Disney Studios）](https://kobanzame-site.pages.dev/blog/k10846-disney-designs-studios-tee/): 1990年代頃・USA製の Disney DESIGNS Tシャツ。カチンコを構えた映画監督ミッキーのプリント。綿100%、サイズM。写真と一緒に紹介します。
-- [MATCH レザーベスト（前革・背面布地・キルティング裏地）](https://kobanzame-site.pages.dev/blog/k11263-match-leather-work-vest/): MATCH のレザーベスト。前身頃がレザー、背面は布地、裏地はキルティング。ダークブラウン。写真と一緒に紹介します。
-- [Levi's 505 デニムパンツ（USA製・W30 L36）](https://kobanzame-site.pages.dev/blog/k11060-levis-505-usa-denim/): Levi's 505-0217 のUSA製デニム。綿100%、インディゴ。W30 L36 のレギュラーストレート。写真と一緒に紹介します。
-- [RUSTLER 1970〜80年代頃のデニムトラッカージャケット（USA製）](https://kobanzame-site.pages.dev/blog/k11203-rustler-denim-trucker-jacket/): RUSTLER の1970〜80年代頃・USA製デニムトラッカージャケット。13オンスの濃色インディゴ。Wrangler姉妹ブランド。写真と一緒に紹介します。
-- [Abercrombie & Fitch「KEMPSHALL JACKET」の黄色いダウン](https://kobanzame-site.pages.dev/blog/af-kempshall/): A&F のダウンジャケット「KEMPSHALL JACKET」。黄色が目を引く1着。首まわりのリブや、フェザー65%・ダウン35%の暖かさ。写真と一緒に紹介します。
-- [Joe's Crabshack KILLER SEAFOOD Tシャツ（1990年代頃・HANES HEAVY）](https://kobanzame-site.pages.dev/blog/k10153-hanes-heavy-1996-digital-screen-inc-landry-s-corp/): 1990年代頃の Joe's Crab Shack のTシャツ（背中のプリントに © 1996）。バックプリントにサメと「KILLER SEAFOOD」のグラフィック。HANES HEAVY ボディ。¥7,480（税込）。
-- [LP マルチカラー花柄ワンピース 共布ベルト付き（イギリス製）](https://kobanzame-site.pages.dev/blog/k10951-lp-floral-belted-dress/): イギリス製の LP のワンピース。白地にマルチカラーの花柄、ベルト付き。UK16、日本L〜XL相当。写真と一緒に紹介します。
-- [ARIAT ペコス（ロパー）ブーツ・ブラック](https://kobanzame-site.pages.dev/blog/k11163-ariat-roper-boots-black/): ARIAT のローパーブーツ。装飾を削ったシンプルなブラック、レザー。US 8.5 D（25.5cm相当）。TOPY張替済み。写真と一緒に紹介します。
+- [川越でスエード・レザーの古着を探している方へ（ジャケット・パンツ・ベスト・ブーツ）](https://kobanzame-kawagoe.com/blog/kawagoe-suede-leather/): 川越の古民家古着屋・小判鮫にある、1970〜90年代頃のスエードレザーのジャケットやパンツ、レザーのベストとブーツをまとめて紹介します。サイズの目安と価格つきです。
+- [ゴートスエード A-1タイプ ボンバージャケット（1980〜90年代頃・タバコブラウン）](https://kobanzame-kawagoe.com/blog/k11411/): 山羊革のスエードを使ったA-1タイプのボンバージャケットが入荷。タバコブラウンの本体にキャメルとオリーブのリブ。1980〜90年代頃の一着です。
+- [Abercrombie & Fitch KEMPSHALL ダウンジャケット（マスタードイエロー・XL）](https://kobanzame-kawagoe.com/blog/k11449-abercrombie-fitch-kempshall-jacket-xl-made-in-china/): Abercrombie & FitchのKEMPSHALLダウンジャケットが入荷。マスタードイエローのパファー、フェザー×ダウンの中綿でXLサイズです。写真と一緒に紹介します。
+- [BEAR RIVER リアルツリーカモ ジップアップパーカー（フリース裏地）](https://kobanzame-kawagoe.com/blog/k11253-bear-river/): BEAR RIVERのリアルツリーカモ柄ジップアップパーカーが入荷。ポリエステル素材にフリース裏地付き。ブラウンとオリーブグリーンの柄を紹介します。
+- [DUKEDOM ニットカーディガン（バーガンディ×ブラック・日本製）](https://kobanzame-kawagoe.com/blog/k11437-dukedom/): DUKEDOMの日本製ニットカーディガンが入荷。バーガンディ×ブラックのパネル切り替えにホワイトラインが入った、ボウリングシャツ型です。写真と一緒に紹介します。
+- [オールドユニクロ Vネックカーディガン（バターイエロー・旧タグ）](https://kobanzame-kawagoe.com/blog/k11438-uniqlo-504-0403/): 旧ロゴタグ付きのオールドユニクロ、綿100%のVネックカーディガンが入荷。バターイエローの無地で、経年の風合いがあります。写真と一緒に紹介します。
+- [Levi's 517 ブーツカット カスタムプリントデニム（ライトインディゴ・W32）](https://kobanzame-kawagoe.com/blog/k11420-levi-strauss-co-517-w32-l36/): Levi's 517のブーツカットデニムが入荷。左脚にライオンと文字のカスタムプリントが入った、ライトインディゴのW32サイズを写真と一緒に紹介します。
+- [Levi's グラフィックプリント ブーツカットデニム（2000年代頃・レディース）](https://kobanzame-kawagoe.com/blog/k11418-levi-s-levi-s/): Levi'sのブーツカットデニムが入荷。フロントに大判のグラフィックプリントが入った、2000年代頃のレディースデニムを写真と一緒に紹介します。
+- [NIKE スタープリント スウェット（ラベンダー×レッド・2000年代頃）](https://kobanzame-kawagoe.com/blog/k11415-nike/): NIKEのコットンスウェットが入荷。ラベンダーパープルの地にレッドのスタープリントと胸元にホワイトスウッシュ。2000年代頃の一着を紹介します。
+- [A&F INTERNATIONAL スエードレザー カーコート（タン×ネイビー）](https://kobanzame-kawagoe.com/blog/k11309-a-f-international/): A&F INTERNATIONALのスエードレザーカーコートが入荷。豚革のボディに牛革の衿とカフスを合わせた、タン×ネイビーの配色を写真と一緒に紹介します。
+- [米軍 デザートナイトカモ パーカー（1980年代頃・実物）](https://kobanzame-kawagoe.com/blog/k11463-lancer-clothing-corp-dla100-81-c-2532-nsn-8415-01-102-6281/): 1980年代頃の米軍デザートナイトカモパーカーが入荷。LANCER CLOTHING CORP.製造の実物支給品。独特のグリッド柄を写真と一緒に紹介します。
+- [ブラックレザーベスト（1970〜80年代頃・ハウンドトゥース裏地）](https://kobanzame-kawagoe.com/blog/k11265/): ブラックレザーベスト。1970〜80年代頃、ハウンドトゥース裏地。金属バックル付き。写真と一緒に紹介します。
+- [Joe's Crabshack KILLER SEAFOOD Tシャツ（1990年代頃・HANES HEAVY）](https://kobanzame-kawagoe.com/blog/k10153-hanes-heavy-1996-digital-screen-inc-landry-s-corp/): 1990年代頃の Joe's Crab Shack のTシャツ（背中のプリントに © 1996）。バックプリントにサメと「KILLER SEAFOOD」のグラフィック。HANES HEAVY ボディ。¥7,480（税込）。
+- [CHICO'S DESIGN シルクのボーダージャケット（シルク100%）](https://kobanzame-kawagoe.com/blog/k10990-chico-s-design/): CHICO'S DESIGN のシルクジャケット。ベージュ・カーキ・チャコールグレーのマルチボーダー柄。絹100%。写真と一緒に紹介します。
+- [Adams Boots パイソン×レザーのウエスタンブーツ（メキシコ製）](https://kobanzame-kawagoe.com/blog/k11212-adams-python-western-boots/): Adams Boots のパイソン×レザー ウエスタンブーツ。メキシコ製、US 8 E（26〜26.5cm相当）。写真と一緒に紹介します。
+- [ARIAT ペコス（ロパー）ブーツ・ブラック](https://kobanzame-kawagoe.com/blog/k11163-ariat-roper-boots-black/): ARIAT のローパーブーツ。装飾を削ったシンプルなブラック、レザー。US 8.5 D（25.5cm相当）。TOPY張替済み。写真と一緒に紹介します。
+- [1970年代頃 U.S.アーミー ヘリクルー フライトトラウザーズ（耐熱ナイロン・オリーブ）](https://kobanzame-kawagoe.com/blog/k10917-wynn-industries-inc-dsa100-71-c-1467-general-ykk/): 1970年代頃（タグに1971年の製造表記）の米陸軍フライトトラウザーズ。高耐熱ナイロン100%、オリーブグリーン。ヘリコプタークルー用の支給品。写真と一緒に紹介します。
+- [Chiarugi 本革張りガラスデカンタ（1980年代頃・イタリア製）](https://kobanzame-kawagoe.com/blog/k10854-chiarugi-leather-glass-decanter/): フィレンツェの革工房 Chiarugi が手がけた本革張りのガラスボトル。1980年代頃のイタリア製。葡萄の型押し入り。写真と一緒に紹介します。
+- [nbel パイソンレザー コンチョベルト（イタリア製）](https://kobanzame-kawagoe.com/blog/k11074-nbel-python-concho-belt/): イタリア製 nbel のパイソン×レザーのコンチョベルト。燻し銀のコンチョが並んだ細ベルト。全長約97cm。写真と一緒に紹介します。
+- [Dragon Ball Z ©2001 プリントTシャツ（FUNimation／Olaes Design）](https://kobanzame-kawagoe.com/blog/k10857-dragon-ball-z-2001-tee/): 2000年代頃の Dragon Ball Z 公式ライセンスTシャツ（背中のプリントに © 2001）。イエローのボディに悟飯のプリント。綿100%、メキシコ製。写真と一緒に紹介します。
+- [LP マルチカラー花柄ワンピース 共布ベルト付き（イギリス製）](https://kobanzame-kawagoe.com/blog/k10951-lp-floral-belted-dress/): イギリス製の LP のワンピース。白地にマルチカラーの花柄、ベルト付き。UK16、日本L〜XL相当。写真と一緒に紹介します。
+- [ZUCCA TRAVAIL オリーブのジャケット（フランス製・ツイル）](https://kobanzame-kawagoe.com/blog/k11314-zucca-trvail-zucca-made-in-france/): ZUCCA TRAVAIL のオリーブジャケット。フランス製、ツイル織り。コンパクトなシルエット。写真と一緒に紹介します。
+- [トルコ製 シルバー925 レース細工のブレスレット（アンカラ買付）](https://kobanzame-kawagoe.com/blog/k10965-turkish-silver-lace-bracelet/): トルコ・アンカラの職人によるシルバー925ブレスレット。花びらを銀線で組んだレースのようなデザイン。新品未使用。写真と一緒に紹介します。
+- [1990年代頃 Sumo Connection「Surf Sumo」Tシャツ（USA製）](https://kobanzame-kawagoe.com/blog/k11021-sumo-connection-surf-tee/): 1990年代頃、ハワイの Sumo Connection「Surf Sumo」Tシャツ。背中に波に乗る力士のプリント、綿100%、USA製。写真と一緒に紹介します。
+- [MACHUPICCHU ARTESANOS 純銀装飾のショットグラス（ペルー製）](https://kobanzame-kawagoe.com/blog/k11054-peru-silver-shot-glass/): ペルー製のショットグラス。MACHUPICCHU ARTESANOS、ガラスに純銀（Silver 990）の装飾。写真と一緒に紹介します。
+- [RUSTLER 1970〜80年代頃のデニムトラッカージャケット（USA製）](https://kobanzame-kawagoe.com/blog/k11203-rustler-denim-trucker-jacket/): RUSTLER の1970〜80年代頃・USA製デニムトラッカージャケット。13オンスの濃色インディゴ。Wrangler姉妹ブランド。写真と一緒に紹介します。
+- [Blackstone by Petris sport タッセルローファー（イタリア製）](https://kobanzame-kawagoe.com/blog/k10780-blackstone-petris-tassel-loafer/): Blackstone by Petris sport のタッセルローファー。本革、ブラック、イタリア製。EU40（約25.5cm）。¥17,380（税込）。
+- [1990年代頃 Champion USA製の半袖ラグランスウェット](https://kobanzame-kawagoe.com/blog/k11190-champion-90s-ss-raglan-sweat/): 1990年代頃の Champion、USA製の半袖ラグランスウェット。グレー、サイズL。ゆったりしたシルエット。写真と一緒に紹介します。
+- [MATCH レザーベスト（前革・背面布地・キルティング裏地）](https://kobanzame-kawagoe.com/blog/k11263-match-leather-work-vest/): MATCH のレザーベスト。前身頃がレザー、背面は布地、裏地はキルティング。ダークブラウン。写真と一緒に紹介します。
+- [Levi's 505 デニムパンツ（USA製・W30 L36）](https://kobanzame-kawagoe.com/blog/k11060-levis-505-usa-denim/): Levi's 505-0217 のUSA製デニム。綿100%、インディゴ。W30 L36 のレギュラーストレート。写真と一緒に紹介します。
+- [Papillio by Birkenstock サンダル（ポルトガル製・デッドストック）](https://kobanzame-kawagoe.com/blog/k10835-papillio-birkenstock-green-sandals/): Birkenstock のレディースライン Papillio のサンダル。ダークグリーンの型押し、ポルトガル製。デッドストック。写真と一緒に紹介します。
+- [トルコ製 シルバー925 フィリグリーのフラワーペンダント](https://kobanzame-kawagoe.com/blog/k10965-turkish-silver-filigree-flower/): トルコ製のシルバー925フィリグリーネックレス。銀の糸で編まれた花のトップ、チェーン40cm。写真と一緒に紹介します。
+- [Abercrombie & Fitch「KEMPSHALL JACKET」の黄色いダウン](https://kobanzame-kawagoe.com/blog/af-kempshall/): A&F のダウンジャケット「KEMPSHALL JACKET」。黄色が目を引く1着。首まわりのリブや、フェザー65%・ダウン35%の暖かさ。写真と一緒に紹介します。
+- [Harley-Davidson 1990年代頃 イーグル プリントTシャツ（USA製）](https://kobanzame-kawagoe.com/blog/k10856-harley-davidson-eagle-green-tee/): 1990年代頃・USA製の Harley-Davidson Tシャツ。深いグリーンの BEEFY-T ボディにイーグルのプリント。綿100%、サイズL。写真と一緒に紹介します。
+- [Finn Comfort レザーブーツ（ドイツ製・デッドストック）](https://kobanzame-kawagoe.com/blog/k10837-finn-comfort-leather-boots/): ドイツの Finn Comfort のレザーブーツ。未使用のデッドストック。EU38（24cm）、ブラック。写真と一緒に紹介します。
+- [Riveted by Lee ストレートジーンズ（1980〜90年代頃・コットン100%デニム）](https://kobanzame-kawagoe.com/blog/k10614-riveted-by-lee/): Riveted by Lee のデニム。コットン100%のストーンウォッシュ加工。1980〜90年代頃。ウエスト74cm。¥11,880（税込）。
+- [Denim & Supply Ralph Lauren 花柄ロングワンピース](https://kobanzame-kawagoe.com/blog/k10909-denim-supply-floral-dress/): Ralph Lauren の短命ライン Denim & Supply のワンピース（2010年代頃）。黒地に小花柄、ビスコース100%。インド製、サイズS。写真と一緒に紹介します。
+- [1980年代頃 Karin Stevens 小花柄レースカラーワンピース](https://kobanzame-kawagoe.com/blog/k10743-karin-stevens-lace-collar-dress/): Karin Stevens のレースカラーワンピース。レーヨン100%、ネイビーに花柄。1980年代頃の香港製。¥10,780（税込）。
+- [スクービー・ドゥー タイダイTシャツ（1990年代頃・USA製）](https://kobanzame-kawagoe.com/blog/k10159-scooby-doo-tie-dye-tee/): 1990年代頃（プリントに © 1997）、USA製のスクービー・ドゥーTシャツ。ブルーとパープルのタイダイ染め。Changes ボディ。サイズ L。¥9,440（税込）。
+- [Disney DESIGNS Tシャツ（1990年代頃・USA製・The Walt Disney Studios）](https://kobanzame-kawagoe.com/blog/k10846-disney-designs-studios-tee/): 1990年代頃・USA製の Disney DESIGNS Tシャツ。カチンコを構えた映画監督ミッキーのプリント。綿100%、サイズM。写真と一緒に紹介します。
+- [メキシコ製 シルバー925 コーラルのスライドトップネックレス](https://kobanzame-kawagoe.com/blog/k11181-mexican-silver-coral-slide-necklace/): メキシコ製のシルバー925ネックレス。コーラル（珊瑚）のスライドトップ付き、チェーン約55cm。写真と一緒に紹介します。
 
 ## 掲載中の商品
-- [1970年代頃 スエードレザーパンツ タンブラウン 5ポケット メンズ 古着](https://kobanzame-site.pages.dev/journal/k11395/): 1970年代頃 スエードレザーパンツ タンブラウン 5ポケット メンズ 古着。19,800円（税込・送料込み）。在庫1点
-- [1980〜90年代頃 スエードレザーパンツ グレージュ 5ポケット 古着](https://kobanzame-site.pages.dev/journal/k11308/): 1980〜90年代頃 スエードレザーパンツ グレージュ 5ポケット 古着。19,580円（税込・送料込み）。在庫1点
-- [A&F INTERNATIONAL スエードレザー カーコート タン×ネイビー メンズ](https://kobanzame-site.pages.dev/journal/k11309-a-f-international/): A&F INTERNATIONAL スエードレザー カーコート タン×ネイビー メンズ。19,800円（税込・送料込み）。在庫1点
-- [1990年代頃 TOUR スエードレザージャケット ブルドッグ刺繍 タンブラウン メンズ](https://kobanzame-site.pages.dev/journal/k11389-tour/): 1990年代頃 TOUR スエードレザージャケット ブルドッグ刺繍 タンブラウン メンズ。19,800円（税込・送料込み）。在庫1点
-- [DUKEDOM 日本製 ニットカーディガン バーガンディ×ブラック ボウリング型 メンズ](https://kobanzame-site.pages.dev/journal/k11437-dukedom/): DUKEDOM 日本製 ニットカーディガン バーガンディ×ブラック ボウリング型 メンズ。4,730円（税込・送料込み）。在庫1点
-- [オールドユニクロ コットン Vネックカーディガン バターイエロー 旧タグ メンズ](https://kobanzame-site.pages.dev/journal/k11438-uniqlo-504-0403/): オールドユニクロ コットン Vネックカーディガン バターイエロー 旧タグ メンズ。7,480円（税込・送料込み）。在庫1点
-- [1950〜60年代頃 西ドイツ軍 ウールカーゴパンツ オリーブドラブ ミリタリー メンズ](https://kobanzame-site.pages.dev/journal/k11409-hch-muermann-k-g-minden/): 1950〜60年代頃 西ドイツ軍 ウールカーゴパンツ オリーブドラブ ミリタリー メンズ。23,980円（税込・送料込み）。在庫1点
-- [1980〜90年代頃 ゴートスエード A-1タイプ ボンバージャケット タバコブラウン メンズ](https://kobanzame-site.pages.dev/journal/k11411/): 1980〜90年代頃 ゴートスエード A-1タイプ ボンバージャケット タバコブラウン メンズ。36,080円（税込・送料込み）。在庫1点
-- [ROTHCO BDU カーゴパンツ オレンジカモ スモールレギュラー メンズ](https://kobanzame-site.pages.dev/journal/k11201/): ROTHCO BDU カーゴパンツ オレンジカモ スモールレギュラー メンズ。7,480円（税込・送料込み）。在庫1点
-- [NIKE スター スウェット ラベンダー×レッド 2000年代頃 メンズ](https://kobanzame-site.pages.dev/journal/k11415-nike/): NIKE スター スウェット ラベンダー×レッド 2000年代頃 メンズ。7,480円（税込・送料込み）。販売終了
-- [Levi's グラフィックプリント ブーツカットデニム ライトブルー 2000年代頃 レディース](https://kobanzame-site.pages.dev/journal/k11418-levi-s-levi-s/): Levi's グラフィックプリント ブーツカットデニム ライトブルー 2000年代頃 レディース。6,380円（税込・送料込み）。在庫1点
-- [FRISTADS ワークパンツ（プリズナーパンツ） グレーグリーン スウェーデン メンズ](https://kobanzame-site.pages.dev/journal/k11419-fristads-st-56-sanfor/): FRISTADS ワークパンツ（プリズナーパンツ） グレーグリーン スウェーデン メンズ。18,480円（税込・送料込み）。在庫1点
-- [1981年頃 米軍 デザートナイトカモ パーカー 実物 Lサイズ ミリタリー メンズ](https://kobanzame-site.pages.dev/journal/k11463-lancer-clothing-corp-dla100-81-c-2532-nsn-8415-01-102-6281/): 1981年頃 米軍 デザートナイトカモ パーカー 実物 Lサイズ ミリタリー メンズ。21,780円（税込・送料込み）。在庫1点
-- [AMOR ブロックチェック バルーンパンツ マルチカラー イージーパンツ レディース](https://kobanzame-site.pages.dev/journal/k11464-amor/): AMOR ブロックチェック バルーンパンツ マルチカラー イージーパンツ レディース。7,480円（税込・送料込み）。在庫1点
-- [2021年製 スマーフ タイダイ パーカー ラベンダー 公式ライセンス メンズ](https://kobanzame-site.pages.dev/journal/k11191-peyo-2021-lic-lafig-belgium-smurf-www-smurf-com-c-life-group-ltd-c-lifegroup-com/): 2021年製 スマーフ タイダイ パーカー ラベンダー 公式ライセンス メンズ。7,480円（税込・送料込み）。在庫1点
-- [BEAR RIVER リアルツリーカモ ジップアップパーカー フリース裏 メンズ](https://kobanzame-site.pages.dev/journal/k11253-bear-river/): BEAR RIVER リアルツリーカモ ジップアップパーカー フリース裏 メンズ。7,480円（税込・送料込み）。在庫1点
-- [Abercrombie & Fitch KEMPSHALL ダウンジャケット マスタードイエロー XL メンズ](https://kobanzame-site.pages.dev/journal/k11449-abercrombie-fitch-kempshall-jacket-xl-made-in-china/): Abercrombie & Fitch KEMPSHALL ダウンジャケット マスタードイエロー XL メンズ。17,380円（税込・送料込み）。在庫1点
-- [Levi's 517 ブーツカット カスタムプリントデニム ライトインディゴ W32 メンズ](https://kobanzame-site.pages.dev/journal/k11420-levi-strauss-co-517-w32-l36/): Levi's 517 ブーツカット カスタムプリントデニム ライトインディゴ W32 メンズ。8,580円（税込・送料込み）。在庫1点
-- [1990年代前後のストレートジーンズ](https://kobanzame-site.pages.dev/journal/k10614-riveted-by-lee/): 90s Riveted by Lee ストレートジーンズ。11,880円（税込・送料込み）。在庫1点
-- [1971年のヘリクルー フライトトラウザーズ](https://kobanzame-site.pages.dev/journal/k10917-wynn-industries-inc-dsa100-71-c-1467-general-ykk/): 1971年 U.S.アーミー ヘリクルー フライトトラウザーズ。9,680円（税込・送料込み）。在庫1点
-- [1996年 Joe's Crabshack KILLER SEAFOOD Tシャツ](https://kobanzame-site.pages.dev/journal/k10153-hanes-heavy-1996-digital-screen-inc-landry-s-corp/): 1996年 Joe's Crabshack KILLER SEAFOOD Tシャツ。7,480円（税込・送料込み）。在庫1点
-- [フランス製のZUCCA TRAVAILのジャケットです](https://kobanzame-site.pages.dev/journal/k11314-zucca-trvail-zucca-made-in-france/): ZUCCA TRAVAIL フランス製 オリーブのジャケット。8,580円（税込・送料込み）。在庫1点
-- [CHICO'S DESIGNのシルクのジャケットです](https://kobanzame-site.pages.dev/journal/k10990-chico-s-design/): CHICO'S DESIGN シルクのボーダージャケット。17,380円（税込・送料込み）。在庫1点
-- [1970〜80年代のブラックレザーベスト](https://kobanzame-site.pages.dev/journal/k11265/): Leather Utility Vest。25,080円（税込・送料込み）。在庫1点
-- [白地に、絵の具が散ったような花](https://kobanzame-site.pages.dev/journal/k10951-lp-floral-belted-dress/): LP マルチカラー花柄ワンピース 共布ベルト付き（白×マルチ・UK16・イギリス製）。14,080円（税込・送料込み）。在庫1点
-- [多色のビーズに、小さな十字架がひとつ](https://kobanzame-site.pages.dev/journal/k11237-gaw-bead-cross-necklace/): GAW カラービーズ クロスチャームネックレス（マルチカラー・全長40〜45cm調整可）。2,860円（税込・送料込み）。販売終了
-- [袖のCワッペンでわかる、90年代USA製の半袖スウェット](https://kobanzame-site.pages.dev/journal/k11190-champion-90s-ss-raglan-sweat/): Champion 90年代 半袖ラグランスウェット（グレー・L・USA製）。9,680円（税込・送料込み）。在庫1点
-- [インディゴが濃く残る、70〜80年代のRUSTLER](https://kobanzame-site.pages.dev/journal/k11203-rustler-denim-trucker-jacket/): RUSTLER 70〜80年代 デニムトラッカージャケット（濃紺・タグXL・USA製）。10,780円（税込・送料込み）。在庫1点
-- [銀の糸で編んだ、重さのある花](https://kobanzame-site.pages.dev/journal/k10965-turkish-silver-filigree-flower/): シルバー925 フィリグリー フラワーペンダントネックレス（トルコ製・チェーン40cm）。60,280円（税込・送料込み）。在庫1点
-- [装飾を削った、歩くためのウエスタンブーツ](https://kobanzame-site.pages.dev/journal/k11163-ariat-roper-boots-black/): ARIAT ペコス（ロパー）ブーツ（ブラック・US8.5D／25.5cm相当）。21,780円（税込・送料込み）。在庫1点
-- [甲に、ヘビの鱗が光るブーツ](https://kobanzame-site.pages.dev/journal/k11212-adams-python-western-boots/): Adams Boots パイソン×レザー ウエスタンブーツ（ブラウン・US8E／26〜26.5cm相当・メキシコ製）。29,480円（税込・送料込み）。在庫1点
-- [黒革に、クリーム色の糸の模様](https://kobanzame-site.pages.dev/journal/k11213-tony-lama-western-boots-black/): Tony Lama ウエスタンブーツ（ブラック・US8D／25cm・USA製・style 2916）。27,280円（税込・送料込み）。販売終了
-- [刻印が語る、メキシコシティの工房](https://kobanzame-site.pages.dev/journal/k11181-mexican-silver-coral-slide-necklace/): ヴィンテージ シルバー925 コーラル スライドトップネックレス（メキシコ・55cm）。27,280円（税込・送料込み）。在庫1点
-- [葡萄の型押しが入った、フィレンツェの革張りガラス瓶](https://kobanzame-site.pages.dev/journal/k10854-chiarugi-leather-glass-decanter/): Chiarugi 本革張り ガラスデカンタ（ブラウン×グリーン・1980年代・イタリア製）。7,480円（税込・送料込み）。在庫1点
-- [マチュピチュの工房から来た、一杯ぶんの銀](https://kobanzame-site.pages.dev/journal/k11054-peru-silver-shot-glass/): MACHUPICCHU ARTESANOS 純銀（Silver 990）装飾ショットグラス（ペルー製）。2,200円（税込・送料込み）。在庫1点
-- [英国の老舗が作った、雨の日も歩けるチャッカ](https://kobanzame-site.pages.dev/journal/k10781-grenson-suede-chukka-boots/): GRENSON Footmaster スエード チャッカブーツ（オリーブブラウン・UK6／24.5〜25cm相当・英国製）。32,780円（税込・送料込み）。販売終了
-- [波に乗る力士の、90年代ハワイ「Sumo Connection」T](https://kobanzame-site.pages.dev/journal/k11021-sumo-connection-surf-tee/): 90年代 Sumo Connection「Surf Sumo」両面プリントTシャツ（ホワイト・L・USA製）。14,080円（税込・送料込み）。在庫1点
-- [紺の小花に、大きな白いレースの襟](https://kobanzame-site.pages.dev/journal/k10743-karin-stevens-lace-collar-dress/): 80年代 Karin Stevens 小花柄レースカラーワンピース（ネイビー・US10・香港製）。10,780円（税込・送料込み）。在庫1点
-- [黒地に小花が舞う、ラルフローレンの短命ライン](https://kobanzame-site.pages.dev/journal/k10909-denim-supply-floral-dress/): Denim & Supply Ralph Lauren 花柄ロングワンピース（黒×花柄・S/P・インド製）。8,580円（税込・送料込み）。在庫1点
-- [腿から膝へ、自然に色が抜けたアメリカ製505](https://kobanzame-site.pages.dev/journal/k11060-levis-505-usa-denim/): Levi's 505-0217 デニムパンツ（インディゴ・W30 L36・USA製）。15,180円（税込・送料込み）。在庫1点
-- [蛇革を継ぎ、燻し銀のコンチョを並べた細ベルト](https://kobanzame-site.pages.dev/journal/k11074-nbel-python-concho-belt/): nbel パイソンレザー コンチョベルト（ブラウン×マルチカラー・幅約2cm・イタリア製）。8,580円（税込・送料込み）。販売終了
-- [積み上げたロゴに、90年代のニューヨーク](https://kobanzame-site.pages.dev/journal/k11038-dkny-90s-six-panel-cap/): 90年代 DKNY 6パネルキャップ（レッド・ワンサイズ・USA製）。6,380円（税込・送料込み）。販売終了
-- [ローライズのフレアが今にはまる、2000年前後の515](https://kobanzame-site.pages.dev/journal/k10977-levis-515-bootcut-colombia/): Levi's 515 ブーツカット デニムパンツ（中色インディゴ・W30相当・コロンビア製）。10,780円（税込・送料込み）。販売終了
-- [履き心地で知られるドイツの一足、未使用のまま](https://kobanzame-site.pages.dev/journal/k10837-finn-comfort-leather-boots/): Finn Comfort レザーブーツ（黒・EU38／24cm・ドイツ製・デッドストック）。26,180円（税込・送料込み）。在庫1点
-- [深いグリーンの型押し、未使用のまま残っていたパピリオ](https://kobanzame-site.pages.dev/journal/k10835-papillio-birkenstock-green-sandals/): Papillio by Birkenstock 一本ストラップ サンダル（ダークグリーン・EU36／23cm・ナロー・ポルトガル製・デッドストック）。8,580円（税込・送料込み）。在庫1点
-- [青い悟飯が胸で睨みをきかせる、2001年のアニメT](https://kobanzame-site.pages.dev/journal/k10857-dragon-ball-z-2001-tee/): Dragon Ball Z ©2001 プリントTシャツ（FUNimation／Olaes Design・イエロー・M）。14,080円（税込・送料込み）。在庫1点
-- [翼を広げたイーグルとバー&シールド、90年代のハーレーT](https://kobanzame-site.pages.dev/journal/k10856-harley-davidson-eagle-green-tee/): Harley-Davidson 90s イーグル×バー&シールド プリントTシャツ（グリーン・L・USA製）。18,480円（税込・送料込み）。在庫1点
-- [カチンコを構えた、映画監督のミッキー](https://kobanzame-site.pages.dev/journal/k10846-disney-designs-studios-tee/): 90s Disney DESIGNS（The Walt Disney Studios）Tシャツ（ネイビー・M・USA製）。14,080円（税込・送料込み）。在庫1点
-- [タイダイとピースマーク、笑顔のスクービー](https://kobanzame-site.pages.dev/journal/k10159-scooby-doo-tie-dye-tee/): 1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製）。9,440円（税込・送料込み）。在庫1点
-- [派手さはなく、長く履けるイタリアの黒ローファー](https://kobanzame-site.pages.dev/journal/k10780-blackstone-petris-tassel-loafer/): Blackstone by Petris sport タッセルローファー（ブラックレザー・EU40／約25.5cm・イタリア製）。17,380円（税込・送料込み）。在庫1点
-- [大輪の花と渦巻き、一粒の貝ボタン](https://kobanzame-site.pages.dev/journal/k10688-impressions-floral-rayon-jacket/): 80s-90s impressions OF CALIFORNIA 渦巻き花柄 薄手レーヨンジャケット（黒×マスタード×クリーム・XL）。8,800円（税込・送料込み）。販売終了
-- [前は革、背中は布。働く人の形をしたベスト](https://kobanzame-site.pages.dev/journal/k11263-match-leather-work-vest/): MATCH レザーベスト（ダークブラウン・背面布地・尾錠つき）。18,480円（税込・送料込み）。在庫1点
-- [花びら一枚ずつ、細い銀線で組んだレースのような腕輪](https://kobanzame-site.pages.dev/journal/k10965-turkish-silver-lace-bracelet/): トルコ製 シルバー925 ハンドメイド ブレスレット（レース細工・花モチーフ・アンカラ買付）。69,080円（税込・送料込み）。在庫1点
-- [彫り模様のスプーンをフックにした、真鍮のウォレットチェーン](https://kobanzame-site.pages.dev/journal/k11274-gaw-spoon-wallet-chain/): ヴィンテージスプーンの真鍮ウォレットチェーン（GAW・全長約49cm）。17,580円（税込・送料込み）。在庫1点
-- [1994年、セントルイスの同窓会で配られたTシャツ](https://kobanzame-site.pages.dev/journal/k10015-wilds-palace-of-poison-tee/): 90s Wild's Palace of Poison 1994 リユニオン記念Tシャツ（Fruit of the Loom BEST・XXL・USA製）。15,490円（税込・送料込み）。在庫1点
-- [しつけ糸がついたままの、90年代カシャレルのリネンジャケット](https://kobanzame-site.pages.dev/journal/k10888-cacharel-linen-jacket/): 90s Cacharel リネン100% テーラードジャケット（マスタードイエロー・3ボタン）。27,280円（税込・送料込み）。販売終了
-- [JCPenneyの値札が付いたままの、70〜80年代のリネン混ジャケット](https://kobanzame-site.pages.dev/journal/k10889-bonvivant-deadstock-jacket/): 70〜80s Bon Vivant リネン混テーラードジャケット（デッドストック・JCPenney値札付き）。19,800円（税込・送料込み）。在庫1点
-- [トレンチの形をした、本気の雨具](https://kobanzame-site.pages.dev/journal/k10715-misty-weather-nylon-trench/): 80s MISTY WEATHER ナイロン ロングトレンチコート（ブラック・着丈105cm）。8,580円（税込・送料込み）。在庫1点
-- [草花の彫りを残した、スプーンのペンダント](https://kobanzame-site.pages.dev/journal/k00000-spoon/): 洋白スプーンのペンダント（GAW・ホワイトハーツ×鹿革）。14,170円（税込・送料込み）。在庫1点
+- [1970年代頃 スエードレザーパンツ タンブラウン 5ポケット メンズ 古着](https://kobanzame-kawagoe.com/journal/k11395/): 1970年代頃 スエードレザーパンツ タンブラウン 5ポケット メンズ 古着。19,800円（税込・送料込み）。在庫1点
+- [1980〜90年代頃 スエードレザーパンツ グレージュ 5ポケット 古着](https://kobanzame-kawagoe.com/journal/k11308/): 1980〜90年代頃 スエードレザーパンツ グレージュ 5ポケット 古着。19,580円（税込・送料込み）。在庫1点
+- [A&F INTERNATIONAL スエードレザー カーコート タン×ネイビー メンズ](https://kobanzame-kawagoe.com/journal/k11309-a-f-international/): A&F INTERNATIONAL スエードレザー カーコート タン×ネイビー メンズ。19,800円（税込・送料込み）。在庫1点
+- [1990年代頃 TOUR スエードレザージャケット ブルドッグ刺繍 タンブラウン メンズ](https://kobanzame-kawagoe.com/journal/k11389-tour/): 1990年代頃 TOUR スエードレザージャケット ブルドッグ刺繍 タンブラウン メンズ。19,800円（税込・送料込み）。在庫1点
+- [DUKEDOM 日本製 ニットカーディガン バーガンディ×ブラック ボウリング型 メンズ](https://kobanzame-kawagoe.com/journal/k11437-dukedom/): DUKEDOM 日本製 ニットカーディガン バーガンディ×ブラック ボウリング型 メンズ。4,730円（税込・送料込み）。在庫1点
+- [オールドユニクロ コットン Vネックカーディガン バターイエロー 旧タグ メンズ](https://kobanzame-kawagoe.com/journal/k11438-uniqlo-504-0403/): オールドユニクロ コットン Vネックカーディガン バターイエロー 旧タグ メンズ。7,480円（税込・送料込み）。在庫1点
+- [1950〜60年代頃 西ドイツ軍 ウールカーゴパンツ オリーブドラブ ミリタリー メンズ](https://kobanzame-kawagoe.com/journal/k11409-hch-muermann-k-g-minden/): 1950〜60年代頃 西ドイツ軍 ウールカーゴパンツ オリーブドラブ ミリタリー メンズ。23,980円（税込・送料込み）。在庫1点
+- [1980〜90年代頃 ゴートスエード A-1タイプ ボンバージャケット タバコブラウン メンズ](https://kobanzame-kawagoe.com/journal/k11411/): 1980〜90年代頃 ゴートスエード A-1タイプ ボンバージャケット タバコブラウン メンズ。36,080円（税込・送料込み）。在庫1点
+- [ROTHCO BDU カーゴパンツ オレンジカモ スモールレギュラー メンズ](https://kobanzame-kawagoe.com/journal/k11201/): ROTHCO BDU カーゴパンツ オレンジカモ スモールレギュラー メンズ。7,480円（税込・送料込み）。在庫1点
+- [NIKE スター スウェット ラベンダー×レッド 2000年代頃 メンズ](https://kobanzame-kawagoe.com/journal/k11415-nike/): NIKE スター スウェット ラベンダー×レッド 2000年代頃 メンズ。7,480円（税込・送料込み）。販売終了
+- [Levi's グラフィックプリント ブーツカットデニム ライトブルー 2000年代頃 レディース](https://kobanzame-kawagoe.com/journal/k11418-levi-s-levi-s/): Levi's グラフィックプリント ブーツカットデニム ライトブルー 2000年代頃 レディース。6,380円（税込・送料込み）。在庫1点
+- [FRISTADS ワークパンツ（プリズナーパンツ） グレーグリーン スウェーデン メンズ](https://kobanzame-kawagoe.com/journal/k11419-fristads-st-56-sanfor/): FRISTADS ワークパンツ（プリズナーパンツ） グレーグリーン スウェーデン メンズ。18,480円（税込・送料込み）。在庫1点
+- [1981年頃 米軍 デザートナイトカモ パーカー 実物 Lサイズ ミリタリー メンズ](https://kobanzame-kawagoe.com/journal/k11463-lancer-clothing-corp-dla100-81-c-2532-nsn-8415-01-102-6281/): 1981年頃 米軍 デザートナイトカモ パーカー 実物 Lサイズ ミリタリー メンズ。21,780円（税込・送料込み）。在庫1点
+- [AMOR ブロックチェック バルーンパンツ マルチカラー イージーパンツ レディース](https://kobanzame-kawagoe.com/journal/k11464-amor/): AMOR ブロックチェック バルーンパンツ マルチカラー イージーパンツ レディース。7,480円（税込・送料込み）。在庫1点
+- [2021年製 スマーフ タイダイ パーカー ラベンダー 公式ライセンス メンズ](https://kobanzame-kawagoe.com/journal/k11191-peyo-2021-lic-lafig-belgium-smurf-www-smurf-com-c-life-group-ltd-c-lifegroup-com/): 2021年製 スマーフ タイダイ パーカー ラベンダー 公式ライセンス メンズ。7,480円（税込・送料込み）。在庫1点
+- [BEAR RIVER リアルツリーカモ ジップアップパーカー フリース裏 メンズ](https://kobanzame-kawagoe.com/journal/k11253-bear-river/): BEAR RIVER リアルツリーカモ ジップアップパーカー フリース裏 メンズ。7,480円（税込・送料込み）。在庫1点
+- [Abercrombie & Fitch KEMPSHALL ダウンジャケット マスタードイエロー XL メンズ](https://kobanzame-kawagoe.com/journal/k11449-abercrombie-fitch-kempshall-jacket-xl-made-in-china/): Abercrombie & Fitch KEMPSHALL ダウンジャケット マスタードイエロー XL メンズ。17,380円（税込・送料込み）。在庫1点
+- [Levi's 517 ブーツカット カスタムプリントデニム ライトインディゴ W32 メンズ](https://kobanzame-kawagoe.com/journal/k11420-levi-strauss-co-517-w32-l36/): Levi's 517 ブーツカット カスタムプリントデニム ライトインディゴ W32 メンズ。8,580円（税込・送料込み）。在庫1点
+- [1990年代前後のストレートジーンズ](https://kobanzame-kawagoe.com/journal/k10614-riveted-by-lee/): 90s Riveted by Lee ストレートジーンズ。11,880円（税込・送料込み）。在庫1点
+- [1971年のヘリクルー フライトトラウザーズ](https://kobanzame-kawagoe.com/journal/k10917-wynn-industries-inc-dsa100-71-c-1467-general-ykk/): 1971年 U.S.アーミー ヘリクルー フライトトラウザーズ。9,680円（税込・送料込み）。在庫1点
+- [1996年 Joe's Crabshack KILLER SEAFOOD Tシャツ](https://kobanzame-kawagoe.com/journal/k10153-hanes-heavy-1996-digital-screen-inc-landry-s-corp/): 1996年 Joe's Crabshack KILLER SEAFOOD Tシャツ。7,480円（税込・送料込み）。在庫1点
+- [フランス製のZUCCA TRAVAILのジャケットです](https://kobanzame-kawagoe.com/journal/k11314-zucca-trvail-zucca-made-in-france/): ZUCCA TRAVAIL フランス製 オリーブのジャケット。8,580円（税込・送料込み）。在庫1点
+- [CHICO'S DESIGNのシルクのジャケットです](https://kobanzame-kawagoe.com/journal/k10990-chico-s-design/): CHICO'S DESIGN シルクのボーダージャケット。17,380円（税込・送料込み）。在庫1点
+- [1970〜80年代のブラックレザーベスト](https://kobanzame-kawagoe.com/journal/k11265/): Leather Utility Vest。25,080円（税込・送料込み）。在庫1点
+- [白地に、絵の具が散ったような花](https://kobanzame-kawagoe.com/journal/k10951-lp-floral-belted-dress/): LP マルチカラー花柄ワンピース 共布ベルト付き（白×マルチ・UK16・イギリス製）。14,080円（税込・送料込み）。在庫1点
+- [多色のビーズに、小さな十字架がひとつ](https://kobanzame-kawagoe.com/journal/k11237-gaw-bead-cross-necklace/): GAW カラービーズ クロスチャームネックレス（マルチカラー・全長40〜45cm調整可）。2,860円（税込・送料込み）。販売終了
+- [袖のCワッペンでわかる、90年代USA製の半袖スウェット](https://kobanzame-kawagoe.com/journal/k11190-champion-90s-ss-raglan-sweat/): Champion 90年代 半袖ラグランスウェット（グレー・L・USA製）。9,680円（税込・送料込み）。在庫1点
+- [インディゴが濃く残る、70〜80年代のRUSTLER](https://kobanzame-kawagoe.com/journal/k11203-rustler-denim-trucker-jacket/): RUSTLER 70〜80年代 デニムトラッカージャケット（濃紺・タグXL・USA製）。10,780円（税込・送料込み）。在庫1点
+- [銀の糸で編んだ、重さのある花](https://kobanzame-kawagoe.com/journal/k10965-turkish-silver-filigree-flower/): シルバー925 フィリグリー フラワーペンダントネックレス（トルコ製・チェーン40cm）。60,280円（税込・送料込み）。在庫1点
+- [装飾を削った、歩くためのウエスタンブーツ](https://kobanzame-kawagoe.com/journal/k11163-ariat-roper-boots-black/): ARIAT ペコス（ロパー）ブーツ（ブラック・US8.5D／25.5cm相当）。21,780円（税込・送料込み）。在庫1点
+- [甲に、ヘビの鱗が光るブーツ](https://kobanzame-kawagoe.com/journal/k11212-adams-python-western-boots/): Adams Boots パイソン×レザー ウエスタンブーツ（ブラウン・US8E／26〜26.5cm相当・メキシコ製）。29,480円（税込・送料込み）。在庫1点
+- [黒革に、クリーム色の糸の模様](https://kobanzame-kawagoe.com/journal/k11213-tony-lama-western-boots-black/): Tony Lama ウエスタンブーツ（ブラック・US8D／25cm・USA製・style 2916）。27,280円（税込・送料込み）。販売終了
+- [刻印が語る、メキシコシティの工房](https://kobanzame-kawagoe.com/journal/k11181-mexican-silver-coral-slide-necklace/): ヴィンテージ シルバー925 コーラル スライドトップネックレス（メキシコ・55cm）。27,280円（税込・送料込み）。在庫1点
+- [葡萄の型押しが入った、フィレンツェの革張りガラス瓶](https://kobanzame-kawagoe.com/journal/k10854-chiarugi-leather-glass-decanter/): Chiarugi 本革張り ガラスデカンタ（ブラウン×グリーン・1980年代・イタリア製）。7,480円（税込・送料込み）。在庫1点
+- [マチュピチュの工房から来た、一杯ぶんの銀](https://kobanzame-kawagoe.com/journal/k11054-peru-silver-shot-glass/): MACHUPICCHU ARTESANOS 純銀（Silver 990）装飾ショットグラス（ペルー製）。2,200円（税込・送料込み）。在庫1点
+- [英国の老舗が作った、雨の日も歩けるチャッカ](https://kobanzame-kawagoe.com/journal/k10781-grenson-suede-chukka-boots/): GRENSON Footmaster スエード チャッカブーツ（オリーブブラウン・UK6／24.5〜25cm相当・英国製）。32,780円（税込・送料込み）。販売終了
+- [波に乗る力士の、90年代ハワイ「Sumo Connection」T](https://kobanzame-kawagoe.com/journal/k11021-sumo-connection-surf-tee/): 90年代 Sumo Connection「Surf Sumo」両面プリントTシャツ（ホワイト・L・USA製）。14,080円（税込・送料込み）。在庫1点
+- [紺の小花に、大きな白いレースの襟](https://kobanzame-kawagoe.com/journal/k10743-karin-stevens-lace-collar-dress/): 80年代 Karin Stevens 小花柄レースカラーワンピース（ネイビー・US10・香港製）。10,780円（税込・送料込み）。在庫1点
+- [黒地に小花が舞う、ラルフローレンの短命ライン](https://kobanzame-kawagoe.com/journal/k10909-denim-supply-floral-dress/): Denim & Supply Ralph Lauren 花柄ロングワンピース（黒×花柄・S/P・インド製）。8,580円（税込・送料込み）。在庫1点
+- [腿から膝へ、自然に色が抜けたアメリカ製505](https://kobanzame-kawagoe.com/journal/k11060-levis-505-usa-denim/): Levi's 505-0217 デニムパンツ（インディゴ・W30 L36・USA製）。15,180円（税込・送料込み）。在庫1点
+- [蛇革を継ぎ、燻し銀のコンチョを並べた細ベルト](https://kobanzame-kawagoe.com/journal/k11074-nbel-python-concho-belt/): nbel パイソンレザー コンチョベルト（ブラウン×マルチカラー・幅約2cm・イタリア製）。8,580円（税込・送料込み）。販売終了
+- [積み上げたロゴに、90年代のニューヨーク](https://kobanzame-kawagoe.com/journal/k11038-dkny-90s-six-panel-cap/): 90年代 DKNY 6パネルキャップ（レッド・ワンサイズ・USA製）。6,380円（税込・送料込み）。販売終了
+- [ローライズのフレアが今にはまる、2000年前後の515](https://kobanzame-kawagoe.com/journal/k10977-levis-515-bootcut-colombia/): Levi's 515 ブーツカット デニムパンツ（中色インディゴ・W30相当・コロンビア製）。10,780円（税込・送料込み）。販売終了
+- [履き心地で知られるドイツの一足、未使用のまま](https://kobanzame-kawagoe.com/journal/k10837-finn-comfort-leather-boots/): Finn Comfort レザーブーツ（黒・EU38／24cm・ドイツ製・デッドストック）。26,180円（税込・送料込み）。在庫1点
+- [深いグリーンの型押し、未使用のまま残っていたパピリオ](https://kobanzame-kawagoe.com/journal/k10835-papillio-birkenstock-green-sandals/): Papillio by Birkenstock 一本ストラップ サンダル（ダークグリーン・EU36／23cm・ナロー・ポルトガル製・デッドストック）。8,580円（税込・送料込み）。在庫1点
+- [青い悟飯が胸で睨みをきかせる、2001年のアニメT](https://kobanzame-kawagoe.com/journal/k10857-dragon-ball-z-2001-tee/): Dragon Ball Z ©2001 プリントTシャツ（FUNimation／Olaes Design・イエロー・M）。14,080円（税込・送料込み）。在庫1点
+- [翼を広げたイーグルとバー&シールド、90年代のハーレーT](https://kobanzame-kawagoe.com/journal/k10856-harley-davidson-eagle-green-tee/): Harley-Davidson 90s イーグル×バー&シールド プリントTシャツ（グリーン・L・USA製）。18,480円（税込・送料込み）。在庫1点
+- [カチンコを構えた、映画監督のミッキー](https://kobanzame-kawagoe.com/journal/k10846-disney-designs-studios-tee/): 90s Disney DESIGNS（The Walt Disney Studios）Tシャツ（ネイビー・M・USA製）。14,080円（税込・送料込み）。在庫1点
+- [タイダイとピースマーク、笑顔のスクービー](https://kobanzame-kawagoe.com/journal/k10159-scooby-doo-tie-dye-tee/): 1997年 スクービー・ドゥー タイダイTシャツ（Changes／Hanna-Barbera公式ライセンス・L・USA製）。9,440円（税込・送料込み）。在庫1点
+- [派手さはなく、長く履けるイタリアの黒ローファー](https://kobanzame-kawagoe.com/journal/k10780-blackstone-petris-tassel-loafer/): Blackstone by Petris sport タッセルローファー（ブラックレザー・EU40／約25.5cm・イタリア製）。17,380円（税込・送料込み）。在庫1点
+- [大輪の花と渦巻き、一粒の貝ボタン](https://kobanzame-kawagoe.com/journal/k10688-impressions-floral-rayon-jacket/): 80s-90s impressions OF CALIFORNIA 渦巻き花柄 薄手レーヨンジャケット（黒×マスタード×クリーム・XL）。8,800円（税込・送料込み）。販売終了
+- [前は革、背中は布。働く人の形をしたベスト](https://kobanzame-kawagoe.com/journal/k11263-match-leather-work-vest/): MATCH レザーベスト（ダークブラウン・背面布地・尾錠つき）。18,480円（税込・送料込み）。在庫1点
+- [花びら一枚ずつ、細い銀線で組んだレースのような腕輪](https://kobanzame-kawagoe.com/journal/k10965-turkish-silver-lace-bracelet/): トルコ製 シルバー925 ハンドメイド ブレスレット（レース細工・花モチーフ・アンカラ買付）。69,080円（税込・送料込み）。在庫1点
+- [彫り模様のスプーンをフックにした、真鍮のウォレットチェーン](https://kobanzame-kawagoe.com/journal/k11274-gaw-spoon-wallet-chain/): ヴィンテージスプーンの真鍮ウォレットチェーン（GAW・全長約49cm）。17,580円（税込・送料込み）。在庫1点
+- [1994年、セントルイスの同窓会で配られたTシャツ](https://kobanzame-kawagoe.com/journal/k10015-wilds-palace-of-poison-tee/): 90s Wild's Palace of Poison 1994 リユニオン記念Tシャツ（Fruit of the Loom BEST・XXL・USA製）。15,490円（税込・送料込み）。在庫1点
+- [しつけ糸がついたままの、90年代カシャレルのリネンジャケット](https://kobanzame-kawagoe.com/journal/k10888-cacharel-linen-jacket/): 90s Cacharel リネン100% テーラードジャケット（マスタードイエロー・3ボタン）。27,280円（税込・送料込み）。販売終了
+- [JCPenneyの値札が付いたままの、70〜80年代のリネン混ジャケット](https://kobanzame-kawagoe.com/journal/k10889-bonvivant-deadstock-jacket/): 70〜80s Bon Vivant リネン混テーラードジャケット（デッドストック・JCPenney値札付き）。19,800円（税込・送料込み）。在庫1点
+- [トレンチの形をした、本気の雨具](https://kobanzame-kawagoe.com/journal/k10715-misty-weather-nylon-trench/): 80s MISTY WEATHER ナイロン ロングトレンチコート（ブラック・着丈105cm）。8,580円（税込・送料込み）。在庫1点
+- [草花の彫りを残した、スプーンのペンダント](https://kobanzame-kawagoe.com/journal/k00000-spoon/): 洋白スプーンのペンダント（GAW・ホワイトハーツ×鹿革）。14,170円（税込・送料込み）。在庫1点

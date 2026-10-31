@@ -32,7 +32,7 @@ jobs:
         continue-on-error: true
         run: |
           for ua in "python-urllib/3" "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)" "Mozilla/5.0 (compatible; GPTBot/1.2; +https://openai.com/gptbot)" "Mozilla/5.0 (compatible; OAI-SearchBot/1.0; +https://openai.com/searchbot)" "Mozilla/5.0 (compatible; ClaudeBot/1.0; +claudebot@anthropic.com)" "Mozilla/5.0 (compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot)" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36"; do
-            code=$(curl -s -o /dev/null -w '%{http_code}' -A "$ua" https://kobanzame-site.pages.dev/sitemap.xml)
+            code=$(curl -s -o /dev/null -w '%{http_code}' -A "$ua" https://kobanzame-kawagoe.com/sitemap.xml)
             echo "$code  $ua"
           done
       - name: Send IndexNow

@@ -17,7 +17,7 @@ v2で変わったこと
 import json, os, html, re, math, datetime, glob, unicodedata
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE = 'https://kobanzame-site.pages.dev'   # 独自ドメイン取得後はここだけ差し替える
+BASE = 'https://kobanzame-kawagoe.com'   # 独自ドメイン取得後はここだけ差し替える
 TODAY = os.environ.get('SITE_TODAY') or datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%Y-%m-%d')
 
 ADD_TAX = True           # 2026-10-06 龍さん決定B：Square登録価格は税抜 → 表示・請求とも ×1.1 を10円単位に切り上げ（63番の QP.ADD_TAX と必ず同じにする）
