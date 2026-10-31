@@ -1142,11 +1142,13 @@ from build_blog import BLOG_CSS
 # 2026-10-31 龍さん要望：商品写真をクリック（タップ）すると大きく開き、もう一度押すとズーム（Amazonのような見え方）
 ZOOM_CSS = """
 .gal img{cursor:zoom-in}
-.lb{position:fixed;inset:0;z-index:1000;background:#120A07;display:flex;align-items:center;justify-content:center;touch-action:none;overscroll-behavior:contain}
+.lb{position:fixed;inset:0;z-index:1000;background:#120A07;display:flex;align-items:center;justify-content:center;touch-action:none}
 .lb[hidden]{display:none}
 .lb .lbv{width:100%;height:100%;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.lb .lbv img{max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in;transition:transform .25s ease;user-select:none;-webkit-user-drag:none}
-.lb.zoom .lbv img{cursor:zoom-out;transition:none}
+.lb .lbv img{max-width:100%;max-height:100%;object-fit:contain;cursor:zoom-in;transition:transform .25s ease;user-select:none;-webkit-user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
+.lb.zoom .lbv img{cursor:zoom-out}
+.lb.pan .lbv img{transition:none}
+.lb.single .lbp,.lb.single .lbn{display:none}
 .lb button{position:absolute;background:rgba(244,240,232,.92);color:#120A07;border:0;width:48px;height:48px;font-size:22px;line-height:48px;cursor:pointer;font-family:var(--gothic)}
 .lb .lbx{top:12px;right:12px}
 .lb .lbp{left:12px;top:50%;transform:translateY(-50%)}
@@ -1430,7 +1432,7 @@ for lang in ('ja', 'en'):
   var hb=document.getElementById('holdbtn'), hx=document.getElementById('holdbox');
   if(hb&&hx){hb.addEventListener('click',function(){hx.hidden=!hx.hidden; hb.setAttribute('aria-expanded',String(!hx.hidden));});}
 })();
-/* 2026-10-31 写真の拡大表示：写真を押す→全画面で開く／もう一度押す→2.5倍ズーム（PCはマウスを動かすと見る場所が動く・スマホは指でなぞる）／左右で次の写真／Escか×で閉じる */
+/* 2026-10-31 写真の拡大表示：写真を押す→全画面で開く／もう一度押す→2.5倍ズーム（PCはマウスを動かすと見る場所が動く・スマホは指でなぞる）／左右で次の写真／Escか×か写真の外の黒い所で閉じる */
 (function(){
   var g=document.getElementById('gal'); if(!g) return;
   var ims=[].slice.call(g.querySelectorAll('img')); if(!ims.length) return;
@@ -1444,13 +1446,15 @@ for lang in ('ja', 'en'):
       +'<button type="button" class="lbx" aria-label="'+(en?'Close':'閉じる')+'">&#10005;</button>';
     document.body.appendChild(lb);
     view=lb.querySelector('.lbv'); big=view.querySelector('img'); cnt=lb.querySelector('.lbc');
-    lb.querySelector('.lbh').textContent=en?'Tap the photo to zoom':'写真を押すとズームします';
+    lb.querySelector('.lbh').textContent=en?'Click or tap the photo to zoom':'写真を押すとズームします';
+    if(ims.length===1) lb.classList.add('single');
+    big.draggable=false; big.addEventListener('dragstart',function(e){e.preventDefault();});
     lb.querySelector('.lbx').addEventListener('click',close);
     lb.querySelector('.lbp').addEventListener('click',function(){show(cur-1);});
     lb.querySelector('.lbn').addEventListener('click',function(){show(cur+1);});
-    view.addEventListener('pointerdown',function(e){dn={x:e.clientX,y:e.clientY,ox:ox,oy:oy};});
+    view.addEventListener('pointerdown',function(e){if(!e.isPrimary) return; dn={x:e.clientX,y:e.clientY,ox:ox,oy:oy};});
     view.addEventListener('pointermove',function(e){
-      if(!zoomed) return;
+      if(!zoomed||!e.isPrimary) return; lb.classList.add('pan');
       if(e.pointerType==='mouse'&&!dn){ /* PC：マウスの位置を見る（Amazonと同じ） */
         var w=big.offsetWidth, h=big.offsetHeight, L=(view.clientWidth-w)/2, T=(view.clientHeight-h)/2, vr=view.getBoundingClientRect();
         setO((e.clientX-vr.left-L)/w*100,(e.clientY-vr.top-T)/h*100); return; }
@@ -1458,7 +1462,7 @@ for lang in ('ja', 'en'):
         setO(dn.ox-(e.clientX-dn.x)/big.offsetWidth*100/(S-1), dn.oy-(e.clientY-dn.y)/big.offsetHeight*100/(S-1)); }
     });
     view.addEventListener('pointerup',function(e){
-      if(!dn) return; var dx=e.clientX-dn.x, dy=e.clientY-dn.y, moved=Math.abs(dx)>10||Math.abs(dy)>10; dn=null;
+      if(!dn||!e.isPrimary) return; var dx=e.clientX-dn.x, dy=e.clientY-dn.y, moved=Math.abs(dx)>10||Math.abs(dy)>10; dn=null;
       if(!moved){ if(e.target===big) toggle(e); else if(!zoomed) close(); return; }
       if(!zoomed&&Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)) show(cur+(dx<0?1:-1));
     });
@@ -1475,22 +1479,22 @@ for lang in ('ja', 'en'):
     if(zoomed){ unzoom(); return; }
     var w=big.offsetWidth, h=big.offsetHeight, vr=view.getBoundingClientRect(), L=(view.clientWidth-w)/2, T=(view.clientHeight-h)/2;
     setO((e.clientX-vr.left-L)/w*100,(e.clientY-vr.top-T)/h*100);
-    zoomed=true; lb.classList.add('zoom'); big.style.transform='scale('+S+')';
+    zoomed=true; lb.classList.remove('pan'); lb.classList.add('zoom'); big.style.transform='scale('+S+')';
   }
-  function unzoom(){ zoomed=false; lb.classList.remove('zoom'); big.style.transform=''; }
+  function unzoom(){ zoomed=false; lb.classList.remove('zoom','pan'); big.style.transform=''; }
   function show(i){
     var n=ims.length; cur=(i%n+n)%n; unzoom(); setO(50,50);
     big.src=ims[cur].currentSrc||ims[cur].src; big.alt=ims[cur].alt||''; cnt.textContent=(cur+1)+' / '+n;
   }
   var opener=null;
   function open(i){ if(!lb) build(); opener=document.activeElement; show(i); lb.hidden=false; document.documentElement.style.overflow='hidden'; lb.querySelector('.lbx').focus(); }
-  function close(){ unzoom(); lb.hidden=true; document.documentElement.style.overflow=''; if(opener&&opener.focus) opener.focus(); }
+  function close(){ unzoom(); lb.hidden=true; try{ g.scrollTo({left:ims[cur].offsetLeft-g.offsetLeft-(g.clientWidth-ims[cur].offsetWidth)/2}); }catch(x){} /* スマホ：一覧の写真をビューアで見ていた写真に合わせる */ document.documentElement.style.overflow=''; if(opener&&opener.focus) opener.focus(); }
   ims.forEach(function(im,i){
     im.setAttribute('tabindex','0'); im.setAttribute('role','button');
     im.setAttribute('aria-label',(im.alt||'')+(en?' (open larger)':'（拡大して見る）'));
-    var sx=0, sy=0;
+    var sx=null, sy=null;
     im.addEventListener('pointerdown',function(e){sx=e.clientX; sy=e.clientY;});
-    im.addEventListener('click',function(e){ if(Math.abs(e.clientX-sx)>10||Math.abs(e.clientY-sy)>10) return; open(i); }); /* スマホで横にめくった時は開かない */
+    im.addEventListener('click',function(e){ var moved=(sx!==null&&e.detail!==0)&&(Math.abs(e.clientX-sx)>10||Math.abs(e.clientY-sy)>10); sx=sy=null; if(moved) return; open(i); }); /* スマホで横にめくった時は開かない */
     im.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(i);} });
   });
 })();
