@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-31",
+  "author": "小判鮫",
+  "access": "free",
+  "paid_from": "",
+  "slug": "kogi-yougo-1",
+  "title": "古着用語の小辞典 その1（目付き・Vガゼット・バルスタージャケット・A-1・オンス）",
+  "description": "古着屋でよく使う言葉を、店にある実物の写真と一緒に1語ずつ解説します。その1は、目付き・Vガゼット・バルスタージャケット・A-1・オンスの5語です。",
+  "cover": "p01.jpg",
+  "tags": [
+    "古着用語",
+    "小辞典",
+    "Champion",
+    "レザージャケット",
+    "デニム"
+  ],
+  "teaser": "<p>今日は、古着屋でよく使う言葉について解説します。</p><!--photo:p01.jpg--><p>商品の説明で何気なく使っている言葉も、初めての方には分かりにくいものがあります。店にある実物の写真と一緒に、1語ずつまとめていきます。その1は5語です。</p>",
+  "body": "<h2>目付き（めつき）・目無し（めなし）</h2><!--photo:p02.jpg--><p>Champion のスウェットの胸にある小さな C のロゴを、古着屋のあいだでは「目」と呼びます。ロゴがあるものが「目付き」、ないものが「目無し」です。目無しは数が少なく、探している人が多いですね。（出典：<a href=\"https://www.2ndstreet.jp/knowbrand/feature/champion-reverse-weave_02/\" rel=\"noopener\">2nd STREET</a>）</p><h2>Vガゼット</h2><p>スウェットの首元の、V字に縫い付けた部分のことです。汗止めや補強、生地の縮みを防ぐための作りとされています。（出典：<a href=\"https://www.2ndstreet.jp/knowbrand/feature/champion-reverse-weave_02/\" rel=\"noopener\">2nd STREET</a>）</p><h2>A-1（エーワン）</h2><p>アメリカ軍が1927年に採用した、革のフライトジャケットです。立ち上がったニットのえり、ニットの袖口と裾、ボタンの前開きが目印。のちのA-2は、ファスナーの前開きと革のえりに変わります。（出典：<a href=\"https://therake.com/stories/a1-jacket-best-bombers\" rel=\"noopener\">The Rake</a>）</p><h2>バルスタージャケット</h2><!--photo:p03.jpg--><p>A-1の形をした、スエードの革ジャンのことです。イタリアの Valstar 社が1935年から作っている「Valstarino（バルスタリーノ）」が名前の元になりました。ブランドが Valstar でなくても、この形をバルスタージャケットと呼ぶことが多いです。（出典：<a href=\"https://www.trunkclothiers.com/blogs/journal/valstar-a-history-of-the-valstarino\" rel=\"noopener\">TRUNK Clothiers</a>）店には<a href=\"https://kobanzame-site.pages.dev/journal/k11411/\">ブランド表記のないゴートスエードの一着</a>があります。</p><h2>オンス（OZ）</h2><!--photo:p04.jpg--><p>デニムのタグにある「13 OZ」などの数字は、生地の重さです。1平方ヤード（約91cm四方）あたりの重さをオンスで表していて、数字が大きいほど厚くしっかりしたデニムになります。（出典：<a href=\"https://sanvt.com/blogs/journal/demim-oz-guide\" rel=\"noopener\">SANVT「Denim oz guide」</a>）<a href=\"https://kobanzame-site.pages.dev/blog/k11203-rustler-denim-trucker-jacket/\">RUSTLER のデニムジャケット</a>は13オンスでした。</p><p>次は、ほかの記事に出てきた言葉をまとめます。知りたい言葉があれば、お店で聞いてみてください。では、また。</p>",
+  "photos": [
+    {
+      "file": "p01.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/03.jpg",
+      "alt": "Champion 胸の小さなCロゴと首元のVガゼット",
+      "caption": "胸の C ロゴ（目）と首元の V ガゼット"
+    },
+    {
+      "file": "p02.jpg",
+      "src": "/assets/blog/k11190-champion-90s-ss-raglan-sweat/04.jpg",
+      "alt": "Champion 袖のCワッペン",
+      "caption": "袖の C ワッペン"
+    },
+    {
+      "file": "p03.jpg",
+      "src": "/assets/products/k11411/10.jpg",
+      "alt": "バルスタージャケットのニットのえりとボタン",
+      "caption": "ニットのえりとボタン（A-1 の目印）"
+    },
+    {
+      "file": "p04.jpg",
+      "src": "/assets/blog/k11203-rustler-denim-trucker-jacket/04.jpg",
+      "alt": "RUSTLER えり裏の黄色い三角タグと13 OZ DENIMの白いタグ",
+      "caption": "「13 OZ DENIM」のタグ"
+    }
+  ]
+}

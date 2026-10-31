@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-31",
+  "author": "小判鮫",
+  "access": "free",
+  "paid_from": "",
+  "slug": "recently-sold-2026-10",
+  "title": "最近売れたもの（2026年10月）革もの・ブーツが続きました",
+  "description": "小判鮫で最近売れた古着とアクセサリーをまとめました。イタリアのレザージャケット、Tony Lama・GRENSON のブーツ、パイソンのコンチョベルトなど。",
+  "cover": "p01.jpg",
+  "tags": [
+    "売れたもの",
+    "レザー",
+    "ブーツ",
+    "川越"
+  ],
+  "teaser": "<p>今日は、小判鮫で最近売れたものについて解説します。</p><!--photo:p01.jpg--><p>並べてみると、革のジャケット、ブーツ、革のベルトと、革ものが続けて売れました。秋らしい動きです。</p>",
+  "body": "<h2>革のジャケット</h2><p>オリーブグリーンの Sicoll のレザージャケット。えり裏に「Sicoll OF EUROPE」、内ポケットに「MADE IN ITALY」のタグがある一着でした。</p><h2>ブーツと革小物</h2><!--photo:p02.jpg--><p>ブーツは2足。Tony Lama のウエスタンブーツ（USA製・US8D）と、GRENSON のスエードのチャッカブーツ（英国製・UK6）です。<a href=\"https://kobanzame-site.pages.dev/blog/k11074-nbel-python-concho-belt/\">nbel のパイソンレザーのコンチョベルト（イタリア製）</a>も売れました。</p><h2>スウェット・ほか</h2><!--photo:p03.jpg--><p>ラベンダーに大きな赤い星の NIKE のスウェット。ほかに、Levi's 515 のブーツカット、DKNY のキャップ、Cacharel のリネンのジャケット、impressions OF CALIFORNIA のレーヨンジャケット、GAW のビーズのネックレスも、新しい持ち主のところへ行きました。</p><h2>店主のひと言</h2><p>〔ここに龍さんの一言：なぜ売れたと思うか・どんな人が買っていったか（前日のLINEで引用して話してもらう）〕</p><p>売れたものと似た物は、また入ってきます。お店で見てみてください。では、また。</p>",
+  "photos": [
+    {
+      "file": "p01.jpg",
+      "src": "/assets/products/k11388/v2_front.jpg",
+      "alt": "Sicoll オリーブグリーンのレザージャケット",
+      "caption": "Sicoll のレザージャケット（SOLD）"
+    },
+    {
+      "file": "p02.jpg",
+      "src": "/assets/blog/k11074-nbel-python-concho-belt/01.jpg",
+      "alt": "nbel パイソンレザーのコンチョベルト",
+      "caption": "nbel のコンチョベルト（SOLD）"
+    },
+    {
+      "file": "p03.jpg",
+      "src": "/assets/products/k11415/v2_front.jpg",
+      "alt": "NIKE ラベンダーに赤い星のスウェット",
+      "caption": "NIKE のスター スウェット（SOLD）"
+    }
+  ]
+}
