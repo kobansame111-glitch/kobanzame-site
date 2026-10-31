@@ -1818,7 +1818,7 @@ for lang in ('ja', 'en'):
 ''' + foot(lang))
 
 # ---------- お気に入り（2026-10-31・tools/site_extras.py）：人ごとのページなので検索には出さない（noindex・sitemap に入れない）----------
-write('/assets/items.json', KX.items_json(live, loc, site_price, is_sold, thumb_of, cat_of))
+write('/assets/items.json', KX.items_json(live, loc, site_price, is_sold, thumb_of))
 for lang in ('ja', 'en'):
     _t = KX.TX[lang]
     write(pre(lang) + '/favorites/index.html', head(lang, _t['fav_title'] + ('｜' + SHOP['name'] if lang == 'ja' else ' | Kobanzame'), _t['fav_local'], pre(lang) + '/favorites/', noindex=True)

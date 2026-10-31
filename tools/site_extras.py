@@ -19,7 +19,7 @@ FIT_GENRES = ('tops', 'outer', 'dress')
 
 TX = {
     'ja': {
-        'fav_add': '♡ お気に入りに入れる', 'fav_on': '♥ お気に入りに入っています', 'fav_see': 'お気に入りを見る →',
+        'fav_add': '♡ お気に入りに入れる', 'fav_nostore': 'このブラウザでは保存できない設定になっています（プライベートブラウズなど）。', 'fav_on': '♥ お気に入りに入っています', 'fav_see': 'お気に入りを見る →',
         'visit_btn': '店頭でこの服を見る', 'visit_open': '今日は営業日です', 'visit_closed': '今日は定休日です',
         'visit_note': '一点ものなので、先に売れていたらごめんなさい（取り置きはしていません）。来店の前に在庫を知りたいときは、Instagram の DM で品番を送ってください。',
         'visit_map': '地図を開く', 'visit_item': '品番',
@@ -35,7 +35,7 @@ TX = {
         'list_link': '商品一覧へ', 'gone': 'この商品は掲載を終了しました',
     },
     'en': {
-        'fav_add': '♡ Save to favorites', 'fav_on': '♥ Saved to favorites', 'fav_see': 'See favorites →',
+        'fav_add': '♡ Save to favorites', 'fav_nostore': 'This browser does not allow saving (private browsing, for example).', 'fav_on': '♥ Saved to favorites', 'fav_see': 'See favorites →',
         'visit_btn': 'See this piece in the shop', 'visit_open': 'We are open today', 'visit_closed': 'We are closed today',
         'visit_note': 'Every piece is one of a kind, so it may sell before you arrive (we do not hold items). To check before visiting, send the item number by Instagram DM.',
         'visit_map': 'Open map', 'visit_item': 'Item no.',
@@ -63,6 +63,8 @@ def measures(p):
     out = {}
     for key, ja in MEASURE_KEYS:
         m = re.search(ja + _NUM, v)
+        if m and key == 'sl' and re.search(r'脇下|裄', v[m.start():m.end()]):
+            continue   # 脇の下から測った袖丈（ラグラン袖など）は、肩から測る手持ちの服と比べられないので使わない
         if m:
             x = float(m.group(1))
             if 5 <= x <= 200:
@@ -75,15 +77,21 @@ def can_fit(p, genre):
     return genre in FIT_GENRES and 'w' in m and 'l' in m
 
 
-def items_json(live, loc, site_price, is_sold, thumb_of, cat_of):
-    """お気に入りページが読む、掲載中の商品の小さな一覧（/assets/items.json）"""
+def _spec(spec, keys):
+    return next((v for k, v in spec if k in keys), '')
+
+
+def items_json(live, loc, site_price, is_sold, thumb_of):
+    """お気に入りページが読む、掲載中の商品の小さな一覧（/assets/items.json）。英語の訳が無い商品は日本語のまま"""
     rows = []
     for p in live:
-        size = next((v for k, v in p.get('spec', []) if k == 'サイズ'), '')
-        rows.append({'s': p['slug'], 'sku': p['sku'], 'b': p.get('brand', ''),
+        ja, en = p.get('spec', []), loc(p, 'spec', 'en')
+        mat_ja = p.get('material', '') or _spec(ja, ('素材',))
+        rows.append({'s': p['slug'], 'b': p.get('brand', ''),
                      'n': {'ja': loc(p, 'product_name', 'ja'), 'en': loc(p, 'product_name', 'en')},
-                     'p': site_price(p), 'sold': 1 if is_sold(p) else 0, 't': thumb_of(p), 'g': cat_of(p),
-                     'm': measures(p), 'mat': p.get('material', ''), 'sz': size})
+                     'p': site_price(p), 'sold': 1 if is_sold(p) else 0, 't': thumb_of(p), 'm': measures(p),
+                     'mat': {'ja': mat_ja, 'en': _spec(en, ('Materials', 'Material')) or mat_ja},
+                     'sz': {'ja': _spec(ja, ('サイズ',)), 'en': _spec(en, ('Size',)) or _spec(ja, ('サイズ',))}})
     return json.dumps({'items': rows}, ensure_ascii=False, separators=(',', ':'))
 
 
@@ -93,7 +101,8 @@ def product_buy_html(p, lang, sold, hours_line, addr, gmaps):
     P = '/en' if lang == 'en' else ''
     fav = (f'<div class="kxfav"><button type="button" class="btn ghost" id="favbtn" data-slug="{html.escape(p["slug"])}" '
            f'data-off="{t["fav_add"]}" data-on="{t["fav_on"]}" aria-pressed="false">{t["fav_add"]}</button>'
-           f'<a class="kxsee" id="favsee" href="{P}/favorites/" hidden>{t["fav_see"]}</a></div>')
+           f'<a class="kxsee" id="favsee" href="{P}/favorites/" hidden>{t["fav_see"]}</a>'
+           f'<small class="kxmsg" id="favmsg" role="status" hidden>{t["fav_nostore"]}</small></div>')
     if sold:
         return fav
     visit = f'''<button type="button" class="btn ghost" id="visitbtn" aria-expanded="false" aria-controls="visitbox">{t['visit_btn']}</button>
@@ -113,21 +122,21 @@ def product_fit_html(p, lang, genre):
     t = TX[lang]
     m = measures(p)
     data = html.escape(json.dumps(m))
-    def inp(k, label, req):
+    def inp(k, label):
         return (f'<label class="kxin"><span>{label}</span><input type="number" inputmode="decimal" min="10" max="150" step="0.5" '
-                f'data-k="{k}"{" required" if req else ""}><small>cm</small></label>')
+                f'data-k="{k}"><small>cm</small></label>')
     return f'''<details class="kxfit" id="fitbox" data-m="{data}"><summary>{t['fit_h']}</summary>
         <p class="howto">{t['fit_p']}</p>
-        <div class="kxins">{inp('w', t['fit_w'], True)}{inp('l', t['fit_l'], True)}{inp('s', t['fit_s'], False)}{inp('sl', t['fit_sl'], False)}</div>
+        <div class="kxins">{inp('w', t['fit_w'])}{inp('l', t['fit_l'])}{inp('s', t['fit_s'])}{inp('sl', t['fit_sl'])}</div>
         <div class="kxfig"><svg id="fitsvg" viewBox="0 0 200 160" role="img" aria-label="{t['fit_h']}"></svg>
           <div class="kxleg"><span class="li"><i class="it"></i>{t['fit_item']}</span><span class="li"><i class="mi"></i>{t['fit_mine']}</span></div></div>
         <ul class="kxdiff" id="fitdiff"><li>{t['fit_empty']}</li></ul>
-        <button type="button" class="clear" id="fitclear">{t['fit_clear']}</button>
+        <button type="button" class="kxbtn" id="fitclear">{t['fit_clear']}</button>
       </details>'''
 
 
 def _shape_js():
-    """服の形（cm）→ SVG の path。肩幅・袖丈が無いときは身幅から目安を作る（図の形のためだけ・差の表には出さない）"""
+    """服の形（cm）→ SVG の path。肩幅が無いときは身幅から目安を作り、袖丈が無いときは袖を描かない（図の形のためだけ・差の表には出さない）"""
     return r'''function kzShape(m,ox,oy,k){
   var w=m.w, l=m.l, s=m.s||w*0.92, sl=m.sl||0, nk=Math.min(18,s*0.36)/2, drop=3.5;
   var X=function(x){return (ox+x*k).toFixed(1)}, Y=function(y){return (oy+y*k).toFixed(1)};
@@ -147,7 +156,6 @@ EXTRAS_JS_TPL = r'''<script>
   var L=__L__, FK='__FK__', MK='__MK__', MAX=__MAX__;
   function rd(k,d){try{var v=JSON.parse(localStorage.getItem(k)||'null');return v==null?d:v;}catch(e){return d;}}
   function wr(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
-  window.kzStore={rd:rd,wr:wr,FK:FK,MK:MK};
   /* A：お気に入り */
   var fb=document.getElementById('favbtn'), fs=document.getElementById('favsee');
   if(fb){
@@ -156,7 +164,8 @@ EXTRAS_JS_TPL = r'''<script>
     fb.addEventListener('click',function(){
       var a=rd(FK,[]), i=a.indexOf(slug);
       if(i>=0) a.splice(i,1); else { a.unshift(slug); if(a.length>MAX) a=a.slice(0,MAX); }
-      wr(FK,a); paint();
+      if(!wr(FK,a)){ var mg=document.getElementById('favmsg'); if(mg) mg.hidden=false; return; }
+      paint();
     });
     paint();
   }
@@ -218,19 +227,25 @@ FAV_JS_TPL = r'''<script>
   function el(tag,cls,txt){var e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e;}
   function render(items){
     var fav=rd(FK,[]), by={}; items.forEach(function(x){by[x.s]=x;});
-    var list=fav.filter(function(s){return by[s];}).map(function(s){return by[s];});
-    if(list.length!==fav.length) wr(FK,list.map(function(x){return x.s;}));   /* 掲載を終えた商品は外す */
-    grid.innerHTML=''; sel=sel.filter(function(s){return by[s]&&list.indexOf(by[s])>=0;});
-    none.hidden=list.length>0; hint.hidden=list.length<2;
+    /* 一覧に無い商品（掲載終了・下書き・読み込みの途中）は勝手に消さず、「掲載を終了しました」と出して、外すかどうかはお客さまに任せる */
+    var list=fav.filter(function(s){return by[s];}).map(function(s){return by[s];}), gone=fav.filter(function(s){return !by[s];});
+    grid.innerHTML=''; sel=sel.filter(function(s){return by[s];});
+    none.hidden=fav.length>0; hint.hidden=list.length<2;
+    gone.forEach(function(s){
+      var w=el('div','favcell gone'); w.appendChild(el('p','favgone',L.gone));
+      var rm=el('button','kxbtn',L.fav_remove); rm.type='button';
+      rm.addEventListener('click',function(){ wr(FK,rd(FK,[]).filter(function(x){return x!==s;})); render(items); });
+      w.appendChild(rm); grid.appendChild(w);
+    });
     list.forEach(function(x){
       var w=el('div','favcell'), a=el('a','card'+(x.sold?' sold':'')); a.href=P+'/journal/'+x.s+'/';
-      var ph=el('div','ph'), im=el('img'); im.src=x.t; im.alt=x.n[lang]||x.n.ja; im.loading='lazy'; ph.appendChild(im); a.appendChild(ph);
+      var ph=el('div','ph'), im=el('img'); im.onload=im.onerror=function(){ph.classList.add('ld');}; im.src=x.t; im.alt=x.n[lang]||x.n.ja; im.loading='lazy'; ph.appendChild(im); a.appendChild(ph);
       a.appendChild(el('div','brand',x.b)); a.appendChild(el('div','nm',x.n[lang]||x.n.ja));
-      var pr=el('div','pr',money(x.p)); a.appendChild(pr); if(x.sold) a.appendChild(el('div','soldf',L.cmp_sold));
+      a.appendChild(el('div','pr',money(x.p)));
       var ctl=el('div','favctl'), cb=el('label','chk'), ci=document.createElement('input'); ci.type='checkbox'; ci.checked=sel.indexOf(x.s)>=0;
-      ci.addEventListener('change',function(){ var i=sel.indexOf(x.s); if(ci.checked){ if(sel.length>=3){ci.checked=false;return;} sel.push(x.s);} else if(i>=0) sel.splice(i,1); table(by); });
+      ci.addEventListener('change',function(){ var i=sel.indexOf(x.s); if(ci.checked){ if(sel.length>=3){ci.checked=false; hint.hidden=false; hint.classList.add('warn'); return;} sel.push(x.s);} else if(i>=0) sel.splice(i,1); hint.classList.remove('warn'); table(by); });
       cb.appendChild(ci); cb.appendChild(document.createTextNode(' '+L.fav_cmp));
-      var rm=el('button','clear',L.fav_remove); rm.type='button';
+      var rm=el('button','kxbtn',L.fav_remove); rm.type='button';
       rm.addEventListener('click',function(){ wr(FK,rd(FK,[]).filter(function(s){return s!==x.s;})); render(items); });
       ctl.appendChild(cb); ctl.appendChild(rm); w.appendChild(a); w.appendChild(ctl); grid.appendChild(w);
     });
@@ -247,17 +262,17 @@ FAV_JS_TPL = r'''<script>
     row(L.cmp_state,function(x){return x.sold?L.cmp_sold:L.cmp_one;});
     ['w','l','s','sl'].forEach(function(k){
       if(!xs.some(function(x){return x.m[k];})) return;
-      row(LAB[k],function(x){ if(!x.m[k]) return '—'; var s=x.m[k]+'cm'; if(my[k]){var d=Math.round((x.m[k]-my[k])*2)/2; s+='（'+(d>0?'+':'')+d+'）';} return s; });
+      row(LAB[k],function(x){ if(!x.m[k]) return '—'; var s=x.m[k]+'cm'; if(my[k]){var d=Math.round((x.m[k]-my[k])*2)/2; s+=L.po+(d>0?'+':'')+d+L.pc;} return s; });
     });
-    row(L.cmp_mat,function(x){return x.mat||'—';});
-    row(L.cmp_size,function(x){return x.sz||'—';});
+    row(L.cmp_mat,function(x){return (x.mat&&(x.mat[lang]||x.mat.ja))||'—';});
+    row(L.cmp_size,function(x){return (x.sz&&(x.sz[lang]||x.sz.ja))||'—';});
     var h=el('h2','',L.cmp_h); cmp.appendChild(h);
-    if(my.w) cmp.appendChild(el('p','howto','（ ）＝'+L.cmp_mine));
+    if(my.w) cmp.appendChild(el('p','howto',L.po+' '+L.pc+' = '+L.cmp_mine));
     var wrap=el('div','cmpwrap'); wrap.appendChild(t); cmp.appendChild(wrap);
   }
   fetch('/assets/items.json',{cache:'no-cache'}).then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(function(d){render(d.items||[]);})
-    .catch(function(e){ none.hidden=false; none.textContent=L.load_err+'（'+e.message+'）'; try{console.error('favorites:',e);}catch(x){} });
+    .catch(function(e){ var er=document.getElementById('faverr'); er.hidden=false; er.textContent=L.load_err+' ('+e.message+')'; try{console.error('favorites:',e);}catch(x){} });
 })();
 </script>'''
 
@@ -270,6 +285,7 @@ def favorites_page_main(lang):
   <p class="howto">{t['fav_local']}</p>
   <p class="howto" id="cmphint" hidden>{t['fav_cmp_hint']}</p>
   <section class="cmpbox" id="cmpbox" hidden></section>
+  <p class="favnone" id="faverr" role="alert" hidden></p>
   <p class="favnone" id="favnone" hidden>{t['fav_none']}<br><a href="{P}/#list">{t['list_link']}</a></p>
   <div class="grid" id="favgrid"></div>
   <div style="height:72px"></div>
@@ -279,7 +295,9 @@ def favorites_page_main(lang):
 def favorites_js(lang):
     t = TX[lang]
     L = {k: t[k] for k in ('fav_remove', 'fav_cmp', 'cmp_h', 'cmp_price', 'cmp_state', 'cmp_mat', 'cmp_size', 'cmp_sold', 'cmp_one', 'cmp_mine')}
-    L['load_err'] = 'お気に入りを読み込めませんでした' if lang == 'ja' else 'Could not load favorites'
+    L['load_err'] = 'お気に入りを読み込めませんでした。時間をおいて開き直してください' if lang == 'ja' else 'Could not load favorites. Please reload later'
+    L['gone'] = t['gone']
+    L['po'], L['pc'] = ('（', '）') if lang == 'ja' else (' (', ')')
     return (FAV_JS_TPL.replace('__L__', json.dumps(L, ensure_ascii=False)).replace('__LAB__', json.dumps(MEASURE_LABEL[lang], ensure_ascii=False))
             .replace('__P__', '/en' if lang == 'en' else '').replace('__LANG__', lang).replace('__FK__', FAV_KEY).replace('__MK__', MY_KEY))
 
@@ -315,8 +333,12 @@ EXTRAS_CSS = """
 .cmpwrap{overflow-x:auto}
 table.cmp{border-collapse:collapse;width:100%;min-width:480px;font-size:13px}
 table.cmp th,table.cmp td{border-top:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
-table.cmp thead th,table.cmp tr:first-child th{border-top:0}
+table.cmp tr:first-child th{border-top:0}
 table.cmp tr:first-child img{width:96px;aspect-ratio:4/5;object-fit:cover;display:block;margin-bottom:4px}
 table.cmp th:first-child{color:var(--usu);font-weight:500;white-space:nowrap;width:5em}
-.card .soldf{font-size:11px;color:var(--kin);margin-top:2px}
+.kxbtn{background:none;border:1px solid var(--line);color:inherit;font:inherit;font-size:13px;padding:0 14px;min-height:44px;cursor:pointer}
+.kxmsg{display:block;width:100%;font-size:12px;color:var(--usu)}
+#cmphint.warn{color:var(--kin)}
+.favgone{font-size:13px;color:var(--usu);margin:0 0 8px}
+.favcell.gone{border:1px dashed var(--line);padding:12px;justify-content:space-between}
 """
