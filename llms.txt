@@ -44,7 +44,7 @@
 ## ブログ（商品の紹介・読みもの）
 - [川越でスエード・レザーの古着を探している方へ（ジャケット・パンツ・ベスト・ブーツ）](https://kobanzame-site.pages.dev/blog/kawagoe-suede-leather/): 川越の古民家古着屋・小判鮫にある、1970〜90年代頃のスエードレザーのジャケットやパンツ、レザーのベストとブーツをまとめて紹介します。サイズの目安と価格つきです。
 - [ゴートスエードのバルスタージャケット（A-1タイプ・1980〜90年代頃・タバコブラウン）](https://kobanzame-site.pages.dev/blog/k11411/): 山羊革のスエードのバルスタージャケット。アメリカ軍のA-1をモチーフに、ヨーロッパで作られた革ジャンです。名前の由来と、タグから分かることを紹介します。
-- [BEAR RIVER リアルツリーカモ ジップアップパーカー（フリース裏地）](https://kobanzame-site.pages.dev/blog/k11253-bear-river/): BEAR RIVERのリアルツリーカモ柄ジップアップパーカーが入荷。ポリエステル素材にフリース裏地付き。ブラウンとオリーブグリーンの柄を紹介します。
+- [BEAR RIVER リアルツリーカモ ジップアップパーカー（裏起毛）](https://kobanzame-site.pages.dev/blog/k11253-bear-river/): BEAR RIVERのリアルツリーカモ柄ジップアップパーカーが入荷。ポリエステル素材の裏起毛です。ブラウンとオリーブグリーンの柄を紹介します。
 - [DUKEDOM ニットカーディガン（バーガンディ×ブラック・日本製）](https://kobanzame-site.pages.dev/blog/k11437-dukedom/): DUKEDOMの日本製ニットカーディガンが入荷。バーガンディ×ブラックのパネル切り替えにホワイトラインが入った、ボウリングシャツ型です。写真と一緒に紹介します。
 - [Levi's 517 ブーツカット カスタムプリントデニム（ライトインディゴ・W32）](https://kobanzame-site.pages.dev/blog/k11420-levi-strauss-co-517-w32-l36/): Levi's 517のブーツカットデニムが入荷。左脚にライオンと文字のカスタムプリントが入った、ライトインディゴのW32サイズを写真と一緒に紹介します。
 - [NIKE スタープリント スウェット（ラベンダー×レッド・2000年代頃）](https://kobanzame-site.pages.dev/blog/k11415-nike/): NIKEのコットンスウェットが入荷。ラベンダーパープルの地にレッドのスタープリントと胸元にホワイトスウッシュ。2000年代頃の一着を紹介します。
@@ -100,7 +100,7 @@
 - [1981年頃 米軍 デザートナイトカモ パーカー 実物 Lサイズ ミリタリー メンズ](https://kobanzame-site.pages.dev/journal/k11463-lancer-clothing-corp-dla100-81-c-2532-nsn-8415-01-102-6281/): 1981年頃 米軍 デザートナイトカモ パーカー 実物 Lサイズ ミリタリー メンズ。21,780円（税込・送料込み）。在庫1点
 - [AMOR ブロックチェック バルーンパンツ マルチカラー イージーパンツ レディース](https://kobanzame-site.pages.dev/journal/k11464-amor/): AMOR ブロックチェック バルーンパンツ マルチカラー イージーパンツ レディース。7,480円（税込・送料込み）。在庫1点
 - [2021年製 スマーフ タイダイ パーカー ラベンダー 公式ライセンス メンズ](https://kobanzame-site.pages.dev/journal/k11191-peyo-2021-lic-lafig-belgium-smurf-www-smurf-com-c-life-group-ltd-c-lifegroup-com/): 2021年製 スマーフ タイダイ パーカー ラベンダー 公式ライセンス メンズ。7,480円（税込・送料込み）。在庫1点
-- [BEAR RIVER リアルツリーカモ ジップアップパーカー フリース裏 メンズ](https://kobanzame-site.pages.dev/journal/k11253-bear-river/): BEAR RIVER リアルツリーカモ ジップアップパーカー フリース裏 メンズ。7,480円（税込・送料込み）。在庫1点
+- [BEAR RIVER リアルツリーカモ ジップアップパーカー 裏起毛 メンズ](https://kobanzame-site.pages.dev/journal/k11253-bear-river/): BEAR RIVER リアルツリーカモ ジップアップパーカー 裏起毛 メンズ。7,480円（税込・送料込み）。在庫1点
 - [Abercrombie & Fitch KEMPSHALL ダウンジャケット マスタードイエロー XL メンズ](https://kobanzame-site.pages.dev/journal/k11449-abercrombie-fitch-kempshall-jacket-xl-made-in-china/): Abercrombie & Fitch KEMPSHALL ダウンジャケット マスタードイエロー XL メンズ。17,380円（税込・送料込み）。在庫1点
 - [Levi's 517 ブーツカット カスタムプリントデニム ライトインディゴ W32 メンズ](https://kobanzame-site.pages.dev/journal/k11420-levi-strauss-co-517-w32-l36/): Levi's 517 ブーツカット カスタムプリントデニム ライトインディゴ W32 メンズ。8,580円（税込・送料込み）。在庫1点
 - [1990年代前後のストレートジーンズ](https://kobanzame-site.pages.dev/journal/k10614-riveted-by-lee/): 90s Riveted by Lee ストレートジーンズ。11,880円（税込・送料込み）。在庫1点

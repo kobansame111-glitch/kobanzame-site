@@ -54,7 +54,7 @@ if(k)send({t:'click',btn:k});},true);
 <nav class="drawer" id="drawer" aria-label="メニュー" aria-hidden="true">
   <div class="dh"><b>小判鮫</b><button type="button" class="x" id="drawerx">閉じる</button></div>
   <h3>ジャンルで選ぶ</h3>
-  <ul><li><a href="/#list" data-cat="">すべての商品<small>50</small></a></li><li><a href="/?cat=new#list" data-cat="new">新着<small>17</small></a></li><li><a href="/?cat=outer#list" data-cat="outer">アウター<small>13</small></a></li><li><a href="/?cat=tops#list" data-cat="tops">トップス<small>11</small></a></li><li><a href="/?cat=bottoms#list" data-cat="bottoms">パンツ・スカート<small>11</small></a></li><li><a href="/?cat=dress#list" data-cat="dress">ワンピース<small>3</small></a></li><li><a href="/?cat=shoes#list" data-cat="shoes">靴<small>5</small></a></li><li><a href="/?cat=acc#list" data-cat="acc">アクセサリー・<wbr>GAW<small>5</small></a></li><li><a href="/?cat=other#list" data-cat="other">小物・雑貨<small>2</small></a></li></ul>
+  <ul><li><a href="/#list" data-cat="">すべての商品<small>50</small></a></li><li><a href="/?cat=new#list" data-cat="new">新着<small>17</small></a></li><li><a href="/?cat=outer#list" data-cat="outer">アウター<small>12</small></a></li><li><a href="/?cat=tops#list" data-cat="tops">トップス<small>12</small></a></li><li><a href="/?cat=bottoms#list" data-cat="bottoms">パンツ・スカート<small>11</small></a></li><li><a href="/?cat=dress#list" data-cat="dress">ワンピース<small>3</small></a></li><li><a href="/?cat=shoes#list" data-cat="shoes">靴<small>5</small></a></li><li><a href="/?cat=acc#list" data-cat="acc">アクセサリー・<wbr>GAW<small>5</small></a></li><li><a href="/?cat=other#list" data-cat="other">小物・雑貨<small>2</small></a></li></ul>
   <h3>お店のこと</h3>
   <ul><li><a href="/blog/">ブログ</a></li><li><a href="/#store">店舗</a></li><li><a href="/#faq">Q&amp;A</a></li><li><a href="/workshop/">ワークショップ（準備中）</a></li></ul>
 </nav>
@@ -116,6 +116,72 @@ if(k)send({t:'click',btn:k});},true);
   g.addEventListener('scroll',upd,{passive:true}); upd();}
   var hb=document.getElementById('holdbtn'), hx=document.getElementById('holdbox');
   if(hb&&hx){hb.addEventListener('click',function(){hx.hidden=!hx.hidden; hb.setAttribute('aria-expanded',String(!hx.hidden));});}
+})();
+/* 2026-10-31 写真の拡大表示：写真を押す→全画面で開く／もう一度押す→2.5倍ズーム（PCはマウスを動かすと見る場所が動く・スマホは指でなぞる）／左右で次の写真／Escか×か写真の外の黒い所で閉じる */
+(function(){
+  var g=document.getElementById('gal'); if(!g) return;
+  var ims=[].slice.call(g.querySelectorAll('img')); if(!ims.length) return;
+  var en=document.documentElement.lang==='en', S=2.5, lb, view, big, cnt, cur=0, zoomed=false, ox=50, oy=50, dn=null;
+  function build(){
+    lb=document.createElement('div'); lb.className='lb'; lb.hidden=true;
+    lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true'); lb.setAttribute('aria-label',en?'Photo viewer':'写真の拡大表示');
+    lb.innerHTML='<div class="lbv"><img alt=""></div><div class="lbh"></div><div class="lbc"></div>'
+      +'<button type="button" class="lbp" aria-label="'+(en?'Previous photo':'前の写真')+'">&#8249;</button>'
+      +'<button type="button" class="lbn" aria-label="'+(en?'Next photo':'次の写真')+'">&#8250;</button>'
+      +'<button type="button" class="lbx" aria-label="'+(en?'Close':'閉じる')+'">&#10005;</button>';
+    document.body.appendChild(lb);
+    view=lb.querySelector('.lbv'); big=view.querySelector('img'); cnt=lb.querySelector('.lbc');
+    lb.querySelector('.lbh').textContent=en?'Click or tap the photo to zoom':'写真を押すとズームします';
+    if(ims.length===1) lb.classList.add('single');
+    big.draggable=false; big.addEventListener('dragstart',function(e){e.preventDefault();});
+    lb.querySelector('.lbx').addEventListener('click',close);
+    lb.querySelector('.lbp').addEventListener('click',function(){show(cur-1);});
+    lb.querySelector('.lbn').addEventListener('click',function(){show(cur+1);});
+    view.addEventListener('pointerdown',function(e){if(!e.isPrimary) return; dn={x:e.clientX,y:e.clientY,ox:ox,oy:oy};});
+    view.addEventListener('pointermove',function(e){
+      if(!zoomed||!e.isPrimary) return; lb.classList.add('pan');
+      if(e.pointerType==='mouse'&&!dn){ /* PC：マウスの位置を見る（Amazonと同じ） */
+        var w=big.offsetWidth, h=big.offsetHeight, L=(view.clientWidth-w)/2, T=(view.clientHeight-h)/2, vr=view.getBoundingClientRect();
+        setO((e.clientX-vr.left-L)/w*100,(e.clientY-vr.top-T)/h*100); return; }
+      if(dn){ /* 指（またはマウスのドラッグ）でなぞる：なぞった方向に写真が動く */
+        setO(dn.ox-(e.clientX-dn.x)/big.offsetWidth*100/(S-1), dn.oy-(e.clientY-dn.y)/big.offsetHeight*100/(S-1)); }
+    });
+    view.addEventListener('pointerup',function(e){
+      if(!dn||!e.isPrimary) return; var dx=e.clientX-dn.x, dy=e.clientY-dn.y, moved=Math.abs(dx)>10||Math.abs(dy)>10; dn=null;
+      if(!moved){ if(e.target===big) toggle(e); else if(!zoomed) close(); return; }
+      if(!zoomed&&Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)) show(cur+(dx<0?1:-1));
+    });
+    view.addEventListener('pointercancel',function(){dn=null;});
+    document.addEventListener('keydown',function(e){
+      if(lb.hidden) return;
+      if(e.key==='Escape'){ zoomed?unzoom():close(); }
+      else if(e.key==='ArrowRight') show(cur+1);
+      else if(e.key==='ArrowLeft') show(cur-1);
+    });
+  }
+  function setO(x,y){ ox=Math.max(0,Math.min(100,x)); oy=Math.max(0,Math.min(100,y)); big.style.transformOrigin=ox+'% '+oy+'%'; }
+  function toggle(e){
+    if(zoomed){ unzoom(); return; }
+    var w=big.offsetWidth, h=big.offsetHeight, vr=view.getBoundingClientRect(), L=(view.clientWidth-w)/2, T=(view.clientHeight-h)/2;
+    setO((e.clientX-vr.left-L)/w*100,(e.clientY-vr.top-T)/h*100);
+    zoomed=true; lb.classList.remove('pan'); lb.classList.add('zoom'); big.style.transform='scale('+S+')';
+  }
+  function unzoom(){ zoomed=false; lb.classList.remove('zoom','pan'); big.style.transform=''; }
+  function show(i){
+    var n=ims.length; cur=(i%n+n)%n; unzoom(); setO(50,50);
+    big.src=ims[cur].currentSrc||ims[cur].src; big.alt=ims[cur].alt||''; cnt.textContent=(cur+1)+' / '+n;
+  }
+  var opener=null;
+  function open(i){ if(!lb) build(); opener=document.activeElement; show(i); lb.hidden=false; document.documentElement.style.overflow='hidden'; lb.querySelector('.lbx').focus(); }
+  function close(){ unzoom(); lb.hidden=true; try{ g.scrollTo({left:ims[cur].offsetLeft-g.offsetLeft-(g.clientWidth-ims[cur].offsetWidth)/2}); }catch(x){} /* スマホ：一覧の写真をビューアで見ていた写真に合わせる */ document.documentElement.style.overflow=''; if(opener&&opener.focus) opener.focus(); }
+  ims.forEach(function(im,i){
+    im.setAttribute('tabindex','0'); im.setAttribute('role','button');
+    im.setAttribute('aria-label',(im.alt||'')+(en?' (open larger)':'（拡大して見る）'));
+    var sx=null, sy=null;
+    im.addEventListener('pointerdown',function(e){sx=e.clientX; sy=e.clientY;});
+    im.addEventListener('click',function(e){ var moved=(sx!==null&&e.detail!==0)&&(Math.abs(e.clientX-sx)>10||Math.abs(e.clientY-sy)>10); sx=sy=null; if(moved) return; open(i); }); /* スマホで横にめくった時は開かない */
+    im.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(i);} });
+  });
 })();
 </script>
 <footer class="site"><div class="wrap">
