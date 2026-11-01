@@ -12,19 +12,20 @@
   "photos": [
     {
       "file": "01.jpg",
-      "src": "/assets/products/k11418/v2_back.jpg",
+      "src": "/assets/products/k11418/01.jpg",
       "alt": "Levi's グラフィックプリント ブーツカットデニム ライトブルー 2000年代頃 レディース",
       "caption": "正面"
     },
     {
       "file": "02.jpg",
-      "src": "/assets/products/k11418/01.jpg",
+      "src": "/assets/products/k11418/02.jpg",
       "alt": "Levi's グラフィックプリント ブーツカットデニム ライトブルー 2000年代頃 レディース"
     },
     {
       "file": "03.jpg",
-      "src": "/assets/products/k11418/02.jpg",
-      "alt": "Levi's グラフィックプリント ブーツカットデニム ライトブルー 2000年代頃 レディース"
+      "src": "/assets/products/k11418/03.jpg",
+      "alt": "Levi's グラフィックプリント ブーツカットデニム ライトブルー 2000年代頃 レディース",
+      "caption": "背面"
     },
     {
       "file": "04.jpg",
