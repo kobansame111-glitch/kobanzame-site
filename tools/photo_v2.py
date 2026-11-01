@@ -26,7 +26,7 @@ DATA = os.path.join(ROOT, 'data', 'products.json')
 COST_DIR = os.path.join(ROOT, 'data', 'ai_cost')
 COST_CSV = os.path.join(COST_DIR, 'photo_v2.csv')
 STOP_FILE = os.path.join(COST_DIR, 'STOP')
-SITE = 'https://kobanzame-site.pages.dev'
+SITE = 'https://kobanzame-kawagoe.com'
 JST = datetime.timezone(datetime.timedelta(hours=9))
 
 PHOTO_V2_FROM = os.environ.get('PHOTO_V2_FROM', '2026-10-09')   # この日以降に公開された商品だけ
