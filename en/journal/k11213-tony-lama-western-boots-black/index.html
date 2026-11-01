@@ -56,7 +56,7 @@ if(k)send({t:'click',btn:k});},true);
   <h3>Shop by category</h3>
   <ul><li><a href="/en/#list" data-cat="">All items<small>50</small></a></li><li><a href="/en/?cat=new#list" data-cat="new">New in<small>17</small></a></li><li><a href="/en/?cat=outer#list" data-cat="outer">Outerwear<small>12</small></a></li><li><a href="/en/?cat=tops#list" data-cat="tops">Tops<small>12</small></a></li><li><a href="/en/?cat=bottoms#list" data-cat="bottoms">Pants & skirts<small>11</small></a></li><li><a href="/en/?cat=dress#list" data-cat="dress">Dresses<small>3</small></a></li><li><a href="/en/?cat=shoes#list" data-cat="shoes">Shoes<small>5</small></a></li><li><a href="/en/?cat=acc#list" data-cat="acc">Accessories & GAW<small>5</small></a></li><li><a href="/en/?cat=other#list" data-cat="other">Goods<small>2</small></a></li></ul>
   <h3>About the shop</h3>
-  <ul><li><a href="/blog/">Blog</a></li><li><a href="/en/#store">Store</a></li><li><a href="/en/#faq">FAQ</a></li><li><a href="/en/workshop/">Workshops (coming soon)</a></li></ul>
+  <ul><li><a href="/blog/">Blog</a></li><li><a href="/en/#store">Store</a></li><li><a href="/en/#faq">FAQ</a></li><li><a href="/en/workshop/">Workshops (coming soon)</a></li><li><a href="/en/favorites/">♡ Favorites</a></li></ul>
 </nav>
 <script>
 (function(){
@@ -94,12 +94,14 @@ if(k)send({t:'click',btn:k});},true);
       <div class="buybox">
         <span class="soldout">SOLD OUT</span>
         
+        <div class="kxfav"><button type="button" class="btn ghost" id="favbtn" data-slug="k11213-tony-lama-western-boots-black" data-off="♡ Save to favorites" data-on="♥ Saved to favorites" aria-pressed="false">♡ Save to favorites</button><a class="kxsee" id="favsee" href="/en/favorites/" hidden>See favorites →</a><small class="kxmsg" id="favmsg" role="status" hidden>This browser does not allow saving (private browsing, for example).</small></div>
         <div class="ship"><b>One of a kind, 1 in stock.</b> You will go to Square's secure checkout. If it sells first elsewhere we may not be able to accept your order, and you will get a full refund.<br>Online checkout ships within Japan. For overseas shipping, please contact us before buying.</div>
       </div>
       <ul class="points"><li>Vintage western boots by Tony Lama, the long-standing American bootmaker, made in USA (style 2916)</li><li>Materials: genuine leather</li><li>Size: US 8D (marked 25 cm)</li></ul>
       <details open><summary>The story</summary><div class="story"><p>We are Kobanzame, a vintage shop in an old wooden house in Kawagoe. Vintage boots from Tony Lama, one of America&#x27;s classic western bootmakers: glossy black leather with cream stitching across the shaft.</p>
 <h2>Details</h2><p>Cream-thread stitchwork covers the shaft. The texture of worn-in leather and the shading at the toes give it a true vintage face. Made in USA, style number 2916.</p><h2>Condition</h2><p>Scuffs at the toes and heels, creasing and general wear. No noticeable tears or major sole damage.</p><h2>How to wear them</h2><p>Let a little of the shaft stitching show under your denim hem. They also loosen up slacks or a dress. For anyone.</p></div></details>
       <details><summary>Details & size</summary><dl class="spec"><dt>Brand</dt><dd>Tony Lama</dd><dt>Materials</dt><dd>Genuine leather</dd><dt>Colour</dt><dd>Black</dd><dt>Size</dt><dd>US 8D (marked 25 cm)</dd><dt>Era</dt><dd>Vintage (style 2916)</dd><dt>Made</dt><dd>USA</dd><dt>Condition</dt><dd>B: Scuffs at toes and heels, creasing and wear; no noticeable tears or major sole damage</dd></dl><p class="howto">Measured flat. Chest = armpit to armpit; length = base of collar to hem. Measure a piece you own the same way to compare.</p></details>
+      
       <details><summary>Shipping & returns</summary><div class="story"><p>Domestic shipping included. Dispatched from our Kawagoe shop within 3 days of payment (closed Mondays). As these are one-of-a-kind vintage items, we do not accept returns for change of mind. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival.</p></div></details>
       <div class="byline">Words: Ryu, owner & buyer at Kobanzame</div>
       
@@ -182,6 +184,72 @@ if(k)send({t:'click',btn:k});},true);
     im.addEventListener('click',function(e){ var moved=(sx!==null&&e.detail!==0)&&(Math.abs(e.clientX-sx)>10||Math.abs(e.clientY-sy)>10); sx=sy=null; if(moved) return; open(i); }); /* スマホで横にめくった時は開かない */
     im.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(i);} });
   });
+})();
+</script>
+<script>
+(function(){
+  var L={"fit_empty": "Enter chest and length to see the two shapes overlaid.", "fit_item": "This piece", "fit_mine": "Yours", "fit_same": "about the same", "fit_bigger": "larger", "fit_smaller": "smaller", "sep": ": ", "word": "this piece is {n}cm {w}"}, FK='kz_fav_v1', MK='kz_my_v1', MAX=30;
+  function rd(k,d){try{var v=JSON.parse(localStorage.getItem(k)||'null');return v==null?d:v;}catch(e){return d;}}
+  function wr(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
+  /* A：お気に入り */
+  var fb=document.getElementById('favbtn'), fs=document.getElementById('favsee');
+  if(fb){
+    var slug=fb.dataset.slug;
+    function paint(){var on=rd(FK,[]).indexOf(slug)>=0; fb.textContent=on?fb.dataset.on:fb.dataset.off; fb.setAttribute('aria-pressed',String(on)); fb.classList.toggle('on',on); if(fs) fs.hidden=!on;}
+    fb.addEventListener('click',function(){
+      var a=rd(FK,[]), i=a.indexOf(slug);
+      if(i>=0) a.splice(i,1); else { a.unshift(slug); if(a.length>MAX) a=a.slice(0,MAX); }
+      if(!wr(FK,a)){ var mg=document.getElementById('favmsg'); if(mg) mg.hidden=false; return; }
+      paint();
+    });
+    paint();
+  }
+  /* B：店頭で見たい */
+  var vb=document.getElementById('visitbtn'), vx=document.getElementById('visitbox'), vt=document.getElementById('vtoday');
+  if(vb&&vx){
+    vb.addEventListener('click',function(){vx.hidden=!vx.hidden; vb.setAttribute('aria-expanded',String(!vx.hidden));});
+    if(vt){var j=new Date(Date.now()+(new Date().getTimezoneOffset()+540)*60000),dw=j.getDay(),ymd=j.getFullYear()+'-'+('0'+(j.getMonth()+1)).slice(-2)+'-'+('0'+j.getDate()).slice(-2),hol=["2026-11-23", "2027-01-11", "2027-03-22", "2027-05-03", "2027-07-19", "2027-09-20", "2027-10-11"],open=(ymd>='2026-11-01'?[1]:[1]).indexOf(dw)<0||hol.indexOf(ymd)>=0;
+      vt.textContent=open?vt.dataset.open:vt.dataset.closed; if(!open) vt.className='vtoday closed'; vt.hidden=false;}
+  }
+  /* C：手持ちの服と比べる */
+  function kzShape(m,ox,oy,k){
+  var w=m.w, l=m.l, s=m.s||w*0.92, sl=m.sl||0, nk=Math.min(18,s*0.36)/2, drop=3.5;
+  var X=function(x){return (ox+x*k).toFixed(1)}, Y=function(y){return (oy+y*k).toFixed(1)};
+  var hs=s/2, hw=w/2, pit=Math.max(18,l*0.3), d='M'+X(-nk)+' '+Y(0)+' Q'+X(0)+' '+Y(5)+' '+X(nk)+' '+Y(0)+' L'+X(hs)+' '+Y(drop);
+  if(sl>0){var a=0.9, ex=Math.cos(a)*sl, ey=Math.sin(a)*sl, cw=Math.max(8,w*0.3);
+    d+=' L'+X(hs+ex)+' '+Y(drop+ey)+' L'+X(hs+ex-Math.sin(a)*cw)+' '+Y(drop+ey+Math.cos(a)*cw)+' L'+X(hw)+' '+Y(pit);}
+  else d+=' L'+X(hw)+' '+Y(pit);
+  d+=' L'+X(hw)+' '+Y(l)+' L'+X(-hw)+' '+Y(l)+' L'+X(-hw)+' '+Y(pit);
+  if(sl>0){d+=' L'+X(-hs-ex+Math.sin(a)*cw)+' '+Y(drop+ey+Math.cos(a)*cw)+' L'+X(-hs-ex)+' '+Y(drop+ey);}
+  return d+' L'+X(-hs)+' '+Y(drop)+' Z';
+}
+function kzExtent(m){var w=m.w,s=m.s||w*0.92,sl=m.sl||0;return {hx:Math.max(w/2,s/2+(sl?Math.cos(0.9)*sl:0)),y:Math.max(m.l,3.5+(sl?Math.sin(0.9)*sl+Math.max(8,w*0.3):0))};}
+  var fx=document.getElementById('fitbox');
+  if(fx){
+    var item=JSON.parse(fx.dataset.m), ins=fx.querySelectorAll('input[data-k]'), svg=document.getElementById('fitsvg'), df=document.getElementById('fitdiff'), lab={"s": "Shoulder", "w": "Chest", "l": "Length", "sl": "Sleeve"};
+    var my=rd(MK,{}); ins.forEach(function(i){ if(my[i.dataset.k]) i.value=my[i.dataset.k]; });
+    function num(v){var x=parseFloat(String(v).replace(/[^0-9.]/g,''));return (x>=10&&x<=150)?x:0;}
+    function draw(){
+      var mine={}; ins.forEach(function(i){var x=num(i.value); if(x) mine[i.dataset.k]=x;});
+      wr(MK,mine);
+      var ok=mine.w&&mine.l, e1=kzExtent(item), e2=ok?kzExtent(mine):{hx:0,y:0};
+      var hx=Math.max(e1.hx,e2.hx), hy=Math.max(e1.y,e2.y), k=Math.min(90/hx,148/hy), h='';
+      h+='<path d="'+kzShape(item,100,6,k)+'" class="it"/>';
+      if(ok) h+='<path d="'+kzShape(mine,100,6,k)+'" class="mi"/>';
+      svg.innerHTML=h;
+      if(!ok){df.innerHTML='<li>'+L.fit_empty+'</li>';return;}
+      var out='';
+      ['w','l','s','sl'].forEach(function(key){
+        if(!(item[key]&&mine[key])) return;
+        var d=Math.round((item[key]-mine[key])*2)/2, word=Math.abs(d)<1?L.fit_same:L.word.replace('{n}',Math.abs(d)).replace('{w}',d>0?L.fit_bigger:L.fit_smaller);
+        var li=document.createElement('li'); li.textContent=lab[key]+L.sep+L.fit_item+' '+item[key]+'cm / '+L.fit_mine+' '+mine[key]+'cm → '+word; out+=li.outerHTML;
+      });
+      df.innerHTML=out;
+    }
+    ins.forEach(function(i){i.addEventListener('input',draw);});
+    document.getElementById('fitclear').addEventListener('click',function(){ins.forEach(function(i){i.value='';}); draw();});
+    draw();
+  }
 })();
 </script>
 <footer class="site"><div class="wrap">
