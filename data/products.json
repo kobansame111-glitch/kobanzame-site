@@ -4263,7 +4263,8 @@
     "url": "https://square.link/u/r8eyP7xH",
     "order_id": "NMQhAf7sIqWHU7ZwQHCdvNTedaWZY",
     "amount": 4730,
-    "created_at": "2026-10-22T11:34:17Z"
+    "created_at": "2026-10-22T11:34:17Z",
+    "closed": "deleted"
    },
    "square": "https://square.link/u/r8eyP7xH"
   },
