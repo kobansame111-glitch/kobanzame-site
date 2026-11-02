@@ -1013,7 +1013,8 @@ def foot(lang):
     shop = [(f'{P}/#list', t['menu_all'])] + ([(f'{P}/?cat=new#list', NEW_LABEL[lang])] if any(is_new(p) for p in avail_live) else []) \
          + [(f'{P}/?cat={c}#list', t['cats'][c]) for c in CATS_PRESENT] + [(SHOP['mercari'], 'メルカリShops' if ja else 'Mercari Shops')]
     read = [('/blog/', 'ブログ' if ja else 'Blog (Japanese)'), ('/guide/' if ja else '/en/guide/', '川越で古着屋を探している方へ' if ja else 'Kawagoe vintage guide')] \
-         + ([('/news/', 'お知らせ')] if ja and NEWS else [])
+         + ([('/news/', 'お知らせ')] if ja and NEWS else []) \
+         + ([('/automation/', 'お店の仕組みづくり')] if ja else [])
     store = [(f'{P}/#store', '場所・営業時間' if ja else 'Address & hours'), (f'{P}/#faq', 'よくある質問' if ja else 'FAQ')] \
           + ([T_WS_NAV[lang]] if WS_OPEN else []) + [(SHOP['gmaps'], t['gm']), (SHOP['instagram'], 'Instagram')]
     cols = col('お買い物' if ja else 'Shop', shop) + col('読みもの' if ja else 'Read', read) + col('お店' if ja else 'The shop', store)
@@ -1797,6 +1798,99 @@ for lang, g in GUIDE.items():
 </main>
 ''' + foot(lang))
 
+# ---------- お店の仕組みづくり（/automation/・2026-11-02 龍さん「サイトに、こういうの作れますよのページを」） ----------
+# Threads・営業メール・Instagram の行き先。小判鮫で実際に動いている仕組みだけを書く（効果の約束・他社との比較はしない）。
+# 料金は 2026-11-02 の二本立て（広く安く＝領収書／古着屋に絞って高く＝出品と在庫）の案。変えるときは AUTO_PRICE だけ直す。
+import urllib.parse
+AUTO_MAIL = 'kobanzame.support@gmail.com'
+AUTO_PRICE = {'receipt': '9,800円〜（税込・設定1回）', 'vintage_init': '150,000円〜（税込）', 'vintage_month': '20,000円〜（税込）'}
+AUTO = {
+  'path': '/automation/',
+  'title': '古着屋の出品と在庫を自動化する仕組みづくり｜古着屋 小判鮫',
+  'desc': '川越の古着屋 小判鮫が自分の店で使っている、出品・在庫・売上集計・記帳の自動化を、ほかのお店にも入れるお手伝い。古着屋向けの「出品と在庫まるごと」と、どの業種でも使える「領収書の自動整理」の2つ。無料30分のオンライン相談から。',
+  'h1': 'お店の事務を、仕組みにします',
+  'lead': '古着屋 小判鮫は、出品・在庫・売上の集計・記帳を自分たちで仕組みにして、月に約30時間分の手作業を自動化しています（2026年10月・自店の記録より）。同じ仕組みを、ほかのお店に入れるお手伝いをしています。',
+  'demo': ('このサイトが見本です', [
+    '商品ページは、写真と商品データから自動で作られています。英語のページも同じデータから作っています。',
+    '新着は毎週水曜の夜に、自動で公開されます。',
+    '売れた商品は自動で「SOLD」になり、毎朝「売れたのに在庫が残っている」ものがないかを見張っています。',
+    'メルカリShopsに出すための一括登録ファイルも、同じデータから作っています。',
+  ]),
+  'plans': [
+    ('古着屋・一点ものの店向け：出品と在庫まるごと', [
+      '写真から、商品ページの下書き（タグの読み方・実寸・状態）を作る。公開の前に、お店の人が確かめる',
+      'お店のサイトに商品ページを自動で作る（英語のページも）',
+      'メルカリShops用の一括登録ファイルを自動で作る',
+      'Square の売上と在庫を毎日表に写し、閉店後の集計をなくす',
+      '売れた一点ものを、ほかの販路でも止めるよう毎朝知らせる',
+    ], [('初期費用', AUTO_PRICE['vintage_init']), ('月額', AUTO_PRICE['vintage_month'])],
+       '販路の数・商品の数・今お使いの道具に合わせてお見積りします。'),
+    ('どの業種でも：領収書の自動整理', [
+      'Gmail に届く領収書・請求書のメールを毎朝集める',
+      'Google ドライブの月ごとのフォルダに保存する',
+      '日付・取引先・金額を表に写す（税理士さんや会計ソフトに渡しやすい形）',
+    ], [('料金', AUTO_PRICE['receipt'])],
+       '小判鮫でも毎朝この仕組みが動いています。'),
+  ],
+  'steps': [
+    ('無料30分のオンライン相談', '今の作業を一緒に棚卸しして、「自動化できそうなこと／やらなくていいこと」を仕分けします。売り込みはしません。'),
+    ('お見積り', '入れる仕組みと料金をはっきり書いてお送りします。'),
+    ('設定', 'お店の Google アカウントの中に設定します。データはお店の中に置き、こちらに集めません。'),
+    ('様子見と手直し', '入れてから1か月、動きを一緒に見て直します。'),
+  ],
+  'faq': [
+    ('プログラミングの知識は要りますか？', '要りません。設定はこちらで行い、使い方をお伝えします。'),
+    ('どんな道具が必要ですか？', 'Google のアカウント（Gmail）があれば始められます。古着屋向けは Square・メルカリShops・お店のサイトなど、お使いの販路に合わせます。'),
+    ('古着屋以外でも頼めますか？', '領収書の自動整理は、どの業種でもお使いいただけます。'),
+    ('どこの地域でも頼めますか？', 'オンラインで全国対応しています。'),
+    ('途中でやめられますか？', 'やめられます。入れた仕組みはお店のアカウントの中にあるので、そのまま残ります。'),
+  ],
+}
+_a = AUTO
+_a_ld = {'@context': 'https://schema.org', '@graph': [
+    org_node(),
+    {'@type': 'FAQPage', '@id': BASE + _a['path'] + '#faq',
+     'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in _a['faq']]},
+    {'@type': 'WebPage', '@id': BASE + _a['path'] + '#page', 'url': BASE + _a['path'], 'name': _a['title'], 'inLanguage': 'ja', 'dateModified': TODAY},
+    {'@type': 'BreadcrumbList', 'itemListElement': [
+        {'@type': 'ListItem', 'position': 1, 'name': 'HOME', 'item': BASE + '/'},
+        {'@type': 'ListItem', 'position': 2, 'name': 'お店の仕組みづくり', 'item': BASE + _a['path']}]}]}
+_a_mailto = 'mailto:' + AUTO_MAIL + '?subject=' + urllib.parse.quote('仕組みづくりの相談（無料30分）')
+_a_demo = ''.join(f'<li>{esc(x)}</li>' for x in _a['demo'][1])
+_a_plans = ''
+for h, items, prices, note in _a['plans']:
+    _a_plans += (f'  <section class="auto-plan"><h3>{esc(h)}</h3><ul>' + ''.join(f'<li>{esc(x)}</li>' for x in items) + '</ul>'
+                 + '<dl class="auto-price">' + ''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in prices) + '</dl>'
+                 + f'<p class="auto-note">{esc(note)}</p></section>\n')
+_a_steps = ''.join(f'<li><strong>{esc(h)}</strong><br>{esc(b)}</li>' for h, b in _a['steps'])
+_a_faq = ''.join(f'  <details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>\n' for q, a in _a['faq'])
+write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'], extra_ld=_a_ld) + f"""
+<style>
+.auto-plan{{border:1px solid var(--kin);padding:18px 18px 8px;margin:18px 0}}
+.auto-plan h3{{margin:0 0 10px;font-size:17px}}
+.auto-plan ul,.auto-demo,.auto-steps{{padding-left:1.2em;line-height:1.9}}
+.auto-price{{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:12px 0 4px}}
+.auto-price dt{{opacity:.75}}
+.auto-price dd{{margin:0;font-weight:600}}
+.auto-note{{font-size:13px;opacity:.8}}
+</style>
+<main class="wrap page">
+  <h1>{esc(_a['h1'])}</h1>
+  <p>{esc(_a['lead'])}</p>
+  <h2>{esc(_a['demo'][0])}</h2>
+  <ul class="auto-demo">{_a_demo}</ul>
+  <h2>入れられる仕組み</h2>
+{_a_plans}  <h2>進め方</h2>
+  <ol class="auto-steps">{_a_steps}</ol>
+  <section class="faq" id="faq"><h2>Q&amp;A</h2>
+{_a_faq}  </section>
+  <h2>ご相談</h2>
+  <p>メールで「話を聞きたい」とだけ送ってください。日時はこちらから合わせます。</p>
+  <p style="margin-top:16px"><a class="btn" href="{_a_mailto}">無料30分の相談を申し込む</a></p>
+  <p style="font-size:13px;opacity:.8">送り先：<code>{esc(AUTO_MAIL)}</code>（株式会社プラグ 小判鮫）</p>
+</main>
+""" + foot('ja'))
+
 # ---------- お知らせ一覧（/news/・/en/news/）----------
 # お知らせが0件でもページは作る（古いページが残って期限切れの文が出続けないように、毎回上書きする）
 for lang in ('ja', 'en'):
@@ -1833,7 +1927,7 @@ pages = []
 for lang in ('ja', 'en'):
     P = pre(lang)
     pages += [P + '/', P + '/journal/'] + [P + f"/journal/{p['slug']}/" for p in live]
-pages += ['/tokushoho/', '/privacy/', '/en/legal/', '/guide/', '/en/guide/'] + (['/workshop/', '/en/workshop/'] if WS_OPEN else [])
+pages += ['/tokushoho/', '/privacy/', '/en/legal/', '/guide/', '/en/guide/', '/automation/'] + (['/workshop/', '/en/workshop/'] if WS_OPEN else [])
 pages += ['/news/', '/en/news/']
 pages += blog_urls   # ブログのページ
 write('/robots.txt', f'''# 小判鮫 公式サイト：検索エンジン・AI検索のどちらにも公開
@@ -1887,6 +1981,7 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 - [ジャーナル]({BASE}/journal/)
 - [川越で古着屋を探している方へ（案内）]({BASE}/guide/)
 - [ブログ]({BASE}/blog/)
+- [お店の仕組みづくり（出品・在庫・領収書の自動化のご相談）]({BASE}/automation/)
 {'- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・' + ('10/24開催' if WS_BOOKING else '予約は準備中') + '）](' + BASE + '/workshop/)' + chr(10) if WS_OPEN else ''}- [English]({BASE}/en/)
 - [特定商取引法に基づく表記]({BASE}/tokushoho/)
 - [プライバシーポリシー]({BASE}/privacy/)
