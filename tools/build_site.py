@@ -136,6 +136,8 @@ T = {
   'hold_to': '送り先', 'hold_mail': 'メール', 'hold_note': '店頭やネットで先に売れていた場合は、こちらからご連絡します。',
   'ship': '<b>一点もの・在庫1点。</b>Squareの安全な決済ページへ進みます。<br>先に店頭などで売れていた場合は、全額返金いたします。<br>決済確認後3日以内に発送（月・火定休を除く）',
   'stock1': '在庫1点', 'width': '身幅 {w}cm',
+  'assure': ['送料込み・追加料金なし', '会員登録不要', '決済はSquare（カード情報は当店に残りません）', '決済後3日以内に発送／売り切れ時は全額返金'],
+  'mercari_buy': 'メルカリで買う', 'ask_ig': 'サイズや状態を質問する（Instagram）',
   'story': 'この一着の話', 'specs': '仕様・サイズ', 'delivery': '配送・返品',
   'howto': '実寸は平置きで測っています。身幅＝脇の下から脇の下、着丈＝襟のつけ根から裾まで。お手持ちの服を同じように測って比べると、サイズの失敗が減ります。',
   'delivery_p': '送料込み。決済確認後3日以内（月・火定休を除く）に、川越の店舗から発送します。古着・一点ものの性質上、お客様都合の返品はお受けしていません。商品説明と著しく異なる場合や発送間違いの場合は、到着後4日以内にメールでご連絡ください。',
@@ -179,6 +181,12 @@ T = {
   'hold_to': 'Send to', 'hold_mail': 'Email', 'hold_note': 'If it sells first in the shop or online, we will let you know.',
   'ship': '<b>One of a kind, 1 in stock.</b> You will go to Square\'s secure checkout. If it sells first elsewhere we may not be able to accept your order, and you will get a full refund.<br>Online checkout ships within Japan. For overseas shipping, please contact us before buying.',
   'stock1': '1 in stock', 'width': 'Chest {w} cm',
+  'assure': ['Shipping within Japan included', 'No account needed', 'Secure checkout by Square', 'Ships within 3 days · full refund if sold'],
+  'mercari_buy': '', 'ask_ig': 'Ask about size or condition (Instagram)',
+  'intl_h': 'Outside Japan?',
+  'intl_p': 'Ships from Kawagoe, Japan by EMS (about 7–10 days). We quote shipping for your country and send a Square invoice. Import duties and taxes are paid by the buyer.',
+  'intl_btn': 'Ask for a shipping quote',
+  'intl_no': 'This piece cannot be shipped outside Japan (export rules for the material).',
   'story': 'The story', 'specs': 'Details & size', 'delivery': 'Shipping & returns',
   'howto': 'Measured flat. Chest = armpit to armpit; length = base of collar to hem. Measure a piece you own the same way to compare.',
   'delivery_p': 'Domestic shipping included. Dispatched from our Kawagoe shop within 3 days of payment (closed Mon & Tue). As these are one-of-a-kind vintage items, we do not accept returns for change of mind. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival.',
@@ -675,6 +683,17 @@ footer.site a{color:var(--kinari)}
 .facts span.soldf{border-color:var(--sold);color:var(--sold)}
 .noen{font-size:12px;color:var(--usu);border-left:2px solid var(--kin);padding-left:10px;margin-top:12px}
 .buybox{margin-top:20px;display:grid;gap:10px}
+.assure{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:4px;font-size:13px;line-height:1.6}
+.assure li{padding-left:1.4em;position:relative}
+.assure li::before{content:"✓";position:absolute;left:0;color:var(--kin)}
+.askig{font-size:12.5px;color:var(--usu)}
+.intl{border:1px solid var(--line);padding:12px 14px;display:grid;gap:8px;font-size:13px;line-height:1.7}
+.intl p{margin:0}
+.card .sz{font-size:12px;color:var(--usu)}
+.newtop{padding:18px 0 6px}
+.newtop .bhead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.newtop h2{margin:0;font-size:18px;letter-spacing:.08em}
+.newtop h2 small{display:block;font-size:11.5px;letter-spacing:.04em;opacity:.8;margin-top:2px}
 .soldout{display:block;border:1px solid var(--sold);color:var(--sold);text-align:center;padding:14px;letter-spacing:.16em}
 .ship{font-size:12.5px;color:var(--usu);line-height:1.8}
 .ship b{color:var(--kinari);font-weight:500}
@@ -1217,8 +1236,27 @@ def card_html(p, lang, lazy=True, findable=False):
     return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}"' + (f' data-p="{site_price(p)}" data-q="{esc(search_text(p))}"' if findable else '') + '>'
             f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}</div>'
             f'<div class="brand">{esc(p["brand"])}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
+            + (f'<div class="sz">{T[lang]["width"].format(w=wv)}</div>' if (wv and not sold) else '') +   # 2026-11-03 一覧で身幅が分かるように
             f'<span class="fit" hidden></span>'
             f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small></div></a>')
+
+import urllib.parse
+# 2026-11-03 法務の目（v0 §7）：輸出に許可が要る恐れのある素材は、英語ページで海外発送の見積を出さない
+NO_EXPORT_RE = re.compile(r'(パイソン|python|蛇革|ヘビ革|スネーク|snake|クロコ|croc|ワニ革|alligator|リザード|lizard|オーストリッチ|ostrich|珊瑚|サンゴ|コーラル|coral|べっ甲|鼈甲|tortoise|象牙|ivory)', re.I)
+NEWTOP_N = 6   # 2026-11-03 龍さん決定A：トップの1画面目に今週の新着の実物（写真・値段・身幅）
+
+def newtop_html(lang):
+    """トップ最上段：新しい順の売り物6点。新着（NEW_DAYS 以内）が少なければ新しい順で足す。"""
+    P = pre(lang)
+    ps = sorted(avail_live, key=lambda p: p.get('published_date', ''), reverse=True)[:NEWTOP_N]
+    if not ps:
+        return ''
+    ja = lang == 'ja'
+    cards = ''.join(card_html(p, lang, lazy=(i >= 2)) for i, p in enumerate(ps))
+    return (f'<section class="newtop" aria-label="{"今週の新着" if ja else "New this week"}"><div class="wrap">'
+            f'<div class="bhead"><h2>NEW ARRIVAL<small>{"毎週水曜20時に新着" if ja else "New pieces every Wednesday, 8 pm JST"}</small></h2>'
+            f'<a class="ball" href="{P}/?cat=new#list">{"新着をすべて見る" if ja else "See all new"}</a></div>'
+            f'<div class="grid">{cards}</div></div></section>')
 
 def tiles_html(lang):
     """トップ最上段の写真タイル（カテゴリごとに新しい順の1枚目）。写真が主役・文字は最小限。"""
@@ -1358,6 +1396,7 @@ for lang in ('ja', 'en'):
 '''
     top = head(lang, t['top_title'], t['top_desc'], P + '/', extra_ld=top_ld) + f'''
 <main>
+  {newtop_html(lang)}
   <section class="tiles" aria-label="{'カテゴリ' if lang == 'ja' else 'Categories'}">
     <div class="wrap tgrid">{tiles_html(lang)}</div>
   </section>
@@ -1562,6 +1601,23 @@ for lang in ('ja', 'en'):
           <p class="ship">{t['hold_note']}</p>
         </div>'''
         noen = f'<p class="noen">{t["no_en"]}</p>' if (lang == 'en' and not has_en(p)) else ''
+        # 2026-11-03 龍さん決定（全部A）：購入ボタンの下に短い安心の4行／メルカリでも買える／質問の入口／英語は海外発送の見積
+        assure = ''
+        if sold or not p['links'].get('square'):
+            buy_extra = f'<div class="ship">{t["ship"]}</div>' if not sold else ''
+        else:
+            assure = '<ul class="assure">' + ''.join(f'<li>{esc(x)}</li>' for x in t['assure']) + '</ul>'   # 購入ボタンのすぐ下
+            if lang == 'ja' and p['links'].get('mercari'):
+                assure += f'<a class="btn ghost" href="{esc(p["links"]["mercari"])}" rel="noopener">{t["mercari_buy"]}</a>'
+            buy_extra = f'<a class="askig" href="{SHOP["instagram"]}" rel="noopener">{t["ask_ig"]}</a>'
+            if lang == 'en':
+                if NO_EXPORT_RE.search(' '.join(str(x) for x in (p.get('title', ''), p.get('product_name', ''), p.get('material', ''), json.dumps(p.get('spec', ''), ensure_ascii=False)))):
+                    buy_extra += f'<div class="intl"><b>{t["intl_h"]}</b><p>{t["intl_no"]}</p></div>'
+                else:
+                    _sub = urllib.parse.quote(f'Shipping quote: {p["sku"]}')
+                    _body = urllib.parse.quote(f'Item: {p["sku"]}\nCountry:\nPostal code:\n')
+                    buy_extra += (f'<div class="intl"><b>{t["intl_h"]}</b><p>{t["intl_p"]}</p>'
+                                  f'<a class="btn ghost" href="mailto:{SHOP["email"]}?subject={_sub}&body={_body}">{t["intl_btn"]}</a></div>')
         draft_banner = f'<div class="draftnote">{t["draft"]}</div>' if rel == 'draft' else ''
         relp = reco_of(p, avail_live)   # 2026-10-29 点数づけ（reco_score）に変更
         rel_cards = ''.join(card_html(x, lang) for x in relp)
@@ -1595,9 +1651,10 @@ for lang in ('ja', 'en'):
       {noen}
       <div class="buybox">
         {buy}
+        {assure}
         {hold}
         {KX.product_buy_html(p, lang, sold, HOURS_LINE[lang], ADDR[lang], SHOP['gmaps'])}
-        <div class="ship">{t['ship']}</div>
+        {buy_extra}
       </div>
       <ul class="points">{points}</ul>
       <details open><summary>{t['story']}</summary><div class="story"><p>{esc(loc(p, 'lead', lang))}</p>
@@ -1771,6 +1828,7 @@ GUIDE = {
    ('When is it closed?', ('Every Monday (open on public holidays). Open 13:00–20:00 Tuesday to Sunday, until 22:00 in July–August.' if NEWHOURS else 'Every Monday and Tuesday. Open 12:00–20:00 on other days.' + (' From 1 November 2026: Tuesday–Sunday 13:00–20:00, closed Mondays.' if NOTICE else ''))),
    ('Do you have both men\'s and women\'s clothing?', 'Yes, both.'),
    ('When do new pieces arrive?', 'Every Wednesday.'),
+   ('Can I shop tax-free?', 'Tax-free shopping is not available at our shop. Prices include Japanese consumption tax.'),   # 2026-11-03 龍さん決定B（確認が済むまで）
   ],
   'cta': 'See the pieces', 'back': '/en/#list', 'crumb': 'Kawagoe vintage guide',
  },
