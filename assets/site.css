@@ -163,6 +163,23 @@ footer.site a{color:var(--kinari)}
 .facts span.soldf{border-color:var(--sold);color:var(--sold)}
 .noen{font-size:12px;color:var(--usu);border-left:2px solid var(--kin);padding-left:10px;margin-top:12px}
 .buybox{margin-top:20px;display:grid;gap:10px}
+.usd{display:block;font-size:12.5px;color:var(--usu);font-weight:400;margin-top:2px}
+.price .usd{font-size:14px}
+.usdnote{font-size:11.5px;color:var(--usu);margin:2px 0 0}
+.pinfo{display:grid;grid-template-columns:5.5em 1fr;gap:6px 12px;margin:14px 0 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.6}
+.pinfo dt{color:var(--usu);font-weight:500}
+.pinfo dd{margin:0}
+.assure{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:4px;font-size:13px;line-height:1.6}
+.assure li{padding-left:1.4em;position:relative}
+.assure li::before{content:"✓";position:absolute;left:0;color:var(--kin)}
+.askig{font-size:12.5px;color:var(--usu)}
+.intl{border:1px solid var(--line);padding:12px 14px;display:grid;gap:8px;font-size:13px;line-height:1.7}
+.intl p{margin:0}
+.card .sz{font-size:12px;color:var(--usu)}
+.newtop{padding:18px 0 6px}
+.newtop .bhead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:12px}
+.newtop h2{margin:0;font-size:18px;letter-spacing:.08em}
+.newtop h2 small{display:block;font-size:11.5px;letter-spacing:.04em;opacity:.8;margin-top:2px}
 .soldout{display:block;border:1px solid var(--sold);color:var(--sold);text-align:center;padding:14px;letter-spacing:.16em}
 .ship{font-size:12.5px;color:var(--usu);line-height:1.8}
 .ship b{color:var(--kinari);font-weight:500}
