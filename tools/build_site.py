@@ -26,6 +26,7 @@ CF_BEACON_TOKEN = ''     # Cloudflare Web Analytics のトークン（空なら�
 ANALYTICS_URL = 'https://script.google.com/macros/s/AKfycbxxYc9kZztdwiWOvefrpY6mPHlRUlqLb2SndthCdAUn7BeBXAgZO3i6_JoDxyFQiv3q/exec'       # 64番（自前の簡易計測）のウェブアプリURL。空なら計測しない（2026-10-06 龍さん決定A）
 GSC_VERIFY = '2pVJ6dksHBkvBUmm0l3gbrdw8Rgpz4v7zoq4X3eL7ys'          # Google Search Console の確認コード（content="…" の中身だけ。空ならタグを入れない）
 BING_VERIFY = ''         # Bing Webmaster Tools の確認コード（同上。Search Consoleから取り込むなら空のままでよい）
+META_VERIFY = 'unmn8k763xu62y5itk1fec6lzm4sdb'   # 2026-11-03 Meta（Instagramショッピング）のドメイン認証コード（content="…" の中身だけ。空ならタグを入れない）
 HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）※2026-10-07 取り置きは廃止（HOLD_ENABLED=False）
 HOLD_ENABLED = False     # 2026-10-07 龍さん決定：一点物なのでサイトも店頭も取り置き不可・先着順
 # 2026-10-13 龍さん決定（10/8の「毎日営業」を置き換え）：11月1日から 火〜日 13:00–20:00・月曜定休（祝日の月曜は営業）・7〜8月は22:00まで
@@ -921,7 +922,8 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
               if CF_BEACON_TOKEN else '')
     track = TRACK_JS.replace('__URL__', ANALYTICS_URL) if ANALYTICS_URL else ''
     verify = ((f'<meta name="google-site-verification" content="{esc(GSC_VERIFY)}">\n' if GSC_VERIFY else '') +
-              (f'<meta name="msvalidate.01" content="{esc(BING_VERIFY)}">\n' if BING_VERIFY else '')) if path in ('/', '/en/') else ''
+              (f'<meta name="msvalidate.01" content="{esc(BING_VERIFY)}">\n' if BING_VERIFY else '') +
+              (f'<meta name="facebook-domain-verification" content="{esc(META_VERIFY)}">\n' if META_VERIFY else '')) if path in ('/', '/en/') else ''
     alt = other_path(path, lang)
     ja_url = BASE + (path if lang == 'ja' else alt)
     en_url = BASE + (path if lang == 'en' else alt)
