@@ -6286,7 +6286,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-03",
   "links": {},
   "images": [
-   "/assets/products/k11452/01.jpg",
+   "/assets/products/k11452/v2_front.jpg",
+   "/assets/products/k11452/v2_back.jpg",
    "/assets/products/k11452/02.jpg",
    "/assets/products/k11452/03.jpg",
    "/assets/products/k11452/04.jpg",
@@ -6296,10 +6297,9 @@
    "/assets/products/k11452/08.jpg",
    "/assets/products/k11452/09.jpg",
    "/assets/products/k11452/10.jpg",
-   "/assets/products/k11452/11.jpg",
    "/assets/products/k11452/12.jpg"
   ],
-  "thumb": "/assets/products/k11452/thumb.jpg",
+  "thumb": "/assets/products/k11452/v2_thumb.jpg",
   "summary_text": "杢グレーのリブニット長袖カットソー。オーバーサイズのシルエットと細かいリブの表情が、着るだけで落ち着いた雰囲気をつくります。",
   "summary_points": [
    "グレー（杢調・無地）のロングスリーブTシャツ（リブニット素材・長袖カットソー）",
@@ -6347,6 +6347,45 @@
    ],
    "approved_at": "2026-11-03"
   },
-  "gender_by": "表記にメンズ・実寸が大きめ（肩幅55・身幅59）"
+  "gender_by": "表記にメンズ・実寸が大きめ（肩幅55・身幅59）",
+  "images_orig": [
+   "/assets/products/k11452/01.jpg",
+   "/assets/products/k11452/02.jpg",
+   "/assets/products/k11452/03.jpg",
+   "/assets/products/k11452/04.jpg",
+   "/assets/products/k11452/05.jpg",
+   "/assets/products/k11452/06.jpg",
+   "/assets/products/k11452/07.jpg",
+   "/assets/products/k11452/08.jpg",
+   "/assets/products/k11452/09.jpg",
+   "/assets/products/k11452/10.jpg",
+   "/assets/products/k11452/11.jpg",
+   "/assets/products/k11452/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-03",
+   "front_i": 0,
+   "back_i": 10,
+   "front_url": "/assets/products/k11452/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 180.0,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11452/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 182.1,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11452/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 59.0,
+    "着丈": 65.0,
+    "肩幅": 55.0
+   }
+  }
  }
 ]
