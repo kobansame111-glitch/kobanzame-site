@@ -683,6 +683,9 @@ footer.site a{color:var(--kinari)}
 .facts span.soldf{border-color:var(--sold);color:var(--sold)}
 .noen{font-size:12px;color:var(--usu);border-left:2px solid var(--kin);padding-left:10px;margin-top:12px}
 .buybox{margin-top:20px;display:grid;gap:10px}
+.pinfo{display:grid;grid-template-columns:5.5em 1fr;gap:6px 12px;margin:14px 0 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.6}
+.pinfo dt{color:var(--usu);font-weight:500}
+.pinfo dd{margin:0}
 .assure{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:4px;font-size:13px;line-height:1.6}
 .assure li{padding-left:1.4em;position:relative}
 .assure li::before{content:"✓";position:absolute;left:0;color:var(--kin)}
@@ -1243,6 +1246,30 @@ def card_html(p, lang, lazy=True, findable=False):
 import urllib.parse
 # 2026-11-03 法務の目（v0 §7）：輸出に許可が要る恐れのある素材は、英語ページで海外発送の見積を出さない
 NO_EXPORT_RE = re.compile(r'(パイソン|python|蛇革|ヘビ革|スネーク|snake|クロコ|croc|ワニ革|alligator|リザード|lizard|オーストリッチ|ostrich|珊瑚|サンゴ|コーラル|coral|べっ甲|鼈甲|tortoise|象牙|ivory)', re.I)
+# 2026-11-03 龍さん「状態A・サイズ…のように、項目名つきで分かりやすく」：価格の下に「商品情報」の表
+COND_MEAN = {'A': '目立つ傷・汚れなし', 'B': '使用感・小さな傷あり', 'C': '目立つ傷・汚れあり'}
+INFO_KEYS = {
+    'ja': [('ブランド', 'ブランド'), ('サイズ', 'サイズ'), ('状態', '状態'), ('素材', '素材'), ('色', '色'), ('年代・生産', '年代'), ('年代', '年代'), ('原産国', '生産国')],
+    'en': [('Brand', 'Brand'), ('Size', 'Size'), ('Condition', 'Condition'), ('Materials', 'Materials'), ('Colour', 'Colour'), ('Era', 'Era'), ('Made', 'Made')],
+}
+
+def info_rows(p, lang):
+    spec = {k: v for k, v in loc(p, 'spec', lang)}
+    rows = [('商品名' if lang == 'ja' else 'Item', loc(p, 'product_name', lang))]
+    seen = set()
+    for key, label in INFO_KEYS[lang]:
+        v = str(spec.get(key, '')).strip()
+        if not v or label in seen:
+            continue
+        if lang == 'ja' and key == '状態':
+            m = re.match(r'^([ABC])[：:]\s*(.*)$', v)
+            if m:
+                rest = m.group(2).strip()
+                v = f'{m.group(1)}（{COND_MEAN[m.group(1)]}）' + ('' if (not rest or rest.startswith('写真')) else f'　{rest}')
+        rows.append((label, v))
+        seen.add(label)
+    return rows
+
 NEWTOP_N = 6   # 2026-11-03 龍さん決定A：トップの1画面目に今週の新着の実物（写真・値段・身幅）
 
 def newtop_html(lang):
@@ -1648,6 +1675,7 @@ for lang in ('ja', 'en'):
       <div class="sku">ITEM NO. {esc(p['sku'])}</div>
       <div class="price">{money(price, lang)}<small>{t['tax_ship']}</small></div>
       <div class="facts">{facts}</div>
+      <dl class="pinfo">{''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in info_rows(p, lang))}</dl>
       {noen}
       <div class="buybox">
         {buy}
