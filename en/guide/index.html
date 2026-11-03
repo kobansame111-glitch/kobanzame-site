@@ -127,5 +127,11 @@ if(k)send({t:'click',btn:k});},true);
   var h=document.querySelector('header.site');addEventListener('scroll',function(){h.classList.toggle('sc',scrollY>40);},{passive:true});
 })();
 </script>
+<script>(function(){var K='kzfx6',H=6*36e5,c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
+function show(x){if(!x||!(x.r>0))return;var n=document.querySelectorAll('.usd[data-jpy]');n.forEach(function(el){el.textContent='≈ US$'+Math.round(el.getAttribute('data-jpy')*x.r).toLocaleString('en-US');el.title='Rate of '+x.d;el.hidden=false});if(n.length){document.querySelectorAll('.usdnote').forEach(function(el){el.hidden=false})}}
+function save(x){try{localStorage.setItem(K,JSON.stringify(x))}catch(e){}show(x)}
+if(c&&Date.now()-c.t<H){show(c);return}
+fetch('https://api.frankfurter.dev/v1/latest?base=JPY&symbols=USD').then(function(r){return r.json()}).then(function(j){save({r:j.rates.USD,d:j.date,t:Date.now()})})
+.catch(function(){fetch('https://open.er-api.com/v6/latest/JPY').then(function(r){return r.json()}).then(function(j){save({r:j.rates.USD,d:String(j.time_last_update_utc||'').slice(5,16),t:Date.now()})}).catch(function(){})})})();</script>
 </body>
 </html>

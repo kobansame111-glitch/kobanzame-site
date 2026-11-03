@@ -316,6 +316,20 @@ def site_price(p):
     # 税込＝税抜×1.1 を10円単位に切り上げ（小数の誤差を避けるため整数で計算：base*11/100 を切り上げて ×10）
     return (-(-base * 11 // 100)) * 10 if ADD_TAX else base
 
+def usd_span(n, lang):
+    """2026-11-03 龍さん「英語版にドル表記を、為替で変わるように」：見る人のブラウザがその日の為替でドルを出す（円のまま払う）"""
+    return f'<span class="usd" data-jpy="{int(n)}" hidden></span>' if lang == 'en' else ''
+
+# 為替：欧州中央銀行の毎営業日の値（frankfurter）→ だめなら open.er-api.com。ブラウザに6時間だけ覚える。取れなければドルは出さない
+USD_JS = '''<script>(function(){var K='kzfx6',H=6*36e5,c=null;try{c=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
+function show(x){if(!x||!(x.r>0))return;var n=document.querySelectorAll('.usd[data-jpy]');n.forEach(function(el){el.textContent='≈ US$'+Math.round(el.getAttribute('data-jpy')*x.r).toLocaleString('en-US');el.title='Rate of '+x.d;el.hidden=false});if(n.length){document.querySelectorAll('.usdnote').forEach(function(el){el.hidden=false})}}
+function save(x){try{localStorage.setItem(K,JSON.stringify(x))}catch(e){}show(x)}
+if(c&&Date.now()-c.t<H){show(c);return}
+fetch('https://api.frankfurter.dev/v1/latest?base=JPY&symbols=USD').then(function(r){return r.json()}).then(function(j){save({r:j.rates.USD,d:j.date,t:Date.now()})})
+.catch(function(){fetch('https://open.er-api.com/v6/latest/JPY').then(function(r){return r.json()}).then(function(j){save({r:j.rates.USD,d:String(j.time_last_update_utc||'').slice(5,16),t:Date.now()})}).catch(function(){})})})();</script>'''
+
+USD_NOTE = '<p class="usdnote" hidden>Approximate US$ at today’s exchange rate. You pay in Japanese yen; your card company sets the final amount.</p>'
+
 def money(n, lang):
     return f'¥{n:,}' if lang == 'en' else f'{n:,}円'
 
@@ -683,6 +697,9 @@ footer.site a{color:var(--kinari)}
 .facts span.soldf{border-color:var(--sold);color:var(--sold)}
 .noen{font-size:12px;color:var(--usu);border-left:2px solid var(--kin);padding-left:10px;margin-top:12px}
 .buybox{margin-top:20px;display:grid;gap:10px}
+.usd{display:block;font-size:12.5px;color:var(--usu);font-weight:400;margin-top:2px}
+.price .usd{font-size:14px}
+.usdnote{font-size:11.5px;color:var(--usu);margin:2px 0 0}
 .pinfo{display:grid;grid-template-columns:5.5em 1fr;gap:6px 12px;margin:14px 0 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.6}
 .pinfo dt{color:var(--usu);font-weight:500}
 .pinfo dd{margin:0}
@@ -1051,6 +1068,7 @@ def foot(lang):
   </div>
 </div></footer>
 {REVEAL_JS}
+{USD_JS if lang == 'en' else ''}
 </body>
 </html>
 '''
@@ -1241,7 +1259,7 @@ def card_html(p, lang, lazy=True, findable=False):
             f'<div class="brand">{esc(p["brand"])}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
             + (f'<div class="sz">{T[lang]["width"].format(w=wv)}</div>' if (wv and not sold) else '') +   # 2026-11-03 一覧で身幅が分かるように
             f'<span class="fit" hidden></span>'
-            f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small></div></a>')
+            f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small>{usd_span(site_price(p), lang)}</div></a>')
 
 import urllib.parse
 # 2026-11-03 法務の目（v0 §7）：輸出に許可が要る恐れのある素材は、英語ページで海外発送の見積を出さない
@@ -1673,7 +1691,8 @@ for lang in ('ja', 'en'):
       <h1>{esc(name)}</h1>
       <div class="ttl">{esc(loc(p, 'title', lang))}</div>
       <div class="sku">ITEM NO. {esc(p['sku'])}</div>
-      <div class="price">{money(price, lang)}<small>{t['tax_ship']}</small></div>
+      <div class="price">{money(price, lang)}<small>{t['tax_ship']}</small>{usd_span(price, lang)}</div>
+      {USD_NOTE if lang == 'en' else ''}
       <div class="facts">{facts}</div>
       <dl class="pinfo">{''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in info_rows(p, lang))}</dl>
       {noen}
