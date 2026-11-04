@@ -28,6 +28,9 @@ GSC_VERIFY = '2pVJ6dksHBkvBUmm0l3gbrdw8Rgpz4v7zoq4X3eL7ys'          # Google Sea
 BING_VERIFY = ''         # Bing Webmaster Tools の確認コード（同上。Search Consoleから取り込むなら空のままでよい）
 META_VERIFY = 'unmn8k763xu62y5itk1fec6lzm4sdb'   # 2026-11-03 Meta（Instagramショッピング）のドメイン認証コード（content="…" の中身だけ。空ならタグを入れない）
 HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）※2026-10-07 取り置きは廃止（HOLD_ENABLED=False）
+# 2026-11-04 龍さん「カート入れてください」（カートA・まとめ買いでも送料の値引きなし＝B）。
+# カートの受付（GAS 63c のウェブアプリの URL）。空のあいだは本番ではカートのボタンを出さない（確認用の住所 *.kobanzame-site.pages.dev だけ見本として出す）
+CART_ENDPOINT = ''
 HOLD_ENABLED = False     # 2026-10-07 龍さん決定：一点物なのでサイトも店頭も取り置き不可・先着順
 # 2026-10-13 龍さん決定（10/8の「毎日営業」を置き換え）：11月1日から 火〜日 13:00–20:00・月曜定休（祝日の月曜は営業）・7〜8月は22:00まで
 NEWHOURS_FROM = '2026-11-01'   # この日以降のビルドで文言が切り替わる
@@ -328,6 +331,73 @@ function save(x){try{localStorage.setItem(K,JSON.stringify(x))}catch(e){}show(x)
 if(c&&Date.now()-c.t<H){show(c);return}
 fetch('https://api.frankfurter.dev/v1/latest?base=JPY&symbols=USD').then(function(r){return r.json()}).then(function(j){save({r:j.rates.USD,d:j.date,t:Date.now()})})
 .catch(function(){fetch('https://open.er-api.com/v6/latest/JPY').then(function(r){return r.json()}).then(function(j){save({r:j.rates.USD,d:String(j.time_last_update_utc||'').slice(5,16),t:Date.now()})}).catch(function(){})})})();</script>'''
+
+# ---------- カート（2026-11-04 カートA） ----------
+# 商品ページの「カートに入れる」→ ブラウザに品番を覚える（会員登録なし）→ /cart/ で「まとめて購入」→ GAS 63c が値段と在庫を確かめて
+# Square の支払いリンク（明細が複数行）を1本作る → Square の決済画面へ。値段はサイトから送らない（サーバー側で決める）
+def cart_add_html(p, lang, name, price, path, img):
+    return (f'<button type="button" class="btn ghost cartadd" hidden data-sku="{esc(p["sku"])}" data-name="{esc(name)}" '
+            f'data-price="{int(price)}" data-url="{esc(path)}" data-img="{esc(img)}">'
+            + ('カートに入れる' if lang == 'ja' else 'Add to cart') + '</button>')
+
+CART_T = {
+  'ja': {'add': 'カートに入れる', 'in': 'カートに入っています（カートを見る）', 'added': 'カートに入れました', 'max': 'カートには10点まで入れられます',
+         'empty': 'カートは空です。', 'remove': '外す', 'total': '合計（送料込み）', 'gone': '次の商品は、先に売れたためカートから外しました：',
+         'fail': 'いまカートでのお支払いを受け付けられませんでした。お手数ですが、商品ページの「購入する」から1点ずつお買い求めください。',
+         'busy': '少し時間をおいて、もう一度お試しください。', 'wait': 'Square の決済画面を準備しています…',
+         'preview': '（確認用のページです）本番では、ここで Square の決済画面に移ります。'},
+  'en': {'add': 'Add to cart', 'in': 'In your cart (view cart)', 'added': 'Added to your cart', 'max': 'You can put up to 10 items in the cart',
+         'empty': 'Your cart is empty.', 'remove': 'Remove', 'total': 'Total (shipping within Japan included)', 'gone': 'These items sold before checkout and were removed:',
+         'fail': 'We could not start the cart checkout right now. Please buy each item from its own page with "Buy now".',
+         'busy': 'Please wait a moment and try again.', 'wait': 'Preparing the Square checkout…',
+         'preview': '(Preview page) On the live site this button opens the Square checkout.'},
+}
+
+CART_JS_BODY = r'''var pv=/^[a-z0-9-]+\.kobanzame-site\.pages\.dev$/.test(location.hostname);if(!EP&&!pv)return;
+function get(){try{var a=JSON.parse(localStorage.getItem(K)||"[]");return Array.isArray(a)?a:[]}catch(e){return[]}}
+function put(a){try{localStorage.setItem(K,JSON.stringify(a))}catch(e){}cnt()}
+function has(s){return get().some(function(x){return x.sku===s})}
+function yen(n){return L==="ja"?Number(n).toLocaleString("ja-JP")+"円":"¥"+Number(n).toLocaleString("en-US")}
+function toast(m){if(window.kzToast)kzToast(m)}
+var pg=document.getElementById("cartpage");
+function cnt(){var n=get().length;document.querySelectorAll(".cartlink").forEach(function(a){a.hidden=!n&&!pg;var c=a.querySelector(".cartn");if(c)c.textContent=n?String(n):""})}
+document.querySelectorAll(".cartadd").forEach(function(b){var s=b.getAttribute("data-sku");b.hidden=false;
+function st(){var on=has(s);b.classList.toggle("in",on);b.textContent=on?T["in"]:T.add}st();
+b.addEventListener("click",function(){if(has(s)){location.href=CU;return}var a=get();if(a.length>=MAX){toast(T.max);return}
+a.push({sku:s,name:b.getAttribute("data-name"),price:Number(b.getAttribute("data-price"))||0,url:b.getAttribute("data-url"),img:b.getAttribute("data-img")});put(a);st();toast(T.added)})});
+cnt();if(!pg)return;
+var ul=document.getElementById("cartlist"),tot=document.getElementById("carttotal"),go=document.getElementById("cartgo"),box=document.getElementById("cartbox"),em=document.getElementById("cartempty"),msg=document.getElementById("cartmsg");
+function say(m){msg.textContent=m;msg.hidden=!m}
+function esc(x){return String(x==null?"":x).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function draw(){var a=get();em.hidden=!!a.length;box.hidden=!a.length;var sum=0;
+ul.innerHTML=a.map(function(x,i){sum+=x.price;return '<li><a href="'+esc(x.url)+'"><img src="'+esc(x.img)+'" alt=""></a><div class="nm"><a href="'+esc(x.url)+'">'+esc(x.name)+'</a><small>ITEM NO. '+esc(x.sku)+'</small><b>'+yen(x.price)+'</b></div><button type="button" data-i="'+i+'">'+T.remove+'</button></li>'}).join("");
+tot.textContent=yen(sum);ul.querySelectorAll("button[data-i]").forEach(function(b){b.addEventListener("click",function(){var a=get();a.splice(Number(b.getAttribute("data-i")),1);put(a);draw()})})}
+function drop(skus){if(!skus||!skus.length)return;var gone=get().filter(function(x){return skus.indexOf(x.sku)>=0});put(get().filter(function(x){return skus.indexOf(x.sku)<0}));draw();
+if(gone.length)say(T.gone+" "+gone.map(function(x){return x.name+"（"+x.sku+"）"}).join("、"))}
+draw();
+fetch("/data/products.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(ps){var ok={};ps.forEach(function(p){if(p&&p.sku&&p.status!=="sold"&&p.links&&p.links.square)ok[p.sku]=1});
+drop(get().map(function(x){return x.sku}).filter(function(s){return !ok[s]}))}).catch(function(){});
+go.addEventListener("click",function(){var a=get();if(!a.length)return;if(!EP){say(T.preview);return}
+go.disabled=true;say(T.wait);
+fetch(EP,{method:"POST",body:JSON.stringify({skus:a.map(function(x){return x.sku}),lang:L})}).then(function(r){return r.json()}).then(function(j){
+if(j&&j.ok&&j.url){location.href=j.url;return}go.disabled=false;
+if(j&&j.code==="unavailable"){drop(j.skus)}else if(j&&j.code==="busy"){say(T.busy)}else{say(T.fail)}}).catch(function(){go.disabled=false;say(T.fail)})})
+})();</script>'''
+
+def cart_js(lang):
+    return ('<script>(function(){var EP=' + json.dumps(CART_ENDPOINT) + ',L=' + json.dumps(lang) + ',T='
+            + json.dumps(CART_T[lang], ensure_ascii=False) + ',K="kzcart1",MAX=10,CU="' + pre(lang) + '/cart/";' + CART_JS_BODY)
+
+CART_PAGE = {
+  'ja': {'title': 'カート｜古着屋 小判鮫', 'h1': 'カート', 'back': '商品を見る',
+         'notes': ['まとめて1回のお支払いで、1つの荷物でお送りします', '送料込み・追加料金なし（何点でも）', '会員登録不要・決済はSquare（カード情報は当店に残りません）',
+                   '一点ものなので、カートに入れても取り置きにはなりません。お支払いの前に、先に売れた商品はお知らせします'],
+         'go': 'まとめて購入する（クレジットカード）'},
+  'en': {'title': 'Cart | Kobanzame Vintage, Kawagoe', 'h1': 'Cart', 'back': 'See the pieces',
+         'notes': ['One payment, one parcel', 'Shipping within Japan included, however many items', 'No account needed · secure checkout by Square',
+                   'Every piece is one of a kind. The cart does not hold items; if one sells first, we tell you before you pay'],
+         'go': 'Check out (credit card)'},
+}
 
 USD_NOTE = '<p class="usdnote" hidden>Approximate US$ at today’s exchange rate. You pay in Japanese yen; your card company sets the final amount.</p>'
 
@@ -707,6 +777,21 @@ footer.site a{color:var(--kinari)}
 .assure{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:4px;font-size:13px;line-height:1.6}
 .assure li{padding-left:1.4em;position:relative}
 .assure li::before{content:"✓";position:absolute;left:0;color:var(--kin)}
+.cartadd{width:100%}
+.cartadd.in{border-color:var(--kin);color:var(--kin)}
+.cartlink{text-decoration:none;display:inline-flex;align-items:center;gap:4px;font-size:13px;letter-spacing:.06em;margin-right:12px;white-space:nowrap}
+.cartlink[hidden]{display:none}
+header.site .tabs a.cartlink[hidden]{display:none}
+@media(max-width:760px){header.site .hl .cartlink{display:none!important}}
+.cartn{display:inline-block;min-width:1.5em;margin-left:4px;padding:0 5px;border-radius:9px;background:var(--kin);color:#fff;font-size:11px;text-align:center}
+.cartlist{list-style:none;margin:16px 0;padding:0;display:grid;gap:12px}
+.cartlist li{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px}
+.cartlist img{width:72px;height:96px;object-fit:cover;background:#eee}
+.cartlist .nm{font-size:14px;line-height:1.5}
+.cartlist .nm small{display:block;opacity:.7}
+.cartlist button{font-size:12px;background:none;border:1px solid var(--line);padding:4px 8px;cursor:pointer}
+.carttotal{display:flex;justify-content:space-between;font-size:18px;font-weight:600;margin:8px 0 14px}
+.cartmsg{font-size:14px;line-height:1.7;padding:10px 12px;border:1px solid var(--kin);margin:12px 0}
 .askig{font-size:12.5px;color:var(--usu)}
 .intl{border:1px solid var(--line);padding:12px 14px;display:grid;gap:8px;font-size:13px;line-height:1.7}
 .intl p{margin:0}
@@ -963,7 +1048,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <body>
 <div class="util">{t['util']}</div>{NEWS_JS if NEWS else ''}
 <header class="site"><div class="wrap">
-  <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button></div>
+  <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button><a class="cartlink" href="{pre(lang)}/cart/" aria-label="{'カート' if lang == 'ja' else 'Cart'}" hidden><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8zm3 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="ct">{'カート' if lang == 'ja' else 'Cart'}</span><span class="cartn"></span></a></div>
   <a class="logo" href="{pre(lang)}/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
   <div class="hnav">{navs}
     <nav class="lang" aria-label="言語 / Language"><a href="{alt if lang == 'en' else path}" lang="ja" aria-current="{ja_cur}">日本語</a><a href="{alt if lang == 'ja' else path}" lang="en" aria-current="{en_cur}">EN</a></nav>
@@ -1005,6 +1090,7 @@ def tabs_html(lang, path):
     cur = 'blog' if path.startswith('/blog') else ''
     items = ''.join(f'<a href="{href[k]}"' + (' data-cat="new"' if k == 'new' else (' data-cat=""' if k == 'list' else '')) + (' aria-current="page"' if k == cur else '') + f'>{l}</a>'
                     for k, l in TABS[lang] if k != 'new' or has_new)
+    items += f'<a class="cartlink tabcart" href="{P}/cart/" hidden>{"カート" if lang == "ja" else "Cart"}<span class="cartn"></span></a>'   # 2026-11-04 カート（中身があるときだけ）
     return f'<nav class="tabs" aria-label="{"メイン" if lang == "ja" else "Main"}">{items}</nav>'
 
 def drawer_html(lang):
@@ -1071,6 +1157,7 @@ def foot(lang):
 </div></footer>
 {REVEAL_JS}
 {USD_JS if lang == 'en' else ''}
+{cart_js(lang)}
 </body>
 </html>
 '''
@@ -1637,6 +1724,7 @@ for lang in ('ja', 'en'):
         elif p['links'].get('square'):
             sq = esc(p['links']['square'])
             buy = f'<a class="btn kin" href="{sq}" rel="noopener">{t["buy"]}</a>'
+            buy += cart_add_html(p, lang, name, price, path, imgs[0] if imgs else '')   # 2026-11-04 カートA（受付が動くまで hidden）
             bar = f'<div class="bar"><b>{money(price, lang)}</b><a class="btn kin" href="{sq}" rel="noopener">{t["buy_s"]}</a></div>'
         else:
             buy, bar = f'<span class="soldout">{t["prep"]}</span>', ''
@@ -1904,6 +1992,24 @@ for lang, g in GUIDE.items():
   <p style="margin-top:28px"><a class="btn" href="{g['back']}">{esc(g['cta'])}</a></p>
 </main>
 ''' + foot(lang))
+
+# ---------- カートのページ（/cart/・/en/cart/・検索には出さない） ----------
+for _cl in ('ja', 'en'):
+    _c = CART_PAGE[_cl]
+    _cpath = pre(_cl) + '/cart/'
+    write(_cpath + 'index.html', head(_cl, _c['title'], _c['title'], _cpath, noindex=True) + f"""
+<main class="wrap page" id="cartpage">
+  <h1>{esc(_c['h1'])}</h1>
+  <p class="cartmsg" id="cartmsg" hidden></p>
+  <div id="cartempty"><p>{esc(CART_T[_cl]['empty'])}</p><p><a class="btn" href="{pre(_cl)}/#list">{esc(_c['back'])}</a></p></div>
+  <div id="cartbox" hidden>
+    <ul class="cartlist" id="cartlist"></ul>
+    <div class="carttotal"><span>{esc(CART_T[_cl]['total'])}</span><span id="carttotal"></span></div>
+    <button type="button" class="btn kin" id="cartgo" style="width:100%">{esc(_c['go'])}</button>
+    <ul class="assure" style="margin-top:12px">{''.join(f'<li>{esc(x)}</li>' for x in _c['notes'])}</ul>
+  </div>
+</main>
+""" + foot(_cl))
 
 # ---------- お店の仕組みづくり（/automation/・2026-11-02 龍さん「サイトに、こういうの作れますよのページを」） ----------
 # Threads・営業メール・Instagram の行き先。小判鮫で実際に動いている仕組みだけを書く（効果の約束・他社との比較はしない）。

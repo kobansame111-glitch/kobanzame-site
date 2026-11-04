@@ -172,6 +172,21 @@ footer.site a{color:var(--kinari)}
 .assure{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:4px;font-size:13px;line-height:1.6}
 .assure li{padding-left:1.4em;position:relative}
 .assure li::before{content:"✓";position:absolute;left:0;color:var(--kin)}
+.cartadd{width:100%}
+.cartadd.in{border-color:var(--kin);color:var(--kin)}
+.cartlink{text-decoration:none;display:inline-flex;align-items:center;gap:4px;font-size:13px;letter-spacing:.06em;margin-right:12px;white-space:nowrap}
+.cartlink[hidden]{display:none}
+header.site .tabs a.cartlink[hidden]{display:none}
+@media(max-width:760px){header.site .hl .cartlink{display:none!important}}
+.cartn{display:inline-block;min-width:1.5em;margin-left:4px;padding:0 5px;border-radius:9px;background:var(--kin);color:#fff;font-size:11px;text-align:center}
+.cartlist{list-style:none;margin:16px 0;padding:0;display:grid;gap:12px}
+.cartlist li{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px}
+.cartlist img{width:72px;height:96px;object-fit:cover;background:#eee}
+.cartlist .nm{font-size:14px;line-height:1.5}
+.cartlist .nm small{display:block;opacity:.7}
+.cartlist button{font-size:12px;background:none;border:1px solid var(--line);padding:4px 8px;cursor:pointer}
+.carttotal{display:flex;justify-content:space-between;font-size:18px;font-weight:600;margin:8px 0 14px}
+.cartmsg{font-size:14px;line-height:1.7;padding:10px 12px;border:1px solid var(--kin);margin:12px 0}
 .askig{font-size:12.5px;color:var(--usu)}
 .intl{border:1px solid var(--line);padding:12px 14px;display:grid;gap:8px;font-size:13px;line-height:1.7}
 .intl p{margin:0}
