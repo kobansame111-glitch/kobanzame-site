@@ -166,6 +166,9 @@ footer.site a{color:var(--kinari)}
 .usd{display:block;font-size:12.5px;color:var(--usu);font-weight:400;margin-top:2px}
 .price .usd{font-size:14px}
 .usdnote{font-size:11.5px;color:var(--usu);margin:2px 0 0}
+.pfaq{margin:6px 0 0;font-size:13.5px;line-height:1.7}
+.pfaq dt{font-weight:600;margin-top:10px}
+.pfaq dd{margin:2px 0 0}
 .pinfo{display:grid;grid-template-columns:5.5em 1fr;gap:6px 12px;margin:14px 0 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.6}
 .pinfo dt{color:var(--usu);font-weight:500}
 .pinfo dd{margin:0}
