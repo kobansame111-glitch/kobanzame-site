@@ -62,6 +62,9 @@ ADDR = {'ja': '〒350-0062 埼玉県川越市元町1-14-5', 'en': '1-14-5 Motoma
 products = json.load(open(os.path.join(ROOT, 'data/products.json'), encoding='utf-8'))
 _en_path = os.path.join(ROOT, 'data/products_en.json')
 EN = json.load(open(_en_path, encoding='utf-8')) if os.path.exists(_en_path) else {}
+# 2026-11-03 龍さん決定A：お客さまから聞かれたことを商品ページに戻す（商品ごとの Q&A）。data/product_faq.json
+_faq_path = os.path.join(ROOT, 'data/product_faq.json')
+PFAQ = {k: v for k, v in (json.load(open(_faq_path, encoding='utf-8')) if os.path.exists(_faq_path) else {}).items() if not k.startswith('_')}
 
 # ---------- お知らせ（2026-10-21 龍さん決定A：LINE（AI秘書）→シート→サイト自動化GAS→ data/news.json）----------
 # data/news.json の形：{"items":[{"id":"N001","date":"2026-10-21","text":"本文","until":"2026-11-20","band":false}, ...]}
@@ -771,6 +774,9 @@ footer.site a{color:var(--kinari)}
 .usd{display:block;font-size:12.5px;color:var(--usu);font-weight:400;margin-top:2px}
 .price .usd{font-size:14px}
 .usdnote{font-size:11.5px;color:var(--usu);margin:2px 0 0}
+.pfaq{margin:6px 0 0;font-size:13.5px;line-height:1.7}
+.pfaq dt{font-weight:600;margin-top:10px}
+.pfaq dd{margin:2px 0 0}
 .pinfo{display:grid;grid-template-columns:5.5em 1fr;gap:6px 12px;margin:14px 0 0;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:13.5px;line-height:1.6}
 .pinfo dt{color:var(--usu);font-weight:500}
 .pinfo dd{margin:0}
@@ -1375,7 +1381,30 @@ def info_rows(p, lang):
                 v = f'{m.group(1)}（{COND_MEAN[m.group(1)]}）' + ('' if (not rest or rest.startswith('写真')) else f'　{rest}')
         rows.append((label, v))
         seen.add(label)
+    for f in PFAQ.get(p['sku'], []):   # 聞かれて答えた寸法などを表にも出す
+        s = f.get('spec_en' if lang == 'en' else 'spec')
+        if s and len(s) == 2:
+            rows.append((s[0], s[1]))
     return rows
+
+# 2026-11-03 龍さん決定A：全商品に共通のよくある質問（短く）。商品ごとの Q&A（PFAQ）があれば先に出す
+COMMON_FAQ = {
+    'ja': [('サイズはどう測っていますか？', '平らに置いて測っています。お手持ちの服を同じように平らに置いて比べると、サイズの失敗が減ります。'),
+           ('送料はかかりますか？', '表示の価格は送料込みです。追加の料金はかかりません。'),
+           ('いつ届きますか？', '決済の確認後3日以内に、川越の店から発送します（月曜定休を除く）。'),
+           ('お店で見られますか？', '川越・元町の店で見られます。一点ものなので、お取り置きはしていません。'),
+           ('ほかに聞きたいことがあるときは？', 'Instagram の DM で聞いてください。答えた内容は、この欄に足していきます。')],
+    'en': [('How do you measure?', 'Laid flat. Compare with a piece you own, laid flat the same way.'),
+           ('Is shipping included?', 'Within Japan, yes. Outside Japan, ask for a shipping quote.'),
+           ('Can I see it in the shop?', 'Yes, at our shop in Motomachi, Kawagoe. Every piece is one of a kind, so we do not hold items.'),
+           ('Other questions?', 'Ask us by Instagram DM. We add the answers here.')],
+}
+
+def pfaq_html(p, lang):
+    own = [((f.get('q_en') or f['q']) if lang == 'en' else f['q'], (f.get('a_en') or f['a']) if lang == 'en' else f['a']) for f in PFAQ.get(p['sku'], [])]
+    items = own + COMMON_FAQ[lang]
+    body = ''.join(f'<dt>{esc(q)}</dt><dd>{esc(a)}</dd>' for q, a in items)
+    return f'<details{" open" if own else ""}><summary>{"よくある質問" if lang == "ja" else "Questions"}</summary><dl class="pfaq">{body}</dl></details>'
 
 NEWTOP_N = 6   # 2026-11-03 龍さん決定A：トップの1画面目に今週の新着の実物（写真・値段・身幅）
 
@@ -1799,6 +1828,7 @@ for lang in ('ja', 'en'):
       <details><summary>{t['specs']}</summary><dl class="spec">{spec}</dl><p class="howto">{t['howto']}</p></details>
       {KX.product_fit_html(p, lang, cat_of(p))}
       <details><summary>{t['delivery']}</summary><div class="story"><p>{t['delivery_p']}</p></div></details>
+      {pfaq_html(p, lang)}
       <div class="byline">{t['byline']}</div>
       {('<p class="toblog"><a href="/blog/' + p['slug'] + '/">' + ('この一着のことをブログで読む →' if lang == 'ja' else 'Read about this piece on our blog (Japanese) →') + '</a></p>') if p['slug'] in BLOG_SLUGS else ''}
     </div>
