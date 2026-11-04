@@ -44,12 +44,12 @@ if(k)send({t:'click',btn:k});},true);
 <body>
 <div class="util"><b>New arrivals every Wednesday</b>　Shipping included · Dispatched within 3 days of payment (closed Mondays)</div><script>document.addEventListener('DOMContentLoaded',function(){try{var d=new Date(Date.now()+324e5).toISOString().slice(0,10);document.querySelectorAll('[data-until]').forEach(function(e){var u=e.getAttribute('data-until');if(u&&u<d)e.hidden=true;});}catch(x){}});</script>
 <header class="site"><div class="wrap">
-  <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>Menu</button></div>
+  <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>Menu</button><a class="cartlink" href="/en/cart/" aria-label="Cart" hidden><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8zm3 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="ct">Cart</span><span class="cartn"></span></a></div>
   <a class="logo" href="/en/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
   <div class="hnav"><a class="n" href="/en/#list">Shop</a><a class="n" href="/blog/">Blog</a><a class="n" href="/en/#store">Store</a><a class="n" href="/en/#faq">FAQ</a><a class="n" href="/en/workshop/">Workshops (coming soon)</a>
     <nav class="lang" aria-label="言語 / Language"><a href="/journal/k11265/" lang="ja" aria-current="false">日本語</a><a href="/en/journal/k11265/" lang="en" aria-current="true">EN</a></nav>
   </div>
-</div><nav class="tabs" aria-label="Main"><a href="/en/#list" data-cat="">Shop</a><a href="/blog/">Blog</a><a href="/en/#store">Store</a></nav></header>
+</div><nav class="tabs" aria-label="Main"><a href="/en/#list" data-cat="">Shop</a><a href="/blog/">Blog</a><a href="/en/#store">Store</a><a class="cartlink tabcart" href="/en/cart/" hidden>Cart<span class="cartn"></span></a></nav></header>
 <div class="drawer-bg" id="drawerbg" hidden></div>
 <nav class="drawer" id="drawer" aria-label="Menu" aria-hidden="true">
   <div class="dh"><b>小判鮫</b><button type="button" class="x" id="drawerx">Close</button></div>
@@ -94,7 +94,7 @@ if(k)send({t:'click',btn:k});},true);
       <dl class="pinfo"><dt>Item</dt><dd>1970s–80s black leather utility vest (houndstooth lining, about men&#x27;s L)</dd><dt>Brand</dt><dd>None on the label</dd><dt>Size</dt><dd>Measured: chest 52 cm, length 59 cm, shoulder 38 cm (about a men&#x27;s L)</dd><dt>Condition</dt><dd>White paint-like marks and stains on the lower front; rust on the metal buckles (see photos for details)</dd><dt>Materials</dt><dd>Genuine leather; houndstooth fabric lining</dd><dt>Colour</dt><dd>Plain black</dd><dt>Era</dt><dd>1970s–1980s</dd></dl>
       
       <div class="buybox">
-        <a class="btn kin" href="https://square.link/u/1qpQWfTx" rel="noopener">Buy now (credit card)</a>
+        <a class="btn kin" href="https://square.link/u/1qpQWfTx" rel="noopener">Buy now (credit card)</a><button type="button" class="btn ghost cartadd" hidden data-sku="K11265" data-name="1970s–80s black leather utility vest (houndstooth lining, about men&#x27;s L)" data-price="25080" data-url="/en/journal/k11265/" data-img="/assets/products/k11265/v2_front.jpg">Add to cart</button>
         <ul class="assure"><li>Shipping within Japan included</li><li>No account needed</li><li>Secure checkout by Square</li><li>Ships within 3 days · full refund if sold</li></ul>
         
         <div class="kxfav"><button type="button" class="btn ghost" id="favbtn" data-slug="k11265" data-off="♡ Save to favorites" data-on="♥ Saved to favorites" aria-pressed="false">♡ Save to favorites</button><a class="kxsee" id="favsee" href="/en/favorites/" hidden>See favorites →</a><small class="kxmsg" id="favmsg" role="status" hidden>This browser does not allow saving (private browsing, for example).</small></div><button type="button" class="btn ghost" id="visitbtn" aria-expanded="false" aria-controls="visitbox">See this piece in the shop</button>
@@ -307,5 +307,35 @@ function save(x){try{localStorage.setItem(K,JSON.stringify(x))}catch(e){}show(x)
 if(c&&Date.now()-c.t<H){show(c);return}
 fetch('https://api.frankfurter.dev/v1/latest?base=JPY&symbols=USD').then(function(r){return r.json()}).then(function(j){save({r:j.rates.USD,d:j.date,t:Date.now()})})
 .catch(function(){fetch('https://open.er-api.com/v6/latest/JPY').then(function(r){return r.json()}).then(function(j){save({r:j.rates.USD,d:String(j.time_last_update_utc||'').slice(5,16),t:Date.now()})}).catch(function(){})})})();</script>
+<script>(function(){var EP="",L="en",T={"add": "Add to cart", "in": "In your cart (view cart)", "added": "Added to your cart", "max": "You can put up to 10 items in the cart", "empty": "Your cart is empty.", "remove": "Remove", "total": "Total (shipping within Japan included)", "gone": "These items sold before checkout and were removed:", "fail": "We could not start the cart checkout right now. Please buy each item from its own page with \"Buy now\".", "busy": "Please wait a moment and try again.", "wait": "Preparing the Square checkout…", "preview": "(Preview page) On the live site this button opens the Square checkout."},K="kzcart1",MAX=10,CU="/en/cart/";var pv=/^[a-z0-9-]+\.kobanzame-site\.pages\.dev$/.test(location.hostname);if(!EP&&!pv)return;
+function get(){try{var a=JSON.parse(localStorage.getItem(K)||"[]");return Array.isArray(a)?a:[]}catch(e){return[]}}
+function put(a){try{localStorage.setItem(K,JSON.stringify(a))}catch(e){}cnt()}
+function has(s){return get().some(function(x){return x.sku===s})}
+function yen(n){return L==="ja"?Number(n).toLocaleString("ja-JP")+"円":"¥"+Number(n).toLocaleString("en-US")}
+function toast(m){if(window.kzToast)kzToast(m)}
+var pg=document.getElementById("cartpage");
+function cnt(){var n=get().length;document.querySelectorAll(".cartlink").forEach(function(a){a.hidden=!n&&!pg;var c=a.querySelector(".cartn");if(c)c.textContent=n?String(n):""})}
+document.querySelectorAll(".cartadd").forEach(function(b){var s=b.getAttribute("data-sku");b.hidden=false;
+function st(){var on=has(s);b.classList.toggle("in",on);b.textContent=on?T["in"]:T.add}st();
+b.addEventListener("click",function(){if(has(s)){location.href=CU;return}var a=get();if(a.length>=MAX){toast(T.max);return}
+a.push({sku:s,name:b.getAttribute("data-name"),price:Number(b.getAttribute("data-price"))||0,url:b.getAttribute("data-url"),img:b.getAttribute("data-img")});put(a);st();toast(T.added)})});
+cnt();if(!pg)return;
+var ul=document.getElementById("cartlist"),tot=document.getElementById("carttotal"),go=document.getElementById("cartgo"),box=document.getElementById("cartbox"),em=document.getElementById("cartempty"),msg=document.getElementById("cartmsg");
+function say(m){msg.textContent=m;msg.hidden=!m}
+function esc(x){return String(x==null?"":x).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function draw(){var a=get();em.hidden=!!a.length;box.hidden=!a.length;var sum=0;
+ul.innerHTML=a.map(function(x,i){sum+=x.price;return '<li><a href="'+esc(x.url)+'"><img src="'+esc(x.img)+'" alt=""></a><div class="nm"><a href="'+esc(x.url)+'">'+esc(x.name)+'</a><small>ITEM NO. '+esc(x.sku)+'</small><b>'+yen(x.price)+'</b></div><button type="button" data-i="'+i+'">'+T.remove+'</button></li>'}).join("");
+tot.textContent=yen(sum);ul.querySelectorAll("button[data-i]").forEach(function(b){b.addEventListener("click",function(){var a=get();a.splice(Number(b.getAttribute("data-i")),1);put(a);draw()})})}
+function drop(skus){if(!skus||!skus.length)return;var gone=get().filter(function(x){return skus.indexOf(x.sku)>=0});put(get().filter(function(x){return skus.indexOf(x.sku)<0}));draw();
+if(gone.length)say(T.gone+" "+gone.map(function(x){return x.name+"（"+x.sku+"）"}).join("、"))}
+draw();
+fetch("/data/products.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(ps){var ok={};ps.forEach(function(p){if(p&&p.sku&&p.status!=="sold"&&p.links&&p.links.square)ok[p.sku]=1});
+drop(get().map(function(x){return x.sku}).filter(function(s){return !ok[s]}))}).catch(function(){});
+go.addEventListener("click",function(){var a=get();if(!a.length)return;if(!EP){say(T.preview);return}
+go.disabled=true;say(T.wait);
+fetch(EP,{method:"POST",body:JSON.stringify({skus:a.map(function(x){return x.sku}),lang:L})}).then(function(r){return r.json()}).then(function(j){
+if(j&&j.ok&&j.url){location.href=j.url;return}go.disabled=false;
+if(j&&j.code==="unavailable"){drop(j.skus)}else if(j&&j.code==="busy"){say(T.busy)}else{say(T.fail)}}).catch(function(){go.disabled=false;say(T.fail)})})
+})();</script>
 </body>
 </html>

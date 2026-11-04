@@ -44,12 +44,12 @@ if(k)send({t:'click',btn:k});},true);
 <body>
 <div class="util"><b>毎週<wbr>水曜 新着入荷</b>　送料込み・決済確認後<wbr>3日以内に<wbr>発送<wbr>（月曜定休を<wbr>除く）</div><script>document.addEventListener('DOMContentLoaded',function(){try{var d=new Date(Date.now()+324e5).toISOString().slice(0,10);document.querySelectorAll('[data-until]').forEach(function(e){var u=e.getAttribute('data-until');if(u&&u<d)e.hidden=true;});}catch(x){}});</script>
 <header class="site"><div class="wrap">
-  <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>メニュー</button></div>
+  <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>メニュー</button><a class="cartlink" href="/cart/" aria-label="カート" hidden><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8zm3 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="ct">カート</span><span class="cartn"></span></a></div>
   <a class="logo" href="/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
   <div class="hnav"><a class="n" href="/#list">商品一覧</a><a class="n" href="/blog/">ブログ</a><a class="n" href="/#store">店舗</a><a class="n" href="/#faq">Q&amp;A</a><a class="n" href="/workshop/">ワークショップ（準備中）</a>
     <nav class="lang" aria-label="言語 / Language"><a href="/guide/" lang="ja" aria-current="true">日本語</a><a href="/en/guide/" lang="en" aria-current="false">EN</a></nav>
   </div>
-</div><nav class="tabs" aria-label="メイン"><a href="/#list" data-cat="">商品</a><a href="/blog/">ブログ</a><a href="/#store">お店</a></nav></header>
+</div><nav class="tabs" aria-label="メイン"><a href="/#list" data-cat="">商品</a><a href="/blog/">ブログ</a><a href="/#store">お店</a><a class="cartlink tabcart" href="/cart/" hidden>カート<span class="cartn"></span></a></nav></header>
 <div class="drawer-bg" id="drawerbg" hidden></div>
 <nav class="drawer" id="drawer" aria-label="メニュー" aria-hidden="true">
   <div class="dh"><b>小判鮫</b><button type="button" class="x" id="drawerx">閉じる</button></div>
@@ -129,5 +129,35 @@ if(k)send({t:'click',btn:k});},true);
 })();
 </script>
 
+<script>(function(){var EP="",L="ja",T={"add": "カートに入れる", "in": "カートに入っています（カートを見る）", "added": "カートに入れました", "max": "カートには10点まで入れられます", "empty": "カートは空です。", "remove": "外す", "total": "合計（送料込み）", "gone": "次の商品は、先に売れたためカートから外しました：", "fail": "いまカートでのお支払いを受け付けられませんでした。お手数ですが、商品ページの「購入する」から1点ずつお買い求めください。", "busy": "少し時間をおいて、もう一度お試しください。", "wait": "Square の決済画面を準備しています…", "preview": "（確認用のページです）本番では、ここで Square の決済画面に移ります。"},K="kzcart1",MAX=10,CU="/cart/";var pv=/^[a-z0-9-]+\.kobanzame-site\.pages\.dev$/.test(location.hostname);if(!EP&&!pv)return;
+function get(){try{var a=JSON.parse(localStorage.getItem(K)||"[]");return Array.isArray(a)?a:[]}catch(e){return[]}}
+function put(a){try{localStorage.setItem(K,JSON.stringify(a))}catch(e){}cnt()}
+function has(s){return get().some(function(x){return x.sku===s})}
+function yen(n){return L==="ja"?Number(n).toLocaleString("ja-JP")+"円":"¥"+Number(n).toLocaleString("en-US")}
+function toast(m){if(window.kzToast)kzToast(m)}
+var pg=document.getElementById("cartpage");
+function cnt(){var n=get().length;document.querySelectorAll(".cartlink").forEach(function(a){a.hidden=!n&&!pg;var c=a.querySelector(".cartn");if(c)c.textContent=n?String(n):""})}
+document.querySelectorAll(".cartadd").forEach(function(b){var s=b.getAttribute("data-sku");b.hidden=false;
+function st(){var on=has(s);b.classList.toggle("in",on);b.textContent=on?T["in"]:T.add}st();
+b.addEventListener("click",function(){if(has(s)){location.href=CU;return}var a=get();if(a.length>=MAX){toast(T.max);return}
+a.push({sku:s,name:b.getAttribute("data-name"),price:Number(b.getAttribute("data-price"))||0,url:b.getAttribute("data-url"),img:b.getAttribute("data-img")});put(a);st();toast(T.added)})});
+cnt();if(!pg)return;
+var ul=document.getElementById("cartlist"),tot=document.getElementById("carttotal"),go=document.getElementById("cartgo"),box=document.getElementById("cartbox"),em=document.getElementById("cartempty"),msg=document.getElementById("cartmsg");
+function say(m){msg.textContent=m;msg.hidden=!m}
+function esc(x){return String(x==null?"":x).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function draw(){var a=get();em.hidden=!!a.length;box.hidden=!a.length;var sum=0;
+ul.innerHTML=a.map(function(x,i){sum+=x.price;return '<li><a href="'+esc(x.url)+'"><img src="'+esc(x.img)+'" alt=""></a><div class="nm"><a href="'+esc(x.url)+'">'+esc(x.name)+'</a><small>ITEM NO. '+esc(x.sku)+'</small><b>'+yen(x.price)+'</b></div><button type="button" data-i="'+i+'">'+T.remove+'</button></li>'}).join("");
+tot.textContent=yen(sum);ul.querySelectorAll("button[data-i]").forEach(function(b){b.addEventListener("click",function(){var a=get();a.splice(Number(b.getAttribute("data-i")),1);put(a);draw()})})}
+function drop(skus){if(!skus||!skus.length)return;var gone=get().filter(function(x){return skus.indexOf(x.sku)>=0});put(get().filter(function(x){return skus.indexOf(x.sku)<0}));draw();
+if(gone.length)say(T.gone+" "+gone.map(function(x){return x.name+"（"+x.sku+"）"}).join("、"))}
+draw();
+fetch("/data/products.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(ps){var ok={};ps.forEach(function(p){if(p&&p.sku&&p.status!=="sold"&&p.links&&p.links.square)ok[p.sku]=1});
+drop(get().map(function(x){return x.sku}).filter(function(s){return !ok[s]}))}).catch(function(){});
+go.addEventListener("click",function(){var a=get();if(!a.length)return;if(!EP){say(T.preview);return}
+go.disabled=true;say(T.wait);
+fetch(EP,{method:"POST",body:JSON.stringify({skus:a.map(function(x){return x.sku}),lang:L})}).then(function(r){return r.json()}).then(function(j){
+if(j&&j.ok&&j.url){location.href=j.url;return}go.disabled=false;
+if(j&&j.code==="unavailable"){drop(j.skus)}else if(j&&j.code==="busy"){say(T.busy)}else{say(T.fail)}}).catch(function(){go.disabled=false;say(T.fail)})})
+})();</script>
 </body>
 </html>
