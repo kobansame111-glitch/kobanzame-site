@@ -21,8 +21,8 @@ TX = {
     'ja': {
         'fav_add': '♡ お気に入りに入れる', 'fav_nostore': 'このブラウザでは保存できない設定になっています（プライベートブラウズなど）。', 'fav_on': '♥ お気に入りに入っています', 'fav_see': 'お気に入りを見る →',
         'visit_btn': '店頭でこの服を見る', 'visit_open': '今日は営業日です', 'visit_closed': '今日は定休日です',
-        'visit_note': '一点ものなので、先に売れていたらごめんなさい（取り置きはしていません）。来店の前に在庫を知りたいときは、Instagram の DM で品番を送ってください。',
-        'visit_map': '地図を開く', 'visit_item': '品番',
+        'visit_note': '一点ものなので、先に売れていたらごめんなさい（取り置きはしていません）。来店の前に在庫を知りたいときは、Instagram の DM で品番「{sku}」を送ってください。',
+        'visit_map': '地図を開く',
         'fit_h': '手持ちの服と比べる', 'fit_p': '手持ちの服を平らに置いて、脇の下から脇の下（身幅）と、えりの付け根から裾（着丈）を測って入れてください。数字はこの端末に覚えておき、ほかの商品でも使えます。',
         'fit_w': '身幅', 'fit_l': '着丈', 'fit_s': '肩幅（なくても可）', 'fit_sl': '袖丈（なくても可）',
         'fit_item': 'この服', 'fit_mine': '手持ちの服', 'fit_empty': '身幅と着丈を入れると、形を重ねた図が出ます。',
@@ -37,8 +37,8 @@ TX = {
     'en': {
         'fav_add': '♡ Save to favorites', 'fav_nostore': 'This browser does not allow saving (private browsing, for example).', 'fav_on': '♥ Saved to favorites', 'fav_see': 'See favorites →',
         'visit_btn': 'See this piece in the shop', 'visit_open': 'We are open today', 'visit_closed': 'We are closed today',
-        'visit_note': 'Every piece is one of a kind, so it may sell before you arrive (we do not hold items). To check before visiting, send the item number by Instagram DM.',
-        'visit_map': 'Open map', 'visit_item': 'Item no.',
+        'visit_note': 'Every piece is one of a kind, so it may sell before you arrive (we do not hold items). To check before visiting, send the item number ({sku}) by Instagram DM.',
+        'visit_map': 'Open map',
         'fit_h': 'Compare with a piece you own', 'fit_p': 'Lay a piece you own flat and measure armpit to armpit (chest) and collar base to hem (length). The numbers are kept on this device for other items too.',
         'fit_w': 'Chest', 'fit_l': 'Length', 'fit_s': 'Shoulder (optional)', 'fit_sl': 'Sleeve (optional)',
         'fit_item': 'This piece', 'fit_mine': 'Yours', 'fit_empty': 'Enter chest and length to see the two shapes overlaid.',
@@ -109,8 +109,8 @@ def product_buy_html(p, lang, sold, hours_line, addr, gmaps):
         <div class="visitbox" id="visitbox" hidden>
           <p class="vtoday" id="vtoday" data-open="{t['visit_open']}" data-closed="{t['visit_closed']}" hidden></p>
           <p>{html.escape(hours_line)}<br>{html.escape(addr)}</p>
-          <p><a class="maplink" href="{html.escape(gmaps)}" rel="noopener">{t['visit_map']}</a>　{t['visit_item']} <code>{html.escape(p['sku'])}</code></p>
-          <p class="ship">{t['visit_note']}</p>
+          <p><a class="maplink" href="{html.escape(gmaps)}" rel="noopener">{t['visit_map']}</a></p>
+          <p class="ship">{html.escape(t['visit_note'].replace('{sku}', p['sku']))}</p>
         </div>'''
     return fav + visit
 
@@ -137,18 +137,25 @@ def product_fit_html(p, lang, genre):
 
 def _shape_js():
     """服の形（cm）→ SVG の path。肩幅が無いときは身幅から目安を作り、袖丈が無いときは袖を描かない（図の形のためだけ・差の表には出さない）"""
-    return r'''function kzShape(m,ox,oy,k){
-  var w=m.w, l=m.l, s=m.s||w*0.92, sl=m.sl||0, nk=Math.min(18,s*0.36)/2, drop=3.5;
-  var X=function(x){return (ox+x*k).toFixed(1)}, Y=function(y){return (oy+y*k).toFixed(1)};
-  var hs=s/2, hw=w/2, pit=Math.max(18,l*0.3), d='M'+X(-nk)+' '+Y(0)+' Q'+X(0)+' '+Y(5)+' '+X(nk)+' '+Y(0)+' L'+X(hs)+' '+Y(drop);
-  if(sl>0){var a=0.9, ex=Math.cos(a)*sl, ey=Math.sin(a)*sl, cw=Math.max(8,w*0.3);
-    d+=' L'+X(hs+ex)+' '+Y(drop+ey)+' L'+X(hs+ex-Math.sin(a)*cw)+' '+Y(drop+ey+Math.cos(a)*cw)+' L'+X(hw)+' '+Y(pit);}
-  else d+=' L'+X(hw)+' '+Y(pit);
-  d+=' L'+X(hw)+' '+Y(l)+' L'+X(-hw)+' '+Y(l)+' L'+X(-hw)+' '+Y(pit);
-  if(sl>0){d+=' L'+X(-hs-ex+Math.sin(a)*cw)+' '+Y(drop+ey+Math.cos(a)*cw)+' L'+X(-hs-ex)+' '+Y(drop+ey);}
-  return d+' L'+X(-hs)+' '+Y(drop)+' Z';
+    # 2026-11-05 龍さん「袖がブラウスみたいで気持ち悪い」→ 袖を「肩先から脇へ平行な筒」に（平置きのスウェット・Tシャツの形）。袖口は少し細く、角度は浅め（約26度）
+    return r'''function kzSleeve(m){
+  var w=m.w, l=m.l, s=m.s||w*0.96, sl=m.sl||0, a=0.45, drop=3.5, hs=s/2, hw=w/2, pit=Math.max(16,Math.min(l*0.32,w*0.42));
+  if(!(sl>0)) return {hs:hs,hw:hw,pit:pit,drop:drop,sl:0};
+  var ux=Math.cos(a), uy=Math.sin(a), nx=-uy, ny=ux;                     // 袖の向き u と、その直角 n
+  var wd=Math.max(6,(hw-hs)*nx+(pit-drop)*ny);                            // 袖の太さ＝肩先から脇までを n に射影したもの
+  var tx=hs+ux*sl, ty=drop+uy*sl, cw=wd*0.85;                             // 袖口（少し細く）
+  return {hs:hs,hw:hw,pit:pit,drop:drop,sl:sl,tx:tx,ty:ty,bx:tx+nx*cw,by:ty+ny*cw};
 }
-function kzExtent(m){var w=m.w,s=m.s||w*0.92,sl=m.sl||0;return {hx:Math.max(w/2,s/2+(sl?Math.cos(0.9)*sl:0)),y:Math.max(m.l,3.5+(sl?Math.sin(0.9)*sl+Math.max(8,w*0.3):0))};}'''
+function kzShape(m,ox,oy,k){
+  var g=kzSleeve(m), nk=Math.min(18,(m.s||m.w*0.96)*0.36)/2;
+  var X=function(x){return (ox+x*k).toFixed(1)}, Y=function(y){return (oy+y*k).toFixed(1)};
+  var d='M'+X(-nk)+' '+Y(0)+' Q'+X(0)+' '+Y(5)+' '+X(nk)+' '+Y(0)+' L'+X(g.hs)+' '+Y(g.drop);
+  if(g.sl>0) d+=' L'+X(g.tx)+' '+Y(g.ty)+' L'+X(g.bx)+' '+Y(g.by);
+  d+=' L'+X(g.hw)+' '+Y(g.pit)+' L'+X(g.hw)+' '+Y(m.l)+' L'+X(-g.hw)+' '+Y(m.l)+' L'+X(-g.hw)+' '+Y(g.pit);
+  if(g.sl>0) d+=' L'+X(-g.bx)+' '+Y(g.by)+' L'+X(-g.tx)+' '+Y(g.ty);
+  return d+' L'+X(-g.hs)+' '+Y(g.drop)+' Z';
+}
+function kzExtent(m){var g=kzSleeve(m);return {hx:Math.max(g.hw,g.sl?g.tx:0),y:Math.max(m.l,g.sl?g.by:0)};}'''
 
 
 EXTRAS_JS_TPL = r'''<script>

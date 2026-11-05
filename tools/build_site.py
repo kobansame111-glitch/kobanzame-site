@@ -1393,11 +1393,11 @@ COMMON_FAQ = {
     'ja': [('サイズはどう測っていますか？', '平置きで測っています。お手持ちの服を同じように平置きして比べると、サイズ感が分かりやすいかと思います。'),   # 2026-11-04 龍さんの文
            ('送料はかかりますか？', '表示の価格は送料込みです。追加の料金はかかりません。'),
            ('いつ届きますか？', '決済の確認後3日以内に、川越の店から発送します（月曜定休を除く）。'),
-           ('お店で見られますか？', 'オンラインに在庫がある商品は、店頭でも見られることがあります。ご不安な場合は、事前にご連絡ください。'),   # 2026-11-04 龍さんの文
+           ('お店で見ることはできますか？', 'オンラインに在庫がある商品は、店頭でもご覧になることができます。確実にご覧になりたい場合や、いらっしゃる時にご覧になりたい場合は、一度ご連絡ください。'),   # 2026-11-05 龍さんの文
            ('ほかに聞きたいことがあるときは？', 'InstagramのDM、またはメールでのお問い合わせをお待ちしております。')],   # 2026-11-04 龍さんの文
     'en': [('How do you measure?', 'Laid flat. Compare with a piece you own, laid flat the same way.'),
            ('Is shipping included?', 'Within Japan, yes. Outside Japan, ask for a shipping quote.'),
-           ('Can I see it in the shop?', 'Items in stock online are often in the shop too. If you want to be sure, please contact us before you visit.'),
+           ('Can I see it in the shop?', 'Items in stock online can also be seen in the shop. If you want to be sure, or want to see it when you visit, please contact us first.'),
            ('Other questions?', 'Please send us an Instagram DM or an email.')],
 }
 
