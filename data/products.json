@@ -6396,13 +6396,18 @@
     "garment_l": 182.1,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k11452/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 59,
     "着丈": 65,
     "肩幅": 55
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-11-05",
+    "note": "首元が違う：本物は縫い閉じた小さなV字の切り替え（内側に白いテープ）、AIは開いた切り込み（キーネック）。色・ロゴなし・ボタン等なしは一致"
    }
   }
  }
