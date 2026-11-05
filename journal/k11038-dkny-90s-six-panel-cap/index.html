@@ -106,7 +106,7 @@ if(k)send({t:'click',btn:k});},true);
       <details><summary>仕様・サイズ</summary><dl class="spec"><dt>ブランド</dt><dd>DKNY（Donna Karan New York）</dd><dt>素材</dt><dd>綿</dd><dt>色</dt><dd>レッド</dd><dt>サイズ</dt><dd>ワンサイズ<wbr>（頭周り約57cm・高さ約10cm・つば<wbr>約7cm）</dd><dt>年代・生産</dt><dd>1990年代・USA製</dd><dt>状態</dt><dd>B：使用感・細かい<wbr>傷あり、<wbr>着用に<wbr>問題なし</dd></dl><p class="howto">実寸は<wbr>平置きで<wbr>測っています。<wbr>身幅＝脇の<wbr>下から<wbr>脇の<wbr>下、<wbr>着丈＝襟の<wbr>つけ根から<wbr>裾まで。<wbr>お手持ちの<wbr>服を<wbr>同じように<wbr>測って<wbr>比べると、<wbr>サイズの<wbr>失敗が<wbr>減ります。</p></details>
       
       <details><summary>配送・返品</summary><div class="story"><p>送料込み。<br>決済確認後<wbr>3日以内<wbr>（月曜定休を<wbr>除く）に、<wbr>川越の<wbr>店舗から<wbr>発送します。<br>古着・<wbr>一点ものの<wbr>性質上、<wbr>お客様都合の<wbr>返品は<wbr>お受けしていません。<br>商品説明と<wbr>著しく<wbr>異なる<wbr>場合や<wbr>発送間違いの<wbr>場合は、<wbr>到着後<wbr>4日以内に<wbr>メールで<wbr>ご連絡ください。</p></div></details>
-      <details><summary>よくある質問</summary><dl class="pfaq"><dt>サイズは<wbr>どう<wbr>測っていますか？</dt><dd>平置きで<wbr>測っています。<wbr>お手持ちの<wbr>服を<wbr>同じように<wbr>平置きして<wbr>比べると、<wbr>サイズ感が<wbr>分かりやすいかと<wbr>思います。</dd><dt>送料は<wbr>かかりますか？</dt><dd>表示の<wbr>価格は<wbr>送料込みです。<wbr>追加の<wbr>料金は<wbr>かかりません。</dd><dt>いつ<wbr>届きますか？</dt><dd>決済の<wbr>確認後<wbr>3日以内に、<wbr>川越の<wbr>店から<wbr>発送します<wbr>（月曜定休を<wbr>除く）。</dd><dt>お店で<wbr>見られますか？</dt><dd>オンラインに<wbr>在庫が<wbr>ある<wbr>商品は、<wbr>店頭でも<wbr>見られる<wbr>ことがあります。<wbr>ご不安な<wbr>場合は、<wbr>事前に<wbr>ご連絡ください。</dd><dt>ほかに<wbr>聞きたいことが<wbr>ある<wbr>ときは？</dt><dd>Instagramの<wbr>DM、<wbr>または<wbr>メールでの<wbr>お問い合わせを<wbr>お待ちしております。</dd></dl></details>
+      <details><summary>よくある質問</summary><dl class="pfaq"><dt>サイズは<wbr>どう<wbr>測っていますか？</dt><dd>平置きで<wbr>測っています。<wbr>お手持ちの<wbr>服を<wbr>同じように<wbr>平置きして<wbr>比べると、<wbr>サイズ感が<wbr>分かりやすいかと<wbr>思います。</dd><dt>送料は<wbr>かかりますか？</dt><dd>表示の<wbr>価格は<wbr>送料込みです。<wbr>追加の<wbr>料金は<wbr>かかりません。</dd><dt>いつ<wbr>届きますか？</dt><dd>決済の<wbr>確認後<wbr>3日以内に、<wbr>川越の<wbr>店から<wbr>発送します<wbr>（月曜定休を<wbr>除く）。</dd><dt>お店で<wbr>見ることは<wbr>できますか？</dt><dd>オンラインに<wbr>在庫が<wbr>ある<wbr>商品は、<wbr>店頭でも<wbr>ご覧に<wbr>なることができます。<wbr>確実に<wbr>ご覧に<wbr>なりたい<wbr>場合や、<wbr>いらっしゃる<wbr>時に<wbr>ご覧に<wbr>なりたい<wbr>場合は、<wbr>一度<wbr>ご連絡ください。</dd><dt>ほかに<wbr>聞きたいことが<wbr>ある<wbr>ときは？</dt><dd>Instagramの<wbr>DM、<wbr>または<wbr>メールでの<wbr>お問い合わせを<wbr>お待ちしております。</dd></dl></details>
       <div class="byline">文：小判鮫オーナー・専属バイヤー 龍</div>
       
     </div>
@@ -216,18 +216,24 @@ if(k)send({t:'click',btn:k});},true);
       vt.textContent=open?vt.dataset.open:vt.dataset.closed; if(!open) vt.className='vtoday closed'; vt.hidden=false;}
   }
   /* C：手持ちの服と比べる */
-  function kzShape(m,ox,oy,k){
-  var w=m.w, l=m.l, s=m.s||w*0.92, sl=m.sl||0, nk=Math.min(18,s*0.36)/2, drop=3.5;
-  var X=function(x){return (ox+x*k).toFixed(1)}, Y=function(y){return (oy+y*k).toFixed(1)};
-  var hs=s/2, hw=w/2, pit=Math.max(18,l*0.3), d='M'+X(-nk)+' '+Y(0)+' Q'+X(0)+' '+Y(5)+' '+X(nk)+' '+Y(0)+' L'+X(hs)+' '+Y(drop);
-  if(sl>0){var a=0.9, ex=Math.cos(a)*sl, ey=Math.sin(a)*sl, cw=Math.max(8,w*0.3);
-    d+=' L'+X(hs+ex)+' '+Y(drop+ey)+' L'+X(hs+ex-Math.sin(a)*cw)+' '+Y(drop+ey+Math.cos(a)*cw)+' L'+X(hw)+' '+Y(pit);}
-  else d+=' L'+X(hw)+' '+Y(pit);
-  d+=' L'+X(hw)+' '+Y(l)+' L'+X(-hw)+' '+Y(l)+' L'+X(-hw)+' '+Y(pit);
-  if(sl>0){d+=' L'+X(-hs-ex+Math.sin(a)*cw)+' '+Y(drop+ey+Math.cos(a)*cw)+' L'+X(-hs-ex)+' '+Y(drop+ey);}
-  return d+' L'+X(-hs)+' '+Y(drop)+' Z';
+  function kzSleeve(m){
+  var w=m.w, l=m.l, s=m.s||w*0.96, sl=m.sl||0, a=0.45, drop=3.5, hs=s/2, hw=w/2, pit=Math.max(16,Math.min(l*0.32,w*0.42));
+  if(!(sl>0)) return {hs:hs,hw:hw,pit:pit,drop:drop,sl:0};
+  var ux=Math.cos(a), uy=Math.sin(a), nx=-uy, ny=ux;                     // 袖の向き u と、その直角 n
+  var wd=Math.max(6,(hw-hs)*nx+(pit-drop)*ny);                            // 袖の太さ＝肩先から脇までを n に射影したもの
+  var tx=hs+ux*sl, ty=drop+uy*sl, cw=wd*0.85;                             // 袖口（少し細く）
+  return {hs:hs,hw:hw,pit:pit,drop:drop,sl:sl,tx:tx,ty:ty,bx:tx+nx*cw,by:ty+ny*cw};
 }
-function kzExtent(m){var w=m.w,s=m.s||w*0.92,sl=m.sl||0;return {hx:Math.max(w/2,s/2+(sl?Math.cos(0.9)*sl:0)),y:Math.max(m.l,3.5+(sl?Math.sin(0.9)*sl+Math.max(8,w*0.3):0))};}
+function kzShape(m,ox,oy,k){
+  var g=kzSleeve(m), nk=Math.min(18,(m.s||m.w*0.96)*0.36)/2;
+  var X=function(x){return (ox+x*k).toFixed(1)}, Y=function(y){return (oy+y*k).toFixed(1)};
+  var d='M'+X(-nk)+' '+Y(0)+' Q'+X(0)+' '+Y(5)+' '+X(nk)+' '+Y(0)+' L'+X(g.hs)+' '+Y(g.drop);
+  if(g.sl>0) d+=' L'+X(g.tx)+' '+Y(g.ty)+' L'+X(g.bx)+' '+Y(g.by);
+  d+=' L'+X(g.hw)+' '+Y(g.pit)+' L'+X(g.hw)+' '+Y(m.l)+' L'+X(-g.hw)+' '+Y(m.l)+' L'+X(-g.hw)+' '+Y(g.pit);
+  if(g.sl>0) d+=' L'+X(-g.bx)+' '+Y(g.by)+' L'+X(-g.tx)+' '+Y(g.ty);
+  return d+' L'+X(-g.hs)+' '+Y(g.drop)+' Z';
+}
+function kzExtent(m){var g=kzSleeve(m);return {hx:Math.max(g.hw,g.sl?g.tx:0),y:Math.max(m.l,g.sl?g.by:0)};}
   var fx=document.getElementById('fitbox');
   if(fx){
     var item=JSON.parse(fx.dataset.m), ins=fx.querySelectorAll('input[data-k]'), svg=document.getElementById('fitsvg'), df=document.getElementById('fitdiff'), lab={"s": "肩幅", "w": "身幅", "l": "着丈", "sl": "袖丈"};
