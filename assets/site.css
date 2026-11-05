@@ -56,6 +56,7 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr)}
 .hero-ph{position:relative}
 .hero-img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:50% 50%}
+.hero-ph{position:relative}.hero-ph .hero-slide{position:absolute;inset:0;height:100%;opacity:0;transition:opacity 1.2s ease}.hero-ph .hero-slide.on{opacity:1}
 .herobox{position:absolute;left:12px;bottom:12px;right:12px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .days{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;background:rgba(255,255,255,.9);border:1px solid var(--line);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:7px 12px}
 .days b{color:var(--kin);font-weight:500}

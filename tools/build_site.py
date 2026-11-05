@@ -119,7 +119,7 @@ T = {
   'util': '<b>毎週水曜 新着入荷</b>　送料込み・決済確認後3日以内に発送（月・火定休を除く）',
   'nav': [('/#list', '商品一覧'), ('/blog/', 'ブログ'), ('/#store', '店舗'), ('/#faq', 'Q&amp;A')],
   'hero_h': 'One<br>of <em>One.</em>',
-  'hero_p': '埼玉・川越、築約80年の古民家から。国内外で買い付けたヴィンテージ古着と、オリジナルの「GAW」。どれも一点もので、同じものはありません。',
+  'hero_p': '埼玉・川越、築約80年の古民家から。<br>国内外で買い付けたヴィンテージ古着と、オリジナルの「GAW」。<br>どれも一点もので、同じものはありません。',   # 2026-11-04 龍さん：文ごとに改行（PC・スマホとも読みやすく）
   'hero_btn': '一点ものを見る',
   'map': '地図を開く ／ 川越市元町1-14-5',
   'days_h': '営業日', 'days': '水〜日 12:00–20:00（月・火 定休）', 'today_open': '本日営業', 'today_closed': '本日定休',
@@ -147,7 +147,7 @@ T = {
   'mercari_buy': 'メルカリで買う', 'ask_ig': 'サイズや状態を質問する（Instagram）',
   'story': 'この一着の話', 'specs': '仕様・サイズ', 'delivery': '配送・返品',
   'howto': '実寸は平置きで測っています。身幅＝脇の下から脇の下、着丈＝襟のつけ根から裾まで。お手持ちの服を同じように測って比べると、サイズの失敗が減ります。',
-  'delivery_p': '送料込み。決済確認後3日以内（月・火定休を除く）に、川越の店舗から発送します。古着・一点ものの性質上、お客様都合の返品はお受けしていません。商品説明と著しく異なる場合や発送間違いの場合は、到着後4日以内にメールでご連絡ください。',
+  'delivery_p': '送料込み。<br>決済確認後3日以内（月・火定休を除く）に、川越の店舗から発送します。<br>古着・一点ものの性質上、お客様都合の返品はお受けしていません。<br>商品説明と著しく異なる場合や発送間違いの場合は、到着後4日以内にメールでご連絡ください。',   # 2026-11-04 龍さん：文ごとに改行
   'byline': '文：小判鮫オーナー・専属バイヤー 龍',
   'related': 'こういうのもおすすめです', 'draft': '下書き（まだ公開していません）｜毎週水曜の夜（20時台）に公開されます',
   'journal_h': 'Journal', 'journal_s': '一点ものの、成り立ちの記録',
@@ -664,6 +664,7 @@ header.site .wrap{display:flex;align-items:center;justify-content:space-between;
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr)}
 .hero-ph{position:relative}
 .hero-img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:50% 50%}
+.hero-ph{position:relative}.hero-ph .hero-slide{position:absolute;inset:0;height:100%;opacity:0;transition:opacity 1.2s ease}.hero-ph .hero-slide.on{opacity:1}
 .herobox{position:absolute;left:12px;bottom:12px;right:12px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .days{display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px;background:rgba(255,255,255,.9);border:1px solid var(--line);color:var(--kinari);font-size:12px;letter-spacing:.06em;padding:7px 12px}
 .days b{color:var(--kin);font-weight:500}
@@ -1389,15 +1390,15 @@ def info_rows(p, lang):
 
 # 2026-11-03 龍さん決定A：全商品に共通のよくある質問（短く）。商品ごとの Q&A（PFAQ）があれば先に出す
 COMMON_FAQ = {
-    'ja': [('サイズはどう測っていますか？', '平らに置いて測っています。お手持ちの服を同じように平らに置いて比べると、サイズの失敗が減ります。'),
+    'ja': [('サイズはどう測っていますか？', '平置きで測っています。お手持ちの服を同じように平置きして比べると、サイズ感が分かりやすいかと思います。'),   # 2026-11-04 龍さんの文
            ('送料はかかりますか？', '表示の価格は送料込みです。追加の料金はかかりません。'),
            ('いつ届きますか？', '決済の確認後3日以内に、川越の店から発送します（月曜定休を除く）。'),
-           ('お店で見られますか？', '川越・元町の店で見られます。一点ものなので、お取り置きはしていません。'),
-           ('ほかに聞きたいことがあるときは？', 'Instagram の DM で聞いてください。答えた内容は、この欄に足していきます。')],
+           ('お店で見られますか？', 'オンラインに在庫がある商品は、店頭でも見られることがあります。ご不安な場合は、事前にご連絡ください。'),   # 2026-11-04 龍さんの文
+           ('ほかに聞きたいことがあるときは？', 'InstagramのDM、またはメールでのお問い合わせをお待ちしております。')],   # 2026-11-04 龍さんの文
     'en': [('How do you measure?', 'Laid flat. Compare with a piece you own, laid flat the same way.'),
            ('Is shipping included?', 'Within Japan, yes. Outside Japan, ask for a shipping quote.'),
-           ('Can I see it in the shop?', 'Yes, at our shop in Motomachi, Kawagoe. Every piece is one of a kind, so we do not hold items.'),
-           ('Other questions?', 'Ask us by Instagram DM. We add the answers here.')],
+           ('Can I see it in the shop?', 'Items in stock online are often in the shop too. If you want to be sure, please contact us before you visit.'),
+           ('Other questions?', 'Please send us an Instagram DM or an email.')],
 }
 
 def pfaq_html(p, lang):
@@ -1535,6 +1536,10 @@ def faq_ld(lang):
 hero_p = next((p for p in avail_live if cat_of(p) == 'outer'), avail_live[0] if avail_live else None)
 HERO_SRCSET = (' srcset="/assets/hero-shop-800.jpg 800w, /assets/hero-shop.jpg 1200w" sizes="(min-width:900px) 55vw, 100vw" width="1200" height="1600"' if HERO_IMAGE == '/assets/hero-shop.jpg' else '')
 HERO_SRC = HERO_IMAGE or (hero_p['images'][0] if hero_p else 'https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg')
+# 2026-11-04 龍さん「店内の写真をスライドショーに」：assets/hero/ に置いた写真（.jpg・名前順）を、トップの店内写真のあとに順に切り替える。無ければ1枚のまま
+HERO_SLIDES = sorted('/assets/hero/' + f for f in os.listdir(os.path.join(ROOT, 'assets/hero')) if f.lower().endswith('.jpg')) if os.path.isdir(os.path.join(ROOT, 'assets/hero')) else []
+HERO_SLIDES_HTML = ''.join(f'<img class="hero-img hero-slide" src="{esc(u)}" alt="" loading="lazy" decoding="async">' for u in HERO_SLIDES)
+HERO_SLIDE_JS = '' if not HERO_SLIDES else '''<script>(function(){var s=[].slice.call(document.querySelectorAll('.hero-ph .hero-slide'));if(!s.length||matchMedia('(prefers-reduced-motion:reduce)').matches)return;var i=-1;setInterval(function(){if(i>=0)s[i].classList.remove('on');i=(i+1)%(s.length+1);if(i<s.length)s[i].classList.add('on');else i=-1;},5000);})();</script>'''
 
 for lang in ('ja', 'en'):
     t = T[lang]
@@ -1566,7 +1571,7 @@ for lang in ('ja', 'en'):
   <section class="hero">
     <div class="wrap">
       <div class="hero-ph">
-        <img class="hero-img" src="{esc(HERO_SRC)}"{HERO_SRCSET} alt="{hero_alt}" fetchpriority="high">
+        <img class="hero-img" src="{esc(HERO_SRC)}"{HERO_SRCSET} alt="{hero_alt}" fetchpriority="high">{HERO_SLIDES_HTML}
         <div class="herobox">
           <div class="days"><b>{t['days_h']}</b>{t['days']}<span class="today" id="today" hidden data-open="{t['today_open']}" data-closed="{t['today_closed']}"></span></div>
           <a class="maplink" href="{SHOP['gmaps']}" rel="noopener">{PIN}{t['map']}</a>
@@ -1578,7 +1583,7 @@ for lang in ('ja', 'en'):
         <a class="btn" href="#list">{t['hero_btn']}</a>
       </div>
     </div>
-  </section>
+  </section>{HERO_SLIDE_JS}
 {news_section}  <div class="wrap">
     <div class="herebar" id="herebar" hidden><button type="button" class="here" id="herego"></button><button type="button" class="back" id="hereback">{'すべての商品に戻る' if lang == 'ja' else 'Show all'}</button></div>
     <div class="catrow" role="group">{catrow(lang)}</div>
@@ -1823,7 +1828,7 @@ for lang in ('ja', 'en'):
         {buy_extra}
       </div>
       <ul class="points">{points}</ul>
-      <details open><summary>{t['story']}</summary><div class="story"><p>{esc(loc(p, 'lead', lang))}</p>
+      <details open><summary>{t['story']}</summary><div class="story">{('<p>' + esc(loc(p, 'lead', lang)) + '</p>') if loc(p, 'lead', lang) else ''}
 {loc(p, 'body_html', lang)}</div></details>
       <details><summary>{t['specs']}</summary><dl class="spec">{spec}</dl><p class="howto">{t['howto']}</p></details>
       {KX.product_fit_html(p, lang, cat_of(p))}
