@@ -977,6 +977,9 @@ def other_path(path, lang):
 
 # 64番：ページが開かれた時と、決まったボタン（購入・メルカリ・取り置き・Instagram・地図）が押された時に1件ずつ送る。
 # 2026-10-28：リンクに ?utm_source=threads&utm_campaign=new-20261028 のような印があれば、流入元（ref）をその印にする（Threads からのクリック数を数えるため）。
+# 2026-11-05（AI値付けの段階0）：一覧の商品カード（売れていないもの）が画面に半分以上見えたら品番を覚え、ページを離れる時にまとめて1件（t:'imp'・最大40品番ずつ）送る。
+#   リンクを押した時・20品番たまった時にも送る（スマホでページを離れる瞬間の送信が落ちることがあるため）。
+#   「♡ お気に入りに入れる」を押した時（入れる時だけ・外す時は送らない）は click の fav。受け取る側は 64番（kobanzame-brain の gas/site-analytics-64）。
 # 個人を見分ける情報（Cookie・端末ID・IP等）は送らない。スタッフは一度 ?nolog=1 を付けて開くと、その端末からは送られない。
 TRACK_JS = """<script>
 (function(){var U='__URL__';if(!U||navigator.webdriver||/bot|crawl|spider|slurp|lighthouse|headless/i.test(navigator.userAgent))return;
@@ -988,9 +991,14 @@ try{var us=(location.search.match(/[?&]utm_source=([A-Za-z0-9-]{1,30})/)||[])[1]
 var b=JSON.stringify(o);try{if(navigator.sendBeacon&&navigator.sendBeacon(U,new Blob([b],{type:'text/plain'})))return;}catch(e){}
 try{fetch(U,{method:'POST',body:b,mode:'no-cors',keepalive:true});}catch(e){}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){send({t:'pv'});});else send({t:'pv'});
-document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a,button');if(!a)return;var h=a.getAttribute('href')||'',k='';
-if(a.id==='holdbtn')k='hold';else if(/square\\.link/.test(h))k='buy';else if(/mercari/.test(h))k='mercari';else if(/instagram\\.com/.test(h))k='instagram';else if(/google\\.[a-z.]+\\/maps|maps\\.app\\.goo\\.gl|goo\\.gl\\/maps/.test(h))k='map';
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a,button');if(!a)return;var h=a.getAttribute('href')||'',k='';if(h&&typeof flush==='function')flush();
+if(a.id==='favbtn'){if(a.getAttribute('aria-pressed')!=='true')k='fav';}else if(a.id==='holdbtn')k='hold';else if(/square\\.link/.test(h))k='buy';else if(/mercari/.test(h))k='mercari';else if(/instagram\\.com/.test(h))k='instagram';else if(/google\\.[a-z.]+\\/maps|maps\\.app\\.goo\\.gl|goo\\.gl\\/maps/.test(h))k='map';
 if(k)send({t:'click',btn:k});},true);
+var seen={},q=[];function flush(){while(q.length)send({t:'imp',skus:q.splice(0,40)});}
+function watch(){if(!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;var s=en.target.getAttribute('data-sku');io.unobserve(en.target);if(s&&!seen[s]){seen[s]=1;q.push(s);}});if(q.length>=20)flush();},{threshold:0.5});
+document.querySelectorAll('a.card[data-sku]:not(.sold)').forEach(function(c){io.observe(c);});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watch);else watch();
+document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')flush();});window.addEventListener('pagehide',flush);
 })();
 </script>"""
 
@@ -1350,7 +1358,7 @@ def card_html(p, lang, lazy=True, findable=False):
     if not sold and is_new(p):   # 2026-10-22 龍さん：新着が分かるように（公開から NEW_DAYS 日以内）
         tag += '<span class="newtag">NEW</span>'
     wv = '' if w is None else f'{w:g}'
-    return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}"' + (f' data-p="{site_price(p)}" data-q="{esc(search_text(p))}"' if findable else '') + '>'
+    return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-sku="{esc(p.get("sku", ""))}" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}"' + (f' data-p="{site_price(p)}" data-q="{esc(search_text(p))}"' if findable else '') + '>'
             f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}</div>'
             f'<div class="brand">{esc(p["brand"])}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
             + (f'<div class="sz">{T[lang]["width"].format(w=wv)}</div>' if (wv and not sold) else '') +   # 2026-11-03 一覧で身幅が分かるように
