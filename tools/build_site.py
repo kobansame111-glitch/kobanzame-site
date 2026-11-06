@@ -246,6 +246,23 @@ if WS_OPEN:
 
 CAT_EN = {'outer': 'Outer', 'tops': 'Tops', 'bottoms': 'Bottoms', 'dress': 'Dresses', 'shoes': 'Shoes', 'acc': 'Accessories', 'other': 'Goods'}
 
+# 2026-11-06 方針書 v1.2 §1（龍さん）：AI運営の宣言文と価格注記。文は一字一句そのまま（変えるときは方針書を先に直す）。
+# 「値下げしました」などの告知・元の値段との比較・「店頭より安い」などの言い方は入れない。
+AI_DECL = {
+    'ja': 'このサイトはAIが運営しています。',
+    'en': 'This site is run by AI.',
+}
+PRICE_NOTE = {
+    'ja': 'オンラインの価格はAIが毎日見直すため、店頭の値札とは異なります。',
+    'en': 'Online prices are reviewed by AI every day, so they differ from the price tags in the shop.',
+}
+PRICE_AT_ORDER = {
+    'ja': 'ご注文時点で商品ページに表示している価格で販売します。',
+    'en': 'We sell at the price shown on the item page at the time of your order.',
+}
+FAQ_AI_ID = 'faq-ai'   # フッターの「くわしく」からこの質問へ
+# 「#faq-ai」で開いたとき、その質問を開いた状態にする
+FAQ_OPEN_JS = "<script>(function(){function o(){var h=location.hash.slice(1);if(!h)return;var d=document.getElementById(h);if(d&&d.tagName==='DETAILS')d.open=true;}o();window.addEventListener('hashchange',o);})();</script>"
 FAQ = {
  'ja': [
     ('小判鮫はどこにある古着屋ですか？', f'埼玉県川越市元町1-14-5（〒350-0062）にある、築約80年の古民家で営業している古着屋です。運営は{SHOP["company"]}です。'),
@@ -258,6 +275,8 @@ FAQ = {
     ('返品はできますか？', '古着・一点ものの性質上、お客様都合による返品はお受けしていません。商品説明と著しく異なる場合や発送間違いの場合は、到着後4日以内にメールでご連絡ください。'),
     ('取り置きはできますか？', '一点ものなので、サイト・店頭ともお取り置きはしていません。先着順でのご案内です。'),
     ('店頭とネットの在庫は同じですか？', 'はい。このサイト・店頭・メルカリShopsで同じ一点を販売しています（在庫を共有しています）。売れた時点でほかの販路は自動で止まりますが、ごくまれに同時に売れた場合は、先に決済が完了したご注文を優先し、もう一方のお客様にはご連絡のうえ全額返金いたします。'),
+    ('このサイトはAIが運営しているのですか？', 'はい。このサイトはAIが運営しています。商品の値付け・商品説明・お問い合わせへの返信はAIが行い、仕入れ・撮影・採寸・梱包・発送は人間のスタッフが行っています。商品を選んでいるのは店主です。'),   # 2026-11-06 方針書 v1.2 §1
+    ('ネットの価格は店頭と同じですか？', '異なります。オンラインの価格はAIが毎日見直すため、店頭の値札とは異なります。ご注文時点で商品ページに表示している価格で販売します。値引きのご相談はお受けしていません。'),
  ],
  'en': [
     ('Where is Kobanzame?', 'At 1-14-5 Motomachi, Kawagoe, Saitama (350-0062), in an 80-year-old wooden house. The shop is run by Plug Inc.'),
@@ -270,8 +289,11 @@ FAQ = {
     ('Can I return it?', 'As these are one-of-a-kind vintage items, we do not accept returns for change of mind. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival.'),
     ('Can you hold a piece for me?', 'Every piece is one of a kind, so we do not hold items, online or in the shop. First come, first served.'),
     ('Is online stock the same as in the shop?', 'Yes. The same one-of-a-kind pieces are sold on this site, in the shop and on Mercari Shops (shared stock). Other channels are stopped automatically once a piece sells; in the rare case that it sells in two places at once, the order paid first is honoured and the other customer is contacted and fully refunded.'),
+    ('Is this site run by AI?', 'Yes. This site is run by AI. Pricing, item descriptions and replies to enquiries are handled by AI; sourcing, photography, measuring, packing and shipping are done by our staff. The pieces are chosen by the shop owner.'),   # 2026-11-06 方針書 v1.2 §1
+    ('Are online prices the same as in the shop?', 'No. Online prices are reviewed by AI every day, so they differ from the price tags in the shop. We sell at the price shown on the item page at the time of your order. We do not accept requests for discounts.'),
  ],
 }
+FAQ_IDS = {'このサイトはAIが運営しているのですか？': FAQ_AI_ID, 'Is this site run by AI?': FAQ_AI_ID}
 
 # ---------- 11月1日からの新しい営業日（火〜日 13:00–20:00・月曜定休）----------
 # 〜10/25：今の表示（水〜日 12:00–20:00・月火定休）のまま
@@ -766,6 +788,7 @@ footer.site a{color:var(--kinari)}
 .info .sku{font-family:var(--roman);font-size:13px;letter-spacing:.2em;color:var(--usu);margin-top:6px}
 .info .price{font-family:var(--mincho);font-weight:700;font-size:30px;margin-top:16px;color:var(--kinari);font-variant-numeric:tabular-nums}
 .info .price small{font-family:var(--gothic);font-size:12px;font-weight:400;color:var(--usu);margin-left:8px}
+.info .pnote{margin:4px 0 0;font-size:12px;line-height:1.6;color:var(--usu)}
 .facts{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
 .facts span{border:1px solid var(--line);font-size:12px;padding:3px 10px;color:var(--kinari)}
 .facts span.one{border-color:var(--kin);color:var(--kin)}
@@ -1167,6 +1190,7 @@ def foot(lang):
   <div class="hair"></div>
   <div>古着屋 小判鮫／{ADDR[lang]}／{hours}<br>
     {op}　・　{lic}<br>
+    {AI_DECL[lang]}{'' if ja else ' '}<a href="{P}/#{FAQ_AI_ID}">{'くわしく' if ja else 'Learn more'}</a><br>
     {legal}
   </div>
 </div></footer>
@@ -1556,7 +1580,7 @@ for lang in ('ja', 'en'):
     top_ld = {'@context': 'https://schema.org', '@graph': [org_node(), faq_ld(lang),
               {'@type': 'WebSite', '@id': BASE + P + '/#website', 'url': BASE + P + '/', 'name': SHOP['name'], 'inLanguage': lang,
                'publisher': {'@id': BASE + '/#store'}}]}
-    faq_html = '\n'.join(f'    <details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in FAQ[lang])
+    faq_html = '\n'.join(f'    <details' + (f' id="{FAQ_IDS[q]}"' if q in FAQ_IDS else '') + f'><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in FAQ[lang])
     trust = ''.join(f'<div><b>{h}</b><span>{s.format(gm=SHOP["gmaps"])}</span></div>' for h, s in t['trust'])
     store_dl = ''.join(f'<dt>{k}</dt><dd>{ADDR[lang] + " ・ <a href=" + chr(34) + SHOP["gmaps"] + chr(34) + " rel=" + chr(34) + "noopener" + chr(34) + ">" + t["gm"] + "</a>" if v is None else v}</dd>' for k, v in t['store_dl'])
     hero_alt = '小判鮫の店内（川越・元町の古民家）' if lang == 'ja' else 'Inside Kobanzame, an old wooden house in Kawagoe'
@@ -1611,6 +1635,7 @@ for lang in ('ja', 'en'):
     <section class="faq" id="faq">
       <div class="sec-head" style="margin-top:0"><h2>Q&amp;A<small>{t['faq_s']}</small></h2></div>
 {faq_html}
+    {FAQ_OPEN_JS}
     </section>
   </div>
 </main>
@@ -1824,6 +1849,7 @@ for lang in ('ja', 'en'):
       <div class="ttl">{esc(loc(p, 'title', lang))}</div>
       <div class="sku">ITEM NO. {esc(p['sku'])}</div>
       <div class="price">{money(price, lang)}<small>{t['tax_ship']}</small>{usd_span(price, lang)}</div>
+      <p class="pnote">{PRICE_NOTE[lang]}</p>
       {USD_NOTE if lang == 'en' else ''}
       <div class="facts">{facts}</div>
       <dl class="pinfo">{''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in info_rows(p, lang))}</dl>
@@ -1870,7 +1896,7 @@ for lang in ('ja', 'en'):
 LAW = [
     ('販売業者', SHOP['company']), ('運営統括責任者', '嶋崎龍'), ('所在地', ADDR['ja']),
     ('電話番号', '請求があった場合には遅滞なく開示いたします。'), ('メールアドレス', SHOP['email']),
-    ('販売価格', '各商品ページに税込価格で表示しています。'),
+    ('販売価格', '各商品ページに税込価格で表示しています。' + PRICE_NOTE['ja'] + PRICE_AT_ORDER['ja']),   # 2026-11-06 方針書 v1.2 §1
     ('商品代金以外の必要料金', '送料は販売価格に含まれます（当店負担）。決済手数料はかかりません。'),
     ('支払方法', 'クレジットカード（Square の決済ページで決済）'), ('支払時期', 'ご注文時に決済が確定します。'),
     ('引渡時期', 'ご注文（決済）の確認後、3日以内（' + '定休日' + 'を除く）に発送します。'), ('販売数量', '各商品とも1点限りです。'),
@@ -1904,7 +1930,7 @@ write('/en/legal/index.html', head('en', 'Legal notice & privacy | Kobanzame', '
   <h1>Legal notice &amp; privacy</h1>
   <p>This is an English summary. The official notices are the Japanese pages: <a href="/tokushoho/">特定商取引法に基づく表記</a> and <a href="/privacy/">プライバシーポリシー</a>.</p>
   <h2>Seller</h2><p>Plug Inc. (Kobanzame). Responsible: Ryu Shimazaki. {ADDR['en']}. Email: {SHOP['email']}. Phone number disclosed on request.</p>
-  <h2>Prices and payment</h2><p>Prices are shown including tax and domestic shipping. Payment by credit card through Square's checkout; the order is confirmed at payment.</p>
+  <h2>Prices and payment</h2><p>Prices are shown including tax and domestic shipping. {PRICE_NOTE['en']} {PRICE_AT_ORDER['en']} Payment by credit card through Square's checkout; the order is confirmed at payment.</p>
   <h2>Delivery</h2><p>Dispatched within 3 days of payment (excluding closed days). Online checkout ships within Japan; contact us before buying for overseas shipping.</p>
   <h2>Returns</h2><p>No returns for change of mind on one-of-a-kind vintage items. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival; we cover return shipping and refund or exchange.</p>
   <h2>Licence</h2><p>Licensed secondhand dealer: Saitama Prefectural Public Safety Commission No. 431080060786.</p>
