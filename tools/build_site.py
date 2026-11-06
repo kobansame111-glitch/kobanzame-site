@@ -31,6 +31,9 @@ HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）※
 # 2026-11-04 龍さん「カート入れてください」（カートA・まとめ買いでも送料の値引きなし＝B）。
 # カートの受付（GAS 63c のウェブアプリの URL）。空のあいだは本番ではカートのボタンを出さない（確認用の住所 *.kobanzame-site.pages.dev だけ見本として出す）
 CART_ENDPOINT = ''
+# 2026-11-06 龍さん決定（お客様対応ボット 1A・2A）：サイトの「AIに質問する」欄の受付（新しい GAS のウェブアプリの URL）。
+# 空のあいだは欄を出さず、プライバシーポリシーの「AIによる自動応答」の段落も出さない（ボットを出す PR で URL を入れると、両方が同時に出る）
+BOT_ENDPOINT = ''
 HOLD_ENABLED = False     # 2026-10-07 龍さん決定：一点物なのでサイトも店頭も取り置き不可・先着順
 # 2026-10-13 龍さん決定（10/8の「毎日営業」を置き換え）：11月1日から 火〜日 13:00–20:00・月曜定休（祝日の月曜は営業）・7〜8月は22:00まで
 NEWHOURS_FROM = '2026-11-01'   # この日以降のビルドで文言が切り替わる
@@ -1910,6 +1913,11 @@ write('/tokushoho/index.html', head('ja', '特定商取引法に基づく表記�
 <main class="wrap page lawtable"><h1>特定商取引法に基づく表記</h1><dl>{law_html}</dl><p style="color:var(--usu);font-size:13px;margin-top:24px">制定：2026年9月30日</p></main>
 ''' + foot('ja'))
 
+# 2026-11-06 龍さん決定（ボット 2A）：ボットが動いている間だけ出す段落（BOT_ENDPOINT が空なら出さない）
+_PRIV_BOT_JA = ('  <h2>AIによる自動応答</h2><p>サイトの「AIに質問する」欄に書かれた質問は、返事を作るために AI のサービス（外部の事業者）へ送ります。'
+                '記録に残すのは質問の種類と要点・商品番号までで、お名前・連絡先は残しません。'
+                '人間のスタッフからの返信を希望して入力されたメールアドレスは、その返信のためだけに使い、返信のあと30日で削除します。</p>\n') if BOT_ENDPOINT else ''
+_PRIV_BOT_EN = (' Questions typed into the "Ask AI" box are sent to an AI service (an outside provider) to write the answer; we keep only the type of question, a one-line summary and the item number, not your name or contact details. An email address you enter to get a reply from our staff is used only for that reply and deleted 30 days after we reply.') if BOT_ENDPOINT else ''
 write('/privacy/index.html', head('ja', 'プライバシーポリシー｜古着屋 小判鮫', '古着屋 小判鮫（運営：株式会社プラグ）のプライバシーポリシー。ご注文やお問い合わせでお預かりする個人情報の使い道と、カード情報の扱い（Square が処理し、当店は持たない）について。', '/privacy/') + f'''
 <main class="wrap page">
   <h1>プライバシーポリシー</h1>
@@ -1919,7 +1927,7 @@ write('/privacy/index.html', head('ja', 'プライバシーポリシー｜古着
   <h2>決済について</h2><p>本サイトでのお支払いは Square 株式会社の決済ページで処理されます。当店はクレジットカード番号を取得・保存しません。</p>
   <h2>第三者提供</h2><p>法令に基づく場合を除き、ご本人の同意なく第三者に提供しません。配送など取引に必要な範囲で委託先に提供する場合があります。</p>
   <h2>アクセス解析</h2><p>サイトの改善のためアクセス状況を測定することがあります。個人を特定する情報は含みません。</p>
-  <h2>お問い合わせ</h2><p>本ポリシーに関するお問い合わせは {SHOP['email']} までお願いいたします。</p>
+{_PRIV_BOT_JA}  <h2>お問い合わせ</h2><p>本ポリシーに関するお問い合わせは {SHOP['email']} までお願いいたします。</p>
   <p style="color:var(--usu);font-size:13px;margin-top:20px">制定：2026年9月／改定：2026年10月</p>
 </main>
 ''' + foot('ja'))
@@ -1934,7 +1942,7 @@ write('/en/legal/index.html', head('en', 'Legal notice & privacy | Kobanzame', '
   <h2>Delivery</h2><p>Dispatched within 3 days of payment (excluding closed days). Online checkout ships within Japan; contact us before buying for overseas shipping.</p>
   <h2>Returns</h2><p>No returns for change of mind on one-of-a-kind vintage items. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival; we cover return shipping and refund or exchange.</p>
   <h2>Licence</h2><p>Licensed secondhand dealer: Saitama Prefectural Public Safety Commission No. 431080060786.</p>
-  <h2>Privacy</h2><p>We collect only what an order or inquiry needs (name, contact, delivery address) and use it only for that purpose. Card details are processed by Square; we never receive or store card numbers. We do not share personal data without consent except as required by law or for delivery.</p>
+  <h2>Privacy</h2><p>We collect only what an order or inquiry needs (name, contact, delivery address) and use it only for that purpose. Card details are processed by Square; we never receive or store card numbers. We do not share personal data without consent except as required by law or for delivery.{_PRIV_BOT_EN}</p>
 </main>
 ''' + foot('en'))
 
