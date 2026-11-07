@@ -2156,39 +2156,38 @@ import urllib.parse
 AUTO_MAIL = 'kobanzame.support@gmail.com'   # 予備の連絡先（申し込みは LINE が主）
 # ---------- 小判鮫サポートの販売ページ（/automation/ を作り替え・2026-11-07 龍さん「チラシと同じ言葉で」） ----------
 # 正本：Project「嶋崎龍3」claude/claude_AI導入支援22_小判鮫サポート_受け皿の準備セット_ルイくん依頼前_2026-11-07.md の §2。
-# 言い切り（必ず・絶対・◯割減）・他店やお客さまの名前は書かない。値段は SUPPORT_PRICE_MODE と SUPPORT_PRICE だけで変える。
+# 言い切り（必ず・絶対・◯割減）・他店やお客さまの名前は書かない。値段は SUPPORT の steps（段ごとの金額の行）と SUPPORT_TAX_NOTE・SUPPORT_UNIT_NOTE だけで変える。
 SUPPORT_LINE = 'https://line.me/R/ti/p/@161gjpew'   # 小判鮫サポートの LINE（ID @161gjpew）
-# 料金の出し方（2026-11-07 龍さんが決める・PR の本文の A／B／C）。'monitor'＝A（モニター価格だけ）／'both'＝B／'none'＝C（金額は出さない）
-SUPPORT_PRICE_MODE = 'monitor'
-SUPPORT_PRICE = {
-    'monitor': [('サイトづくり', '30,000円'), ('1点ごとに', '50円')],   # モニター価格（2026-10-28 決定・2027-01-28 まで据え置き）
-    'monitor_note': 'モニター価格です（2027年1月まで）。',
-    'regular': [('初期費用', '150,000円〜'), ('月額', '20,000円〜')],     # 今のページの表示（2026-11-02 の案）
-}
+# 料金（2026-11-07 龍さん：#100 の① A＝モニター価格だけ。期間はページに書かない・通常価格とは比べない）。金額はすべて税抜。
+# 正本：Project「小判鮫サポート 確定版v1」「入口と階段の設計v1」。言葉はチラシ（11/7 版）に合わせる。
+SUPPORT_TAX_NOTE = '金額はすべて税抜です。'
+SUPPORT_UNIT_NOTE = '1点50円は、下書きまで作った商品1点ごとです（お店が「NG」で止めた物も数えます。こちらの都合で作り直した物は数えません）。'
 SUPPORT = {
   'path': '/automation/',
-  'title': '撮るだけで、お店のサイトに並ぶ。｜小判鮫サポート',
-  'desc': '古着屋・一点ものの店主さんへ。写真を撮るだけで、説明文・お店のサイトの商品ページ・メルカリ用の登録・SNSのお知らせまでをAIが用意します。まずは無料で、写真10点から見本を作ります。',
+  'title': 'スマホで写真をとるだけ。｜小判鮫サポート',
+  'desc': '古着屋・一点ものの店主さんへ。スマホで写真をとるだけで、説明・ネットのお店の商品ページ・メルカリ用の登録・SNSのお知らせまでをAIが用意します。まずは無料でためせます（写真10点から）。',
   'eyebrow': '古着屋・一点ものの店主さんへ',
-  'h1': '撮るだけで、お店のサイトに並ぶ。',
-  'merits': ['かんたん', '閉店後の作業がへる', '無料で試せる'],
+  'h1': 'スマホで写真をとるだけ。',
+  'sub': 'あとはAIが、ネットのお店に並べます。',
+  'merits': ['かんたん', '夜の作業がへる', 'ためすのは無料'],
   'flow_h': 'お店がやるのは2つだけ',
-  'flow': [('01', '撮る', 'shop'), ('02', '説明文を書く', 'ai'), ('03', 'NGだけ返す', 'shop'),
-           ('04', 'サイトに並ぶ', 'ai'), ('05', 'メルカリ用も', 'ai'), ('06', 'SNSでお知らせ', 'ai')],
-  'try_h': 'まずは無料で、見本を作ります。',
+  'flow': [('1', '写真をとる', 'shop'), ('2', '説明を書く', 'ai'), ('3', 'いやな物だけ「NG」と返す', 'shop'),
+           ('4', 'ネットのお店に並ぶ', 'ai'), ('5', 'メルカリにも出せる', 'ai'), ('6', 'SNSでお知らせ', 'ai')],
+  'try_h': 'まずは無料でためせます',
   'try_p': ['写真10点を送るだけ。', '5日ほどで、あなたのお店の商品ページに。'],
   'try_btn': 'LINEで申し込む',
   'try_ok': '合わなければ、そこで終わりで大丈夫です。',
   'try_limit': '見本は20点まで・2週間まで。',
-  # 見本のあとの段（「合えば」）。※2026-11-07 時点は仮の文：Project §2 が読めなかったため、今のページと流れ（01〜06）から組んだ。正本の文が届いたら差し替える
+  'sample': ('見本のサイトを見る（古着屋 小判鮫）', 'https://kobanzame-kawagoe.com/'),
   'steps_h': '合えば、次の段へ',
-  'steps': [('段1', 'お店のサイトに並べる', '撮った写真から、説明文と商品ページを作ります。お店はNGだけ返します。'),
-            ('段2', 'メルカリにも出す', '同じ写真と説明文から、メルカリ用の登録ファイルを作ります。'),
-            ('段3', 'SNSでお知らせ', '新しく並んだ商品を、お店のSNSでお知らせします。'),
-            ('段4', '売れたら止める・まとめる', '一点ものが売れたら、ほかの販路でも止めるよう知らせます。売上もまとめます。')],
+  # (段, 名前, 中身, 金額の行)
+  'steps': [('段1', '最初の契約', 'お店のサイト＋写真を送るだけの出品', ['サイトづくり 30,000円（最初の1回だけ）', '1点ごと 50円', '（モニター価格）']),
+            ('段2', '毎月', '見守り・月1回の小さな直し・訪問', ['見守り 月10,000円〜', '伴走（月1回訪問） 月50,000円']),
+            ('段3', 'メニューを足す', '在庫と売上の台帳・経理の自動化・SNSの自動投稿など', ['2つ目からの導入費は半額']),
+            ('段4', 'データ', 'ジャンル別の売れ筋・値付けの目安', ['毎月の料金に含む'])],
   'stop_h': 'やめたいときは',
   'stop_p': '仕組みはお店に残ります。直しと改善は止まります。',
-  'faq': [('パソコンやプログラミングの知識は要りますか？', '要りません。お店がするのは、撮ることと、NGを返すことだけです。'),
+  'faq': [('パソコンやプログラミングの知識は要りますか？', '要りません。お店がするのは、写真をとることと、いやな物だけ「NG」と返すことです。'),
           ('どんな道具が要りますか？', 'スマホとLINE、Googleのアカウントがあれば始められます。'),
           ('どこの地域でも頼めますか？', 'オンラインで全国のお店に対応しています。')],
 }
@@ -2204,16 +2203,7 @@ _a_ld = {'@context': 'https://schema.org', '@graph': [
 _a_mailto = 'mailto:' + AUTO_MAIL + '?subject=' + urllib.parse.quote('小判鮫サポートの見本（無料）')
 _a_merits = ''.join(f'<li>{esc(x)}</li>' for x in _a['merits'])
 _a_flow = ''.join(f'<li class="sp-{k}"><span class="sp-no">{n}</span><b>{esc(w)}</b><span class="sp-who">{"お店" if k == "shop" else "AI"}</span></li>' for n, w, k in _a['flow'])
-def _sp_price_html():
-    if SUPPORT_PRICE_MODE == 'none':
-        return '<p class="sp-pnote">料金は、見本のあとに料金表でお渡しします。</p>'
-    rows = SUPPORT_PRICE['monitor'] if SUPPORT_PRICE_MODE in ('monitor', 'both') else []
-    html_ = '<dl class="sp-price">' + ''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in rows) + '</dl>'
-    html_ += f'<p class="sp-pnote">{esc(SUPPORT_PRICE["monitor_note"])}</p>'
-    if SUPPORT_PRICE_MODE == 'both':
-        html_ += ('<p class="sp-pnote">モニター期間のあと：' + '・'.join(f'{esc(k)} {esc(v)}' for k, v in SUPPORT_PRICE['regular']) + '</p>')
-    return html_
-_a_steps = ''.join(f'<li><span class="sp-step">{esc(s)}</span><b>{esc(h)}</b><p>{esc(b)}</p></li>' for s, h, b in _a['steps'])
+_a_steps = ''.join(f'<li><span class="sp-step">{esc(s)}</span><b>{esc(h)}</b><p>{esc(b)}</p><p class="sp-sp">' + '<br>'.join(esc(x) for x in pr) + '</p></li>' for s, h, b, pr in _a['steps'])
 _a_faq = ''.join(f'  <details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>\n' for q, a in _a['faq'])
 write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'], extra_ld=_a_ld) + f"""
 <style>
@@ -2221,7 +2211,11 @@ write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'],
 .sp h1,.sp h2,.sp h3{{font-family:inherit}}
 .sp-hero{{background:linear-gradient(160deg,#fff7e8 0%,#eaf5ff 100%);border-radius:20px;padding:30px 20px 26px;margin:14px 0 26px;text-align:center}}
 .sp-eye{{display:inline-block;background:#fff;border-radius:999px;padding:4px 14px;font-size:13px;font-weight:700;color:#e0701b}}
-.sp-hero h1{{font-size:clamp(26px,7.2vw,40px);line-height:1.35;font-weight:800;margin:14px 0 18px;letter-spacing:.01em}}
+.sp-hero h1{{font-size:clamp(28px,8vw,42px);line-height:1.3;font-weight:800;margin:14px 0 6px;letter-spacing:.01em}}
+.sp-sub{{font-size:17px;font-weight:700;margin:0 0 18px}}
+.sp-sp{{font-weight:700;color:#0b4a80}}
+.sp-sample{{margin-top:12px;font-size:14px}}
+.sp-sample a{{color:#0b4a80;font-weight:700}}
 .sp-merits{{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}}
 .sp-merits li{{background:#fff;border:2px solid #ffd39b;border-radius:999px;padding:6px 14px;font-size:14px;font-weight:700}}
 .sp h2{{font-size:21px;font-weight:800;margin:30px 0 14px;text-align:center}}
@@ -2246,7 +2240,7 @@ write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'],
 .sp-step{{display:inline-block;background:#1d1d1f;color:#fff;border-radius:6px;padding:0 8px;font-size:12px;font-weight:700}}
 .sp-price{{display:grid;grid-template-columns:auto auto;justify-content:center;gap:4px 16px;margin:14px 0 2px;font-size:16px}}
 .sp-price dd{{margin:0;font-weight:800}}
-.sp-pnote{{text-align:center;font-size:13px;color:#555;margin:4px 0}}
+.sp-pnote{{font-size:12px;color:#555;margin:10px 0 4px;line-height:1.7}}
 .sp-stop{{background:#f6f7f9;border-radius:14px;padding:14px;text-align:center;margin-top:10px}}
 .sp-stop p{{margin:0}}
 .sp .faq details{{border-bottom:1px solid #e5e5e5;padding:10px 0}}
@@ -2257,6 +2251,7 @@ write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'],
   <section class="sp-hero">
     <span class="sp-eye">{esc(_a['eyebrow'])}</span>
     <h1>{esc(_a['h1'])}</h1>
+    <p class="sp-sub">{esc(_a['sub'])}</p>
     <ul class="sp-merits">{_a_merits}</ul>
   </section>
 
@@ -2270,11 +2265,12 @@ write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'],
     <a class="sp-line" href="{SUPPORT_LINE}" rel="noopener">{esc(_a['try_btn'])}</a>
     <p>{esc(_a['try_ok'])}</p>
     <p class="sp-small">{esc(_a['try_limit'])}</p>
+    <p class="sp-sample"><a href="{_a['sample'][1]}">{esc(_a['sample'][0])}</a></p>
   </section>
 
   <h2>{esc(_a['steps_h'])}</h2>
   <ol class="sp-steps">{_a_steps}</ol>
-  {_sp_price_html()}
+  <p class="sp-pnote">{esc(SUPPORT_TAX_NOTE)}<br>{esc(SUPPORT_UNIT_NOTE)}</p>
 
   <h2>{esc(_a['stop_h'])}</h2>
   <div class="sp-stop"><p>{esc(_a['stop_p'])}</p></div>
