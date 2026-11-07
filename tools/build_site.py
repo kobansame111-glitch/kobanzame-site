@@ -34,7 +34,7 @@ CART_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwqMemm4-Eq5dUa4v7sHWsg
 # 2026-11-06 15:20 龍さん決定A（AI値付け設計書 §3-3）：「購入する」（1点）も、商品ごとの支払いリンク（63番）ではなく
 # カートの受付（63c番）を通す。押した時に GAS が products.json の「その時のサイトの値段」で Square の支払いリンクを作る。
 # True にするのは 63c番のウェブアプリ（CART_ENDPOINT）が動き、試しの購入が済んでから。False の間は今までどおり（63番のリンク）。
-BUY_VIA_CART = False
+BUY_VIA_CART = True   # 2026-11-07 手順書14（龍さん OK）：「購入する」（1点）も 63c番の受付を通す
 # 2026-11-06 龍さん決定（お客様対応ボット 1A・2A）：サイトの「AIに質問する」欄の受付（新しい GAS のウェブアプリの URL）。
 # 空のあいだは欄を出さず、プライバシーポリシーの「AIによる自動応答」の段落も出さない（ボットを出す PR で URL を入れると、両方が同時に出る）
 BOT_ENDPOINT = ''
