@@ -2160,36 +2160,42 @@ AUTO_MAIL = 'kobanzame.support@gmail.com'   # 予備の連絡先（申し込み�
 SUPPORT_LINE = 'https://line.me/R/ti/p/@161gjpew'   # 小判鮫サポートの LINE（ID @161gjpew）
 # 料金（2026-11-07 龍さん：#100 の① A＝モニター価格だけ。期間はページに書かない・通常価格とは比べない）。金額はすべて税抜。
 # 正本：Project「小判鮫サポート 確定版v1」「入口と階段の設計v1」。言葉はチラシ（11/7 版）に合わせる。
-SUPPORT_TAX_NOTE = '金額はすべて税抜です。'
-SUPPORT_UNIT_NOTE = '1点50円は、下書きまで作った商品1点ごとです（お店が「NG」で止めた物も数えます。こちらの都合で作り直した物は数えません）。'
+SUPPORT_TAX_NOTE = '金額はすべて税抜です（消費税が別にかかります）。'
+SUPPORT_UNIT_NOTE = '1点50円は、下書きまで作った商品の数で数えます。「NG」にした物も数えます（こちらの都合で作り直した物は数えません）。'
+# 2026-11-07 受付デスク（22導入担当・Web発信課05・法務チェック）の見直しを反映。※1 段4の「売れ筋」の範囲・※2 遠いお店の訪問は龍さんの確認待ち（仮の文）
 SUPPORT = {
   'path': '/automation/',
   'title': 'スマホで写真をとるだけ。｜小判鮫サポート',
-  'desc': '古着屋・一点ものの店主さんへ。スマホで写真をとるだけで、説明・ネットのお店の商品ページ・メルカリ用の登録・SNSのお知らせまでをAIが用意します。まずは無料でためせます（写真10点から）。',
+  'desc': '古着屋・一点ものの店主さんへ。スマホで写真をとるだけで、説明・ネットのお店の商品ページ・メルカリ用のデータまでをAIが用意します（SNSのお知らせはあとから足せます）。まずは無料でためせます。お店・事業者さま向けのサービスです。',
   'eyebrow': '古着屋・一点ものの店主さんへ',
+  'biz': 'お店・事業者さま向けのサービスです。',
   'h1': 'スマホで写真をとるだけ。',
   'sub': 'あとはAIが、ネットのお店に並べます。',
   'merits': ['かんたん', '夜の作業がへる', 'ためすのは無料'],
   'flow_h': 'お店がやるのは2つだけ',
-  'flow': [('1', '写真をとる', 'shop'), ('2', '説明を書く', 'ai'), ('3', 'いやな物だけ「NG」と返す', 'shop'),
-           ('4', 'ネットのお店に並ぶ', 'ai'), ('5', 'メルカリにも出せる', 'ai'), ('6', 'SNSでお知らせ', 'ai')],
+  # (番号, 文, 色〔shop＝お店・ai＝AI〕, 札の文)
+  'flow': [('1', '写真をとる', 'shop', 'お店'), ('2', '説明を書く', 'ai', 'AI'), ('3', '気になる下書きだけ「NG」と返す', 'shop', 'お店'),
+           ('4', 'ネットのお店に並ぶ', 'ai', 'AI'), ('5', 'メルカリ用のデータも作る', 'ai', 'AI'), ('6', 'SNSでお知らせ', 'ai', 'あとから足せます')],
   'try_h': 'まずは無料でためせます',
-  'try_p': ['写真10点を送るだけ。', '5日ほどで、あなたのお店の商品ページに。'],
+  'try_p': ['写真10点を送るだけ。', '送っていただいた写真は、見本づくりにだけ使います。公開しません。', '5日ほどで、あなたのお店の商品ページの見本が届きます。'],
   'try_btn': 'LINEで申し込む',
   'try_ok': '合わなければ、そこで終わりで大丈夫です。',
-  'try_limit': '見本は20点まで・2週間まで。',
+  'try_limit': '写真は10点で十分です（多くても20点まで作ります）。見本のページは2週間見られます。',
   'sample': ('見本のサイトを見る（古着屋 小判鮫）', 'https://kobanzame-kawagoe.com/'),
   'steps_h': '合えば、次の段へ',
-  # (段, 名前, 中身, 金額の行)
-  'steps': [('段1', '最初の契約', 'お店のサイト＋写真を送るだけの出品', ['サイトづくり 30,000円（最初の1回だけ）', '1点ごと 50円', '（モニター価格）']),
-            ('段2', '毎月', '見守り・月1回の小さな直し・訪問', ['見守り 月10,000円〜', '伴走（月1回訪問） 月50,000円']),
-            ('段3', 'メニューを足す', '在庫と売上の台帳・経理の自動化・SNSの自動投稿など', ['2つ目からの導入費は半額']),
-            ('段4', 'データ', 'ジャンル別の売れ筋・値付けの目安', ['毎月の料金に含む'])],
+  # (段, 名前, 中身, 金額の行, 下の一言)
+  'steps': [('段1', '最初の契約', 'お店のサイト＋写真を送るだけの出品',
+             ['サイトづくり 30,000円（最初の1回だけ・買い切り）', '商品1点ごとに 50円', 'モニター価格（導入事例として紹介させていただくお店の価格です）'], ''),
+            ('段2', '毎月', '見張りと、止まったときの直し',
+             ['見守り 入れた仕組み1つにつき 月10,000円', '伴走（月1回訪問・見守り1つ分込み） 月50,000円'], ''),
+            ('段3', 'メニューを足す', '在庫と売上の台帳・経理の自動化・SNSの自動投稿など',
+             ['2つ目からの導入費は半額'], '毎月の使いすぎを防ぐ上限を、最初に一緒に決めます。'),
+            ('段4', 'データ', 'お店の売れ筋と、値付けの目安のまとめ', ['毎月の料金に含む'], '')],
   'stop_h': 'やめたいときは',
-  'stop_p': '仕組みはお店に残ります。直しと改善は止まります。',
-  'faq': [('パソコンやプログラミングの知識は要りますか？', '要りません。お店がするのは、写真をとることと、いやな物だけ「NG」と返すことです。'),
+  'stop_p': '最初の3か月のあとは、いつでもやめられます。やめても仕組みはお店に残ります（直しと改善は止まります）。',
+  'faq': [('パソコンやプログラミングの知識は要りますか？', '要りません。お店がするのは、写真をとることと、気になる下書きだけ「NG」と返すことです。'),
           ('どんな道具が要りますか？', 'スマホとLINE、Googleのアカウントがあれば始められます。'),
-          ('どこの地域でも頼めますか？', 'オンラインで全国のお店に対応しています。')],
+          ('どこの地域でも頼めますか？', 'オンラインで全国のお店に対応しています（月1回の訪問がある伴走は、場所によってご相談）。')],
 }
 _a = SUPPORT
 _a_ld = {'@context': 'https://schema.org', '@graph': [
@@ -2202,8 +2208,8 @@ _a_ld = {'@context': 'https://schema.org', '@graph': [
         {'@type': 'ListItem', 'position': 2, 'name': '小判鮫サポート', 'item': BASE + _a['path']}]}]}
 _a_mailto = 'mailto:' + AUTO_MAIL + '?subject=' + urllib.parse.quote('小判鮫サポートの見本（無料）')
 _a_merits = ''.join(f'<li>{esc(x)}</li>' for x in _a['merits'])
-_a_flow = ''.join(f'<li class="sp-{k}"><span class="sp-no">{n}</span><b>{esc(w)}</b><span class="sp-who">{"お店" if k == "shop" else "AI"}</span></li>' for n, w, k in _a['flow'])
-_a_steps = ''.join(f'<li><span class="sp-step">{esc(s)}</span><b>{esc(h)}</b><p>{esc(b)}</p><p class="sp-sp">' + '<br>'.join(esc(x) for x in pr) + '</p></li>' for s, h, b, pr in _a['steps'])
+_a_flow = ''.join(f'<li class="sp-{k}"><span class="sp-no">{n}</span><b>{esc(w)}</b><span class="sp-who">{esc(lab)}</span></li>' for n, w, k, lab in _a['flow'])
+_a_steps = ''.join(f'<li><span class="sp-step">{esc(s)}</span><b>{esc(h)}</b><p>{esc(b)}</p><p class="sp-sp">' + '<br>'.join(esc(x) for x in pr) + '</p>' + (f'<p class="sp-snote">{esc(nt)}</p>' if nt else '') + '</li>' for s, h, b, pr, nt in _a['steps'])
 _a_faq = ''.join(f'  <details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>\n' for q, a in _a['faq'])
 write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'], extra_ld=_a_ld) + f"""
 <style>
@@ -2214,6 +2220,8 @@ write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'],
 .sp-hero h1{{font-size:clamp(28px,8vw,42px);line-height:1.3;font-weight:800;margin:14px 0 6px;letter-spacing:.01em}}
 .sp-sub{{font-size:17px;font-weight:700;margin:0 0 18px}}
 .sp-sp{{font-weight:700;color:#0b4a80}}
+.sp-snote{{font-size:13px;color:#333}}
+.sp-biz{{font-size:12px;color:#555;margin:14px 0 0}}
 .sp-sample{{margin-top:12px;font-size:14px}}
 .sp-sample a{{color:#0b4a80;font-weight:700}}
 .sp-merits{{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}}
@@ -2253,6 +2261,7 @@ write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'],
     <h1>{esc(_a['h1'])}</h1>
     <p class="sp-sub">{esc(_a['sub'])}</p>
     <ul class="sp-merits">{_a_merits}</ul>
+    <p class="sp-biz">{esc(_a['biz'])}</p>
   </section>
 
   <h2>{esc(_a['flow_h'])}</h2>
@@ -2278,7 +2287,7 @@ write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'],
   <section class="faq" id="faq"><h2>Q&amp;A</h2>
 {_a_faq}  </section>
 
-  <p class="sp-contact">LINEが使えないときは：<a href="{_a_mailto}">{esc(AUTO_MAIL)}</a><br>株式会社プラグ 小判鮫サポート</p>
+  <p class="sp-contact">LINEが使えないときは：<a href="{_a_mailto}">{esc(AUTO_MAIL)}</a><br>株式会社プラグ 小判鮫サポート ・ <a href="/tokushoho/">会社の情報（特定商取引法に基づく表記）</a></p>
 </main>
 """ + foot('ja'))
 
