@@ -1906,6 +1906,36 @@ LAW = [
     ('古物商許可', f"{SHOP['kobutsu']}（{SHOP['company']}）"),
 ]
 law_html = ''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in LAW)
+
+# 2026-11-07 お客様対応ボット 段1（kobanzame-brain の設計書 §4-1・11/6 龍さん 1A）：ボットが「答えてよい事実」を、サイトの文と同じ値から書き出す。
+# 画面は変えない。ボットはこのファイルと products.json だけを読む（サイトとボットの答えがずれないように）。人の名前・電話番号は入れない。
+def _plain(s):
+    return re.sub(r'\s+', ' ', re.sub(r'<br\s*/?>', ' ', re.sub(r'<(?!br)[^>]+>', '', str(s)))).strip()
+_LAWD = dict(LAW)
+BOT_FACTS = {
+    'version': TODAY,
+    'note': 'お客様対応ボットが答えてよい事実（tools/build_site.py が毎回書き出す。手で直さない）',
+    'ja': {
+        'ai': dict(FAQ['ja']).get('このサイトはAIが運営しているのですか？', AI_DECL['ja']).replace('はい。', '', 1),
+        'price_note': PRICE_NOTE['ja'], 'price_at_order': PRICE_AT_ORDER['ja'],
+        'shipping': _LAWD['商品代金以外の必要料金'], 'delivery': _plain(T['ja']['delivery_p']), 'dispatch': _LAWD['引渡時期'],
+        'returns': _LAWD['返品・交換'], 'cancel': _LAWD['申込みの撤回・解除'], 'sold_elsewhere': _LAWD['品切れの場合'],
+        'payment': _LAWD['支払方法'], 'payment_time': _LAWD['支払時期'], 'quantity': _LAWD['販売数量'],
+        'hours': _plain(T['ja']['days']), 'store': [['住所', ADDR['ja']]] + [[k, _plain(v)] for k, v in T['ja']['store_dl'] if k in ('営業', '定休日')],
+        'hold': '取り置き・予約は、すべての販路でお受けしていません（一点ものなので先着順です）。',
+        'faq': [[q, _plain(a)] for q, a in FAQ['ja']],
+    },
+    'en': {
+        'ai': dict(FAQ['en']).get('Is this site run by AI?', AI_DECL['en']).replace('Yes. ', '', 1),
+        'price_note': PRICE_NOTE['en'], 'price_at_order': PRICE_AT_ORDER['en'],
+        'delivery': _plain(T['en']['delivery_p']), 'hours': _plain(T['en']['days']),
+        'store': [['Address', ADDR['en']]] + [[k, _plain(v)] for k, v in T['en']['store_dl'] if k in ('Hours', 'Closed')],
+        'hold': 'We do not hold or reserve items on any channel (every piece is one of a kind, first come, first served).',
+        'faq': [[q, _plain(a)] for q, a in FAQ['en']],
+    },
+    'contact': {'email': SHOP['email'], 'instagram': SHOP['instagram']},
+}
+write('/bot/facts.json', json.dumps(BOT_FACTS, ensure_ascii=False, indent=1) + '\n')
 write('/tokushoho/index.html', head('ja', '特定商取引法に基づく表記｜古着屋 小判鮫', '古着屋 小判鮫（運営：株式会社プラグ）の特定商取引法に基づく表記。販売価格（税込・送料込み）、支払い方法、発送の時期、返品・交換の条件、古物商許可番号を載せています。', '/tokushoho/') + f'''
 <main class="wrap page lawtable"><h1>特定商取引法に基づく表記</h1><dl>{law_html}</dl><p style="color:var(--usu);font-size:13px;margin-top:24px">制定：2026年9月30日</p></main>
 ''' + foot('ja'))
