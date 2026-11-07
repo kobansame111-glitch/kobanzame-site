@@ -1,0 +1,160 @@
+{
+ "version": "2026-11-07",
+ "note": "お客様対応ボットが答えてよい事実（tools/build_site.py が毎回書き出す。手で直さない）",
+ "ja": {
+  "ai": "このサイトはAIが運営しています。商品の値付け・商品説明・お問い合わせへの返信はAIが行い、仕入れ・撮影・採寸・梱包・発送は人間のスタッフが行っています。商品を選んでいるのは店主です。",
+  "price_note": "オンラインの価格はAIが毎日見直すため、店頭の値札とは異なります。",
+  "price_at_order": "ご注文時点で商品ページに表示している価格で販売します。",
+  "shipping": "送料は販売価格に含まれます（当店負担）。決済手数料はかかりません。",
+  "delivery": "送料込み。 決済確認後3日以内（月曜定休を除く）に、川越の店舗から発送します。 古着・一点ものの性質上、お客様都合の返品はお受けしていません。 商品説明と著しく異なる場合や発送間違いの場合は、到着後4日以内にメールでご連絡ください。",
+  "dispatch": "ご注文（決済）の確認後、3日以内（定休日を除く）に発送します。",
+  "returns": "古着・一点ものの性質上、お客様都合による返品・交換はお受けしておりません。商品説明と著しく異なる場合や当店の発送間違いの場合は、商品到着後4日以内にメールでご連絡ください。返品送料は当店が負担し、返金または交換にて対応いたします。",
+  "cancel": "通信販売にはクーリング・オフ制度は適用されません。上記「返品・交換」の条件に従います。",
+  "sold_elsewhere": "店頭・他の販路で先に売れた場合は、ご注文をお受けできないことがあります。その際はご連絡のうえ全額返金いたします。",
+  "payment": "クレジットカード（Square の決済ページで決済）",
+  "payment_time": "ご注文時に決済が確定します。",
+  "quantity": "各商品とも1点限りです。",
+  "hours": "火〜日 13:00–20:00（月曜定休・祝日は営業）",
+  "store": [
+   [
+    "住所",
+    "〒350-0062 埼玉県川越市元町1-14-5"
+   ],
+   [
+    "営業",
+    "13:00–20:00（7〜8月は22:00まで）"
+   ],
+   [
+    "定休日",
+    "月曜（祝日は営業）"
+   ]
+  ],
+  "hold": "取り置き・予約は、すべての販路でお受けしていません（一点ものなので先着順です）。",
+  "faq": [
+   [
+    "小判鮫はどこにある古着屋ですか？",
+    "埼玉県川越市元町1-14-5（〒350-0062）にある、築約80年の古民家で営業している古着屋です。運営は株式会社プラグです。"
+   ],
+   [
+    "営業時間と定休日は？",
+    "13:00〜20:00の営業で、定休日は毎週月曜日です（祝日の月曜は営業）。7〜8月は22:00まで営業します。臨時の休みや営業時間の変更はInstagramでお知らせします。"
+   ],
+   [
+    "どんなものを扱っていますか？",
+    "国内外で買い付けたヴィンテージ古着（メンズ・レディース）と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱っています。商品はすべて一点ものです。"
+   ],
+   [
+    "GAWとは何ですか？",
+    "小判鮫オリジナルのリメイクアクセサリーのラインです。古いスプーンなどの素材を、ペンダントやバングルなどの一点ものに作り直しています。"
+   ],
+   [
+    "通販で買えますか？",
+    "はい。このサイトに載っている商品は、クレジットカード（Square決済）でそのまま購入できます。メルカリShopsでも販売しています。"
+   ],
+   [
+    "送料はかかりますか？",
+    "このサイトで購入した場合、表示価格は税込・送料込みです。"
+   ],
+   [
+    "いつ届きますか？",
+    "ご注文（決済）の確認後、3日以内（定休日を除く）に発送します。"
+   ],
+   [
+    "返品はできますか？",
+    "古着・一点ものの性質上、お客様都合による返品はお受けしていません。商品説明と著しく異なる場合や発送間違いの場合は、到着後4日以内にメールでご連絡ください。"
+   ],
+   [
+    "取り置きはできますか？",
+    "一点ものなので、サイト・店頭ともお取り置きはしていません。先着順でのご案内です。"
+   ],
+   [
+    "店頭とネットの在庫は同じですか？",
+    "はい。このサイト・店頭・メルカリShopsで同じ一点を販売しています（在庫を共有しています）。売れた時点でほかの販路は自動で止まりますが、ごくまれに同時に売れた場合は、先に決済が完了したご注文を優先し、もう一方のお客様にはご連絡のうえ全額返金いたします。"
+   ],
+   [
+    "このサイトはAIが運営しているのですか？",
+    "はい。このサイトはAIが運営しています。商品の値付け・商品説明・お問い合わせへの返信はAIが行い、仕入れ・撮影・採寸・梱包・発送は人間のスタッフが行っています。商品を選んでいるのは店主です。"
+   ],
+   [
+    "ネットの価格は店頭と同じですか？",
+    "異なります。オンラインの価格はAIが毎日見直すため、店頭の値札とは異なります。ご注文時点で商品ページに表示している価格で販売します。値引きのご相談はお受けしていません。"
+   ]
+  ]
+ },
+ "en": {
+  "ai": "This site is run by AI. Pricing, item descriptions and replies to enquiries are handled by AI; sourcing, photography, measuring, packing and shipping are done by our staff. The pieces are chosen by the shop owner.",
+  "price_note": "Online prices are reviewed by AI every day, so they differ from the price tags in the shop.",
+  "price_at_order": "We sell at the price shown on the item page at the time of your order.",
+  "delivery": "Domestic shipping included. Dispatched from our Kawagoe shop within 3 days of payment (closed Mondays). As these are one-of-a-kind vintage items, we do not accept returns for change of mind. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival.",
+  "hours": "Tue–Sun 13:00–20:00 (closed Mon, open on holidays)",
+  "store": [
+   [
+    "Address",
+    "1-14-5 Motomachi, Kawagoe, Saitama 350-0062, Japan"
+   ],
+   [
+    "Hours",
+    "13:00–20:00 (until 22:00 in Jul–Aug)"
+   ],
+   [
+    "Closed",
+    "Mondays (open on public holidays)"
+   ]
+  ],
+  "hold": "We do not hold or reserve items on any channel (every piece is one of a kind, first come, first served).",
+  "faq": [
+   [
+    "Where is Kobanzame?",
+    "At 1-14-5 Motomachi, Kawagoe, Saitama (350-0062), in an 80-year-old wooden house. The shop is run by Plug Inc."
+   ],
+   [
+    "Opening hours?",
+    "Open 13:00–20:00, Tuesday to Sunday. Closed on Mondays (open on public holidays). Until 22:00 in July and August. Changes are announced on Instagram."
+   ],
+   [
+    "What do you sell?",
+    "Vintage clothing sourced in Japan and abroad (men's and women's) and GAW, our own line of remade accessories. Every piece is one of a kind."
+   ],
+   [
+    "What is GAW?",
+    "Kobanzame's own remake accessory line. We turn materials such as old spoons into one-of-a-kind pendants, bangles and more."
+   ],
+   [
+    "Can I buy online?",
+    "Yes. Pieces on this site can be bought by credit card through Square. Online checkout ships within Japan; for overseas shipping, contact us first."
+   ],
+   [
+    "Is shipping included?",
+    "Yes. Prices on this site include tax and domestic shipping."
+   ],
+   [
+    "When will it arrive?",
+    "We dispatch within 3 days of payment (excluding our closed days)."
+   ],
+   [
+    "Can I return it?",
+    "As these are one-of-a-kind vintage items, we do not accept returns for change of mind. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival."
+   ],
+   [
+    "Can you hold a piece for me?",
+    "Every piece is one of a kind, so we do not hold items, online or in the shop. First come, first served."
+   ],
+   [
+    "Is online stock the same as in the shop?",
+    "Yes. The same one-of-a-kind pieces are sold on this site, in the shop and on Mercari Shops (shared stock). Other channels are stopped automatically once a piece sells; in the rare case that it sells in two places at once, the order paid first is honoured and the other customer is contacted and fully refunded."
+   ],
+   [
+    "Is this site run by AI?",
+    "Yes. This site is run by AI. Pricing, item descriptions and replies to enquiries are handled by AI; sourcing, photography, measuring, packing and shipping are done by our staff. The pieces are chosen by the shop owner."
+   ],
+   [
+    "Are online prices the same as in the shop?",
+    "No. Online prices are reviewed by AI every day, so they differ from the price tags in the shop. We sell at the price shown on the item page at the time of your order. We do not accept requests for discounts."
+   ]
+  ]
+ },
+ "contact": {
+  "email": "kobansame111@gmail.com",
+  "instagram": "https://www.instagram.com/remora__used372/"
+ }
+}
