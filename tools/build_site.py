@@ -30,7 +30,7 @@ META_VERIFY = 'unmn8k763xu62y5itk1fec6lzm4sdb'   # 2026-11-03 Meta（Instagram�
 HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）※2026-10-07 取り置きは廃止（HOLD_ENABLED=False）
 # 2026-11-04 龍さん「カート入れてください」（カートA・まとめ買いでも送料の値引きなし＝B）。
 # カートの受付（GAS 63c のウェブアプリの URL）。空のあいだは本番ではカートのボタンを出さない（確認用の住所 *.kobanzame-site.pages.dev だけ見本として出す）
-CART_ENDPOINT = ''
+CART_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwqMemm4-Eq5dUa4v7sHWsgQAHxd5sLTJf_Pn50UGC5HK68hN3QoaUo5F7sd1EctPRC9w/exec'   # 2026-11-07 63c番「カートの受付 v1.0」（龍さんが新しいデプロイを作った）
 # 2026-11-06 15:20 龍さん決定A（AI値付け設計書 §3-3）：「購入する」（1点）も、商品ごとの支払いリンク（63番）ではなく
 # カートの受付（63c番）を通す。押した時に GAS が products.json の「その時のサイトの値段」で Square の支払いリンクを作る。
 # True にするのは 63c番のウェブアプリ（CART_ENDPOINT）が動き、試しの購入が済んでから。False の間は今までどおり（63番のリンク）。
