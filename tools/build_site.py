@@ -1816,7 +1816,7 @@ for lang in ('ja', 'en'):
             buy, bar = f'<span class="soldout">{t["soldout"]}</span>', ''
         elif buyable(p):
             if buy_via_cart():   # 2026-11-06 決定A：押した時に 63c番がその時の値段で支払いリンクを作る（JS は CART_JS_BODY の .buyc）
-                sq = esc(p['links'].get('square') or '#buy')
+                sq = '#buy'   # 63番の古いリンク（前の値段のまま）には飛ばさない＝表示と決済の値段を必ずそろえる
                 dk = f' data-sku="{esc(p["sku"])}"'
                 buy = f'<a class="btn kin buyc" href="{sq}"{dk} rel="noopener">{t["buy"]}</a><p class="buymsg" hidden></p>'
                 bar_btn = f'<a class="btn kin buyc" href="{sq}"{dk} rel="noopener">{t["buy_s"]}</a>'
