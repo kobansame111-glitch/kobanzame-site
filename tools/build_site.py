@@ -31,6 +31,10 @@ HOLD_DAYS = 2            # 店頭取り置きの日数（2026-10-04 決定）※
 # 2026-11-04 龍さん「カート入れてください」（カートA・まとめ買いでも送料の値引きなし＝B）。
 # カートの受付（GAS 63c のウェブアプリの URL）。空のあいだは本番ではカートのボタンを出さない（確認用の住所 *.kobanzame-site.pages.dev だけ見本として出す）
 CART_ENDPOINT = ''
+# 2026-11-06 15:20 龍さん決定A（AI値付け設計書 §3-3）：「購入する」（1点）も、商品ごとの支払いリンク（63番）ではなく
+# カートの受付（63c番）を通す。押した時に GAS が products.json の「その時のサイトの値段」で Square の支払いリンクを作る。
+# True にするのは 63c番のウェブアプリ（CART_ENDPOINT）が動き、試しの購入が済んでから。False の間は今までどおり（63番のリンク）。
+BUY_VIA_CART = False
 # 2026-11-06 龍さん決定（お客様対応ボット 1A・2A）：サイトの「AIに質問する」欄の受付（新しい GAS のウェブアプリの URL）。
 # 空のあいだは欄を出さず、プライバシーポリシーの「AIによる自動応答」の段落も出さない（ボットを出す PR で URL を入れると、両方が同時に出る）
 BOT_ENDPOINT = ''
@@ -363,6 +367,19 @@ fetch('https://api.frankfurter.dev/v1/latest?base=JPY&symbols=USD').then(functio
 # ---------- カート（2026-11-04 カートA） ----------
 # 商品ページの「カートに入れる」→ ブラウザに品番を覚える（会員登録なし）→ /cart/ で「まとめて購入」→ GAS 63c が値段と在庫を確かめて
 # Square の支払いリンク（明細が複数行）を1本作る → Square の決済画面へ。値段はサイトから送らない（サーバー側で決める）
+def buy_via_cart():
+    """2026-11-06 決定A：1点の購入もカートの受付（63c番）を通すか。受付の URL が無いあいだは必ず False（63番のリンクのまま）"""
+    return bool(BUY_VIA_CART and CART_ENDPOINT)
+
+def buyable(p):
+    """購入ボタンを出してよいか（売れたかどうかは呼ぶ側で見る）。決定Aの後は「サイトの値段がある」こと、それまでは63番のリンクがあること"""
+    if buy_via_cart():
+        try:
+            return site_price(p) > 0
+        except (KeyError, TypeError, ValueError):
+            return False
+    return bool(p['links'].get('square'))
+
 def cart_add_html(p, lang, name, price, path, img):
     return (f'<button type="button" class="btn ghost cartadd" hidden data-sku="{esc(p["sku"])}" data-name="{esc(name)}" '
             f'data-price="{int(price)}" data-url="{esc(path)}" data-img="{esc(img)}">'
@@ -373,12 +390,14 @@ CART_T = {
          'empty': 'カートは空です。', 'remove': '外す', 'total': '合計（送料込み）', 'gone': '次の商品は、先に売れたためカートから外しました：',
          'fail': 'いまカートでのお支払いを受け付けられませんでした。お手数ですが、商品ページの「購入する」から1点ずつお買い求めください。',
          'busy': '少し時間をおいて、もう一度お試しください。', 'wait': 'Square の決済画面を準備しています…',
-         'preview': '（確認用のページです）本番では、ここで Square の決済画面に移ります。'},
+         'preview': '（確認用のページです）本番では、ここで Square の決済画面に移ります。',
+         'sold1': 'この商品は先に売れてしまいました。申し訳ありません。', 'fail1': 'いまお支払いの画面を開けませんでした。少し時間をおいて、もう一度お試しください。'},
   'en': {'add': 'Add to cart', 'in': 'In your cart (view cart)', 'added': 'Added to your cart', 'max': 'You can put up to 10 items in the cart',
          'empty': 'Your cart is empty.', 'remove': 'Remove', 'total': 'Total (shipping within Japan included)', 'gone': 'These items sold before checkout and were removed:',
          'fail': 'We could not start the cart checkout right now. Please buy each item from its own page with "Buy now".',
          'busy': 'Please wait a moment and try again.', 'wait': 'Preparing the Square checkout…',
-         'preview': '(Preview page) On the live site this button opens the Square checkout.'},
+         'preview': '(Preview page) On the live site this button opens the Square checkout.',
+         'sold1': 'Sorry, this piece has just sold.', 'fail1': 'We could not open the checkout right now. Please wait a moment and try again.'},
 }
 
 CART_JS_BODY = r'''var pv=/^[a-z0-9-]+\.kobanzame-site\.pages\.dev$/.test(location.hostname);if(!EP&&!pv)return;
@@ -393,7 +412,14 @@ document.querySelectorAll(".cartadd").forEach(function(b){var s=b.getAttribute("
 function st(){var on=has(s);b.classList.toggle("in",on);b.textContent=on?T["in"]:T.add}st();
 b.addEventListener("click",function(){if(has(s)){location.href=CU;return}var a=get();if(a.length>=MAX){toast(T.max);return}
 a.push({sku:s,name:b.getAttribute("data-name"),price:Number(b.getAttribute("data-price"))||0,url:b.getAttribute("data-url"),img:b.getAttribute("data-img")});put(a);st();toast(T.added)})});
-cnt();if(!pg)return;
+cnt();
+document.querySelectorAll("a.buyc[data-sku]").forEach(function(b){b.addEventListener("click",function(e){if(!EP||!V)return;e.preventDefault();if(b.getAttribute("aria-busy")==="true")return;
+var s=b.getAttribute("data-sku"),m=document.querySelector(".buymsg");function say1(x){if(m){m.textContent=x;m.hidden=!x}else if(x)toast(x)}
+b.setAttribute("aria-busy","true");say1(T.wait);
+fetch(EP,{method:"POST",body:JSON.stringify({skus:[s],lang:L})}).then(function(r){return r.json()}).then(function(j){
+if(j&&j.ok&&j.url){location.href=j.url;return}b.removeAttribute("aria-busy");
+if(j&&j.code==="unavailable"){say1(T.sold1)}else if(j&&j.code==="busy"){say1(T.busy)}else{say1(T.fail1)}}).catch(function(){b.removeAttribute("aria-busy");say1(T.fail1)})})});
+if(!pg)return;
 var ul=document.getElementById("cartlist"),tot=document.getElementById("carttotal"),go=document.getElementById("cartgo"),box=document.getElementById("cartbox"),em=document.getElementById("cartempty"),msg=document.getElementById("cartmsg");
 function say(m){msg.textContent=m;msg.hidden=!m}
 function esc(x){return String(x==null?"":x).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
@@ -403,7 +429,7 @@ tot.textContent=yen(sum);ul.querySelectorAll("button[data-i]").forEach(function(
 function drop(skus){if(!skus||!skus.length)return;var gone=get().filter(function(x){return skus.indexOf(x.sku)>=0});put(get().filter(function(x){return skus.indexOf(x.sku)<0}));draw();
 if(gone.length)say(T.gone+" "+gone.map(function(x){return x.name+"（"+x.sku+"）"}).join("、"))}
 draw();
-fetch("/data/products.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(ps){var ok={};ps.forEach(function(p){if(p&&p.sku&&p.status!=="sold"&&p.links&&p.links.square)ok[p.sku]=1});
+fetch("/data/products.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(ps){var ok={};ps.forEach(function(p){if(p&&p.sku&&p.status!=="sold"&&(V?(p.prices&&Number(p.prices.site)>0):(p.links&&p.links.square)))ok[p.sku]=1});
 drop(get().map(function(x){return x.sku}).filter(function(s){return !ok[s]}))}).catch(function(){});
 go.addEventListener("click",function(){var a=get();if(!a.length)return;if(!EP){say(T.preview);return}
 go.disabled=true;say(T.wait);
@@ -413,7 +439,7 @@ if(j&&j.code==="unavailable"){drop(j.skus)}else if(j&&j.code==="busy"){say(T.bus
 })();</script>'''
 
 def cart_js(lang):
-    return ('<script>(function(){var EP=' + json.dumps(CART_ENDPOINT) + ',L=' + json.dumps(lang) + ',T='
+    return ('<script>(function(){var EP=' + json.dumps(CART_ENDPOINT) + ',V=' + ('true' if buy_via_cart() else 'false') + ',L=' + json.dumps(lang) + ',T='
             + json.dumps(CART_T[lang], ensure_ascii=False) + ',K="kzcart1",MAX=10,CU="' + pre(lang) + '/cart/";' + CART_JS_BODY)
 
 CART_PAGE = {
@@ -1018,7 +1044,7 @@ var b=JSON.stringify(o);try{if(navigator.sendBeacon&&navigator.sendBeacon(U,new 
 try{fetch(U,{method:'POST',body:b,mode:'no-cors',keepalive:true});}catch(e){}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){send({t:'pv'});});else send({t:'pv'});
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a,button');if(!a)return;var h=a.getAttribute('href')||'',k='';if(h&&typeof flush==='function')flush();
-if(a.id==='favbtn'){if(a.getAttribute('aria-pressed')!=='true')k='fav';}else if(a.id==='holdbtn')k='hold';else if(/square\\.link/.test(h))k='buy';else if(/mercari/.test(h))k='mercari';else if(/instagram\\.com/.test(h))k='instagram';else if(/google\\.[a-z.]+\\/maps|maps\\.app\\.goo\\.gl|goo\\.gl\\/maps/.test(h))k='map';
+if(a.id==='favbtn'){if(a.getAttribute('aria-pressed')!=='true')k='fav';}else if(a.id==='holdbtn')k='hold';else if(/square\\.link/.test(h)||(a.classList&&a.classList.contains('buyc')))k='buy';else if(/mercari/.test(h))k='mercari';else if(/instagram\\.com/.test(h))k='instagram';else if(/google\\.[a-z.]+\\/maps|maps\\.app\\.goo\\.gl|goo\\.gl\\/maps/.test(h))k='map';
 if(k)send({t:'click',btn:k});},true);
 var seen={},q=[];function flush(){while(q.length)send({t:'imp',skus:q.splice(0,40)});}
 function watch(){if(!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;var s=en.target.getAttribute('data-sku');io.unobserve(en.target);if(s&&!seen[s]){seen[s]=1;q.push(s);}});if(q.length>=20)flush();},{threshold:0.5});
@@ -1791,11 +1817,18 @@ for lang in ('ja', 'en'):
         facts += (f'<span>{rk}</span>' if rk else '') + (f'<span>{t["width"].format(w=f"{w:g}")}</span>' if w is not None else '')
         if sold:
             buy, bar = f'<span class="soldout">{t["soldout"]}</span>', ''
-        elif p['links'].get('square'):
-            sq = esc(p['links']['square'])
-            buy = f'<a class="btn kin" href="{sq}" rel="noopener">{t["buy"]}</a>'
+        elif buyable(p):
+            if buy_via_cart():   # 2026-11-06 決定A：押した時に 63c番がその時の値段で支払いリンクを作る（JS は CART_JS_BODY の .buyc）
+                sq = '#buy'   # 63番の古いリンク（前の値段のまま）には飛ばさない＝表示と決済の値段を必ずそろえる
+                dk = f' data-sku="{esc(p["sku"])}"'
+                buy = f'<a class="btn kin buyc" href="{sq}"{dk} rel="noopener">{t["buy"]}</a><p class="buymsg" hidden></p>'
+                bar_btn = f'<a class="btn kin buyc" href="{sq}"{dk} rel="noopener">{t["buy_s"]}</a>'
+            else:
+                sq = esc(p['links']['square'])
+                buy = f'<a class="btn kin" href="{sq}" rel="noopener">{t["buy"]}</a>'
+                bar_btn = f'<a class="btn kin" href="{sq}" rel="noopener">{t["buy_s"]}</a>'
             buy += cart_add_html(p, lang, name, price, path, imgs[0] if imgs else '')   # 2026-11-04 カートA（受付が動くまで hidden）
-            bar = f'<div class="bar"><b>{money(price, lang)}</b><a class="btn kin" href="{sq}" rel="noopener">{t["buy_s"]}</a></div>'
+            bar = f'<div class="bar"><b>{money(price, lang)}</b>{bar_btn}</div>'
         else:
             buy, bar = f'<span class="soldout">{t["prep"]}</span>', ''
         hold = '' if (sold or not HOLD_ENABLED) else f'''<button type="button" class="btn ghost" id="holdbtn" aria-expanded="false" aria-controls="holdbox">{t['hold_btn'].format(n=HOLD_DAYS)}</button>
@@ -1808,7 +1841,7 @@ for lang in ('ja', 'en'):
         noen = f'<p class="noen">{t["no_en"]}</p>' if (lang == 'en' and not has_en(p)) else ''
         # 2026-11-03 龍さん決定（全部A）：購入ボタンの下に短い安心の4行／メルカリでも買える／質問の入口／英語は海外発送の見積
         assure = ''
-        if sold or not p['links'].get('square'):
+        if sold or not buyable(p):
             buy_extra = f'<div class="ship">{t["ship"]}</div>' if not sold else ''
         else:
             assure = '<ul class="assure">' + ''.join(f'<li>{esc(x)}</li>' for x in t['assure']) + '</ul>'   # 購入ボタンのすぐ下
@@ -2323,7 +2356,7 @@ def _x(s):
     return html.escape(str(s), quote=True)
 feed_items = []
 for p in avail_live:
-    if not p['links'].get('square'):
+    if not buyable(p):
         continue
     imgs = [abs_url(u) for u in real_images(p)[:11]]
     cond = 'new' if p.get('item_condition') == 'NewCondition' else 'used'
