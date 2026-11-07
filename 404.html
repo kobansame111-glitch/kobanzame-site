@@ -36,7 +36,7 @@ var b=JSON.stringify(o);try{if(navigator.sendBeacon&&navigator.sendBeacon(U,new 
 try{fetch(U,{method:'POST',body:b,mode:'no-cors',keepalive:true});}catch(e){}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){send({t:'pv'});});else send({t:'pv'});
 document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a,button');if(!a)return;var h=a.getAttribute('href')||'',k='';if(h&&typeof flush==='function')flush();
-if(a.id==='favbtn'){if(a.getAttribute('aria-pressed')!=='true')k='fav';}else if(a.id==='holdbtn')k='hold';else if(/square\.link/.test(h))k='buy';else if(/mercari/.test(h))k='mercari';else if(/instagram\.com/.test(h))k='instagram';else if(/google\.[a-z.]+\/maps|maps\.app\.goo\.gl|goo\.gl\/maps/.test(h))k='map';
+if(a.id==='favbtn'){if(a.getAttribute('aria-pressed')!=='true')k='fav';}else if(a.id==='holdbtn')k='hold';else if(/square\.link/.test(h)||(a.classList&&a.classList.contains('buyc')))k='buy';else if(/mercari/.test(h))k='mercari';else if(/instagram\.com/.test(h))k='instagram';else if(/google\.[a-z.]+\/maps|maps\.app\.goo\.gl|goo\.gl\/maps/.test(h))k='map';
 if(k)send({t:'click',btn:k});},true);
 var seen={},q=[];function flush(){while(q.length)send({t:'imp',skus:q.splice(0,40)});}
 function watch(){if(!('IntersectionObserver' in window))return;var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;var s=en.target.getAttribute('data-sku');io.unobserve(en.target);if(s&&!seen[s]){seen[s]=1;q.push(s);}});if(q.length>=20)flush();},{threshold:0.5});
@@ -116,7 +116,7 @@ document.addEventListener('visibilitychange',function(){if(document.visibilitySt
 })();
 </script>
 
-<script>(function(){var EP="",L="ja",T={"add": "カートに入れる", "in": "カートに入っています（カートを見る）", "added": "カートに入れました", "max": "カートには10点まで入れられます", "empty": "カートは空です。", "remove": "外す", "total": "合計（送料込み）", "gone": "次の商品は、先に売れたためカートから外しました：", "fail": "いまカートでのお支払いを受け付けられませんでした。お手数ですが、商品ページの「購入する」から1点ずつお買い求めください。", "busy": "少し時間をおいて、もう一度お試しください。", "wait": "Square の決済画面を準備しています…", "preview": "（確認用のページです）本番では、ここで Square の決済画面に移ります。"},K="kzcart1",MAX=10,CU="/cart/";var pv=/^[a-z0-9-]+\.kobanzame-site\.pages\.dev$/.test(location.hostname);if(!EP&&!pv)return;
+<script>(function(){var EP="",V=false,L="ja",T={"add": "カートに入れる", "in": "カートに入っています（カートを見る）", "added": "カートに入れました", "max": "カートには10点まで入れられます", "empty": "カートは空です。", "remove": "外す", "total": "合計（送料込み）", "gone": "次の商品は、先に売れたためカートから外しました：", "fail": "いまカートでのお支払いを受け付けられませんでした。お手数ですが、商品ページの「購入する」から1点ずつお買い求めください。", "busy": "少し時間をおいて、もう一度お試しください。", "wait": "Square の決済画面を準備しています…", "preview": "（確認用のページです）本番では、ここで Square の決済画面に移ります。", "sold1": "この商品は先に売れてしまいました。申し訳ありません。", "fail1": "いまお支払いの画面を開けませんでした。少し時間をおいて、もう一度お試しください。"},K="kzcart1",MAX=10,CU="/cart/";var pv=/^[a-z0-9-]+\.kobanzame-site\.pages\.dev$/.test(location.hostname);if(!EP&&!pv)return;
 function get(){try{var a=JSON.parse(localStorage.getItem(K)||"[]");return Array.isArray(a)?a:[]}catch(e){return[]}}
 function put(a){try{localStorage.setItem(K,JSON.stringify(a))}catch(e){}cnt()}
 function has(s){return get().some(function(x){return x.sku===s})}
@@ -128,7 +128,14 @@ document.querySelectorAll(".cartadd").forEach(function(b){var s=b.getAttribute("
 function st(){var on=has(s);b.classList.toggle("in",on);b.textContent=on?T["in"]:T.add}st();
 b.addEventListener("click",function(){if(has(s)){location.href=CU;return}var a=get();if(a.length>=MAX){toast(T.max);return}
 a.push({sku:s,name:b.getAttribute("data-name"),price:Number(b.getAttribute("data-price"))||0,url:b.getAttribute("data-url"),img:b.getAttribute("data-img")});put(a);st();toast(T.added)})});
-cnt();if(!pg)return;
+cnt();
+document.querySelectorAll("a.buyc[data-sku]").forEach(function(b){b.addEventListener("click",function(e){if(!EP||!V)return;e.preventDefault();if(b.getAttribute("aria-busy")==="true")return;
+var s=b.getAttribute("data-sku"),m=document.querySelector(".buymsg");function say1(x){if(m){m.textContent=x;m.hidden=!x}else if(x)toast(x)}
+b.setAttribute("aria-busy","true");say1(T.wait);
+fetch(EP,{method:"POST",body:JSON.stringify({skus:[s],lang:L})}).then(function(r){return r.json()}).then(function(j){
+if(j&&j.ok&&j.url){location.href=j.url;return}b.removeAttribute("aria-busy");
+if(j&&j.code==="unavailable"){say1(T.sold1)}else if(j&&j.code==="busy"){say1(T.busy)}else{say1(T.fail1)}}).catch(function(){b.removeAttribute("aria-busy");say1(T.fail1)})})});
+if(!pg)return;
 var ul=document.getElementById("cartlist"),tot=document.getElementById("carttotal"),go=document.getElementById("cartgo"),box=document.getElementById("cartbox"),em=document.getElementById("cartempty"),msg=document.getElementById("cartmsg");
 function say(m){msg.textContent=m;msg.hidden=!m}
 function esc(x){return String(x==null?"":x).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
@@ -138,7 +145,7 @@ tot.textContent=yen(sum);ul.querySelectorAll("button[data-i]").forEach(function(
 function drop(skus){if(!skus||!skus.length)return;var gone=get().filter(function(x){return skus.indexOf(x.sku)>=0});put(get().filter(function(x){return skus.indexOf(x.sku)<0}));draw();
 if(gone.length)say(T.gone+" "+gone.map(function(x){return x.name+"（"+x.sku+"）"}).join("、"))}
 draw();
-fetch("/data/products.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(ps){var ok={};ps.forEach(function(p){if(p&&p.sku&&p.status!=="sold"&&p.links&&p.links.square)ok[p.sku]=1});
+fetch("/data/products.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(ps){var ok={};ps.forEach(function(p){if(p&&p.sku&&p.status!=="sold"&&(V?(p.prices&&Number(p.prices.site)>0):(p.links&&p.links.square)))ok[p.sku]=1});
 drop(get().map(function(x){return x.sku}).filter(function(s){return !ok[s]}))}).catch(function(){});
 go.addEventListener("click",function(){var a=get();if(!a.length)return;if(!EP){say(T.preview);return}
 go.disabled=true;say(T.wait);
