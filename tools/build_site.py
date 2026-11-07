@@ -35,6 +35,9 @@ CART_ENDPOINT = ''
 # カートの受付（63c番）を通す。押した時に GAS が products.json の「その時のサイトの値段」で Square の支払いリンクを作る。
 # True にするのは 63c番のウェブアプリ（CART_ENDPOINT）が動き、試しの購入が済んでから。False の間は今までどおり（63番のリンク）。
 BUY_VIA_CART = False
+# 2026-11-06 龍さん決定（お客様対応ボット 1A・2A）：サイトの「AIに質問する」欄の受付（新しい GAS のウェブアプリの URL）。
+# 空のあいだは欄を出さず、プライバシーポリシーの「AIによる自動応答」の段落も出さない（ボットを出す PR で URL を入れると、両方が同時に出る）
+BOT_ENDPOINT = ''
 HOLD_ENABLED = False     # 2026-10-07 龍さん決定：一点物なのでサイトも店頭も取り置き不可・先着順
 # 2026-10-13 龍さん決定（10/8の「毎日営業」を置き換え）：11月1日から 火〜日 13:00–20:00・月曜定休（祝日の月曜は営業）・7〜8月は22:00まで
 NEWHOURS_FROM = '2026-11-01'   # この日以降のビルドで文言が切り替わる
@@ -1939,10 +1942,45 @@ LAW = [
     ('古物商許可', f"{SHOP['kobutsu']}（{SHOP['company']}）"),
 ]
 law_html = ''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in LAW)
+
+# 2026-11-07 お客様対応ボット 段1（kobanzame-brain の設計書 §4-1・11/6 龍さん 1A）：ボットが「答えてよい事実」を、サイトの文と同じ値から書き出す。
+# 画面は変えない。ボットはこのファイルと products.json だけを読む（サイトとボットの答えがずれないように）。人の名前・電話番号は入れない。
+def _plain(s):
+    return re.sub(r'\s+', ' ', re.sub(r'<br\s*/?>', ' ', re.sub(r'<(?!br)[^>]+>', '', str(s)))).strip()
+_LAWD = dict(LAW)
+BOT_FACTS = {
+    'version': TODAY,
+    'note': 'お客様対応ボットが答えてよい事実（tools/build_site.py が毎回書き出す。手で直さない）',
+    'ja': {
+        'ai': dict(FAQ['ja']).get('このサイトはAIが運営しているのですか？', AI_DECL['ja']).replace('はい。', '', 1),
+        'price_note': PRICE_NOTE['ja'], 'price_at_order': PRICE_AT_ORDER['ja'],
+        'shipping': _LAWD['商品代金以外の必要料金'], 'delivery': _plain(T['ja']['delivery_p']), 'dispatch': _LAWD['引渡時期'],
+        'returns': _LAWD['返品・交換'], 'cancel': _LAWD['申込みの撤回・解除'], 'sold_elsewhere': _LAWD['品切れの場合'],
+        'payment': _LAWD['支払方法'], 'payment_time': _LAWD['支払時期'], 'quantity': _LAWD['販売数量'],
+        'hours': _plain(T['ja']['days']), 'store': [['住所', ADDR['ja']]] + [[k, _plain(v)] for k, v in T['ja']['store_dl'] if k in ('営業', '定休日')],
+        'hold': '取り置き・予約は、すべての販路でお受けしていません（一点ものなので先着順です）。',
+        'faq': [[q, _plain(a)] for q, a in FAQ['ja']],
+    },
+    'en': {
+        'ai': dict(FAQ['en']).get('Is this site run by AI?', AI_DECL['en']).replace('Yes. ', '', 1),
+        'price_note': PRICE_NOTE['en'], 'price_at_order': PRICE_AT_ORDER['en'],
+        'delivery': _plain(T['en']['delivery_p']), 'hours': _plain(T['en']['days']),
+        'store': [['Address', ADDR['en']]] + [[k, _plain(v)] for k, v in T['en']['store_dl'] if k in ('Hours', 'Closed')],
+        'hold': 'We do not hold or reserve items on any channel (every piece is one of a kind, first come, first served).',
+        'faq': [[q, _plain(a)] for q, a in FAQ['en']],
+    },
+    'contact': {'email': SHOP['email'], 'instagram': SHOP['instagram']},
+}
+write('/bot/facts.json', json.dumps(BOT_FACTS, ensure_ascii=False, indent=1) + '\n')
 write('/tokushoho/index.html', head('ja', '特定商取引法に基づく表記｜古着屋 小判鮫', '古着屋 小判鮫（運営：株式会社プラグ）の特定商取引法に基づく表記。販売価格（税込・送料込み）、支払い方法、発送の時期、返品・交換の条件、古物商許可番号を載せています。', '/tokushoho/') + f'''
 <main class="wrap page lawtable"><h1>特定商取引法に基づく表記</h1><dl>{law_html}</dl><p style="color:var(--usu);font-size:13px;margin-top:24px">制定：2026年9月30日</p></main>
 ''' + foot('ja'))
 
+# 2026-11-06 龍さん決定（ボット 2A）：ボットが動いている間だけ出す段落（BOT_ENDPOINT が空なら出さない）
+_PRIV_BOT_JA = ('  <h2>AIによる自動応答</h2><p>サイトの「AIに質問する」欄に書かれた質問は、返事を作るために AI のサービス（外部の事業者）へ送ります。'
+                '記録に残すのは質問の種類と要点・商品番号までで、お名前・連絡先は残しません。'
+                '人間のスタッフからの返信を希望して入力されたメールアドレスは、その返信のためだけに使い、返信のあと30日で削除します。</p>\n') if BOT_ENDPOINT else ''
+_PRIV_BOT_EN = (' Questions typed into the "Ask AI" box are sent to an AI service (an outside provider) to write the answer; we keep only the type of question, a one-line summary and the item number, not your name or contact details. An email address you enter to get a reply from our staff is used only for that reply and deleted 30 days after we reply.') if BOT_ENDPOINT else ''
 write('/privacy/index.html', head('ja', 'プライバシーポリシー｜古着屋 小判鮫', '古着屋 小判鮫（運営：株式会社プラグ）のプライバシーポリシー。ご注文やお問い合わせでお預かりする個人情報の使い道と、カード情報の扱い（Square が処理し、当店は持たない）について。', '/privacy/') + f'''
 <main class="wrap page">
   <h1>プライバシーポリシー</h1>
@@ -1952,7 +1990,7 @@ write('/privacy/index.html', head('ja', 'プライバシーポリシー｜古着
   <h2>決済について</h2><p>本サイトでのお支払いは Square 株式会社の決済ページで処理されます。当店はクレジットカード番号を取得・保存しません。</p>
   <h2>第三者提供</h2><p>法令に基づく場合を除き、ご本人の同意なく第三者に提供しません。配送など取引に必要な範囲で委託先に提供する場合があります。</p>
   <h2>アクセス解析</h2><p>サイトの改善のためアクセス状況を測定することがあります。個人を特定する情報は含みません。</p>
-  <h2>お問い合わせ</h2><p>本ポリシーに関するお問い合わせは {SHOP['email']} までお願いいたします。</p>
+{_PRIV_BOT_JA}  <h2>お問い合わせ</h2><p>本ポリシーに関するお問い合わせは {SHOP['email']} までお願いいたします。</p>
   <p style="color:var(--usu);font-size:13px;margin-top:20px">制定：2026年9月／改定：2026年10月</p>
 </main>
 ''' + foot('ja'))
@@ -1967,7 +2005,7 @@ write('/en/legal/index.html', head('en', 'Legal notice & privacy | Kobanzame', '
   <h2>Delivery</h2><p>Dispatched within 3 days of payment (excluding closed days). Online checkout ships within Japan; contact us before buying for overseas shipping.</p>
   <h2>Returns</h2><p>No returns for change of mind on one-of-a-kind vintage items. If the item differs significantly from the description or we sent the wrong item, email us within 4 days of arrival; we cover return shipping and refund or exchange.</p>
   <h2>Licence</h2><p>Licensed secondhand dealer: Saitama Prefectural Public Safety Commission No. 431080060786.</p>
-  <h2>Privacy</h2><p>We collect only what an order or inquiry needs (name, contact, delivery address) and use it only for that purpose. Card details are processed by Square; we never receive or store card numbers. We do not share personal data without consent except as required by law or for delivery.</p>
+  <h2>Privacy</h2><p>We collect only what an order or inquiry needs (name, contact, delivery address) and use it only for that purpose. Card details are processed by Square; we never receive or store card numbers. We do not share personal data without consent except as required by law or for delivery.{_PRIV_BOT_EN}</p>
 </main>
 ''' + foot('en'))
 
