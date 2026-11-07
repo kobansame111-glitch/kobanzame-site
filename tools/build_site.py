@@ -1208,7 +1208,7 @@ def foot(lang):
          + [(f'{P}/?cat={c}#list', t['cats'][c]) for c in CATS_PRESENT] + [(SHOP['mercari'], 'メルカリShops' if ja else 'Mercari Shops')]
     read = [('/blog/', 'ブログ' if ja else 'Blog (Japanese)'), ('/guide/' if ja else '/en/guide/', '川越で古着屋を探している方へ' if ja else 'Kawagoe vintage guide')] \
          + ([('/news/', 'お知らせ')] if ja and NEWS else []) \
-         + ([('/automation/', 'お店の仕組みづくり')] if ja else [])
+         + ([('/automation/', '小判鮫サポート（お店の仕組みづくり）')] if ja else [])
     store = [(f'{P}/#store', '場所・営業時間' if ja else 'Address & hours'), (f'{P}/#faq', 'よくある質問' if ja else 'FAQ')] \
           + ([T_WS_NAV[lang]] if WS_OPEN else []) + [(SHOP['gmaps'], t['gm']), (SHOP['instagram'], 'Instagram')]
     cols = col('お買い物' if ja else 'Shop', shop) + col('読みもの' if ja else 'Read', read) + col('お店' if ja else 'The shop', store)
@@ -2151,55 +2151,48 @@ for _cl in ('ja', 'en'):
 </main>
 """ + foot(_cl))
 
-# ---------- お店の仕組みづくり（/automation/・2026-11-02 龍さん「サイトに、こういうの作れますよのページを」） ----------
-# Threads・営業メール・Instagram の行き先。小判鮫で実際に動いている仕組みだけを書く（効果の約束・他社との比較はしない）。
-# 料金は 2026-11-02 の二本立て（広く安く＝領収書／古着屋に絞って高く＝出品と在庫）の案。変えるときは AUTO_PRICE だけ直す。
+# ---------- /automation/：2026-11-02 に「お店の仕組みづくり」として作り、2026-11-07 に小判鮫サポートの販売ページへ作り替え（URL は同じ） ----------
 import urllib.parse
-AUTO_MAIL = 'kobanzame.support@gmail.com'
-AUTO_PRICE = {'receipt': '9,800円〜（税込・設定1回）', 'vintage_init': '150,000円〜（税込）', 'vintage_month': '20,000円〜（税込）'}
-AUTO = {
-  'path': '/automation/',
-  'title': '古着屋の出品と在庫を自動化する仕組みづくり｜古着屋 小判鮫',
-  'desc': '川越の古着屋 小判鮫が自分の店で使っている、出品・在庫・売上集計・記帳の自動化を、ほかのお店にも入れるお手伝い。古着屋向けの「出品と在庫まるごと」と、どの業種でも使える「領収書の自動整理」の2つ。無料30分のオンライン相談から。',
-  'h1': 'お店の事務を、仕組みにします',
-  'lead': '古着屋 小判鮫は、出品・在庫・売上の集計・記帳を自分たちで仕組みにして、月に約30時間分の手作業を自動化しています（2026年10月・自店の記録より）。同じ仕組みを、ほかのお店に入れるお手伝いをしています。',
-  'demo': ('このサイトが見本です', [
-    '商品ページは、写真と商品データから自動で作られています。英語のページも同じデータから作っています。',
-    '新着は毎週水曜の夜に、自動で公開されます。',
-    '売れた商品は自動で「SOLD」になり、毎朝「売れたのに在庫が残っている」ものがないかを見張っています。',
-    'メルカリShopsに出すための一括登録ファイルも、同じデータから作っています。',
-  ]),
-  'plans': [
-    ('古着屋・一点ものの店向け：出品と在庫まるごと', [
-      '写真から、商品ページの下書き（タグの読み方・実寸・状態）を作る。公開の前に、お店の人が確かめる',
-      'お店のサイトに商品ページを自動で作る（英語のページも）',
-      'メルカリShops用の一括登録ファイルを自動で作る',
-      'Square の売上と在庫を毎日表に写し、閉店後の集計をなくす',
-      '売れた一点ものを、ほかの販路でも止めるよう毎朝知らせる',
-    ], [('初期費用', AUTO_PRICE['vintage_init']), ('月額', AUTO_PRICE['vintage_month'])],
-       '販路の数・商品の数・今お使いの道具に合わせてお見積りします。'),
-    ('どの業種でも：領収書の自動整理', [
-      'Gmail に届く領収書・請求書のメールを毎朝集める',
-      'Google ドライブの月ごとのフォルダに保存する',
-      '日付・取引先・金額を表に写す（税理士さんや会計ソフトに渡しやすい形）',
-    ], [('料金', AUTO_PRICE['receipt'])],
-       '小判鮫でも毎朝この仕組みが動いています。'),
-  ],
-  'steps': [
-    ('無料30分のオンライン相談', '今の作業を一緒に棚卸しして、「自動化できそうなこと／やらなくていいこと」を仕分けします。売り込みはしません。'),
-    ('お見積り', '入れる仕組みと料金をはっきり書いてお送りします。'),
-    ('設定', 'お店の Google アカウントの中に設定します。データはお店の中に置き、こちらに集めません。'),
-    ('様子見と手直し', '入れてから1か月、動きを一緒に見て直します。'),
-  ],
-  'faq': [
-    ('プログラミングの知識は要りますか？', '要りません。設定はこちらで行い、使い方をお伝えします。'),
-    ('どんな道具が必要ですか？', 'Google のアカウント（Gmail）があれば始められます。古着屋向けは Square・メルカリShops・お店のサイトなど、お使いの販路に合わせます。'),
-    ('古着屋以外でも頼めますか？', '領収書の自動整理は、どの業種でもお使いいただけます。'),
-    ('どこの地域でも頼めますか？', 'オンラインで全国対応しています。'),
-    ('途中でやめられますか？', 'やめられます。入れた仕組みはお店のアカウントの中にあるので、そのまま残ります。'),
-  ],
+AUTO_MAIL = 'kobanzame.support@gmail.com'   # 予備の連絡先（申し込みは LINE が主）
+# ---------- 小判鮫サポートの販売ページ（/automation/ を作り替え・2026-11-07 龍さん「チラシと同じ言葉で」） ----------
+# 正本：Project「嶋崎龍3」claude/claude_AI導入支援22_小判鮫サポート_受け皿の準備セット_ルイくん依頼前_2026-11-07.md の §2。
+# 言い切り（必ず・絶対・◯割減）・他店やお客さまの名前は書かない。値段は SUPPORT_PRICE_MODE と SUPPORT_PRICE だけで変える。
+SUPPORT_LINE = 'https://line.me/R/ti/p/@161gjpew'   # 小判鮫サポートの LINE（ID @161gjpew）
+# 料金の出し方（2026-11-07 龍さんが決める・PR の本文の A／B／C）。'monitor'＝A（モニター価格だけ）／'both'＝B／'none'＝C（金額は出さない）
+SUPPORT_PRICE_MODE = 'monitor'
+SUPPORT_PRICE = {
+    'monitor': [('サイトづくり', '30,000円'), ('1点ごとに', '50円')],   # モニター価格（2026-10-28 決定・2027-01-28 まで据え置き）
+    'monitor_note': 'モニター価格です（2027年1月まで）。',
+    'regular': [('初期費用', '150,000円〜'), ('月額', '20,000円〜')],     # 今のページの表示（2026-11-02 の案）
 }
-_a = AUTO
+SUPPORT = {
+  'path': '/automation/',
+  'title': '撮るだけで、お店のサイトに並ぶ。｜小判鮫サポート',
+  'desc': '古着屋・一点ものの店主さんへ。写真を撮るだけで、説明文・お店のサイトの商品ページ・メルカリ用の登録・SNSのお知らせまでをAIが用意します。まずは無料で、写真10点から見本を作ります。',
+  'eyebrow': '古着屋・一点ものの店主さんへ',
+  'h1': '撮るだけで、お店のサイトに並ぶ。',
+  'merits': ['かんたん', '閉店後の作業がへる', '無料で試せる'],
+  'flow_h': 'お店がやるのは2つだけ',
+  'flow': [('01', '撮る', 'shop'), ('02', '説明文を書く', 'ai'), ('03', 'NGだけ返す', 'shop'),
+           ('04', 'サイトに並ぶ', 'ai'), ('05', 'メルカリ用も', 'ai'), ('06', 'SNSでお知らせ', 'ai')],
+  'try_h': 'まずは無料で、見本を作ります。',
+  'try_p': ['写真10点を送るだけ。', '5日ほどで、あなたのお店の商品ページに。'],
+  'try_btn': 'LINEで申し込む',
+  'try_ok': '合わなければ、そこで終わりで大丈夫です。',
+  'try_limit': '見本は20点まで・2週間まで。',
+  # 見本のあとの段（「合えば」）。※2026-11-07 時点は仮の文：Project §2 が読めなかったため、今のページと流れ（01〜06）から組んだ。正本の文が届いたら差し替える
+  'steps_h': '合えば、次の段へ',
+  'steps': [('段1', 'お店のサイトに並べる', '撮った写真から、説明文と商品ページを作ります。お店はNGだけ返します。'),
+            ('段2', 'メルカリにも出す', '同じ写真と説明文から、メルカリ用の登録ファイルを作ります。'),
+            ('段3', 'SNSでお知らせ', '新しく並んだ商品を、お店のSNSでお知らせします。'),
+            ('段4', '売れたら止める・まとめる', '一点ものが売れたら、ほかの販路でも止めるよう知らせます。売上もまとめます。')],
+  'stop_h': 'やめたいときは',
+  'stop_p': '仕組みはお店に残ります。直しと改善は止まります。',
+  'faq': [('パソコンやプログラミングの知識は要りますか？', '要りません。お店がするのは、撮ることと、NGを返すことだけです。'),
+          ('どんな道具が要りますか？', 'スマホとLINE、Googleのアカウントがあれば始められます。'),
+          ('どこの地域でも頼めますか？', 'オンラインで全国のお店に対応しています。')],
+}
+_a = SUPPORT
 _a_ld = {'@context': 'https://schema.org', '@graph': [
     org_node(),
     {'@type': 'FAQPage', '@id': BASE + _a['path'] + '#faq',
@@ -2207,40 +2200,89 @@ _a_ld = {'@context': 'https://schema.org', '@graph': [
     {'@type': 'WebPage', '@id': BASE + _a['path'] + '#page', 'url': BASE + _a['path'], 'name': _a['title'], 'inLanguage': 'ja', 'dateModified': TODAY},
     {'@type': 'BreadcrumbList', 'itemListElement': [
         {'@type': 'ListItem', 'position': 1, 'name': 'HOME', 'item': BASE + '/'},
-        {'@type': 'ListItem', 'position': 2, 'name': 'お店の仕組みづくり', 'item': BASE + _a['path']}]}]}
-_a_mailto = 'mailto:' + AUTO_MAIL + '?subject=' + urllib.parse.quote('仕組みづくりの相談（無料30分）')
-_a_demo = ''.join(f'<li>{esc(x)}</li>' for x in _a['demo'][1])
-_a_plans = ''
-for h, items, prices, note in _a['plans']:
-    _a_plans += (f'  <section class="auto-plan"><h3>{esc(h)}</h3><ul>' + ''.join(f'<li>{esc(x)}</li>' for x in items) + '</ul>'
-                 + '<dl class="auto-price">' + ''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in prices) + '</dl>'
-                 + f'<p class="auto-note">{esc(note)}</p></section>\n')
-_a_steps = ''.join(f'<li><strong>{esc(h)}</strong><br>{esc(b)}</li>' for h, b in _a['steps'])
+        {'@type': 'ListItem', 'position': 2, 'name': '小判鮫サポート', 'item': BASE + _a['path']}]}]}
+_a_mailto = 'mailto:' + AUTO_MAIL + '?subject=' + urllib.parse.quote('小判鮫サポートの見本（無料）')
+_a_merits = ''.join(f'<li>{esc(x)}</li>' for x in _a['merits'])
+_a_flow = ''.join(f'<li class="sp-{k}"><span class="sp-no">{n}</span><b>{esc(w)}</b><span class="sp-who">{"お店" if k == "shop" else "AI"}</span></li>' for n, w, k in _a['flow'])
+def _sp_price_html():
+    if SUPPORT_PRICE_MODE == 'none':
+        return '<p class="sp-pnote">料金は、見本のあとに料金表でお渡しします。</p>'
+    rows = SUPPORT_PRICE['monitor'] if SUPPORT_PRICE_MODE in ('monitor', 'both') else []
+    html_ = '<dl class="sp-price">' + ''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in rows) + '</dl>'
+    html_ += f'<p class="sp-pnote">{esc(SUPPORT_PRICE["monitor_note"])}</p>'
+    if SUPPORT_PRICE_MODE == 'both':
+        html_ += ('<p class="sp-pnote">モニター期間のあと：' + '・'.join(f'{esc(k)} {esc(v)}' for k, v in SUPPORT_PRICE['regular']) + '</p>')
+    return html_
+_a_steps = ''.join(f'<li><span class="sp-step">{esc(s)}</span><b>{esc(h)}</b><p>{esc(b)}</p></li>' for s, h, b in _a['steps'])
 _a_faq = ''.join(f'  <details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>\n' for q, a in _a['faq'])
 write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'], extra_ld=_a_ld) + f"""
 <style>
-.auto-plan{{border:1px solid var(--kin);padding:18px 18px 8px;margin:18px 0}}
-.auto-plan h3{{margin:0 0 10px;font-size:17px}}
-.auto-plan ul,.auto-demo,.auto-steps{{padding-left:1.2em;line-height:1.9}}
-.auto-price{{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;margin:12px 0 4px}}
-.auto-price dt{{opacity:.75}}
-.auto-price dd{{margin:0;font-weight:600}}
-.auto-note{{font-size:13px;opacity:.8}}
+.sp{{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;color:#1d1d1f;letter-spacing:.02em}}
+.sp h1,.sp h2,.sp h3{{font-family:inherit}}
+.sp-hero{{background:linear-gradient(160deg,#fff7e8 0%,#eaf5ff 100%);border-radius:20px;padding:30px 20px 26px;margin:14px 0 26px;text-align:center}}
+.sp-eye{{display:inline-block;background:#fff;border-radius:999px;padding:4px 14px;font-size:13px;font-weight:700;color:#e0701b}}
+.sp-hero h1{{font-size:clamp(26px,7.2vw,40px);line-height:1.35;font-weight:800;margin:14px 0 18px;letter-spacing:.01em}}
+.sp-merits{{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}}
+.sp-merits li{{background:#fff;border:2px solid #ffd39b;border-radius:999px;padding:6px 14px;font-size:14px;font-weight:700}}
+.sp h2{{font-size:21px;font-weight:800;margin:30px 0 14px;text-align:center}}
+.sp-legend{{text-align:center;font-size:13px;margin:-6px 0 12px}}
+.sp-legend span{{display:inline-block;border-radius:999px;padding:2px 10px;margin:0 4px;font-weight:700}}
+.sp-flow{{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}}
+.sp-flow li{{border-radius:14px;padding:12px 12px 10px;display:flex;flex-direction:column;gap:2px;min-height:86px}}
+.sp-flow b{{font-size:16px;font-weight:800}}
+.sp-no{{font-size:13px;font-weight:800;opacity:.7}}
+.sp-who{{margin-top:auto;font-size:12px;font-weight:700;align-self:flex-start;border-radius:999px;padding:1px 9px;background:#fff}}
+.sp-shop,.sp-legend .k-shop{{background:#ffe6c7;color:#7a3b00}}
+.sp-ai,.sp-legend .k-ai{{background:#dcefff;color:#0b4a80}}
+.sp-try{{background:#fff;border:3px solid #06c755;border-radius:20px;padding:22px 18px;margin:28px 0;text-align:center}}
+.sp-try h2{{margin-top:0}}
+.sp-try p{{margin:4px 0;font-size:16px}}
+.sp-line{{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 30px;margin:16px 0 10px;border-radius:999px;background:#06c755;color:#fff;font-size:17px;font-weight:800;text-decoration:none;letter-spacing:.06em}}
+.sp-small{{font-size:13px;color:#555}}
+.sp-steps{{list-style:none;padding:0;margin:0;display:grid;gap:10px}}
+.sp-steps li{{background:#f6f7f9;border-radius:14px;padding:12px 14px}}
+.sp-steps b{{font-size:16px;font-weight:800;margin-left:8px}}
+.sp-steps p{{margin:4px 0 0;font-size:14px;color:#333}}
+.sp-step{{display:inline-block;background:#1d1d1f;color:#fff;border-radius:6px;padding:0 8px;font-size:12px;font-weight:700}}
+.sp-price{{display:grid;grid-template-columns:auto auto;justify-content:center;gap:4px 16px;margin:14px 0 2px;font-size:16px}}
+.sp-price dd{{margin:0;font-weight:800}}
+.sp-pnote{{text-align:center;font-size:13px;color:#555;margin:4px 0}}
+.sp-stop{{background:#f6f7f9;border-radius:14px;padding:14px;text-align:center;margin-top:10px}}
+.sp-stop p{{margin:0}}
+.sp .faq details{{border-bottom:1px solid #e5e5e5;padding:10px 0}}
+.sp .faq summary{{font-weight:700}}
+.sp-contact{{text-align:center;font-size:13px;color:#555;margin:26px 0 8px}}
 </style>
-<main class="wrap page">
-  <h1>{esc(_a['h1'])}</h1>
-  <p>{esc(_a['lead'])}</p>
-  <h2>{esc(_a['demo'][0])}</h2>
-  <ul class="auto-demo">{_a_demo}</ul>
-  <h2>入れられる仕組み</h2>
-{_a_plans}  <h2>進め方</h2>
-  <ol class="auto-steps">{_a_steps}</ol>
+<main class="wrap page sp">
+  <section class="sp-hero">
+    <span class="sp-eye">{esc(_a['eyebrow'])}</span>
+    <h1>{esc(_a['h1'])}</h1>
+    <ul class="sp-merits">{_a_merits}</ul>
+  </section>
+
+  <h2>{esc(_a['flow_h'])}</h2>
+  <p class="sp-legend"><span class="k-shop">お店</span><span class="k-ai">AI</span></p>
+  <ol class="sp-flow">{_a_flow}</ol>
+
+  <section class="sp-try" id="try">
+    <h2>{esc(_a['try_h'])}</h2>
+    {''.join(f'<p>{esc(x)}</p>' for x in _a['try_p'])}
+    <a class="sp-line" href="{SUPPORT_LINE}" rel="noopener">{esc(_a['try_btn'])}</a>
+    <p>{esc(_a['try_ok'])}</p>
+    <p class="sp-small">{esc(_a['try_limit'])}</p>
+  </section>
+
+  <h2>{esc(_a['steps_h'])}</h2>
+  <ol class="sp-steps">{_a_steps}</ol>
+  {_sp_price_html()}
+
+  <h2>{esc(_a['stop_h'])}</h2>
+  <div class="sp-stop"><p>{esc(_a['stop_p'])}</p></div>
+
   <section class="faq" id="faq"><h2>Q&amp;A</h2>
 {_a_faq}  </section>
-  <h2>ご相談</h2>
-  <p>メールで「話を聞きたい」とだけ送ってください。日時はこちらから合わせます。</p>
-  <p style="margin-top:16px"><a class="btn" href="{_a_mailto}">無料30分の相談を申し込む</a></p>
-  <p style="font-size:13px;opacity:.8">送り先：<code>{esc(AUTO_MAIL)}</code>（株式会社プラグ 小判鮫）</p>
+
+  <p class="sp-contact">LINEが使えないときは：<a href="{_a_mailto}">{esc(AUTO_MAIL)}</a><br>株式会社プラグ 小判鮫サポート</p>
 </main>
 """ + foot('ja'))
 
@@ -2334,7 +2376,7 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 - [ジャーナル]({BASE}/journal/)
 - [川越で古着屋を探している方へ（案内）]({BASE}/guide/)
 - [ブログ]({BASE}/blog/)
-- [お店の仕組みづくり（出品・在庫・領収書の自動化のご相談）]({BASE}/automation/)
+- [小判鮫サポート（古着屋・一点ものの店向け：撮るだけでお店のサイトに並ぶ仕組み）]({BASE}/automation/)
 {'- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・' + ('10/24開催' if WS_BOOKING else '予約は準備中') + '）](' + BASE + '/workshop/)' + chr(10) if WS_OPEN else ''}- [English]({BASE}/en/)
 - [特定商取引法に基づく表記]({BASE}/tokushoho/)
 - [プライバシーポリシー]({BASE}/privacy/)
