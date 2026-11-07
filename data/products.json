@@ -1269,7 +1269,8 @@
     "url": "https://square.link/u/S7Hr6O8J",
     "order_id": "fNyUiqF7kEEpDekqhCfYZJPz4oAZY",
     "amount": 2200,
-    "created_at": "2026-10-06T02:19:31Z"
+    "created_at": "2026-10-06T02:19:31Z",
+    "closed": "deleted"
    }
   },
   "images": [
@@ -5212,7 +5213,8 @@
     "url": "https://square.link/u/U4MR6QKY",
     "order_id": "ZKsVgePbeth2YP3bmdq1UnPCHhWZY",
     "amount": 6380,
-    "created_at": "2026-10-24T11:34:16Z"
+    "created_at": "2026-10-24T11:34:16Z",
+    "closed": "deleted"
    },
    "square": "https://square.link/u/U4MR6QKY",
    "mercari": "https://jp.mercari.com/shops/product/2JYwGQDa6na4vaTR2cKmUZ"
