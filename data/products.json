@@ -6435,9 +6435,9 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-08",
   "links": {},
   "images": [
+   "/assets/products/k11450/v2_front.jpg",
+   "/assets/products/k11450/v2_back.jpg",
    "/assets/products/k11450/01.jpg",
-   "/assets/products/k11450/02.jpg",
-   "/assets/products/k11450/03.jpg",
    "/assets/products/k11450/04.jpg",
    "/assets/products/k11450/05.jpg",
    "/assets/products/k11450/06.jpg",
@@ -6448,7 +6448,7 @@
    "/assets/products/k11450/11.jpg",
    "/assets/products/k11450/12.jpg"
   ],
-  "thumb": "/assets/products/k11450/thumb.jpg",
+  "thumb": "/assets/products/k11450/v2_thumb.jpg",
   "summary_text": "ロンドンフォグのライトグレー・ロングレインコート。",
   "summary_points": [
    "アウター：ライトグレー（無地）／ライナー：ネイビーパイルのロングレインコート（フーデッド・パイルライナー付き）（ブランド：LONDON FOG）",
@@ -6507,7 +6507,46 @@
    ],
    "approved_at": "2026-11-08"
   },
-  "gender_by": "写真：レディース（タグサイズ「16 REG」は米国レディース号数表記、かつボタンが着る人から見て左側に付いている）"
+  "gender_by": "写真：レディース（タグサイズ「16 REG」は米国レディース号数表記、かつボタンが着る人から見て左側に付いている）",
+  "images_orig": [
+   "/assets/products/k11450/01.jpg",
+   "/assets/products/k11450/02.jpg",
+   "/assets/products/k11450/03.jpg",
+   "/assets/products/k11450/04.jpg",
+   "/assets/products/k11450/05.jpg",
+   "/assets/products/k11450/06.jpg",
+   "/assets/products/k11450/07.jpg",
+   "/assets/products/k11450/08.jpg",
+   "/assets/products/k11450/09.jpg",
+   "/assets/products/k11450/10.jpg",
+   "/assets/products/k11450/11.jpg",
+   "/assets/products/k11450/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-08",
+   "front_i": 2,
+   "back_i": 1,
+   "front_url": "/assets/products/k11450/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 121.8,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11450/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.1,
+    "garment_l": 138.1,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k11450/v2_mannequin.jpg",
+   "mannequin_body": "身長165cm・バスト83cm",
+   "measures": {
+    "身幅": 54.0,
+    "着丈": 110.0,
+    "肩幅": 47.0
+   }
+  }
  },
  {
   "sku": "K10562",
@@ -6529,7 +6568,8 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-08",
   "links": {},
   "images": [
-   "/assets/products/k10562/01.jpg",
+   "/assets/products/k10562/v2_front.jpg",
+   "/assets/products/k10562/v2_back.jpg",
    "/assets/products/k10562/02.jpg",
    "/assets/products/k10562/03.jpg",
    "/assets/products/k10562/04.jpg",
@@ -6537,12 +6577,11 @@
    "/assets/products/k10562/06.jpg",
    "/assets/products/k10562/07.jpg",
    "/assets/products/k10562/08.jpg",
-   "/assets/products/k10562/09.jpg",
    "/assets/products/k10562/10.jpg",
    "/assets/products/k10562/11.jpg",
    "/assets/products/k10562/12.jpg"
   ],
-  "thumb": "/assets/products/k10562/thumb.jpg",
+  "thumb": "/assets/products/k10562/v2_thumb.jpg",
   "summary_text": "マスタードイエローのウール胴体にネイビーのビニールスリーブ。「H」レターとチアリーディングのメガホン刺繍が入った、1970〜1980年代頃と思われるスタジャンです。",
   "summary_points": [
    "マスタードイエロー（ウール胴体）× ネイビー（ビニールスリーブ）、ゴールド×ネイビーのリブトリムのスタジャン（バーシティジャケット）",
@@ -6597,7 +6636,46 @@
    ],
    "approved_at": "2026-11-08"
   },
-  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に位置）"
+  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に位置）",
+  "images_orig": [
+   "/assets/products/k10562/01.jpg",
+   "/assets/products/k10562/02.jpg",
+   "/assets/products/k10562/03.jpg",
+   "/assets/products/k10562/04.jpg",
+   "/assets/products/k10562/05.jpg",
+   "/assets/products/k10562/06.jpg",
+   "/assets/products/k10562/07.jpg",
+   "/assets/products/k10562/08.jpg",
+   "/assets/products/k10562/09.jpg",
+   "/assets/products/k10562/10.jpg",
+   "/assets/products/k10562/11.jpg",
+   "/assets/products/k10562/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-08",
+   "front_i": 0,
+   "back_i": 8,
+   "front_url": "/assets/products/k10562/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.3,
+    "garment_l": 93.9,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k10562/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.3,
+    "garment_l": 91.2,
+    "bg": "normal"
+   },
+   "mannequin": "pending",
+   "mannequin_url": "/assets/products/k10562/v2_mannequin.jpg",
+   "mannequin_body": "身長175cm・胸囲90cm",
+   "measures": {
+    "身幅": 58.0,
+    "着丈": 58.0,
+    "肩幅": 58.0
+   }
+  }
  },
  {
   "sku": "K11494",
