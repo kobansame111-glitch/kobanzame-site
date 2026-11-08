@@ -4543,7 +4543,8 @@
     "url": "https://square.link/u/nGlVkE3u",
     "order_id": "bDW8QITO1t37N3zeRUS8rZnzTNIZY",
     "amount": 23980,
-    "created_at": "2026-10-22T11:34:18Z"
+    "created_at": "2026-10-22T11:34:18Z",
+    "closed": "deleted"
    },
    "square": "https://square.link/u/nGlVkE3u",
    "mercari": "https://jp.mercari.com/shops/product/2JYwG4s2SCpT2FkVabPxcz"
