@@ -6433,7 +6433,16 @@
    "mercari": 19580
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-08",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "EGYHML6RM4AALVQM",
+    "url": "https://square.link/u/auY8tf7C",
+    "order_id": "bFpXbvgwHLHoKIIVB9wNUnzz4n9YY",
+    "amount": 19580,
+    "created_at": "2026-11-08T11:34:15Z"
+   },
+   "square": "https://square.link/u/auY8tf7C"
+  },
   "images": [
    "/assets/products/k11450/v2_front.jpg",
    "/assets/products/k11450/v2_back.jpg",
@@ -6542,9 +6551,9 @@
    "mannequin_url": "/assets/products/k11450/v2_mannequin.jpg",
    "mannequin_body": "身長165cm・バスト83cm",
    "measures": {
-    "身幅": 54.0,
-    "着丈": 110.0,
-    "肩幅": 47.0
+    "身幅": 54,
+    "着丈": 110,
+    "肩幅": 47
    }
   }
  },
@@ -6566,7 +6575,16 @@
    "mercari": 18480
   },
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-08",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "CRC36SLPMRV3OPQZ",
+    "url": "https://square.link/u/7Tv8TKBa",
+    "order_id": "3l2JTnW1ePQ407en0eQdl9YQnObZY",
+    "amount": 18480,
+    "created_at": "2026-11-08T11:34:15Z"
+   },
+   "square": "https://square.link/u/7Tv8TKBa"
+  },
   "images": [
    "/assets/products/k10562/v2_front.jpg",
    "/assets/products/k10562/v2_back.jpg",
@@ -6671,9 +6689,9 @@
    "mannequin_url": "/assets/products/k10562/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
-    "身幅": 58.0,
-    "着丈": 58.0,
-    "肩幅": 58.0
+    "身幅": 58,
+    "着丈": 58,
+    "肩幅": 58
    }
   }
  },
