@@ -49,9 +49,9 @@ OLD_IMAGE_MODEL = 'gemini-2.5-flash-image'    # 2027-03-15 に終わる予定の
 # ---- お金のルール（円・推定）。料金が変わったらここを直す ----
 USD_JPY = 150.0                       # 為替（推定・固定）
 PRICE = {                             # 100万トークンあたりのドル（Google公表の料金。2026-11-09 に公式の料金ページで確かめた値）
-    TEXT_MODEL: {'in': 0.30, 'out': 2.50},
-    OLD_IMAGE_MODEL: {'in': 0.30, 'out': 30.0},   # 画像1枚の出力＝約1,290トークン＝0.039ドル＝約5.8円
-    IMAGE_MODEL: {'in': 0.25, 'out': 30.0},       # 1K の画像1枚＝1,120トークン＝0.0336ドル＝約5.0円
+    TEXT_MODEL: {'in': 0.30, 'out': 2.50, 'text_out': 2.50},
+    OLD_IMAGE_MODEL: {'in': 0.30, 'out': 30.0, 'text_out': 2.50},   # 画像1枚の出力＝約1,290トークン＝0.039ドル＝約5.8円
+    IMAGE_MODEL: {'in': 0.25, 'out': 30.0, 'text_out': 1.50},       # 1K の画像1枚＝1,120トークン＝0.0336ドル＝約5.0円。文字と考えた分は 1.50
 }
 IMAGE_OUT_TOKENS = {OLD_IMAGE_MODEL: 1290, IMAGE_MODEL: 1120}   # 画像1枚の出力トークン（見込みの計算用）
 BATCH_RATE = 0.5                      # Batch（まとめて頼む）は入力も出力も半額（公式の料金ページの Batch の表）
@@ -111,8 +111,14 @@ class Budget:
     def yen(model, usage, batch=False):
         p = PRICE.get(model, PRICE[OLD_IMAGE_MODEL])   # 知らないモデルは高い方で数える
         i = usage.get('promptTokenCount', 0) or 0
-        o = (usage.get('candidatesTokenCount', 0) or 0) + (usage.get('thoughtsTokenCount', 0) or 0)
-        return i, o, (i * p['in'] + o * p['out']) / 1e6 * USD_JPY * (BATCH_RATE if batch else 1.0)
+        cand = usage.get('candidatesTokenCount', 0) or 0
+        think = usage.get('thoughtsTokenCount', 0) or 0
+        o = cand + think
+        # 2026-11-09：出力の内訳（画像／文字）が返ってくる時は、画像の分だけ画像の料金、文字と考えた分は文字の料金で数える
+        # （1回目の見本で、新しい型の考えた分を画像の料金で数えて1枚 約6.6〜7.0円と高く出たため）。内訳が無い時は今まで通り高い方で
+        img = sum((d.get('tokenCount') or 0) for d in (usage.get('candidatesTokensDetails') or []) if d.get('modality') == 'IMAGE')
+        cost = (i * p['in'] + img * p['out'] + (o - img) * p['text_out']) if img else (i * p['in'] + o * p['out'])
+        return i, o, cost / 1e6 * USD_JPY * (BATCH_RATE if batch else 1.0)
 
     def record(self, sku, kind, model, res, images=0, batch=False):
         i, o, y = self.yen(model, (res or {}).get('usageMetadata') or {}, batch)
@@ -145,6 +151,8 @@ def gemini_logged(budget, sku, kind, model, parts, gen, images=0):
             csv.writer(f).writerow([now_jst().strftime('%Y-%m-%d %H:%M'), sku, kind + '（失敗・料金不明）', model, '', '', f'{est:.2f}', 0])
         raise
     y = budget.record(sku, kind, model, res, images)
+    if kind.startswith('見本'):   # 見本の時は、料金の内訳（トークン）もログに残す（PR に実測を書くため）
+        log(f'  {sku} {kind} 使ったトークン：{json.dumps(res.get("usageMetadata") or {}, ensure_ascii=False)[:400]}')
     return res, y
 
 
@@ -672,6 +680,15 @@ def sample_skus(text):
     return out[:3]
 
 
+def dump_b64(path, width=8000):
+    """ファイルを base64 にして、印つきの行に分けてログに出す（LOG_LINES には入れない）"""
+    data = base64.b64encode(open(path, 'rb').read()).decode()
+    name = os.path.basename(path)
+    chunks = [data[k:k + width] for k in range(0, len(data), width)]
+    for n, c in enumerate(chunks):
+        print(f'SAMPLE_B64 {name} {n + 1}/{len(chunks)} {c}', flush=True)
+
+
 def make_samples(products, budget):
     """見本だけを作る（商品データ・サイトの写真は変えない）。新旧の型で2枚ずつ、その場で作る（Batch を待たないので標準の料金）"""
     skus = sample_skus(open(SAMPLE_FILE, encoding='utf-8').read())
@@ -702,6 +719,11 @@ def make_samples(products, budget):
                 log(lines[-1])
     with open(os.path.join(od, 'README.txt'), 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines) + '\n')
+    # main 以外のブランチで動かすと、最後のコミットの段が止まって画像が残らない（2026-11-09 1回目）。
+    # 取り出せるように、画像をログにも文字で書き出す（公開リポジトリなのでログは誰でも見られる＝商品写真と同じ扱い）
+    for name in sorted(os.listdir(od)):
+        if name.endswith('.jpg'):
+            dump_b64(os.path.join(od, name))
     os.remove(SAMPLE_FILE)
     log(f'見本を {od} に作りました（SAMPLE_REQUEST は消しました）')
 

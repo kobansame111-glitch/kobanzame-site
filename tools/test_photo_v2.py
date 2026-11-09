@@ -29,6 +29,12 @@ check('直す前：古い型・その場で1枚＝約5.83円', old, 5.83)
 check('新しい型・その場で1枚＝約5.06円', new_std, 5.06)
 check('直した後：新しい型・まとめて1枚＝約2.53円（半額）', new_batch, 2.53)
 check('台帳の実測（2026-11-08 K10562：入力614・出力1290）を古い型で計算すると 5.83円', round(pv.Budget.yen(pv.OLD_IMAGE_MODEL, {'promptTokenCount': 614, 'candidatesTokenCount': 1290})[2], 2), 5.83)
+u = {'promptTokenCount': 1000, 'candidatesTokenCount': 1120, 'thoughtsTokenCount': 400,
+     'candidatesTokensDetails': [{'modality': 'IMAGE', 'tokenCount': 1120}]}
+check('内訳あり：画像1,120は画像の料金・考えた400は文字の料金（新しい型・その場）',
+      round(pv.Budget.yen(pv.IMAGE_MODEL, u)[2], 4), round((1000 * 0.25 + 1120 * 30 + 400 * 1.5) / 1e6 * 150, 4))
+check('内訳なし：今まで通り全部を画像の料金（高い方）', round(pv.Budget.yen(pv.IMAGE_MODEL, {'candidatesTokenCount': 1120, 'thoughtsTokenCount': 400})[2], 4),
+      round(1520 * 30 / 1e6 * 150, 4))
 check('知らない型は高い方（古い型）で数える', pv.Budget.yen('unknown', {'candidatesTokenCount': 1290})[2], pv.Budget.yen(pv.OLD_IMAGE_MODEL, {'candidatesTokenCount': 1290})[2])
 
 # ---- 純粋関数 ----
@@ -154,6 +160,12 @@ check('見本：新旧2枚ずつ（4枚）と README', sorted(os.listdir(d)), ['
 check('見本：その場で4回（古い型2・新しい型2）', [c[0] for c in calls], [f'models/{pv.OLD_IMAGE_MODEL}:generateContent'] * 2 + [f'models/{pv.IMAGE_MODEL}:generateContent'] * 2)
 check('見本：商品データは変えない', json.dumps(sp, sort_keys=True), before_json)
 check('見本：頼みのファイルは消す', os.path.exists(pv.SAMPLE_FILE), False)
+import contextlib  # noqa: E402
+buf = io.StringIO()
+with contextlib.redirect_stdout(buf):
+    pv.dump_b64(os.path.join(d, 'K90001_new_1.jpg'), width=100)
+parts = [ln.split(' ', 3) for ln in buf.getvalue().splitlines() if ln.startswith('SAMPLE_B64 ')]
+check('ログに書き出した画像を元に戻せる', base64.b64decode(''.join(p[3] for p in parts)), open(os.path.join(d, 'K90001_new_1.jpg'), 'rb').read())
 srows = [r for r in csv.DictReader(open(pv.COST_CSV, encoding='utf-8')) if r['処理'].startswith('見本')]
 check('見本の料金も台帳に4行（標準の料金）', [(r['モデル'], r['概算円']) for r in srows],
       [(pv.OLD_IMAGE_MODEL, f'{old:.2f}')] * 2 + [(pv.IMAGE_MODEL, f'{new_std:.2f}')] * 2)
