@@ -6818,7 +6818,7 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-09",
   "links": {},
   "images": [
-   "/assets/products/k11288/01.jpg",
+   "/assets/products/k11288/v2_front.jpg",
    "/assets/products/k11288/02.jpg",
    "/assets/products/k11288/03.jpg",
    "/assets/products/k11288/04.jpg",
@@ -6827,7 +6827,7 @@
    "/assets/products/k11288/07.jpg",
    "/assets/products/k11288/08.jpg"
   ],
-  "thumb": "/assets/products/k11288/thumb.jpg",
+  "thumb": "/assets/products/k11288/v2_thumb.jpg",
   "summary_text": "燻し仕上げのシルバーネックレス。小ぶりなハートトップに花柄の刻印が入り、経年の黒ずみが独特の落ち着きを作っています。",
   "summary_points": [
    "シルバー（燻し仕上げ・酸化による黒ずみあり）、ハート型ペンダントトップに花柄（フローラル）の刻印模様のシルバーネックレス（ハートモチーフペンダント）"
@@ -6873,7 +6873,28 @@
    ],
    "approved_at": "2026-11-09"
   },
-  "gender_by": "アクセサリー・小物は性別なし"
+  "gender_by": "アクセサリー・小物は性別なし",
+  "images_orig": [
+   "/assets/products/k11288/01.jpg",
+   "/assets/products/k11288/02.jpg",
+   "/assets/products/k11288/03.jpg",
+   "/assets/products/k11288/04.jpg",
+   "/assets/products/k11288/05.jpg",
+   "/assets/products/k11288/06.jpg",
+   "/assets/products/k11288/07.jpg",
+   "/assets/products/k11288/08.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-09",
+   "front_i": 0,
+   "back_i": -1,
+   "front_url": "/assets/products/k11288/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 155.7,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11286",
@@ -6895,17 +6916,17 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-09",
   "links": {},
   "images": [
-   "/assets/products/k11286/01.jpg",
+   "/assets/products/k11286/v2_front.jpg",
+   "/assets/products/k11286/v2_back.jpg",
    "/assets/products/k11286/02.jpg",
    "/assets/products/k11286/03.jpg",
-   "/assets/products/k11286/04.jpg",
    "/assets/products/k11286/05.jpg",
    "/assets/products/k11286/06.jpg",
    "/assets/products/k11286/07.jpg",
    "/assets/products/k11286/08.jpg",
    "/assets/products/k11286/09.jpg"
   ],
-  "thumb": "/assets/products/k11286/thumb.jpg",
+  "thumb": "/assets/products/k11286/v2_thumb.jpg",
   "summary_text": "裏面に「SAW」と「L」の刻印が入った、盾形シルバープレートのペンダントネックレスです。",
   "summary_points": [
    "シルバー（酸化による黒ずみあり）、チェーンはゴールド系のシルバーペンダントネックレス（盾形プレート）（ブランド：裏面に「SAW」と「L」の刻印あり）"
@@ -6954,7 +6975,35 @@
    ],
    "approved_at": "2026-11-09"
   },
-  "gender_by": "アクセサリー・小物は性別なし"
+  "gender_by": "アクセサリー・小物は性別なし",
+  "images_orig": [
+   "/assets/products/k11286/01.jpg",
+   "/assets/products/k11286/02.jpg",
+   "/assets/products/k11286/03.jpg",
+   "/assets/products/k11286/04.jpg",
+   "/assets/products/k11286/05.jpg",
+   "/assets/products/k11286/06.jpg",
+   "/assets/products/k11286/07.jpg",
+   "/assets/products/k11286/08.jpg",
+   "/assets/products/k11286/09.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-09",
+   "front_i": 3,
+   "back_i": 0,
+   "front_url": "/assets/products/k11286/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 138.1,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11286/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 151.1,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11509",
@@ -6976,9 +7025,9 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-09",
   "links": {},
   "images": [
-   "/assets/products/k11509/01.jpg",
+   "/assets/products/k11509/v2_front.jpg",
+   "/assets/products/k11509/v2_back.jpg",
    "/assets/products/k11509/02.jpg",
-   "/assets/products/k11509/03.jpg",
    "/assets/products/k11509/04.jpg",
    "/assets/products/k11509/05.jpg",
    "/assets/products/k11509/06.jpg",
@@ -6988,7 +7037,7 @@
    "/assets/products/k11509/10.jpg",
    "/assets/products/k11509/11.jpg"
   ],
-  "thumb": "/assets/products/k11509/thumb.jpg",
+  "thumb": "/assets/products/k11509/v2_thumb.jpg",
   "summary_text": "ブラックコードに5種のシルバーチャームを連ねた、民族工芸調のチョーカーネックレスです。1980〜2000年代頃のエスニックシルバーの手仕事感が、首元にそのまま出ます。",
   "summary_points": [
    "ブラックコード×シルバービーズ、シルバーチャーム5点（菱形花柄・長方形花柄・六角形幾何柄・バー縦縞柄・正方形花柄）のチャームネックレス（ビーズ×コード編みチョーカー）"
@@ -7034,6 +7083,36 @@
    ],
    "approved_at": "2026-11-09"
   },
-  "gender_by": "アクセサリー・小物は性別なし"
+  "gender_by": "アクセサリー・小物は性別なし",
+  "images_orig": [
+   "/assets/products/k11509/01.jpg",
+   "/assets/products/k11509/02.jpg",
+   "/assets/products/k11509/03.jpg",
+   "/assets/products/k11509/04.jpg",
+   "/assets/products/k11509/05.jpg",
+   "/assets/products/k11509/06.jpg",
+   "/assets/products/k11509/07.jpg",
+   "/assets/products/k11509/08.jpg",
+   "/assets/products/k11509/09.jpg",
+   "/assets/products/k11509/10.jpg",
+   "/assets/products/k11509/11.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-09",
+   "front_i": 0,
+   "back_i": 2,
+   "front_url": "/assets/products/k11509/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 158.9,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11509/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 148.3,
+    "bg": "normal"
+   }
+  }
  }
 ]
