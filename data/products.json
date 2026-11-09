@@ -6816,7 +6816,16 @@
    "mercari": 4950
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-09",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "GXRPEQZ5XI6RVBP2",
+    "url": "https://square.link/u/ErXSpWgS",
+    "order_id": "Rknfm8FNM7e78eTchZmMydXBPmCZY",
+    "amount": 4950,
+    "created_at": "2026-11-09T11:34:18Z"
+   },
+   "square": "https://square.link/u/ErXSpWgS"
+  },
   "images": [
    "/assets/products/k11288/v2_front.jpg",
    "/assets/products/k11288/02.jpg",
@@ -6890,7 +6899,7 @@
    "back_i": -1,
    "front_url": "/assets/products/k11288/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 155.7,
     "bg": "normal"
    }
@@ -6914,7 +6923,16 @@
    "mercari": 15180
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-09",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "VXEF2H2QTOAVAHEE",
+    "url": "https://square.link/u/jkBcIjVL",
+    "order_id": "dIChaLXUehZMSr4RPOEaLoH0Bu5YY",
+    "amount": 15180,
+    "created_at": "2026-11-09T11:34:19Z"
+   },
+   "square": "https://square.link/u/jkBcIjVL"
+  },
   "images": [
    "/assets/products/k11286/v2_front.jpg",
    "/assets/products/k11286/v2_back.jpg",
@@ -6993,13 +7011,13 @@
    "back_i": 0,
    "front_url": "/assets/products/k11286/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 138.1,
     "bg": "normal"
    },
    "back_url": "/assets/products/k11286/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 151.1,
     "bg": "normal"
    }
@@ -7023,7 +7041,16 @@
    "mercari": 16280
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-09",
-  "links": {},
+  "links": {
+   "square_qp": {
+    "id": "3TSAQA2O4I33ST35",
+    "url": "https://square.link/u/uqb06sAN",
+    "order_id": "bzmmBh7RsYWwmZsQpyMPQzDZdkFZY",
+    "amount": 16280,
+    "created_at": "2026-11-09T11:34:20Z"
+   },
+   "square": "https://square.link/u/uqb06sAN"
+  },
   "images": [
    "/assets/products/k11509/v2_front.jpg",
    "/assets/products/k11509/v2_back.jpg",
@@ -7103,13 +7130,13 @@
    "back_i": 2,
    "front_url": "/assets/products/k11509/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 158.9,
     "bg": "normal"
    },
    "back_url": "/assets/products/k11509/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 148.3,
     "bg": "normal"
    }
