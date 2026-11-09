@@ -156,9 +156,18 @@ def gemini_logged(budget, sku, kind, model, parts, gen, images=0):
     return res, y
 
 
+TYPICAL_USAGE = {   # 画像1枚の典型の使い方（2026-11-09 見本の実測）
+    OLD_IMAGE_MODEL: {'promptTokenCount': 614, 'candidatesTokenCount': 1290,
+                      'candidatesTokensDetails': [{'modality': 'IMAGE', 'tokenCount': 1290}]},
+    IMAGE_MODEL: {'promptTokenCount': 1476, 'candidatesTokenCount': 1600,     # 新しい型は写真の入力が1,120トークン・文字の出力が400〜470
+                  'candidatesTokensDetails': [{'modality': 'IMAGE', 'tokenCount': 1120}]},
+}
+
+
 def image_yen_estimate(model, batch=False):
-    """画像1枚の見込みの円（入力は写真1枚＋指示で約600トークン・2026-11-08 の実測 614 から）"""
-    return Budget.yen(model, {'promptTokenCount': 600, 'candidatesTokenCount': IMAGE_OUT_TOKENS.get(model, 1290)}, batch)[2]
+    """画像1枚の見込みの円（見本の実測から・少し多めに）"""
+    u = TYPICAL_USAGE.get(model) or {'promptTokenCount': 600, 'candidatesTokenCount': IMAGE_OUT_TOKENS.get(model, 1290)}
+    return Budget.yen(model, u, batch)[2]
 
 
 API = 'https://generativelanguage.googleapis.com/v1beta'

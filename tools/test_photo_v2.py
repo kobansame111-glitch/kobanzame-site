@@ -26,8 +26,8 @@ old = round(pv.image_yen_estimate(pv.OLD_IMAGE_MODEL), 2)
 new_std = round(pv.image_yen_estimate(pv.IMAGE_MODEL), 2)
 new_batch = round(pv.image_yen_estimate(pv.IMAGE_MODEL, batch=True), 2)
 check('直す前：古い型・その場で1枚＝約5.83円', old, 5.83)
-check('新しい型・その場で1枚＝約5.06円', new_std, 5.06)
-check('直した後：新しい型・まとめて1枚＝約2.53円（半額）', new_batch, 2.53)
+check('新しい型・その場で1枚＝約5.20円（11/9 見本の実測と同じ）', new_std, 5.2)
+check('直した後：新しい型・まとめて1枚＝約2.60円（半額）', new_batch, 2.6)
 check('台帳の実測（2026-11-08 K10562：入力614・出力1290）を古い型で計算すると 5.83円', round(pv.Budget.yen(pv.OLD_IMAGE_MODEL, {'promptTokenCount': 614, 'candidatesTokenCount': 1290})[2], 2), 5.83)
 u = {'promptTokenCount': 1000, 'candidatesTokenCount': 1120, 'thoughtsTokenCount': 400,
      'candidatesTokensDetails': [{'modality': 'IMAGE', 'tokenCount': 1120}]}
@@ -78,7 +78,7 @@ def fake_http(path, body=None, timeout=180):
         return {'name': 'batches/abc123', 'metadata': {'state': 'JOB_STATE_PENDING'}}
     if path.endswith(':generateContent'):
         return {'candidates': [{'content': {'parts': [{'inlineData': {'mimeType': 'image/png', 'data': PNG64}}]}}],
-                'usageMetadata': {'promptTokenCount': 600, 'candidatesTokenCount': pv.IMAGE_OUT_TOKENS.get(path.split('/')[1].split(':')[0], 1290)}}
+                'usageMetadata': pv.TYPICAL_USAGE[path.split('/')[1].split(':')[0]]}
     if path == 'batches/abc123':
         return {'name': path, 'done': STATE['state'] != 'JOB_STATE_RUNNING', 'metadata': {'state': STATE['state']},
                 'response': {'inlinedResponses': {'inlinedResponses': STATE['responses']}}}
@@ -121,7 +121,7 @@ STATE['state'] = 'JOB_STATE_SUCCEEDED'
 key0 = ps[0]['photo_v2']['mannequin_key']
 STATE['responses'] = [{'metadata': {'key': key0}, 'response': {
     'candidates': [{'content': {'parts': [{'inlineData': {'mimeType': 'image/png', 'data': PNG64}}]}}],
-    'usageMetadata': {'promptTokenCount': 600, 'candidatesTokenCount': 1120}}},
+    'usageMetadata': pv.TYPICAL_USAGE[pv.IMAGE_MODEL]}},
     {'metadata': {'key': ps[1]['photo_v2']['mannequin_key']}, 'error': {'code': 400, 'message': 'blocked'}}]
 budget2 = pv.Budget(ps)
 check('上限の計算：受け取り待ち2件ぶんを見込みで数える', round(budget2.reserved, 2), round(2 * new_batch, 2))
