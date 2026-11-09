@@ -6547,13 +6547,18 @@
     "garment_l": 138.1,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k11450/v2_mannequin.jpg",
    "mannequin_body": "身長165cm・バスト83cm",
    "measures": {
     "身幅": 54,
     "着丈": 110,
     "肩幅": 47
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-11-09",
+    "note": "③本物のフードのひもは平らな布のひもだけだが、AIは両側に黒いコードストッパーを足している（04.jpg と拡大して比較）。①グレー・ネイビーのパイル裏フード・前ボタン6つ・斜めポケット2つ・肩のヨーク・④着丈110cmで裾がすね中ほどは一致"
    }
   }
  },
@@ -6685,13 +6690,18 @@
     "garment_l": 91.2,
     "bg": "normal"
    },
-   "mannequin": "pending",
+   "mannequin": "ng",
    "mannequin_url": "/assets/products/k10562/v2_mannequin.jpg",
    "mannequin_body": "身長175cm・胸囲90cm",
    "measures": {
     "身幅": 58,
     "着丈": 58,
     "肩幅": 58
+   },
+   "mannequin_review": {
+    "by": "03出品担当(AI)",
+    "date": "2026-11-09",
+    "note": "②胸の「H」ワッペンの縦の文字「CHEERLEADER」が崩れて読めない（拡大して確認・無い文字を足している）。ウール地にも本物に無い細かい織り模様が出ている。①マスタード×ネイビー袖・③スナップ6つと裾の1つ・玉縁の斜めポケット2つ・④着丈58cmで裾が腰は一致"
    }
   }
  },
