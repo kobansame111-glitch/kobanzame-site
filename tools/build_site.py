@@ -120,6 +120,28 @@ def load_news():
 NEWS = load_news()
 NEWS_BAND = [n for n in NEWS if n['band']][:NEWS_BAND_MAX]
 
+# ---------- ブラックフライデー（2026-11-10 龍さん決定A）：期間中だけ、上に告知の帯 ----------
+# カートの割引（gas/site-automation/63c_cart_v1.gs の QC_SALES）と「必ず同じ日付・率」にする。
+# 帯は静的な HTML に埋め込み、見る人の時計ではなく「決まった時刻（日本時間）」で出す／隠す（下の f〜t を Date.now() と比べる）。
+# 終わりは「翌0:00・含まない」＝前日の 23:59 まで。商品ごとの値段に取り消し線・通常価格は出さない（二重価格表示を避ける）。
+BF_SALES = [
+    {'from': '2026-11-12 00:00', 'to': '2026-11-16 00:00', 'ja': 'BLACK FRIDAY ｜ カートで全品20%引き（11/15まで）', 'en': 'BLACK FRIDAY | 20% off all items at cart checkout (until Nov 15)'},
+    {'from': '2026-11-27 00:00', 'to': '2026-11-30 00:00', 'ja': 'BLACK FRIDAY ｜ カートで全品20%引き（11/29まで）', 'en': 'BLACK FRIDAY | 20% off all items at cart checkout (until Nov 29)'},
+]
+_JST = datetime.timezone(datetime.timedelta(hours=9))
+def _bf_ms(s):
+    return int(datetime.datetime.strptime(s, '%Y-%m-%d %H:%M').replace(tzinfo=_JST).timestamp() * 1000)
+BF_PERIODS = [{'f': _bf_ms(s['from']), 't': _bf_ms(s['to']), 'ja': s['ja'], 'en': s['en']} for s in BF_SALES]
+BF_STYLE = '<style>.bfband{background:#111;color:#fff;text-align:center;font-size:13px;letter-spacing:.04em;padding:7px 12px;font-weight:600;line-height:1.4}</style>'
+def bf_band(lang):
+    """期間中だけ出る告知の帯（期間外は何も出ない）。見る人の時計ではなく、決まった時刻（日本時間＝epoch）で出す／隠す。"""
+    if not BF_PERIODS:
+        return ''
+    data = json.dumps([{'f': p['f'], 't': p['t'], 'x': p[lang]} for p in BF_PERIODS], ensure_ascii=False)
+    return (BF_STYLE + '<div class="bfband" id="bfband" role="status" hidden></div>'
+            '<script>(function(){var P=' + data + ',n=Date.now(),b=document.getElementById("bfband");'
+            'for(var i=0;i<P.length;i++){if(n>=P[i].f&&n<P[i].t){b.textContent=P[i].x;b.hidden=false;break;}}})();</script>')
+
 # ---------- 文言（日本語／英語） ----------
 T = {
  'ja': {
@@ -1113,7 +1135,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 {beacon}{track}
 {verify}</head>
 <body>
-<div class="util">{t['util']}</div>{NEWS_JS if NEWS else ''}
+{bf_band(lang)}<div class="util">{t['util']}</div>{NEWS_JS if NEWS else ''}
 <header class="site"><div class="wrap">
   <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button><a class="cartlink" href="{pre(lang)}/cart/" aria-label="{'カート' if lang == 'ja' else 'Cart'}" hidden><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8zm3 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="ct">{'カート' if lang == 'ja' else 'Cart'}</span><span class="cartn"></span></a></div>
   <a class="logo" href="{pre(lang)}/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
