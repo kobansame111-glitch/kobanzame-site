@@ -7220,7 +7220,25 @@
    ],
    "approved_at": "2026-11-10"
   },
-  "gender_by": "アクセサリー・小物は性別なし"
+  "gender_by": "アクセサリー・小物は性別なし",
+  "images_orig": [
+   "/assets/products/k11512/01.jpg",
+   "/assets/products/k11512/02.jpg",
+   "/assets/products/k11512/03.jpg",
+   "/assets/products/k11512/04.jpg",
+   "/assets/products/k11512/05.jpg",
+   "/assets/products/k11512/06.jpg",
+   "/assets/products/k11512/07.jpg",
+   "/assets/products/k11512/08.jpg",
+   "/assets/products/k11512/09.jpg",
+   "/assets/products/k11512/10.jpg",
+   "/assets/products/k11512/11.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-10",
+   "front_i": -1,
+   "back_i": -1
+  }
  },
  {
   "sku": "K11517",
@@ -7313,13 +7331,13 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-10",
   "links": {},
   "images": [
-   "/assets/products/k11290/01.jpg",
+   "/assets/products/k11290/v2_front.jpg",
    "/assets/products/k11290/02.jpg",
    "/assets/products/k11290/03.jpg",
    "/assets/products/k11290/04.jpg",
    "/assets/products/k11290/05.jpg"
   ],
-  "thumb": "/assets/products/k11290/thumb.jpg",
+  "thumb": "/assets/products/k11290/v2_thumb.jpg",
   "summary_text": "クォーターフォイル型のペンダントトップに、ハンマードテクスチャーが入ったシルバー系ネックレスです。酸化による黒ずみが全体に乗り、使い込まれた落ち着きがあります。",
   "summary_points": [
    "シルバー系／酸化くすみありのネックレス（ペンダント）"
@@ -7365,6 +7383,24 @@
    ],
    "approved_at": "2026-11-10"
   },
-  "gender_by": "アクセサリー・小物は性別なし"
+  "gender_by": "アクセサリー・小物は性別なし",
+  "images_orig": [
+   "/assets/products/k11290/01.jpg",
+   "/assets/products/k11290/02.jpg",
+   "/assets/products/k11290/03.jpg",
+   "/assets/products/k11290/04.jpg",
+   "/assets/products/k11290/05.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-10",
+   "front_i": 0,
+   "back_i": -1,
+   "front_url": "/assets/products/k11290/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 156.1,
+    "bg": "normal"
+   }
+  }
  }
 ]
