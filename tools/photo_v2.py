@@ -18,6 +18,15 @@
       再開は、中身を確認してから data/ai_cost/STOP を消す。
 鍵：GEMINI_API_KEY（GitHub Secrets・値はログに出さない）。無ければ何もしない。
 失敗：その商品は元の写真のまま。HTTP ステータスと本文の先頭をログに出す（握り潰さない）。
+
+2026-11-09 龍さん「なるべくお金をかけずに」（v1.1）
+  ①マネキン画像の型を gemini-2.5-flash-image（2027-03-15 に終わる予定）から Nano Banana 2 Lite
+    （gemini-3.1-flash-lite-image・画像の型で一番安い・1K だけ）に替える。
+  ②マネキン画像は Batch（まとめて頼むと半額）で頼む。その回の実行では頼むだけ（mannequin=queued→batch）、
+    結果は次の回の実行で受け取って確認待ち（pending）にする。水曜の公開に間に合わない品は、今と同じくマネキンなしで出る
+    （マネキンは確認で OK が出た品だけ2枚目に入るため）。
+  ③見本：data/ai_cost/SAMPLE_REQUEST に品番（1行に1つ・3つまで）を書いて置くと、その回は見本だけを作る
+    （新旧の型で2枚ずつ・data/ai_cost/samples/YYYYMMDD/。商品データ・サイトは変えない）。作り終えたらファイルを消す。
 """
 import base64, csv, datetime, io, json, os, re, sys, urllib.request, urllib.error
 
@@ -26,21 +35,27 @@ DATA = os.path.join(ROOT, 'data', 'products.json')
 COST_DIR = os.path.join(ROOT, 'data', 'ai_cost')
 COST_CSV = os.path.join(COST_DIR, 'photo_v2.csv')
 STOP_FILE = os.path.join(COST_DIR, 'STOP')
+SAMPLE_FILE = os.path.join(COST_DIR, 'SAMPLE_REQUEST')   # 見本を作る頼み（品番を1行に1つ）
+SAMPLE_DIR = os.path.join(COST_DIR, 'samples')
 SITE = 'https://kobanzame-kawagoe.com'
 JST = datetime.timezone(datetime.timedelta(hours=9))
 
 PHOTO_V2_FROM = os.environ.get('PHOTO_V2_FROM', '2026-10-09')   # この日以降に公開された商品だけ
 MAX_PER_RUN = int(os.environ.get('PHOTO_V2_MAX', '5'))           # 1回に処理する商品の上限（時間・費用の暴走防止）
 TEXT_MODEL = 'gemini-2.5-flash'
-IMAGE_MODEL = 'gemini-2.5-flash-image'
+IMAGE_MODEL = 'gemini-3.1-flash-lite-image'   # 2026-11-09 Nano Banana 2 Lite（画像の型で一番安い・1K だけ）
+OLD_IMAGE_MODEL = 'gemini-2.5-flash-image'    # 2027-03-15 に終わる予定の型。見本の比べ用と、昔の台帳の行の料金用に残す
 
 # ---- お金のルール（円・推定）。料金が変わったらここを直す ----
 USD_JPY = 150.0                       # 為替（推定・固定）
-PRICE = {                             # 100万トークンあたりのドル（Google公表の料金。2026-10 時点の値を手で入れたもの）
-    TEXT_MODEL: {'in': 0.30, 'out': 2.50},
-    IMAGE_MODEL: {'in': 0.30, 'out': 30.0},   # 画像1枚の出力＝約1,290トークン＝約0.039ドル＝約6円
+PRICE = {                             # 100万トークンあたりのドル（Google公表の料金。2026-11-09 に公式の料金ページで確かめた値）
+    TEXT_MODEL: {'in': 0.30, 'out': 2.50, 'text_out': 2.50},
+    OLD_IMAGE_MODEL: {'in': 0.30, 'out': 30.0, 'text_out': 2.50},   # 画像1枚の出力＝約1,290トークン＝0.039ドル＝約5.8円
+    IMAGE_MODEL: {'in': 0.25, 'out': 30.0, 'text_out': 1.50},       # 1K の画像1枚＝1,120トークン＝0.0336ドル＝約5.0円。文字と考えた分は 1.50
 }
-STOP_PER_IMAGE_YEN = 15.0             # 画像1枚を作るのにこれを超えたら止める（ふだんは約6円）
+IMAGE_OUT_TOKENS = {OLD_IMAGE_MODEL: 1290, IMAGE_MODEL: 1120}   # 画像1枚の出力トークン（見込みの計算用）
+BATCH_RATE = 0.5                      # Batch（まとめて頼む）は入力も出力も半額（公式の料金ページの Batch の表）
+STOP_PER_IMAGE_YEN = 15.0             # 画像1枚を作るのにこれを超えたら止める（ふだんは約2.5円・見本だけ約5〜6円）
 MONTH_CAP_YEN = 1000.0                # この処理の1か月の上限（Googleの上限1,500円の内側。21番・ジャンル判定の分を残す）
 
 BG = (243, 241, 236)                  # サイト共通の背景色（オフホワイト）
@@ -75,13 +90,15 @@ def now_jst():
 class Budget:
     HEADER = ['日時', '品番', '処理', 'モデル', '入力トークン', '出力トークン', '概算円', '作った画像']
 
-    def __init__(self):
+    def __init__(self, products=None):
         os.makedirs(COST_DIR, exist_ok=True)
         if not os.path.exists(COST_CSV):
             with open(COST_CSV, 'w', newline='', encoding='utf-8') as f:
                 csv.writer(f).writerow(self.HEADER)
         self.month = now_jst().strftime('%Y-%m')
         self.spent = 0.0
+        # まとめて頼んで、まだ受け取っていない分（料金は受け取った時に台帳へ）は、上限の計算では使ったものとして数える
+        self.reserved = image_yen_estimate(IMAGE_MODEL, batch=True) * len(waiting_products(products or []))
         with open(COST_CSV, encoding='utf-8') as f:
             for r in csv.DictReader(f):
                 if str(r.get('日時', '')).startswith(self.month):
@@ -91,21 +108,27 @@ class Budget:
                         log(f'台帳の読めない行を飛ばしました：{r}')
 
     @staticmethod
-    def yen(model, usage):
-        p = PRICE.get(model, PRICE[IMAGE_MODEL])   # 知らないモデルは高い方で数える
+    def yen(model, usage, batch=False):
+        p = PRICE.get(model, PRICE[OLD_IMAGE_MODEL])   # 知らないモデルは高い方で数える
         i = usage.get('promptTokenCount', 0) or 0
-        o = (usage.get('candidatesTokenCount', 0) or 0) + (usage.get('thoughtsTokenCount', 0) or 0)
-        return i, o, (i * p['in'] + o * p['out']) / 1e6 * USD_JPY
+        cand = usage.get('candidatesTokenCount', 0) or 0
+        think = usage.get('thoughtsTokenCount', 0) or 0
+        o = cand + think
+        # 2026-11-09：出力の内訳（画像／文字）が返ってくる時は、画像の分だけ画像の料金、文字と考えた分は文字の料金で数える
+        # （1回目の見本で、新しい型の考えた分を画像の料金で数えて1枚 約6.6〜7.0円と高く出たため）。内訳が無い時は今まで通り高い方で
+        img = sum((d.get('tokenCount') or 0) for d in (usage.get('candidatesTokensDetails') or []) if d.get('modality') == 'IMAGE')
+        cost = (i * p['in'] + img * p['out'] + (o - img) * p['text_out']) if img else (i * p['in'] + o * p['out'])
+        return i, o, cost / 1e6 * USD_JPY * (BATCH_RATE if batch else 1.0)
 
-    def record(self, sku, kind, model, res, images=0):
-        i, o, y = self.yen(model, (res or {}).get('usageMetadata') or {})
+    def record(self, sku, kind, model, res, images=0, batch=False):
+        i, o, y = self.yen(model, (res or {}).get('usageMetadata') or {}, batch)
         self.spent += y
         with open(COST_CSV, 'a', newline='', encoding='utf-8') as f:
             csv.writer(f).writerow([now_jst().strftime('%Y-%m-%d %H:%M'), sku, kind, model, i, o, f'{y:.2f}', images])
         return y
 
     def can_spend(self, est):
-        return self.spent + est <= MONTH_CAP_YEN
+        return self.spent + self.reserved + est <= MONTH_CAP_YEN
 
     @staticmethod
     def stop(reason):
@@ -122,25 +145,48 @@ def gemini_logged(budget, sku, kind, model, parts, gen, images=0):
     try:
         res = gemini(model, parts, gen)
     except Exception as e:
-        est = 0.0 if model == TEXT_MODEL else Budget.yen(model, {'promptTokenCount': 500, 'candidatesTokenCount': 1290})[2]
+        est = 0.0 if model == TEXT_MODEL else image_yen_estimate(model)
         budget.spent += est
         with open(COST_CSV, 'a', newline='', encoding='utf-8') as f:
             csv.writer(f).writerow([now_jst().strftime('%Y-%m-%d %H:%M'), sku, kind + '（失敗・料金不明）', model, '', '', f'{est:.2f}', 0])
         raise
     y = budget.record(sku, kind, model, res, images)
+    if kind.startswith('見本'):   # 見本の時は、料金の内訳（トークン）もログに残す（PR に実測を書くため）
+        log(f'  {sku} {kind} 使ったトークン：{json.dumps(res.get("usageMetadata") or {}, ensure_ascii=False)[:400]}')
     return res, y
 
 
-def gemini(model, parts, gen):
-    body = {'contents': [{'parts': parts}], 'generationConfig': gen}
-    url = f'https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent'
-    req = urllib.request.Request(url, data=json.dumps(body).encode(), method='POST',
+TYPICAL_USAGE = {   # 画像1枚の典型の使い方（2026-11-09 見本の実測）
+    OLD_IMAGE_MODEL: {'promptTokenCount': 614, 'candidatesTokenCount': 1290,
+                      'candidatesTokensDetails': [{'modality': 'IMAGE', 'tokenCount': 1290}]},
+    IMAGE_MODEL: {'promptTokenCount': 1476, 'candidatesTokenCount': 1600,     # 新しい型は写真の入力が1,120トークン・文字の出力が400〜470
+                  'candidatesTokensDetails': [{'modality': 'IMAGE', 'tokenCount': 1120}]},
+}
+
+
+def image_yen_estimate(model, batch=False):
+    """画像1枚の見込みの円（見本の実測から・少し多めに）"""
+    u = TYPICAL_USAGE.get(model) or {'promptTokenCount': 600, 'candidatesTokenCount': IMAGE_OUT_TOKENS.get(model, 1290)}
+    return Budget.yen(model, u, batch)[2]
+
+
+API = 'https://generativelanguage.googleapis.com/v1beta'
+
+
+def gemini_http(path, body=None, timeout=180):
+    """Gemini の REST を呼ぶ（body が無ければ GET）。HTTP の失敗は本文の先頭つきで RuntimeError にする"""
+    req = urllib.request.Request(f'{API}/{path}', data=json.dumps(body).encode() if body is not None else None,
+                                 method='POST' if body is not None else 'GET',
                                  headers={'Content-Type': 'application/json', 'x-goog-api-key': os.environ['GEMINI_API_KEY']})
     try:
-        with urllib.request.urlopen(req, timeout=180) as r:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
             return json.loads(r.read().decode())
     except urllib.error.HTTPError as e:
         raise RuntimeError(f'Gemini HTTP {e.code}：{e.read().decode(errors="replace")[:400]}')
+
+
+def gemini(model, parts, gen):
+    return gemini_http(f'models/{model}:generateContent', {'contents': [{'parts': parts}], 'generationConfig': gen})
 
 
 def img_part(im, q=88):
@@ -442,9 +488,8 @@ def fit_text(p, b, m):
     return ' '.join(lines)
 
 
-def mannequin_image(p, front, b, m, budget):
-    from PIL import Image
-    prompt = ('This photo shows a vintage garment for sale. Create a new product photo of EXACTLY this same garment worn by '
+def mannequin_prompt(p, b, m):
+    return ('This photo shows a vintage garment for sale. Create a new product photo of EXACTLY this same garment worn by '
               'a plain matte white full-body mannequin without facial features, standing straight, front view. '
               'Show the whole mannequin from head to feet. Keep the garment identical: same color, pattern, print, logos, tags, '
               'buttons (same number), stitching, fabric texture, fading, wear and proportions. Do not add, remove or redesign '
@@ -455,16 +500,241 @@ def mannequin_image(p, front, b, m, budget):
               'Do not draw price tags, paper tags, labels hanging from the garment, or hangers. '
               'The mannequin must have realistic adult proportions: legs are about half of the total height, crotch at about 47% of the height from the floor. '
               + fit_text(p, b, m))
-    res, y = gemini_logged(budget, p['sku'], 'マネキン画像', IMAGE_MODEL, [img_part(front), {'text': prompt}],
-                           {'responseModalities': ['IMAGE', 'TEXT']}, images=1)
-    if y > STOP_PER_IMAGE_YEN:
-        Budget.stop(f'{p["sku"]} のマネキン画像1枚が {y:.1f}円（上限 {STOP_PER_IMAGE_YEN:.0f}円）')
+
+
+MANNEQUIN_GEN = {'responseModalities': ['IMAGE', 'TEXT']}   # 新しい型は 1K だけなので大きさの指定はしない（既定が 1K）
+
+
+def front_part(front):
+    """元の写真（長い辺を2048画素まで・まとめて頼む時の大きさの上限20MBに余裕を持たせる）"""
+    small = front.copy(); small.thumbnail((2048, 2048))
+    return img_part(small)
+
+
+def image_from_response(res):
+    """Gemini の返事から画像を1枚取り出す。無ければ理由つきで RuntimeError（純粋関数に近い・テスト対象）"""
+    from PIL import Image
     for part in ((res.get('candidates') or [{}])[0].get('content') or {}).get('parts', []):
         d = part.get('inlineData') or part.get('inline_data')
         if d and d.get('data'):
             return Image.open(io.BytesIO(base64.b64decode(d['data']))).convert('RGB')
     c = (res.get('candidates') or [{}])[0]
     raise RuntimeError(f'マネキン画像が返ってきません finish={c.get("finishReason")} {json.dumps(res.get("promptFeedback", {}))[:200]} {text_of(res)[:120]}')
+
+
+def mannequin_image(p, front, b, m, budget, model=IMAGE_MODEL, kind='マネキン画像'):
+    """その場で1枚作る（見本づくり用。ふだんのマネキン画像は Batch で頼む）"""
+    res, y = gemini_logged(budget, p['sku'], kind, model, [front_part(front), {'text': mannequin_prompt(p, b, m)}],
+                           MANNEQUIN_GEN, images=1)
+    if y > STOP_PER_IMAGE_YEN:
+        Budget.stop(f'{p["sku"]} のマネキン画像1枚が {y:.1f}円（上限 {STOP_PER_IMAGE_YEN:.0f}円）')
+    return image_from_response(res)
+
+
+def finish_mannequin(raw, b):
+    """AIの画像 → 背景をそろえて置き、下に「AI作成」の一文を入れる"""
+    from PIL import Image
+    rgba = raw.convert('RGBA'); rgba.putalpha(Image.fromarray((edge_alpha(raw) * 255).astype('uint8')))
+    return caption(place(rgba, MANNEQUIN_H, 0.9, shadow=False),
+                   f'{b["label"]}のマネキン着用イメージ（AI作成／サイズ感は実寸からの推定）')
+
+
+# ===== マネキン画像を Batch（まとめて・半額）で頼む／受け取る（2026-11-09） ==================
+
+BATCH_MAX = 20                         # 1回にまとめて頼む上限（1件 約0.5MB なので 20MB に余裕あり）
+BATCH_WAIT_STATES = ('PENDING', 'RUNNING', 'UNSPECIFIED', '')
+
+
+def waiting_products(products):
+    """頼む前（queued）と、頼んで受け取る前（batch）の商品"""
+    return [p for p in products if (p.get('photo_v2') or {}).get('mannequin') in ('queued', 'batch')]
+
+
+def batch_state(st):
+    """Batch の状態を短い言葉に（JOB_STATE_SUCCEEDED / BATCH_STATE_SUCCEEDED → SUCCEEDED）。done=false なら RUNNING（純粋関数・テスト対象）"""
+    s = str((st.get('metadata') or {}).get('state') or st.get('state') or '')
+    s = s.split('_STATE_')[-1] if '_STATE_' in s else s
+    if not s and st.get('done') is False:
+        return 'RUNNING'
+    return s
+
+
+def inlined_responses(st):
+    """終わった Batch から、1件ずつの返事の一覧を取り出す（置き場所が2通りあるので両方見る・純粋関数・テスト対象）"""
+    for holder in (st.get('response') or {}, (st.get('metadata') or {}).get('output') or {}, st.get('dest') or {}, st.get('output') or {}):
+        ir = holder.get('inlinedResponses')
+        if isinstance(ir, dict):
+            ir = ir.get('inlinedResponses')
+        if isinstance(ir, list):
+            return ir
+    return []
+
+
+def batch_body(items, stamp):
+    """items＝[(key, request)] → batchGenerateContent に送る本文（純粋関数・テスト対象）"""
+    return {'batch': {'display_name': f'kobanzame-mannequin-{stamp}',
+                      'input_config': {'requests': {'requests': [{'request': r, 'metadata': {'key': k}} for k, r in items]}}}}
+
+
+def mark_queued(v, p, b, m):
+    """マネキン画像を「頼む予定」にする（この回の最後にまとめて頼む）"""
+    v.update({'mannequin': 'queued', 'mannequin_body': b['label'], 'measures': m})
+    v.pop('mannequin_url', None)      # 前の画像（NG になった物など）は使わない
+    v.pop('mannequin_error', None)
+
+
+def submit_batch(products, budget):
+    """queued の商品をまとめて1つの Batch で頼む。成功→ batch（名前と鍵を残す）、失敗→ error。頼んだ数を返す"""
+    queued = [p for p in products if (p.get('photo_v2') or {}).get('mannequin') == 'queued'][:BATCH_MAX]
+    if not queued:
+        return 0
+    stamp = now_jst().strftime('%Y%m%d-%H%M')
+    items, ok = [], []
+    for p in queued:
+        v = p['photo_v2']
+        try:
+            src = p.get('images_orig') or p['images']
+            fi = v.get('front_i', 0)
+            front = load_image(src[fi] if isinstance(fi, int) and 0 <= fi < len(src) else src[0])
+            b, m = body_for(p), parse_measures(p)
+            items.append((f'{p["sku"]}-{stamp}', {'contents': [{'parts': [front_part(front), {'text': mannequin_prompt(p, b, m)}]}],
+                                                   'generationConfig': MANNEQUIN_GEN}))
+            ok.append(p)
+        except Exception as e:
+            v.update({'mannequin': 'error', 'mannequin_error': f'頼む前の準備で失敗：{e!r}'[:300]})
+            log(f'{p["sku"]}: マネキン画像を頼めません：{e!r}')
+    if not items:
+        return 0
+    try:
+        res = gemini_http(f'models/{IMAGE_MODEL}:batchGenerateContent', batch_body(items, stamp), timeout=300)
+        name = res.get('name') or (res.get('metadata') or {}).get('name')
+        if not name:
+            raise RuntimeError(f'Batch の名前が返ってきません：{json.dumps(res)[:200]}')
+    except Exception as e:
+        for p in ok:
+            p['photo_v2'].update({'mannequin': 'error', 'mannequin_error': f'まとめて頼めませんでした：{e!r}'[:300]})
+        log(f'マネキン画像をまとめて頼めませんでした（{len(ok)}件・マネキンなしのまま）：{e!r}')
+        return 0
+    for (key, _), p in zip(items, ok):
+        p['photo_v2'].update({'mannequin': 'batch', 'mannequin_batch': name, 'mannequin_key': key,
+                              'mannequin_model': IMAGE_MODEL, 'mannequin_asked': now_jst().strftime('%Y-%m-%d %H:%M')})
+    log(f'マネキン画像を {len(ok)}件 まとめて頼みました（{name}・結果は次の回の実行で受け取る）')
+    return len(ok)
+
+
+def collect_batches(products, budget):
+    """頼んであった Batch の結果を受け取る。終わった分は画像にして確認待ち（pending）へ。料金は1枚ずつ台帳へ。変えた数を返す"""
+    groups = {}
+    for p in products:
+        v = p.get('photo_v2') or {}
+        if v.get('mannequin') == 'batch' and v.get('mannequin_batch'):
+            groups.setdefault(v['mannequin_batch'], []).append(p)
+    changed = 0
+    for name, ps in groups.items():
+        try:
+            st = gemini_http(name, timeout=120)
+        except Exception as e:
+            log(f'Batch {name} の様子が読めません（次の回にもう一度）：{e!r}')
+            continue
+        state = batch_state(st)
+        if state in BATCH_WAIT_STATES:
+            log(f'Batch {name}：まだ終わっていません（{state or "不明"}・{len(ps)}件）')
+            continue
+        if state != 'SUCCEEDED':
+            for p in ps:
+                p['photo_v2'].update({'mannequin': 'error', 'mannequin_error': f'まとめて頼んだ分が {state} で終わりました'})
+            log(f'Batch {name}：{state}（{len(ps)}件はマネキンなしのまま）')
+            changed += len(ps)
+            continue
+        by_key = {str((r.get('metadata') or {}).get('key')): r for r in inlined_responses(st)}
+        for p in ps:
+            v = p['photo_v2']
+            r = by_key.get(str(v.get('mannequin_key')))
+            changed += 1
+            try:
+                if not r:
+                    raise RuntimeError('結果の一覧にこの品がありません')
+                if r.get('error'):
+                    raise RuntimeError(f'エラー：{json.dumps(r["error"], ensure_ascii=False)[:200]}')
+                res = r.get('response') or {}
+                y = budget.record(p['sku'], 'マネキン画像（まとめて）', v.get('mannequin_model') or IMAGE_MODEL, res, images=1, batch=True)
+                budget.reserved = max(0.0, budget.reserved - image_yen_estimate(IMAGE_MODEL, batch=True))
+                if y > STOP_PER_IMAGE_YEN:
+                    Budget.stop(f'{p["sku"]} のマネキン画像1枚が {y:.1f}円（上限 {STOP_PER_IMAGE_YEN:.0f}円）')
+                b = body_for(p)
+                rel = f'/assets/products/{p["sku"].lower()}'
+                od = os.path.join(ROOT, rel.lstrip('/')); os.makedirs(od, exist_ok=True)
+                finish_mannequin(image_from_response(res), b).save(os.path.join(od, 'v2_mannequin.jpg'), quality=88, optimize=True)
+                for k in ('mannequin_batch', 'mannequin_key', 'mannequin_error'):
+                    v.pop(k, None)
+                v.update({'mannequin': 'pending', 'mannequin_url': f'{rel}/v2_mannequin.jpg', 'mannequin_body': b['label'],
+                          'mannequin_date': now_jst().strftime('%Y-%m-%d')})
+                log(f'{p["sku"]}: マネキン画像を受け取りました（確認待ち）')
+            except Exception as e:
+                v.update({'mannequin': 'error', 'mannequin_error': repr(e)[:300]})
+                for k in ('mannequin_batch', 'mannequin_key'):
+                    v.pop(k, None)
+                log(f'{p["sku"]}: マネキン画像の受け取りで失敗（マネキンなしのまま）：{e!r}')
+    return changed
+
+
+# ===== 見本（新旧の型で2枚ずつ・2026-11-09） ==========================================
+
+def sample_skus(text):
+    """SAMPLE_REQUEST の中身から品番を取り出す（K＋5桁・重なりなし・3つまで。純粋関数・テスト対象）"""
+    out = []
+    for s in re.findall(r'\bK\d{5}\b', text.upper()):
+        if s not in out:
+            out.append(s)
+    return out[:3]
+
+
+def dump_b64(path, width=8000):
+    """ファイルを base64 にして、印つきの行に分けてログに出す（LOG_LINES には入れない）"""
+    data = base64.b64encode(open(path, 'rb').read()).decode()
+    name = os.path.basename(path)
+    chunks = [data[k:k + width] for k in range(0, len(data), width)]
+    for n, c in enumerate(chunks):
+        print(f'SAMPLE_B64 {name} {n + 1}/{len(chunks)} {c}', flush=True)
+
+
+def make_samples(products, budget):
+    """見本だけを作る（商品データ・サイトの写真は変えない）。新旧の型で2枚ずつ、その場で作る（Batch を待たないので標準の料金）"""
+    skus = sample_skus(open(SAMPLE_FILE, encoding='utf-8').read())
+    od = os.path.join(SAMPLE_DIR, now_jst().strftime('%Y%m%d')); os.makedirs(od, exist_ok=True)
+    lines = [f'マネキン画像の見本（{now_jst():%Y-%m-%d %H:%M}・旧＝{OLD_IMAGE_MODEL}／新＝{IMAGE_MODEL}）']
+    for sku in skus:
+        p = next((x for x in products if x.get('sku') == sku), None)
+        if not p:
+            lines.append(f'{sku}：商品データに無い'); continue
+        v = p.get('photo_v2') or {}
+        src = p.get('images_orig') or p.get('images') or []
+        fi = v.get('front_i', 0)
+        if not src:
+            lines.append(f'{sku}：写真が無い'); continue
+        front = load_image(src[fi] if isinstance(fi, int) and 0 <= fi < len(src) else src[0])
+        b, m = body_for(p), parse_measures(p)
+        for model, tag in ((OLD_IMAGE_MODEL, 'old'), (IMAGE_MODEL, 'new')):
+            for n in (1, 2):
+                if os.path.exists(STOP_FILE) or not budget.can_spend(STOP_PER_IMAGE_YEN):
+                    lines.append(f'{sku} {tag}{n}：お金の上限で作らず'); continue
+                before = budget.spent
+                try:
+                    finish_mannequin(mannequin_image(p, front, b, m, budget, model, f'見本（{"旧" if tag == "old" else "新"}の型）'), b).save(
+                        os.path.join(od, f'{sku}_{tag}_{n}.jpg'), quality=88, optimize=True)
+                    lines.append(f'{sku}_{tag}_{n}.jpg：{budget.spent - before:.2f}円')
+                except Exception as e:
+                    lines.append(f'{sku} {tag}{n}：失敗 {e!r}'[:300])
+                log(lines[-1])
+    with open(os.path.join(od, 'README.txt'), 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines) + '\n')
+    # main 以外のブランチで動かすと、最後のコミットの段が止まって画像が残らない（2026-11-09 1回目）。
+    # 取り出せるように、画像をログにも文字で書き出す（公開リポジトリなのでログは誰でも見られる＝商品写真と同じ扱い）
+    for name in sorted(os.listdir(od)):
+        if name.endswith('.jpg'):
+            dump_b64(os.path.join(od, name))
+    os.remove(SAMPLE_FILE)
+    log(f'見本を {od} に作りました（SAMPLE_REQUEST は消しました）')
 
 
 def caption(im, text):
@@ -557,26 +827,16 @@ def process(p, budget):
             log(f'{sku} {key}: 失敗 → 元の写真のまま：{e!r}')
     v = {'date': now_jst().strftime('%Y-%m-%d'), 'front_i': front_i, 'back_i': back_i,
          **{(k if k.endswith(('_error', '_check')) else k + '_url'): u for k, u in urls.items()}}
-    # マネキン（服のジャンルだけ・確認待ちで作る）
+    # マネキン（服のジャンルだけ）。2026-11-09：この回は「頼む予定」にするだけ。回の最後に Batch でまとめて頼み、次の回で受け取る
     if p.get('genre') in CLOTHES and front_i >= 0 and not os.path.exists(STOP_FILE) and os.environ.get('PHOTO_V2_NO_MANNEQUIN') != '1':
-        if not budget.can_spend(STOP_PER_IMAGE_YEN):
+        if not budget.can_spend(image_yen_estimate(IMAGE_MODEL, batch=True)):
             v['mannequin'] = 'skipped-budget'
             Budget.stop(f'この月の写真v2のAI代が上限 {MONTH_CAP_YEN:.0f}円 に届きました（使用 {budget.spent:.0f}円）')
         else:
             b, m = body_for(p), parse_measures(p)
-            try:
-                raw = mannequin_image(p, images[front_i], b, m, budget)
-                from PIL import Image
-                rgba = raw.convert('RGBA'); rgba.putalpha(Image.fromarray((edge_alpha(raw) * 255).astype('uint8')))
-                caption(place(rgba, MANNEQUIN_H, 0.9, shadow=False),
-                        f'{b["label"]}のマネキン着用イメージ（AI作成／サイズ感は実寸からの推定）').save(
-                    os.path.join(od, 'v2_mannequin.jpg'), quality=88, optimize=True)
-                v.update({'mannequin': 'pending', 'mannequin_url': f'{rel}/v2_mannequin.jpg', 'mannequin_body': b['label'],
-                          'measures': m})
-                log(f'{sku}: マネキン画像を作りました（確認待ち）実寸 {m}')
-            except Exception as e:
-                v['mannequin'] = 'error'
-                log(f'{sku}: マネキン画像 失敗：{e!r}')
+            mark_queued(v, p, b, m)
+            budget.reserved += image_yen_estimate(IMAGE_MODEL, batch=True)
+            log(f'{sku}: マネキン画像はまとめて頼みます（受け取りは次の回）実寸 {m}')
     p['images_orig'] = list(p['images'])
     p['images'] = new_image_list(p['images'], front_i, back_i, urls.get('front'), urls.get('back'))   # *_error は並びに使わない
     if urls.get('front') or urls.get('back'):
@@ -641,31 +901,16 @@ def redo_cutout(p, budget):
 
 
 def remake_mannequin(p, budget):
-    """マネキン画像だけ作り直す。背景をそろえた写真・並びは変えない。結果は確認待ち（pending）に戻す"""
+    """マネキン画像だけ作り直す。背景をそろえた写真・並びは変えない。
+    2026-11-09：その場では作らず「頼む予定（queued）」にし、回の最後に Batch で頼む。受け取ったら確認待ち（pending）"""
     v = p['photo_v2']
     v['mannequin_retries'] = v.get('mannequin_retries', 0) + 1
-    if not budget.can_spend(STOP_PER_IMAGE_YEN):
+    if not budget.can_spend(image_yen_estimate(IMAGE_MODEL, batch=True)):
         Budget.stop(f'この月の写真v2のAI代が上限 {MONTH_CAP_YEN:.0f}円 に届きました（使用 {budget.spent:.0f}円）')
         return
-    src = p.get('images_orig') or p['images']
-    fi = v.get('front_i', 0)
-    front = load_image(src[fi] if 0 <= fi < len(src) else src[0])
-    b, m = body_for(p), parse_measures(p)
-    rel = f'/assets/products/{p["sku"].lower()}'
-    od = os.path.join(ROOT, rel.lstrip('/'))
-    try:
-        raw = mannequin_image(p, front, b, m, budget)
-        from PIL import Image
-        rgba = raw.convert('RGBA'); rgba.putalpha(Image.fromarray((edge_alpha(raw) * 255).astype('uint8')))
-        caption(place(rgba, MANNEQUIN_H, 0.9, shadow=False),
-                f'{b["label"]}のマネキン着用イメージ（AI作成／サイズ感は実寸からの推定）').save(
-            os.path.join(od, 'v2_mannequin.jpg'), quality=88, optimize=True)
-        v.update({'mannequin': 'pending', 'mannequin_url': f'{rel}/v2_mannequin.jpg', 'mannequin_body': b['label'], 'measures': m,
-                  'mannequin_date': now_jst().strftime('%Y-%m-%d')})
-        log(f'{p["sku"]}: マネキン画像を作り直しました（確認待ち）')
-    except Exception as e:
-        v['mannequin'] = 'error'
-        log(f'{p["sku"]}: マネキン画像の作り直し 失敗：{e!r}')
+    mark_queued(v, p, body_for(p), parse_measures(p))   # 2026-11-09：作り直しも Batch でまとめて頼む
+    budget.reserved += image_yen_estimate(IMAGE_MODEL, batch=True)
+    log(f'{p["sku"]}: マネキン画像の作り直しをまとめて頼みます（受け取りは次の回）')
 
 
 def save_products(products):
@@ -689,7 +934,9 @@ def main():
 def _main():
     products = json.load(open(DATA, encoding='utf-8'))
     if '--check' in sys.argv:          # 対象の件数だけ出す（ワークフローが重い道具を入れるか決める）
-        n = len(targets(products)) if os.environ.get('GEMINI_API_KEY') and not os.path.exists(STOP_FILE) else 0
+        # 2026-11-09：まとめて頼んで受け取る前の品（画像にする時に切り抜きの道具が要る）と、見本の頼みも数える
+        n = (len(targets(products)) + len(waiting_products(products)) + (1 if os.path.exists(SAMPLE_FILE) else 0)
+             if os.environ.get('GEMINI_API_KEY') and not os.path.exists(STOP_FILE) else 0)
         print(n)
         out = os.environ.get('GITHUB_OUTPUT')
         if out:
@@ -702,8 +949,18 @@ def _main():
         log('⛔ data/ai_cost/STOP があるので、AIは呼びません：' + open(STOP_FILE, encoding='utf-8').read().strip())
     elif not os.environ.get('GEMINI_API_KEY'):
         log('GEMINI_API_KEY が無いので何もしません')
+    elif os.path.exists(SAMPLE_FILE):
+        # 見本の頼みがある回は、見本だけを作る（商品データ・サイトの写真は変えない）
+        budget = Budget(products)
+        make_samples(products, budget)
+        log(f'今月のこの処理のAI代（概算）：{budget.spent:.1f}円／上限 {MONTH_CAP_YEN:.0f}円')
+        changed = changed or 1
     else:
-        budget = Budget()
+        budget = Budget(products)
+        got = collect_batches(products, budget)   # 前の回にまとめて頼んだマネキン画像を受け取る
+        if got:
+            changed += got
+            save_products(products)
         for p in targets(products)[:MAX_PER_RUN]:
             if os.path.exists(STOP_FILE):
                 break
@@ -724,7 +981,10 @@ def _main():
                 save_products(products)
                 changed += 1
                 log(f'{p["sku"]}: エラー（元の写真のまま。{"次回もう一度試す" if tries < 2 else "2回失敗したのでやめる"}）：{e!r}')
-        log(f'今月のこの処理のAI代（概算）：{budget.spent:.1f}円／上限 {MONTH_CAP_YEN:.0f}円')
+        if not os.path.exists(STOP_FILE) and submit_batch(products, budget):   # この回の分をまとめて頼む（半額）
+            changed += 1
+            save_products(products)
+        log(f'今月のこの処理のAI代（概算）：{budget.spent:.1f}円・受け取り待ちの見込み {budget.reserved:.1f}円／上限 {MONTH_CAP_YEN:.0f}円')
     if changed and LOG_LINES:
         os.makedirs(COST_DIR, exist_ok=True)
         with open(os.path.join(COST_DIR, 'photo_v2_last_run.txt'), 'w', encoding='utf-8') as f:   # 直近の実行の記録（何をして何が失敗したか）
