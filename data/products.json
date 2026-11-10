@@ -3,7 +3,7 @@
   "sku": "K11272",
   "slug": "k00000-spoon",
   "published": true,
-  "status": "available",
+  "status": "sold",
   "title": "草花の彫りを残した、スプーンのペンダント",
   "product_name": "洋白スプーンのペンダント（GAW・ホワイトハーツ×鹿革）",
   "brand": "GAW",
@@ -7397,7 +7397,7 @@
    "back_i": -1,
    "front_url": "/assets/products/k11290/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 156.1,
     "bg": "normal"
    }
