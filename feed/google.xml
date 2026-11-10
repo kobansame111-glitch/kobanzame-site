@@ -1184,29 +1184,5 @@
       <g:size>6</g:size>
       <g:shipping><g:country>JP</g:country><g:price>0 JPY</g:price></g:shipping>
     </item>
-    <item>
-      <g:id>K11272</g:id>
-      <title>洋白スプーンのペンダント（GAW・ホワイトハーツ×鹿革）</title>
-      <description>GAWのスプーンペンダントです。洋白のトップにホワイトハーツと鹿革コードを合わせ、長さは約50〜90cmで調整できます。</description>
-      <link>https://kobanzame-kawagoe.com/journal/k00000-spoon/</link>
-      <g:image_link>https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipBiPKYk5f7ApJKD.jpg</g:image_link>
-      <g:additional_image_link>https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaiseVWx8nYoUcBDaC.jpg</g:additional_image_link>
-      <g:additional_image_link>https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaipViqwguffwMERpE.jpg</g:additional_image_link>
-      <g:additional_image_link>https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaikNZdxpbkzVoHuzH.jpg</g:additional_image_link>
-      <g:additional_image_link>https://assets.mercari-shops-static.com/-/large/plain/2JX8ZaintqhdAM67EWAHhy.jpg</g:additional_image_link>
-      <g:additional_image_link>https://assets.mercari-shops-static.com/-/large/plain/2JX8ZainuRmvFcQP7qB5Rw.jpg</g:additional_image_link>
-      <g:additional_image_link>https://assets.mercari-shops-static.com/-/large/plain/2JX8ZbSE7rksF9JBEAcYYR.jpg</g:additional_image_link>
-      <g:availability>in_stock</g:availability>
-      <g:price>14170 JPY</g:price>
-      <g:condition>used</g:condition>
-      <g:brand>GAW</g:brand>
-      <g:identifier_exists>no</g:identifier_exists>
-      <g:product_type>アクセサリー &gt; ネックレス</g:product_type>
-      <g:gender>unisex</g:gender>
-      <g:age_group>adult</g:age_group>
-      <g:color>シルバートーン/レッド/ブラウン</g:color>
-      <g:size>トップ 約3×5cm</g:size>
-      <g:shipping><g:country>JP</g:country><g:price>0 JPY</g:price></g:shipping>
-    </item>
   </channel>
 </rss>
