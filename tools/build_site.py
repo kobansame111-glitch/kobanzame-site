@@ -277,10 +277,6 @@ CAT_EN = {'outer': 'Outer', 'tops': 'Tops', 'bottoms': 'Bottoms', 'dress': 'Dres
 
 # 2026-11-06 方針書 v1.2 §1（龍さん）：AI運営の宣言文と価格注記。文は一字一句そのまま（変えるときは方針書を先に直す）。
 # 「値下げしました」などの告知・元の値段との比較・「店頭より安い」などの言い方は入れない。
-AI_DECL = {
-    'ja': '選ぶのは店主、値段を決めて並べるのはAI。川越の古着屋が、二人三脚で続けている小さな実験です。',
-    'en': 'This site is run by AI.',
-}
 PRICE_NOTE = {
     'ja': 'オンラインの価格は、店頭の値札とは異なることがあります。',
     'en': 'Online prices may differ from the price tags in the shop.',
@@ -1970,7 +1966,6 @@ BOT_FACTS = {
     'version': TODAY,
     'note': 'お客様対応ボットが答えてよい事実（tools/build_site.py が毎回書き出す。手で直さない）',
     'ja': {
-        'ai': dict(FAQ['ja']).get('このサイトはAIが運営しているのですか？', AI_DECL['ja']).replace('はい。', '', 1),
         'price_note': PRICE_NOTE['ja'], 'price_at_order': PRICE_AT_ORDER['ja'],
         'shipping': _LAWD['商品代金以外の必要料金'], 'delivery': _plain(T['ja']['delivery_p']), 'dispatch': _LAWD['引渡時期'],
         'returns': _LAWD['返品・交換'], 'cancel': _LAWD['申込みの撤回・解除'], 'sold_elsewhere': _LAWD['品切れの場合'],
@@ -1980,7 +1975,6 @@ BOT_FACTS = {
         'faq': [[q, _plain(a)] for q, a in FAQ['ja']],
     },
     'en': {
-        'ai': dict(FAQ['en']).get('Is this site run by AI?', AI_DECL['en']).replace('Yes. ', '', 1),
         'price_note': PRICE_NOTE['en'], 'price_at_order': PRICE_AT_ORDER['en'],
         'delivery': _plain(T['en']['delivery_p']), 'hours': _plain(T['en']['days']),
         'store': [['Address', ADDR['en']]] + [[k, _plain(v)] for k, v in T['en']['store_dl'] if k in ('Hours', 'Closed')],
