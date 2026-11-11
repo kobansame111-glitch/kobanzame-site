@@ -126,19 +126,29 @@ NEWS_BAND = [n for n in NEWS if n['band']][:NEWS_BAND_MAX]
 # 終わりは「翌0:00・含まない」＝前日の 23:59 まで。商品ごとの値段に取り消し線・通常価格は出さない（二重価格表示を避ける）。
 BF_SALES = [
     {'from': '2026-11-12 00:00', 'to': '2026-11-16 00:00',
+     'tease_from': '2026-11-11 00:00',   # 事前告知を出し始める時刻（割引の開始は from のまま）
      'ja': 'BLACK FRIDAY ｜ カートで全品20%引き（11/15まで）', 'en': 'BLACK FRIDAY | 20% off all items at cart checkout (until Nov 15)',
      'hero_ja': 'カートで全品20%引き ｜ 11月15日まで', 'hero_en': '20% off all items at cart checkout — until Nov 15',
-     'pill_ja': 'カートで20%引き（11/15まで）', 'pill_en': '20% off at cart (until Nov 15)'},
+     'pill_ja': 'カートで20%引き（11/15まで）', 'pill_en': '20% off at cart (until Nov 15)',
+     'tease_ja': 'BLACK FRIDAY ｜ まもなく開始・カートで全品20%引き（11/12 0:00〜11/15）', 'tease_en': 'BLACK FRIDAY | Starts soon — 20% off all items at cart (Nov 12 0:00–Nov 15)',
+     'tease_hero_ja': 'まもなく開始 ｜ カートで全品20%引き（11/12 0:00〜11/15）', 'tease_hero_en': 'Starts soon — 20% off all items at cart (Nov 12 0:00 – Nov 15)',
+     'tease_pill_ja': 'まもなく20%引き', 'tease_pill_en': 'Coming soon'},
     {'from': '2026-11-27 00:00', 'to': '2026-11-30 00:00',
+     'tease_from': '2026-11-26 00:00',
      'ja': 'BLACK FRIDAY ｜ カートで全品20%引き（11/29まで）', 'en': 'BLACK FRIDAY | 20% off all items at cart checkout (until Nov 29)',
      'hero_ja': 'カートで全品20%引き ｜ 11月29日まで', 'hero_en': '20% off all items at cart checkout — until Nov 29',
-     'pill_ja': 'カートで20%引き（11/29まで）', 'pill_en': '20% off at cart (until Nov 29)'},
+     'pill_ja': 'カートで20%引き（11/29まで）', 'pill_en': '20% off at cart (until Nov 29)',
+     'tease_ja': 'BLACK FRIDAY ｜ まもなく開始・カートで全品20%引き（11/27 0:00〜11/29）', 'tease_en': 'BLACK FRIDAY | Starts soon — 20% off all items at cart (Nov 27 0:00–Nov 29)',
+     'tease_hero_ja': 'まもなく開始 ｜ カートで全品20%引き（11/27 0:00〜11/29）', 'tease_hero_en': 'Starts soon — 20% off all items at cart (Nov 27 0:00 – Nov 29)',
+     'tease_pill_ja': 'まもなく20%引き', 'tease_pill_en': 'Coming soon'},
 ]
 _JST = datetime.timezone(datetime.timedelta(hours=9))
 def _bf_ms(s):
     return int(datetime.datetime.strptime(s, '%Y-%m-%d %H:%M').replace(tzinfo=_JST).timestamp() * 1000)
-BF_PERIODS = [{'f': _bf_ms(s['from']), 't': _bf_ms(s['to']), 'ja': s['ja'], 'en': s['en'],
-               'hero_ja': s['hero_ja'], 'hero_en': s['hero_en'], 'pill_ja': s['pill_ja'], 'pill_en': s['pill_en']} for s in BF_SALES]
+BF_PERIODS = [{'f': _bf_ms(s['from']), 't': _bf_ms(s['to']), 'tf': _bf_ms(s['tease_from']), 'ja': s['ja'], 'en': s['en'],
+               'hero_ja': s['hero_ja'], 'hero_en': s['hero_en'], 'pill_ja': s['pill_ja'], 'pill_en': s['pill_en'],
+               'tease_ja': s['tease_ja'], 'tease_en': s['tease_en'], 'tease_hero_ja': s['tease_hero_ja'], 'tease_hero_en': s['tease_hero_en'],
+               'tease_pill_ja': s['tease_pill_ja'], 'tease_pill_en': s['tease_pill_en']} for s in BF_SALES]
 BF_STYLE = ('<style>'
   '.bfband{background:#111;color:#fff;text-align:center;font-size:13px;letter-spacing:.04em;padding:7px 12px;font-weight:600;line-height:1.4}'
   '.bfhero{background:#111;color:#fff;text-align:center;padding:18px 16px}'
@@ -147,28 +157,63 @@ BF_STYLE = ('<style>'
   '.bfhero-t{font-size:clamp(13px,3.4vw,16px);letter-spacing:.03em;font-weight:600}'
   '.bfpill{display:inline-block;margin-left:8px;background:#111;color:#fff;font-size:11px;font-weight:700;letter-spacing:.02em;padding:2px 8px;border-radius:999px;vertical-align:middle;white-space:nowrap}'
   '.bfpill[hidden]{display:none}'  # hidden 属性が効くように（author CSS の display が UA の [hidden] を上書きしてしまうため）
+  '.bfcount{font-family:var(--roman,"Libre Caslon Text",serif);font-weight:700;font-size:clamp(20px,5.5vw,34px);letter-spacing:.06em;font-variant-numeric:tabular-nums;color:var(--kin,#d4af37);margin-top:2px}'
+  '.bfcount small{font-size:.5em;font-weight:600;letter-spacing:.12em;opacity:.85;margin-right:.5em;vertical-align:.2em}'
+  '.bffw{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999}'
   '</style>')
 def _bf_data(lang):
-    return json.dumps([{'f': p['f'], 't': p['t'], 'x': p[lang], 'h': p['hero_' + lang], 'pl': p['pill_' + lang]} for p in BF_PERIODS], ensure_ascii=False)
+    return json.dumps([{'f': p['f'], 't': p['t'], 'tf': p['tf'],
+                        'x': p[lang], 'h': p['hero_' + lang], 'pl': p['pill_' + lang],
+                        'tx': p['tease_' + lang], 'th': p['tease_hero_' + lang], 'tpl': p['tease_pill_' + lang]} for p in BF_PERIODS], ensure_ascii=False)
 def bf_band(lang):
     """期間中だけ：上の帯・トップの大きな告知(#bfhero)・値段の近くの小さな札(.bfpill)を出す。
     見る人の時計ではなく、決まった時刻（日本時間＝epoch）で出す／隠す。取り消し線・元の値段・通常価格は出さない（二重価格表示を避ける）。"""
     if not BF_PERIODS:
         return ''
+    cl = ('{pre:"オープンまで あと ",d:"日",h:"時間",m:"分",s:"秒"}' if lang == 'ja'
+          else '{pre:"Opens in ",d:"d ",h:"h ",m:"m ",s:"s"}')
+    js = (
+      'var P=' + _bf_data(lang) + ',CL=' + cl + ',n=Date.now(),st=null,per=null;'
+      'for(var i=0;i<P.length;i++){var p=P[i];'
+        'if(n>=p.f&&n<p.t){st="a";per=p;break;}'
+        'if(n>=p.tf&&n<p.f){st="t";per=p;break;}}'
+      'if(!st)return;'
+      'var band=document.getElementById("bfband"),hero=document.getElementById("bfhero"),'
+        'ht=hero?hero.querySelector("[data-bfhero-text]"):null,cnt=document.getElementById("bfcount"),'
+        'ps=document.querySelectorAll(".bfpill");'
+      'function setT(x,h,pl){if(band){band.textContent=x;band.hidden=false;}'
+        'if(ht)ht.textContent=h;if(hero)hero.hidden=false;'
+        'for(var j=0;j<ps.length;j++){ps[j].textContent=pl;ps[j].hidden=false;}}'
+      'var RM=matchMedia("(prefers-reduced-motion:reduce)").matches;'
+      'function fw(){if(RM)return;var c=document.createElement("canvas");c.className="bffw";document.body.appendChild(c);'
+        'var ctx=c.getContext("2d"),DPR=Math.min(2,devicePixelRatio||1),W,H;'
+        'function sz(){W=c.width=innerWidth*DPR;H=c.height=innerHeight*DPR;}sz();addEventListener("resize",sz);'
+        'var Q=[],CO=["#ffd700","#ff6b6b","#4ecdc4","#ffffff","#ffa94d","#b197fc"];'
+        'function burst(x,y){var col=CO[(Math.random()*CO.length)|0];for(var k=0;k<64;k++){var a=6.283*k/64,sp=(2+Math.random()*4)*DPR;Q.push({x:x,y:y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,l:1,c:col});}}'
+        'var t0=Date.now(),sh=0;'
+        'function lp(){var el=Date.now()-t0;ctx.clearRect(0,0,W,H);'
+          'if(sh<6&&el>sh*450){burst((0.15+Math.random()*0.7)*W,(0.15+Math.random()*0.45)*H);sh++;}'
+          'for(var k=Q.length-1;k>=0;k--){var q=Q[k];q.x+=q.vx;q.y+=q.vy;q.vy+=0.045*DPR;q.vx*=0.99;q.l-=0.012;'
+            'if(q.l<=0){Q.splice(k,1);continue;}ctx.globalAlpha=Math.max(0,q.l);ctx.fillStyle=q.c;ctx.beginPath();ctx.arc(q.x,q.y,2.6*DPR,0,7);ctx.fill();}'
+          'if(el<5000||Q.length){requestAnimationFrame(lp);}else{c.remove();}}lp();}'
+      'if(st==="a"){setT(per.x,per.h,per.pl);if(cnt)cnt.hidden=true;if(n<per.f+600000)fw();return;}'
+      'setT(per.tx,per.th,per.tpl);'
+      'if(cnt){cnt.hidden=false;var iv;'
+        'function tk(){var d=per.f-Date.now();if(d<=0){clearInterval(iv);setT(per.x,per.h,per.pl);cnt.hidden=true;fw();return;}'
+          'var s=Math.floor(d/1000),dd=Math.floor(s/86400),hh=Math.floor(s%86400/3600),mm=Math.floor(s%3600/60),ss=s%60,o="";'
+          'if(dd>0)o+=dd+CL.d;o+=hh+CL.h+mm+CL.m+ss+CL.s;'
+          'cnt.innerHTML="<small>"+CL.pre+"</small>"+o;}'
+        'tk();iv=setInterval(tk,1000);}'
+    )
     return (BF_STYLE + '<div class="bfband" id="bfband" role="status" hidden></div>'
-            '<script>(function(){var P=' + _bf_data(lang) + ',n=Date.now(),a=null;'
-            'for(var i=0;i<P.length;i++){if(n>=P[i].f&&n<P[i].t){a=P[i];break;}}'
-            'if(!a)return;'
-            'var b=document.getElementById("bfband");if(b){b.textContent=a.x;b.hidden=false;}'
-            'var h=document.getElementById("bfhero");if(h){var ht=h.querySelector("[data-bfhero-text]");if(ht)ht.textContent=a.h;h.hidden=false;}'
-            'var ps=document.querySelectorAll(".bfpill");for(var j=0;j<ps.length;j++){ps[j].textContent=a.pl;ps[j].hidden=false;}'
-            '})();</script>')
+            '<script>(function(){' + js + '})();</script>')
 def bf_hero(lang):
     """トップの一番上に出る大きめの告知（期間中だけ・bf_band の script が #bfhero を出す）。"""
     if not BF_PERIODS:
         return ''
     return ('<div class="bfhero" id="bfhero" role="status" hidden><div class="bfhero-in">'
-            '<span class="bfhero-k">BLACK FRIDAY</span><span class="bfhero-t" data-bfhero-text></span></div></div>')
+            '<span class="bfhero-k">BLACK FRIDAY</span><span class="bfhero-t" data-bfhero-text></span>'
+            '<span class="bfcount" id="bfcount" hidden></span></div></div>')
 def bf_pill(lang):
     """値段の近くに出る小さな札（期間中だけ）。取り消し線・元の値段は出さない。"""
     if not BF_PERIODS:
