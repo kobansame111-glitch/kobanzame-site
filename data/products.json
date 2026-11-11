@@ -7403,5 +7403,98 @@
     "bg": "normal"
    }
   }
+ },
+ {
+  "sku": "K10538",
+  "slug": "k10538-made-in-italy-expressly-for-hess-s",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "Made in Italy Expressly for Hess's クルーネックニットセーター",
+  "product_name": "Made in Italy Expressly for Hess's クルーネックニットセーター",
+  "brand": "Made in Italy Expressly for Hess's",
+  "category": "メンズ／トップス／ニット",
+  "material": "70%アクリル・30%ウール",
+  "published_date": "2026-11-11",
+  "prices": {
+   "store": 7800,
+   "site": 7800,
+   "mercari": 8580
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-11",
+  "links": {},
+  "images": [
+   "/assets/products/k10538/01.jpg",
+   "/assets/products/k10538/02.jpg",
+   "/assets/products/k10538/03.jpg",
+   "/assets/products/k10538/04.jpg",
+   "/assets/products/k10538/05.jpg",
+   "/assets/products/k10538/06.jpg",
+   "/assets/products/k10538/07.jpg",
+   "/assets/products/k10538/08.jpg",
+   "/assets/products/k10538/09.jpg",
+   "/assets/products/k10538/10.jpg",
+   "/assets/products/k10538/11.jpg",
+   "/assets/products/k10538/12.jpg"
+  ],
+  "thumb": "/assets/products/k10538/thumb.jpg",
+  "summary_text": "ブラウン×オフホワイトのダイヤ格子ジャガードに、ボルドーとブラックのスクエアアクセントが入った、手の込んだ一枚です。",
+  "summary_points": [
+   "ブラウン×オフホワイト・ダイヤ格子ジャガード柄、ボルドー・ブラックのスクエアアクセントのクルーネックニットセーター（ブランド：Made in Italy Expressly for Hess's）",
+   "素材：70%アクリル・30%ウール",
+   "実寸 身幅60cm・着丈69cm・肩幅64cm"
+  ],
+  "lead": "アクリル70%・ウール30%の混紡で織られた、クルーネックのジャガードニットです。",
+  "body_html": "<h2>この一着のこと</h2><p>アクリル70%・ウール30%の混紡で織られた、クルーネックのジャガードニットです。ベースはブラウンとオフホワイトのダイヤ格子で、そこにボルドーとブラックのスクエアアクセントが規則正しく配置されています。柄の構成は複雑で、ジャガード織りならではの立体的な表情が出ています。タグには「Made in Italy Expressly for Hess's」と刻まれており、アメリカのHess'sデパート向けにイタリアで作られた別注品と思われます。</p><p>着る人から見て右袖付け根付近に軽微な縫い目のほつれが見られますが、着用に支障のある状態ではありません。ボックス気味のシルエットと肩幅の広い設計から、メンズのXLサイズ感と思われます。</p><p>着るときは、このニット一枚でそのまま着てください。インナーを覗かせる必要はなく、クルーネックの首元をそのまま見せる着方が、このジャガードの顔を一番はっきり出します。</p><h2>状態</h2><p>状態は写真でご確認ください。気になる点は、お問い合わせからお尋ねください。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "Made in Italy Expressly for Hess's"
+   ],
+   [
+    "タグの表記",
+    "Made in Italy Expressly for Hess's（RN 31289）"
+   ],
+   [
+    "店頭での名前",
+    "Argyle Design Knit"
+   ],
+   [
+    "素材",
+    "70%アクリル・30%ウール"
+   ],
+   [
+    "色",
+    "ブラウン×オフホワイト・ダイヤ格子ジャガード柄、ボルドー・ブラックのスクエアアクセント"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅60cm・着丈69cm・肩幅64cm"
+   ],
+   [
+    "状態",
+    "写真でご確認ください"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "tops",
+  "genre_by": "auto-keyword-2026-11-11",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.8",
+   "made_at": "2026-11-11",
+   "needs": [
+    "性別は自動判定：メンズ（写真の見立て：メンズ（XLサイズ表記およびボックス気味のシルエット・肩幅の広い設計から）・実寸が大きめ（肩幅64・身幅60））→ 違えばClaudeへ",
+    "ブランド欄は短い名前（Made in Italy Expressly for Hess's）にした。タグの表記の全文は仕様表「タグの表記」",
+    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "商品名・見出しは決まった並び（年代・ブランド・素材・色・品目・性別）で自動作成 → 気に入らなければClaudeへ",
+    "着こなし・雰囲気の文を 3文外した（決まり2・3）",
+    "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
+    "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
+    "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "写真の見立て：メンズ（XLサイズ表記およびボックス気味のシルエット・肩幅の広い設計から）・実寸が大きめ（肩幅64・身幅60）"
  }
 ]
