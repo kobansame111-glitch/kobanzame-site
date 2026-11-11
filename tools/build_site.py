@@ -125,22 +125,55 @@ NEWS_BAND = [n for n in NEWS if n['band']][:NEWS_BAND_MAX]
 # 帯は静的な HTML に埋め込み、見る人の時計ではなく「決まった時刻（日本時間）」で出す／隠す（下の f〜t を Date.now() と比べる）。
 # 終わりは「翌0:00・含まない」＝前日の 23:59 まで。商品ごとの値段に取り消し線・通常価格は出さない（二重価格表示を避ける）。
 BF_SALES = [
-    {'from': '2026-11-12 00:00', 'to': '2026-11-16 00:00', 'ja': 'BLACK FRIDAY ｜ カートで全品20%引き（11/15まで）', 'en': 'BLACK FRIDAY | 20% off all items at cart checkout (until Nov 15)'},
-    {'from': '2026-11-27 00:00', 'to': '2026-11-30 00:00', 'ja': 'BLACK FRIDAY ｜ カートで全品20%引き（11/29まで）', 'en': 'BLACK FRIDAY | 20% off all items at cart checkout (until Nov 29)'},
+    {'from': '2026-11-12 00:00', 'to': '2026-11-16 00:00',
+     'ja': 'BLACK FRIDAY ｜ カートで全品20%引き（11/15まで）', 'en': 'BLACK FRIDAY | 20% off all items at cart checkout (until Nov 15)',
+     'hero_ja': 'カートで全品20%引き ｜ 11月15日まで', 'hero_en': '20% off all items at cart checkout — until Nov 15',
+     'pill_ja': 'カートで20%引き（11/15まで）', 'pill_en': '20% off at cart (until Nov 15)'},
+    {'from': '2026-11-27 00:00', 'to': '2026-11-30 00:00',
+     'ja': 'BLACK FRIDAY ｜ カートで全品20%引き（11/29まで）', 'en': 'BLACK FRIDAY | 20% off all items at cart checkout (until Nov 29)',
+     'hero_ja': 'カートで全品20%引き ｜ 11月29日まで', 'hero_en': '20% off all items at cart checkout — until Nov 29',
+     'pill_ja': 'カートで20%引き（11/29まで）', 'pill_en': '20% off at cart (until Nov 29)'},
 ]
 _JST = datetime.timezone(datetime.timedelta(hours=9))
 def _bf_ms(s):
     return int(datetime.datetime.strptime(s, '%Y-%m-%d %H:%M').replace(tzinfo=_JST).timestamp() * 1000)
-BF_PERIODS = [{'f': _bf_ms(s['from']), 't': _bf_ms(s['to']), 'ja': s['ja'], 'en': s['en']} for s in BF_SALES]
-BF_STYLE = '<style>.bfband{background:#111;color:#fff;text-align:center;font-size:13px;letter-spacing:.04em;padding:7px 12px;font-weight:600;line-height:1.4}</style>'
+BF_PERIODS = [{'f': _bf_ms(s['from']), 't': _bf_ms(s['to']), 'ja': s['ja'], 'en': s['en'],
+               'hero_ja': s['hero_ja'], 'hero_en': s['hero_en'], 'pill_ja': s['pill_ja'], 'pill_en': s['pill_en']} for s in BF_SALES]
+BF_STYLE = ('<style>'
+  '.bfband{background:#111;color:#fff;text-align:center;font-size:13px;letter-spacing:.04em;padding:7px 12px;font-weight:600;line-height:1.4}'
+  '.bfhero{background:#111;color:#fff;text-align:center;padding:18px 16px}'
+  '.bfhero-in{display:flex;flex-direction:column;align-items:center;gap:4px;line-height:1.15}'
+  '.bfhero-k{font-family:var(--roman,"Libre Caslon Text",serif);font-weight:700;letter-spacing:.14em;font-size:clamp(24px,6.5vw,44px)}'
+  '.bfhero-t{font-size:clamp(13px,3.4vw,16px);letter-spacing:.03em;font-weight:600}'
+  '.bfpill{display:inline-block;margin-left:8px;background:#111;color:#fff;font-size:11px;font-weight:700;letter-spacing:.02em;padding:2px 8px;border-radius:999px;vertical-align:middle;white-space:nowrap}'
+  '.bfpill[hidden]{display:none}'  # hidden 属性が効くように（author CSS の display が UA の [hidden] を上書きしてしまうため）
+  '</style>')
+def _bf_data(lang):
+    return json.dumps([{'f': p['f'], 't': p['t'], 'x': p[lang], 'h': p['hero_' + lang], 'pl': p['pill_' + lang]} for p in BF_PERIODS], ensure_ascii=False)
 def bf_band(lang):
-    """期間中だけ出る告知の帯（期間外は何も出ない）。見る人の時計ではなく、決まった時刻（日本時間＝epoch）で出す／隠す。"""
+    """期間中だけ：上の帯・トップの大きな告知(#bfhero)・値段の近くの小さな札(.bfpill)を出す。
+    見る人の時計ではなく、決まった時刻（日本時間＝epoch）で出す／隠す。取り消し線・元の値段・通常価格は出さない（二重価格表示を避ける）。"""
     if not BF_PERIODS:
         return ''
-    data = json.dumps([{'f': p['f'], 't': p['t'], 'x': p[lang]} for p in BF_PERIODS], ensure_ascii=False)
     return (BF_STYLE + '<div class="bfband" id="bfband" role="status" hidden></div>'
-            '<script>(function(){var P=' + data + ',n=Date.now(),b=document.getElementById("bfband");'
-            'for(var i=0;i<P.length;i++){if(n>=P[i].f&&n<P[i].t){b.textContent=P[i].x;b.hidden=false;break;}}})();</script>')
+            '<script>(function(){var P=' + _bf_data(lang) + ',n=Date.now(),a=null;'
+            'for(var i=0;i<P.length;i++){if(n>=P[i].f&&n<P[i].t){a=P[i];break;}}'
+            'if(!a)return;'
+            'var b=document.getElementById("bfband");if(b){b.textContent=a.x;b.hidden=false;}'
+            'var h=document.getElementById("bfhero");if(h){var ht=h.querySelector("[data-bfhero-text]");if(ht)ht.textContent=a.h;h.hidden=false;}'
+            'var ps=document.querySelectorAll(".bfpill");for(var j=0;j<ps.length;j++){ps[j].textContent=a.pl;ps[j].hidden=false;}'
+            '})();</script>')
+def bf_hero(lang):
+    """トップの一番上に出る大きめの告知（期間中だけ・bf_band の script が #bfhero を出す）。"""
+    if not BF_PERIODS:
+        return ''
+    return ('<div class="bfhero" id="bfhero" role="status" hidden><div class="bfhero-in">'
+            '<span class="bfhero-k">BLACK FRIDAY</span><span class="bfhero-t" data-bfhero-text></span></div></div>')
+def bf_pill(lang):
+    """値段の近くに出る小さな札（期間中だけ）。取り消し線・元の値段は出さない。"""
+    if not BF_PERIODS:
+        return ''
+    return '<span class="bfpill" hidden></span>'
 
 # ---------- 文言（日本語／英語） ----------
 T = {
@@ -1430,7 +1463,7 @@ def card_html(p, lang, lazy=True, findable=False):
             f'<div class="brand">{esc(p["brand"])}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
             + (f'<div class="sz">{T[lang]["width"].format(w=wv)}</div>' if (wv and not sold) else '') +   # 2026-11-03 一覧で身幅が分かるように
             f'<span class="fit" hidden></span>'
-            f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small>{usd_span(site_price(p), lang)}</div></a>')
+            f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small>{usd_span(site_price(p), lang)}{bf_pill(lang)}</div></a>')
 
 import urllib.parse
 # 2026-11-03 法務の目（v0 §7）：輸出に許可が要る恐れのある素材は、英語ページで海外発送の見積を出さない
@@ -1639,6 +1672,7 @@ for lang in ('ja', 'en'):
 '''
     top = head(lang, t['top_title'], t['top_desc'], P + '/', extra_ld=top_ld) + f'''
 <main>
+  {bf_hero(lang)}
   {newtop_html(lang)}
   <section class="tiles" aria-label="{'カテゴリ' if lang == 'ja' else 'Categories'}">
     <div class="wrap tgrid">{tiles_html(lang)}</div>
@@ -1898,7 +1932,7 @@ for lang in ('ja', 'en'):
       <h1>{esc(name)}</h1>
       <div class="ttl">{esc(loc(p, 'title', lang))}</div>
       <div class="sku">ITEM NO. {esc(p['sku'])}</div>
-      <div class="price">{money(price, lang)}<small>{t['tax_ship']}</small>{usd_span(price, lang)}</div>
+      <div class="price">{money(price, lang)}<small>{t['tax_ship']}</small>{usd_span(price, lang)}{bf_pill(lang)}</div>
       <p class="pnote">{PRICE_NOTE[lang]}</p>
       {USD_NOTE if lang == 'en' else ''}
       <div class="facts">{facts}</div>
