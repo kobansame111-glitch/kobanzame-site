@@ -6746,6 +6746,11 @@
   "lead": "ラルフローレンのピーコートです。",
   "links": {},
   "material": "綿100%",
+  "photo_v2": {
+   "error": "RuntimeError('Gemini HTTP 402：{\\n  \"error\": {\\n    \"code\": 402,\\n    \"message\": \"Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. \",\\n    \"status\": \"RESOU",
+   "tries": 2,
+   "date": "2026-11-11"
+  },
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。値札は 12,800 円（税別）。写真の読み取りが 2,800 円と読み違えていたので、2026-11-08 龍さんの指示で 12,800 円に直した。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-08",
   "prices": {
    "mercari": 14080,
@@ -6797,12 +6802,7 @@
   ],
   "summary_text": "ラルフローレンのコットンピーコート。",
   "thumb": "/assets/products/k11494/thumb.jpg",
-  "title": "1990〜2000年代頃 RALPH LAUREN ネイビー ピーコート レディース",
-  "photo_v2": {
-   "error": "RuntimeError('Gemini HTTP 402：{\\n  \"error\": {\\n    \"code\": 402,\\n    \"message\": \"Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. \",\\n    \"status\": \"RESOU",
-   "tries": 1,
-   "date": "2026-11-11"
-  }
+  "title": "1990〜2000年代頃 RALPH LAUREN ネイビー ピーコート レディース"
  },
  {
   "sku": "K11288",
@@ -7286,6 +7286,11 @@
   "lead": "ヤシの葉（パームリーフ）を赤とベージュに染め、球形に手編みしたビーズと、赤色のガラスシードビーズを黒糸で交互に繋いだ、メキシコの民芸品のロザリオです。",
   "links": {},
   "material": "",
+  "photo_v2": {
+   "error": "RuntimeError('Gemini HTTP 402：{\\n  \"error\": {\\n    \"code\": 402,\\n    \"message\": \"Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. \",\\n    \"status\": \"RESOU",
+   "tries": 2,
+   "date": "2026-11-11"
+  },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-10",
   "prices": {
    "mercari": 5280,
@@ -7315,12 +7320,7 @@
   ],
   "summary_text": "ヤシの葉を手編みした球形ビーズとガラスビーズを黒糸で繋いだロザリオ。十字架ペンダントまで同じ手仕事で作られた、メキシコの民芸品です。",
   "thumb": "/assets/products/k11517/thumb.jpg",
-  "title": "パームリーフ編みビーズロザリオ（十字架ペンダント付き）",
-  "photo_v2": {
-   "error": "RuntimeError('Gemini HTTP 402：{\\n  \"error\": {\\n    \"code\": 402,\\n    \"message\": \"Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. \",\\n    \"status\": \"RESOU",
-   "tries": 1,
-   "date": "2026-11-11"
-  }
+  "title": "パームリーフ編みビーズロザリオ（十字架ペンダント付き）"
  },
  {
   "sku": "K11290",
@@ -7454,6 +7454,11 @@
   "lead": "アクリル70%・ウール30%の混紡で織られた、クルーネックのジャガードニットです。",
   "links": {},
   "material": "70%アクリル・30%ウール",
+  "photo_v2": {
+   "error": "RuntimeError('Gemini HTTP 402：{\\n  \"error\": {\\n    \"code\": 402,\\n    \"message\": \"Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. \",\\n    \"status\": \"RESOU",
+   "tries": 2,
+   "date": "2026-11-11"
+  },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-11",
   "prices": {
    "mercari": 8580,
@@ -7505,11 +7510,6 @@
   ],
   "summary_text": "ブラウン×オフホワイトのダイヤ格子ジャガードに、ボルドーとブラックのスクエアアクセントが入った、手の込んだ一枚です。",
   "thumb": "/assets/products/k10538/thumb.jpg",
-  "title": "Made in Italy Expressly for Hess's クルーネックニットセーター",
-  "photo_v2": {
-   "error": "RuntimeError('Gemini HTTP 402：{\\n  \"error\": {\\n    \"code\": 402,\\n    \"message\": \"Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. \",\\n    \"status\": \"RESOU",
-   "tries": 1,
-   "date": "2026-11-11"
-  }
+  "title": "Made in Italy Expressly for Hess's クルーネックニットセーター"
  }
 ]
