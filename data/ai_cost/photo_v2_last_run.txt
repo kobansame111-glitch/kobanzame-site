@@ -1,5 +1,5 @@
-2026-11-10 20:23
-K11512: 全体の写真 正面=-1 背面=-1（0から数える）
-K11290: 全体の写真 正面=0 背面=-1（0から数える）
-K11290 front: 背景を揃えました
+2026-11-11 17:44
+K11494: エラー（元の写真のまま。次回もう一度試す）：RuntimeError('Gemini HTTP 402：{\n  "error": {\n    "code": 402,\n    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",\n    "status": "RESOURCE_EXHAUSTED"\n  }\n}\n')
+K11517: エラー（元の写真のまま。次回もう一度試す）：RuntimeError('Gemini HTTP 402：{\n  "error": {\n    "code": 402,\n    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",\n    "status": "RESOURCE_EXHAUSTED"\n  }\n}\n')
+K10538: エラー（元の写真のまま。次回もう一度試す）：RuntimeError('Gemini HTTP 402：{\n  "error": {\n    "code": 402,\n    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",\n    "status": "RESOURCE_EXHAUSTED"\n  }\n}\n')
 今月のこの処理のAI代（概算）：160.9円・受け取り待ちの見込み 0.0円／上限 1000円
