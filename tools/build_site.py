@@ -163,7 +163,7 @@ T = {
   'trust': [('送料込み', '表示価格は税込・送料込み'), ('3日以内に発送', '決済確認後（月・火定休を除く）'),
             ('川越の実店舗', '古物商許可 ' + SHOP['kobutsu']), ('お店の評判', '<a href="{gm}" rel="noopener">Googleマップでクチコミを見る</a>')],
   'store_p': '古着屋 小判鮫（KOBANZAME）は、埼玉県川越市元町にある築約80年の古民家で営業している古着屋です。国内外で買い付けたヴィンテージ古着と、小判鮫オリジナルのリメイクアクセサリー「GAW」を扱っています。ブランドや流行ではなく、素材・質感・その一点にしかない空気感で選んでいます。サイトに載っている商品は、店頭にも並んでいます。',
-  'store_dl': [('住所', None), ('営業', '12:00–20:00'), ('定休日', '月曜・火曜'), ('運営', SHOP['company']), ('お問い合わせ', SHOP['email'])],
+  'store_dl': [('住所', None), ('営業', '12:00–20:00'), ('定休日', '月曜・火曜'), ('お問い合わせ', SHOP['email'])],
   'faq_s': 'よくある質問',
   'buy': '購入する（クレジットカード）', 'buy_s': '購入する', 'soldout': 'SOLD OUT', 'prep': '準備中（まもなく購入できるようになります）',
   'hold_btn': '店頭で見たい・取り置きする（{n}日間）',
@@ -208,7 +208,7 @@ T = {
   'trust': [('Shipping included', 'Prices include tax and domestic shipping'), ('Ships in 3 days', 'After payment (closed Mon & Tue)'),
             ('A real shop in Kawagoe', 'Licensed secondhand dealer (Saitama Pref. No. 431080060786)'), ('Reviews', '<a href="{gm}" rel="noopener">Read reviews on Google Maps</a>')],
   'store_p': 'Kobanzame is a vintage clothing shop in an 80-year-old wooden house in Motomachi, Kawagoe, Saitama. We carry vintage clothing sourced in Japan and abroad, and GAW, our own line of remade accessories. We choose by material, texture and the feel of each single piece, not by brand or trend. Everything on this site is also in the shop.',
-  'store_dl': [('Address', None), ('Hours', '12:00–20:00'), ('Closed', 'Mondays & Tuesdays'), ('Operator', 'Plug Inc.'), ('Contact', SHOP['email'])],
+  'store_dl': [('Address', None), ('Hours', '12:00–20:00'), ('Closed', 'Mondays & Tuesdays'), ('Contact', SHOP['email'])],
   'faq_s': 'Frequently asked questions',
   'buy': 'Buy now (credit card)', 'buy_s': 'Buy now', 'soldout': 'SOLD OUT', 'prep': 'Coming soon',
   'hold_btn': 'See it in the shop / hold it ({n} days)',
@@ -278,7 +278,7 @@ CAT_EN = {'outer': 'Outer', 'tops': 'Tops', 'bottoms': 'Bottoms', 'dress': 'Dres
 # 2026-11-06 方針書 v1.2 §1（龍さん）：AI運営の宣言文と価格注記。文は一字一句そのまま（変えるときは方針書を先に直す）。
 # 「値下げしました」などの告知・元の値段との比較・「店頭より安い」などの言い方は入れない。
 AI_DECL = {
-    'ja': 'このサイトはAIが運営しています。',
+    'ja': '選ぶのは店主、値段を決めて並べるのはAI。川越の古着屋が、二人三脚で続けている小さな実験です。',
     'en': 'This site is run by AI.',
 }
 PRICE_NOTE = {
@@ -333,7 +333,7 @@ if NEWHOURS:
         'util': '<b>毎週水曜 新着入荷</b>　送料込み・決済確認後3日以内に発送（月曜定休を除く）',
         'days': '火〜日 13:00–20:00（月曜定休・祝日は営業）',
         'trust': [(a, '決済確認後（月曜定休を除く）' if a == '3日以内に発送' else b) for a, b in T['ja']['trust']],
-        'store_dl': [('営業', '13:00–20:00（7〜8月は22:00まで）') if a == '営業' else ('定休日', '月曜（祝日は営業）') if a == '定休日' else (a, b) for a, b in T['ja']['store_dl']],
+        'store_dl': [('住所', None), ('営業', '13:00–20:00／月曜定休（祝日営業）'), ('お問い合わせ', SHOP['email'])],
         'ship': T['ja']['ship'].replace('（月・火定休を除く）', '（月曜定休を除く）'),
         'delivery_p': T['ja']['delivery_p'].replace('3日以内（月・火定休を除く）に', '3日以内（月曜定休を除く）に'),
     })
@@ -1221,7 +1221,6 @@ def foot(lang):
     P = pre(lang)
     ja = lang == 'ja'
     lic = ('古物商許可：' + SHOP['kobutsu']) if ja else 'Licensed secondhand dealer: Saitama Prefectural Public Safety Commission No. 431080060786'
-    op = ('運営：' + SHOP['company']) if ja else 'Operated by Plug Inc.'
     hours = HOURS_LINE[lang]
     def col(h, links):
         return f'<div class="fcol"><h3>{h}</h3><ul>' + ''.join(f'<li><a href="{u}"' + (' rel="noopener"' if u.startswith('http') else '') + f'>{l}</a></li>' for u, l in links) + '</ul></div>'
@@ -1240,7 +1239,7 @@ def foot(lang):
   <nav class="fcols" aria-label="{'サイトの案内' if ja else 'Site map'}">{cols}</nav>
   <div class="hair"></div>
   <div>古着屋 小判鮫／{ADDR[lang]}／{hours}<br>
-    {op}　・　{lic}<br>
+    {lic}<br>
     {AI_DECL[lang]}{'' if ja else ' '}<a href="{P}/#{FAQ_AI_ID}">{'くわしく' if ja else 'Learn more'}</a><br>
     {legal}
   </div>
