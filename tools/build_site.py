@@ -127,19 +127,19 @@ NEWS_BAND = [n for n in NEWS if n['band']][:NEWS_BAND_MAX]
 BF_SALES = [
     {'from': '2026-11-12 00:00', 'to': '2026-11-16 00:00',
      'tease_from': '2026-11-11 00:00',   # 事前告知を出し始める時刻（割引の開始は from のまま）
-     'ja': 'BLACK FRIDAY ｜ カートで全品20%引き（11/15まで）', 'en': 'BLACK FRIDAY | 20% off all items at cart checkout (until Nov 15)',
-     'hero_ja': 'カートで全品20%引き ｜ 11月15日まで', 'hero_en': '20% off all items at cart checkout — until Nov 15',
+     'ja': 'BLACK FRIDAY ｜ オンライン限定・カートで全品20%引き（11/15まで）', 'en': 'BLACK FRIDAY | Online only — 20% off all items at cart checkout (until Nov 15)',
+     'hero_ja': 'オンラインストア限定 ｜ カートで全品20%引き（11月15日まで）', 'hero_en': 'Online store only — 20% off all items at cart checkout (until Nov 15)',
      'pill_ja': 'カートで20%引き（11/15まで）', 'pill_en': '20% off at cart (until Nov 15)',
-     'tease_ja': 'BLACK FRIDAY ｜ まもなく開始・カートで全品20%引き（11/12 0:00〜11/15）', 'tease_en': 'BLACK FRIDAY | Starts soon — 20% off all items at cart (Nov 12 0:00–Nov 15)',
-     'tease_hero_ja': 'まもなく開始 ｜ カートで全品20%引き（11/12 0:00〜11/15）', 'tease_hero_en': 'Starts soon — 20% off all items at cart (Nov 12 0:00 – Nov 15)',
+     'tease_ja': 'BLACK FRIDAY ｜ オンライン限定・まもなく開始・カートで全品20%引き（11/12 0:00〜11/15）', 'tease_en': 'BLACK FRIDAY | Online only — Starts soon — 20% off all items at cart (Nov 12 0:00–Nov 15)',
+     'tease_hero_ja': 'オンラインストア限定 ｜ まもなく開始 ｜ カートで全品20%引き（11/12 0:00〜11/15）', 'tease_hero_en': 'Online store only — Starts soon — 20% off all items at cart (Nov 12 0:00 – Nov 15)',
      'tease_pill_ja': 'まもなく20%引き', 'tease_pill_en': 'Coming soon'},
     {'from': '2026-11-27 00:00', 'to': '2026-11-30 00:00',
      'tease_from': '2026-11-26 00:00',
-     'ja': 'BLACK FRIDAY ｜ カートで全品20%引き（11/29まで）', 'en': 'BLACK FRIDAY | 20% off all items at cart checkout (until Nov 29)',
-     'hero_ja': 'カートで全品20%引き ｜ 11月29日まで', 'hero_en': '20% off all items at cart checkout — until Nov 29',
+     'ja': 'BLACK FRIDAY ｜ オンライン限定・カートで全品20%引き（11/29まで）', 'en': 'BLACK FRIDAY | Online only — 20% off all items at cart checkout (until Nov 29)',
+     'hero_ja': 'オンラインストア限定 ｜ カートで全品20%引き（11月29日まで）', 'hero_en': 'Online store only — 20% off all items at cart checkout (until Nov 29)',
      'pill_ja': 'カートで20%引き（11/29まで）', 'pill_en': '20% off at cart (until Nov 29)',
-     'tease_ja': 'BLACK FRIDAY ｜ まもなく開始・カートで全品20%引き（11/27 0:00〜11/29）', 'tease_en': 'BLACK FRIDAY | Starts soon — 20% off all items at cart (Nov 27 0:00–Nov 29)',
-     'tease_hero_ja': 'まもなく開始 ｜ カートで全品20%引き（11/27 0:00〜11/29）', 'tease_hero_en': 'Starts soon — 20% off all items at cart (Nov 27 0:00 – Nov 29)',
+     'tease_ja': 'BLACK FRIDAY ｜ オンライン限定・まもなく開始・カートで全品20%引き（11/27 0:00〜11/29）', 'tease_en': 'BLACK FRIDAY | Online only — Starts soon — 20% off all items at cart (Nov 27 0:00–Nov 29)',
+     'tease_hero_ja': 'オンラインストア限定 ｜ まもなく開始 ｜ カートで全品20%引き（11/27 0:00〜11/29）', 'tease_hero_en': 'Online store only — Starts soon — 20% off all items at cart (Nov 27 0:00 – Nov 29)',
      'tease_pill_ja': 'まもなく20%引き', 'tease_pill_en': 'Coming soon'},
 ]
 _JST = datetime.timezone(datetime.timedelta(hours=9))
@@ -151,10 +151,10 @@ BF_PERIODS = [{'f': _bf_ms(s['from']), 't': _bf_ms(s['to']), 'tf': _bf_ms(s['tea
                'tease_pill_ja': s['tease_pill_ja'], 'tease_pill_en': s['tease_pill_en']} for s in BF_SALES]
 BF_STYLE = ('<style>'
   '.bfband{background:#111;color:#fff;text-align:center;font-size:13px;letter-spacing:.04em;padding:7px 12px;font-weight:600;line-height:1.4}'
-  '.bfhero{background:#111;color:#fff;text-align:center;padding:18px 16px}'
-  '.bfhero-in{display:flex;flex-direction:column;align-items:center;gap:4px;line-height:1.15}'
-  '.bfhero-k{font-family:var(--roman,"Libre Caslon Text",serif);font-weight:700;letter-spacing:.14em;font-size:clamp(24px,6.5vw,44px)}'
-  '.bfhero-t{font-size:clamp(13px,3.4vw,16px);letter-spacing:.03em;font-weight:600}'
+  '.bfhero{background:#111;color:#fff;text-align:center;padding:30px 16px;border-top:3px solid var(--kin,#d4af37);border-bottom:3px solid var(--kin,#d4af37)}'
+  '.bfhero-in{display:flex;flex-direction:column;align-items:center;gap:8px;line-height:1.1}'
+  '.bfhero-k{font-family:var(--roman,"Libre Caslon Text",serif);font-weight:700;letter-spacing:.16em;font-size:clamp(32px,10vw,64px);color:var(--kin,#d4af37)}'
+  '.bfhero-t{font-size:clamp(14px,4.2vw,20px);letter-spacing:.03em;font-weight:700}'
   '.bfpill{display:inline-block;margin-left:8px;background:#111;color:#fff;font-size:11px;font-weight:700;letter-spacing:.02em;padding:2px 8px;border-radius:999px;vertical-align:middle;white-space:nowrap}'
   '.bfpill[hidden]{display:none}'  # hidden 属性が効くように（author CSS の display が UA の [hidden] を上書きしてしまうため）
   '.bfcount{font-family:var(--roman,"Libre Caslon Text",serif);font-weight:700;font-size:clamp(20px,5.5vw,34px);letter-spacing:.06em;font-variant-numeric:tabular-nums;color:var(--kin,#d4af37);margin-top:2px}'
@@ -206,7 +206,8 @@ def bf_band(lang):
         'tk();iv=setInterval(tk,1000);}'
     )
     return (BF_STYLE + '<div class="bfband" id="bfband" role="status" hidden></div>'
-            '<script>(function(){' + js + '})();</script>')
+            '<script>(function(){function go(){' + js + '}'
+            'if(document.readyState!=="loading"){go();}else{document.addEventListener("DOMContentLoaded",go);}})();</script>')
 def bf_hero(lang):
     """トップの一番上に出る大きめの告知（期間中だけ・bf_band の script が #bfhero を出す）。"""
     if not BF_PERIODS:
