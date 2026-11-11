@@ -775,7 +775,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 54800,
-   "site": 54800,
+   "site": 49400,
    "mercari": 62800
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -838,7 +838,13 @@
   ],
   "sku_confidence": "確定",
   "genre": "acc",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "price_ai": {
+   "at": "2026-11-12",
+   "from": 54800,
+   "to": 49400,
+   "by": "pl_76"
+  }
  },
  {
   "sku": "K11163",
@@ -1259,7 +1265,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 2000,
-   "site": 2000,
+   "site": 1800,
    "mercari": 2480
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -1321,7 +1327,13 @@
   ],
   "sku_confidence": "推定",
   "genre": "other",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "price_ai": {
+   "at": "2026-11-12",
+   "from": 2000,
+   "to": 1800,
+   "by": "pl_76"
+  }
  },
  {
   "sku": "K10781",
@@ -1419,7 +1431,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 12800,
-   "site": 12800,
+   "site": 11600,
    "mercari": 14880
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -1485,7 +1497,13 @@
   ],
   "sku_confidence": "推定",
   "genre": "tops",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "price_ai": {
+   "at": "2026-11-12",
+   "from": 12800,
+   "to": 11600,
+   "by": "pl_76"
+  }
  },
  {
   "sku": "K10743",
@@ -1745,7 +1763,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 13800,
-   "site": 13800,
+   "site": 12500,
    "mercari": 15880
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -1813,7 +1831,13 @@
   ],
   "sku_confidence": "推定",
   "genre": "bottoms",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "price_ai": {
+   "at": "2026-11-12",
+   "from": 13800,
+   "to": 12500,
+   "by": "pl_76"
+  }
  },
  {
   "sku": "K11074",
@@ -2334,7 +2358,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 16800,
-   "site": 16800,
+   "site": 15200,
    "mercari": 14800
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -2402,7 +2426,13 @@
   ],
   "sku_confidence": "推定",
   "genre": "tops",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "price_ai": {
+   "at": "2026-11-12",
+   "from": 16800,
+   "to": 15200,
+   "by": "pl_76"
+  }
  },
  {
   "sku": "K10846",
@@ -2418,7 +2448,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 12800,
-   "site": 12800,
+   "site": 11600,
    "mercari": 14200
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -2485,7 +2515,13 @@
   ],
   "sku_confidence": "推定",
   "genre": "tops",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "price_ai": {
+   "at": "2026-11-12",
+   "from": 12800,
+   "to": 11600,
+   "by": "pl_76"
+  }
  },
  {
   "sku": "K10159",
@@ -2823,7 +2859,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 62800,
-   "site": 62800,
+   "site": 56600,
    "mercari": 69980
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04",
@@ -2884,7 +2920,13 @@
   ],
   "sku_confidence": "確定",
   "genre": "acc",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "price_ai": {
+   "at": "2026-11-12",
+   "from": 62800,
+   "to": 56600,
+   "by": "pl_76"
+  }
  },
  {
   "sku": "K11265",
