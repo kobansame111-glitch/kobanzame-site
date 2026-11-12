@@ -278,7 +278,7 @@ T = {
   'map': '地図を開く ／ 川越市元町1-14-5',
   'days_h': '営業日', 'days': '水〜日 12:00–20:00（月・火 定休）', 'today_open': '本日営業', 'today_closed': '本日定休',
   'menu': 'メニュー', 'menu_close': '閉じる', 'menu_cats': 'ジャンルで選ぶ', 'menu_all': 'すべての商品', 'menu_more': 'お店のこと',
-  'list_h': 'In Stock', 'list_s': 'オンラインで買える一点もの（毎週水曜更新）', 'unit': '点', 'see_all': 'すべて見る', 'new_in': '新着',
+  'list_h': 'In Stock', 'list_s': 'オンラインで買える一点もの（毎週水曜更新）', 'unit': '点', 'count_unit': '点（在庫・SOLD除く）', 'see_all': 'すべて見る', 'new_in': '新着',
   'kw_l': '文字で探す', 'kw_ph': '例：Levi\'s　90s　デニム', 'pr_l': '値段', 'pr_all': 'すべて',
   'pr_bands': ['〜1万円', '1万〜2万円', '2万円〜'], 'finder_l': '手持ちの服の身幅', 'finder_u': 'cm ±3cmの服を表示', 'finder_sold': '売れた一点ものも見る', 'finder_clear': '条件をクリア',
   'finder_hint': '身幅＝脇の下から脇の下までを平らに置いて測った長さ。いちばん気に入っている服で測るのがおすすめです。',
@@ -323,7 +323,7 @@ T = {
   'map': 'Open map / 1-14-5 Motomachi, Kawagoe',
   'days_h': 'Open', 'days': 'Wed–Sun 12:00–20:00 (closed Mon & Tue)', 'today_open': 'Open today', 'today_closed': 'Closed today',
   'menu': 'Menu', 'menu_close': 'Close', 'menu_cats': 'Shop by category', 'menu_all': 'All items', 'menu_more': 'About the shop',
-  'list_h': 'In Stock', 'list_s': 'One-of-a-kind pieces you can buy online (updated every Wednesday)', 'unit': ' items', 'see_all': 'See all', 'new_in': 'New in',
+  'list_h': 'In Stock', 'list_s': 'One-of-a-kind pieces you can buy online (updated every Wednesday)', 'unit': ' items', 'count_unit': ' for sale', 'see_all': 'See all', 'new_in': 'New in',
   'kw_l': 'Search', 'kw_ph': 'e.g. Levi\'s 90s denim', 'pr_l': 'Price', 'pr_all': 'Any',
   'pr_bands': ['Under ¥10,000', '¥10,000–20,000', '¥20,000 and up'], 'finder_l': 'Chest width of a piece you own', 'finder_u': 'cm — show pieces within ±3 cm', 'finder_sold': 'Show sold pieces', 'finder_clear': 'Clear',
   'finder_hint': 'Chest width = measured flat, armpit to armpit. Measure the piece you like best for the closest match.',
@@ -607,6 +607,12 @@ def release(p):
 
 def is_sold(p):
     return p.get('status') == 'sold'
+
+# 2026-11-12 龍さん②-2A：英語ページでは、日本語の「ブランド無し」表記だけ英語に置き換える（実在ブランド名はそのまま）
+BRAND_EN = {'表記なし': 'Not indicated', 'ノーブランド': 'No brand'}
+def brand_disp(p, lang):
+    b = (p.get('brand') or '').strip()
+    return BRAND_EN.get(b, b) if lang == 'en' else b
 
 def cat_of(p):
     # 2026-10-08 products.json に genre（写真から判定したジャンル）があればそれを優先。無ければカテゴリの文字で判定
@@ -1552,7 +1558,7 @@ def card_html(p, lang, lazy=True, findable=False):
     wv = '' if w is None else f'{w:g}'
     return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-sku="{esc(p.get("sku", ""))}" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}"' + (f' data-p="{site_price(p)}" data-q="{esc(search_text(p))}"' if findable else '') + '>'
             f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}</div>'
-            f'<div class="brand">{esc(p["brand"])}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
+            f'<div class="brand">{esc(brand_disp(p, lang))}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
             + (f'<div class="sz">{T[lang]["width"].format(w=wv)}</div>' if (wv and not sold) else '') +   # 2026-11-03 一覧で身幅が分かるように
             f'<span class="fit" hidden></span>'
             f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small>{usd_span(site_price(p), lang)}{bf_pill(lang)}</div></a>')
@@ -1682,7 +1688,7 @@ def finder(lang):
 
 def list_js(lang):
     t = T[lang]
-    msg = json.dumps({'empty_w': t['empty_w'], 'empty': t['empty'], 'fit': t['fit'], 'same': t['same'], 'unit': t['unit'],
+    msg = json.dumps({'empty_w': t['empty_w'], 'empty': t['empty'], 'fit': t['fit'], 'same': t['same'], 'unit': t['unit'], 'count_unit': t['count_unit'],
                       'labels': dict(t['cats'], new=NEW_LABEL[lang]), 'here': 'いま見ているのは' if lang == 'ja' else 'Showing',
                       'shown': '{c}を表示（{n}）' if lang == 'ja' else 'Showing {c} ({n})', 'all': 'すべての商品を表示' if lang == 'ja' else 'Showing all items', 'bands': PRICE_BANDS}, ensure_ascii=False)
     return '''<script>
@@ -1692,22 +1698,25 @@ def list_js(lang):
   var kw=document.getElementById('kw'), pr=document.getElementById('pr'), myw=document.getElementById('myw'), showsold=document.getElementById('showsold'), cnt=document.getElementById('count'), blocks=document.getElementById('blocks');
   var empty=document.createElement('div'); empty.className='empty'; empty.hidden=true; grid.appendChild(empty);
   function apply(){
-    var my=parseFloat(myw.value), n=0;
+    var my=parseFloat(myw.value), n=0, na=0;
     var words=(kw?kw.value:'').normalize('NFKC').toLowerCase().replace(/['’`]/g,'').split(/\\s+/).filter(Boolean), band=(pr&&pr.value!=='')?M.bands[+pr.value]:null;
     var plain=!filter&&isNaN(my)&&!showsold.checked&&!words.length&&!band;   // 何も絞っていない時はジャンルごとのブロックを見せる
     if(blocks){blocks.hidden=!plain; grid.hidden=plain;}
     grid.querySelectorAll('.card').forEach(function(c){
-      var ok=(!filter||(filter==='new'?c.dataset.new==='1':c.dataset.cat===filter))&&(showsold.checked||c.dataset.sold!=='1');
+      var notsold=c.dataset.sold!=='1';
+      var ok=(!filter||(filter==='new'?c.dataset.new==='1':c.dataset.cat===filter));
       var w=c.dataset.w===''?null:parseFloat(c.dataset.w), fit=c.querySelector('.fit');
       if(!isNaN(my)) ok=ok&&w!==null&&Math.abs(w-my)<=3;
       if(words.length){var q=c.dataset.q||''; ok=ok&&words.every(function(x){return q.indexOf(x)>=0;});}
       if(band){var pv=parseInt(c.dataset.p,10)||0; ok=ok&&pv>=band[0]&&pv<band[1];}
       if(!isNaN(my)&&w!==null){var d=w-my; fit.textContent=M.fit.replace('{w}',w).replace('{d}',d===0?M.same:(d>0?'+':'')+d.toFixed(1)+'cm'); fit.hidden=false;} else fit.hidden=true;
-      c.hidden=!ok; if(ok) n++;
+      if(ok&&notsold) na++;
+      var vis=ok&&(showsold.checked||notsold);
+      c.hidden=!vis; if(vis) n++;
     });
     empty.hidden=n>0;
     empty.textContent=!isNaN(my)?M.empty_w.replace('{w}',my):M.empty;
-    if(cnt) cnt.textContent=n+M.unit;
+    if(cnt) cnt.textContent=na+M.count_unit;
     document.querySelectorAll('.catrow button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.filter===filter));});
     var hb=document.getElementById('herebar');
     if(hb){hb.hidden=!filter; if(filter) document.getElementById('herego').innerHTML=M.here+' <b>'+(M.labels[filter]||filter)+'</b>（'+n+M.unit+'）';}
@@ -1789,7 +1798,7 @@ for lang in ('ja', 'en'):
 {news_section}  <div class="wrap">
     <div class="herebar" id="herebar" hidden><button type="button" class="here" id="herego"></button><button type="button" class="back" id="hereback">{'すべての商品に戻る' if lang == 'ja' else 'Show all'}</button></div>
     <div class="catrow" role="group">{catrow(lang)}</div>
-    <div class="sec-head" id="list"><h2>{t['list_h']}<small>{t['list_s']}</small></h2><span class="count" id="count">{len(avail_live)}{t['unit']}</span></div>
+    <div class="sec-head" id="list"><h2>{t['list_h']}<small>{t['list_s']}</small></h2><span class="count" id="count">{len(avail_live)}{t['count_unit']}</span></div>
     {finder(lang)}
     <div class="blocks" id="blocks">
 {blocks_html(lang)}
@@ -1823,7 +1832,7 @@ for lang in ('ja', 'en'):
 <main class="wrap">
   <div class="crumb"><a href="{P}/">HOME</a><span>／</span><span>JOURNAL</span></div>
   <div class="catrow" role="group" style="margin-top:4px">{catrow(lang)}</div>
-  <div class="sec-head jhead"><h1>{t['journal_h']}<small>{t['journal_s']}</small></h1><span class="count" id="count">{len(avail_live)}{t['unit']}</span></div>
+  <div class="sec-head jhead"><h1>{t['journal_h']}<small>{t['journal_s']}</small></h1><span class="count" id="count">{len(avail_live)}{t['count_unit']}</span></div>
   {finder(lang)}
   <div class="grid" id="grid">
 {cards}
@@ -2021,7 +2030,7 @@ for lang in ('ja', 'en'):
       <div class="galcount" id="galcount"></div>
     </div>
     <div class="info">
-      <div class="brand">{esc(p['brand'])}</div>
+      <div class="brand">{esc(brand_disp(p, lang))}</div>
       <h1>{esc(name)}</h1>
       <div class="ttl">{esc(loc(p, 'title', lang))}</div>
       <div class="sku">ITEM NO. {esc(p['sku'])}</div>
