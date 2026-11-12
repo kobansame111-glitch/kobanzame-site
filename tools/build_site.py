@@ -135,11 +135,11 @@ BF_SALES = [
      'tease_pill_ja': 'まもなく20%引き', 'tease_pill_en': 'Coming soon'},
     {'from': '2026-11-27 00:00', 'to': '2026-11-30 00:00',
      'tease_from': '2026-11-26 00:00',
-     'ja': 'BLACK FRIDAY ｜ オンライン限定・カートで全品20%引き（11/29まで）', 'en': 'BLACK FRIDAY | Online only — 20% off all items at cart checkout (until Nov 29)',
-     'hero_ja': 'オンラインストア限定 ｜ カートで全品20%引き（11月29日まで）', 'hero_en': 'Online store only — 20% off all items at cart checkout (until Nov 29)',
+     'ja': 'BLACK FRIDAY ｜ オンライン限定・カートで全品20%引き（11/29まで）・この期間のご注文は12/3以降に順次発送', 'en': 'BLACK FRIDAY | Online only — 20% off all items at cart checkout (until Nov 29) — orders ship from Dec 3',
+     'hero_ja': 'オンラインストア限定 ｜ カートで全品20%引き（11月29日まで）｜ この期間のご注文は12/3以降に順次発送', 'hero_en': 'Online store only — 20% off all items at cart checkout (until Nov 29) — orders ship from Dec 3',
      'pill_ja': 'カートで20%引き（11/29まで）', 'pill_en': '20% off at cart (until Nov 29)',
-     'tease_ja': 'BLACK FRIDAY ｜ オンライン限定・まもなく開始・カートで全品20%引き（11/27 0:00〜11/29）', 'tease_en': 'BLACK FRIDAY | Online only — Starts soon — 20% off all items at cart (Nov 27 0:00–Nov 29)',
-     'tease_hero_ja': 'オンラインストア限定 ｜ まもなく開始 ｜ カートで全品20%引き（11/27 0:00〜11/29）', 'tease_hero_en': 'Online store only — Starts soon — 20% off all items at cart (Nov 27 0:00 – Nov 29)',
+     'tease_ja': 'BLACK FRIDAY ｜ オンライン限定・まもなく開始・カートで全品20%引き（11/27 0:00〜11/29）・ご注文は12/3以降に順次発送', 'tease_en': 'BLACK FRIDAY | Online only — Starts soon — 20% off all items at cart (Nov 27 0:00–Nov 29) — orders ship from Dec 3',
+     'tease_hero_ja': 'オンラインストア限定 ｜ まもなく開始 ｜ カートで全品20%引き（11/27 0:00〜11/29）｜ ご注文は12/3以降に順次発送', 'tease_hero_en': 'Online store only — Starts soon — 20% off all items at cart (Nov 27 0:00 – Nov 29) — orders ship from Dec 3',
      'tease_pill_ja': 'まもなく20%引き', 'tease_pill_en': 'Coming soon'},
 ]
 _JST = datetime.timezone(datetime.timedelta(hours=9))
@@ -220,6 +220,52 @@ def bf_pill(lang):
     if not BF_PERIODS:
         return ''
     return '<span class="bfpill" hidden></span>'
+
+# ---------- お休みのお知らせ・発送の切り替え（2026-11-11 龍さん・日本時間で自動）----------
+# 店舗休業：11/25〜12/5（再開12/6）。お知らせと帯は 11/18 0:00〜12/6 0:00 に自動表示。
+# 発送：11/24 0:00〜12/3 0:00 の間だけ、発送の文言を「12/3から順に発送」に切り替える（.shipwhen をJSで差し替え）。
+HOLIDAY = {
+  'from': '2026-11-18 00:00', 'to': '2026-12-06 00:00',
+  'band_ja': '店舗休業：11/25（水）〜12/5（土）。オンラインのご注文は期間中も受付。11/24以降のご注文は12/3から順に発送します。',
+  'band_en': 'Shop closed Nov 25–Dec 5. Online orders still accepted; orders from Nov 24 ship from Dec 3.',
+  'full_ja': '買い付けのため、店舗は11月25日（水）〜12月5日（土）お休みします。営業再開は12月6日（日）13:00〜（予定）。オンラインのご注文は期間中も受け付けます。11月24日以降のご注文は、12月3日から順に発送します。',
+  'full_en': 'We will be closed for buying trips from Nov 25 (Wed) to Dec 5 (Sat). We reopen Dec 6 (Sun) at 13:00 (planned). Online orders are accepted throughout. Orders placed on or after Nov 24 will be dispatched from Dec 3, in order.',
+}
+SHIPWIN = {'from': '2026-11-24 00:00', 'to': '2026-12-03 00:00',
+           'ja': '11月24日以降のご注文は、12月3日から順に発送します',
+           'en': 'Orders placed on or after Nov 24 will be dispatched from Dec 3, in order.'}
+_HOL_F, _HOL_T = _bf_ms(HOLIDAY['from']), _bf_ms(HOLIDAY['to'])
+_SHIP_F, _SHIP_T = _bf_ms(SHIPWIN['from']), _bf_ms(SHIPWIN['to'])
+HOL_STYLE = ('<style>'
+  '.holband{background:#3b4a73;color:#fff;text-align:center;font-size:13px;letter-spacing:.02em;padding:7px 12px;line-height:1.5}'
+  '.holnotice{background:var(--kinari,#f3f1ea);border:1px solid var(--line,#d7dbdf);border-radius:10px;padding:14px 16px;margin:18px 0;font-size:14px;line-height:1.9}'
+  '.holnotice b{display:block;margin-bottom:4px;letter-spacing:.04em}'
+  '</style>')
+# 発送の文言（この語句が本文にあれば .shipwhen で包み、発送期間だけ差し替える）
+_SHIP_PHRASES = [
+  '決済確認後3日以内に発送（月・火定休を除く）', '決済確認後3日以内に発送（月曜定休を除く）',
+  '決済確認後3日以内（月・火定休を除く）に、川越の店舗から発送します', '決済確認後3日以内（月曜定休を除く）に、川越の店舗から発送します',
+  'ご注文（決済）の確認後、3日以内（定休日を除く）に発送します',
+  'Dispatched within 3 days of payment (closed Mon & Tue)', 'Dispatched within 3 days of payment (closed Mondays)',
+  'Dispatched from our Kawagoe shop within 3 days of payment (closed Mon & Tue)',
+]
+def wrap_ship(html):
+    """発送の時期の文言を .shipwhen で包む（発送期間中だけJSが差し替える）。長い語句から先に処理。"""
+    for ph in sorted(_SHIP_PHRASES, key=len, reverse=True):
+        if ph in html and 'shipwhen' not in html.split(ph)[0][-40:]:
+            html = html.replace(ph, '<span class="shipwhen">' + ph + '</span>')
+    return html
+def hol_band(lang):
+    return '<div class="holband" id="holband" role="status" hidden>' + esc(HOLIDAY['band_' + lang]) + '</div>'
+def hol_notice(lang):
+    ttl = 'お休みのお知らせ' if lang == 'ja' else 'Shop closure'
+    return '<div class="holnotice" id="holnotice" hidden><b>' + ttl + '</b>' + esc(HOLIDAY['full_' + lang]) + '</div>'
+def site_notice_js(lang):
+    salt = json.dumps(SHIPWIN[lang], ensure_ascii=False)
+    return (HOL_STYLE + '<script>(function(){function go(){var n=Date.now();'
+            'if(n>=' + str(_HOL_F) + '&&n<' + str(_HOL_T) + '){["holband","holnotice"].forEach(function(id){var e=document.getElementById(id);if(e)e.hidden=false;});}'
+            'if(n>=' + str(_SHIP_F) + '&&n<' + str(_SHIP_T) + '){var ps=document.querySelectorAll(".shipwhen");for(var i=0;i<ps.length;i++){ps[i].textContent=' + salt + ';}}'
+            '}if(document.readyState!=="loading"){go();}else{document.addEventListener("DOMContentLoaded",go);}})();</script>')
 
 # ---------- 文言（日本語／英語） ----------
 T = {
@@ -1208,7 +1254,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 {beacon}{track}
 {verify}</head>
 <body>
-{bf_band(lang)}<div class="util">{t['util']}</div>{NEWS_JS if NEWS else ''}
+{bf_band(lang)}{hol_band(lang)}{site_notice_js(lang)}<div class="util">{wrap_ship(t['util'])}</div>{NEWS_JS if NEWS else ''}
 <header class="site"><div class="wrap">
   <div class="hl"><button type="button" class="menubtn" id="menubtn" aria-expanded="false" aria-controls="drawer"><i aria-hidden="true"></i>{t['menu']}</button><a class="cartlink" href="{pre(lang)}/cart/" aria-label="{'カート' if lang == 'ja' else 'Cart'}" hidden><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8zm3 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><span class="ct">{'カート' if lang == 'ja' else 'Cart'}</span><span class="cartn"></span></a></div>
   <a class="logo" href="{pre(lang)}/" aria-label="小判鮫 KOBANZAME"><img src="/assets/seal-128.png" alt="" width="44" height="44"><span class="wm"><b>KOBANZAME</b><span>小判鮫 ・ KAWAGOE</span></span></a>
@@ -1719,6 +1765,7 @@ for lang in ('ja', 'en'):
     top = head(lang, t['top_title'], t['top_desc'], P + '/', extra_ld=top_ld) + f'''
 <main>
   {bf_hero(lang)}
+  {hol_notice(lang)}
   {newtop_html(lang)}
   <section class="tiles" aria-label="{'カテゴリ' if lang == 'ja' else 'Categories'}">
     <div class="wrap tgrid">{tiles_html(lang)}</div>
@@ -1936,7 +1983,7 @@ for lang in ('ja', 'en'):
         # 2026-11-03 龍さん決定（全部A）：購入ボタンの下に短い安心の4行／メルカリでも買える／質問の入口／英語は海外発送の見積
         assure = ''
         if sold or not buyable(p):
-            buy_extra = f'<div class="ship">{t["ship"]}</div>' if not sold else ''
+            buy_extra = f'<div class="ship">{wrap_ship(t["ship"])}</div>' if not sold else ''
         else:
             assure = '<ul class="assure">' + ''.join(f'<li>{esc(x)}</li>' for x in t['assure']) + '</ul>'   # 購入ボタンのすぐ下
             if lang == 'ja' and p['links'].get('mercari'):
@@ -1996,7 +2043,7 @@ for lang in ('ja', 'en'):
 {loc(p, 'body_html', lang)}</div></details>
       <details><summary>{t['specs']}</summary><dl class="spec">{spec}</dl><p class="howto">{t['howto']}</p></details>
       {KX.product_fit_html(p, lang, cat_of(p))}
-      <details><summary>{t['delivery']}</summary><div class="story"><p>{t['delivery_p']}</p></div></details>
+      <details><summary>{t['delivery']}</summary><div class="story"><p>{wrap_ship(t['delivery_p'])}</p></div></details>
       {pfaq_html(p, lang)}
       <div class="byline">{t['byline']}</div>
       {('<p class="toblog"><a href="/blog/' + p['slug'] + '/">' + ('この一着のことをブログで読む →' if lang == 'ja' else 'Read about this piece on our blog (Japanese) →') + '</a></p>') if p['slug'] in BLOG_SLUGS else ''}
@@ -2035,7 +2082,7 @@ LAW = [
     ('品切れの場合', '店頭・他の販路で先に売れた場合は、ご注文をお受けできないことがあります。その際はご連絡のうえ全額返金いたします。'),
     ('古物商許可', f"{SHOP['kobutsu']}（{SHOP['company']}）"),
 ]
-law_html = ''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in LAW)
+law_html = ''.join(f'<dt>{esc(k)}</dt><dd>{wrap_ship(esc(v)) if k == "引渡時期" else esc(v)}</dd>' for k, v in LAW)
 
 # 2026-11-07 お客様対応ボット 段1（kobanzame-brain の設計書 §4-1・11/6 龍さん 1A）：ボットが「答えてよい事実」を、サイトの文と同じ値から書き出す。
 # 画面は変えない。ボットはこのファイルと products.json だけを読む（サイトとボットの答えがずれないように）。人の名前・電話番号は入れない。
