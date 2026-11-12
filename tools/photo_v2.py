@@ -16,6 +16,11 @@
 止める：data/ai_cost/STOP というファイルがあれば、AIを一切呼ばない。次の2つの時に自動で作る（作られるとワークフローの最後の段が
       失敗になり、GitHubから龍さんにメールが届く）：①マネキン画像1枚が STOP_PER_IMAGE_YEN を超えた ②この月の合計が MONTH_CAP_YEN に届いた。
       再開は、中身を確認してから data/ai_cost/STOP を消す。
+マネキンを止める（2026-11-12 龍さん決定・既定OFF）：マネキン画像は「全体の8割が成功なら続ける・届かなければ止める」。
+      実績 OK6・NG15・確認待ち6（成功 約29%）で8割に届かないため停止。機能のコードは消さずに残す。
+      次のどれかでマネキンの生成と Batch の依頼を止める（mannequin_off()）：①data/ai_cost/MANNEQUIN_OFF というファイルがある（←いまはこれを置いている＝既定OFF）
+      ②環境変数 PHOTO_V2_MANNEQUIN=0　③環境変数 PHOTO_V2_NO_MANNEQUIN=1。背景を揃える処理など、マネキン以外の写真の処理はこのスイッチでは止めない。
+      また作る（再開）には data/ai_cost/MANNEQUIN_OFF を消す（環境変数を付けているなら外す）。
 鍵：GEMINI_API_KEY（GitHub Secrets・値はログに出さない）。無ければ何もしない。
 失敗：その商品は元の写真のまま。HTTP ステータスと本文の先頭をログに出す（握り潰さない）。
 
@@ -37,6 +42,7 @@ COST_CSV = os.path.join(COST_DIR, 'photo_v2.csv')
 STOP_FILE = os.path.join(COST_DIR, 'STOP')
 SAMPLE_FILE = os.path.join(COST_DIR, 'SAMPLE_REQUEST')   # 見本を作る頼み（品番を1行に1つ）
 SAMPLE_DIR = os.path.join(COST_DIR, 'samples')
+MANNEQUIN_OFF_FILE = os.path.join(COST_DIR, 'MANNEQUIN_OFF')   # これがあれば、マネキン画像を作らない・Batch で頼まない（2026-11-12 龍さん決定）
 SITE = 'https://kobanzame-kawagoe.com'
 JST = datetime.timezone(datetime.timedelta(hours=9))
 
@@ -83,6 +89,24 @@ def log(m):
 
 def now_jst():
     return datetime.datetime.now(JST)
+
+
+def mannequin_off():
+    """マネキン画像を「作らない」か（Batch で頼むのも止める）。既定は OFF＝作らない（2026-11-12 龍さん決定）。
+    止める理由：マネキン画像は「全体の8割が成功なら続ける・届かなければ止める」。実績 OK6・NG15・確認待ち6（成功 約29%）で8割に届かないため停止。機能のコードは消さずに残す。
+    OFF（作らない）になる条件（どれか1つでも当てはまればOFF）：
+      ① data/ai_cost/MANNEQUIN_OFF というファイルがある（←いまはこれを置いている＝既定OFF）
+      ② 環境変数 PHOTO_V2_MANNEQUIN=0
+      ③ 環境変数 PHOTO_V2_NO_MANNEQUIN=1（前からあるスイッチ）
+    また作る（再開）には：①のファイル data/ai_cost/MANNEQUIN_OFF を消す（②③の環境変数を付けているならそれも外す）。
+    このスイッチは背景を揃える処理（make_v2）など、マネキン以外の写真の処理は止めない。"""
+    if os.environ.get('PHOTO_V2_MANNEQUIN') == '0':
+        return True
+    if os.environ.get('PHOTO_V2_NO_MANNEQUIN') == '1':
+        return True
+    if os.path.exists(MANNEQUIN_OFF_FILE):
+        return True
+    return False
 
 
 # ===== お金の台帳 ===================================================================
@@ -585,6 +609,8 @@ def mark_queued(v, p, b, m):
 
 def submit_batch(products, budget):
     """queued の商品をまとめて1つの Batch で頼む。成功→ batch（名前と鍵を残す）、失敗→ error。頼んだ数を返す"""
+    if mannequin_off():               # マネキンOFF（2026-11-12 龍さん）＝ Batch で頼まない
+        return 0
     queued = [p for p in products if (p.get('photo_v2') or {}).get('mannequin') == 'queued'][:BATCH_MAX]
     if not queued:
         return 0
@@ -624,6 +650,11 @@ def submit_batch(products, budget):
 
 def collect_batches(products, budget):
     """頼んであった Batch の結果を受け取る。終わった分は画像にして確認待ち（pending）へ。料金は1枚ずつ台帳へ。変えた数を返す"""
+    if mannequin_off():               # マネキンOFF（2026-11-12 龍さん）＝受け取りもしない（再開したら続きから受け取る）
+        n = sum(1 for p in products if (p.get('photo_v2') or {}).get('mannequin') == 'batch')
+        if n:
+            log(f'マネキンOFF：受け取り待ちの Batch が {n}件 ありますが、OFFの間は受け取りません（MANNEQUIN_OFF を消すと再開します）')
+        return 0
     groups = {}
     for p in products:
         v = p.get('photo_v2') or {}
@@ -828,7 +859,7 @@ def process(p, budget):
     v = {'date': now_jst().strftime('%Y-%m-%d'), 'front_i': front_i, 'back_i': back_i,
          **{(k if k.endswith(('_error', '_check')) else k + '_url'): u for k, u in urls.items()}}
     # マネキン（服のジャンルだけ）。2026-11-09：この回は「頼む予定」にするだけ。回の最後に Batch でまとめて頼み、次の回で受け取る
-    if p.get('genre') in CLOTHES and front_i >= 0 and not os.path.exists(STOP_FILE) and os.environ.get('PHOTO_V2_NO_MANNEQUIN') != '1':
+    if p.get('genre') in CLOTHES and front_i >= 0 and not os.path.exists(STOP_FILE) and not mannequin_off():
         if not budget.can_spend(image_yen_estimate(IMAGE_MODEL, batch=True)):
             v['mannequin'] = 'skipped-budget'
             Budget.stop(f'この月の写真v2のAI代が上限 {MONTH_CAP_YEN:.0f}円 に届きました（使用 {budget.spent:.0f}円）')
@@ -850,7 +881,7 @@ def process(p, budget):
 def is_mannequin_retry(p):
     """photo_v2.mannequin が "retry" の商品は、マネキン画像だけを1回作り直す（2026-10-14 追加・人がNGにした時用）"""
     v = p.get('photo_v2') or {}
-    return (p.get('status') == 'available' and v.get('mannequin') == 'retry' and v.get('mannequin_retries', 0) < 1
+    return (not mannequin_off() and p.get('status') == 'available' and v.get('mannequin') == 'retry' and v.get('mannequin_retries', 0) < 1
             and p.get('genre') in CLOTHES and bool(p.get('images_orig') or p.get('images')))
 
 
@@ -903,6 +934,8 @@ def redo_cutout(p, budget):
 def remake_mannequin(p, budget):
     """マネキン画像だけ作り直す。背景をそろえた写真・並びは変えない。
     2026-11-09：その場では作らず「頼む予定（queued）」にし、回の最後に Batch で頼む。受け取ったら確認待ち（pending）"""
+    if mannequin_off():               # マネキンOFF（2026-11-12 龍さん）＝作り直しもしない（retry のまま残す）
+        return
     v = p['photo_v2']
     v['mannequin_retries'] = v.get('mannequin_retries', 0) + 1
     if not budget.can_spend(image_yen_estimate(IMAGE_MODEL, batch=True)):

@@ -60,7 +60,10 @@ pv.COST_CSV = os.path.join(pv.COST_DIR, 'photo_v2.csv')
 pv.STOP_FILE = os.path.join(pv.COST_DIR, 'STOP')
 pv.SAMPLE_FILE = os.path.join(pv.COST_DIR, 'SAMPLE_REQUEST')
 pv.SAMPLE_DIR = os.path.join(pv.COST_DIR, 'samples')
+pv.MANNEQUIN_OFF_FILE = os.path.join(pv.COST_DIR, 'MANNEQUIN_OFF')   # 作業用フォルダに向ける（実リポジトリの OFF ファイルを見ない）。下のマネキンの流れのテストは「マネキンON」で動かす
 pv.DATA = os.path.join(tmp, 'data', 'products.json')
+for _k in ('PHOTO_V2_MANNEQUIN', 'PHOTO_V2_NO_MANNEQUIN'):   # 環境変数のスイッチが付いていてもテストは素の状態で
+    os.environ.pop(_k, None)
 
 from PIL import Image  # noqa: E402
 
@@ -174,6 +177,31 @@ check('見本の料金も台帳に4行（標準の料金）', [(r['モデル'], 
 b5 = pv.Budget([])
 b5.spent = pv.MONTH_CAP_YEN - 1
 check('月の上限に近いと頼まない（can_spend が False）', b5.can_spend(new_batch), False)
+
+# ---- マネキンOFF スイッチ（2026-11-12 龍さん：成功 約29%で止める・機能は残す）----
+check('OFF：既定（ファイルも環境変数も無い）は作る（False）', pv.mannequin_off(), False)
+open(pv.MANNEQUIN_OFF_FILE, 'w').write('off')
+check('OFF：MANNEQUIN_OFF ファイルがあれば止める（True）', pv.mannequin_off(), True)
+offr = prod('K90010', 'retry'); offr['photo_v2']['mannequin_url'] = '/x.jpg'
+check('OFF：retry はマネキンの対象にしない', pv.is_mannequin_retry(offr), False)
+pv.remake_mannequin(offr, pv.Budget([offr]))
+check('OFF：作り直しは何もしない（retry のまま・回数も増えない）',
+      (offr['photo_v2']['mannequin'], offr['photo_v2'].get('mannequin_retries', 0)), ('retry', 0))
+offq = [prod('K90011', 'queued')]
+check('OFF：submit_batch は Batch で頼まない（0件・queued のまま）',
+      (pv.submit_batch(offq, pv.Budget(offq)), offq[0]['photo_v2']['mannequin']), (0, 'queued'))
+offb = [prod('K90012', 'batch')]; offb[0]['photo_v2']['mannequin_batch'] = 'batches/zzz'
+check('OFF：collect_batches も受け取らない（0件・batch のまま）',
+      (pv.collect_batches(offb, pv.Budget(offb)), offb[0]['photo_v2']['mannequin']), (0, 'batch'))
+check('OFF：背景を揃える処理（make_v2）は止めない＝関数はそのまま使える', callable(getattr(pv, 'make_v2', None)), True)
+os.remove(pv.MANNEQUIN_OFF_FILE)
+os.environ['PHOTO_V2_MANNEQUIN'] = '0'
+check('OFF：環境変数 PHOTO_V2_MANNEQUIN=0 でも止める', pv.mannequin_off(), True)
+os.environ.pop('PHOTO_V2_MANNEQUIN')
+os.environ['PHOTO_V2_NO_MANNEQUIN'] = '1'
+check('OFF：前からのスイッチ PHOTO_V2_NO_MANNEQUIN=1 でも止める', pv.mannequin_off(), True)
+os.environ.pop('PHOTO_V2_NO_MANNEQUIN')
+check('OFF：スイッチを戻す（ファイルを消す・環境変数を外す）と ON（作る）に戻る', pv.mannequin_off(), False)
 
 print(f'NG {ng}件／{ok + ng}' if ng else f'photo_v2：全部 OK（{ok}件）')
 sys.exit(1 if ng else 0)
