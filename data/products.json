@@ -1520,7 +1520,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 9800,
-   "site": 9800,
+   "site": 8900,
    "mercari": 10980
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -1586,7 +1586,13 @@
   ],
   "sku_confidence": "推定",
   "genre": "dress",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "price_ai": {
+   "at": "2026-11-13",
+   "from": 9800,
+   "to": 8900,
+   "by": "pl_76"
+  }
  },
  {
   "sku": "K10951",
@@ -2195,7 +2201,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 7800,
-   "site": 7800,
+   "site": 7100,
    "mercari": 8980
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -2259,7 +2265,13 @@
   ],
   "sku_confidence": "推定",
   "genre": "shoes",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "price_ai": {
+   "at": "2026-11-13",
+   "from": 7800,
+   "to": 7100,
+   "by": "pl_76"
+  }
  },
  {
   "sku": "K10857",
@@ -2275,7 +2287,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 12800,
-   "site": 12800,
+   "site": 11600,
    "mercari": 11500
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -2343,7 +2355,13 @@
   ],
   "sku_confidence": "推定",
   "genre": "tops",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "price_ai": {
+   "at": "2026-11-13",
+   "from": 12800,
+   "to": 11600,
+   "by": "pl_76"
+  }
  },
  {
   "sku": "K10856",
@@ -2621,7 +2639,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 15800,
-   "site": 15800,
+   "site": 14300,
    "mercari": 16200
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -2686,7 +2704,13 @@
   ],
   "sku_confidence": "推定",
   "genre": "shoes",
-  "genre_by": "manual-photo-2026-10-08"
+  "genre_by": "manual-photo-2026-10-08",
+  "price_ai": {
+   "at": "2026-11-13",
+   "from": 15800,
+   "to": 14300,
+   "by": "pl_76"
+  }
  },
  {
   "sku": "K10688",
