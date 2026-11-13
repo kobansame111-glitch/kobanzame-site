@@ -375,9 +375,9 @@ WS_OPEN = TODAY >= WS_FROM
 # False の間は「予約する」ボタンを出さず「予約は準備中です」と表示し、メニューも「（準備中）」付きにする。
 # 予約サイトが整ったら True に戻す（RESERVE の行き先も新しいサイトに）。
 WS_BOOKING = False
-RESERVE = 'https://www.concentsocket.com/location/kobanzame/reserve/'
+RESERVE = '/reserve/?c='   # 2026-11-13 自前の予約画面（tools/reserve_page.py・GAS 65番）。旧：concentsocket（友人作）は使わない
 WORKSHOPS = [
-    {'id': 'brass-bangle', 'reserve': RESERVE + 'dedff258-e093-4b81-bc8e-0abf0ac5bf4a', 'price': 1500, 'minutes': 60, 'max': 2,
+    {'id': 'brass-bangle', 'reserve': RESERVE + 'brass-bangle', 'price': 1500, 'minutes': 60, 'max': 2,
      'ja': {'name': '真鍮バングルワークショップ',
             'lead': '切り出した真鍮を、店主が目の前で腕の形に曲げます。仕上げの刻印（アルファベット・数字・記号）は、ご自身の手で打っていただきます。完成品はその場でお持ち帰りいただけます。',
             'notes': ['1人1本・刻印つき', 'モニター募集中：作業中の写真を撮らせていただく場合があります（お顔を出したくない方は当日お伝えください。手元だけを撮ります）',
@@ -386,7 +386,7 @@ WORKSHOPS = [
             'lead': 'The owner bends a cut brass bar to the shape of your wrist in front of you, and you stamp the finishing marks (letters, numbers, symbols) yourself. Take it home the same day.',
             'notes': ['One bangle per person, stamping included', 'We may take photos of your hands while you work (tell us if you prefer not)',
                       'If you have a metal allergy, please ask us before booking', 'Brass changes colour as you wear it']}},
-    {'id': 'stone-beads', 'reserve': RESERVE + '381ebd3c-3e63-4c6c-8f93-2ec4ec346c7f', 'price': 1200, 'minutes': 30, 'max': 2,
+    {'id': 'stone-beads', 'reserve': RESERVE + 'stone-beads', 'price': 1200, 'minutes': 30, 'max': 2,
      'ja': {'name': '天然石ビーズブレスレットワークショップ',
             'lead': '店頭にある天然石のビーズから1種類を選んで、ブレスレットを作ります。完成品はその場でお持ち帰りいただけます。',
             'notes': ['料金には石1種類分が含まれます', '2種類以上使いたい場合は、1種類につき＋100円（当日店頭でお支払い）', '選べる石は、その日の店頭の在庫によって変わります']},
@@ -2204,6 +2204,10 @@ if WS_OPEN:
   <p style="color:var(--usu);font-size:13px;margin-top:20px">{esc(end_note)}<br>{esc(place)}</p>
 </main>
 ''' + foot(lang))
+
+# ---------- 予約画面（2026-11-13・自前の予約の仕組み。中身はGAS 65番から読む。noindex・サイトマップに入れない） ----------
+import reserve_page
+reserve_page.build(write, head, foot, CART_ENDPOINT, SHOP['name'])
 
 # ---------- 川越で古着屋を探している人向けの案内ページ（AI検索・検索エンジン対策 2026-10-06） ----------
 # AIや検索で「川越 古着屋」と聞かれたときに、そのまま答えになる文章を1ページにまとめる。
