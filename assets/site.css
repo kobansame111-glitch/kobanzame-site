@@ -419,6 +419,11 @@ footer.site{font-size:13px}
 .blog-grid{display:grid;gap:24px;margin-top:24px}
 @media(min-width:640px){.blog-grid{grid-template-columns:1fr 1fr}}
 .blog-empty{color:var(--usu);text-align:center;padding:48px 0}
+.blog-cats{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px}
+.blog-cats a{font-size:.85rem;text-decoration:none;color:var(--usu);border:1px solid var(--line);padding:6px 14px;border-radius:20px}
+.blog-cats a.on{background:var(--kinari);color:var(--sumi,#fff);border-color:var(--kinari)}
+.blog-card-cat{display:inline-block;font-size:.72rem;color:var(--usu);border:1px solid var(--line);padding:1px 8px;border-radius:10px;margin-right:8px}
+.blog-cat-link{font-size:.8rem;color:var(--usu);margin-right:10px}
 header.site .tabs{display:none}
 @media(max-width:760px){
   header.site .tabs{display:flex;border-top:1px solid var(--line)}
