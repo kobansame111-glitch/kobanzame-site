@@ -367,7 +367,7 @@ T = {
 # ---------- ワークショップ（2026-10-07 龍さん決定A） ----------
 # 予約は外部の予約サイト（concentsocket.com）。このサイトには案内と「予約する」ボタンだけを置く。
 # WS_FROM より前の日付で作ったときは、ページもメニューの入り口も出さない（予約受付の開始日に合わせる）。
-# 料金は「10/24開催分」として書く（2026-10-15 龍さんGO・案A）。「期間限定」は終了日が未定だと有利誤認のおそれがあるため使わない。
+# 料金は「税込・1人」と書く（2026-11-13 更新。もとは 2026-10-15 の「10/24開催分」）。「期間限定」は終了日が未定だと有利誤認のおそれがあるため使わない。
 # 比べる「通常価格」も書かない（二重価格表示にしない）。
 WS_FROM = '2026-10-21'
 WS_OPEN = TODAY >= WS_FROM
@@ -377,15 +377,14 @@ WS_OPEN = TODAY >= WS_FROM
 WS_BOOKING = False
 RESERVE = '/reserve/?c='   # 2026-11-13 自前の予約画面（tools/reserve_page.py・GAS 65番）。旧：concentsocket（友人作）は使わない
 WORKSHOPS = [
-    {'id': 'brass-bangle', 'reserve': RESERVE + 'brass-bangle', 'price': 1500, 'minutes': 60, 'max': 2,
-     'ja': {'name': '真鍮バングルワークショップ',
-            'lead': '切り出した真鍮を、店主が目の前で腕の形に曲げます。仕上げの刻印（アルファベット・数字・記号）は、ご自身の手で打っていただきます。完成品はその場でお持ち帰りいただけます。',
-            'notes': ['1人1本・刻印つき', 'モニター募集中：作業中の写真を撮らせていただく場合があります（お顔を出したくない方は当日お伝えください。手元だけを撮ります）',
-                      '金属アレルギーのある方は、ご予約の前にご相談ください', '真鍮は使い込むと色が変化します']},
-     'en': {'name': 'Brass bangle workshop',
-            'lead': 'The owner bends a cut brass bar to the shape of your wrist in front of you, and you stamp the finishing marks (letters, numbers, symbols) yourself. Take it home the same day.',
-            'notes': ['One bangle per person, stamping included', 'We may take photos of your hands while you work (tell us if you prefer not)',
-                      'If you have a metal allergy, please ask us before booking', 'Brass changes colour as you wear it']}},
+    # 2026-11-13 龍さん決定：真鍮バングルはやめる（加工に時間と手間）。革小物に移す。料金・中身が決まるまで 'soon'（予約ボタンを出さない）
+    {'id': 'leather', 'reserve': RESERVE + 'leather', 'price': None, 'minutes': None, 'max': 2, 'soon': True,
+     'ja': {'name': '革小物ワークショップ（準備中）',
+            'lead': '刻印（スタンプ）を打って、ライターケースや小銭入れなどの革小物を作ります。中身と料金は、決まり次第このページと Instagram でお知らせします。',
+            'notes': ['完成品はその場でお持ち帰りいただけます']},
+     'en': {'name': 'Leather goods workshop (coming soon)',
+            'lead': 'Stamp your own marks and make a small leather piece such as a lighter case or a coin purse. Details and price will be announced here and on Instagram.',
+            'notes': ['Take it home the same day']}},
     {'id': 'stone-beads', 'reserve': RESERVE + 'stone-beads', 'price': 1200, 'minutes': 30, 'max': 2,
      'ja': {'name': '天然石ビーズブレスレットワークショップ',
             'lead': '店頭にある天然石のビーズから1種類を選んで、ブレスレットを作ります。完成品はその場でお持ち帰りいただけます。',
@@ -2164,20 +2163,20 @@ if WS_OPEN:
         path = P + '/workshop/'
         if lang == 'ja':
             title = 'ワークショップ｜古着屋 小判鮫（川越・元町の古民家）'
-            desc = '川越・元町の古民家古着屋 小判鮫のワークショップ。真鍮バングル、天然石ビーズブレスレット。' + ('10月24日（土）開催。ご予約はオンラインで。' if WS_BOOKING else '予約の受付は準備中です。')
+            desc = '川越・元町の古民家古着屋 小判鮫のワークショップ。天然石ビーズブレスレット、革小物（準備中）。' + ('土日に開催。ご予約はオンラインで（開催の7日前まで）。' if WS_BOOKING else '予約の受付は準備中です。')
             h1, intro = 'ワークショップ', '小判鮫の店内で、ものづくりの時間を。どちらも完成品はその場でお持ち帰りいただけます。'
-            limited = '税込・10/24開催分'
-            end_note = '10/25以降の開催日と料金は、決まり次第このページとInstagramでお知らせします。'
+            limited = '税込・1人'
+            end_note = ('開催：土日 13:00／15:30／18:00。オンラインのご予約は開催日の7日前まで（それより直前のご相談は、お電話・Instagram の DM・店頭で）。' if WS_BOOKING else '開催日と予約の受付は、決まり次第このページとInstagramでお知らせします。')
             meta = '所要 約{m}分・1回 最大{n}名'
             btn = '予約する（日時を選ぶ）'
             btn_off = '予約は準備中です（受付を始めたら、このページと Instagram でお知らせします）'
             place = f'会場：古着屋 小判鮫（{ADDR["ja"]}）／' + ('定休日 月曜（祝日は営業）' if NEWHOURS else '定休日 月曜・火曜')
         else:
             title = 'Workshops | Kobanzame, Kawagoe'
-            desc = 'Workshops at Kobanzame, a vintage shop in an old wooden house in Kawagoe: brass bangle and natural stone bead bracelet. ' + ('Held on Saturday 24 October. Book online.' if WS_BOOKING else 'Online booking is coming soon.')
+            desc = 'Workshops at Kobanzame, a vintage shop in an old wooden house in Kawagoe: natural stone bead bracelet, leather goods (coming soon). ' + ('Weekends. Book online at least 7 days ahead.' if WS_BOOKING else 'Online booking is coming soon.')
             h1, intro = 'Workshops', 'Make something in our old wooden shop. You take your piece home the same day.'
-            limited = 'tax incl., for the 24 Oct sessions'
-            end_note = 'Dates and prices after 24 October will be announced on this page and on Instagram.'
+            limited = 'tax incl., per person'
+            end_note = ('Sessions: weekends at 13:00, 15:30 and 18:00. Online booking closes 7 days before the session (for later requests, call us, send an Instagram DM or ask in the shop).' if WS_BOOKING else 'Dates and booking will be announced on this page and on Instagram.')
             meta = 'About {m} min · up to {n} people per session'
             btn = 'Book a time'
             btn_off = 'Booking is coming soon (we will announce it here and on Instagram)'
@@ -2186,12 +2185,15 @@ if WS_OPEN:
         for w in WORKSHOPS:
             x = w[lang]
             notes = ''.join(f'<li>{esc(n)}</li>' for n in x['notes'])
+            soon = w.get('soon')
             cards += (f'<article id="{w["id"]}"><h2>{esc(x["name"])}</h2>'
-                      f'<div class="price">{money(w["price"], lang)}<small>{limited}</small></div>'
-                      f'<div class="meta">{meta.format(m=w["minutes"], n=w["max"])}</div>'
-                      f'<p>{esc(x["lead"])}</p><ul>{notes}</ul>'
-                      + (f'<a class="btn kin" href="{w["reserve"]}" rel="noopener">{btn}</a>' if WS_BOOKING else f'<p class="ws-off" role="note">{btn_off}</p>')
+                      + ('' if soon else f'<div class="price">{money(w["price"], lang)}<small>{limited}</small></div>'
+                                         f'<div class="meta">{meta.format(m=w["minutes"], n=w["max"])}</div>')
+                      + f'<p>{esc(x["lead"])}</p><ul>{notes}</ul>'
+                      + (f'<a class="btn kin" href="{w["reserve"]}" rel="noopener">{btn}</a>' if WS_BOOKING and not soon else f'<p class="ws-off" role="note">{btn_off}</p>')
                       + '</article>')
+            if soon:
+                continue
             svc.append({'@type': 'Service', 'name': x['name'], 'description': x['lead'], 'provider': {'@id': BASE + '/#store'},
                         'areaServed': '川越市' if lang == 'ja' else 'Kawagoe',
                         'offers': dict({'@type': 'Offer', 'price': str(w['price']), 'priceCurrency': 'JPY'}, **({'url': w['reserve']} if WS_BOOKING else {}))})
@@ -2536,7 +2538,7 @@ write('/llms.txt', f'''# 古着屋 小判鮫（KOBANZAME）
 - [川越で古着屋を探している方へ（案内）]({BASE}/guide/)
 - [ブログ]({BASE}/blog/)
 - [小判鮫サポート（古着屋・一点ものの店向け：撮るだけでお店のサイトに並ぶ仕組み）]({BASE}/automation/)
-{'- [ワークショップ（真鍮バングル・天然石ビーズブレスレット・' + ('10/24開催' if WS_BOOKING else '予約は準備中') + '）](' + BASE + '/workshop/)' + chr(10) if WS_OPEN else ''}- [English]({BASE}/en/)
+{'- [ワークショップ（天然石ビーズブレスレット・革小物（準備中）・' + ('土日開催・予約は7日前まで' if WS_BOOKING else '予約は準備中') + '）](' + BASE + '/workshop/)' + chr(10) if WS_OPEN else ''}- [English]({BASE}/en/)
 - [特定商取引法に基づく表記]({BASE}/tokushoho/)
 - [プライバシーポリシー]({BASE}/privacy/)
 
