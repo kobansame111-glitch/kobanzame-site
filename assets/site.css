@@ -322,6 +322,10 @@ header.site{background:rgba(244,240,232,.94);border-bottom:1px solid var(--line)
 .logo .wm{display:flex;flex-direction:column;gap:3px;line-height:1}
 @media(max-width:760px){.logo img{width:36px;height:36px}.logo{gap:8px}}
 .btn.kin:hover{background:var(--kinari)}
+/* 2026-11-13 購入ボタン：押したらすぐ「準備中」と分かるように（二度押しも防ぐ） */
+.buyc[aria-busy=true],#cartgo:disabled{opacity:.65;cursor:wait;pointer-events:none}
+.buyc[aria-busy=true]::before,#cartgo:disabled::before{content:'';display:inline-block;width:12px;height:12px;margin-right:8px;vertical-align:-1px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:kzspin .8s linear infinite}
+@keyframes kzspin{to{transform:rotate(360deg)}}
 .block .bhead{border-bottom-color:var(--kin2)}
 .card .pr{color:var(--kinari)}
 .tile:after{background:linear-gradient(180deg,transparent 45%,rgba(18,10,7,.5))}
