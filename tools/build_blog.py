@@ -21,7 +21,8 @@ build_site.py が先に head(), foot(), write() などを定義しているの�
     {"file": "01.jpg", "alt": "正面・全体（フードあり）"},
     ...
   ],
-  "tags": ["ダウンジャケット", "Abercrombie & Fitch"]
+  "tags": ["ダウンジャケット", "Abercrombie & Fitch"],
+  "category": "items"         // 項目。"items"（商品の紹介・省略時）| "events"（イベント・お知らせ）
 }
 """
 import json, os, re, html as _html, glob, datetime
@@ -45,6 +46,20 @@ TODAY = _site_var('TODAY') or os.environ.get('SITE_TODAY') or datetime.datetime.
 
 BLOG_DIR = os.path.join(ROOT, 'data/blog/posts')
 BLOG_ASSETS = '/assets/blog'   # URL上のパス
+
+# ---------- 記事の項目（2026-11-13 龍さん「ブログの項目を分ける」） ----------
+# 記事JSONの "category" に左のキーを書く。書いていない記事は「商品の紹介」。
+# 一覧は /blog/（すべて）と /blog/category/<キー>/（項目ごと）の両方を作る。
+CATEGORIES = [
+    ('items', '商品の紹介'),
+    ('events', 'イベント・お知らせ'),
+]
+CATEGORY_NAMES = dict(CATEGORIES)
+
+
+def post_category(p):
+    c = p.get('category') or 'items'
+    return c if c in CATEGORY_NAMES else 'items'
 
 # ---------- 記事を読み込む ----------
 def load_posts():
@@ -264,6 +279,7 @@ def build_post(p):
   <div class="crumb"><a href="/">HOME</a><span>／</span><a href="/blog/">ブログ</a><span>／</span><span>{_esc(title)}</span></div>
   <article class="blog-article">
     <div class="blog-header">
+      <a class="blog-cat-link" href="/blog/category/{post_category(p)}/">{_esc(CATEGORY_NAMES[post_category(p)])}</a>
       <time datetime="{date}">{date_display}</time>
       <h1>{_esc(title)}</h1>
       <p class="blog-author">{_esc(author)}</p>
@@ -279,9 +295,21 @@ def build_post(p):
 
 
 # ---------- 一覧ページ ----------
-def build_index(posts):
-    """ブログの一覧ページ /blog/ を生成する"""
+def category_nav(cat):
+    """一覧の上の項目タブ（すべて／項目ごと）"""
+    items = [('', 'すべて', '/blog/')] + [(k, n, f'/blog/category/{k}/') for k, n in CATEGORIES]
+    links = []
+    for k, n, href in items:
+        cur = ' aria-current="page" class="on"' if (k or None) == cat else ''
+        links.append(f'<a href="{href}"{cur}>{_esc(n)}</a>')
+    return '<nav class="blog-cats" aria-label="ブログの項目">' + ''.join(links) + '</nav>'
+
+
+def build_index(posts, cat=None):
+    """ブログの一覧ページを生成する（cat=None なら /blog/、項目なら /blog/category/<cat>/）"""
     visible = [p for p in posts if not p.get('_draft')]
+    if cat:
+        visible = [p for p in visible if post_category(p) == cat]
 
     cards = []
     for p in visible:
@@ -308,6 +336,7 @@ def build_index(posts):
         cards.append(f'''<a href="/blog/{slug}/" class="blog-card">
   {img_html}
   <div class="blog-card-body">
+    <span class="blog-card-cat">{_esc(CATEGORY_NAMES[post_category(p)])}</span>
     <time datetime="{date}">{date_display}</time>
     <h2>{_esc(title)}</h2>
     <p>{_esc(desc[:120])}</p>
@@ -320,19 +349,30 @@ def build_index(posts):
     else:
         body_html = '<div class="blog-grid">\n' + '\n'.join(cards) + '\n</div>'
 
+    if cat:
+        path = f'/blog/category/{cat}/'
+        cname = CATEGORY_NAMES[cat]
+        page_title = f'{cname}｜ブログ｜古着屋 小判鮫（川越の古着・ヴィンテージ）'
+        page_desc = f'川越・元町の古民家古着屋「小判鮫」のブログから「{cname}」の記事をまとめています。'
+        crumb = f'<a href="/">HOME</a><span>／</span><a href="/blog/">ブログ</a><span>／</span><span>{_esc(cname)}</span>'
+    else:
+        path = '/blog/'
+        page_title = 'ブログ｜古着屋 小判鮫（川越の古着・ヴィンテージ）'
+        page_desc = '川越・元町の古民家古着屋「小判鮫」のブログ。店頭とサイトに並ぶヴィンテージ古着や一点もの、店頭イベントのお知らせを写真と一緒に載せています。'
+        crumb = '<a href="/">HOME</a><span>／</span><span>ブログ</span>'
     blog_ld = {'@context': 'https://schema.org', '@graph': [try_org_node(), {
-        '@type': 'Blog', '@id': f'{BASE}/blog/#blog', 'name': '小判鮫ブログ', 'url': f'{BASE}/blog/', 'inLanguage': 'ja', 'publisher': {'@id': f'{BASE}/#store'},
+        '@type': 'Blog', '@id': f'{BASE}{path}#blog', 'name': '小判鮫ブログ', 'url': f'{BASE}{path}', 'inLanguage': 'ja', 'publisher': {'@id': f'{BASE}/#store'},
         'blogPost': [{'@type': 'BlogPosting', '@id': f'{BASE}/blog/{p["slug"]}/#article', 'headline': p['title'], 'url': f'{BASE}/blog/{p["slug"]}/', 'datePublished': p['date']} for p in visible]}]}
-    page_html = try_head('ja', 'ブログ｜古着屋 小判鮫（川越の古着・ヴィンテージ）',
-                         '川越・元町の古民家古着屋「小判鮫」のブログ。店頭とサイトに並ぶヴィンテージ古着や一点ものを、写真と一緒に1点ずつ紹介しています。', '/blog/', extra_ld=blog_ld)
+    page_html = try_head('ja', page_title, page_desc, path, extra_ld=blog_ld)
     page_html += f'''<main class="blog-main">
-  <div class="crumb"><a href="/">HOME</a><span>／</span><span>ブログ</span></div>
+  <div class="crumb">{crumb}</div>
   <div class="sec-head"><h1>Blog<small>ブログ</small></h1></div>
+  {category_nav(cat)}
   {body_html}
 </main>
 '''
     page_html += try_foot('ja')
-    try_write('/blog/index.html', page_html)
+    try_write(path + 'index.html', page_html)
     return [f'/blog/{p["slug"]}/' for p in visible]
 
 
@@ -406,6 +446,11 @@ BLOG_CSS = """
 .blog-grid{display:grid;gap:24px;margin-top:24px}
 @media(min-width:640px){.blog-grid{grid-template-columns:1fr 1fr}}
 .blog-empty{color:var(--usu);text-align:center;padding:48px 0}
+.blog-cats{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 4px}
+.blog-cats a{font-size:.85rem;text-decoration:none;color:var(--usu);border:1px solid var(--line);padding:6px 14px;border-radius:20px}
+.blog-cats a.on{background:var(--kinari);color:var(--sumi,#fff);border-color:var(--kinari)}
+.blog-card-cat{display:inline-block;font-size:.72rem;color:var(--usu);border:1px solid var(--line);padding:1px 8px;border-radius:10px;margin-right:8px}
+.blog-cat-link{font-size:.8rem;color:var(--usu);margin-right:10px}
 """
 
 # ---------- エントリーポイント ----------
@@ -420,8 +465,12 @@ def build_blog():
         url = build_post(p)
         urls.append(url)
     visible_urls = build_index(posts)
+    cat_urls = []
+    for k, _n in CATEGORIES:
+        build_index(posts, k)
+        cat_urls.append(f'/blog/category/{k}/')
     # 一覧ページ自体も返す
-    urls = ['/blog/'] + urls
+    urls = ['/blog/'] + cat_urls + urls
     print(f'ブログ: {len(posts)} 記事を生成')
     return urls
 
