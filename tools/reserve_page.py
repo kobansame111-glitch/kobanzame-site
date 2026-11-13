@@ -46,12 +46,19 @@ def _css():
 .rv-sum{border-top:1px solid var(--line,#ddd);border-bottom:1px solid var(--line,#ddd);padding:12px 0;margin:18px 0;font-size:15px;line-height:1.8}
 .rv-msg{padding:12px 14px;border:1px solid var(--kin);margin:14px 0;font-size:14px;line-height:1.7}
 .rv-empty{color:var(--usu);font-size:14px;padding:10px 0}
+/* 2026-11-13 龍さん「読み込み中はくるくる回るのにしよう（待っている感じが少ない）」 */
+.rv-spin{display:flex;flex-direction:column;align-items:center;gap:12px;padding:48px 0;color:var(--usu);font-size:13px}
+.rv-spin::before{content:'';width:34px;height:34px;border:3px solid currentColor;border-right-color:transparent;border-radius:50%;opacity:.7;animation:rvspin .8s linear infinite}
+#rv-submit:disabled::before{content:'';display:inline-block;width:12px;height:12px;margin-right:8px;vertical-align:-1px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:rvspin .8s linear infinite}
+@keyframes rvspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.rv-spin::before,#rv-submit:disabled::before{animation-duration:2.4s}}
 </style>"""
 
 
 def _js(endpoint):
     return '<script>(function(){var EP=' + json.dumps(endpoint) + r''';
 var $=function(id){return document.getElementById(id)};
+function stopSpin(){var l=$('rv-loading');if(l)l.className='rv-empty'}
 var st={cfg:null,course:null,date:null,time:null,month:null};
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function yen(n){return Number(n).toLocaleString('ja-JP')+'円'}
@@ -60,9 +67,9 @@ function dJa(d){var p=d.split('-');var w=new Date(Date.UTC(+p[0],+p[1]-1,+p[2]))
 function show(id,on){$(id).hidden=!on}
 function msg(t){var m=$('rv-msg');m.textContent=t;m.hidden=!t}
 function load(){
-  if(!EP){$('rv-loading').textContent='予約の受付は準備中です。';return}
+  if(!EP){stopSpin();$('rv-loading').textContent='予約の受付は準備中です。';return}
   fetch(EP+'?r=reserve',{cache:'no-store'}).then(function(r){return r.json()}).then(function(c){
-    if(!c||!c.ok){$('rv-loading').textContent='予約の受付は準備中です。始めたら、このページと Instagram でお知らせします。';return}
+    if(!c||!c.ok){stopSpin();$('rv-loading').textContent='予約の受付は準備中です。始めたら、このページと Instagram でお知らせします。';return}
     st.cfg=c;show('rv-loading',false);show('rv-app',true);
     $('rv-hours').textContent='営業時間：'+c.hours;
     if(c.note){$('rv-top').textContent=c.note;show('rv-top',true)}
@@ -76,7 +83,7 @@ function load(){
     });
     var q=new URLSearchParams(location.search).get('c');
     if(q&&c.courses.some(function(x){return x.id===q}))pickCourse(q);else if(c.courses.length===1)pickCourse(c.courses[0].id);
-  }).catch(function(){$('rv-loading').textContent='読み込めませんでした。少し時間をおいて、もう一度開いてください。'});
+  }).catch(function(){stopSpin();$('rv-loading').textContent='読み込めませんでした。少し時間をおいて、もう一度開いてください。'});
 }
 function course(){return st.cfg.courses.filter(function(x){return x.id===st.course})[0]}
 function pickCourse(id){
@@ -148,7 +155,7 @@ def build(write, head, foot, endpoint, shop_name):
   <h1>ご予約</h1>
   <p class="rv-note" id="rv-hours"></p>
   <p class="rv-msg" id="rv-top" hidden></p>
-  <p class="rv-empty" id="rv-loading">読み込み中…（数秒かかります）</p>
+  <p class="rv-spin" id="rv-loading" role="status" aria-live="polite">読み込んでいます</p>
   <div id="rv-app" hidden>
     <h2>1. コースを選ぶ</h2>
     <div class="rv-courses" id="rv-courses"></div>
