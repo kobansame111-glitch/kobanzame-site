@@ -148,7 +148,7 @@ def build(write, head, foot, endpoint, shop_name):
   <h1>ご予約</h1>
   <p class="rv-note" id="rv-hours"></p>
   <p class="rv-msg" id="rv-top" hidden></p>
-  <p class="rv-empty" id="rv-loading">読み込み中…</p>
+  <p class="rv-empty" id="rv-loading">読み込み中…（数秒かかります）</p>
   <div id="rv-app" hidden>
     <h2>1. コースを選ぶ</h2>
     <div class="rv-courses" id="rv-courses"></div>
