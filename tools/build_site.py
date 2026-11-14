@@ -1170,11 +1170,19 @@ header.site.sc{box-shadow:0 6px 20px -14px rgba(18,10,7,.35)}
 '''
 PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>'
 
+# 英語版が無い日本語だけのページ。EN ボタンは英語のトップへ、hreflang は出さない（2026-11-14 点検）
+JA_ONLY_PREFIXES = ('/blog/', '/automation/', '/reserve/')
+
+def has_en_pair(path, lang):
+    return not (lang == 'ja' and path.startswith(JA_ONLY_PREFIXES))
+
 def other_path(path, lang):
     """切り替え先（日本語⇔英語）のパス。英語ページが無いもの（特商法・プライバシー）は英語の法務ページへ"""
     if lang == 'ja':
         if path in ('/tokushoho/', '/privacy/'):
             return '/en/legal/'
+        if not has_en_pair(path, lang):
+            return '/en/'
         return '/en' + path
     p = path[3:] if path.startswith('/en') else path
     return '/tokushoho/' if p == '/legal/' else (p or '/')
@@ -1235,6 +1243,9 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
     ja_cur = 'true' if lang == 'ja' else 'false'
     en_cur = 'true' if lang == 'en' else 'false'
     tabs = tabs_html(lang, path)
+    hreflang = (f'<link rel="alternate" hreflang="ja" href="{ja_url}">\n'
+                f'<link rel="alternate" hreflang="en" href="{en_url}">\n'
+                f'<link rel="alternate" hreflang="x-default" href="{ja_url}">\n') if has_en_pair(path, lang) else ''
     return f'''<!doctype html>
 <html lang="{lang}">
 <head>
@@ -1253,10 +1264,7 @@ def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, 
 <meta property="og:locale" content="{'en_US' if lang == 'en' else 'ja_JP'}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="{url}">
-<link rel="alternate" hreflang="ja" href="{ja_url}">
-<link rel="alternate" hreflang="en" href="{en_url}">
-<link rel="alternate" hreflang="x-default" href="{ja_url}">
-<link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
+{hreflang}<link rel="alternate" type="text/plain" title="llms.txt" href="/llms.txt">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&family=Libre+Caslon+Text:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="/assets/favicon-48.png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
