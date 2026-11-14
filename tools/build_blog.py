@@ -166,6 +166,28 @@ def _products():
     return _PRODUCTS
 
 
+_PRICE_ROW = re.compile(r'(<tr><th>価格</th><td>)¥[\d,]+(（税込）</td></tr>)')
+
+
+def sync_price(p):
+    """2026-11-14：記事の「この1点の情報」の価格の行を、商品ページの今の値段に合わせる。
+    値段は毎日見直されるので、記事に書いた時の値段のままだと商品ページと食い違う。
+    販売中の商品で、表の価格の行（¥…（税込））がある記事だけ。売れた商品・文の中の値段は触らない。"""
+    pr = _products().get(p.get('slug', ''))
+    if not pr or pr.get('status') != 'available':
+        return
+    try:
+        site = int(pr['prices']['site'])
+    except Exception:
+        return
+    exp = ((site * 11 + 99) // 100) * 10   # 商品ページと同じ計算（税抜×1.1 を10円単位に切り上げ）
+    body = p.get('body', '') or ''
+    new = _PRICE_ROW.sub(lambda m: f'{m.group(1)}¥{exp:,}{m.group(2)}', body)
+    if new != body:
+        p['body'] = new
+        print(f'  [blog] {p.get("slug")}: 価格の行を商品ページの今の値段に合わせた（¥{exp:,}）')
+
+
 def lint_post(p):
     text = re.sub(r'<[^>]+>', '', (p.get('teaser', '') or '') + (p.get('body', '') or ''))
     # 2026-10-22：商品の記事は、記事の slug＝商品の slug（違うと週1の自動作成が「記事が無い」と思い二重に書く・URL も変わる）
@@ -206,6 +228,7 @@ def build_post(p):
     cover = p.get('cover', '')
     access = p.get('access', 'free')
     teaser = p.get('teaser', '')
+    sync_price(p)
     body = p.get('body', '')
     photos = p.get('photos', [])
     tags = p.get('tags', [])
