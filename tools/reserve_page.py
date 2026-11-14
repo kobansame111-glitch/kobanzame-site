@@ -46,6 +46,10 @@ def _css():
 .rv-sum{border-top:1px solid var(--line,#ddd);border-bottom:1px solid var(--line,#ddd);padding:12px 0;margin:18px 0;font-size:15px;line-height:1.8}
 .rv-msg{padding:12px 14px;border:1px solid var(--kin);margin:14px 0;font-size:14px;line-height:1.7}
 .rv-empty{color:var(--usu);font-size:14px;padding:10px 0}
+/* 2026-11-13 龍さん「なぜ進めないのか分からない」：入っていない欄をその場で赤く・すぐ下に理由 */
+.rv-form input[aria-invalid=true],.rv-form .chk.bad{outline:2px solid #d9534f;outline-offset:1px}
+.rv-err{color:#e8786f;font-size:13px;margin:6px 0 0;line-height:1.6}
+.rv-msg.bad{border-color:#d9534f;color:#e8786f}
 /* 2026-11-13 龍さん「読み込み中はくるくる回るのにしよう（待っている感じが少ない）」 */
 .rv-spin{display:flex;flex-direction:column;align-items:center;gap:12px;padding:48px 0;color:var(--usu);font-size:13px}
 .rv-spin::before{content:'';width:34px;height:34px;border:3px solid currentColor;border-right-color:transparent;border-radius:50%;opacity:.7;animation:rvspin .8s linear infinite}
@@ -65,7 +69,23 @@ function yen(n){return Number(n).toLocaleString('ja-JP')+'円'}
 var WD=['日','月','火','水','木','金','土'];
 function dJa(d){var p=d.split('-');var w=new Date(Date.UTC(+p[0],+p[1]-1,+p[2])).getUTCDay();return (+p[1])+'月'+(+p[2])+'日（'+WD[w]+'）'}
 function show(id,on){$(id).hidden=!on}
-function msg(t){var m=$('rv-msg');m.textContent=t;m.hidden=!t}
+function msg(t,bad){var m=$('rv-msg');m.textContent=t;m.hidden=!t;m.className='rv-msg'+(bad?' bad':'')}
+/* 欄ごとのエラー：欄を赤くして、すぐ下に理由を出す */
+var FIELDS=['rv-name','rv-tel','rv-email','rv-agree'];
+function ferr(id,t){var el=$(id),box=id==='rv-agree'?el.parentNode:el,e=$(id+'-err');
+  if(!e){e=document.createElement('p');e.className='rv-err';e.id=id+'-err';box.parentNode.insertBefore(e,box.nextSibling)}
+  e.textContent=t||'';e.hidden=!t;
+  if(id==='rv-agree'){box.classList.toggle('bad',!!t)}else{if(t){el.setAttribute('aria-invalid','true');el.setAttribute('aria-describedby',e.id)}else el.removeAttribute('aria-invalid')}}
+function clearErr(){FIELDS.forEach(function(id){ferr(id,'')})}
+function digits(v){return String(v||'').replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248)}).replace(/[^0-9]/g,'')}
+function check(){var bad=[],first=null;function add(id,t,label){ferr(id,t);bad.push(label);if(!first)first=id}
+  var nm=$('rv-name').value.trim(),tl=digits($('rv-tel').value),em=$('rv-email').value.trim();
+  if(!nm)add('rv-name','お名前が入っていません。','お名前');
+  if(!tl)add('rv-tel','電話番号が入っていません。','電話番号');else if(tl.length<10||tl.length>11)add('rv-tel','電話番号は数字10〜11けたで入れてください（ハイフンはあってもなくても大丈夫です）。','電話番号');
+  if(!em)add('rv-email','メールアドレスが入っていません。','メールアドレス');else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em))add('rv-email','メールアドレスの形をご確認ください（例：name@example.com）。','メールアドレス');
+  if(!$('rv-agree').checked)add('rv-agree','キャンセルの決まりと、ご連絡先の使い方をご確認のうえ、チェックを入れてください。','確認のチェック');
+  if(first){msg('まだ進めません。'+bad.join('・')+' をご確認ください（赤い所）。',true);var el=$(first);el.scrollIntoView({behavior:'smooth',block:'center'});try{el.focus({preventScroll:true})}catch(x){}}
+  return !first}
 function load(){
   if(!EP){stopSpin();$('rv-loading').textContent='予約の受付は準備中です。';return}
   fetch(EP+'?r=reserve',{cache:'no-store'}).then(function(r){return r.json()}).then(function(c){
@@ -125,8 +145,8 @@ function pickTime(s,b){
 function sum(){var co=course(),p=Number($('rv-people').value||1);
   $('rv-sum').innerHTML=esc(co.name)+'<br>'+dJa(st.date)+' '+st.time+'・'+p+'名<br><b>お支払い '+yen(co.price*p)+'（税込）</b>'}
 function submit(e){
-  e.preventDefault();msg('');
-  if(!$('rv-agree').checked){msg('キャンセルの決まりと、連絡先の使い方をご確認のうえ、チェックを入れてください。');return}
+  e.preventDefault();msg('');clearErr();
+  if(!check())return;
   var body={action:'reserve',course:st.course,date:st.date,time:st.time,people:Number($('rv-people').value),
     name:$('rv-name').value,tel:$('rv-tel').value,email:$('rv-email').value,agree:true};
   var btn=$('rv-submit');btn.disabled=true;btn.textContent='受付中…';
@@ -135,15 +155,17 @@ function submit(e){
     if(r&&r.ok&&r.done){$('rv-app').innerHTML='<div class="rv-msg">ご予約を承りました。確認のメールをお送りしました。</div>';return}
     btn.disabled=false;btn.textContent='お支払いへ進む';
     var c=r&&r.code,f=r&&r.field;
-    if(c==='full'||c==='unavailable'){msg('ごめんなさい。この日時はちょうど埋まってしまいました。別の日時をお選びください。');load()}
-    else if(c==='bad'&&f==='tel')msg('電話番号をご確認ください（数字10〜11けた）。');
-    else if(c==='bad'&&f==='email')msg('メールアドレスをご確認ください。');
-    else if(c==='bad'&&f==='name')msg('お名前を入れてください。');
-    else if(c==='closed')msg('いま予約の受付を止めています。少し時間をおいてお試しください。');
-    else msg('うまく受け付けられませんでした。少し時間をおいて、もう一度お試しください。');
-  }).catch(function(){btn.disabled=false;btn.textContent='お支払いへ進む';msg('通信がうまくいきませんでした。もう一度お試しください。')});
+    var FMAP={name:['rv-name','お名前をご確認ください。'],tel:['rv-tel','電話番号は数字10〜11けたで入れてください。'],email:['rv-email','メールアドレスをご確認ください。'],agree:['rv-agree','確認のチェックを入れてください。']};
+    if(c==='full'||c==='unavailable'){msg('ごめんなさい。この日時はちょうど埋まってしまいました。別の日時をお選びください。',true);load()}
+    else if(c==='bad'&&FMAP[f]){ferr(FMAP[f][0],FMAP[f][1]);msg('まだ進めません。赤い所をご確認ください。',true);$(FMAP[f][0]).scrollIntoView({behavior:'smooth',block:'center'})}
+    else if(c==='bad')msg('日時か人数の選び方がうまく受け付けられませんでした。日にちと時間を選び直してください。',true);
+    else if(c==='busy')msg('いま混み合っています。少し時間をおいて、もう一度「お支払いへ進む」を押してください。',true);
+    else if(c==='closed')msg('いま予約の受付を止めています。少し時間をおいてお試しください。',true);
+    else msg('うまく受け付けられませんでした。少し時間をおいて、もう一度お試しください。',true);
+  }).catch(function(){btn.disabled=false;btn.textContent='お支払いへ進む';msg('通信がうまくいきませんでした。電波の良い所で、もう一度お試しください。',true)});
 }
-document.addEventListener('DOMContentLoaded',function(){$('rv-people').onchange=sum;$('rv-form').onsubmit=submit;load()});
+document.addEventListener('DOMContentLoaded',function(){$('rv-people').onchange=sum;$('rv-form').onsubmit=submit;
+  FIELDS.forEach(function(id){$(id).addEventListener(id==='rv-agree'?'change':'input',function(){ferr(id,'');if(!document.querySelector('.rv-err:not([hidden])'))msg('')})});load()});
 })();</script>'''
 
 
