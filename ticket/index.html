@@ -36,7 +36,7 @@ function draw(d){
     '<ul class="rules"><li>使える日：<b>'+d.from+'</b> から <b>'+d.until+'</b> まで</li><li>小判鮫の店頭でだけ使えます</li><li>お会計3,000円ごとに1枚（1枚＝1,000円分）</li><li>現金への交換・おつり・再発行はできません</li></ul>'+
     (d.left>0 && d.state==='有効' ? '<button onclick="openGive()">券を譲る</button>' : '')+
     '<div id="give"></div>';
-  var q = qrcode(0,'M'); q.addData(P.url+'?p=staff&t='+encodeURIComponent(d.id)); q.make(); $('qr').innerHTML = q.createImgTag(6,8);
+  var q = qrcode(0,'M'); q.addData(location.origin+'/ticket/staff/?t='+encodeURIComponent(d.id));  // 2026-11-14 スタッフ画面もサイトに置いた（Google ドライブに飛ばされないように） q.make(); $('qr').innerHTML = q.createImgTag(6,8);
   tick();
 }
 // 2026-11-14 龍さん：「いまの時刻」ではなく「使える期限までのカウントダウン」を出す（期限の日の 23:59:59 まで・日本時間）
