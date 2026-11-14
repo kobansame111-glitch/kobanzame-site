@@ -11,7 +11,8 @@ button{padding:12px 16px;font-size:16px;font-weight:bold;border-radius:10px;bord
 button.main{background:#7C4412;color:#fff;width:100%}.nums button{min-width:52px;margin:3px}.nums button.on{background:#7C4412;color:#fff}
 input{width:100%;box-sizing:border-box;padding:10px;font-size:16px;border:1px solid #c9b8a6;border-radius:8px;margin:4px 0 8px}
 #give{display:none;text-align:left}.ok{color:#2c6e2f;font-weight:bold}.err{color:#a12a2a;font-weight:bold}.clock{font-size:13px;color:#5a4636;margin-top:8px}
-</style></head><body><div class="card" id="c">読み込んでいます…</div>
+.spin{width:44px;height:44px;margin:18px auto 12px;border:5px solid #e3d6c6;border-top-color:#7C4412;border-radius:50%;animation:sp 0.9s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
+</style></head><body><div class="card" id="c"><div class="spin"></div><p class="small">お買物券を読み込んでいます…</p></div>
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 <script>
 // 2026-11-14：券の画面を小判鮫のサイトに置く（Google ドライブを経由しない）。データは券の仕組み（GAS）から読む。
@@ -36,10 +37,16 @@ function draw(d){
     '<ul class="rules"><li>使える日：<b>'+d.from+'</b> から <b>'+d.until+'</b> まで</li><li>小判鮫の店頭でだけ使えます</li><li>お会計3,000円ごとに1枚（1枚＝1,000円分）</li><li>現金への交換・おつり・再発行はできません</li></ul>'+
     (d.left>0 && d.state==='有効' ? '<button onclick="openGive()">券を譲る</button>' : '')+
     '<div id="give"></div>';
-  var q = qrcode(0,'M'); q.addData(P.url+'?p=staff&t='+encodeURIComponent(d.id)); q.make(); $('qr').innerHTML = q.createImgTag(6,8);
+  var q = qrcode(0,'M'); q.addData(location.origin+'/ticket/staff/?t='+encodeURIComponent(d.id));  // 2026-11-14 スタッフ画面もサイトに置いた（Google ドライブに飛ばされないように） q.make(); $('qr').innerHTML = q.createImgTag(6,8);
   tick();
 }
-function tick(){ var e=$('clk'); if(e) e.textContent='いま '+new Date().toLocaleString('ja-JP'); }
+// 2026-11-14 龍さん：「いまの時刻」ではなく「使える期限までのカウントダウン」を出す（期限の日の 23:59:59 まで・日本時間）
+function tick(){ var e=$('clk'); if(!e || !D || !D.until) return;
+  var end = new Date(String(D.until).slice(0,10)+'T23:59:59+09:00').getTime(), s = Math.floor((end - Date.now())/1000);
+  if (isNaN(s)) { e.textContent=''; return; }
+  if (s < 0) { e.textContent='使える期限を過ぎました'; return; }
+  var dd=Math.floor(s/86400), hh=Math.floor(s%86400/3600), mm=Math.floor(s%3600/60), ss=s%60, p=function(n){return (n<10?'0':'')+n;};
+  e.textContent='使える期限まで あと '+dd+'日 '+p(hh)+'時間 '+p(mm)+'分 '+p(ss)+'秒'; }
 setInterval(tick,1000); setInterval(load,15000);
 function openGive(){ pick=0; var b=''; for(var i=1;i<=Math.min(D.left,30);i++) b+='<button onclick="sel('+i+',this)">'+i+'</button>';
   var g=$('give'); g.style.display='block'; g.innerHTML='<hr><p><b>券を譲る</b>：譲る枚数を選んでください（残り'+D.left+'枚）</p><div class="nums">'+b+'</div>'+

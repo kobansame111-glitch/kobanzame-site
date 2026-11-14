@@ -1,0 +1,154 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>わらしべ長者 スタッフ用｜小判鮫</title><style>
+body{margin:0;background:#F4F0E8;color:#120A07;font-family:"Hiragino Sans","Noto Sans JP",sans-serif;font-size:16px}
+main{max-width:480px;margin:0 auto;padding:12px}h1{font-size:19px;margin:4px 0 10px}h2{font-size:17px;margin:14px 0 8px;border-left:5px solid #7C4412;padding-left:8px}
+label{display:block;margin:8px 0;font-weight:bold}input{display:block;width:100%;box-sizing:border-box;padding:11px;font-size:18px;border:1px solid #c9b8a6;border-radius:8px;margin-top:4px;background:#fff}
+button{width:100%;padding:13px;margin:6px 0;font-size:17px;font-weight:bold;border:0;border-radius:10px;background:#7C4412;color:#fff}button.sub{background:#fff;color:#7C4412;border:2px solid #7C4412}
+button.big{font-size:21px;padding:18px;background:#2c6e2f}.tabs{display:flex;gap:6px}.tabs button{flex:1;font-size:13px;padding:10px 2px}.tabs button.on{background:#7C4412;color:#fff}.tabs button:not(.on){background:#fff;color:#7C4412;border:2px solid #7C4412}
+.box{background:#fffdf8;border:1px solid #e3d6c6;border-radius:10px;padding:12px;margin:10px 0;white-space:pre-wrap;word-break:break-all}
+.tk{background:#fffdf8;border:3px solid #7C4412;border-radius:12px;padding:12px;margin:10px 0;text-align:center}.tk .n{font-size:44px;font-weight:900}
+.err{color:#a12a2a;font-weight:bold}.ok{color:#2c6e2f;font-weight:bold}.ngbox{background:#fbe9e9;border:3px solid #a12a2a;border-radius:12px;padding:12px;font-size:19px;color:#a12a2a;font-weight:bold;text-align:center}
+.nums{display:flex;flex-wrap:wrap;gap:6px}.nums button{width:auto;min-width:60px;background:#fff;color:#7C4412;border:2px solid #7C4412;font-size:20px}.nums button.on{background:#7C4412;color:#fff}
+.hide{display:none}.row{background:#fffdf8;border:1px solid #e3d6c6;border-radius:10px;padding:10px;margin:6px 0}.row.on{border:3px solid #7C4412}
+.confirm{background:#fff8e6;border:3px solid #c08a1e;border-radius:12px;padding:14px;margin:10px 0;font-size:18px;line-height:1.7}
+</style></head><body><main>
+<h1>わらしべ長者 スタッフ用</h1>
+<div id="login"><label>合言葉<input id="pin" type="password" inputmode="numeric" autocomplete="off"></label>
+<label style="font-weight:normal"><input type="checkbox" id="remember" style="display:inline;width:auto"> この端末を覚える（お店のスマホ・iPadだけ）</label>
+<button onclick="login()">はじめる</button><p id="lerr" class="err"></p></div>
+<div id="app" class="hide">
+<div class="tabs"><button id="tb-use" onclick="tab('use')">お会計で使う</button><button id="tb-issue" onclick="tab('issue')">券を出す</button><button id="tb-find" onclick="tab('find')">調べる・再送</button><button id="tb-num" onclick="tab('num')">数字</button></div>
+
+<section id="use"><h2>お会計で使う</h2>
+<p style="font-size:14px">お客さまの券の画面のQRを、このスマホのカメラで読むと自動で出ます。読めないときは券番号を入れてください。</p>
+<label>券番号<input id="uid" placeholder="例 W2-001 または 1"></label><button class="sub" onclick="look()">この番号で探す</button>
+<div id="uinfo"></div>
+<div id="ustep" class="hide">
+<label>お会計の金額（税込・円）<input id="amt" type="number" inputmode="numeric" oninput="nums()"></label>
+<div id="unums"></div><div id="uconf"></div></div>
+<div id="ures"></div>
+<details id="paper" style="margin-top:18px;border:2px solid #7C4412;border-radius:10px;padding:10px 12px"><summary style="font-weight:bold;font-size:17px;cursor:pointer">第1回の紙の券（K・V）を使う</summary>
+<p style="font-size:14px">紙の券の番号を、頭文字（K か V）＋数字で入れてください。何枚でもまとめて入れられます（すき間か「、」で区切る）。</p>
+<label>紙の券の番号<input id="pids" placeholder="例 K12 K13 V5" oninput="pcalc()"></label>
+<label>お会計の金額（税込・円）<input id="pamt" type="number" inputmode="numeric" oninput="pcalc()"></label>
+<div id="pinfo"></div><button class="sub" onclick="pcheck()">番号を確かめる（使われていないか）</button>
+<div id="pconf"></div><div id="pres"></div></details>
+<label>スタッフの名前<input id="stf" maxlength="20" onchange="localStorage.setItem('wstf',this.value)"></label>
+</section>
+
+<section id="issue" class="hide"><h2>券を出す（査定のあと）</h2>
+<p style="font-size:14px">受付フォームに入力した人のうち、まだ券を出していない人です。</p>
+<button class="sub" onclick="pending()">一覧を新しくする</button><div id="plist">…</div>
+<div id="iform" class="hide"><div class="box" id="iwho"></div>
+<label>メールアドレス（券をここに送ります）<input id="imail" type="email"></label>
+<label>見込み売価（1点ずつ入れて「足す」）<input id="ip" type="number" inputmode="numeric" placeholder="例 4800" onkeydown="if(event.key==='Enter')addP()"></label><button class="sub" onclick="addP()">足す</button>
+<div id="ipl"></div>
+<button onclick="issueConfirm()">確認する</button><div id="iconf"></div></div>
+<div id="ires"></div>
+<details style="margin-top:14px"><summary>フォームに入力していない人に出す</summary>
+<label>お名前<input id="mname"></label><label>連絡先（Instagram か 電話）<input id="mcon"></label><label>メールアドレス<input id="mmail" type="email"></label><label>見込み売価の合計（円）<input id="mtotal" type="number" inputmode="numeric"></label><p style="font-size:14px">枚数は合計から自動で決まります（3,500円ごとに1枚）。</p>
+<button class="sub" onclick="issueManual()">この人に券を出す</button></details>
+</section>
+
+<section id="find" class="hide"><h2>調べる・メールをもう一度送る</h2>
+<label>券番号<input id="fid"></label><button class="sub" onclick="find()">調べる</button><div id="finfo"></div>
+<label>送り先のメール（空なら登録のメール）<input id="fmail" type="email"></label><button class="sub" onclick="resend()">券のメールをもう一度送る</button><div id="fres"></div>
+</section>
+<section id="num" class="hide"><h2>いまの数字（第2回）</h2><div id="nbox">…</div><button class="sub" onclick="stats()">新しくする</button></section>
+</div>
+<script>
+// 2026-11-14 スタッフ画面をサイトに置いた（お店のスマホで QR を読むと Google ドライブに飛ばされていたため）。
+// 中身は わらしべのスクリプトに POST で問い合わせる（合言葉はアドレスに入れない）。
+var API = 'https://script.google.com/macros/s/AKfycbyjz5lJlJvoeA-1rPvK4HUh02RRG4bw0qT1wHRzc5nhv37Xl0weBoEnPjfmPpHLaPgh/exec';
+var PRE = { t: new URLSearchParams(location.search).get('t') || '' };
+var PIN = localStorage.getItem('wpin') || sessionStorage.getItem('wpin') || '';
+var CUR = null, PICK = 0, SEL = null, PRICES = [], PER = 3500;
+function $(i){return document.getElementById(i);}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(x){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[x];});}
+function fail(el){return function(e){ $(el).innerHTML='<p class="err">'+esc(e&&e.message||e)+'</p>'; };}
+// google.script.run と同じ書き方で呼べるようにする小さな代わり
+function run(s, f){ var o = { withSuccessHandler: function(h){ return run(h, f); }, withFailureHandler: function(h){ return run(s, h); } };
+  ['staffCheck','staffPending','staffIssue','staffLookup','staffRedeem','staffUndo','staffResend','staffStats','staffPaperCheck','staffPaperRedeem','staffPaperUndo'].forEach(function(n){
+    o[n] = function(){ var args = Array.prototype.slice.call(arguments);
+      fetch(API, { method: 'POST', credentials: 'omit', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ fn: n, args: args }) })
+        .then(function(r){ return r.json(); })
+        .then(function(j){ if (j && j.ok) { if (s) s(j.result); } else if (f) f(new Error(j && j.error || 'うまくいきませんでした')); })
+        .catch(function(){ if (f) f(new Error('通信できませんでした。電波を確かめて、もう一度押してください')); }); };
+  });
+  return o; }
+function pparse(t){ t=String(t||'').toUpperCase().replace(/[Ｋｋ]/g,'K').replace(/[Ｖｖ]/g,'V').replace(/[０-９]/g,function(d){return String.fromCharCode(d.charCodeAt(0)-0xFEE0);}); var ok=[],bad=[],seen={}; t.split(/[\s,、，・\/]+/).map(function(x){return x.replace(/-/g,'');}).filter(String).forEach(function(x){ var m=x.match(/^([KV])0*(\d{1,4})$/); if(!m){bad.push(x);return;} var id=m[1]+Number(m[2]); if(seen[id])bad.push(id+'（2回）'); else {seen[id]=1; ok.push(id);} }); return {ids:ok,bad:bad}; }
+function pcalc(){ $('pres').innerHTML=''; var p=pparse($('pids').value), a=+$('pamt').value||0, max=Math.floor(a/3000), n=p.ids.length;
+  var h=''; if(p.bad.length) h+='<p class="err">読めない番号：'+esc(p.bad.join('・'))+'</p>';
+  if(n) h+='<div class="box">'+n+'枚：'+esc(p.ids.join('・'))+'</div>';
+  $('pinfo').innerHTML=h;
+  if(!n||!a||p.bad.length){ $('pconf').innerHTML=''; return; }
+  if(n>max){ $('pconf').innerHTML='<p class="err">このお会計で使えるのは '+max+' 枚までです（3,000円ごとに1枚）</p>'; return; }
+  $('pconf').innerHTML='<div class="confirm">紙の券 <b>'+n+'枚</b>（−'+(n*1000).toLocaleString()+'円）<br>お会計 '+a.toLocaleString()+'円<br>お支払い <b style="font-size:24px">'+(a-n*1000).toLocaleString()+'円</b></div><button class="big" onclick="predeem(this)">この内容で使う（確定）</button>'; }
+function pcheck(){ $('pres').innerHTML='…'; run().withSuccessHandler(function(r){ $('pres').innerHTML=r.usedAlready.length?'<p class="err">もう使われた券：'+esc(r.usedAlready.join('・'))+'</p>':'<p class="ok">'+r.ids.length+'枚とも、まだ使われていません</p>'; }).withFailureHandler(fail('pres')).staffPaperCheck(PIN,$('pids').value); }
+function predeem(btn){ btn.disabled=true; btn.textContent='記録しています…';
+  run().withSuccessHandler(function(r){ $('pconf').innerHTML=''; $('pres').innerHTML='<div class="box">記録しました。紙の券 '+r.used+'枚（'+esc(r.ids.join('・'))+'）\nSquare で <b>−'+r.discount.toLocaleString()+'円</b> 割引してください。お支払いは '+r.pay.toLocaleString()+'円です。\n使った紙の券は回収してください。</div><button class="sub" onclick="pundo(\''+r.logId+'\',this)">まちがえたので取り消す（10分以内）</button>'; $('pids').value=''; $('pamt').value=''; $('pinfo').innerHTML=''; })
+  .withFailureHandler(function(e){ btn.disabled=false; btn.textContent='この内容で使う（確定）'; fail('pres')(e); }).staffPaperRedeem(PIN,$('pids').value,$('pamt').value,$('stf').value); }
+function pundo(id,btn){ if(!confirm('いまの紙の券の使用を取り消します。よいですか？'))return; btn.disabled=true;
+  run().withSuccessHandler(function(r){ $('pres').innerHTML='<div class="box">取り消しました（'+esc(r.ids.join('・'))+'）。Square の割引も取り消してください。</div>'; }).withFailureHandler(fail('pres')).staffPaperUndo(PIN,id); }
+function login(){ var p=$('pin').value; run().withSuccessHandler(function(r){ if(r&&r.perTicket)PER=r.perTicket; PIN=p; ($('remember').checked?localStorage:sessionStorage).setItem('wpin',p); start(); }).withFailureHandler(fail('lerr')).staffCheck(p); }
+function start(){ $('login').classList.add('hide'); $('app').classList.remove('hide'); $('stf').value=localStorage.getItem('wstf')||''; tab('use'); if(PRE.t){ $('uid').value=PRE.t; look(); } }
+function tab(t){ ['use','issue','find','num'].forEach(function(x){ $(x).classList.toggle('hide',x!==t); $('tb-'+x).classList.toggle('on',x===t); }); if(t==='issue') pending(); if(t==='num') stats(); }
+// ---- お会計 ----
+function look(){ CUR=null; PICK=0; $('ustep').classList.add('hide'); $('ures').innerHTML=''; $('uconf').innerHTML=''; $('uinfo').innerHTML='…';
+  run().withSuccessHandler(function(r){ CUR=r;
+    var card=(r.test?'<div class="ngbox" style="background:#fff8e6;border-color:#c08a1e;color:#7a5410">試しの券です（テスト用）。Squareでは割引しないでください</div>':'')+'<div class="tk"><div>'+esc(r.id)+'　'+esc(r.name)+' 様</div><div class="n">残り '+r.left+' 枚</div><div>使える日 '+r.from+' 〜 '+r.until+'</div></div>';
+    if(r.ng){ $('uinfo').innerHTML=card+'<div class="ngbox">使えません：'+esc(r.ng)+'</div>'; return; }
+    $('uinfo').innerHTML=card; $('ustep').classList.remove('hide'); $('amt').value=''; nums(); $('amt').focus();
+  }).withFailureHandler(fail('uinfo')).staffLookup(PIN,$('uid').value); }
+function nums(){ PICK=0; $('uconf').innerHTML=''; if(!CUR) return; var a=+$('amt').value||0; var max=Math.min(Math.floor(a/3000),CUR.left);
+  if(!a){ $('unums').innerHTML=''; return; }
+  if(max<1){ $('unums').innerHTML='<p class="err">このお会計では使えません（3,000円ごとに1枚）</p>'; return; }
+  var b='<p><b>使う枚数を選ぶ</b>（このお会計で '+max+' 枚まで）</p><div class="nums">'; for(var i=1;i<=max;i++) b+='<button onclick="pickN('+i+',this)">'+i+'</button>'; $('unums').innerHTML=b+'</div>'; }
+function pickN(n,el){ PICK=n; Array.prototype.forEach.call(document.querySelectorAll('#unums .nums button'),function(x){x.classList.toggle('on',x===el);});
+  var a=+$('amt').value; $('uconf').innerHTML='<div class="confirm">'+esc(CUR.id)+'　'+esc(CUR.name)+' 様<br>お会計 '+a.toLocaleString()+'円<br>券 <b>'+n+'枚</b>（−'+(n*1000).toLocaleString()+'円）<br>お支払い <b style="font-size:24px">'+(a-n*1000).toLocaleString()+'円</b><br>券の残り '+CUR.left+' → '+(CUR.left-n)+' 枚</div><button class="big" onclick="redeem(this)">この内容で使う（確定）</button>'; }
+function redeem(btn){ if(!PICK) return; btn.disabled=true; btn.textContent='…';
+  run().withSuccessHandler(function(r){ $('ustep').classList.add('hide'); $('uinfo').innerHTML='';
+    $('ures').innerHTML='<div class="box ok" style="font-size:19px">✔ '+esc(r.id)+' を '+r.used+'枚使いました\n'+(r.test?'【試しの券】Squareでは割引しない（テストの記録だけ）\n':'Squareの割引「わらしべ券」に '+r.discount.toLocaleString()+'円 を入れる\nお支払い '+r.pay.toLocaleString()+'円\n')+'券の残り '+r.left+' 枚</div><button class="sub" onclick="undo(\''+r.logId+'\',this)">まちがえた：取り消す（10分以内）</button><button onclick="next()">次のお客さま</button>';
+  }).withFailureHandler(function(e){ btn.disabled=false; btn.textContent='この内容で使う（確定）'; fail('ures')(e); }).staffRedeem(PIN,CUR.id,$('amt').value,PICK,$('stf').value); }
+function undo(id,btn){ if(!confirm('いまの使用を取り消して、枚数を元に戻します。よいですか？'))return; btn.disabled=true;
+  run().withSuccessHandler(function(r){ $('ures').innerHTML='<div class="box">取り消しました。'+esc(r.id)+' の残りは '+r.left+' 枚です。</div><button onclick="next()">次のお客さま</button>'; }).withFailureHandler(fail('ures')).staffUndo(PIN,id); }
+function next(){ CUR=null; $('uid').value=''; $('uinfo').innerHTML=''; $('ures').innerHTML=''; $('ustep').classList.add('hide'); }
+// ---- 券を出す ----
+function pending(){ $('plist').innerHTML='…'; SEL=null; $('iform').classList.add('hide');
+  run().withSuccessHandler(function(a){ if(!a.length){ $('plist').innerHTML='<p>まだ券を出していない人はいません。</p>'; return; }
+    $('plist').innerHTML=a.map(function(x,i){ return '<div class="row" id="pr'+i+'" onclick="choose('+i+')"><b>'+esc(x.name)+'</b>　'+esc(x.at)+'<br><small>'+esc(x.contact)+'　'+(x.email?esc(x.email):'<span class="err">メールなし</span>')+'　'+esc(x.age)+'</small></div>'; }).join('');
+    window._P=a; }).withFailureHandler(fail('plist')).staffPending(PIN); }
+function choose(i){ SEL=window._P[i]; Array.prototype.forEach.call(document.querySelectorAll('#plist .row'),function(x,j){x.classList.toggle('on',j===i);});
+  $('iform').classList.remove('hide'); $('iwho').textContent=SEL.name+' 様（受付 '+SEL.at+'）\n連絡先：'+SEL.contact; $('imail').value=SEL.email; PRICES=[]; drawP(); $('iconf').innerHTML=''; $('ip').focus(); }
+// 見込み売価を1点ずつ足す → 合計 ÷ 3,500円（切り捨て）＝枚数（人が決めない）
+function tot(){ return PRICES.reduce(function(a,b){return a+b;},0); }
+function cnt(){ return Math.floor(tot()/PER); }
+function addP(){ var v=parseInt($('ip').value,10); if(!(v>0)){ $('ip').focus(); return; } if(v>=1000000){ alert('値段が大きすぎます。打ち間違いがないか確かめてください'); return; } PRICES.push(v); $('ip').value=''; $('ip').focus(); drawP(); }
+function delP(i){ PRICES.splice(i,1); drawP(); }
+function drawP(){ $('iconf').innerHTML=''; var t=tot(), n=cnt();
+  $('ipl').innerHTML=(PRICES.length?'<div class="box" style="white-space:normal">'+PRICES.map(function(p,i){return '<span style="display:inline-block;margin:2px 8px 2px 0">'+(i+1)+'. '+p.toLocaleString()+'円 <a href="#" onclick="delP('+i+');return false" style="color:#a12a2a">✕</a></span>';}).join('')+'</div>':'')+
+   '<div class="tk"><div>'+PRICES.length+'点・合計 '+t.toLocaleString()+'円</div><div class="n">'+n+' 枚</div><div style="font-size:13px">'+PER.toLocaleString()+'円ごとに1枚（自動）'+(t>0&&n<1?'<br><span class="err">'+PER.toLocaleString()+'円に届かないので券は出せません</span>':'')+'</div></div>'; }
+function issueConfirm(){ var n=cnt(); if(!(n>=1)){ $('iconf').innerHTML='<p class="err">見込み売価を1点ずつ入れてください（合計 '+PER.toLocaleString()+'円以上で1枚）</p>'; return; }
+  var m=$('imail').value.trim();
+  $('iconf').innerHTML='<div class="confirm">'+esc(SEL.name)+' 様に <b style="font-size:24px">'+n+' 枚</b>（'+(n*1000).toLocaleString()+'円分）<br>'+(m?'メールで送ります：'+esc(m):'<span class="err">メールが無いので、DMの文を出します</span>')+'<br>'+(n>=10?'<span class="err">10枚以上：店頭で身分証の確認と、住所・職業の記入が必要です</span>':'')+'<br><small>'+PRICES.length+'点・見込み売価 '+tot().toLocaleString()+'円</small></div><button class="big" onclick="issue(this)">この内容で券を出す（確定）</button>'; }
+function issue(btn){ btn.disabled=true; btn.textContent='…';
+  run().withSuccessHandler(showIssued).withFailureHandler(function(e){ btn.disabled=false; btn.textContent='この内容で券を出す（確定）'; fail('iconf')(e); })
+   .staffIssue(PIN,{row:SEL.row,prices:PRICES,email:$('imail').value,staff:$('stf').value}); }
+function issueManual(){ var t=parseInt($('mtotal').value,10)||0, n=Math.floor(t/PER); if(n<1){ alert('見込み売価の合計が '+PER.toLocaleString()+'円に届かないので、券は出せません'); return; } if(!confirm(($('mname').value||'')+' 様に '+n+' 枚（見込み売価 '+t.toLocaleString()+'円）出します。よいですか？'))return;
+  run().withSuccessHandler(showIssued).withFailureHandler(fail('ires')).staffIssue(PIN,{name:$('mname').value,contact:$('mcon').value,email:$('mmail').value,prices:[t],staff:$('stf').value}); }
+function showIssued(r){ $('iform').classList.add('hide'); $('plist').innerHTML='';
+  PRICES=[]; $('ipl').innerHTML='';
+  $('ires').innerHTML='<div class="box ok">✔ '+esc(r.id)+' を '+r.count+'枚で出しました（'+r.items+'点・見込み売価 '+Number(r.total).toLocaleString()+'円／'+r.from+' から使える）\n'+(r.mailed?'メールで送りました。':'メールが無いので、下の文をInstagramのDMで送ってください。')+'</div>'+
+   (r.mailed?'':'<div class="box" id="dm">'+esc(r.dm)+'</div><button class="sub" onclick="navigator.clipboard.writeText(document.getElementById(\'dm\').textContent).then(function(){alert(\'コピーしました\')})">DMの文をコピー</button>')+
+   '<button onclick="document.getElementById(\'ires\').innerHTML=\'\';pending()">次の人</button>'; }
+// ---- 数字 ----
+function stats(){ $('nbox').innerHTML='…'; run().withSuccessHandler(function(s){ var r=function(a,b){return '<tr><td>'+a+'</td><td style="text-align:right"><b>'+b+'</b></td></tr>';};
+  $('nbox').innerHTML='<table style="width:100%;border-collapse:collapse;background:#fffdf8">'+
+   r('券を出した組',s.groups+' 組')+r('出した枚数',s.issued+' 枚（'+(s.issued*1000).toLocaleString()+'円分）')+
+   r('使った枚数（使用率）',s.used+' 枚（'+s.useRate+'%）')+r('券を使ったお会計',s.visits+' 回')+r('券以外に払ってもらった額',s.extra.toLocaleString()+' 円')+
+   r('譲った件数・枚数（譲渡率）',s.gifts+' 件・'+s.giftN+' 枚（'+s.giftRate+'%）')+r('譲られた券で使った枚数（使用率）',s.usedGift+' 枚（'+s.giftUseRate+'%）')+
+   r('譲られて来た新しいお客さま',s.newFromGift+' 人')+r('初めて使うまでの平均',(s.daysToUse===''?'—':s.daysToUse+' 日'))+r('まだ使っていない枚数',s.left+' 枚')+'</table>'; }).withFailureHandler(fail('nbox')).staffStats(PIN); }
+// ---- 調べる ----
+function find(){ run().withSuccessHandler(function(r){ $('finfo').innerHTML='<div class="box">'+esc(r.id)+'　'+esc(r.name)+' 様\n残り '+r.left+' 枚／はじめ '+r.issued+' 枚\n使える日 '+r.from+' 〜 '+r.until+'\n状態：'+esc(r.state)+(r.ng?'\n'+esc(r.ng):'')+'</div>'; }).withFailureHandler(fail('finfo')).staffLookup(PIN,$('fid').value); }
+function resend(){ run().withSuccessHandler(function(r){ $('fres').innerHTML='<p class="ok">'+esc(r.email)+' に送りました</p>'; }).withFailureHandler(fail('fres')).staffResend(PIN,$('fid').value,$('fmail').value); }
+if(PIN) run().withSuccessHandler(function(r){ if(r&&r.perTicket)PER=r.perTicket; start(); }).withFailureHandler(function(){ localStorage.removeItem('wpin'); sessionStorage.removeItem('wpin'); PIN=''; }).staffCheck(PIN);
+</script></main></body></html>
