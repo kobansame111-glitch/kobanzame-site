@@ -39,7 +39,13 @@ function draw(d){
   var q = qrcode(0,'M'); q.addData(P.url+'?p=staff&t='+encodeURIComponent(d.id)); q.make(); $('qr').innerHTML = q.createImgTag(6,8);
   tick();
 }
-function tick(){ var e=$('clk'); if(e) e.textContent='いま '+new Date().toLocaleString('ja-JP'); }
+// 2026-11-14 龍さん：「いまの時刻」ではなく「使える期限までのカウントダウン」を出す（期限の日の 23:59:59 まで・日本時間）
+function tick(){ var e=$('clk'); if(!e || !D || !D.until) return;
+  var end = new Date(String(D.until).slice(0,10)+'T23:59:59+09:00').getTime(), s = Math.floor((end - Date.now())/1000);
+  if (isNaN(s)) { e.textContent=''; return; }
+  if (s < 0) { e.textContent='使える期限を過ぎました'; return; }
+  var dd=Math.floor(s/86400), hh=Math.floor(s%86400/3600), mm=Math.floor(s%3600/60), ss=s%60, p=function(n){return (n<10?'0':'')+n;};
+  e.textContent='使える期限まで あと '+dd+'日 '+p(hh)+'時間 '+p(mm)+'分 '+p(ss)+'秒'; }
 setInterval(tick,1000); setInterval(load,15000);
 function openGive(){ pick=0; var b=''; for(var i=1;i<=Math.min(D.left,30);i++) b+='<button onclick="sel('+i+',this)">'+i+'</button>';
   var g=$('give'); g.style.display='block'; g.innerHTML='<hr><p><b>券を譲る</b>：譲る枚数を選んでください（残り'+D.left+'枚）</p><div class="nums">'+b+'</div>'+
