@@ -2967,7 +2967,7 @@
   "published_date": "2026-10-14",
   "prices": {
    "store": 22800,
-   "site": 22800,
+   "site": 20600,
    "mercari": 25080
   },
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-12",
@@ -3083,6 +3083,12 @@
     "bg": "normal"
    },
    "redone": "2026-10-22"
+  },
+  "price_ai": {
+   "at": "2026-11-16",
+   "from": 22800,
+   "to": 20600,
+   "by": "pl_76"
   }
  },
  {
@@ -7832,14 +7838,14 @@
    "back_i": 3,
    "front_url": "/assets/products/k10824/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 203.7,
     "bg": "light_item"
    },
    "back_url": "/assets/products/k10824/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
-    "garment_l": 204.0,
+    "brighten": 0,
+    "garment_l": 204,
     "bg": "light_item"
    }
   }
@@ -7957,14 +7963,14 @@
    "back_i": 4,
    "front_url": "/assets/products/k11474/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 193.9,
     "bg": "light_item"
    },
    "back_url": "/assets/products/k11474/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
-    "garment_l": 192.0,
+    "brighten": 0,
+    "garment_l": 192,
     "bg": "light_item"
    }
   }
