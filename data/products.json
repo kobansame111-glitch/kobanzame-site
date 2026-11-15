@@ -7629,12 +7629,12 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-15",
   "links": {},
   "images": [
-   "/assets/products/k11541/01.jpg",
+   "/assets/products/k11541/v2_front.jpg",
+   "/assets/products/k11541/06.jpg",
    "/assets/products/k11541/02.jpg",
    "/assets/products/k11541/03.jpg",
    "/assets/products/k11541/04.jpg",
    "/assets/products/k11541/05.jpg",
-   "/assets/products/k11541/06.jpg",
    "/assets/products/k11541/07.jpg",
    "/assets/products/k11541/08.jpg",
    "/assets/products/k11541/09.jpg",
@@ -7642,7 +7642,7 @@
    "/assets/products/k11541/11.jpg",
    "/assets/products/k11541/12.jpg"
   ],
-  "thumb": "/assets/products/k11541/thumb.jpg",
+  "thumb": "/assets/products/k11541/v2_thumb.jpg",
   "summary_text": "ダークブラウンのスエードにラビットファーのトリミング、コルセット風レースアップが入った2000年代前後頃のレディースジャケットです。イタリアブランド「conbipel」のVERA PELLE（本革）表記、TG.48サイズ。",
   "summary_points": [
    "ダークブラウン（スエード外側）／ベージュ・キャメル（ラビットファー部分）のレザージャケット（スエード×ラビットファートリミング）（ブランド：conbipel / VERA PELLE / TG.48 / Made in China）",
@@ -7696,7 +7696,33 @@
    ],
    "approved_at": "2026-11-15"
   },
-  "gender_by": "表記にレディース・写真の見立て：レディース（イタリアサイズTG.48はレディース表記、またジャケット前立てのジッパー位置・シルエットがレディース向け）"
+  "gender_by": "表記にレディース・写真の見立て：レディース（イタリアサイズTG.48はレディース表記、またジャケット前立てのジッパー位置・シルエットがレディース向け）",
+  "images_orig": [
+   "/assets/products/k11541/01.jpg",
+   "/assets/products/k11541/02.jpg",
+   "/assets/products/k11541/03.jpg",
+   "/assets/products/k11541/04.jpg",
+   "/assets/products/k11541/05.jpg",
+   "/assets/products/k11541/06.jpg",
+   "/assets/products/k11541/07.jpg",
+   "/assets/products/k11541/08.jpg",
+   "/assets/products/k11541/09.jpg",
+   "/assets/products/k11541/10.jpg",
+   "/assets/products/k11541/11.jpg",
+   "/assets/products/k11541/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-15",
+   "front_i": 0,
+   "back_i": 5,
+   "front_url": "/assets/products/k11541/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 81.2,
+    "bg": "normal"
+   },
+   "back_error": "RuntimeError('仕上がり確認で不合格：袖の一部が切り取られています。')"
+  }
  },
  {
   "sku": "K10824",
@@ -7718,10 +7744,10 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-15",
   "links": {},
   "images": [
-   "/assets/products/k10824/01.jpg",
+   "/assets/products/k10824/v2_front.jpg",
+   "/assets/products/k10824/v2_back.jpg",
    "/assets/products/k10824/02.jpg",
    "/assets/products/k10824/03.jpg",
-   "/assets/products/k10824/04.jpg",
    "/assets/products/k10824/05.jpg",
    "/assets/products/k10824/06.jpg",
    "/assets/products/k10824/07.jpg",
@@ -7731,7 +7757,7 @@
    "/assets/products/k10824/11.jpg",
    "/assets/products/k10824/12.jpg"
   ],
-  "thumb": "/assets/products/k10824/thumb.jpg",
+  "thumb": "/assets/products/k10824/v2_thumb.jpg",
   "summary_text": "ブルックス ブラザーズのノンアイロンストレッチ仕様、スピマコットン96%のボタンダウンシャツです。ホワイト地にライトブルーとピンクの細線ウィンドウペーンチェックが入った、清潔感のある一枚です。",
   "summary_points": [
    "ホワイト地・ライトブルー＆ピンクの細線ウィンドウペーンチェックのドレスシャツ（長袖ボタンダウン）（ブランド：Brooks Brothers Est.1818 / REGULAR / 15½-31 / NON-IRON STRETCH / 96% SUPIMA COTTON 4% SPANDEX / MADE IN VIETNAM）",
@@ -7785,7 +7811,38 @@
    ],
    "approved_at": "2026-11-15"
   },
-  "gender_by": "写真：メンズ（正面写真でボタンが着る人から見て右側に付いている）"
+  "gender_by": "写真：メンズ（正面写真でボタンが着る人から見て右側に付いている）",
+  "images_orig": [
+   "/assets/products/k10824/01.jpg",
+   "/assets/products/k10824/02.jpg",
+   "/assets/products/k10824/03.jpg",
+   "/assets/products/k10824/04.jpg",
+   "/assets/products/k10824/05.jpg",
+   "/assets/products/k10824/06.jpg",
+   "/assets/products/k10824/07.jpg",
+   "/assets/products/k10824/08.jpg",
+   "/assets/products/k10824/09.jpg",
+   "/assets/products/k10824/10.jpg",
+   "/assets/products/k10824/11.jpg",
+   "/assets/products/k10824/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-15",
+   "front_i": 0,
+   "back_i": 3,
+   "front_url": "/assets/products/k10824/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 203.7,
+    "bg": "light_item"
+   },
+   "back_url": "/assets/products/k10824/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 204.0,
+    "bg": "light_item"
+   }
+  }
  },
  {
   "sku": "K11474",
@@ -7807,11 +7864,11 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-15",
   "links": {},
   "images": [
-   "/assets/products/k11474/01.jpg",
+   "/assets/products/k11474/v2_front.jpg",
+   "/assets/products/k11474/v2_back.jpg",
    "/assets/products/k11474/02.jpg",
    "/assets/products/k11474/03.jpg",
    "/assets/products/k11474/04.jpg",
-   "/assets/products/k11474/05.jpg",
    "/assets/products/k11474/06.jpg",
    "/assets/products/k11474/07.jpg",
    "/assets/products/k11474/08.jpg",
@@ -7820,7 +7877,7 @@
    "/assets/products/k11474/11.jpg",
    "/assets/products/k11474/12.jpg"
   ],
-  "thumb": "/assets/products/k11474/thumb.jpg",
+  "thumb": "/assets/products/k11474/v2_thumb.jpg",
   "summary_text": "ラルフ ローレンのコットン長袖ボタンダウン、ライトピンク。黒地白文字の上位ラインタグが付いた一枚で、2000年代前後のものと思われます。",
   "summary_points": [
    "無地・ライトピンクのメンズドレスシャツ（長袖ボタンダウン）（ブランド：RALPH LAUREN）",
@@ -7879,6 +7936,37 @@
    ],
    "approved_at": "2026-11-15"
   },
-  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いており、メンズ仕様と確認）"
+  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いており、メンズ仕様と確認）",
+  "images_orig": [
+   "/assets/products/k11474/01.jpg",
+   "/assets/products/k11474/02.jpg",
+   "/assets/products/k11474/03.jpg",
+   "/assets/products/k11474/04.jpg",
+   "/assets/products/k11474/05.jpg",
+   "/assets/products/k11474/06.jpg",
+   "/assets/products/k11474/07.jpg",
+   "/assets/products/k11474/08.jpg",
+   "/assets/products/k11474/09.jpg",
+   "/assets/products/k11474/10.jpg",
+   "/assets/products/k11474/11.jpg",
+   "/assets/products/k11474/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-15",
+   "front_i": 0,
+   "back_i": 4,
+   "front_url": "/assets/products/k11474/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 193.9,
+    "bg": "light_item"
+   },
+   "back_url": "/assets/products/k11474/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 192.0,
+    "bg": "light_item"
+   }
+  }
  }
 ]
