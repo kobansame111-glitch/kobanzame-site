@@ -5684,7 +5684,8 @@
     "url": "https://square.link/u/tFimOzT4",
     "order_id": "tcOYKGdbSp87iL2ipwJ2ioF2rzXZY",
     "amount": 7480,
-    "created_at": "2026-10-25T11:34:16Z"
+    "created_at": "2026-10-25T11:34:16Z",
+    "closed": "deleted"
    },
    "square": "https://square.link/u/tFimOzT4",
    "mercari": "https://jp.mercari.com/shops/product/2JYwGLnaEQSs3LJHxBYS58"
