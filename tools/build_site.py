@@ -654,8 +654,77 @@ def real_images(p):
     mq = (p.get('photo_v2') or {}).get('mannequin_url')
     return [u for u in p['images'] if u != mq] or p['images']
 
-def thumb_of(p):
+# ===== 一覧カード用の軽いサムネイル（2026-11-15 龍さん「サイト=A」重い件の直し）=====
+# 一覧（トップ・ジャンル一覧）のカードは、商品ページ用の大きい写真（1枚400KB〜1MB）をそのまま読んでいて重い。
+# 組み立ての時に、ローカルの大きい写真から長辺 THUMB_LONG_EDGE px の WebP を作り、カードではそれを使う。
+# ・色や形は変えない（縮小のみ。切り抜き・色補正・向き変更はしない）。
+# ・商品ページの大きい写真はそのまま（ここは一覧カード用だけ）。
+# ・メルカリ等のリモート画像は今までどおり /medium/ を使う（外部・リポジトリは増えない）。
+# ・Pillow が無い／読めない等で失敗したら、元の大きい写真に戻す（サイトづくりは止めない）。
+THUMB_LONG_EDGE = 600      # 長辺の目安（px）
+THUMB_QUALITY = 80         # WebP の画質（0-100）
+_thumb_cache = {}          # 元URL -> (出すURL, 幅, 高さ)
+_thumb_stats = {'made': 0, 'reused': 0, 'bytes_out': 0, 'bytes_src': 0, 'failed': 0, 'remote': 0}
+
+def _is_local_asset(u):
+    return isinstance(u, str) and (u.startswith('/assets/') or u.startswith('assets/'))
+
+def card_image(u):
+    """一覧カード用の画像。ローカルの大きい写真は長辺 THUMB_LONG_EDGE px の WebP に差し替え、
+    (出すURL, 幅, 高さ) を返す。リモート画像や失敗時は (元のURL, None, None)。"""
+    if not isinstance(u, str) or not u:
+        return (u, None, None)
+    if u in _thumb_cache:
+        return _thumb_cache[u]
+    if not _is_local_asset(u):
+        _thumb_stats['remote'] += 1
+        res = (u, None, None); _thumb_cache[u] = res; return res
+    rel = u.lstrip('/')                       # assets/products/<sku>/NN.jpg
+    src_fp = os.path.join(ROOT, rel)
+    if not os.path.exists(src_fp):
+        res = (u, None, None); _thumb_cache[u] = res; return res
+    d, fn = os.path.split(rel)
+    stem = os.path.splitext(fn)[0]
+    out_rel = f'{d}/thumb/{stem}.webp'        # 元の隣の thumb/ に .webp
+    out_fp = os.path.join(ROOT, out_rel)
+    out_url = '/' + out_rel
+    try:
+        from PIL import Image
+        with Image.open(src_fp) as im:
+            w, h = im.size
+            scale = THUMB_LONG_EDGE / max(w, h)
+            if scale < 1:
+                tw, th = max(1, round(w * scale)), max(1, round(h * scale))
+            else:
+                tw, th = w, h                 # 元が既に小さければ拡大しない
+            # 既にサムネがあれば作り直さない（同じ写真はいつも同じ結果。毎回のビルドで無駄に作り直して
+            #  再コミットするのを防ぐ）。写真を同じ名前で差し替えたときは thumb/ の該当 .webp を消せば作り直す。
+            need = not os.path.exists(out_fp)
+            if need:
+                os.makedirs(os.path.dirname(out_fp), exist_ok=True)
+                rgb = im.convert('RGB')
+                thumb = rgb if (tw, th) == (w, h) else rgb.resize((tw, th), Image.LANCZOS)
+                thumb.save(out_fp, 'WEBP', quality=THUMB_QUALITY, method=6)
+                _thumb_stats['made'] += 1
+            else:
+                _thumb_stats['reused'] += 1
+        _thumb_stats['bytes_out'] += os.path.getsize(out_fp)
+        _thumb_stats['bytes_src'] += os.path.getsize(src_fp)
+        res = (out_url, tw, th)
+    except Exception as e:
+        _thumb_stats['failed'] += 1
+        print(f'  [thumb] 失敗（元の写真を使う）: {u} … {e}')
+        res = (u, None, None)
+    _thumb_cache[u] = res
+    return res
+
+def thumb_src(p):
+    """一覧カードに使う「元の」画像URL（サムネ化前）。"""
     return p.get('thumb') or p['images'][0].replace('/large/', '/medium/')
+
+def thumb_of(p):
+    """一覧カードの画像URL（ローカルは軽いWebP、リモートはメルカリ /medium）。"""
+    return card_image(thumb_src(p))[0]
 
 def loc(p, key, lang):
     """英語ページでは products_en.json の値を使う（無ければ日本語のまま）"""
@@ -1529,7 +1598,11 @@ def blog_top_html(lang, n=3):
     posts.sort(key=lambda p: (p['date'], p['slug']), reverse=True)
     if not posts:
         return ''
-    cards = ''.join(f'''<a href="/blog/{p['slug']}/" class="blog-card"><div class="blog-card-img"><img src="{esc(cover_src(p))}" alt="" loading="lazy" decoding="async"></div>'''
+    def _cover_tag(p):   # ブログ一覧のカバーも軽いWebPに（2026-11-15 重い件の直し）
+        u, bw, bh = card_image(cover_src(p))
+        dim = f' width="{bw}" height="{bh}"' if bw else ''
+        return f'<img src="{esc(u)}" alt="" loading="lazy" decoding="async"{dim}>'
+    cards = ''.join(f'''<a href="/blog/{p['slug']}/" class="blog-card"><div class="blog-card-img">{_cover_tag(p)}</div>'''
                     f'''<div class="blog-card-body"><time datetime="{p['date']}">{p['date'].replace('-', '.')}</time><h3>{esc(p['title'])}</h3></div></a>''' for p in posts[:n])
     return f'''    <section class="blogtop" aria-labelledby="blog-h">
       <div class="sec-head"><h2 id="blog-h">Blog<small>ブログ</small></h2><a class="more" href="/blog/">すべて見る</a></div>
@@ -1549,7 +1622,11 @@ CATS_PRESENT = [c for c in ['outer', 'tops', 'bottoms', 'dress', 'shoes', 'acc',
 def alt_img(p):
     """2枚目の写真（PCでカーソルを乗せた時だけ見える）。マネキン画像は使わない"""
     ims = [u for u in p.get('images', [])[1:] if u != (p.get('photo_v2') or {}).get('mannequin_url')]
-    return f'<img class="alt" src="{esc(ims[0].replace("/large/", "/medium/"))}" alt="" loading="lazy" aria-hidden="true">' if ims and not is_sold(p) else ''
+    if not (ims and not is_sold(p)):
+        return ''
+    url, aw, ah = card_image(ims[0].replace("/large/", "/medium/"))   # ローカルは軽いWebP、リモートは /medium
+    dim = f' width="{aw}" height="{ah}"' if aw else ''
+    return f'<img class="alt" src="{esc(url)}" alt="" loading="lazy" aria-hidden="true"{dim}>'
 
 NEW_DAYS = 6   # 2026-10-22 龍さん：水曜の公開から次の水曜の公開の前日まで「NEW」を付ける（毎週水曜に作り直されるので、先週分は自然に外れる）
 
@@ -1569,8 +1646,10 @@ def card_html(p, lang, lazy=True, findable=False):
     if not sold and is_new(p):   # 2026-10-22 龍さん：新着が分かるように（公開から NEW_DAYS 日以内）
         tag += '<span class="newtag">NEW</span>'
     wv = '' if w is None else f'{w:g}'
+    _cturl, _ctw, _cth = card_image(thumb_src(p))   # 一覧カードは軽いWebP（ローカル）／メルカリ /medium（リモート）
+    _ctdim = f' width="{_ctw}" height="{_cth}"' if _ctw else ''
     return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-sku="{esc(p.get("sku", ""))}" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}"' + (f' data-p="{site_price(p)}" data-q="{esc(search_text(p))}"' if findable else '') + '>'
-            f'<div class="ph"><img src="{esc(thumb_of(p))}" alt="{esc(loc(p, "product_name", lang))}"{lz}>{alt_img(p)}{tag}</div>'
+            f'<div class="ph"><img src="{esc(_cturl)}" alt="{esc(loc(p, "product_name", lang))}"{lz}{_ctdim}>{alt_img(p)}{tag}</div>'
             f'<div class="brand">{esc(brand_disp(p, lang))}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
             + (f'<div class="sz">{T[lang]["width"].format(w=wv)}</div>' if (wv and not sold) else '') +   # 2026-11-03 一覧で身幅が分かるように
             f'<span class="fit" hidden></span>'
@@ -1650,9 +1729,10 @@ def tiles_html(lang):
         if not ps:
             continue
         ps = sorted(ps, key=lambda p: p.get('published_date', ''), reverse=True)
-        img = thumb_of(ps[0])
+        img, _tw, _th = card_image(thumb_src(ps[0]))
+        _tdim = f' width="{_tw}" height="{_th}"' if _tw else ''
         lab = CAT_EN[c].upper()
-        out.append(f'<a class="tile" href="{P}/?cat={c}#list" data-cat="{c}"><img src="{esc(img)}" alt="{esc(T[lang]["cats"][c])}"'
+        out.append(f'<a class="tile" href="{P}/?cat={c}#list" data-cat="{c}"><img src="{esc(img)}" alt="{esc(T[lang]["cats"][c])}"{_tdim}'
                    + (' fetchpriority="high"' if not out else ' loading="lazy"') + f'><span class="tt"><b>{lab} - NEW ARRIVAL</b><i>SHOP NOW</i></span></a>')
     return ''.join(out[:6])
 
@@ -2597,6 +2677,15 @@ write('/feed/google.xml', '<?xml version="1.0" encoding="UTF-8"?>\n'
       + ''.join(feed_items) + '  </channel>\n</rss>\n')
 
 print('built', len(pages), 'pages', '/ feed', len(feed_items), 'items')
+
+# 一覧カード用サムネイル（WebP）の結果（2026-11-15 重い件の直し）
+_ts = _thumb_stats
+if _ts['made'] or _ts['reused'] or _ts['failed']:
+    _n = _ts['made'] + _ts['reused']
+    _save = _ts['bytes_src'] - _ts['bytes_out']
+    print(f"[thumb] 一覧カード用WebP {_n}枚（新規{_ts['made']}・再利用{_ts['reused']}・失敗{_ts['failed']}）"
+          f" / サムネ合計 {_ts['bytes_out']/1e6:.2f}MB（元の該当写真 {_ts['bytes_src']/1e6:.2f}MB → {_save/1e6:.2f}MB 軽量化）"
+          f" / リモート画像はそのまま {_ts['remote']}参照")
 
 # ---------- 文章の点検（2026-10-09 龍さん決定：語尾は「です・ます」で言い切る） ----------
 # 止めはしない（サイトは作る）。言い切っていない文があれば、作り直しのログに一覧を出す。
