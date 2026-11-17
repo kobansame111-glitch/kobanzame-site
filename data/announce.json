@@ -1,16 +1,13 @@
 {
- "publish_date": "2026-11-12",
- "made_at": "2026-11-11 04:31",
- "count": 7,
+ "publish_date": "2026-11-19",
+ "made_at": "2026-11-18 05:41",
+ "count": 4,
  "skus": [
-  "K11450",
-  "K10562",
-  "K11288",
-  "K11286",
-  "K11509",
-  "K11512",
-  "K11290"
+  "K11541",
+  "K10824",
+  "K11474",
+  "K11472"
  ],
  "skipped_no_photo": [],
- "image": "/assets/announce/2026-11-12.jpg"
+ "image": "/assets/announce/2026-11-19.jpg"
 }
