@@ -2402,47 +2402,73 @@ for _cl in ('ja', 'en'):
 # ---------- /automation/：2026-11-02 に「お店の仕組みづくり」として作り、2026-11-07 に小判鮫サポートの販売ページへ作り替え（URL は同じ） ----------
 import urllib.parse
 AUTO_MAIL = 'kobanzame.support@gmail.com'   # 予備の連絡先（申し込みは LINE が主）
-# ---------- 小判鮫サポートの販売ページ（/automation/ を作り替え・2026-11-07 龍さん「チラシと同じ言葉で」） ----------
-# 正本：Project「嶋崎龍3」claude/claude_AI導入支援22_小判鮫サポート_受け皿の準備セット_ルイくん依頼前_2026-11-07.md の §2。
-# 言い切り（必ず・絶対・◯割減）・他店やお客さまの名前は書かない。値段は SUPPORT の steps（段ごとの金額の行）と SUPPORT_TAX_NOTE・SUPPORT_UNIT_NOTE だけで変える。
-SUPPORT_LINE = 'https://line.me/R/ti/p/@161gjpew'   # 小判鮫サポートの LINE（ID @161gjpew）
-# 料金（2026-11-07 龍さん：#100 の① A＝モニター価格だけ。期間はページに書かない・通常価格とは比べない）。金額はすべて税抜。
-# 正本：Project「小判鮫サポート 確定版v1」「入口と階段の設計v1」。言葉はチラシ（11/7 版）に合わせる。
+# ---------- 小判鮫サポートの販売ページ（/automation/）----------
+# 2026-11-17 に見せ方を作り直し（URL は同じ）。urllib.parse と AUTO_MAIL はこの上（2026-11-07 版）の定義をそのまま使う。
+# 見せ方の決まり（2026-11-17 龍さん）：
+#  ・1区切り1メッセージ（見出し1行＋短い文）。区切りの間は大きくあける。数字は大きく、説明は小さく。
+#  ・スマホで縦に1枚ずつ（料金を横に3つ並べない）。
+#  ・難しい言葉を使わない（伴走・導入・連携・最適化・DX・松竹梅は使わない）。
+#  ・言い切り（必ず・絶対・◯割減）は使わない。他店やお客さまの名前は書かない。Square は前に出さない（スタートパックで一言だけ）。
+# 値段・文言はこの SUPPORT と SUPPORT_TAX_NOTE・SUPPORT_COUNT_NOTE だけで変える（HTML は手で直さない）。金額はすべて税抜。
+SUPPORT_LINE = 'https://line.me/R/ti/p/@161gjpew'   # 小判鮫サポートの LINE（無料の見本づくりの申し込み先。ID @161gjpew）
 SUPPORT_TAX_NOTE = '金額はすべて税抜です（消費税が別にかかります）。'
-SUPPORT_UNIT_NOTE = '1点50円は、下書きまで作った商品の数で数えます。「NG」にした物も数えます（こちらの都合で作り直した物は数えません）。'
-# 2026-11-07 受付デスク（22導入担当・Web発信課05・法務チェック）の見直しを反映。15:56 龍さん決定：段4の売れ筋＝そのお店のデータだけ（A）／訪問は全国どこでも・交通費はその都度
+SUPPORT_COUNT_NOTE = '点数の数え方：下書きまで作った商品を数えます。「NG」にした物も数えます（こちらの都合で作り直した物は数えません）。'
 SUPPORT = {
   'path': '/automation/',
-  'title': 'スマホで写真をとるだけ。｜小判鮫サポート',
-  'desc': '古着屋・一点ものの店主さんへ。スマホで写真をとるだけで、説明・ネットのお店の商品ページ・メルカリ用のデータまでをAIが用意します（SNSのお知らせはあとから足せます）。まずは無料でためせます。お店・事業者さま向けのサービスです。',
-  'eyebrow': '古着屋・一点ものの店主さんへ',
+  'title': 'あなたのお店だけの、ネットのお店を。｜小判鮫サポート',
+  'desc': '古着屋・一点ものの店のための、AIつきの自社ウェブ。写真を送ると、商品の説明文と採寸表をAIが用意します。売れたら在庫は自動で0、お知らせはLINEに。まずは無料で見本を作ります。お店・事業者さま向けのサービスです。',
+  # ① いちばん上
+  'h1': 'あなたのお店だけの、ネットのお店を。',
+  'hero_sub': '古着屋・一点ものの店のための、AIつきの自社ウェブ。',
+  'cta': '無料で見本を作ってもらう',
   'biz': 'お店・事業者さま向けのサービスです。',
-  'h1': 'スマホで写真をとるだけ。',
-  'sub': 'あとはAIが、ネットのお店に並べます。',
-  'merits': ['かんたん', '夜の作業がへる', 'ためすのは無料'],
-  'flow_h': 'お店がやるのは2つだけ',
-  # (番号, 文, 色〔shop＝お店・ai＝AI〕, 札の文)
-  'flow': [('1', '写真をとる', 'shop', 'お店'), ('2', '説明を書く', 'ai', 'AI'), ('3', '気になる下書きだけ「NG」と返す', 'shop', 'お店'),
-           ('4', 'ネットのお店に並ぶ', 'ai', 'AI'), ('5', 'メルカリ用のデータも作る', 'ai', 'AI'), ('6', 'SNSでお知らせ', 'ai', 'あとから足せます')],
-  'try_h': 'まずは無料でためせます',
-  'try_p': ['写真10点を送るだけ。', '送っていただいた写真は、見本づくりにだけ使います。公開しません。', '5日ほどで、あなたのお店の商品ページの見本が届きます。'],
-  'try_btn': 'LINEで申し込む',
-  'try_ok': '合わなければ、そこで終わりで大丈夫です。',
-  'try_limit': '写真は10点で十分です（多くても20点まで作ります）。見本のページは2週間見られます。',
+  # ② できること（絵文字, 見出し, 説明）
+  'cando': [
+    ('🏠', 'お店らしさが伝わる自社ウェブ', '借りもののページではなく、あなたの店の名前で。'),
+    ('✍️', '説明文はAIが書く', '写真を送ると、商品の文と採寸表ができあがる。'),
+    ('🔔', '売れたら、勝手に片づく', '在庫は0に。お知らせはLINEに。'),
+  ],
+  # ③ 時間
+  'time_big': '閉店後の45分が、0分に。',
+  'time_mid': '売上をまとめて在庫表を直す作業は、自動になりました。',
+  'time_tiny': '小判鮫の店主の記録（2026年10月・1営業日45分以上・少なめに見た数字）',
+  # ④ お金（月に30万円売るお店の場合）
+  'money_big': '月30万円売ると、手数料などはこれだけ。',
+  # (名前, 金額, 内訳, これが小判鮫か)
+  'money_rows': [
+    ('売上の10%を取られるサイト', '30,000円', '', False),
+    ('小判鮫サポート「ひとりで」', '12,780円', '月額1,980円＋カード決済3.6%', True),
+  ],
+  'money_tiny': '1回の買い物6,000円・月50件として計算。売上が大きいほど差が開きます（月50万円なら 50,000円 と 19,980円）。',
+  # ⑤ まず試す（名前, 金額, 説明）
+  'try_h': 'まず試す',
+  'try_sub': 'どれも、続けなくて大丈夫です。',
+  'try_cards': [
+    ('見本を見る', '0円', '写真10枚で、あなたのお店のページの見本を作ります（約5日）。'),
+    ('写真30点パック', '3,000円', '30点分の説明文・採寸表・メルカリ用のデータをお返しします。'),
+    ('スタートパック', '9,800円（1か月）', 'あなたのお店のウェブを1か月使えます。売れたら在庫0・LINEでお知らせ、まで体験できます。カード決済（Square）の登録もお手伝いします。自動で続きません。'),
+  ],
   'sample': ('見本のサイトを見る（古着屋 小判鮫）', 'https://kobanzame-kawagoe.com/'),
-  'steps_h': '合えば、3つの段から選べます',
-  # (段, 名前, 中身, 金額の行, 下の一言)
-  # 2026-11-13 龍さん決定A：松竹梅の3段に変更（相場の出どころは PR の本文）。先着3店のモニターは「最初に」の金額だけが変わる。
-  'steps': [('梅', 'はじめる', 'お店のサイト＋写真を送るだけの出品（仕組み1つ）と、毎月の見守り',
-             ['最初に 98,000円（1回だけ）', '毎月 15,000円', '商品1点ごとに 50円'], ''),
-            ('竹', 'まかせる', '仕組みを3つまで（在庫と売上の台帳・経理の自動化・SNSの自動投稿など）と、月1回のオンライン相談',
-             ['最初に 198,000円（1回だけ）', '毎月 30,000円', '商品1点ごとに 50円'], '毎月の使いすぎを防ぐ上限を、最初に一緒に決めます。'),
-            ('松', '伴走', '竹の中身に加えて、月1回の訪問（全国）と、お店の売れ筋・値付けの目安の毎月のまとめ',
-             ['最初に 298,000円（1回だけ）', '毎月 80,000円', '商品1点ごとに 50円'], '訪問の交通費は、場所に合わせてご相談します。'),
-            ('モニター', '先着3店', '導入事例として紹介させていただけるお店は、梅の「最初に」の金額が変わります',
-             ['最初に 30,000円（梅・先着3店）', '毎月と1点ごとの金額は、梅と同じです'], '3店に達したら終わります。')],
-  'stop_h': 'やめたいときは',
-  'stop_p': '最初の3か月のあとは、いつでもやめられます。やめても仕組みはお店に残ります（直しと改善は止まります）。',
+  # ⑥ 続けるなら（名前, 金額, 小さな但し書き, 中身）
+  'keep_h': '続けるなら',
+  'keep_sub': '最初の費用は、どれも0円です（税抜）。',
+  'keep_cards': [
+    ('ひとりで', '月1,980円', 'ネットの売上が月6万円未満の月は0円。', 'お店のウェブ・決済・在庫0の自動・LINEのお知らせ・仕組みの見守り。相談はLINEで、返事は2日以内。'),
+    ('いっしょに', '月14,800円', '最低6か月。', 'ひとりでの中身に加えて、月1回オンラインで相談。在庫・売上の台帳／経理／SNS自動投稿などの仕組みを3つまで。'),
+    ('まるごとプロデュース', '月49,800円', '最低6か月。', 'いっしょにの中身に加えて、月1回お店に伺います（交通費は場所によりご相談）。売れ筋と値付けの目安を毎月お届けします。'),
+  ],
+  # ⑦ 出品の料金（使った分だけ）（名前, 金額, 説明）
+  'list_h': '出品の料金',
+  'list_sub': '使った分だけ。',
+  'list_cards': [
+    ('ふつう出品', '1点 300円', '商品文・採寸表・サイト掲載・メルカリ用データ。'),
+    ('熱量出品', '1点 800円', 'ふつう出品に加えて、店主のひとこと・お店の言葉で書く・年代や素材の下調べ。'),
+  ],
+  # モニターは「条件つきの別のプラン」として書く（取消線・「通常◯円→◯円」は使わない）
+  'monitor': ('モニター', '先着3店・3か月', 'ふつう出品 1点 50円／熱量出品 1点 150円', '使っているお店として紹介させていただくことが条件です。'),
+  # ⑧ やめたいとき・Q&A
+  'stop_h': 'やめたいとき・よくあるご質問',
+  'stop_p': 'ひとりでは、毎月いつでもやめられます。いっしょに・まるごとプロデュースは、最低6か月です。やめても仕組みはお店に残ります（直しと改善は止まります）。',
   'faq': [('パソコンやプログラミングの知識は要りますか？', '要りません。お店がするのは、写真をとることと、気になる下書きだけ「NG」と返すことです。'),
           ('どんな道具が要りますか？', 'スマホとLINE、Googleのアカウントがあれば始められます。'),
           ('どこの地域でも頼めますか？', '全国どこでも伺います（沖縄でも）。打ち合わせはオンラインでもできます。訪問の交通費は、場所に合わせてご相談します。')],
@@ -2457,85 +2483,109 @@ _a_ld = {'@context': 'https://schema.org', '@graph': [
         {'@type': 'ListItem', 'position': 1, 'name': 'HOME', 'item': BASE + '/'},
         {'@type': 'ListItem', 'position': 2, 'name': '小判鮫サポート', 'item': BASE + _a['path']}]}]}
 _a_mailto = 'mailto:' + AUTO_MAIL + '?subject=' + urllib.parse.quote('小判鮫サポートの見本（無料）')
-_a_merits = ''.join(f'<li>{esc(x)}</li>' for x in _a['merits'])
-_a_flow = ''.join(f'<li class="sp-{k}"><span class="sp-no">{n}</span><b>{esc(w)}</b><span class="sp-who">{esc(lab)}</span></li>' for n, w, k, lab in _a['flow'])
-_a_steps = ''.join(f'<li><span class="sp-step">{esc(s)}</span><b>{esc(h)}</b><p>{esc(b)}</p><p class="sp-sp">' + '<br>'.join(esc(x) for x in pr) + '</p>' + (f'<p class="sp-snote">{esc(nt)}</p>' if nt else '') + '</li>' for s, h, b, pr, nt in _a['steps'])
-_a_faq = ''.join(f'  <details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>\n' for q, a in _a['faq'])
+_a_cando = ''.join(f'<div class="sp-do"><span class="sp-em">{esc(em)}</span><b>{esc(t)}</b><p>{esc(d)}</p></div>' for em, t, d in _a['cando'])
+_a_money = ''.join(f'<div class="sp-cmp-row{" sp-cmp-ours" if ours else ""}"><span class="sp-cmp-name">{esc(nm)}</span><span class="sp-cmp-num">{esc(num)}</span>' + (f'<span class="sp-cmp-sub">{esc(sub)}</span>' if sub else '') + '</div>' for nm, num, sub, ours in _a['money_rows'])
+_a_try = ''.join(f'<div class="sp-card"><span class="sp-nm">{esc(nm)}</span><span class="sp-pr">{esc(pr)}</span><p class="sp-ds">{esc(ds)}</p></div>' for nm, pr, ds in _a['try_cards'])
+_a_keep = ''.join(f'<div class="sp-card"><span class="sp-nm">{esc(nm)}</span><span class="sp-pr">{esc(pr)}</span><span class="sp-cond">{esc(cond)}</span><p class="sp-ds">{esc(ds)}</p></div>' for nm, pr, cond, ds in _a['keep_cards'])
+_a_list = ''.join(f'<div class="sp-card"><span class="sp-nm">{esc(nm)}</span><span class="sp-pr">{esc(pr)}</span><p class="sp-ds">{esc(ds)}</p></div>' for nm, pr, ds in _a['list_cards'])
+_mn = _a['monitor']
+_a_monitor = f'<div class="sp-card sp-mon"><span class="sp-tag">条件つきの別プラン</span><span class="sp-nm">{esc(_mn[0])}</span><span class="sp-cond">{esc(_mn[1])}</span><span class="sp-pr2">{esc(_mn[2])}</span><p class="sp-ds">{esc(_mn[3])}</p></div>'
+_a_faq = ''.join(f'    <details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>\n' for q, a in _a['faq'])
 write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'], extra_ld=_a_ld) + f"""
 <style>
 .sp{{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;color:#1d1d1f;letter-spacing:.02em}}
-.sp h1,.sp h2,.sp h3{{font-family:inherit}}
-.sp-hero{{background:linear-gradient(160deg,#fff7e8 0%,#eaf5ff 100%);border-radius:20px;padding:30px 20px 26px;margin:14px 0 26px;text-align:center}}
-.sp-eye{{display:inline-block;background:#fff;border-radius:999px;padding:4px 14px;font-size:13px;font-weight:700;color:#e0701b}}
-.sp-hero h1{{font-size:clamp(28px,8vw,42px);line-height:1.3;font-weight:800;margin:14px 0 6px;letter-spacing:.01em}}
-.sp-sub{{font-size:17px;font-weight:700;margin:0 0 18px}}
-.sp-sp{{font-weight:700;color:#0b4a80}}
-.sp-snote{{font-size:13px;color:#333}}
-.sp-biz{{font-size:12px;color:#555;margin:14px 0 0}}
-.sp-sample{{margin-top:12px;font-size:14px}}
+.sp h1,.sp h2{{font-family:inherit}}
+.sp-sec{{margin:60px 0}}
+.sp-h{{font-size:22px;font-weight:800;text-align:center;margin:0 0 6px;line-height:1.4}}
+.sp-h-sub{{text-align:center;font-size:14px;color:#555;margin:0 0 24px}}
+.sp-hero{{background:linear-gradient(160deg,#fff7e8 0%,#eaf5ff 100%);border-radius:22px;padding:40px 22px 34px;margin:14px 0 56px;text-align:center}}
+.sp-hero h1{{font-size:clamp(27px,7.6vw,40px);line-height:1.4;font-weight:800;margin:0 0 14px;letter-spacing:.01em}}
+.sp-hero .sp-sub{{font-size:15px;color:#333;font-weight:700;margin:0 0 24px;line-height:1.8}}
+.sp-cta{{display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 28px;border-radius:999px;background:#06c755;color:#fff;font-size:17px;font-weight:800;text-decoration:none;letter-spacing:.03em;max-width:100%}}
+.sp-biz{{font-size:12px;color:#666;margin:18px 0 0}}
+.sp-cando{{display:grid;gap:18px}}
+.sp-do{{background:#fff;border:1px solid #ececec;border-radius:16px;padding:20px;box-shadow:0 1px 5px rgba(0,0,0,.04)}}
+.sp-do .sp-em{{font-size:30px;display:block;margin-bottom:8px;line-height:1}}
+.sp-do b{{font-size:18px;font-weight:800;display:block;margin-bottom:6px;line-height:1.5}}
+.sp-do p{{margin:0;font-size:14px;color:#444;line-height:1.8}}
+.sp-big{{font-size:clamp(26px,7.2vw,37px);font-weight:800;text-align:center;line-height:1.4;margin:0 0 16px}}
+.sp-mid{{text-align:center;font-size:15px;color:#333;margin:0 0 10px;line-height:1.8}}
+.sp-tiny{{text-align:center;font-size:12px;color:#888;margin:14px 0 0;line-height:1.8}}
+.sp-cmp{{display:grid;gap:12px;margin:0}}
+.sp-cmp-row{{background:#f6f7f9;border-radius:16px;padding:18px 20px;display:grid;gap:4px}}
+.sp-cmp-ours{{background:#eafaef;border:2px solid #06c755}}
+.sp-cmp-name{{font-size:14px;font-weight:700;color:#333}}
+.sp-cmp-num{{font-size:clamp(28px,8vw,36px);font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums}}
+.sp-cmp-sub{{font-size:12px;color:#666}}
+.sp-cards{{display:grid;gap:16px}}
+.sp-card{{background:#fff;border:1px solid #e8e8e8;border-radius:16px;padding:20px}}
+.sp-nm{{font-size:17px;font-weight:800;display:block}}
+.sp-cond{{display:block;font-size:12px;color:#777;margin-top:2px}}
+.sp-pr{{font-size:clamp(24px,6.4vw,30px);font-weight:800;line-height:1.2;display:block;margin:8px 0;font-variant-numeric:tabular-nums}}
+.sp-pr2{{font-size:17px;font-weight:800;line-height:1.6;display:block;margin:8px 0}}
+.sp-ds{{margin:0;font-size:14px;color:#444;line-height:1.9}}
+.sp-mon{{border:2px dashed #cda43a;background:#fffdf4}}
+.sp-tag{{display:inline-block;background:#cda43a;color:#fff;font-size:11px;font-weight:800;border-radius:999px;padding:3px 12px;margin-bottom:10px;letter-spacing:.03em}}
+.sp-ctawrap{{text-align:center;margin:26px 0 6px}}
+.sp-sample{{text-align:center;font-size:13px;margin:12px 0 0}}
 .sp-sample a{{color:#0b4a80;font-weight:700}}
-.sp-merits{{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}}
-.sp-merits li{{background:#fff;border:2px solid #ffd39b;border-radius:999px;padding:6px 14px;font-size:14px;font-weight:700}}
-.sp h2{{font-size:21px;font-weight:800;margin:30px 0 14px;text-align:center}}
-.sp-legend{{text-align:center;font-size:13px;margin:-6px 0 12px}}
-.sp-legend span{{display:inline-block;border-radius:999px;padding:2px 10px;margin:0 4px;font-weight:700}}
-.sp-flow{{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}}
-.sp-flow li{{border-radius:14px;padding:12px 12px 10px;display:flex;flex-direction:column;gap:2px;min-height:86px}}
-.sp-flow b{{font-size:16px;font-weight:800}}
-.sp-no{{font-size:13px;font-weight:800;opacity:.7}}
-.sp-who{{margin-top:auto;font-size:12px;font-weight:700;align-self:flex-start;border-radius:999px;padding:1px 9px;background:#fff}}
-.sp-shop,.sp-legend .k-shop{{background:#ffe6c7;color:#7a3b00}}
-.sp-ai,.sp-legend .k-ai{{background:#dcefff;color:#0b4a80}}
-.sp-try{{background:#fff;border:3px solid #06c755;border-radius:20px;padding:22px 18px;margin:28px 0;text-align:center}}
-.sp-try h2{{margin-top:0}}
-.sp-try p{{margin:4px 0;font-size:16px}}
-.sp-line{{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 30px;margin:16px 0 10px;border-radius:999px;background:#06c755;color:#fff;font-size:17px;font-weight:800;text-decoration:none;letter-spacing:.06em}}
-.sp-small{{font-size:13px;color:#555}}
-.sp-steps{{list-style:none;padding:0;margin:0;display:grid;gap:10px}}
-.sp-steps li{{background:#f6f7f9;border-radius:14px;padding:12px 14px}}
-.sp-steps b{{font-size:16px;font-weight:800;margin-left:8px}}
-.sp-steps p{{margin:4px 0 0;font-size:14px;color:#333}}
-.sp-step{{display:inline-block;background:#1d1d1f;color:#fff;border-radius:6px;padding:0 8px;font-size:12px;font-weight:700}}
-.sp-price{{display:grid;grid-template-columns:auto auto;justify-content:center;gap:4px 16px;margin:14px 0 2px;font-size:16px}}
-.sp-price dd{{margin:0;font-weight:800}}
-.sp-pnote{{font-size:12px;color:#555;margin:10px 0 4px;line-height:1.7}}
-.sp-stop{{background:#f6f7f9;border-radius:14px;padding:14px;text-align:center;margin-top:10px}}
+.sp-note{{font-size:12px;color:#555;margin:18px 0 0;line-height:1.9}}
+.sp-stop{{background:#f6f7f9;border-radius:16px;padding:18px 20px;font-size:15px;line-height:1.95;margin:0 0 10px}}
 .sp-stop p{{margin:0}}
-.sp .faq details{{border-bottom:1px solid #e5e5e5;padding:10px 0}}
-.sp .faq summary{{font-weight:700}}
-.sp-contact{{text-align:center;font-size:13px;color:#555;margin:26px 0 8px}}
+.sp .faq details{{border-bottom:1px solid #e5e5e5;padding:12px 2px}}
+.sp .faq summary{{font-weight:700;font-size:15px}}
+.sp .faq p{{margin:8px 0 0;font-size:14px;color:#444;line-height:1.9}}
+.sp-contact{{text-align:center;font-size:13px;color:#555;margin:48px 0 8px;line-height:1.95}}
 </style>
 <main class="wrap page sp">
   <section class="sp-hero">
-    <span class="sp-eye">{esc(_a['eyebrow'])}</span>
     <h1>{esc(_a['h1'])}</h1>
-    <p class="sp-sub">{esc(_a['sub'])}</p>
-    <ul class="sp-merits">{_a_merits}</ul>
+    <p class="sp-sub">{esc(_a['hero_sub'])}</p>
+    <div><a class="sp-cta" href="{SUPPORT_LINE}" rel="noopener">{esc(_a['cta'])}</a></div>
     <p class="sp-biz">{esc(_a['biz'])}</p>
   </section>
 
-  <h2>{esc(_a['flow_h'])}</h2>
-  <p class="sp-legend"><span class="k-shop">お店</span><span class="k-ai">AI</span></p>
-  <ol class="sp-flow">{_a_flow}</ol>
+  <section class="sp-sec sp-cando">{_a_cando}</section>
 
-  <section class="sp-try" id="try">
-    <h2>{esc(_a['try_h'])}</h2>
-    {''.join(f'<p>{esc(x)}</p>' for x in _a['try_p'])}
-    <a class="sp-line" href="{SUPPORT_LINE}" rel="noopener">{esc(_a['try_btn'])}</a>
-    <p>{esc(_a['try_ok'])}</p>
-    <p class="sp-small">{esc(_a['try_limit'])}</p>
+  <section class="sp-sec sp-time">
+    <p class="sp-big">{esc(_a['time_big'])}</p>
+    <p class="sp-mid">{esc(_a['time_mid'])}</p>
+    <p class="sp-tiny">{esc(_a['time_tiny'])}</p>
+  </section>
+
+  <section class="sp-sec sp-money">
+    <p class="sp-big">{esc(_a['money_big'])}</p>
+    <div class="sp-cmp">{_a_money}</div>
+    <p class="sp-tiny">{esc(_a['money_tiny'])}</p>
+  </section>
+
+  <section class="sp-sec">
+    <h2 class="sp-h">{esc(_a['try_h'])}</h2>
+    <p class="sp-h-sub">{esc(_a['try_sub'])}</p>
+    <div class="sp-cards">{_a_try}</div>
+    <div class="sp-ctawrap"><a class="sp-cta" href="{SUPPORT_LINE}" rel="noopener">{esc(_a['cta'])}</a></div>
     <p class="sp-sample"><a href="{_a['sample'][1]}">{esc(_a['sample'][0])}</a></p>
   </section>
 
-  <h2>{esc(_a['steps_h'])}</h2>
-  <ol class="sp-steps">{_a_steps}</ol>
-  <p class="sp-pnote">{esc(SUPPORT_TAX_NOTE)}<br>{esc(SUPPORT_UNIT_NOTE)}</p>
+  <section class="sp-sec">
+    <h2 class="sp-h">{esc(_a['keep_h'])}</h2>
+    <p class="sp-h-sub">{esc(_a['keep_sub'])}</p>
+    <div class="sp-cards">{_a_keep}</div>
+  </section>
 
-  <h2>{esc(_a['stop_h'])}</h2>
-  <div class="sp-stop"><p>{esc(_a['stop_p'])}</p></div>
+  <section class="sp-sec">
+    <h2 class="sp-h">{esc(_a['list_h'])}</h2>
+    <p class="sp-h-sub">{esc(_a['list_sub'])}</p>
+    <div class="sp-cards">{_a_list}{_a_monitor}</div>
+    <p class="sp-note">{esc(SUPPORT_COUNT_NOTE)}<br>{esc(SUPPORT_TAX_NOTE)}</p>
+  </section>
 
-  <section class="faq" id="faq"><h2>Q&amp;A</h2>
-{_a_faq}  </section>
+  <section class="sp-sec">
+    <h2 class="sp-h">{esc(_a['stop_h'])}</h2>
+    <div class="sp-stop"><p>{esc(_a['stop_p'])}</p></div>
+    <div class="faq" id="faq">
+{_a_faq}    </div>
+  </section>
 
   <p class="sp-contact">LINEが使えないときは：<a href="{_a_mailto}">{esc(AUTO_MAIL)}</a><br>株式会社プラグ 小判鮫サポート ・ <a href="/tokushoho/">会社の情報（特定商取引法に基づく表記）</a></p>
 </main>
