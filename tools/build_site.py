@@ -2437,9 +2437,9 @@ SUPPORT = {
   # (名前, 金額, 内訳, これが小判鮫か)
   'money_rows': [
     ('売上の10%を取られるサイト', '30,000円', '', False),
-    ('小判鮫サポート「ひとりで」', '12,780円', '月額1,980円＋カード決済3.6%', True),
+    ('小判鮫サポート「ひとりで」', '12,780円', '月額1,980円＋カード決済3.6%で計算。出品料は別です（使った分だけ・ふつう出品1点300円）。1回の買い物6,000円・月50件として計算しています。', True),
   ],
-  'money_tiny': '1回の買い物6,000円・月50件として計算。売上が大きいほど差が開きます（月50万円なら 50,000円 と 19,980円）。',
+  'money_tiny': '売上が大きいほど差が開きます（月50万円なら 50,000円 と 19,980円）。',
   # ⑤ まず試す（名前, 金額, 説明）
   'try_h': 'まず試す',
   'try_sub': 'どれも、続けなくて大丈夫です。',
@@ -2464,8 +2464,9 @@ SUPPORT = {
     ('ふつう出品', '1点 300円', '商品文・採寸表・サイト掲載・メルカリ用データ。'),
     ('熱量出品', '1点 800円', 'ふつう出品に加えて、店主のひとこと・お店の言葉で書く・年代や素材の下調べ。'),
   ],
-  # モニターは「条件つきの別のプラン」として書く（取消線・「通常◯円→◯円」は使わない）
-  'monitor': ('モニター', '先着3店・3か月', 'ふつう出品 1点 50円／熱量出品 1点 150円', '使っているお店として紹介させていただくことが条件です。'),
+  # モニターは「条件つきの別のプラン」。条件（先着3店・3か月・使っているお店として紹介）を値段より先に書く。
+  # 「通常・定価・今だけ・◯円→◯円・おトク・割引」や取消線は使わない（2026-11-17 龍さん）。(名前, 条件, 金額)
+  'monitor': ('モニター', '条件：先着3店・3か月・使っているお店として紹介させていただくこと。', 'ふつう出品 1点 50円／熱量出品 1点 150円'),
   # ⑧ やめたいとき・Q&A
   'stop_h': 'やめたいとき・よくあるご質問',
   'stop_p': 'ひとりでは、毎月いつでもやめられます。いっしょに・まるごとプロデュースは、最低6か月です。やめても仕組みはお店に残ります（直しと改善は止まります）。',
@@ -2489,7 +2490,7 @@ _a_try = ''.join(f'<div class="sp-card"><span class="sp-nm">{esc(nm)}</span><spa
 _a_keep = ''.join(f'<div class="sp-card"><span class="sp-nm">{esc(nm)}</span><span class="sp-pr">{esc(pr)}</span><span class="sp-cond">{esc(cond)}</span><p class="sp-ds">{esc(ds)}</p></div>' for nm, pr, cond, ds in _a['keep_cards'])
 _a_list = ''.join(f'<div class="sp-card"><span class="sp-nm">{esc(nm)}</span><span class="sp-pr">{esc(pr)}</span><p class="sp-ds">{esc(ds)}</p></div>' for nm, pr, ds in _a['list_cards'])
 _mn = _a['monitor']
-_a_monitor = f'<div class="sp-card sp-mon"><span class="sp-tag">条件つきの別プラン</span><span class="sp-nm">{esc(_mn[0])}</span><span class="sp-cond">{esc(_mn[1])}</span><span class="sp-pr2">{esc(_mn[2])}</span><p class="sp-ds">{esc(_mn[3])}</p></div>'
+_a_monitor = f'<div class="sp-card sp-mon"><span class="sp-tag">条件つきの別プラン</span><span class="sp-nm">{esc(_mn[0])}</span><p class="sp-cond-lead">{esc(_mn[1])}</p><span class="sp-pr2">{esc(_mn[2])}</span></div>'
 _a_faq = ''.join(f'    <details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>\n' for q, a in _a['faq'])
 write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'], extra_ld=_a_ld) + f"""
 <style>
@@ -2521,6 +2522,7 @@ write(_a['path'] + 'index.html', head('ja', _a['title'], _a['desc'], _a['path'],
 .sp-card{{background:#fff;border:1px solid #e8e8e8;border-radius:16px;padding:20px}}
 .sp-nm{{font-size:17px;font-weight:800;display:block}}
 .sp-cond{{display:block;font-size:12px;color:#777;margin-top:2px}}
+.sp-cond-lead{{font-size:13px;color:#444;margin:8px 0 4px;line-height:1.8}}
 .sp-pr{{font-size:clamp(24px,6.4vw,30px);font-weight:800;line-height:1.2;display:block;margin:8px 0;font-variant-numeric:tabular-nums}}
 .sp-pr2{{font-size:17px;font-weight:800;line-height:1.6;display:block;margin:8px 0}}
 .sp-ds{{margin:0;font-size:14px;color:#444;line-height:1.9}}
