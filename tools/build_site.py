@@ -529,13 +529,13 @@ CART_T = {
   'ja': {'add': 'カートに入れる', 'in': 'カートに入っています（カートを見る）', 'added': 'カートに入れました', 'max': 'カートには10点まで入れられます',
          'empty': 'カートは空です。', 'remove': '外す', 'total': '合計（送料込み）', 'gone': '次の商品は、先に売れたためカートから外しました：',
          'fail': 'いまカートでのお支払いを受け付けられませんでした。お手数ですが、商品ページの「購入する」から1点ずつお買い求めください。',
-         'busy': '少し時間をおいて、もう一度お試しください。', 'wait': '決済画面を準備中…（数秒かかります）',
+         'busy': '少し時間をおいて、もう一度お試しください。', 'wait': 'Square の安全な決済画面を開いています（数秒）',
          'preview': '（確認用のページです）本番では、ここで Square の決済画面に移ります。',
          'sold1': 'この商品は先に売れてしまいました。申し訳ありません。', 'fail1': 'いまお支払いの画面を開けませんでした。少し時間をおいて、もう一度お試しください。'},
   'en': {'add': 'Add to cart', 'in': 'In your cart (view cart)', 'added': 'Added to your cart', 'max': 'You can put up to 10 items in the cart',
          'empty': 'Your cart is empty.', 'remove': 'Remove', 'total': 'Total (shipping within Japan included)', 'gone': 'These items sold before checkout and were removed:',
          'fail': 'We could not start the cart checkout right now. Please buy each item from its own page with "Buy now".',
-         'busy': 'Please wait a moment and try again.', 'wait': 'Preparing checkout… (a few seconds)',
+         'busy': 'Please wait a moment and try again.', 'wait': 'Opening Square’s secure checkout… (a few seconds)',
          'preview': '(Preview page) On the live site this button opens the Square checkout.',
          'sold1': 'Sorry, this piece has just sold.', 'fail1': 'We could not open the checkout right now. Please wait a moment and try again.'},
 }
@@ -554,8 +554,9 @@ b.addEventListener("click",function(){if(has(s)){location.href=CU;return}var a=g
 a.push({sku:s,name:b.getAttribute("data-name"),price:Number(b.getAttribute("data-price"))||0,url:b.getAttribute("data-url"),img:b.getAttribute("data-img")});put(a);st();toast(T.added)})});
 cnt();
 /* 2026-11-13 購入ボタンが重い：購入ボタンのあるページ・カートを開いたら、先にGASを起こして商品の一覧を読ませておく（何も売らない・1回のセッションで5分に1回まで） */
-if(EP&&V&&(pg||document.querySelector("a.buyc[data-sku]"))){try{var wk="kzwarm",wt=Number(sessionStorage.getItem(wk)||0);if(Date.now()-wt>300000){sessionStorage.setItem(wk,String(Date.now()));fetch(EP+"?r=warm").catch(function(){})}}catch(e){}}
-document.querySelectorAll("a.buyc[data-sku]").forEach(function(b){b.addEventListener("click",function(e){if(!EP||!V)return;e.preventDefault();if(b.getAttribute("aria-busy")==="true")return;
+function warm(){if(!(EP&&V))return;try{var wk="kzwarm",wt=Number(sessionStorage.getItem(wk)||0);if(Date.now()-wt>300000){sessionStorage.setItem(wk,String(Date.now()));fetch(EP+"?r=warm").catch(function(){})}}catch(e){}}
+if(pg||document.querySelector("a.buyc[data-sku]"))warm();
+document.querySelectorAll("a.buyc[data-sku]").forEach(function(b){b.addEventListener("mousedown",warm);b.addEventListener("touchstart",warm,{passive:true});b.addEventListener("click",function(e){if(!EP||!V)return;e.preventDefault();if(b.getAttribute("aria-busy")==="true")return;
 var s=b.getAttribute("data-sku"),m=document.querySelector(".buymsg");function say1(x){if(m){m.textContent=x;m.hidden=!x}else if(x)toast(x)}
 b.setAttribute("aria-busy","true");var b0=b.textContent;b.textContent=T.wait;say1(T.wait);
 fetch(EP,{method:"POST",body:JSON.stringify({skus:[s],lang:L})}).then(function(r){return r.json()}).then(function(j){
