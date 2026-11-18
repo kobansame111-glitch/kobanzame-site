@@ -8070,9 +8070,9 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-18",
   "links": {},
   "images": [
-   "/assets/products/k11467/01.jpg",
+   "/assets/products/k11467/v2_front.jpg",
+   "/assets/products/k11467/v2_back.jpg",
    "/assets/products/k11467/02.jpg",
-   "/assets/products/k11467/03.jpg",
    "/assets/products/k11467/04.jpg",
    "/assets/products/k11467/05.jpg",
    "/assets/products/k11467/06.jpg",
@@ -8083,7 +8083,7 @@
    "/assets/products/k11467/11.jpg",
    "/assets/products/k11467/12.jpg"
   ],
-  "thumb": "/assets/products/k11467/thumb.jpg",
+  "thumb": "/assets/products/k11467/v2_thumb.jpg",
   "summary_text": "バーガンディ×クリームのウール×カウハイド。タグに「NO MILLS」の文字が読める1960〜70年代頃のスタジャンが、川越の古民家に届いています。",
   "summary_points": [
    "ボディ：バーガンディ（マルーン）、スリーブ：クリーム／オフホワイト、リブ：バーガンディ×ゴールドストライプのスタジャン（アワードジャケット／レタードジャケット）",
@@ -8137,7 +8137,38 @@
    ],
    "approved_at": "2026-11-18"
   },
-  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いている＝メンズ仕様）"
+  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いている＝メンズ仕様）",
+  "images_orig": [
+   "/assets/products/k11467/01.jpg",
+   "/assets/products/k11467/02.jpg",
+   "/assets/products/k11467/03.jpg",
+   "/assets/products/k11467/04.jpg",
+   "/assets/products/k11467/05.jpg",
+   "/assets/products/k11467/06.jpg",
+   "/assets/products/k11467/07.jpg",
+   "/assets/products/k11467/08.jpg",
+   "/assets/products/k11467/09.jpg",
+   "/assets/products/k11467/10.jpg",
+   "/assets/products/k11467/11.jpg",
+   "/assets/products/k11467/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-18",
+   "front_i": 0,
+   "back_i": 2,
+   "front_url": "/assets/products/k11467/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 56.0,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11467/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 54.1,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11493",
@@ -8159,7 +8190,7 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-18",
   "links": {},
   "images": [
-   "/assets/products/k11493/01.jpg",
+   "/assets/products/k11493/v2_front.jpg",
    "/assets/products/k11493/02.jpg",
    "/assets/products/k11493/03.jpg",
    "/assets/products/k11493/04.jpg",
@@ -8172,7 +8203,7 @@
    "/assets/products/k11493/11.jpg",
    "/assets/products/k11493/12.jpg"
   ],
-  "thumb": "/assets/products/k11493/thumb.jpg",
+  "thumb": "/assets/products/k11493/v2_thumb.jpg",
   "summary_text": "A.P.C.の1980年代頃のフランス製フィールドジャケット。綿100%のオリーブカーキ、経年による退色がそのまま風合いになっています。",
   "summary_points": [
    "オリーブカーキ（無地）のミリタリー系フィールドジャケット／ワークジャケット（ブランド：A.P.C. RUE DE FLEURUS PARIS）",
@@ -8229,6 +8260,31 @@
    ],
    "approved_at": "2026-11-18"
   },
-  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）"
+  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）",
+  "images_orig": [
+   "/assets/products/k11493/01.jpg",
+   "/assets/products/k11493/02.jpg",
+   "/assets/products/k11493/03.jpg",
+   "/assets/products/k11493/04.jpg",
+   "/assets/products/k11493/05.jpg",
+   "/assets/products/k11493/06.jpg",
+   "/assets/products/k11493/07.jpg",
+   "/assets/products/k11493/08.jpg",
+   "/assets/products/k11493/09.jpg",
+   "/assets/products/k11493/10.jpg",
+   "/assets/products/k11493/11.jpg",
+   "/assets/products/k11493/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-18",
+   "front_i": 0,
+   "back_i": -1,
+   "front_url": "/assets/products/k11493/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 149.9,
+    "bg": "normal"
+   }
+  }
  }
 ]
