@@ -5003,125 +5003,6 @@
   }
  },
  {
-  "sku": "K11388",
-  "slug": "k11388-sicoll-sicoll-of-europe-sicoll-made-in-italy",
-  "published": true,
-  "release": "draft",
-  "status": "sold",
-  "title": "Euro Leather JKT green",
-  "product_name": "Euro Leather JKT green",
-  "brand": "Sicoll（襟裏タグ「Sicoll OF EUROPE」・内ポケットのタグ「Sicoll MADE IN ITALY」）",
-  "category": "メンズ／アウター／ジャケット",
-  "material": "",
-  "published_date": "2026-10-23",
-  "prices": {
-   "store": 22800,
-   "site": 22800,
-   "mercari": 25080
-  },
-  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-10-23",
-  "links": {},
-  "images": [
-   "/assets/products/k11388/v2_front.jpg",
-   "/assets/products/k11388/v2_mannequin.jpg",
-   "/assets/products/k11388/v2_back.jpg",
-   "/assets/products/k11388/02.jpg",
-   "/assets/products/k11388/03.jpg",
-   "/assets/products/k11388/04.jpg",
-   "/assets/products/k11388/05.jpg",
-   "/assets/products/k11388/06.jpg",
-   "/assets/products/k11388/07.jpg",
-   "/assets/products/k11388/08.jpg",
-   "/assets/products/k11388/10.jpg",
-   "/assets/products/k11388/11.jpg",
-   "/assets/products/k11388/12.jpg"
-  ],
-  "thumb": "/assets/products/k11388/v2_thumb.jpg",
-  "summary_text": "イタリアブランド「Sicoll」のオリーブグリーンのレザーライダース。1980年代頃のヴィンテージで、色も作りも見かけることが少ない一着です。",
-  "summary_points": [
-   "オリーブグリーン無地（リブ・裏地もオリーブ）のレザージャケット（シングルライダース型・リブ襟・リブ袖口・裾ゴム）（ブランド：Sicoll（襟裏タグ「Sicoll OF EUROPE」・内ポケットのタグ「Sicoll MADE IN ITALY」））",
-   "実寸 身幅53cm・着丈64.5cm・肩幅43.5cm"
-  ],
-  "lead": "「Sicoll OF EUROPE」の襟裏タグと「Sicoll MADE IN ITALY」の内タグを持つ、シングルライダース型のレザージャケットです。",
-  "body_html": "<h2>この一着のこと</h2><p>「Sicoll OF EUROPE」の襟裏タグと「Sicoll MADE IN ITALY」の内タグを持つ、シングルライダース型のレザージャケットです。ヨーロッパサイズ50表記のメンズサイズで、1980年代頃のものと思われます。</p><p>本革と思われる素材はやわらかく薄手で、リブはニット、裏地は光沢のある化繊仕立て。リブ襟・リブ袖口・裾ゴムという構成で、全体がオリーブグリーンで統一されています。リブも裏地も同じオリーブで揃えているところに、作り手の意図がはっきり出ています。</p><p>状態は、革全体にシワと経年のツヤムラがあります。袖に小さな点状の跡が1か所ありますが、写真で確認できる範囲に目立つ破れはありません。ツヤムラは使い込まれた革が持つ表情で、新品にはない落ち着きがあります。</p><p>そういう着方が、この一着には合っています。</p><h2>状態</h2><p>状態は写真でご確認ください。</p>",
-  "spec": [
-   [
-    "ブランド",
-    "Sicoll（襟裏タグ「Sicoll OF EUROPE」・内ポケットのタグ「Sicoll MADE IN ITALY」）"
-   ],
-   [
-    "色",
-    "オリーブグリーン無地（リブ・裏地もオリーブ）"
-   ],
-   [
-    "サイズ",
-    "実寸 身幅53cm・着丈64.5cm・肩幅43.5cm"
-   ],
-   [
-    "状態",
-    "写真でご確認ください"
-   ]
-  ],
-  "sku_confidence": "確定",
-  "genre": "outer",
-  "genre_by": "auto-keyword-2026-10-23",
-  "draft_meta": {
-   "made_by": "67_draft_maker_v1",
-   "version": "v1.3",
-   "made_at": "2026-10-23",
-   "needs": [
-    "性別は自動判定：メンズ（写真の見立て：メンズ（ヨーロッパのメンズサイズ50の表記から））→ 違えばClaudeへ",
-    "素材が確定していない（推定のまま or 不明）→ 仕様表に載せていない",
-    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
-    "見出し（title）は物語の一言から自動で作った → 気に入らなければClaudeへ",
-    "商品名は STORY_SEED／値札の文言そのまま → ブランド・年代・産地が確定した事実か確認",
-    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
-    "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ],
-   "approved_at": "2026-10-23"
-  },
-  "gender_by": "写真の見立て：メンズ（ヨーロッパのメンズサイズ50の表記から）",
-  "images_orig": [
-   "/assets/products/k11388/01.jpg",
-   "/assets/products/k11388/02.jpg",
-   "/assets/products/k11388/03.jpg",
-   "/assets/products/k11388/04.jpg",
-   "/assets/products/k11388/05.jpg",
-   "/assets/products/k11388/06.jpg",
-   "/assets/products/k11388/07.jpg",
-   "/assets/products/k11388/08.jpg",
-   "/assets/products/k11388/09.jpg",
-   "/assets/products/k11388/10.jpg",
-   "/assets/products/k11388/11.jpg",
-   "/assets/products/k11388/12.jpg"
-  ],
-  "photo_v2": {
-   "date": "2026-10-23",
-   "front_i": 0,
-   "back_i": 8,
-   "front_url": "/assets/products/k11388/v2_front.jpg",
-   "front_check": {
-    "brighten": 0.1,
-    "garment_l": 114.8,
-    "bg": "normal"
-   },
-   "back_url": "/assets/products/k11388/v2_back.jpg",
-   "back_check": {
-    "brighten": 0.1,
-    "garment_l": 113,
-    "bg": "normal"
-   },
-   "mannequin": "pending",
-   "mannequin_url": "/assets/products/k11388/v2_mannequin.jpg",
-   "mannequin_body": "身長175cm・胸囲90cm",
-   "measures": {
-    "身幅": 53,
-    "着丈": 64.5,
-    "肩幅": 43.5
-   }
-  }
- },
- {
   "sku": "K11415",
   "slug": "k11415-nike",
   "published": true,
@@ -7977,127 +7858,6 @@
   }
  },
  {
-  "sku": "K11466",
-  "slug": "k11466-fendi-ff",
-  "published": true,
-  "release": "draft",
-  "status": "sold",
-  "title": "1980〜90年代頃 FENDI / FF 長袖ボタンダウンシャツ メンズ",
-  "product_name": "1980〜90年代頃 FENDI / FF 長袖ボタンダウンシャツ メンズ",
-  "brand": "FENDI / FF",
-  "category": "メンズ／トップス／シャツ",
-  "material": "",
-  "published_date": "2026-11-16",
-  "prices": {
-   "store": 12800,
-   "site": 12800,
-   "mercari": 14080
-  },
-  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-16",
-  "links": {},
-  "images": [
-   "/assets/products/k11466/v2_front.jpg",
-   "/assets/products/k11466/v2_back.jpg",
-   "/assets/products/k11466/03.jpg",
-   "/assets/products/k11466/04.jpg",
-   "/assets/products/k11466/05.jpg",
-   "/assets/products/k11466/06.jpg",
-   "/assets/products/k11466/07.jpg",
-   "/assets/products/k11466/08.jpg",
-   "/assets/products/k11466/09.jpg",
-   "/assets/products/k11466/10.jpg",
-   "/assets/products/k11466/11.jpg",
-   "/assets/products/k11466/12.jpg"
-  ],
-  "thumb": "/assets/products/k11466/v2_thumb.jpg",
-  "summary_text": "FENDIのFFロゴが入ったライトブルー×オフホワイトのヘリンボーンドレスシャツです。1980〜90年代前半頃のMADE IN ITALYの一着が、川越の古民家に並んでいます。",
-  "summary_points": [
-   "ライトブルー×オフホワイト ヘリンボーン織り柄の長袖ボタンダウンシャツ（ドレスシャツ）（ブランド：FENDI / FF）",
-   "実寸 身幅59cm・着丈78.5cm・肩幅49cm"
-  ],
-  "lead": "FENDIのFFロゴが刻まれた、MADE IN ITALYのボタンダウンドレスシャツです。",
-  "body_html": "<h2>この一着のこと</h2><p>FENDIのFFロゴが刻まれた、MADE IN ITALYのボタンダウンドレスシャツです。ライトブルーとオフホワイトが交差するヘリンボーン織りで、表面には細かな綾目と落ち着いた光沢があります。素材はウール主体と思われ、ドレスシャツとしては肉厚でしっかりとした手触りです。タグのデザインやFFロゴの書体、ボタンの形状から、1980年代〜1990年代前半頃のものと思われます。</p><p>左胸ポケット付近に軽微なほつれがありますが、全体に大きな破損や汚れは見当たらず、概ね良好な状態です。サイズはメンズMまたはL相当と思われます。</p><p>着方はシンプルに、このシャツ一枚で決めてください。ヘリンボーンの柄がすでに表情を持っているので、余計なものは要りません。川越の古民家の光の中で見ると、ライトブルーの色がことさら穏やかに見えます。</p><h2>状態</h2><p>状態は写真でご確認ください。気になる点は、お問い合わせからお尋ねください。</p>",
-  "spec": [
-   [
-    "ブランド",
-    "FENDI / FF"
-   ],
-   [
-    "タグの表記",
-    "FENDI / FF（ダブルF）ロゴ / MADE IN ITALY"
-   ],
-   [
-    "店頭での名前",
-    "FENDI helingbone made in Italy"
-   ],
-   [
-    "色",
-    "ライトブルー×オフホワイト ヘリンボーン織り柄"
-   ],
-   [
-    "サイズ",
-    "実寸 身幅59cm・着丈78.5cm・肩幅49cm"
-   ],
-   [
-    "状態",
-    "写真でご確認ください"
-   ]
-  ],
-  "sku_confidence": "確定",
-  "genre": "tops",
-  "genre_by": "auto-keyword-2026-11-16",
-  "draft_meta": {
-   "made_by": "67_draft_maker_v1",
-   "version": "v1.8",
-   "made_at": "2026-11-16",
-   "needs": [
-    "性別は自動判定：メンズ（写真：メンズ（ボタンが着る人から見て右側に付いている））→ 違えばClaudeへ",
-    "ブランド欄は短い名前（FENDI / FF）にした。タグの表記の全文は仕様表「タグの表記」",
-    "素材が確定していない（推定のまま or 不明）→ 仕様表に載せていない",
-    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
-    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
-    "商品名・見出しは決まった並び（年代・ブランド・素材・色・品目・性別）で自動作成 → 気に入らなければClaudeへ",
-    "着こなし・雰囲気の文を 2文外した（決まり2・3）",
-    "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
-    "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
-    "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
-   ],
-   "approved_at": "2026-11-16"
-  },
-  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）",
-  "images_orig": [
-   "/assets/products/k11466/01.jpg",
-   "/assets/products/k11466/02.jpg",
-   "/assets/products/k11466/03.jpg",
-   "/assets/products/k11466/04.jpg",
-   "/assets/products/k11466/05.jpg",
-   "/assets/products/k11466/06.jpg",
-   "/assets/products/k11466/07.jpg",
-   "/assets/products/k11466/08.jpg",
-   "/assets/products/k11466/09.jpg",
-   "/assets/products/k11466/10.jpg",
-   "/assets/products/k11466/11.jpg",
-   "/assets/products/k11466/12.jpg"
-  ],
-  "photo_v2": {
-   "date": "2026-11-16",
-   "front_i": 0,
-   "back_i": 1,
-   "front_url": "/assets/products/k11466/v2_front.jpg",
-   "front_check": {
-    "brighten": 0,
-    "garment_l": 180.8,
-    "bg": "normal"
-   },
-   "back_url": "/assets/products/k11466/v2_back.jpg",
-   "back_check": {
-    "brighten": 0,
-    "garment_l": 186.8,
-    "bg": "light_item"
-   }
-  }
- },
- {
   "sku": "K11472",
   "slug": "k11472-wrangler",
   "published": true,
@@ -8293,7 +8053,7 @@
  {
   "sku": "K11467",
   "slug": "k11467",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1960〜70年代頃 レザー ボディ：バーガンディ スタジャン メンズ 古着",
@@ -8374,14 +8134,15 @@
     "着こなし・雰囲気の文を 1文外した（決まり2・3）",
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-11-18"
   },
   "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いている＝メンズ仕様）"
  },
  {
   "sku": "K11493",
   "slug": "k11493-a-p-c-rue-de-fleurus-paris",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "A.P.C. RUE DE FLEURUS PARIS ミリタリー系フィールドジャケット／ワークジャケット",
@@ -8465,7 +8226,8 @@
     "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-11-18"
   },
   "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）"
  }
