@@ -8375,7 +8375,7 @@
  {
   "sku": "K11488",
   "slug": "k11488-ilgwu",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1950〜70年代頃 ILGWU バーントオレンジ ニットセーター レディース",
@@ -8457,7 +8457,8 @@
     "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
     "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-11-19"
   },
   "gender_by": "写真：レディース（ILGWUはInternational Ladies Garment Workers Unionの略であり、婦人服組合製造品であることがタグから確定）"
  },
@@ -8611,7 +8612,7 @@
  {
   "sku": "K11511",
   "slug": "k11511",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "ガーネットチップビーズネックレス 古着",
@@ -8680,14 +8681,15 @@
     "着こなし・雰囲気の文を 2文外した（決まり2・3）",
     "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）"
-   ]
+   ],
+   "approved_at": "2026-11-19"
   },
   "gender_by": "アクセサリー・小物は性別なし"
  },
  {
   "sku": "K11453",
   "slug": "k11453-amherst",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1990年代頃 amherst ネイビー コーデュロイ長袖シャツ メンズ",
@@ -8781,7 +8783,8 @@
     "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
     "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-11-19"
   },
   "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いており、メンズ仕様と確認できる）"
  }
