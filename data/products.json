@@ -8392,12 +8392,12 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-19",
   "links": {},
   "images": [
+   "/assets/products/k11488/v2_front.jpg",
+   "/assets/products/k11488/v2_back.jpg",
    "/assets/products/k11488/01.jpg",
-   "/assets/products/k11488/02.jpg",
    "/assets/products/k11488/03.jpg",
    "/assets/products/k11488/04.jpg",
    "/assets/products/k11488/05.jpg",
-   "/assets/products/k11488/06.jpg",
    "/assets/products/k11488/07.jpg",
    "/assets/products/k11488/08.jpg",
    "/assets/products/k11488/09.jpg",
@@ -8405,7 +8405,7 @@
    "/assets/products/k11488/11.jpg",
    "/assets/products/k11488/12.jpg"
   ],
-  "thumb": "/assets/products/k11488/thumb.jpg",
+  "thumb": "/assets/products/k11488/v2_thumb.jpg",
   "summary_text": "バーントオレンジのバスケット編みニット。ILGWUユニオンメイドタグが残る、1950〜70年代頃の婦人服です。テラコッタの色みが、秋の川越の空気感によく馴染みます。",
   "summary_points": [
    "バーントオレンジ／テラコッタブラウン・バスケット編み柄（総柄テクスチャー）のニットセーター（クルーネック／モックネック）（ブランド：ILGWU）",
@@ -8460,7 +8460,38 @@
    ],
    "approved_at": "2026-11-19"
   },
-  "gender_by": "写真：レディース（ILGWUはInternational Ladies Garment Workers Unionの略であり、婦人服組合製造品であることがタグから確定）"
+  "gender_by": "写真：レディース（ILGWUはInternational Ladies Garment Workers Unionの略であり、婦人服組合製造品であることがタグから確定）",
+  "images_orig": [
+   "/assets/products/k11488/01.jpg",
+   "/assets/products/k11488/02.jpg",
+   "/assets/products/k11488/03.jpg",
+   "/assets/products/k11488/04.jpg",
+   "/assets/products/k11488/05.jpg",
+   "/assets/products/k11488/06.jpg",
+   "/assets/products/k11488/07.jpg",
+   "/assets/products/k11488/08.jpg",
+   "/assets/products/k11488/09.jpg",
+   "/assets/products/k11488/10.jpg",
+   "/assets/products/k11488/11.jpg",
+   "/assets/products/k11488/12.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-19",
+   "front_i": 1,
+   "back_i": 5,
+   "front_url": "/assets/products/k11488/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 93.9,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11488/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 90.7,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11513",
@@ -8629,7 +8660,7 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-19",
   "links": {},
   "images": [
-   "/assets/products/k11511/01.jpg",
+   "/assets/products/k11511/v2_front.jpg",
    "/assets/products/k11511/02.jpg",
    "/assets/products/k11511/03.jpg",
    "/assets/products/k11511/04.jpg",
@@ -8638,7 +8669,7 @@
    "/assets/products/k11511/07.jpg",
    "/assets/products/k11511/08.jpg"
   ],
-  "thumb": "/assets/products/k11511/thumb.jpg",
+  "thumb": "/assets/products/k11511/v2_thumb.jpg",
   "summary_text": "ガーネットと思われる天然石チップビーズを細かく連ねた、チェーン約48cmのネックレスです。深みのあるダークレッドが、首元にそのまま色を添えます。",
   "summary_points": [
    "深みのあるダークレッド（ワインレッド〜ガーネットレッド）、無地のガーネットチップビーズネックレス（チェーン48cm）"
@@ -8684,7 +8715,28 @@
    ],
    "approved_at": "2026-11-19"
   },
-  "gender_by": "アクセサリー・小物は性別なし"
+  "gender_by": "アクセサリー・小物は性別なし",
+  "images_orig": [
+   "/assets/products/k11511/01.jpg",
+   "/assets/products/k11511/02.jpg",
+   "/assets/products/k11511/03.jpg",
+   "/assets/products/k11511/04.jpg",
+   "/assets/products/k11511/05.jpg",
+   "/assets/products/k11511/06.jpg",
+   "/assets/products/k11511/07.jpg",
+   "/assets/products/k11511/08.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-19",
+   "front_i": 0,
+   "back_i": -1,
+   "front_url": "/assets/products/k11511/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 151.1,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11453",
@@ -8706,7 +8758,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-19",
   "links": {},
   "images": [
-   "/assets/products/k11453/01.jpg",
+   "/assets/products/k11453/v2_front.jpg",
+   "/assets/products/k11453/v2_back.jpg",
    "/assets/products/k11453/02.jpg",
    "/assets/products/k11453/03.jpg",
    "/assets/products/k11453/04.jpg",
@@ -8717,7 +8770,6 @@
    "/assets/products/k11453/09.jpg",
    "/assets/products/k11453/10.jpg",
    "/assets/products/k11453/11.jpg",
-   "/assets/products/k11453/12.jpg",
    "/assets/products/k11453/13.jpg",
    "/assets/products/k11453/14.jpg",
    "/assets/products/k11453/15.jpg",
@@ -8727,7 +8779,7 @@
    "/assets/products/k11453/19.jpg",
    "/assets/products/k11453/20.jpg"
   ],
-  "thumb": "/assets/products/k11453/thumb.jpg",
+  "thumb": "/assets/products/k11453/v2_thumb.jpg",
   "summary_text": "柄の密度と素材の厚みが、一枚でしっかり絵になります。",
   "summary_points": [
    "ネイビー地×テラコッタドット×オリーブグリーン植物柄（バロック調リーフ＆ポルカドット混合プリント）のコーデュロイ長袖シャツ（ブランド：amherst）",
@@ -8786,6 +8838,45 @@
    ],
    "approved_at": "2026-11-19"
   },
-  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いており、メンズ仕様と確認できる）"
+  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いており、メンズ仕様と確認できる）",
+  "images_orig": [
+   "/assets/products/k11453/01.jpg",
+   "/assets/products/k11453/02.jpg",
+   "/assets/products/k11453/03.jpg",
+   "/assets/products/k11453/04.jpg",
+   "/assets/products/k11453/05.jpg",
+   "/assets/products/k11453/06.jpg",
+   "/assets/products/k11453/07.jpg",
+   "/assets/products/k11453/08.jpg",
+   "/assets/products/k11453/09.jpg",
+   "/assets/products/k11453/10.jpg",
+   "/assets/products/k11453/11.jpg",
+   "/assets/products/k11453/12.jpg",
+   "/assets/products/k11453/13.jpg",
+   "/assets/products/k11453/14.jpg",
+   "/assets/products/k11453/15.jpg",
+   "/assets/products/k11453/16.jpg",
+   "/assets/products/k11453/17.jpg",
+   "/assets/products/k11453/18.jpg",
+   "/assets/products/k11453/19.jpg",
+   "/assets/products/k11453/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-19",
+   "front_i": 0,
+   "back_i": 11,
+   "front_url": "/assets/products/k11453/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.2,
+    "garment_l": 68.2,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11453/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.1,
+    "garment_l": 72.2,
+    "bg": "normal"
+   }
+  }
  }
 ]
