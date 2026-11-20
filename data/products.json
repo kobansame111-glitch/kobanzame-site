@@ -8899,12 +8899,12 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-19",
   "links": {},
   "images": [
-   "/assets/products/k11525/01.jpg",
+   "/assets/products/k11525/v2_front.jpg",
+   "/assets/products/k11525/v2_back.jpg",
    "/assets/products/k11525/02.jpg",
    "/assets/products/k11525/03.jpg",
    "/assets/products/k11525/04.jpg",
    "/assets/products/k11525/05.jpg",
-   "/assets/products/k11525/06.jpg",
    "/assets/products/k11525/07.jpg",
    "/assets/products/k11525/08.jpg",
    "/assets/products/k11525/09.jpg",
@@ -8920,7 +8920,7 @@
    "/assets/products/k11525/19.jpg",
    "/assets/products/k11525/20.jpg"
   ],
-  "thumb": "/assets/products/k11525/thumb.jpg",
+  "thumb": "/assets/products/k11525/v2_thumb.jpg",
   "summary_text": "ダークブラウンの本革A-2タイプボンバー。1980〜90年代頃のものと思われます。ラベルにイタリア語表記があり、革もリブも質感が高い一着です。",
   "summary_points": [
    "ダークブラウン（無地）のレザーボンバージャケット（A-2タイプ）",
@@ -8976,7 +8976,46 @@
    ],
    "approved_at": "2026-11-20"
   },
-  "gender_by": "写真：メンズ（ジッパーが着る人から見て右側に引き手があるメンズ仕様）"
+  "gender_by": "写真：メンズ（ジッパーが着る人から見て右側に引き手があるメンズ仕様）",
+  "images_orig": [
+   "/assets/products/k11525/01.jpg",
+   "/assets/products/k11525/02.jpg",
+   "/assets/products/k11525/03.jpg",
+   "/assets/products/k11525/04.jpg",
+   "/assets/products/k11525/05.jpg",
+   "/assets/products/k11525/06.jpg",
+   "/assets/products/k11525/07.jpg",
+   "/assets/products/k11525/08.jpg",
+   "/assets/products/k11525/09.jpg",
+   "/assets/products/k11525/10.jpg",
+   "/assets/products/k11525/11.jpg",
+   "/assets/products/k11525/12.jpg",
+   "/assets/products/k11525/13.jpg",
+   "/assets/products/k11525/14.jpg",
+   "/assets/products/k11525/15.jpg",
+   "/assets/products/k11525/16.jpg",
+   "/assets/products/k11525/17.jpg",
+   "/assets/products/k11525/18.jpg",
+   "/assets/products/k11525/19.jpg",
+   "/assets/products/k11525/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-20",
+   "front_i": 0,
+   "back_i": 5,
+   "front_url": "/assets/products/k11525/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 91.1,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11525/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.4,
+    "garment_l": 93.2,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11530",
@@ -8998,7 +9037,7 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-19",
   "links": {},
   "images": [
-   "/assets/products/k11530/01.jpg",
+   "/assets/products/k11530/v2_front.jpg",
    "/assets/products/k11530/02.jpg",
    "/assets/products/k11530/03.jpg",
    "/assets/products/k11530/04.jpg",
@@ -9019,7 +9058,7 @@
    "/assets/products/k11530/19.jpg",
    "/assets/products/k11530/20.jpg"
   ],
-  "thumb": "/assets/products/k11530/thumb.jpg",
+  "thumb": "/assets/products/k11530/v2_thumb.jpg",
   "summary_text": "mabrunのスエード調レザーコート。オリーブグリーンの退色と経年の摩耗が全体に刻まれた、使い込まれた一着です。",
   "summary_points": [
    "オリーブグリーン（経年でムラのある退色・くすみあり）のレザーコート／フィールドジャケット型レザーアウター（ブランド：mabrun）",
@@ -9078,7 +9117,40 @@
    ],
    "approved_at": "2026-11-20"
   },
-  "gender_by": "写真：メンズ（正面写真でボタンが着る人から見て右側に付いている）"
+  "gender_by": "写真：メンズ（正面写真でボタンが着る人から見て右側に付いている）",
+  "images_orig": [
+   "/assets/products/k11530/01.jpg",
+   "/assets/products/k11530/02.jpg",
+   "/assets/products/k11530/03.jpg",
+   "/assets/products/k11530/04.jpg",
+   "/assets/products/k11530/05.jpg",
+   "/assets/products/k11530/06.jpg",
+   "/assets/products/k11530/07.jpg",
+   "/assets/products/k11530/08.jpg",
+   "/assets/products/k11530/09.jpg",
+   "/assets/products/k11530/10.jpg",
+   "/assets/products/k11530/11.jpg",
+   "/assets/products/k11530/12.jpg",
+   "/assets/products/k11530/13.jpg",
+   "/assets/products/k11530/14.jpg",
+   "/assets/products/k11530/15.jpg",
+   "/assets/products/k11530/16.jpg",
+   "/assets/products/k11530/17.jpg",
+   "/assets/products/k11530/18.jpg",
+   "/assets/products/k11530/19.jpg",
+   "/assets/products/k11530/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-20",
+   "front_i": 0,
+   "back_i": -1,
+   "front_url": "/assets/products/k11530/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 84.1,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11528",
@@ -9197,9 +9269,9 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-20",
   "links": {},
   "images": [
-   "/assets/products/k11524/01.jpg",
+   "/assets/products/k11524/v2_front.jpg",
+   "/assets/products/k11524/v2_back.jpg",
    "/assets/products/k11524/02.jpg",
-   "/assets/products/k11524/03.jpg",
    "/assets/products/k11524/04.jpg",
    "/assets/products/k11524/05.jpg",
    "/assets/products/k11524/06.jpg",
@@ -9216,7 +9288,7 @@
    "/assets/products/k11524/17.jpg",
    "/assets/products/k11524/18.jpg"
   ],
-  "thumb": "/assets/products/k11524/thumb.jpg",
+  "thumb": "/assets/products/k11524/v2_thumb.jpg",
   "summary_text": "イタリアの老舗チェーン、conbipelのブラックレザーコートです。本革のエイジングが全体に進み、ミドル丈のジップアップシルエットが一枚でしっかり決まります。",
   "summary_points": [
    "ブラック無地のレザーコート（ミドル丈・ジップアップ）（ブランド：FREENERON VERA PELLE / conbipel）",
@@ -9276,7 +9348,44 @@
    ],
    "approved_at": "2026-11-20"
   },
-  "gender_by": "表記にメンズ・写真の見立て：メンズ（ジッパーが着る人から見て右側に引き手、かつサイズ44はイタリア男性服の標準サイズ表記）・実寸が大きめ（肩幅45・身幅55）"
+  "gender_by": "表記にメンズ・写真の見立て：メンズ（ジッパーが着る人から見て右側に引き手、かつサイズ44はイタリア男性服の標準サイズ表記）・実寸が大きめ（肩幅45・身幅55）",
+  "images_orig": [
+   "/assets/products/k11524/01.jpg",
+   "/assets/products/k11524/02.jpg",
+   "/assets/products/k11524/03.jpg",
+   "/assets/products/k11524/04.jpg",
+   "/assets/products/k11524/05.jpg",
+   "/assets/products/k11524/06.jpg",
+   "/assets/products/k11524/07.jpg",
+   "/assets/products/k11524/08.jpg",
+   "/assets/products/k11524/09.jpg",
+   "/assets/products/k11524/10.jpg",
+   "/assets/products/k11524/11.jpg",
+   "/assets/products/k11524/12.jpg",
+   "/assets/products/k11524/13.jpg",
+   "/assets/products/k11524/14.jpg",
+   "/assets/products/k11524/15.jpg",
+   "/assets/products/k11524/16.jpg",
+   "/assets/products/k11524/17.jpg",
+   "/assets/products/k11524/18.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-20",
+   "front_i": 0,
+   "back_i": 2,
+   "front_url": "/assets/products/k11524/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 98.9,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11524/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 90.3,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11523",
@@ -9298,11 +9407,11 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-20",
   "links": {},
   "images": [
-   "/assets/products/k11523/01.jpg",
+   "/assets/products/k11523/v2_front.jpg",
+   "/assets/products/k11523/v2_back.jpg",
    "/assets/products/k11523/02.jpg",
    "/assets/products/k11523/03.jpg",
    "/assets/products/k11523/04.jpg",
-   "/assets/products/k11523/05.jpg",
    "/assets/products/k11523/06.jpg",
    "/assets/products/k11523/07.jpg",
    "/assets/products/k11523/08.jpg",
@@ -9319,7 +9428,7 @@
    "/assets/products/k11523/19.jpg",
    "/assets/products/k11523/20.jpg"
   ],
-  "thumb": "/assets/products/k11523/thumb.jpg",
+  "thumb": "/assets/products/k11523/v2_thumb.jpg",
   "summary_text": "イタリア製、1980〜90年代頃のレザーボンバージャケット。ブラックの革が経年でブラウンに退色し、内側にはタータンチェックのライニングを持つ、造りのしっかりした一着です。",
   "summary_points": [
    "ブラック（経年によりブラウン色の退色・色落ちあり）、内側ライニングはレッド×ブラック×グレーのタータンチェック柄のレザーボンバージャケット（A-2タイプ）（ブランド：ブランドタグ不明）",
@@ -9374,7 +9483,46 @@
    ],
    "approved_at": "2026-11-20"
   },
-  "gender_by": "写真の見立て：メンズ（正面写真でフロントジップ・スナップの位置がメンズ仕様、また全体的なシルエット・サイズ感がメンズ向け）"
+  "gender_by": "写真の見立て：メンズ（正面写真でフロントジップ・スナップの位置がメンズ仕様、また全体的なシルエット・サイズ感がメンズ向け）",
+  "images_orig": [
+   "/assets/products/k11523/01.jpg",
+   "/assets/products/k11523/02.jpg",
+   "/assets/products/k11523/03.jpg",
+   "/assets/products/k11523/04.jpg",
+   "/assets/products/k11523/05.jpg",
+   "/assets/products/k11523/06.jpg",
+   "/assets/products/k11523/07.jpg",
+   "/assets/products/k11523/08.jpg",
+   "/assets/products/k11523/09.jpg",
+   "/assets/products/k11523/10.jpg",
+   "/assets/products/k11523/11.jpg",
+   "/assets/products/k11523/12.jpg",
+   "/assets/products/k11523/13.jpg",
+   "/assets/products/k11523/14.jpg",
+   "/assets/products/k11523/15.jpg",
+   "/assets/products/k11523/16.jpg",
+   "/assets/products/k11523/17.jpg",
+   "/assets/products/k11523/18.jpg",
+   "/assets/products/k11523/19.jpg",
+   "/assets/products/k11523/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-20",
+   "front_i": 0,
+   "back_i": 4,
+   "front_url": "/assets/products/k11523/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 75.9,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11523/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 88.0,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11526",
@@ -9396,12 +9544,12 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-20",
   "links": {},
   "images": [
-   "/assets/products/k11526/01.jpg",
+   "/assets/products/k11526/v2_front.jpg",
+   "/assets/products/k11526/v2_back.jpg",
    "/assets/products/k11526/02.jpg",
    "/assets/products/k11526/03.jpg",
    "/assets/products/k11526/04.jpg",
    "/assets/products/k11526/05.jpg",
-   "/assets/products/k11526/06.jpg",
    "/assets/products/k11526/07.jpg",
    "/assets/products/k11526/08.jpg",
    "/assets/products/k11526/09.jpg",
@@ -9417,7 +9565,7 @@
    "/assets/products/k11526/19.jpg",
    "/assets/products/k11526/20.jpg"
   ],
-  "thumb": "/assets/products/k11526/thumb.jpg",
+  "thumb": "/assets/products/k11526/v2_thumb.jpg",
   "summary_text": "Pull & Bearのレザーボンバー、タン／キャメルブラウン。経年のシワとムラが全体に刻まれた、使い込まれた一着です。",
   "summary_points": [
    "タン／キャメルブラウン（無地）、経年によるムラありのレザーボンバージャケット（レザーブルゾン）（ブランド：Pull & Bear）",
@@ -9472,7 +9620,46 @@
    ],
    "approved_at": "2026-11-20"
   },
-  "gender_by": "写真：メンズ（ジップが着る人から見て右側＝メンズ仕様、タグにサイズ表記もメンズ基準）"
+  "gender_by": "写真：メンズ（ジップが着る人から見て右側＝メンズ仕様、タグにサイズ表記もメンズ基準）",
+  "images_orig": [
+   "/assets/products/k11526/01.jpg",
+   "/assets/products/k11526/02.jpg",
+   "/assets/products/k11526/03.jpg",
+   "/assets/products/k11526/04.jpg",
+   "/assets/products/k11526/05.jpg",
+   "/assets/products/k11526/06.jpg",
+   "/assets/products/k11526/07.jpg",
+   "/assets/products/k11526/08.jpg",
+   "/assets/products/k11526/09.jpg",
+   "/assets/products/k11526/10.jpg",
+   "/assets/products/k11526/11.jpg",
+   "/assets/products/k11526/12.jpg",
+   "/assets/products/k11526/13.jpg",
+   "/assets/products/k11526/14.jpg",
+   "/assets/products/k11526/15.jpg",
+   "/assets/products/k11526/16.jpg",
+   "/assets/products/k11526/17.jpg",
+   "/assets/products/k11526/18.jpg",
+   "/assets/products/k11526/19.jpg",
+   "/assets/products/k11526/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-20",
+   "front_i": 0,
+   "back_i": 5,
+   "front_url": "/assets/products/k11526/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 124.9,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11526/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 131.0,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11529",
