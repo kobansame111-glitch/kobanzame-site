@@ -135,12 +135,13 @@ BF_SALES = [
      'tease_pill_ja': 'まもなく20%引き', 'tease_pill_en': 'Coming soon'},
     {'from': '2026-11-27 00:00', 'to': '2026-11-30 00:00',
      'tease_from': '2026-11-26 00:00',
-     'ja': 'BLACK FRIDAY ｜ オンライン限定・カートで全品20%引き（11/29まで）・この期間のご注文は12/3以降に順次発送', 'en': 'BLACK FRIDAY | Online only — 20% off all items at cart checkout (until Nov 29) — orders ship from Dec 3',
-     'hero_ja': 'オンラインストア限定 ｜ カートで全品20%引き（11月29日まで）｜ この期間のご注文は12/3以降に順次発送', 'hero_en': 'Online store only — 20% off all items at cart checkout (until Nov 29) — orders ship from Dec 3',
-     'pill_ja': 'カートで20%引き（11/29まで）', 'pill_en': '20% off at cart (until Nov 29)',
-     'tease_ja': 'BLACK FRIDAY ｜ オンライン限定・まもなく開始・カートで全品20%引き（11/27 0:00〜11/29）・ご注文は12/3以降に順次発送', 'tease_en': 'BLACK FRIDAY | Online only — Starts soon — 20% off all items at cart (Nov 27 0:00–Nov 29) — orders ship from Dec 3',
-     'tease_hero_ja': 'オンラインストア限定 ｜ まもなく開始 ｜ カートで全品20%引き（11/27 0:00〜11/29）｜ ご注文は12/3以降に順次発送', 'tease_hero_en': 'Online store only — Starts soon — 20% off all items at cart (Nov 27 0:00 – Nov 29) — orders ship from Dec 3',
-     'tease_pill_ja': 'まもなく20%引き', 'tease_pill_en': 'Coming soon'},
+     # 2026-11-20 「全品20%引き」を「最大20%引き」に：カートの割引は80%を100円単位で切り上げ（＋原価の下限）なので、実際は品によって18〜20%（販売中55点のうちちょうど20%は1点）。言い過ぎを避ける（景表法）
+     'ja': 'BLACK FRIDAY ｜ オンライン限定・カートで最大20%引き（11/29まで）・この期間のご注文は12/3以降に順次発送', 'en': 'BLACK FRIDAY | Online only — up to 20% off at cart checkout (until Nov 29) — orders ship from Dec 3',
+     'hero_ja': 'オンラインストア限定 ｜ カートで最大20%引き（11月29日まで）｜ この期間のご注文は12/3以降に順次発送', 'hero_en': 'Online store only — up to 20% off at cart checkout (until Nov 29) — orders ship from Dec 3',
+     'pill_ja': 'カートで最大20%引き（11/29まで）', 'pill_en': 'Up to 20% off at cart (until Nov 29)',
+     'tease_ja': 'BLACK FRIDAY ｜ オンライン限定・まもなく開始・カートで最大20%引き（11/27 0:00〜11/29）・ご注文は12/3以降に順次発送', 'tease_en': 'BLACK FRIDAY | Online only — Starts soon — up to 20% off at cart (Nov 27 0:00–Nov 29) — orders ship from Dec 3',
+     'tease_hero_ja': 'オンラインストア限定 ｜ まもなく開始 ｜ カートで最大20%引き（11/27 0:00〜11/29）｜ ご注文は12/3以降に順次発送', 'tease_hero_en': 'Online store only — Starts soon — up to 20% off at cart (Nov 27 0:00 – Nov 29) — orders ship from Dec 3',
+     'tease_pill_ja': 'まもなく最大20%引き', 'tease_pill_en': 'Coming soon'},
 ]
 _JST = datetime.timezone(datetime.timedelta(hours=9))
 def _bf_ms(s):
@@ -227,10 +228,10 @@ def bf_pill(lang):
 # 2026-11-20 修理の列1：割引が「見えない」直し。値段・割引額はサイトで計算しない（カートの受付 63c が原価の下限を見て決めるので、サイトで出すと食い違う）。
 # 割引が始まっている間だけ、購入ボタンの上・カートの合計の下に「割引はお支払い画面で反映される」と書く。取り消し線・元の値段・通常価格は出さない（二重価格表示を避ける）。
 BF_NOTE = {
-  'pdp':  {'ja': 'ブラックフライデー中は、全品20%引き。表示の値段は割引前です。割引後の金額は、お支払い画面（Square）に表示されます。',
-           'en': 'Black Friday: 20% off every item. The price shown is before the discount; the discounted amount appears on the checkout screen (Square).'},
-  'cart': {'ja': 'ブラックフライデー中は、全品20%引き。この合計は割引前です。割引後の金額は、お支払い画面（Square）に表示されます。',
-           'en': 'Black Friday: 20% off every item. This total is before the discount; the discounted amount appears on the checkout screen (Square).'},
+  'pdp':  {'ja': 'ブラックフライデー中は、カートで最大20%引き（品によって割引率は異なります）。表示の値段は割引前です。割引後の金額は、お支払い画面（Square）に表示されます。',
+           'en': 'Black Friday: up to 20% off (the discount varies by item). The price shown is before the discount; the discounted amount appears on the checkout screen (Square).'},
+  'cart': {'ja': 'ブラックフライデー中は、最大20%引き（品によって割引率は異なります）。この合計は割引前です。割引後の金額は、お支払い画面（Square）に表示されます。',
+           'en': 'Black Friday: up to 20% off (the discount varies by item). This total is before the discount; the discounted amount appears on the checkout screen (Square).'},
 }
 def bf_note(lang, kind):
     """購入ボタンの上・カートの合計の下に出す説明（割引が始まっている間だけ・bf_band の script が #hidden を外す）。"""
@@ -2085,7 +2086,7 @@ for lang in ('ja', 'en'):
         rk = cond_rank(p, lang)
         facts += (f'<span>{rk}</span>' if rk else '') + (f'<span>{t["width"].format(w=f"{w:g}")}</span>' if w is not None else '')
         if sold:
-            buy, bar = f'<span class="soldout">{t["soldout"]}</span>', ''
+            buy, bar, bfn = f'<span class="soldout">{t["soldout"]}</span>', '', ''   # 2026-11-20 売れた商品の枝にも bfn（割引の注記）を作る（無いと NameError で組み立てが止まる）
         elif buyable(p):
             if buy_via_cart():   # 2026-11-06 決定A：押した時に 63c番がその時の値段で支払いリンクを作る（JS は CART_JS_BODY の .buyc）
                 sq = '#buy'   # 63番の古いリンク（前の値段のまま）には飛ばさない＝表示と決済の値段を必ずそろえる
