@@ -499,4 +499,15 @@ def build_blog():
 
 
 if __name__ == '__main__':
+    # build_blog.py を単体で実行すると build_site.py の head()/foot() が無く、
+    # ページの <head> が空（meta説明・CSS・canonical・構造化データ・ナビ・計測なし）の
+    # 「頭が消えた」ページになってしまう（2026-11-19 実測で確認・PR #141 の原因）。
+    # 単体実行は黙って壊れたページを作らず、はっきり失敗して止める（呼び出し側の「失敗したら push しない」に乗せる）。
+    if not _site_var('head'):
+        sys.stderr.write(
+            'build_blog.py は単体で実行しないでください。\n'
+            'build_site.py の head()/foot() が無いと、ページの <head> が空になります。\n'
+            'ブログを作り直すときはサイト全体のビルドから呼んでください：\n'
+            '  python3 tools/build_site.py\n')
+        sys.exit(1)
     build_blog()
