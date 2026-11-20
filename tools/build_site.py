@@ -159,6 +159,7 @@ BF_STYLE = ('<style>'
   '.bfpill{display:inline-block;margin-left:8px;background:#111;color:#fff;font-size:11px;font-weight:700;letter-spacing:.02em;padding:2px 8px;border-radius:999px;vertical-align:middle;white-space:nowrap}'
   '.bfpill[hidden]{display:none}'  # hidden 属性が効くように（author CSS の display が UA の [hidden] を上書きしてしまうため）
   '.bar .bfpill{display:block;margin:2px 0 0;padding:1px 6px;font-size:10px;width:max-content}'   # 2026-11-20 画面下の購入バーでは値段の下に小さく
+  '.bar .bfpill[hidden]{display:none}'   # 上の指定と同じ強さで後ろの display:block が勝ち、割引が無い期間にも空の札が出るのを防ぐ（Codex P3）
   '.bfnote{margin:0 0 12px;padding:10px 12px;border:1px solid var(--kin,#d4af37);border-radius:8px;font-size:13px;line-height:1.7;font-weight:600}'
   '.bfnote[hidden]{display:none}'
   '.bfcount{font-family:var(--roman,"Libre Caslon Text",serif);font-weight:700;font-size:clamp(20px,5.5vw,34px);letter-spacing:.06em;font-variant-numeric:tabular-nums;color:var(--kin,#d4af37);margin-top:2px}'
@@ -181,6 +182,9 @@ def bf_band(lang):
       'for(var i=0;i<P.length;i++){var p=P[i];'
         'if(n>=p.f&&n<p.t){st="a";per=p;break;}'
         'if(n>=p.tf&&n<p.f){st="t";per=p;break;}}'
+      # 2026-11-20 割引の注記は、割引の期間（開始〜終了）かどうかを30秒ごとに見直す＝ページを開いたまま開始・終了をまたいでも表示が合う（Codex P2）。期間外のページでも見直す（開く時に期間外でも、開いたまま始まる場合のため）
+      'var ns=document.querySelectorAll(".bfnote");function nt(){var t=Date.now(),a=false;for(var u=0;u<P.length;u++){if(t>=P[u].f&&t<P[u].t){a=true;break;}}for(var j=0;j<ns.length;j++){ns[j].hidden=!a;}}'
+      'if(ns.length){nt();setInterval(nt,30000);}'
       'if(!st)return;'
       'var band=document.getElementById("bfband"),hero=document.getElementById("bfhero"),'
         'ht=hero?hero.querySelector("[data-bfhero-text]"):null,cnt=document.getElementById("bfcount"),'
@@ -188,7 +192,6 @@ def bf_band(lang):
       'function setT(x,h,pl){if(band){band.textContent=x;band.hidden=false;}'
         'if(ht)ht.textContent=h;if(hero)hero.hidden=false;'
         'for(var j=0;j<ps.length;j++){ps[j].textContent=pl;ps[j].hidden=false;}}'
-      'var ns=document.querySelectorAll(".bfnote");function nt(){for(var j=0;j<ns.length;j++){ns[j].hidden=false;}}'   # 2026-11-20：割引が始まった後だけ、購入ボタン・カートの近くの説明を出す（事前告知の間は出さない）
       'var RM=matchMedia("(prefers-reduced-motion:reduce)").matches;'
       'function fw(){if(RM)return;var c=document.createElement("canvas");c.className="bffw";document.body.appendChild(c);'
         'var ctx=c.getContext("2d"),DPR=Math.min(2,devicePixelRatio||1),W,H;'
