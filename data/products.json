@@ -9681,9 +9681,9 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-20",
   "links": {},
   "images": [
+   "/assets/products/k11529/v2_back.jpg",
    "/assets/products/k11529/01.jpg",
    "/assets/products/k11529/02.jpg",
-   "/assets/products/k11529/03.jpg",
    "/assets/products/k11529/04.jpg",
    "/assets/products/k11529/05.jpg",
    "/assets/products/k11529/06.jpg",
@@ -9702,7 +9702,7 @@
    "/assets/products/k11529/19.jpg",
    "/assets/products/k11529/20.jpg"
   ],
-  "thumb": "/assets/products/k11529/thumb.jpg",
+  "thumb": "/assets/products/k11529/v2_thumb.jpg",
   "summary_text": "「ECHT LEDER（本革）」の刻印が入った、オリーブグレーの本革ボンバー。1980年代後半〜1990年代頃のもので、リブ裾とスナップボタンが効いたシックな一着です。",
   "summary_points": [
    "グレー（薄いオリーブグレー）無地のレザージャケット（ボンバー型／ハリントン型）（ブランド：「ECHT LEDER」）",
@@ -9762,7 +9762,41 @@
    ],
    "approved_at": "2026-11-20"
   },
-  "gender_by": "表記にメンズ・写真の見立て：メンズ（フロントジッパーが着る人から見て右側に引き手、かつ全体的なシルエット・サイズ感）・実寸が大きめ（肩幅51.5・身幅56.5）"
+  "gender_by": "表記にメンズ・写真の見立て：メンズ（フロントジッパーが着る人から見て右側に引き手、かつ全体的なシルエット・サイズ感）・実寸が大きめ（肩幅51.5・身幅56.5）",
+  "images_orig": [
+   "/assets/products/k11529/01.jpg",
+   "/assets/products/k11529/02.jpg",
+   "/assets/products/k11529/03.jpg",
+   "/assets/products/k11529/04.jpg",
+   "/assets/products/k11529/05.jpg",
+   "/assets/products/k11529/06.jpg",
+   "/assets/products/k11529/07.jpg",
+   "/assets/products/k11529/08.jpg",
+   "/assets/products/k11529/09.jpg",
+   "/assets/products/k11529/10.jpg",
+   "/assets/products/k11529/11.jpg",
+   "/assets/products/k11529/12.jpg",
+   "/assets/products/k11529/13.jpg",
+   "/assets/products/k11529/14.jpg",
+   "/assets/products/k11529/15.jpg",
+   "/assets/products/k11529/16.jpg",
+   "/assets/products/k11529/17.jpg",
+   "/assets/products/k11529/18.jpg",
+   "/assets/products/k11529/19.jpg",
+   "/assets/products/k11529/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-20",
+   "front_i": 0,
+   "back_i": 2,
+   "front_error": "RuntimeError('仕上がり確認で不合格：服の一部が切り取られています。')",
+   "back_url": "/assets/products/k11529/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.2,
+    "garment_l": 147.2,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11527",
