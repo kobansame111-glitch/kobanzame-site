@@ -135,12 +135,13 @@ BF_SALES = [
      'tease_pill_ja': 'まもなく20%引き', 'tease_pill_en': 'Coming soon'},
     {'from': '2026-11-27 00:00', 'to': '2026-11-30 00:00',
      'tease_from': '2026-11-26 00:00',
-     'ja': 'BLACK FRIDAY ｜ オンライン限定・カートで全品20%引き（11/29まで）・この期間のご注文は12/3以降に順次発送', 'en': 'BLACK FRIDAY | Online only — 20% off all items at cart checkout (until Nov 29) — orders ship from Dec 3',
-     'hero_ja': 'オンラインストア限定 ｜ カートで全品20%引き（11月29日まで）｜ この期間のご注文は12/3以降に順次発送', 'hero_en': 'Online store only — 20% off all items at cart checkout (until Nov 29) — orders ship from Dec 3',
-     'pill_ja': 'カートで20%引き（11/29まで）', 'pill_en': '20% off at cart (until Nov 29)',
-     'tease_ja': 'BLACK FRIDAY ｜ オンライン限定・まもなく開始・カートで全品20%引き（11/27 0:00〜11/29）・ご注文は12/3以降に順次発送', 'tease_en': 'BLACK FRIDAY | Online only — Starts soon — 20% off all items at cart (Nov 27 0:00–Nov 29) — orders ship from Dec 3',
-     'tease_hero_ja': 'オンラインストア限定 ｜ まもなく開始 ｜ カートで全品20%引き（11/27 0:00〜11/29）｜ ご注文は12/3以降に順次発送', 'tease_hero_en': 'Online store only — Starts soon — 20% off all items at cart (Nov 27 0:00 – Nov 29) — orders ship from Dec 3',
-     'tease_pill_ja': 'まもなく20%引き', 'tease_pill_en': 'Coming soon'},
+     # 2026-11-20 「全品20%引き」を「最大20%引き」に：カートの割引は80%を100円単位で切り上げ（＋原価の下限）なので、実際は品によって18〜20%（販売中55点のうちちょうど20%は1点）。言い過ぎを避ける（景表法）
+     'ja': 'BLACK FRIDAY ｜ オンライン限定・カートで最大20%引き（11/29まで）・この期間のご注文は12/3以降に順次発送', 'en': 'BLACK FRIDAY | Online only — up to 20% off at cart checkout (until Nov 29) — orders ship from Dec 3',
+     'hero_ja': 'オンラインストア限定 ｜ カートで最大20%引き（11月29日まで）｜ この期間のご注文は12/3以降に順次発送', 'hero_en': 'Online store only — up to 20% off at cart checkout (until Nov 29) — orders ship from Dec 3',
+     'pill_ja': 'カートで最大20%引き（11/29まで）', 'pill_en': 'Up to 20% off at cart (until Nov 29)',
+     'tease_ja': 'BLACK FRIDAY ｜ オンライン限定・まもなく開始・カートで最大20%引き（11/27 0:00〜11/29）・ご注文は12/3以降に順次発送', 'tease_en': 'BLACK FRIDAY | Online only — Starts soon — up to 20% off at cart (Nov 27 0:00–Nov 29) — orders ship from Dec 3',
+     'tease_hero_ja': 'オンラインストア限定 ｜ まもなく開始 ｜ カートで最大20%引き（11/27 0:00〜11/29）｜ ご注文は12/3以降に順次発送', 'tease_hero_en': 'Online store only — Starts soon — up to 20% off at cart (Nov 27 0:00 – Nov 29) — orders ship from Dec 3',
+     'tease_pill_ja': 'まもなく最大20%引き', 'tease_pill_en': 'Coming soon'},
 ]
 _JST = datetime.timezone(datetime.timedelta(hours=9))
 def _bf_ms(s):
@@ -157,6 +158,10 @@ BF_STYLE = ('<style>'
   '.bfhero-t{font-size:clamp(14px,4.2vw,20px);letter-spacing:.03em;font-weight:700}'
   '.bfpill{display:inline-block;margin-left:8px;background:#111;color:#fff;font-size:11px;font-weight:700;letter-spacing:.02em;padding:2px 8px;border-radius:999px;vertical-align:middle;white-space:nowrap}'
   '.bfpill[hidden]{display:none}'  # hidden 属性が効くように（author CSS の display が UA の [hidden] を上書きしてしまうため）
+  '.bar .bfpill{display:block;margin:2px 0 0;padding:1px 6px;font-size:10px;width:max-content}'   # 2026-11-20 画面下の購入バーでは値段の下に小さく
+  '.bar .bfpill[hidden]{display:none}'   # 上の指定と同じ強さで後ろの display:block が勝ち、割引が無い期間にも空の札が出るのを防ぐ（Codex P3）
+  '.bfnote{margin:0 0 12px;padding:10px 12px;border:1px solid var(--kin,#d4af37);border-radius:8px;font-size:13px;line-height:1.7;font-weight:600}'
+  '.bfnote[hidden]{display:none}'
   '.bfcount{font-family:var(--roman,"Libre Caslon Text",serif);font-weight:700;font-size:clamp(20px,5.5vw,34px);letter-spacing:.06em;font-variant-numeric:tabular-nums;color:var(--kin,#d4af37);margin-top:2px}'
   '.bfcount small{font-size:.5em;font-weight:600;letter-spacing:.12em;opacity:.85;margin-right:.5em;vertical-align:.2em}'
   '.bffw{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999}'
@@ -177,6 +182,9 @@ def bf_band(lang):
       'for(var i=0;i<P.length;i++){var p=P[i];'
         'if(n>=p.f&&n<p.t){st="a";per=p;break;}'
         'if(n>=p.tf&&n<p.f){st="t";per=p;break;}}'
+      # 2026-11-20 割引の注記は、割引の期間（開始〜終了）かどうかを30秒ごとに見直す＝ページを開いたまま開始・終了をまたいでも表示が合う（Codex P2）。期間外のページでも見直す（開く時に期間外でも、開いたまま始まる場合のため）
+      'var ns=document.querySelectorAll(".bfnote");function nt(){var t=Date.now(),a=false;for(var u=0;u<P.length;u++){if(t>=P[u].f&&t<P[u].t){a=true;break;}}for(var j=0;j<ns.length;j++){ns[j].hidden=!a;}}'
+      'if(ns.length){nt();setInterval(nt,30000);}'
       'if(!st)return;'
       'var band=document.getElementById("bfband"),hero=document.getElementById("bfhero"),'
         'ht=hero?hero.querySelector("[data-bfhero-text]"):null,cnt=document.getElementById("bfcount"),'
@@ -196,10 +204,10 @@ def bf_band(lang):
           'for(var k=Q.length-1;k>=0;k--){var q=Q[k];q.x+=q.vx;q.y+=q.vy;q.vy+=0.045*DPR;q.vx*=0.99;q.l-=0.012;'
             'if(q.l<=0){Q.splice(k,1);continue;}ctx.globalAlpha=Math.max(0,q.l);ctx.fillStyle=q.c;ctx.beginPath();ctx.arc(q.x,q.y,2.6*DPR,0,7);ctx.fill();}'
           'if(el<5000||Q.length){requestAnimationFrame(lp);}else{c.remove();}}lp();}'
-      'if(st==="a"){setT(per.x,per.h,per.pl);if(cnt)cnt.hidden=true;if(n<per.f+600000)fw();return;}'
+      'if(st==="a"){setT(per.x,per.h,per.pl);nt();if(cnt)cnt.hidden=true;if(n<per.f+600000)fw();return;}'
       'setT(per.tx,per.th,per.tpl);'
       'if(cnt){cnt.hidden=false;var iv;'
-        'function tk(){var d=per.f-Date.now();if(d<=0){clearInterval(iv);setT(per.x,per.h,per.pl);cnt.hidden=true;fw();return;}'
+        'function tk(){var d=per.f-Date.now();if(d<=0){clearInterval(iv);setT(per.x,per.h,per.pl);nt();cnt.hidden=true;fw();return;}'
           'var s=Math.floor(d/1000),dd=Math.floor(s/86400),hh=Math.floor(s%86400/3600),mm=Math.floor(s%3600/60),ss=s%60,o="";'
           'if(dd>0)o+=dd+CL.d;o+=hh+CL.h+mm+CL.m+ss+CL.s;'
           'cnt.innerHTML="<small>"+CL.pre+"</small>"+o;}'
@@ -220,6 +228,19 @@ def bf_pill(lang):
     if not BF_PERIODS:
         return ''
     return '<span class="bfpill" hidden></span>'
+# 2026-11-20 修理の列1：割引が「見えない」直し。値段・割引額はサイトで計算しない（カートの受付 63c が原価の下限を見て決めるので、サイトで出すと食い違う）。
+# 割引が始まっている間だけ、購入ボタンの上・カートの合計の下に「割引はお支払い画面で反映される」と書く。取り消し線・元の値段・通常価格は出さない（二重価格表示を避ける）。
+BF_NOTE = {
+  'pdp':  {'ja': 'ブラックフライデー中は、カートで最大20%引き（品によって割引率は異なります）。表示の値段は割引前です。割引後の金額は、お支払い画面（Square）に表示されます。',
+           'en': 'Black Friday: up to 20% off (the discount varies by item). The price shown is before the discount; the discounted amount appears on the checkout screen (Square).'},
+  'cart': {'ja': 'ブラックフライデー中は、最大20%引き（品によって割引率は異なります）。この合計は割引前です。割引後の金額は、お支払い画面（Square）に表示されます。',
+           'en': 'Black Friday: up to 20% off (the discount varies by item). This total is before the discount; the discounted amount appears on the checkout screen (Square).'},
+}
+def bf_note(lang, kind):
+    """購入ボタンの上・カートの合計の下に出す説明（割引が始まっている間だけ・bf_band の script が #hidden を外す）。"""
+    if not BF_PERIODS:
+        return ''
+    return '<p class="bfnote" hidden>' + esc(BF_NOTE[kind][lang]) + '</p>'
 
 # ---------- お休みのお知らせ・発送の切り替え（2026-11-11 龍さん・日本時間で自動）----------
 # 店舗休業：11/25〜12/5（再開12/6）。お知らせと帯は 11/18 0:00〜12/6 0:00 に自動表示。
@@ -248,6 +269,9 @@ _SHIP_PHRASES = [
   'ご注文（決済）の確認後、3日以内（定休日を除く）に発送します',
   'Dispatched within 3 days of payment (closed Mon & Tue)', 'Dispatched within 3 days of payment (closed Mondays)',
   'Dispatched from our Kawagoe shop within 3 days of payment (closed Mon & Tue)',
+  # 2026-11-20 購入ボタンの下・よくある質問にも「3日以内」が残り、11/24〜12/3 の本当の発送（12/3から）と食い違っていたので足した
+  '決済後3日以内に発送', 'Ships within 3 days',
+  '決済の確認後3日以内に、川越の店から発送します（月曜定休を除く）', 'We dispatch within 3 days of payment (excluding our closed days)',
 ]
 def wrap_ship(html):
     """発送の時期の文言を .shipwhen で包む（発送期間中だけJSが差し替える）。長い語句から先に処理。"""
@@ -255,6 +279,8 @@ def wrap_ship(html):
         if ph in html and 'shipwhen' not in html.split(ph)[0][-40:]:
             html = html.replace(ph, '<span class="shipwhen">' + ph + '</span>')
     return html
+SHIPTILE_HEADS = ('3日以内に発送', 'Ships in 3 days')
+SHIPTILE_TXT = {'ja': ('12/3から順に発送', '11/24以降のご注文'), 'en': ('Ships from Dec 3', 'Orders placed from Nov 24')}
 def hol_band(lang):
     return '<div class="holband" id="holband" role="status" hidden>' + esc(HOLIDAY['band_' + lang]) + '</div>'
 def hol_notice(lang):
@@ -264,7 +290,8 @@ def site_notice_js(lang):
     salt = json.dumps(SHIPWIN[lang], ensure_ascii=False)
     return (HOL_STYLE + '<script>(function(){function go(){var n=Date.now();'
             'if(n>=' + str(_HOL_F) + '&&n<' + str(_HOL_T) + '){["holband","holnotice"].forEach(function(id){var e=document.getElementById(id);if(e)e.hidden=false;});}'
-            'if(n>=' + str(_SHIP_F) + '&&n<' + str(_SHIP_T) + '){var ps=document.querySelectorAll(".shipwhen");for(var i=0;i<ps.length;i++){ps[i].textContent=' + salt + ';}}'
+            'if(n>=' + str(_SHIP_F) + '&&n<' + str(_SHIP_T) + '){var ps=document.querySelectorAll(".shipwhen");for(var i=0;i<ps.length;i++){ps[i].textContent=' + salt + ';}'
+            'var ts=document.querySelectorAll(".shiptile");for(var k=0;k<ts.length;k++){var tb=ts[k].querySelector("b"),tp=ts[k].querySelector("span");if(tb)tb.textContent=' + json.dumps(SHIPTILE_TXT[lang][0], ensure_ascii=False) + ';if(tp)tp.textContent=' + json.dumps(SHIPTILE_TXT[lang][1], ensure_ascii=False) + ';}}'
             '}if(document.readyState!=="loading"){go();}else{document.addEventListener("DOMContentLoaded",go);}})();</script>')
 
 # ---------- 文言（日本語／英語） ----------
@@ -1703,7 +1730,7 @@ COMMON_FAQ = {
 def pfaq_html(p, lang):
     own = [((f.get('q_en') or f['q']) if lang == 'en' else f['q'], (f.get('a_en') or f['a']) if lang == 'en' else f['a']) for f in PFAQ.get(p['sku'], [])]
     items = own + COMMON_FAQ[lang]
-    body = ''.join(f'<dt>{esc(q)}</dt><dd>{esc(a)}</dd>' for q, a in items)
+    body = ''.join(f'<dt>{esc(q)}</dt><dd>{wrap_ship(esc(a))}</dd>' for q, a in items)
     return f'<details{" open" if own else ""}><summary>{"よくある質問" if lang == "ja" else "Questions"}</summary><dl class="pfaq">{body}</dl></details>'
 
 NEWTOP_N = 6   # 2026-11-03 龍さん決定A：トップの1画面目に今週の新着の実物（写真・値段・身幅）
@@ -1851,8 +1878,10 @@ for lang in ('ja', 'en'):
     top_ld = {'@context': 'https://schema.org', '@graph': [org_node(), faq_ld(lang),
               {'@type': 'WebSite', '@id': BASE + P + '/#website', 'url': BASE + P + '/', 'name': SHOP['name'], 'inLanguage': lang,
                'publisher': {'@id': BASE + '/#store'}}]}
-    faq_html = '\n'.join(f'    <details' + (f' id="{FAQ_IDS[q]}"' if q in FAQ_IDS else '') + f'><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in FAQ[lang])
-    trust = ''.join(f'<div><b>{h}</b><span>{s.format(gm=SHOP["gmaps"])}</span></div>' for h, s in t['trust'])
+    faq_html = '\n'.join(f'    <details' + (f' id="{FAQ_IDS[q]}"' if q in FAQ_IDS else '') + f'><summary>{esc(q)}</summary><p>{wrap_ship(esc(a))}</p></details>' for q, a in FAQ[lang])
+    # 2026-11-20 「3日以内に発送」の欄は、11/24〜12/3 だけ「12/3から順に発送」に差し替える（site_notice_js が .shiptile の b・span を書き換える）
+    trust = ''.join((f'<div class="shiptile"><b>{h}</b><span>{s.format(gm=SHOP["gmaps"])}</span></div>' if h in SHIPTILE_HEADS
+                     else f'<div><b>{h}</b><span>{s.format(gm=SHOP["gmaps"])}</span></div>') for h, s in t['trust'])
     store_dl = ''.join(f'<dt>{k}</dt><dd>{ADDR[lang] + " ・ <a href=" + chr(34) + SHOP["gmaps"] + chr(34) + " rel=" + chr(34) + "noopener" + chr(34) + ">" + t["gm"] + "</a>" if v is None else v}</dd>' for k, v in t['store_dl'])
     hero_alt = '小判鮫の店内（川越・元町の古民家）' if lang == 'ja' else 'Inside Kobanzame, an old wooden house in Kawagoe'
     # お知らせ欄（日本語のトップだけ・お知らせが1件以上あるときだけ出す）
@@ -2060,7 +2089,7 @@ for lang in ('ja', 'en'):
         rk = cond_rank(p, lang)
         facts += (f'<span>{rk}</span>' if rk else '') + (f'<span>{t["width"].format(w=f"{w:g}")}</span>' if w is not None else '')
         if sold:
-            buy, bar = f'<span class="soldout">{t["soldout"]}</span>', ''
+            buy, bar, bfn = f'<span class="soldout">{t["soldout"]}</span>', '', ''   # 2026-11-20 売れた商品の枝にも bfn（割引の注記）を作る（無いと NameError で組み立てが止まる）
         elif buyable(p):
             if buy_via_cart():   # 2026-11-06 決定A：押した時に 63c番がその時の値段で支払いリンクを作る（JS は CART_JS_BODY の .buyc）
                 sq = '#buy'   # 63番の古いリンク（前の値段のまま）には飛ばさない＝表示と決済の値段を必ずそろえる
@@ -2072,9 +2101,10 @@ for lang in ('ja', 'en'):
                 buy = f'<a class="btn kin" href="{sq}" rel="noopener">{t["buy"]}</a>'
                 bar_btn = f'<a class="btn kin" href="{sq}" rel="noopener">{t["buy_s"]}</a>'
             buy += cart_add_html(p, lang, name, price, path, imgs[0] if imgs else '')   # 2026-11-04 カートA（受付が動くまで hidden）
-            bar = f'<div class="bar"><b>{money(price, lang)}</b>{bar_btn}</div>'
+            bar = f'<div class="bar"><b>{money(price, lang)}{bf_pill(lang)}</b>{bar_btn}</div>'
+            bfn = bf_note(lang, 'pdp')   # 2026-11-20 購入ボタンの上に「割引はお支払い画面で反映」（割引が始まっている間だけ表示）
         else:
-            buy, bar = f'<span class="soldout">{t["prep"]}</span>', ''
+            buy, bar, bfn = f'<span class="soldout">{t["prep"]}</span>', '', ''
         hold = '' if (sold or not HOLD_ENABLED) else f'''<button type="button" class="btn ghost" id="holdbtn" aria-expanded="false" aria-controls="holdbox">{t['hold_btn'].format(n=HOLD_DAYS)}</button>
         <div class="holdbox" id="holdbox" hidden>
           <p>{t['hold_p'].format(n=HOLD_DAYS)}</p>
@@ -2088,7 +2118,7 @@ for lang in ('ja', 'en'):
         if sold or not buyable(p):
             buy_extra = f'<div class="ship">{wrap_ship(t["ship"])}</div>' if not sold else ''
         else:
-            assure = '<ul class="assure">' + ''.join(f'<li>{esc(x)}</li>' for x in t['assure']) + '</ul>'   # 購入ボタンのすぐ下
+            assure = '<ul class="assure">' + ''.join(f'<li>{wrap_ship(esc(x))}</li>' for x in t['assure']) + '</ul>'   # 購入ボタンのすぐ下（発送の文言は 11/24〜12/3 に差し替わる）
             if lang == 'ja' and p['links'].get('mercari'):
                 assure += f'<a class="btn ghost" href="{esc(p["links"]["mercari"])}" rel="noopener">{t["mercari_buy"]}</a>'
             buy_extra = f'<a class="askig" href="{SHOP["instagram"]}" rel="noopener">{t["ask_ig"]}</a>'
@@ -2135,6 +2165,7 @@ for lang in ('ja', 'en'):
       <dl class="pinfo">{''.join(f'<dt>{esc(k)}</dt><dd>{esc(v)}</dd>' for k, v in info_rows(p, lang))}</dl>
       {noen}
       <div class="buybox">
+        {bfn}
         {buy}
         {assure}
         {hold}
@@ -2394,6 +2425,7 @@ for _cl in ('ja', 'en'):
   <div id="cartbox" hidden>
     <ul class="cartlist" id="cartlist"></ul>
     <div class="carttotal"><span>{esc(CART_T[_cl]['total'])}</span><span id="carttotal"></span></div>
+    {bf_note(_cl, 'cart')}
     <button type="button" class="btn kin" id="cartgo" style="width:100%">{esc(_c['go'])}</button>
     <ul class="assure" style="margin-top:12px">{''.join(f'<li>{esc(x)}</li>' for x in _c['notes'])}</ul>
   </div>
