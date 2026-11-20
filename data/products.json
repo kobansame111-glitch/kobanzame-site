@@ -9005,7 +9005,7 @@
    "back_i": 5,
    "front_url": "/assets/products/k11525/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 91.1,
     "bg": "normal"
    },
@@ -9381,7 +9381,7 @@
    },
    "back_url": "/assets/products/k11524/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 90.3,
     "bg": "normal"
    }
@@ -9518,8 +9518,8 @@
    },
    "back_url": "/assets/products/k11523/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
-    "garment_l": 88.0,
+    "brighten": 0,
+    "garment_l": 88,
     "bg": "normal"
    }
   }
@@ -9649,14 +9649,14 @@
    "back_i": 5,
    "front_url": "/assets/products/k11526/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 124.9,
     "bg": "normal"
    },
    "back_url": "/assets/products/k11526/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
-    "garment_l": 131.0,
+    "brighten": 0,
+    "garment_l": 131,
     "bg": "normal"
    }
   }
@@ -9860,5 +9860,184 @@
    ]
   },
   "gender_by": "手がかりが食い違う：表記にメンズ・表記にレディース・写真の見立て：レディース（ジッパーが着る人から見て左側に引き手＝レディース仕様、かつシルエットがウエストシェイプされており女性向けデザイン）・実寸が大きめ（肩幅49.5・身幅51）"
+ },
+ {
+  "sku": "K11534",
+  "slug": "k11534-slazenger",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "1970〜80年代頃 Slazenger クルーネックニットセーター メンズ",
+  "product_name": "1970〜80年代頃 Slazenger クルーネックニットセーター メンズ",
+  "brand": "Slazenger",
+  "category": "メンズ／トップス／ニット",
+  "material": "100%アクリル",
+  "published_date": "2026-11-20",
+  "prices": {
+   "store": 10800,
+   "site": 10800,
+   "mercari": 11880
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-20",
+  "links": {},
+  "images": [
+   "/assets/products/k11534/01.jpg",
+   "/assets/products/k11534/02.jpg",
+   "/assets/products/k11534/03.jpg",
+   "/assets/products/k11534/04.jpg",
+   "/assets/products/k11534/05.jpg",
+   "/assets/products/k11534/06.jpg",
+   "/assets/products/k11534/07.jpg",
+   "/assets/products/k11534/08.jpg",
+   "/assets/products/k11534/09.jpg",
+   "/assets/products/k11534/10.jpg",
+   "/assets/products/k11534/11.jpg"
+  ],
+  "thumb": "/assets/products/k11534/thumb.jpg",
+  "summary_text": "スラセンジャーのアクリルニット。胸の「escolette Guide」刺繍が効いた、1970〜1980年代頃のクルーネックセーターです。サイズはXL相当、コンディション良好。",
+  "summary_points": [
+   "ブルー無地（トーナル横ストライプ編み柄）のクルーネックニットセーター（アクリルニット）（ブランド：Slazenger）",
+   "素材：100%アクリル",
+   "実寸 身幅53cm・着丈68.9cm・肩幅62cm・袖丈52.5cm"
+  ],
+  "lead": "スラセンジャーのクルーネックニットセーターです。",
+  "body_html": "<h2>この一着のこと</h2><p>スラセンジャーのクルーネックニットセーターです。タグには「Made in Gt. Britain」とあり、旧ロゴのデザインやアクリル素材の仕様から、1970〜1980年代頃のものと思われます。</p><p>ブルー無地の地に、同系色のトーナル横ストライプ編み柄が入っています。派手さはなく、近づいて初めて柄の表情がわかる、落ち着いた一枚です。胸には「escolette Guide」の刺繍が入っており、これがこのセーターの個性になっています。スラセンジャーのニットにクラブ名刺繍が入ったものは、流通数が少ないと思われます。</p><p>素材は100%アクリル。当時のアクリルニットらしい、適度なハリとボリューム感があります。サイズはXL・胸囲112cmの大きめ規格で、現代の感覚でもゆったりと着られます。目立った傷や汚れは確認できず、全体的に良好なコンディションです。</p><p>着方はシンプルに、このセーター一枚で決めてください。デニムでもチノでも受け止めます。胸の刺繍がさりげなく主張するので、それ以上に足す必要はありません。川越の古民家の空気感に、このくらいの温度感がちょうど合います。</p><h2>状態</h2><p>状態は写真でご確認ください。気になる点は、お問い合わせからお尋ねください。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "Slazenger"
+   ],
+   [
+    "タグの表記",
+    "Slazenger（スラセンジャー）／Made in Gt. Britain／胸に「escolette Guide」刺繍あり"
+   ],
+   [
+    "店頭での名前",
+    "slazenger"
+   ],
+   [
+    "素材",
+    "100%アクリル"
+   ],
+   [
+    "色",
+    "ブルー無地（トーナル横ストライプ編み柄）"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅53cm・着丈68.9cm・肩幅62cm・袖丈52.5cm"
+   ],
+   [
+    "状態",
+    "写真でご確認ください"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "tops",
+  "genre_by": "auto-keyword-2026-11-20",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.9",
+   "made_at": "2026-11-20",
+   "needs": [
+    "性別は自動判定：メンズ（写真の見立て：メンズ（タグにXL/44・胸囲112cmとあり、大きめ規格のサイズ表記）・実寸が大きめ（肩幅62・身幅53））→ 違えばClaudeへ",
+    "ブランド欄は短い名前（Slazenger）にした。タグの表記の全文は仕様表「タグの表記」",
+    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "商品名・見出しは決まった並び（年代・ブランド・素材・色・品目・性別）で自動作成 → 気に入らなければClaudeへ",
+    "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
+    "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
+    "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "写真の見立て：メンズ（タグにXL/44・胸囲112cmとあり、大きめ規格のサイズ表記）・実寸が大きめ（肩幅62・身幅53）"
+ },
+ {
+  "sku": "K11560",
+  "slug": "k11560-l-l-bean-made-in-ireland-style-1763-rn-71341-vendor-11049-iws-reg-no-0452-e1-76w",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "L.L.Bean / MADE IN IRELAND / STYLE 1763 / RN:71341 / VENDOR:11049 / IWS REG.NO. 0452-E1-76W ウール Vネックニットセーター",
+  "product_name": "L.L.Bean / MADE IN IRELAND / STYLE 1763 / RN:71341 / VENDOR:11049 / IWS REG.NO. 0452-E1-76W ウール Vネックニットセーター",
+  "brand": "L.L.Bean / MADE IN IRELAND / STYLE 1763 / RN:71341 / VENDOR:11049 / IWS REG.NO. 0452-E1-76W",
+  "category": "メンズ／トップス／ニット",
+  "material": "ラムズウール100%（タグにLAMBSWOOL・PURE NEW WOOL表記）",
+  "published_date": "2026-11-20",
+  "prices": {
+   "store": 0,
+   "site": 9800,
+   "mercari": 10780
+  },
+  "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-20",
+  "links": {},
+  "images": [
+   "/assets/products/k11560/01.jpg",
+   "/assets/products/k11560/02.jpg",
+   "/assets/products/k11560/03.jpg",
+   "/assets/products/k11560/04.jpg",
+   "/assets/products/k11560/05.jpg",
+   "/assets/products/k11560/06.jpg",
+   "/assets/products/k11560/07.jpg",
+   "/assets/products/k11560/08.jpg",
+   "/assets/products/k11560/09.jpg",
+   "/assets/products/k11560/10.jpg",
+   "/assets/products/k11560/11.jpg",
+   "/assets/products/k11560/12.jpg",
+   "/assets/products/k11560/13.jpg"
+  ],
+  "thumb": "/assets/products/k11560/thumb.jpg",
+  "summary_text": "L.L.Beanのラムズウール100%・VネックニットセーターをVintageで。錆橙の杢調が落ち着いていて、一枚でそのまま着られる厚みと色があります。",
+  "summary_points": [
+   "バーントオレンジ（錆橙）無地・杢調のVネックニットセーター（ブランド：L.L.Bean / MADE IN IRELAND / STYLE 1763 / RN:71341 / VENDOR:11049 / IWS REG.NO. 0452-E1-76W）",
+   "素材：ラムズウール100%（タグにLAMBSWOOL・PURE NEW WOOL表記）",
+   "実寸 身幅62cm・着丈65.5cm・肩幅46cm"
+  ],
+  "lead": "L.L.BeanのVネックニットセーターです。",
+  "body_html": "<h2>この一着のこと</h2><p>L.L.BeanのVネックニットセーターです。タグにはLAMBSWOOL・PURE NEW WOOL、IWSウールマークの表記があります。</p><p>素材はラムズウール100%です。編み地は杢調で、色はバーントオレンジ——錆に近い橙で、派手すぎず、くすみすぎない落ち着いた発色です。Vネックの開きはほどよく、身幅はメンズLのゆとりがあります。</p><p>状態は使用感があります。正面中央からやや右寄りに薄い汚れと毛羽立ち（ピリング）が見られます。大きな破れや虫食いはありません。手に取って確認してから判断してください。</p><p>インナーは不要です。ボトムはチノパンでもデニムでもなじみます。Vネックから白いシャツの衿を見せるアイビーの着方もありますが、それをしなくてもこのセーター単体で十分に形になります。秋口から冬にかけて、羽織るものなしでそのまま出かけられる厚みがあります。川越の街を歩くのにちょうどいい重さです。</p><h2>状態</h2><p>状態は写真でご確認ください。気になる点は、お問い合わせからお尋ねください。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "L.L.Bean / MADE IN IRELAND / STYLE 1763 / RN:71341 / VENDOR:11049 / IWS REG.NO. 0452-E1-76W"
+   ],
+   [
+    "店頭での名前",
+    "L.L. Bean"
+   ],
+   [
+    "素材",
+    "ラムズウール100%（タグにLAMBSWOOL・PURE NEW WOOL表記）"
+   ],
+   [
+    "色",
+    "バーントオレンジ（錆橙）無地・杢調"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅62cm・着丈65.5cm・肩幅46cm"
+   ],
+   [
+    "状態",
+    "写真でご確認ください"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "tops",
+  "genre_by": "auto-keyword-2026-11-20",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.9",
+   "made_at": "2026-11-20",
+   "needs": [
+    "性別は自動判定：メンズ（写真の見立て：メンズ（タグにサイズLのみ記載、Vネックのシルエット・身幅からメンズ向けと推測）・実寸が大きめ（肩幅46・身幅62））→ 違えばClaudeへ",
+    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "商品名・見出しは決まった並び（年代・ブランド・素材・色・品目・性別）で自動作成 → 気に入らなければClaudeへ",
+    "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
+    "Square の値段が0円（未登録）なので、値札の 9800 円（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。店頭の Square にも値段を入れると、メルカリにも出せる",
+    "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "写真の見立て：メンズ（タグにサイズLのみ記載、Vネックのシルエット・身幅からメンズ向けと推測）・実寸が大きめ（肩幅46・身幅62）"
  }
 ]
