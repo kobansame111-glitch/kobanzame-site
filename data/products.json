@@ -9915,9 +9915,9 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-20",
   "links": {},
   "images": [
-   "/assets/products/k11560/01.jpg",
+   "/assets/products/k11560/v2_front.jpg",
+   "/assets/products/k11560/v2_back.jpg",
    "/assets/products/k11560/02.jpg",
-   "/assets/products/k11560/03.jpg",
    "/assets/products/k11560/04.jpg",
    "/assets/products/k11560/05.jpg",
    "/assets/products/k11560/06.jpg",
@@ -9929,7 +9929,7 @@
    "/assets/products/k11560/12.jpg",
    "/assets/products/k11560/13.jpg"
   ],
-  "thumb": "/assets/products/k11560/thumb.jpg",
+  "thumb": "/assets/products/k11560/v2_thumb.jpg",
   "summary_text": "L.L.Beanのラムズウール100%・VネックニットセーターをVintageで。錆橙の杢調が落ち着いていて、一枚でそのまま着られる厚みと色があります。",
   "summary_points": [
    "バーントオレンジ（錆橙）無地・杢調のVネックニットセーター（ブランド：L.L.Bean / MADE IN IRELAND / STYLE 1763 / RN:71341 / VENDOR:11049 / IWS REG.NO. 0452-E1-76W）",
@@ -9982,7 +9982,39 @@
    ],
    "approved_at": "2026-11-21"
   },
-  "gender_by": "写真の見立て：メンズ（タグにサイズLのみ記載、Vネックのシルエット・身幅からメンズ向けと推測）・実寸が大きめ（肩幅46・身幅62）"
+  "gender_by": "写真の見立て：メンズ（タグにサイズLのみ記載、Vネックのシルエット・身幅からメンズ向けと推測）・実寸が大きめ（肩幅46・身幅62）",
+  "images_orig": [
+   "/assets/products/k11560/01.jpg",
+   "/assets/products/k11560/02.jpg",
+   "/assets/products/k11560/03.jpg",
+   "/assets/products/k11560/04.jpg",
+   "/assets/products/k11560/05.jpg",
+   "/assets/products/k11560/06.jpg",
+   "/assets/products/k11560/07.jpg",
+   "/assets/products/k11560/08.jpg",
+   "/assets/products/k11560/09.jpg",
+   "/assets/products/k11560/10.jpg",
+   "/assets/products/k11560/11.jpg",
+   "/assets/products/k11560/12.jpg",
+   "/assets/products/k11560/13.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-21",
+   "front_i": 0,
+   "back_i": 2,
+   "front_url": "/assets/products/k11560/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 104.2,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11560/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 107.8,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11549",
@@ -10004,13 +10036,13 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-21",
   "links": {},
   "images": [
-   "/assets/products/k11549/01.jpg",
+   "/assets/products/k11549/v2_front.jpg",
+   "/assets/products/k11549/v2_back.jpg",
    "/assets/products/k11549/02.jpg",
    "/assets/products/k11549/03.jpg",
    "/assets/products/k11549/04.jpg",
    "/assets/products/k11549/05.jpg",
    "/assets/products/k11549/06.jpg",
-   "/assets/products/k11549/07.jpg",
    "/assets/products/k11549/08.jpg",
    "/assets/products/k11549/09.jpg",
    "/assets/products/k11549/10.jpg",
@@ -10019,7 +10051,7 @@
    "/assets/products/k11549/13.jpg",
    "/assets/products/k11549/14.jpg"
   ],
-  "thumb": "/assets/products/k11549/thumb.jpg",
+  "thumb": "/assets/products/k11549/v2_thumb.jpg",
   "summary_text": "Martin Fierroのシープスキン100%・B-3タイプジャケット。1970〜80年代前半頃と思われる一着で、タン×ダークブラウンの色合いと経年のシワが、素材そのものの厚みを伝えます。",
   "summary_points": [
    "タン／キャメルブラウン（表革）＋ダークブラウン（ウール面）のシープスキン（ムートン）ジャケット／B-3タイプ（ブランド：Martin Fierro）",
@@ -10079,7 +10111,40 @@
    ],
    "approved_at": "2026-11-21"
   },
-  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）"
+  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）",
+  "images_orig": [
+   "/assets/products/k11549/01.jpg",
+   "/assets/products/k11549/02.jpg",
+   "/assets/products/k11549/03.jpg",
+   "/assets/products/k11549/04.jpg",
+   "/assets/products/k11549/05.jpg",
+   "/assets/products/k11549/06.jpg",
+   "/assets/products/k11549/07.jpg",
+   "/assets/products/k11549/08.jpg",
+   "/assets/products/k11549/09.jpg",
+   "/assets/products/k11549/10.jpg",
+   "/assets/products/k11549/11.jpg",
+   "/assets/products/k11549/12.jpg",
+   "/assets/products/k11549/13.jpg",
+   "/assets/products/k11549/14.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-21",
+   "front_i": 0,
+   "back_i": 6,
+   "front_url": "/assets/products/k11549/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.5,
+    "garment_l": 104.1,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11549/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.1,
+    "garment_l": 111.0,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11454",
@@ -10101,10 +10166,10 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-21",
   "links": {},
   "images": [
-   "/assets/products/k11454/01.jpg",
+   "/assets/products/k11454/v2_front.jpg",
+   "/assets/products/k11454/v2_back.jpg",
    "/assets/products/k11454/02.jpg",
    "/assets/products/k11454/03.jpg",
-   "/assets/products/k11454/04.jpg",
    "/assets/products/k11454/05.jpg",
    "/assets/products/k11454/06.jpg",
    "/assets/products/k11454/07.jpg",
@@ -10119,7 +10184,7 @@
    "/assets/products/k11454/16.jpg",
    "/assets/products/k11454/17.jpg"
   ],
-  "thumb": "/assets/products/k11454/thumb.jpg",
+  "thumb": "/assets/products/k11454/v2_thumb.jpg",
   "summary_text": "レナウンのスエードミディスカート。ブラウンのかがりステッチが走るパネル切り替えが目を引く、ベージュ×タンのAラインです。",
   "summary_points": [
    "ベージュ／タン（無地）、ブラウンのかがり縫いステッチによるパネル切り替えデザインのレザースカート（スエード・ミディ丈・Aライン）（ブランド：（株）レナウン（Renown）／品番7308039／サイズ9／COL-81／KS4 1-F／MADE IN PHILIPPINES）",
@@ -10168,7 +10233,43 @@
    ],
    "approved_at": "2026-11-21"
   },
-  "gender_by": "品目（スカート）"
+  "gender_by": "品目（スカート）",
+  "images_orig": [
+   "/assets/products/k11454/01.jpg",
+   "/assets/products/k11454/02.jpg",
+   "/assets/products/k11454/03.jpg",
+   "/assets/products/k11454/04.jpg",
+   "/assets/products/k11454/05.jpg",
+   "/assets/products/k11454/06.jpg",
+   "/assets/products/k11454/07.jpg",
+   "/assets/products/k11454/08.jpg",
+   "/assets/products/k11454/09.jpg",
+   "/assets/products/k11454/10.jpg",
+   "/assets/products/k11454/11.jpg",
+   "/assets/products/k11454/12.jpg",
+   "/assets/products/k11454/13.jpg",
+   "/assets/products/k11454/14.jpg",
+   "/assets/products/k11454/15.jpg",
+   "/assets/products/k11454/16.jpg",
+   "/assets/products/k11454/17.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-21",
+   "front_i": 0,
+   "back_i": 3,
+   "front_url": "/assets/products/k11454/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 152.0,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11454/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 156.8,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11197",
@@ -10190,8 +10291,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-21",
   "links": {},
   "images": [
-   "/assets/products/k11197/01.jpg",
-   "/assets/products/k11197/02.jpg",
+   "/assets/products/k11197/v2_front.jpg",
+   "/assets/products/k11197/v2_back.jpg",
    "/assets/products/k11197/03.jpg",
    "/assets/products/k11197/04.jpg",
    "/assets/products/k11197/05.jpg",
@@ -10211,7 +10312,7 @@
    "/assets/products/k11197/19.jpg",
    "/assets/products/k11197/20.jpg"
   ],
-  "thumb": "/assets/products/k11197/thumb.jpg",
+  "thumb": "/assets/products/k11197/v2_thumb.jpg",
   "summary_text": "光沢レッドのナイロン×グレーフリース裏地。1970〜80年代前半頃のコーチジャケットで、背面には「Burch's Dairy Queen North Manchester」のプリントが入ります。",
   "summary_points": [
    "無地レッド（表：光沢レッドナイロン、裏地：グレーフリース）のコーチジャケット（ナイロン製スナップボタン前開き、フリース裏地）（ブランド：Pla-Jac by Dunbrooke / サイズ44-L-45 / MADE IN U.S.A. / DO NOT WRING, SQUEEZE OR）",
@@ -10265,7 +10366,46 @@
    ],
    "approved_at": "2026-11-21"
   },
-  "gender_by": "写真：メンズ（スナップボタンが着る人から見て右側に付いている＝メンズ仕様、かつタグにL/44-45サイズ表記）"
+  "gender_by": "写真：メンズ（スナップボタンが着る人から見て右側に付いている＝メンズ仕様、かつタグにL/44-45サイズ表記）",
+  "images_orig": [
+   "/assets/products/k11197/01.jpg",
+   "/assets/products/k11197/02.jpg",
+   "/assets/products/k11197/03.jpg",
+   "/assets/products/k11197/04.jpg",
+   "/assets/products/k11197/05.jpg",
+   "/assets/products/k11197/06.jpg",
+   "/assets/products/k11197/07.jpg",
+   "/assets/products/k11197/08.jpg",
+   "/assets/products/k11197/09.jpg",
+   "/assets/products/k11197/10.jpg",
+   "/assets/products/k11197/11.jpg",
+   "/assets/products/k11197/12.jpg",
+   "/assets/products/k11197/13.jpg",
+   "/assets/products/k11197/14.jpg",
+   "/assets/products/k11197/15.jpg",
+   "/assets/products/k11197/16.jpg",
+   "/assets/products/k11197/17.jpg",
+   "/assets/products/k11197/18.jpg",
+   "/assets/products/k11197/19.jpg",
+   "/assets/products/k11197/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-21",
+   "front_i": 0,
+   "back_i": 1,
+   "front_url": "/assets/products/k11197/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 96.6,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11197/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.1,
+    "garment_l": 99.2,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11165",
@@ -10287,9 +10427,9 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-21",
   "links": {},
   "images": [
-   "/assets/products/k11165/01.jpg",
+   "/assets/products/k11165/v2_front.jpg",
+   "/assets/products/k11165/v2_back.jpg",
    "/assets/products/k11165/02.jpg",
-   "/assets/products/k11165/03.jpg",
    "/assets/products/k11165/04.jpg",
    "/assets/products/k11165/05.jpg",
    "/assets/products/k11165/06.jpg",
@@ -10308,7 +10448,7 @@
    "/assets/products/k11165/19.jpg",
    "/assets/products/k11165/20.jpg"
   ],
-  "thumb": "/assets/products/k11165/thumb.jpg",
+  "thumb": "/assets/products/k11165/v2_thumb.jpg",
   "summary_text": "グリーン×ネイビーのペイズリー総柄、バンドカラーのシルクシャツです。光沢のある薄手の織地が、一枚でドレッシーな表情をつくります。",
   "summary_points": [
    "グリーン×ネイビー ペイズリー総柄のバンドカラーシャツ（長袖・ボタンフロント）（ブランド：TOUREMO）",
@@ -10363,7 +10503,46 @@
    ],
    "approved_at": "2026-11-21"
   },
-  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いており、正面写真で確認）"
+  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いており、正面写真で確認）",
+  "images_orig": [
+   "/assets/products/k11165/01.jpg",
+   "/assets/products/k11165/02.jpg",
+   "/assets/products/k11165/03.jpg",
+   "/assets/products/k11165/04.jpg",
+   "/assets/products/k11165/05.jpg",
+   "/assets/products/k11165/06.jpg",
+   "/assets/products/k11165/07.jpg",
+   "/assets/products/k11165/08.jpg",
+   "/assets/products/k11165/09.jpg",
+   "/assets/products/k11165/10.jpg",
+   "/assets/products/k11165/11.jpg",
+   "/assets/products/k11165/12.jpg",
+   "/assets/products/k11165/13.jpg",
+   "/assets/products/k11165/14.jpg",
+   "/assets/products/k11165/15.jpg",
+   "/assets/products/k11165/16.jpg",
+   "/assets/products/k11165/17.jpg",
+   "/assets/products/k11165/18.jpg",
+   "/assets/products/k11165/19.jpg",
+   "/assets/products/k11165/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-21",
+   "front_i": 0,
+   "back_i": 2,
+   "front_url": "/assets/products/k11165/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 81.9,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11165/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 81.1,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11550",
