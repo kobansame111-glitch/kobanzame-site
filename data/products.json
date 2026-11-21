@@ -10564,7 +10564,8 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-21",
   "links": {},
   "images": [
-   "/assets/products/k11550/01.jpg",
+   "/assets/products/k11550/v2_front.jpg",
+   "/assets/products/k11550/v2_back.jpg",
    "/assets/products/k11550/02.jpg",
    "/assets/products/k11550/03.jpg",
    "/assets/products/k11550/04.jpg",
@@ -10574,7 +10575,6 @@
    "/assets/products/k11550/08.jpg",
    "/assets/products/k11550/09.jpg",
    "/assets/products/k11550/10.jpg",
-   "/assets/products/k11550/11.jpg",
    "/assets/products/k11550/12.jpg",
    "/assets/products/k11550/13.jpg",
    "/assets/products/k11550/14.jpg",
@@ -10583,7 +10583,7 @@
    "/assets/products/k11550/17.jpg",
    "/assets/products/k11550/18.jpg"
   ],
-  "thumb": "/assets/products/k11550/thumb.jpg",
+  "thumb": "/assets/products/k11550/v2_thumb.jpg",
   "summary_text": "デンマークのシャツブランド「J.B.BROOKS」によるコットンデニムのウエスタンシャツです。1980〜1990年代頃のもので、スナップボタンとリラックスシルエットが特徴的な一枚です。",
   "summary_points": [
    "ミディアムブルー無地デニムのデニムウエスタンシャツ（長袖・スナップボタン）（ブランド：J.B.BROOKS）",
@@ -10643,7 +10643,44 @@
    ],
    "approved_at": "2026-11-21"
   },
-  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いており、正面写真で確認できる）"
+  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いており、正面写真で確認できる）",
+  "images_orig": [
+   "/assets/products/k11550/01.jpg",
+   "/assets/products/k11550/02.jpg",
+   "/assets/products/k11550/03.jpg",
+   "/assets/products/k11550/04.jpg",
+   "/assets/products/k11550/05.jpg",
+   "/assets/products/k11550/06.jpg",
+   "/assets/products/k11550/07.jpg",
+   "/assets/products/k11550/08.jpg",
+   "/assets/products/k11550/09.jpg",
+   "/assets/products/k11550/10.jpg",
+   "/assets/products/k11550/11.jpg",
+   "/assets/products/k11550/12.jpg",
+   "/assets/products/k11550/13.jpg",
+   "/assets/products/k11550/14.jpg",
+   "/assets/products/k11550/15.jpg",
+   "/assets/products/k11550/16.jpg",
+   "/assets/products/k11550/17.jpg",
+   "/assets/products/k11550/18.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-21",
+   "front_i": 0,
+   "back_i": 10,
+   "front_url": "/assets/products/k11550/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 112.1,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11550/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 110.2,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11533",
@@ -10665,8 +10702,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-21",
   "links": {},
   "images": [
+   "/assets/products/k11533/v2_back.jpg",
    "/assets/products/k11533/01.jpg",
-   "/assets/products/k11533/02.jpg",
    "/assets/products/k11533/03.jpg",
    "/assets/products/k11533/04.jpg",
    "/assets/products/k11533/05.jpg",
@@ -10677,7 +10714,7 @@
    "/assets/products/k11533/10.jpg",
    "/assets/products/k11533/11.jpg"
   ],
-  "thumb": "/assets/products/k11533/thumb.jpg",
+  "thumb": "/assets/products/k11533/v2_thumb.jpg",
   "summary_text": "ICEBERGのMADE IN ITALYタグ付きニットベスト。チャコール・グレー・オフホワイトの横ストライプに、複数の編み技法を組み合わせた立体的なテクスチャーが目を引く一枚です。",
   "summary_points": [
    "チャコールグレー・ミディアムグレー・オフホワイトの横ストライプ柄（複数のニット編み技法を組み合わせた立体的なテクスチャー）のニットベスト（Vネック・ボタン前開き）（ブランド：ICEBERG / MADE IN ITALY）",
@@ -10727,7 +10764,32 @@
    ],
    "approved_at": "2026-11-21"
   },
-  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）"
+  "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）",
+  "images_orig": [
+   "/assets/products/k11533/01.jpg",
+   "/assets/products/k11533/02.jpg",
+   "/assets/products/k11533/03.jpg",
+   "/assets/products/k11533/04.jpg",
+   "/assets/products/k11533/05.jpg",
+   "/assets/products/k11533/06.jpg",
+   "/assets/products/k11533/07.jpg",
+   "/assets/products/k11533/08.jpg",
+   "/assets/products/k11533/09.jpg",
+   "/assets/products/k11533/10.jpg",
+   "/assets/products/k11533/11.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-21",
+   "front_i": 0,
+   "back_i": 1,
+   "front_error": "RuntimeError('仕上がり確認で不合格：首元にダメージがあります。')",
+   "back_url": "/assets/products/k11533/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 76.0,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11546",
