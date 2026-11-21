@@ -10004,13 +10004,13 @@
    "back_i": 2,
    "front_url": "/assets/products/k11560/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 104.2,
     "bg": "normal"
    },
    "back_url": "/assets/products/k11560/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 107.8,
     "bg": "normal"
    }
@@ -10141,7 +10141,7 @@
    "back_url": "/assets/products/k11549/v2_back.jpg",
    "back_check": {
     "brighten": 0.1,
-    "garment_l": 111.0,
+    "garment_l": 111,
     "bg": "normal"
    }
   }
@@ -10259,13 +10259,13 @@
    "back_i": 3,
    "front_url": "/assets/products/k11454/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
-    "garment_l": 152.0,
+    "brighten": 0,
+    "garment_l": 152,
     "bg": "normal"
    },
    "back_url": "/assets/products/k11454/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 156.8,
     "bg": "normal"
    }
@@ -10395,7 +10395,7 @@
    "back_i": 1,
    "front_url": "/assets/products/k11197/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 96.6,
     "bg": "normal"
    },
@@ -10538,7 +10538,7 @@
    },
    "back_url": "/assets/products/k11165/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 81.1,
     "bg": "normal"
    }
@@ -10728,5 +10728,203 @@
    "approved_at": "2026-11-21"
   },
   "gender_by": "写真：メンズ（ボタンが着る人から見て右側に付いている）"
+ },
+ {
+  "sku": "K11546",
+  "slug": "k11546-nanuk",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "1980〜90年代頃 NANUK ネイビー ニットカーディガン メンズ",
+  "product_name": "1980〜90年代頃 NANUK ネイビー ニットカーディガン メンズ",
+  "brand": "NANUK",
+  "category": "メンズ／トップス／ニット",
+  "material": "アクリル（Acrylic / Polyacryl）",
+  "published_date": "2026-11-21",
+  "prices": {
+   "store": 0,
+   "site": 7800,
+   "mercari": 8580
+  },
+  "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-21",
+  "links": {},
+  "images": [
+   "/assets/products/k11546/01.jpg",
+   "/assets/products/k11546/02.jpg",
+   "/assets/products/k11546/03.jpg",
+   "/assets/products/k11546/04.jpg",
+   "/assets/products/k11546/05.jpg",
+   "/assets/products/k11546/06.jpg",
+   "/assets/products/k11546/07.jpg",
+   "/assets/products/k11546/08.jpg",
+   "/assets/products/k11546/09.jpg",
+   "/assets/products/k11546/10.jpg",
+   "/assets/products/k11546/11.jpg",
+   "/assets/products/k11546/12.jpg",
+   "/assets/products/k11546/13.jpg",
+   "/assets/products/k11546/14.jpg",
+   "/assets/products/k11546/15.jpg",
+   "/assets/products/k11546/16.jpg",
+   "/assets/products/k11546/17.jpg",
+   "/assets/products/k11546/18.jpg",
+   "/assets/products/k11546/19.jpg",
+   "/assets/products/k11546/20.jpg"
+  ],
+  "thumb": "/assets/products/k11546/thumb.jpg",
+  "summary_text": "ネイビー地にフェアアイル調の幾何学柄が入った、NANUKのヴィンテージVネックカーディガンです。1980〜90年代前半頃のXLサイズ、メンズ仕様。",
+  "summary_points": [
+   "ネイビー地・フェアアイル調マルチカラー幾何学柄（赤・グレー・白・緑・紫）のニットカーディガン（Vネック・ボタン前開き）（ブランド：NANUK）",
+   "素材：アクリル（Acrylic / Polyacryl）",
+   "実寸 身幅58cm・着丈71cm・肩幅59cm"
+  ],
+  "lead": "NANUKのタグが付いた、Vネックのボタン前開きカーディガンです。",
+  "body_html": "<h2>この一着のこと</h2><p>NANUKのタグが付いた、Vネックのボタン前開きカーディガンです。ネイビーを地色に、赤・グレー・白・緑・紫のマルチカラーでフェアアイル調の幾何学柄が全面に入っています。素材はアクリル（Polyacryl）と思われます。1980年代〜1990年代前半頃のものと思われます。</p><p>いまの状態をそのままお伝えします。全体にピリング（毛玉）が多数あります。正面中央部には毛羽立ちとほつれが目立ちます。胸の上部、左右どちらかの位置に小穴と色の薄れがあります。内側にはスナッグ（引っ掛け跡）も複数確認できます。古民家の自然光の下で見ると、傷みの具合ははっきりわかります。状態を確認したうえでお選びください。</p><p>着方はシンプルに、一枚でそのまま着るのが合います。ボタンを留めてもよし、開けたままでもよし。XLのゆったりしたサイズ感なので、肩の力を抜いた着こなしになります。柄が主役なので、下はデニムやチノパンなど無地のボトムスで十分です。</p><h2>状態</h2><p>状態：全体的にピリング（毛玉）多数あり／正面中央部に毛羽立ち・ほつれ多数／胸上部（着る人から見て左右どちらか判別困難な位置）に小穴・薄れあり／内側（裏面）にスナッグ（引っ掛け）多数確認。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "NANUK"
+   ],
+   [
+    "タグの表記",
+    "NANUK（ネックタグに確認）"
+   ],
+   [
+    "店頭での名前",
+    "Knit Cardigan"
+   ],
+   [
+    "素材",
+    "アクリル（Acrylic / Polyacryl）"
+   ],
+   [
+    "色",
+    "ネイビー地・フェアアイル調マルチカラー幾何学柄（赤・グレー・白・緑・紫）"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅58cm・着丈71cm・肩幅59cm"
+   ],
+   [
+    "状態",
+    "全体的にピリング（毛玉）多数あり／正面中央部に毛羽立ち・ほつれ多数／胸上部（着る人から見て左右どちらか判別困難な位置）に小穴・薄れあり／内側（裏面）にスナッグ（引っ掛け）多数確認"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "tops",
+  "genre_by": "auto-category-2026-11-21",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.9",
+   "made_at": "2026-11-21",
+   "needs": [
+    "性別は自動判定：メンズ（写真：メンズ（ボタンが着る人から見て右側＝メンズ留め））→ 違えばClaudeへ",
+    "ブランド欄は短い名前（NANUK）にした。タグの表記の全文は仕様表「タグの表記」",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "商品名・見出しは決まった並び（年代・ブランド・素材・色・品目・性別）で自動作成 → 気に入らなければClaudeへ",
+    "着こなし・雰囲気の文を 1文外した（決まり2・3）",
+    "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
+    "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
+    "Square の値段が0円（未登録）なので、値札の 7800 円（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。店頭の Square にも値段を入れると、メルカリにも出せる",
+    "ジャンルは分類から自動で決めた（tops）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "写真：メンズ（ボタンが着る人から見て右側＝メンズ留め）"
+ },
+ {
+  "sku": "K11538",
+  "slug": "k11538-ellesse",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "1990〜2000年代頃 ellesse リバーシブルフリースジャケット メンズ",
+  "product_name": "1990〜2000年代頃 ellesse リバーシブルフリースジャケット メンズ",
+  "brand": "ellesse",
+  "category": "メンズ／アウター／ジャケット",
+  "material": "",
+  "published_date": "2026-11-21",
+  "prices": {
+   "store": 7200,
+   "site": 7200,
+   "mercari": 7920
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-21",
+  "links": {},
+  "images": [
+   "/assets/products/k11538/01.jpg",
+   "/assets/products/k11538/02.jpg",
+   "/assets/products/k11538/03.jpg",
+   "/assets/products/k11538/04.jpg",
+   "/assets/products/k11538/05.jpg",
+   "/assets/products/k11538/06.jpg",
+   "/assets/products/k11538/07.jpg",
+   "/assets/products/k11538/08.jpg",
+   "/assets/products/k11538/09.jpg",
+   "/assets/products/k11538/10.jpg",
+   "/assets/products/k11538/11.jpg",
+   "/assets/products/k11538/12.jpg",
+   "/assets/products/k11538/13.jpg",
+   "/assets/products/k11538/14.jpg",
+   "/assets/products/k11538/15.jpg",
+   "/assets/products/k11538/16.jpg",
+   "/assets/products/k11538/17.jpg",
+   "/assets/products/k11538/18.jpg",
+   "/assets/products/k11538/19.jpg",
+   "/assets/products/k11538/20.jpg"
+  ],
+  "thumb": "/assets/products/k11538/thumb.jpg",
+  "summary_text": "エレッセのリバーシブルフリースジャケット。フリース面のボーダー柄とナイロン面の無地ブラック、どちらを表にしても一枚で完結します。",
+  "summary_points": [
+   "ブラック×グレー×オフホワイト ボーダー柄（フリース面）／無地ブラック（ナイロン面）のリバーシブルフリースジャケット（ブランド：ellesse）",
+   "実寸 身幅59cm・着丈72cm・肩幅60cm"
+  ],
+  "lead": "エレッセは「SPORT ITALIA 1959」の刻印を持つイタリアのスポーツブランドです。",
+  "body_html": "<h2>この一着のこと</h2><p>エレッセは「SPORT ITALIA 1959」の刻印を持つイタリアのスポーツブランドです。このジャケットはフリース面とナイロン面を持つリバーシブル仕様で、90年代後半〜2000年代前半頃のものと思われます。</p><p>フリース面はブラック×グレー×オフホワイトのボーダー柄。ナイロン面（またはポリエステルタフタと思われます）は無地のブラックです。素材はポリエステルフリースとナイロン系の組み合わせと思われます。サイズはメンズMまたはL相当のゆったりとしたシルエットで、ジップの向きなどからメンズラインと見ています。</p><p>フリース面に軽微な毛玉が見られる程度で、目立つ破れや汚れはなく、状態は概ね良好です。</p><p>着方はシンプルに一枚で。フリース面を表にしてボーダーを出す日もあれば、ナイロン面を表にして無地のブラックでまとめる日もある。同じジャケットで二通りの顔を使い分けられます。エレッセのロゴがさりげなく効いて、余計なものを足さなくても決まります。</p><h2>状態</h2><p>状態は写真でご確認ください。気になる点は、お問い合わせからお尋ねください。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "ellesse"
+   ],
+   [
+    "タグの表記",
+    "ellesse（エレッセ）/ SPORT ITALIA 1959"
+   ],
+   [
+    "店頭での名前",
+    "80's ellesse reversible fleece JKT"
+   ],
+   [
+    "色",
+    "ブラック×グレー×オフホワイト ボーダー柄（フリース面）／無地ブラック（ナイロン面）"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅59cm・着丈72cm・肩幅60cm"
+   ],
+   [
+    "状態",
+    "写真でご確認ください"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "outer",
+  "genre_by": "auto-keyword-2026-11-21",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.9",
+   "made_at": "2026-11-21",
+   "needs": [
+    "性別は自動判定：メンズ（表記にメンズ・写真の見立て：メンズ（ジップが着る人から見て右側・全体のシルエットおよびブランドラインの傾向）・実寸が大きめ（肩幅60・身幅59））→ 違えばClaudeへ",
+    "ブランド欄は短い名前（ellesse）にした。タグの表記の全文は仕様表「タグの表記」",
+    "素材が確定していない（推定のまま or 不明）→ 仕様表に載せていない",
+    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "商品名・見出しは決まった並び（年代・ブランド・素材・色・品目・性別）で自動作成 → 気に入らなければClaudeへ",
+    "着こなし・雰囲気の文を 2文外した（決まり2・3）",
+    "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
+    "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
+    "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "表記にメンズ・写真の見立て：メンズ（ジップが着る人から見て右側・全体のシルエットおよびブランドラインの傾向）・実寸が大きめ（肩幅60・身幅59）"
  }
 ]
