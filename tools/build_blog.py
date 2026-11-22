@@ -376,7 +376,7 @@ def build_index(posts, cat=None):
         path = f'/blog/category/{cat}/'
         cname = CATEGORY_NAMES[cat]
         page_title = f'{cname}｜ブログ｜古着屋 小判鮫（川越の古着・ヴィンテージ）'
-        page_desc = f'川越・元町の古民家古着屋「小判鮫」のブログから「{cname}」の記事をまとめています。'
+        page_desc = f'川越・元町の古民家古着屋「小判鮫」のブログから「{cname}」の記事をまとめています。新しい記事を上から順に載せています。'
         crumb = f'<a href="/">HOME</a><span>／</span><a href="/blog/">ブログ</a><span>／</span><span>{_esc(cname)}</span>'
     else:
         path = '/blog/'
