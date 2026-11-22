@@ -7504,9 +7504,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "conbipel / VERA PELLE / TG.48 / Made in China スエード レザージャケット",
-  "product_name": "conbipel / VERA PELLE / TG.48 / Made in China スエード レザージャケット",
-  "brand": "conbipel / VERA PELLE / TG.48 / Made in China",
+  "title": "2000年代前後頃 conbipel ダークブラウン スエード レザージャケット レディース",
+  "product_name": "2000年代前後頃 conbipel ダークブラウン スエード レザージャケット レディース",
+  "brand": "conbipel",
   "category": "レディース／アウター／レザージャケット",
   "material": "外側：スエード（本革・タグにVERA PELLEと明記）、トリミング：ラビットファー（タグに「PELLICCIA DI CONIGLIO / RABBIT FUR」と明記）、裏地：ポリエステル（タグに記載）",
   "published_date": "2026-11-18",
@@ -7534,7 +7534,7 @@
   "thumb": "/assets/products/k11541/v2_thumb.jpg",
   "summary_text": "ダークブラウンのスエードにラビットファーのトリミング、コルセット風レースアップが入った2000年代前後頃のレディースジャケットです。イタリアブランド「conbipel」のVERA PELLE（本革）表記、TG.48サイズ。",
   "summary_points": [
-   "ダークブラウン（スエード外側）／ベージュ・キャメル（ラビットファー部分）のレザージャケット（スエード×ラビットファートリミング）（ブランド：conbipel / VERA PELLE / TG.48 / Made in China）",
+   "ダークブラウン（スエード外側）／ベージュ・キャメル（ラビットファー部分）のレザージャケット（スエード×ラビットファートリミング）（ブランド：conbipel）",
    "素材：外側：スエード（本革・タグにVERA PELLEと明記）、トリミング：ラビットファー（タグに「PELLICCIA DI CONIGLIO / RABBIT FUR」と明記）、裏地：ポリエステル（タグに記載）",
    "実寸 身幅55cm・着丈63cm・肩幅42cm"
   ],
@@ -7543,6 +7543,10 @@
   "spec": [
    [
     "ブランド",
+    "conbipel"
+   ],
+   [
+    "タグの表記",
     "conbipel / VERA PELLE / TG.48 / Made in China"
    ],
    [
@@ -7619,9 +7623,9 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "Brooks Brothers Est.1818 / REGULAR / 15½-31 / NON-IRON STRETCH / 96% SUPIMA COTTON 4% SPANDEX / MADE IN VIETNAM ドレスシャツ",
-  "product_name": "Brooks Brothers Est.1818 / REGULAR / 15½-31 / NON-IRON STRETCH / 96% SUPIMA COTTON 4% SPANDEX / MADE IN VIETNAM ドレスシャツ",
-  "brand": "Brooks Brothers Est.1818 / REGULAR / 15½-31 / NON-IRON STRETCH / 96% SUPIMA COTTON 4% SPANDEX / MADE IN VIETNAM",
+  "title": "Brooks Brothers ノンアイロンストレッチ ホワイト ウィンドウペーンチェック ドレスシャツ メンズ",
+  "product_name": "Brooks Brothers ノンアイロンストレッチ ホワイト ウィンドウペーンチェック ドレスシャツ メンズ",
+  "brand": "Brooks Brothers",
   "category": "メンズ／トップス／シャツ",
   "material": "96% スピマコットン・4% スパンデックス（ノンアイロンストレッチ）",
   "published_date": "2026-11-18",
@@ -7649,7 +7653,7 @@
   "thumb": "/assets/products/k10824/v2_thumb.jpg",
   "summary_text": "ブルックス ブラザーズのノンアイロンストレッチ仕様、スピマコットン96%のボタンダウンシャツです。ホワイト地にライトブルーとピンクの細線ウィンドウペーンチェックが入った、清潔感のある一枚です。",
   "summary_points": [
-   "ホワイト地・ライトブルー＆ピンクの細線ウィンドウペーンチェックのドレスシャツ（長袖ボタンダウン）（ブランド：Brooks Brothers Est.1818 / REGULAR / 15½-31 / NON-IRON STRETCH / 96% SUPIMA COTTON 4% SPANDEX / MADE IN VIETNAM）",
+   "ホワイト地・ライトブルー＆ピンクの細線ウィンドウペーンチェックのドレスシャツ（長袖ボタンダウン）（ブランド：Brooks Brothers）",
    "素材：96% スピマコットン・4% スパンデックス（ノンアイロンストレッチ）",
    "実寸 身幅57.5cm・着丈66cm・肩幅44.5cm"
   ],
@@ -7658,6 +7662,10 @@
   "spec": [
    [
     "ブランド",
+    "Brooks Brothers"
+   ],
+   [
+    "タグの表記",
     "Brooks Brothers Est.1818 / REGULAR / 15½-31 / NON-IRON STRETCH / 96% SUPIMA COTTON 4% SPANDEX / MADE IN VIETNAM"
    ],
    [
@@ -7739,8 +7747,8 @@
   "published": true,
   "release": "live",
   "status": "available",
-  "title": "2000年代頃 RALPH LAUREN 無 メンズドレスシャツ メンズ",
-  "product_name": "2000年代頃 RALPH LAUREN 無 メンズドレスシャツ メンズ",
+  "title": "2000年代頃 RALPH LAUREN ライトピンク ボタンダウンシャツ メンズ",
+  "product_name": "2000年代頃 RALPH LAUREN ライトピンク ボタンダウンシャツ メンズ",
   "brand": "RALPH LAUREN",
   "category": "メンズ／トップス／シャツ",
   "material": "コットン100%（洗濯表示タグにCOTTONの記載あり）",
@@ -9159,9 +9167,9 @@
   "published": false,
   "release": "draft",
   "status": "available",
-  "title": "ブランド名タグは写真に写っておらず読み取り不可。品番タグ「15 213/0 5037/7」のみ確認 スエードレザーコート",
-  "product_name": "ブランド名タグは写真に写っておらず読み取り不可。品番タグ「15 213/0 5037/7」のみ確認 スエードレザーコート",
-  "brand": "ブランド名タグは写真に写っておらず読み取り不可。品番タグ「15 213/0 5037/7」のみ確認",
+  "title": "タンブラウン スエードレザーコート 裏地フェイクファー",
+  "product_name": "タンブラウン スエードレザーコート 裏地フェイクファー",
+  "brand": "表記なし",
   "category": "ジャケット・アウター／ロングコート",
   "material": "表地：本革スエード（GENUINE LEATHER表記あり）／裏地：Webpelz（フェイクファー）80%ポリアクリル・20%ポリエステル／ボディライニング：100%ポリエステル",
   "published_date": "2026-11-20",
@@ -9197,7 +9205,7 @@
   "thumb": "/assets/products/k11528/thumb.jpg",
   "summary_text": "本革スエードの表地にフェイクシアリング裏地を合わせた、1970〜1980年代頃のメンズコートです。タン／キャメルブラウンのパネル切り替えが目を引く一着です。",
   "summary_points": [
-   "タン／キャメルブラウン（無地）のスエードレザーコート（シアリング裏地付き）（ブランド：ブランド名タグは写真に写っておらず読み取り不可。品番タグ「15 213/0 5037/7」のみ確認）",
+   "タン／キャメルブラウン（無地）のスエードレザーコート（シアリング裏地付き）（ブランド：表記なし）",
    "素材：表地：本革スエード（GENUINE LEATHER表記あり）／裏地：Webpelz（フェイクファー）80%ポリアクリル・20%ポリエステル／ボディライニング：100%ポリエステル",
    "実寸 身幅63cm・着丈82cm・肩幅48.5cm"
   ],
@@ -9206,7 +9214,11 @@
   "spec": [
    [
     "ブランド",
-    "ブランド名タグは写真に写っておらず読み取り不可。品番タグ「15 213/0 5037/7」のみ確認"
+    "表記なし"
+   ],
+   [
+    "タグの表記",
+    "品番タグ「15 213/0 5037/7」のみ確認（ブランド名のタグは写真に写っていない）"
    ],
    [
     "店頭での名前",
@@ -9256,9 +9268,9 @@
   "published": true,
   "release": "draft",
   "status": "available",
-  "title": "FREENERON VERA PELLE / conbipel レザーコート",
-  "product_name": "FREENERON VERA PELLE / conbipel レザーコート",
-  "brand": "FREENERON VERA PELLE / conbipel",
+  "title": "conbipel ブラック ミドル丈 レザーコート メンズ",
+  "product_name": "conbipel ブラック ミドル丈 レザーコート メンズ",
+  "brand": "conbipel",
   "category": "メンズ／ジャケット・アウター／ロングコート",
   "material": "表地：本革（Vera Pelle / Real Leather）、裏地：ポリエステル（キルティングライナー付き）",
   "published_date": "2026-11-20",
@@ -9292,7 +9304,7 @@
   "thumb": "/assets/products/k11524/v2_thumb.jpg",
   "summary_text": "イタリアの老舗チェーン、conbipelのブラックレザーコートです。本革のエイジングが全体に進み、ミドル丈のジップアップシルエットが一枚でしっかり決まります。",
   "summary_points": [
-   "ブラック無地のレザーコート（ミドル丈・ジップアップ）（ブランド：FREENERON VERA PELLE / conbipel）",
+   "ブラック無地のレザーコート（ミドル丈・ジップアップ）（ブランド：conbipel）",
    "素材：表地：本革（Vera Pelle / Real Leather）、裏地：ポリエステル（キルティングライナー付き）",
    "実寸 身幅55cm・着丈80cm・肩幅45cm・袖丈59.5cm"
   ],
@@ -9301,7 +9313,7 @@
   "spec": [
    [
     "ブランド",
-    "FREENERON VERA PELLE / conbipel"
+    "conbipel"
    ],
    [
     "タグの表記",
@@ -9394,9 +9406,9 @@
   "published": true,
   "release": "draft",
   "status": "available",
-  "title": "1980〜90年代頃 ブランドタグ不明 レザーボンバージャケット メンズ",
-  "product_name": "1980〜90年代頃 ブランドタグ不明 レザーボンバージャケット メンズ",
-  "brand": "ブランドタグ不明",
+  "title": "1980〜90年代頃 ブラック レザーボンバージャケット メンズ",
+  "product_name": "1980〜90年代頃 ブラック レザーボンバージャケット メンズ",
+  "brand": "表記なし",
   "category": "メンズ／アウター／レザージャケット",
   "material": "",
   "published_date": "2026-11-20",
@@ -9432,7 +9444,7 @@
   "thumb": "/assets/products/k11523/v2_thumb.jpg",
   "summary_text": "イタリア製、1980〜90年代頃のレザーボンバージャケット。ブラックの革が経年でブラウンに退色し、内側にはタータンチェックのライニングを持つ、造りのしっかりした一着です。",
   "summary_points": [
-   "ブラック（経年によりブラウン色の退色・色落ちあり）、内側ライニングはレッド×ブラック×グレーのタータンチェック柄のレザーボンバージャケット（A-2タイプ）（ブランド：ブランドタグ不明）",
+   "ブラック（経年によりブラウン色の退色・色落ちあり）、内側ライニングはレッド×ブラック×グレーのタータンチェック柄のレザーボンバージャケット（A-2タイプ）（ブランド：表記なし）",
    "実寸 身幅51cm・着丈59cm・肩幅42cm"
   ],
   "lead": "A-2タイプのシルエットをベースに、フロントジップとスナップ、リブのネック・カフス・ヘムで構成されたレザーボンバージャケットです。",
@@ -9440,7 +9452,7 @@
   "spec": [
    [
     "ブランド",
-    "ブランドタグ不明"
+    "表記なし"
    ],
    [
     "タグの表記",
@@ -9805,9 +9817,9 @@
   "published": false,
   "release": "draft",
   "status": "available",
-  "title": "gianfranco gotelli / MADE IN ITALY / サイズ44 レザージャケット",
-  "product_name": "gianfranco gotelli / MADE IN ITALY / サイズ44 レザージャケット",
-  "brand": "gianfranco gotelli / MADE IN ITALY / サイズ44",
+  "title": "gianfranco gotelli ブラック レザージャケット",
+  "product_name": "gianfranco gotelli ブラック レザージャケット",
+  "brand": "gianfranco gotelli",
   "category": "アウター／レザージャケット",
   "material": "vera pelle（本革）／裏地100%ポリエステル",
   "published_date": "2026-11-20",
@@ -9843,7 +9855,7 @@
   "thumb": "/assets/products/k11527/thumb.jpg",
   "summary_text": "「MADE IN ITALY」刻印入り本革、1970〜80年代頃のレディースレザージャケット。シンプルなブラックに、ウエストのシェイプが効いた一着です。",
   "summary_points": [
-   "ブラック無地のレザージャケット（ジップアップ・カラー付き）（ブランド：gianfranco gotelli / MADE IN ITALY / サイズ44）",
+   "ブラック無地のレザージャケット（ジップアップ・カラー付き）（ブランド：gianfranco gotelli）",
    "素材：vera pelle（本革）／裏地100%ポリエステル",
    "実寸 身幅51cm・着丈60cm・肩幅49.5cm・袖丈60cm"
   ],
@@ -9852,6 +9864,10 @@
   "spec": [
    [
     "ブランド",
+    "gianfranco gotelli"
+   ],
+   [
+    "タグの表記",
     "gianfranco gotelli / MADE IN ITALY / サイズ44"
    ],
    [
@@ -9902,9 +9918,9 @@
   "published": true,
   "release": "draft",
   "status": "available",
-  "title": "L.L.Bean / MADE IN IRELAND / STYLE 1763 / RN:71341 / VENDOR:11049 / IWS REG.NO. 0452-E1-76W ウール Vネックニットセーター",
-  "product_name": "L.L.Bean / MADE IN IRELAND / STYLE 1763 / RN:71341 / VENDOR:11049 / IWS REG.NO. 0452-E1-76W ウール Vネックニットセーター",
-  "brand": "L.L.Bean / MADE IN IRELAND / STYLE 1763 / RN:71341 / VENDOR:11049 / IWS REG.NO. 0452-E1-76W",
+  "title": "L.L.Bean ラムズウール バーントオレンジ Vネックニットセーター メンズ",
+  "product_name": "L.L.Bean ラムズウール バーントオレンジ Vネックニットセーター メンズ",
+  "brand": "L.L.Bean",
   "category": "メンズ／トップス／ニット",
   "material": "ラムズウール100%（タグにLAMBSWOOL・PURE NEW WOOL表記）",
   "published_date": "2026-11-20",
@@ -9933,7 +9949,7 @@
   "thumb": "/assets/products/k11560/v2_thumb.jpg",
   "summary_text": "L.L.Beanのラムズウール100%・VネックニットセーターをVintageで。錆橙の杢調が落ち着いていて、一枚でそのまま着られる厚みと色があります。",
   "summary_points": [
-   "バーントオレンジ（錆橙）無地・杢調のVネックニットセーター（ブランド：L.L.Bean / MADE IN IRELAND / STYLE 1763 / RN:71341 / VENDOR:11049 / IWS REG.NO. 0452-E1-76W）",
+   "バーントオレンジ（錆橙）無地・杢調のVネックニットセーター（ブランド：L.L.Bean）",
    "素材：ラムズウール100%（タグにLAMBSWOOL・PURE NEW WOOL表記）",
    "実寸 身幅62cm・着丈65.5cm・肩幅46cm"
   ],
@@ -9942,6 +9958,10 @@
   "spec": [
    [
     "ブランド",
+    "L.L.Bean"
+   ],
+   [
+    "タグの表記",
     "L.L.Bean / MADE IN IRELAND / STYLE 1763 / RN:71341 / VENDOR:11049 / IWS REG.NO. 0452-E1-76W"
    ],
    [
@@ -10153,9 +10173,9 @@
   "published": true,
   "release": "draft",
   "status": "available",
-  "title": "（株）レナウン（Renown）／品番7308039／サイズ9／COL-81／KS4 1-F／MADE IN PHILIPPINES スエード レザースカート",
-  "product_name": "（株）レナウン（Renown）／品番7308039／サイズ9／COL-81／KS4 1-F／MADE IN PHILIPPINES スエード レザースカート",
-  "brand": "（株）レナウン（Renown）／品番7308039／サイズ9／COL-81／KS4 1-F／MADE IN PHILIPPINES",
+  "title": "レナウン ベージュ スエード ミディ丈 レザースカート レディース",
+  "product_name": "レナウン ベージュ スエード ミディ丈 レザースカート レディース",
+  "brand": "レナウン（Renown）",
   "category": "レディース／スカート／スカート",
   "material": "",
   "published_date": "2026-11-21",
@@ -10188,7 +10208,7 @@
   "thumb": "/assets/products/k11454/v2_thumb.jpg",
   "summary_text": "レナウンのスエードミディスカート。ブラウンのかがりステッチが走るパネル切り替えが目を引く、ベージュ×タンのAラインです。",
   "summary_points": [
-   "ベージュ／タン（無地）、ブラウンのかがり縫いステッチによるパネル切り替えデザインのレザースカート（スエード・ミディ丈・Aライン）（ブランド：（株）レナウン（Renown）／品番7308039／サイズ9／COL-81／KS4 1-F／MADE IN PHILIPPINES）",
+   "ベージュ／タン（無地）、ブラウンのかがり縫いステッチによるパネル切り替えデザインのレザースカート（スエード・ミディ丈・Aライン）（ブランド：レナウン（Renown））",
    "実寸 ウエスト67cm"
   ],
   "lead": "（株）レナウンのタグが付いた、スエード素材のミディ丈Aラインスカートです。",
@@ -10196,6 +10216,10 @@
   "spec": [
    [
     "ブランド",
+    "レナウン（Renown）"
+   ],
+   [
+    "タグの表記",
     "（株）レナウン（Renown）／品番7308039／サイズ9／COL-81／KS4 1-F／MADE IN PHILIPPINES"
    ],
    [
@@ -10278,9 +10302,9 @@
   "published": true,
   "release": "draft",
   "status": "available",
-  "title": "Pla-Jac by Dunbrooke / サイズ44-L-45 / MADE IN U.S.A. / DO NOT WRING, SQUEEZE OR コーチジャケット",
-  "product_name": "Pla-Jac by Dunbrooke / サイズ44-L-45 / MADE IN U.S.A. / DO NOT WRING, SQUEEZE OR コーチジャケット",
-  "brand": "Pla-Jac by Dunbrooke / サイズ44-L-45 / MADE IN U.S.A. / DO NOT WRING, SQUEEZE OR",
+  "title": "1960〜70年代頃 Pla-Jac by Dunbrooke レッド ナイロン コーチジャケット メンズ",
+  "product_name": "1960〜70年代頃 Pla-Jac by Dunbrooke レッド ナイロン コーチジャケット メンズ",
+  "brand": "Pla-Jac by Dunbrooke",
   "category": "メンズ／アウター／ジャケット",
   "material": "",
   "published_date": "2026-11-21",
@@ -10316,7 +10340,7 @@
   "thumb": "/assets/products/k11197/v2_thumb.jpg",
   "summary_text": "光沢レッドのナイロン×グレーフリース裏地。1970〜80年代前半頃のコーチジャケットで、背面には「Burch's Dairy Queen North Manchester」のプリントが入ります。",
   "summary_points": [
-   "無地レッド（表：光沢レッドナイロン、裏地：グレーフリース）のコーチジャケット（ナイロン製スナップボタン前開き、フリース裏地）（ブランド：Pla-Jac by Dunbrooke / サイズ44-L-45 / MADE IN U.S.A. / DO NOT WRING, SQUEEZE OR）",
+   "無地レッド（表：光沢レッドナイロン、裏地：グレーフリース）のコーチジャケット（ナイロン製スナップボタン前開き、フリース裏地）（ブランド：Pla-Jac by Dunbrooke）",
    "実寸 身幅68cm・着丈73.5cm・肩幅51.5cm"
   ],
   "lead": "Pla-Jac by Dunbrookeのタグ、MADE IN U.S.A.の表記、そして「44-L-45」というサイズ刻印。",
@@ -10324,7 +10348,7 @@
   "spec": [
    [
     "ブランド",
-    "Pla-Jac by Dunbrooke / サイズ44-L-45 / MADE IN U.S.A. / DO NOT WRING, SQUEEZE OR"
+    "Pla-Jac by Dunbrooke"
    ],
    [
     "タグの表記",
@@ -10689,9 +10713,9 @@
   "published": true,
   "release": "draft",
   "status": "available",
-  "title": "ICEBERG / MADE IN ITALY ニットベスト",
-  "product_name": "ICEBERG / MADE IN ITALY ニットベスト",
-  "brand": "ICEBERG / MADE IN ITALY",
+  "title": "ICEBERG チャコールグレー 横ストライプ ニットベスト メンズ",
+  "product_name": "ICEBERG チャコールグレー 横ストライプ ニットベスト メンズ",
+  "brand": "ICEBERG",
   "category": "メンズ／アウター／ベスト",
   "material": "",
   "published_date": "2026-11-21",
@@ -10718,7 +10742,7 @@
   "thumb": "/assets/products/k11533/v2_thumb.jpg",
   "summary_text": "ICEBERGのMADE IN ITALYタグ付きニットベスト。チャコール・グレー・オフホワイトの横ストライプに、複数の編み技法を組み合わせた立体的なテクスチャーが目を引く一枚です。",
   "summary_points": [
-   "チャコールグレー・ミディアムグレー・オフホワイトの横ストライプ柄（複数のニット編み技法を組み合わせた立体的なテクスチャー）のニットベスト（Vネック・ボタン前開き）（ブランド：ICEBERG / MADE IN ITALY）",
+   "チャコールグレー・ミディアムグレー・オフホワイトの横ストライプ柄（複数のニット編み技法を組み合わせた立体的なテクスチャー）のニットベスト（Vネック・ボタン前開き）（ブランド：ICEBERG）",
    "実寸 身幅51cm・着丈63.5cm・肩幅46cm"
   ],
   "lead": "チャコールグレー、ミディアムグレー、オフホワイトの横ストライプが、複数のニット編み技法を組み合わせた立体的なテクスチャーで表現されています。",
@@ -10726,6 +10750,10 @@
   "spec": [
    [
     "ブランド",
+    "ICEBERG"
+   ],
+   [
+    "タグの表記",
     "ICEBERG / MADE IN ITALY"
    ],
    [
@@ -11340,8 +11368,8 @@
   "published": true,
   "release": "draft",
   "status": "available",
-  "title": "1980〜90年代頃 ТЕТТУЛ グレーメランジュ 長袖ポロシャツ メンズ",
-  "product_name": "1980〜90年代頃 ТЕТТУЛ グレーメランジュ 長袖ポロシャツ メンズ",
+  "title": "1980〜90年代頃 グレーメランジュ ウールニットポロ 長袖 メンズ",
+  "product_name": "1980〜90年代頃 グレーメランジュ ウールニットポロ 長袖 メンズ",
   "brand": "ТЕТТУЛ",
   "category": "メンズ／トップス／ニット",
   "material": "80% ウール / 20% ビスコース",
@@ -11462,9 +11490,9 @@
   "published": true,
   "release": "draft",
   "status": "available",
-  "title": "AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept. 長袖Tシャツ",
-  "product_name": "AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept. 長袖Tシャツ",
-  "brand": "AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept.",
+  "title": "2000年代頃 AEROPOSTALE チャコールグレー ボーダー サーマル長袖Tシャツ メンズ",
+  "product_name": "2000年代頃 AEROPOSTALE チャコールグレー ボーダー サーマル長袖Tシャツ メンズ",
+  "brand": "AEROPOSTALE",
   "category": "メンズ／トップス／Tシャツ",
   "material": "100% コットン",
   "published_date": "2026-11-22",
@@ -11500,7 +11528,7 @@
   "thumb": "/assets/products/k11459/v2_thumb.jpg",
   "summary_text": "AEROPOSTALEのチャコールグレー×ホワイトのボーダー柄、長袖のサーマル（ワッフル生地）Tシャツです。コットン100%、身幅50cm・着丈69cm。フロントのアップリケにほつれと剥がれがあります。",
   "summary_points": [
-   "チャコールグレー×ホワイト ボーダー柄の長袖Tシャツ（サーマル・ワッフル生地）（ブランド：AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept.）",
+   "チャコールグレー×ホワイト ボーダー柄の長袖Tシャツ（サーマル・ワッフル生地）（ブランド：AEROPOSTALE）",
    "素材：100% コットン",
    "実寸 身幅50cm・着丈69cm・肩幅45cm"
   ],
@@ -11509,7 +11537,7 @@
   "spec": [
    [
     "ブランド",
-    "AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept."
+    "AEROPOSTALE"
    ],
    [
     "タグの表記",
