@@ -10926,7 +10926,7 @@
    },
    "back_url": "/assets/products/k11546/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 56.2,
     "bg": "normal"
    }
@@ -11181,13 +11181,13 @@
    "back_i": 9,
    "front_url": "/assets/products/k11492/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 65.9,
     "bg": "normal"
    },
    "back_url": "/assets/products/k11492/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 65.9,
     "bg": "normal"
    }
@@ -11321,13 +11321,13 @@
    "back_i": 1,
    "front_url": "/assets/products/k11552/v2_front.jpg",
    "front_check": {
-    "brighten": 0.0,
-    "garment_l": 185.0,
+    "brighten": 0,
+    "garment_l": 185,
     "bg": "light_item"
    },
    "back_url": "/assets/products/k11552/v2_back.jpg",
    "back_check": {
-    "brighten": 0.0,
+    "brighten": 0,
     "garment_l": 189.2,
     "bg": "light_item"
    }
@@ -11650,5 +11650,106 @@
    "approved_at": "2026-11-22"
   },
   "gender_by": "写真の見立て：レディース（イタリア婦人服サイズ表記「6/3」、細身のシルエット）・実寸が小さめ（肩幅40・身幅44）"
+ },
+ {
+  "sku": "K11455",
+  "slug": "k11455-gap-1969-extraslim-fit-stretch",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "GAP 1969 EXTRASLIM FIT STRETCH デニムパンツ",
+  "product_name": "GAP 1969 EXTRASLIM FIT STRETCH デニムパンツ",
+  "brand": "GAP 1969 EXTRASLIM FIT STRETCH",
+  "category": "メンズ／パンツ／デニム",
+  "material": "綿98%、ポリウレタン2%（ストレッチデニム）",
+  "published_date": "2026-11-22",
+  "prices": {
+   "store": 3600,
+   "site": 3600,
+   "mercari": 3960
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-22",
+  "links": {},
+  "images": [
+   "/assets/products/k11455/01.jpg",
+   "/assets/products/k11455/02.jpg",
+   "/assets/products/k11455/03.jpg",
+   "/assets/products/k11455/04.jpg",
+   "/assets/products/k11455/05.jpg",
+   "/assets/products/k11455/06.jpg",
+   "/assets/products/k11455/07.jpg",
+   "/assets/products/k11455/08.jpg",
+   "/assets/products/k11455/09.jpg",
+   "/assets/products/k11455/10.jpg",
+   "/assets/products/k11455/11.jpg",
+   "/assets/products/k11455/12.jpg",
+   "/assets/products/k11455/13.jpg",
+   "/assets/products/k11455/14.jpg",
+   "/assets/products/k11455/15.jpg",
+   "/assets/products/k11455/16.jpg",
+   "/assets/products/k11455/17.jpg",
+   "/assets/products/k11455/18.jpg",
+   "/assets/products/k11455/19.jpg",
+   "/assets/products/k11455/20.jpg"
+  ],
+  "thumb": "/assets/products/k11455/thumb.jpg",
+  "summary_text": "GAPの1969ラインから、ストレッチ入りのエクストラスリムフィットデニム。ダークウォッシュのインディゴが落ち着いていて、一枚でそのまま決まります。",
+  "summary_points": [
+   "インディゴブルー（無地・ダークウォッシュ）のデニムパンツ（ジーンズ）（ブランド：GAP 1969 EXTRASLIM FIT STRETCH）",
+   "素材：綿98%、ポリウレタン2%（ストレッチデニム）",
+   "実寸 ウエスト80cm・股上26cm"
+  ],
+  "lead": "GAPの「1969」ラインに属するストレッチデニムパンツです。",
+  "body_html": "<h2>この一着のこと</h2><p>GAPの「1969」ラインに属するストレッチデニムパンツです。素材は綿98%にポリウレタン2%を混ぜたストレッチデニムで、エクストラスリムフィットのシルエットに仕立てられています。フロントタグ・バックのレザーパッチ・ボタンにそれぞれ「GAP JEANS EST.1969」の刻印があります。2000年代後半から2010年代頃のものと思われます。</p><p>ダークウォッシュのインディゴは色が均一で、目立つ破れや汚れもなく、使用感の少ない良好なコンディションです。光の入り方によって、インディゴの深みがはっきり出ます。</p><p>エクストラスリムフィットですが、ストレッチが入っているぶん、穿いたときの窮屈さは抑えられています。GAPの定番ラインらしいクリーンな一本です。</p><h2>状態</h2><p>状態は写真でご確認ください。気になる点は、お問い合わせからお尋ねください。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "GAP 1969 EXTRASLIM FIT STRETCH"
+   ],
+   [
+    "タグの表記",
+    "GAP 1969 EXTRASLIM FIT STRETCH（フロントタグ・バックレザーパッチ・ボタン刻印「GAP JEANS EST.1969」）"
+   ],
+   [
+    "店頭での名前",
+    "Stretch denim"
+   ],
+   [
+    "素材",
+    "綿98%、ポリウレタン2%（ストレッチデニム）"
+   ],
+   [
+    "色",
+    "インディゴブルー（無地・ダークウォッシュ）"
+   ],
+   [
+    "サイズ",
+    "実寸 ウエスト80cm・股上26cm"
+   ],
+   [
+    "状態",
+    "写真でご確認ください"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "bottoms",
+  "genre_by": "auto-keyword-2026-11-22",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.9",
+   "made_at": "2026-11-22",
+   "needs": [
+    "性別は自動判定：メンズ（写真の見立て：メンズ（フロントボタンが着る人から見て右側・EXTRASLIM FITはGAPメンズライン））→ 違えばClaudeへ",
+    "ブランド欄は短い名前（GAP 1969 EXTRASLIM FIT STRETCH）にした。タグの表記の全文は仕様表「タグの表記」",
+    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "商品名・見出しは決まった並び（年代・ブランド・素材・色・品目・性別）で自動作成 → 気に入らなければClaudeへ",
+    "着こなし・雰囲気の文を 3文外した（決まり2・3）",
+    "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
+    "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
+    "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "写真の見立て：メンズ（フロントボタンが着る人から見て右側・EXTRASLIM FITはGAPメンズライン）"
  }
 ]
