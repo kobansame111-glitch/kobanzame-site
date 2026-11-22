@@ -11179,5 +11179,199 @@
    ]
   },
   "gender_by": "写真の見立て：メンズ（ウエスト32×インシーム32のインチ表記およびシルエット・フロントボタン位置から）"
+ },
+ {
+  "sku": "K11535",
+  "slug": "k11535",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "1980〜90年代頃 ТЕТТУЛ グレーメランジュ 長袖ポロシャツ メンズ",
+  "product_name": "1980〜90年代頃 ТЕТТУЛ グレーメランジュ 長袖ポロシャツ メンズ",
+  "brand": "ТЕТТУЛ",
+  "category": "メンズ／トップス／ニット",
+  "material": "80% ウール / 20% ビスコース",
+  "published_date": "2026-11-22",
+  "prices": {
+   "store": 5800,
+   "site": 5800,
+   "mercari": 6380
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-22",
+  "links": {},
+  "images": [
+   "/assets/products/k11535/01.jpg",
+   "/assets/products/k11535/02.jpg",
+   "/assets/products/k11535/03.jpg",
+   "/assets/products/k11535/04.jpg",
+   "/assets/products/k11535/05.jpg",
+   "/assets/products/k11535/06.jpg",
+   "/assets/products/k11535/07.jpg",
+   "/assets/products/k11535/08.jpg",
+   "/assets/products/k11535/09.jpg",
+   "/assets/products/k11535/10.jpg",
+   "/assets/products/k11535/11.jpg",
+   "/assets/products/k11535/12.jpg",
+   "/assets/products/k11535/13.jpg"
+  ],
+  "thumb": "/assets/products/k11535/thumb.jpg",
+  "summary_text": "キリル文字タグのウールニットポロ。グレーメランジュの無地、1980〜1990年代頃と思われる一着です。",
+  "summary_points": [
+   "グレーメランジュ（無地）の長袖ポロシャツ（ニットポロ）（ブランド：ТЕТТУЛ）",
+   "素材：80% ウール / 20% ビスコース",
+   "実寸 身幅53cm・着丈66cm・肩幅47cm"
+  ],
+  "lead": "ウール80%、ビスコース20%と思われる素材で編まれた、長袖のニットポロシャツです。",
+  "body_html": "<h2>この一着のこと</h2><p>ウール80%、ビスコース20%と思われる素材で編まれた、長袖のニットポロシャツです。色はグレーメランジュの無地。タグにはキリル文字で「ТЕТТУЛ」と刻まれており、ロシア語圏のブランドと推定されます。サイズタグにも「М」とキリル文字で表記されています。1980〜1990年代頃のものと思われます。</p><p>現在は川越・小判鮫の古民家の棚に並んでいます。全体的に概ね良好な状態で、着る人から見て右袖の付け根付近にわずかな使用感が見られますが、その他に目立つ傷や汚れは確認できません。ウール混のニット地はしっかりとした編み目で、手に取るとほどよい重みがあります。</p><p>着方はシンプルに、これ一枚でそのまま着るのが似合います。ボタンを開けて首元をゆったりさせても、閉めてすっきり着ても、グレーメランジュの無地が邪魔をしません。</p><h2>状態</h2><p>状態は写真でご確認ください。気になる点は、お問い合わせからお尋ねください。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "ТЕТТУЛ"
+   ],
+   [
+    "タグの表記",
+    "ТЕТТУЛ（キリル文字表記、ロシア語圏ブランドと推定）"
+   ],
+   [
+    "店頭での名前",
+    "Polo shirt wool"
+   ],
+   [
+    "素材",
+    "80% ウール / 20% ビスコース"
+   ],
+   [
+    "色",
+    "グレーメランジュ（無地）"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅53cm・着丈66cm・肩幅47cm"
+   ],
+   [
+    "状態",
+    "写真でご確認ください"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "tops",
+  "genre_by": "auto-keyword-2026-11-22",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.9",
+   "made_at": "2026-11-22",
+   "needs": [
+    "性別は自動判定：メンズ（写真：メンズ（着る人から見て右側にボタンが付いている））→ 違えばClaudeへ",
+    "ブランド欄は短い名前（ТЕТТУЛ）にした。タグの表記の全文は仕様表「タグの表記」",
+    "状態（傷・汚れ）が確定していない → 「写真でご確認ください」としてある",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "商品名・見出しは決まった並び（年代・ブランド・素材・色・品目・性別）で自動作成 → 気に入らなければClaudeへ",
+    "着こなし・雰囲気の文を 1文外した（決まり2・3）",
+    "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
+    "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
+    "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いている）"
+ },
+ {
+  "sku": "K11459",
+  "slug": "k11459-aeropostale-nineteen-eighty-seven-authentic-brand-aerony-athletic-dept",
+  "published": false,
+  "release": "draft",
+  "status": "available",
+  "title": "AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept. 長袖Tシャツ",
+  "product_name": "AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept. 長袖Tシャツ",
+  "brand": "AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept.",
+  "category": "メンズ／トップス／Tシャツ",
+  "material": "100% コットン",
+  "published_date": "2026-11-22",
+  "prices": {
+   "store": 4200,
+   "site": 4200,
+   "mercari": 4620
+  },
+  "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-22",
+  "links": {},
+  "images": [
+   "/assets/products/k11459/01.jpg",
+   "/assets/products/k11459/02.jpg",
+   "/assets/products/k11459/03.jpg",
+   "/assets/products/k11459/04.jpg",
+   "/assets/products/k11459/05.jpg",
+   "/assets/products/k11459/06.jpg",
+   "/assets/products/k11459/07.jpg",
+   "/assets/products/k11459/08.jpg",
+   "/assets/products/k11459/09.jpg",
+   "/assets/products/k11459/10.jpg",
+   "/assets/products/k11459/11.jpg",
+   "/assets/products/k11459/12.jpg",
+   "/assets/products/k11459/13.jpg",
+   "/assets/products/k11459/14.jpg",
+   "/assets/products/k11459/15.jpg",
+   "/assets/products/k11459/16.jpg",
+   "/assets/products/k11459/17.jpg",
+   "/assets/products/k11459/18.jpg",
+   "/assets/products/k11459/19.jpg",
+   "/assets/products/k11459/20.jpg"
+  ],
+  "thumb": "/assets/products/k11459/thumb.jpg",
+  "summary_text": "チャコールグレー×ホワイトのボーダー柄サーマル。",
+  "summary_points": [
+   "チャコールグレー×ホワイト ボーダー柄の長袖Tシャツ（サーマル・ワッフル生地）（ブランド：AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept.）",
+   "素材：100% コットン",
+   "実寸 身幅50cm・着丈69cm・肩幅45cm"
+  ],
+  "lead": "ワッフル生地のサーマル素材で作られた、長袖のボーダーTシャツです。",
+  "body_html": "<h2>この一着のこと</h2><p>ワッフル生地のサーマル素材で作られた、長袖のボーダーTシャツです。チャコールグレーとホワイトの横縞に、フロントにはAEROPOSTALE / Nineteen Eighty Seven / AeroNY Athletic Dept.の刺繍アップリケが入っています。素材はコットン100%と思われます。ボーダー柄とアップリケの組み合わせは、無地のサーマルとは一線を画す個性があります。</p><p>今は川越の古民家の中にあります。フロントアップリケにほつれと剥がれがあり、意図的なヴィンテージ加工の可能性もあります。ネックライン付近の中央に小穴、裾ステッチにもほつれがあります。状態はきれいとは言えませんが、サーマルのワッフル地はしっかりと残っています。タグにはM/Mと明記されており、メンズのMサイズです。</p><p>これ一枚でそのまま着てください。ボーダーとアップリケがあるので、上に何かを重ねると情報が多くなりすぎます。アップリケのくたびれ具合も含めて、着た姿になじみます。</p><h2>状態</h2><p>状態：フロントアップリケのほつれ・剥がれ（意図的ヴィンテージ加工の可能性あり）、ネックライン付近に小穴あり（着る人から見て左右中央付近）、裾ステッチほつれあり。</p>",
+  "spec": [
+   [
+    "ブランド",
+    "AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept."
+   ],
+   [
+    "タグの表記",
+    "AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept.（フロント刺繍アップリケ）"
+   ],
+   [
+    "店頭での名前",
+    "Y2k border L/s waffle"
+   ],
+   [
+    "素材",
+    "100% コットン"
+   ],
+   [
+    "色",
+    "チャコールグレー×ホワイト ボーダー柄"
+   ],
+   [
+    "サイズ",
+    "実寸 身幅50cm・着丈69cm・肩幅45cm"
+   ],
+   [
+    "状態",
+    "フロントアップリケのほつれ・剥がれ（意図的ヴィンテージ加工の可能性あり）、ネックライン付近に小穴あり（着る人から見て左右中央付近）、裾ステッチほつれあり"
+   ]
+  ],
+  "sku_confidence": "確定",
+  "genre": "tops",
+  "genre_by": "auto-keyword-2026-11-22",
+  "draft_meta": {
+   "made_by": "67_draft_maker_v1",
+   "version": "v1.9",
+   "made_at": "2026-11-22",
+   "needs": [
+    "性別は自動判定：メンズ（写真：メンズ（タグにM/M表記、シルエット・身幅からも男性向けと判断））→ 違えばClaudeへ",
+    "ブランド欄は短い名前（AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept.）にした。タグの表記の全文は仕様表「タグの表記」",
+    "写真は品番フォルダ直下の先頭から名前順に自動採用（先頭がトップ画像）→ 値札や採寸の紙が混ざっていないか確認",
+    "商品名・見出しは決まった並び（年代・ブランド・素材・色・品目・性別）で自動作成 → 気に入らなければClaudeへ",
+    "着こなし・雰囲気の文を 1文外した（決まり2・3）",
+    "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
+    "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
+    "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
+   ]
+  },
+  "gender_by": "写真：メンズ（タグにM/M表記、シルエット・身幅からも男性向けと判断）"
  }
 ]
