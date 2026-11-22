@@ -10794,7 +10794,7 @@
  {
   "sku": "K11546",
   "slug": "k11546-nanuk",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1980〜90年代頃 NANUK ネイビー ニットカーディガン メンズ",
@@ -10888,14 +10888,15 @@
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
     "Square の値段が0円（未登録）なので、値札の 7800 円（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。店頭の Square にも値段を入れると、メルカリにも出せる",
     "ジャンルは分類から自動で決めた（tops）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-11-22"
   },
   "gender_by": "写真：メンズ（ボタンが着る人から見て右側＝メンズ留め）"
  },
  {
   "sku": "K11538",
   "slug": "k11538-ellesse",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1990〜2000年代頃 ellesse リバーシブルフリースジャケット メンズ",
@@ -10985,14 +10986,15 @@
     "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
     "ジャンルはキーワードで自動判定（outer）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-11-22"
   },
   "gender_by": "表記にメンズ・写真の見立て：メンズ（ジップが着る人から見て右側・全体のシルエットおよびブランドラインの傾向）・実寸が大きめ（肩幅60・身幅59）"
  },
  {
   "sku": "K11492",
   "slug": "k11492",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1970〜80年代頃 インディゴブルー デニムパンツ メンズ 古着",
@@ -11076,14 +11078,15 @@
     "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-11-22"
   },
   "gender_by": "写真の見立て：メンズ（フロントジッパーフライ・リベット仕様・シルエットからメンズ寄りと推定）"
  },
  {
   "sku": "K11552",
   "slug": "k11552-wpl-11935",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1980〜90年代頃 WPL 11935 ライトブルー デニムパンツ メンズ",
@@ -11176,14 +11179,15 @@
     "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
     "ジャンルはキーワードで自動判定（bottoms）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-11-22"
   },
   "gender_by": "写真の見立て：メンズ（ウエスト32×インシーム32のインチ表記およびシルエット・フロントボタン位置から）"
  },
  {
   "sku": "K11535",
   "slug": "k11535",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "1980〜90年代頃 ТЕТТУЛ グレーメランジュ 長袖ポロシャツ メンズ",
@@ -11270,14 +11274,15 @@
     "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
     "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-11-22"
   },
   "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いている）"
  },
  {
   "sku": "K11459",
   "slug": "k11459-aeropostale-nineteen-eighty-seven-authentic-brand-aerony-athletic-dept",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept. 長袖Tシャツ",
@@ -11370,14 +11375,15 @@
     "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
     "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-11-22"
   },
   "gender_by": "写真：メンズ（タグにM/M表記、シルエット・身幅からも男性向けと判断）"
  },
  {
   "sku": "K11537",
   "slug": "k11537-giada-fashion",
-  "published": false,
+  "published": true,
   "release": "draft",
   "status": "available",
   "title": "2000〜10年代頃 GIADA Fashion 長袖ハーフジップポロシャツ",
@@ -11464,7 +11470,8 @@
     "「と思われます」がある → 言い切るか、分からないなら消す（決まり4）",
     "色・生地・首元などの特徴が写真どおりか確かめる（決まり6・7）",
     "ジャンルはキーワードで自動判定（tops）→ 違えばClaudeへ"
-   ]
+   ],
+   "approved_at": "2026-11-22"
   },
   "gender_by": "写真の見立て：レディース（イタリア婦人服サイズ表記「6/3」、細身のシルエット）・実寸が小さめ（肩幅40・身幅44）"
  }
