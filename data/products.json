@@ -4739,7 +4739,7 @@
   "slug": "k11411",
   "published": true,
   "release": "live",
-  "status": "available",
+  "status": "sold",
   "title": "1980〜90年代頃 ゴートスエード バルスタージャケット（A-1タイプ） タバコブラウン メンズ",
   "product_name": "1980〜90年代頃 ゴートスエード バルスタージャケット（A-1タイプ） タバコブラウン メンズ",
   "brand": "表記なし",
@@ -11584,7 +11584,7 @@
    "front_url": "/assets/products/k11459/v2_front.jpg",
    "front_check": {
     "brighten": 0.1,
-    "garment_l": 67.0,
+    "garment_l": 67,
     "bg": "normal"
    },
    "back_url": "/assets/products/k11459/v2_back.jpg",
