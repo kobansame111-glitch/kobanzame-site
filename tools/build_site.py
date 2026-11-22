@@ -259,7 +259,8 @@ _HOL_F, _HOL_T = _bf_ms(HOLIDAY['from']), _bf_ms(HOLIDAY['to'])
 _SHIP_F, _SHIP_T = _bf_ms(SHIPWIN['from']), _bf_ms(SHIPWIN['to'])
 HOL_STYLE = ('<style>'
   '.holband{background:#3b4a73;color:#fff;text-align:center;font-size:13px;letter-spacing:.02em;padding:7px 12px;line-height:1.5}'
-  '.holnotice{background:var(--kinari,#f3f1ea);border:1px solid var(--line,#d7dbdf);border-radius:10px;padding:14px 16px;margin:18px 0;font-size:14px;line-height:1.9}'
+  # 2026-11-22 トップの大きな黒い四角の正体＝このお知らせの枠。背景に文字色（--kinari＝ほぼ黒）を使っていて、文字も同じ色のため中身が見えない黒い箱になっていた。背景を薄い色（--susu）に、文字を --kinari にして読めるようにする
+  '.holnotice{background:var(--susu,#EAE4D8);color:var(--kinari,#120A07);border:1px solid var(--line,#DCD3C3);border-radius:10px;padding:14px 16px;margin:18px var(--gutter,16px);font-size:14px;line-height:1.9}'   # 左右に余白（画面の端にくっつけない）
   '.holnotice b{display:block;margin-bottom:4px;letter-spacing:.04em}'
   '</style>')
 # 発送の文言（この語句が本文にあれば .shipwhen で包み、発送期間だけ差し替える）
@@ -556,13 +557,13 @@ CART_T = {
   'ja': {'add': 'カートに入れる', 'in': 'カートに入っています（カートを見る）', 'added': 'カートに入れました', 'max': 'カートには10点まで入れられます',
          'empty': 'カートは空です。', 'remove': '外す', 'total': '合計（送料込み）', 'gone': '次の商品は、先に売れたためカートから外しました：',
          'fail': 'いまカートでのお支払いを受け付けられませんでした。お手数ですが、商品ページの「購入する」から1点ずつお買い求めください。',
-         'busy': '少し時間をおいて、もう一度お試しください。', 'wait': 'Square の安全な決済画面を開いています（数秒）',
+         'busy': '少し時間をおいて、もう一度お試しください。', 'wait': '決済画面へ移動中…',
          'preview': '（確認用のページです）本番では、ここで Square の決済画面に移ります。',
          'sold1': 'この商品は先に売れてしまいました。申し訳ありません。', 'fail1': 'いまお支払いの画面を開けませんでした。少し時間をおいて、もう一度お試しください。'},
   'en': {'add': 'Add to cart', 'in': 'In your cart (view cart)', 'added': 'Added to your cart', 'max': 'You can put up to 10 items in the cart',
          'empty': 'Your cart is empty.', 'remove': 'Remove', 'total': 'Total (shipping within Japan included)', 'gone': 'These items sold before checkout and were removed:',
          'fail': 'We could not start the cart checkout right now. Please buy each item from its own page with "Buy now".',
-         'busy': 'Please wait a moment and try again.', 'wait': 'Opening Square’s secure checkout… (a few seconds)',
+         'busy': 'Please wait a moment and try again.', 'wait': 'Going to checkout…',
          'preview': '(Preview page) On the live site this button opens the Square checkout.',
          'sold1': 'Sorry, this piece has just sold.', 'fail1': 'We could not open the checkout right now. Please wait a moment and try again.'},
 }
