@@ -10811,7 +10811,8 @@
   "price_rule": "Square が0円（未登録）のため値札の価格（税別）をサイトの値段にした（龍さんルール 2026-10-14・AI値付け 2A）。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-21",
   "links": {},
   "images": [
-   "/assets/products/k11546/01.jpg",
+   "/assets/products/k11546/v2_front.jpg",
+   "/assets/products/k11546/v2_back.jpg",
    "/assets/products/k11546/02.jpg",
    "/assets/products/k11546/03.jpg",
    "/assets/products/k11546/04.jpg",
@@ -10821,7 +10822,6 @@
    "/assets/products/k11546/08.jpg",
    "/assets/products/k11546/09.jpg",
    "/assets/products/k11546/10.jpg",
-   "/assets/products/k11546/11.jpg",
    "/assets/products/k11546/12.jpg",
    "/assets/products/k11546/13.jpg",
    "/assets/products/k11546/14.jpg",
@@ -10832,7 +10832,7 @@
    "/assets/products/k11546/19.jpg",
    "/assets/products/k11546/20.jpg"
   ],
-  "thumb": "/assets/products/k11546/thumb.jpg",
+  "thumb": "/assets/products/k11546/v2_thumb.jpg",
   "summary_text": "ネイビー地にフェアアイル調の幾何学柄が入った、NANUKのヴィンテージVネックカーディガンです。1980〜90年代前半頃のXLサイズ、メンズ仕様。",
   "summary_points": [
    "ネイビー地・フェアアイル調マルチカラー幾何学柄（赤・グレー・白・緑・紫）のニットカーディガン（Vネック・ボタン前開き）（ブランド：NANUK）",
@@ -10891,7 +10891,46 @@
    ],
    "approved_at": "2026-11-22"
   },
-  "gender_by": "写真：メンズ（ボタンが着る人から見て右側＝メンズ留め）"
+  "gender_by": "写真：メンズ（ボタンが着る人から見て右側＝メンズ留め）",
+  "images_orig": [
+   "/assets/products/k11546/01.jpg",
+   "/assets/products/k11546/02.jpg",
+   "/assets/products/k11546/03.jpg",
+   "/assets/products/k11546/04.jpg",
+   "/assets/products/k11546/05.jpg",
+   "/assets/products/k11546/06.jpg",
+   "/assets/products/k11546/07.jpg",
+   "/assets/products/k11546/08.jpg",
+   "/assets/products/k11546/09.jpg",
+   "/assets/products/k11546/10.jpg",
+   "/assets/products/k11546/11.jpg",
+   "/assets/products/k11546/12.jpg",
+   "/assets/products/k11546/13.jpg",
+   "/assets/products/k11546/14.jpg",
+   "/assets/products/k11546/15.jpg",
+   "/assets/products/k11546/16.jpg",
+   "/assets/products/k11546/17.jpg",
+   "/assets/products/k11546/18.jpg",
+   "/assets/products/k11546/19.jpg",
+   "/assets/products/k11546/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-22",
+   "front_i": 0,
+   "back_i": 10,
+   "front_url": "/assets/products/k11546/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.3,
+    "garment_l": 47.8,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11546/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 56.2,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11538",
@@ -10913,10 +10952,10 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-21",
   "links": {},
   "images": [
-   "/assets/products/k11538/01.jpg",
+   "/assets/products/k11538/v2_front.jpg",
+   "/assets/products/k11538/04.jpg",
    "/assets/products/k11538/02.jpg",
    "/assets/products/k11538/03.jpg",
-   "/assets/products/k11538/04.jpg",
    "/assets/products/k11538/05.jpg",
    "/assets/products/k11538/06.jpg",
    "/assets/products/k11538/07.jpg",
@@ -10934,7 +10973,7 @@
    "/assets/products/k11538/19.jpg",
    "/assets/products/k11538/20.jpg"
   ],
-  "thumb": "/assets/products/k11538/thumb.jpg",
+  "thumb": "/assets/products/k11538/v2_thumb.jpg",
   "summary_text": "エレッセのリバーシブルフリースジャケット。フリース面のボーダー柄とナイロン面の無地ブラック、どちらを表にしても一枚で完結します。",
   "summary_points": [
    "ブラック×グレー×オフホワイト ボーダー柄（フリース面）／無地ブラック（ナイロン面）のリバーシブルフリースジャケット（ブランド：ellesse）",
@@ -10989,7 +11028,41 @@
    ],
    "approved_at": "2026-11-22"
   },
-  "gender_by": "表記にメンズ・写真の見立て：メンズ（ジップが着る人から見て右側・全体のシルエットおよびブランドラインの傾向）・実寸が大きめ（肩幅60・身幅59）"
+  "gender_by": "表記にメンズ・写真の見立て：メンズ（ジップが着る人から見て右側・全体のシルエットおよびブランドラインの傾向）・実寸が大きめ（肩幅60・身幅59）",
+  "images_orig": [
+   "/assets/products/k11538/01.jpg",
+   "/assets/products/k11538/02.jpg",
+   "/assets/products/k11538/03.jpg",
+   "/assets/products/k11538/04.jpg",
+   "/assets/products/k11538/05.jpg",
+   "/assets/products/k11538/06.jpg",
+   "/assets/products/k11538/07.jpg",
+   "/assets/products/k11538/08.jpg",
+   "/assets/products/k11538/09.jpg",
+   "/assets/products/k11538/10.jpg",
+   "/assets/products/k11538/11.jpg",
+   "/assets/products/k11538/12.jpg",
+   "/assets/products/k11538/13.jpg",
+   "/assets/products/k11538/14.jpg",
+   "/assets/products/k11538/15.jpg",
+   "/assets/products/k11538/16.jpg",
+   "/assets/products/k11538/17.jpg",
+   "/assets/products/k11538/18.jpg",
+   "/assets/products/k11538/19.jpg",
+   "/assets/products/k11538/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-22",
+   "front_i": 0,
+   "back_i": 3,
+   "front_url": "/assets/products/k11538/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.5,
+    "garment_l": 47.8,
+    "bg": "normal"
+   },
+   "back_error": "RuntimeError('数字の検査で不合格：背景が透けて明るくなった量 5.9（5.0以上）＝白飛び')"
+  }
  },
  {
   "sku": "K11492",
@@ -11011,8 +11084,9 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-22",
   "links": {},
   "images": [
+   "/assets/products/k11492/v2_front.jpg",
+   "/assets/products/k11492/v2_back.jpg",
    "/assets/products/k11492/01.jpg",
-   "/assets/products/k11492/02.jpg",
    "/assets/products/k11492/03.jpg",
    "/assets/products/k11492/04.jpg",
    "/assets/products/k11492/05.jpg",
@@ -11020,7 +11094,6 @@
    "/assets/products/k11492/07.jpg",
    "/assets/products/k11492/08.jpg",
    "/assets/products/k11492/09.jpg",
-   "/assets/products/k11492/10.jpg",
    "/assets/products/k11492/11.jpg",
    "/assets/products/k11492/12.jpg",
    "/assets/products/k11492/13.jpg",
@@ -11030,7 +11103,7 @@
    "/assets/products/k11492/17.jpg",
    "/assets/products/k11492/18.jpg"
   ],
-  "thumb": "/assets/products/k11492/thumb.jpg",
+  "thumb": "/assets/products/k11492/v2_thumb.jpg",
   "summary_text": "1970〜80年代頃のヴィンテージデニム。ストーンウォッシュのミディアムブルーに、シルバーリベットとゴールドステッチが映える一本です。",
   "summary_points": [
    "インディゴブルー・ミディアムウォッシュ、ストーンウォッシュ加工のデニムパンツ（ジーンズ）",
@@ -11081,7 +11154,44 @@
    ],
    "approved_at": "2026-11-22"
   },
-  "gender_by": "写真の見立て：メンズ（フロントジッパーフライ・リベット仕様・シルエットからメンズ寄りと推定）"
+  "gender_by": "写真の見立て：メンズ（フロントジッパーフライ・リベット仕様・シルエットからメンズ寄りと推定）",
+  "images_orig": [
+   "/assets/products/k11492/01.jpg",
+   "/assets/products/k11492/02.jpg",
+   "/assets/products/k11492/03.jpg",
+   "/assets/products/k11492/04.jpg",
+   "/assets/products/k11492/05.jpg",
+   "/assets/products/k11492/06.jpg",
+   "/assets/products/k11492/07.jpg",
+   "/assets/products/k11492/08.jpg",
+   "/assets/products/k11492/09.jpg",
+   "/assets/products/k11492/10.jpg",
+   "/assets/products/k11492/11.jpg",
+   "/assets/products/k11492/12.jpg",
+   "/assets/products/k11492/13.jpg",
+   "/assets/products/k11492/14.jpg",
+   "/assets/products/k11492/15.jpg",
+   "/assets/products/k11492/16.jpg",
+   "/assets/products/k11492/17.jpg",
+   "/assets/products/k11492/18.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-22",
+   "front_i": 1,
+   "back_i": 9,
+   "front_url": "/assets/products/k11492/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 65.9,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11492/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 65.9,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11552",
@@ -11103,8 +11213,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-22",
   "links": {},
   "images": [
-   "/assets/products/k11552/01.jpg",
-   "/assets/products/k11552/02.jpg",
+   "/assets/products/k11552/v2_front.jpg",
+   "/assets/products/k11552/v2_back.jpg",
    "/assets/products/k11552/03.jpg",
    "/assets/products/k11552/04.jpg",
    "/assets/products/k11552/05.jpg",
@@ -11124,7 +11234,7 @@
    "/assets/products/k11552/19.jpg",
    "/assets/products/k11552/20.jpg"
   ],
-  "thumb": "/assets/products/k11552/thumb.jpg",
+  "thumb": "/assets/products/k11552/v2_thumb.jpg",
   "summary_text": "薄色ウォッシュのコットンデニム、ブーツカットシルエット。右脚から左脚にかけて黄色いペイントが飛び散り、それ自体が個性になっています。",
   "summary_points": [
    "ライトブルー（薄色ウォッシュ）、無地のデニムパンツ（ブーツカット／フレアカット）（ブランド：WPL 11935）",
@@ -11182,7 +11292,46 @@
    ],
    "approved_at": "2026-11-22"
   },
-  "gender_by": "写真の見立て：メンズ（ウエスト32×インシーム32のインチ表記およびシルエット・フロントボタン位置から）"
+  "gender_by": "写真の見立て：メンズ（ウエスト32×インシーム32のインチ表記およびシルエット・フロントボタン位置から）",
+  "images_orig": [
+   "/assets/products/k11552/01.jpg",
+   "/assets/products/k11552/02.jpg",
+   "/assets/products/k11552/03.jpg",
+   "/assets/products/k11552/04.jpg",
+   "/assets/products/k11552/05.jpg",
+   "/assets/products/k11552/06.jpg",
+   "/assets/products/k11552/07.jpg",
+   "/assets/products/k11552/08.jpg",
+   "/assets/products/k11552/09.jpg",
+   "/assets/products/k11552/10.jpg",
+   "/assets/products/k11552/11.jpg",
+   "/assets/products/k11552/12.jpg",
+   "/assets/products/k11552/13.jpg",
+   "/assets/products/k11552/14.jpg",
+   "/assets/products/k11552/15.jpg",
+   "/assets/products/k11552/16.jpg",
+   "/assets/products/k11552/17.jpg",
+   "/assets/products/k11552/18.jpg",
+   "/assets/products/k11552/19.jpg",
+   "/assets/products/k11552/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-22",
+   "front_i": 0,
+   "back_i": 1,
+   "front_url": "/assets/products/k11552/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.0,
+    "garment_l": 185.0,
+    "bg": "light_item"
+   },
+   "back_url": "/assets/products/k11552/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 189.2,
+    "bg": "light_item"
+   }
+  }
  },
  {
   "sku": "K11535",
@@ -11204,8 +11353,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-22",
   "links": {},
   "images": [
+   "/assets/products/k11535/v2_back.jpg",
    "/assets/products/k11535/01.jpg",
-   "/assets/products/k11535/02.jpg",
    "/assets/products/k11535/03.jpg",
    "/assets/products/k11535/04.jpg",
    "/assets/products/k11535/05.jpg",
@@ -11218,7 +11367,7 @@
    "/assets/products/k11535/12.jpg",
    "/assets/products/k11535/13.jpg"
   ],
-  "thumb": "/assets/products/k11535/thumb.jpg",
+  "thumb": "/assets/products/k11535/v2_thumb.jpg",
   "summary_text": "キリル文字タグのウールニットポロ。グレーメランジュの無地、1980〜1990年代頃と思われる一着です。",
   "summary_points": [
    "グレーメランジュ（無地）の長袖ポロシャツ（ニットポロ）（ブランド：ТЕТТУЛ）",
@@ -11277,7 +11426,34 @@
    ],
    "approved_at": "2026-11-22"
   },
-  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いている）"
+  "gender_by": "写真：メンズ（着る人から見て右側にボタンが付いている）",
+  "images_orig": [
+   "/assets/products/k11535/01.jpg",
+   "/assets/products/k11535/02.jpg",
+   "/assets/products/k11535/03.jpg",
+   "/assets/products/k11535/04.jpg",
+   "/assets/products/k11535/05.jpg",
+   "/assets/products/k11535/06.jpg",
+   "/assets/products/k11535/07.jpg",
+   "/assets/products/k11535/08.jpg",
+   "/assets/products/k11535/09.jpg",
+   "/assets/products/k11535/10.jpg",
+   "/assets/products/k11535/11.jpg",
+   "/assets/products/k11535/12.jpg",
+   "/assets/products/k11535/13.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-22",
+   "front_i": 0,
+   "back_i": 1,
+   "front_error": "RuntimeError('仕上がり確認で不合格：左袖が切り取られています。')",
+   "back_url": "/assets/products/k11535/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.9,
+    "garment_l": 135.8,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11459",
