@@ -11475,11 +11475,11 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-22",
   "links": {},
   "images": [
-   "/assets/products/k11459/01.jpg",
+   "/assets/products/k11459/v2_front.jpg",
+   "/assets/products/k11459/v2_back.jpg",
    "/assets/products/k11459/02.jpg",
    "/assets/products/k11459/03.jpg",
    "/assets/products/k11459/04.jpg",
-   "/assets/products/k11459/05.jpg",
    "/assets/products/k11459/06.jpg",
    "/assets/products/k11459/07.jpg",
    "/assets/products/k11459/08.jpg",
@@ -11496,7 +11496,7 @@
    "/assets/products/k11459/19.jpg",
    "/assets/products/k11459/20.jpg"
   ],
-  "thumb": "/assets/products/k11459/thumb.jpg",
+  "thumb": "/assets/products/k11459/v2_thumb.jpg",
   "summary_text": "チャコールグレー×ホワイトのボーダー柄サーマル。",
   "summary_points": [
    "チャコールグレー×ホワイト ボーダー柄の長袖Tシャツ（サーマル・ワッフル生地）（ブランド：AEROPOSTALE / Nineteen Eighty Seven / Authentic Brand / AeroNY Athletic Dept.）",
@@ -11554,7 +11554,46 @@
    ],
    "approved_at": "2026-11-22"
   },
-  "gender_by": "写真：メンズ（タグにM/M表記、シルエット・身幅からも男性向けと判断）"
+  "gender_by": "写真：メンズ（タグにM/M表記、シルエット・身幅からも男性向けと判断）",
+  "images_orig": [
+   "/assets/products/k11459/01.jpg",
+   "/assets/products/k11459/02.jpg",
+   "/assets/products/k11459/03.jpg",
+   "/assets/products/k11459/04.jpg",
+   "/assets/products/k11459/05.jpg",
+   "/assets/products/k11459/06.jpg",
+   "/assets/products/k11459/07.jpg",
+   "/assets/products/k11459/08.jpg",
+   "/assets/products/k11459/09.jpg",
+   "/assets/products/k11459/10.jpg",
+   "/assets/products/k11459/11.jpg",
+   "/assets/products/k11459/12.jpg",
+   "/assets/products/k11459/13.jpg",
+   "/assets/products/k11459/14.jpg",
+   "/assets/products/k11459/15.jpg",
+   "/assets/products/k11459/16.jpg",
+   "/assets/products/k11459/17.jpg",
+   "/assets/products/k11459/18.jpg",
+   "/assets/products/k11459/19.jpg",
+   "/assets/products/k11459/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-22",
+   "front_i": 0,
+   "back_i": 4,
+   "front_url": "/assets/products/k11459/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 67.0,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11459/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.2,
+    "garment_l": 63.3,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11537",
@@ -11576,8 +11615,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-22",
   "links": {},
   "images": [
-   "/assets/products/k11537/01.jpg",
-   "/assets/products/k11537/02.jpg",
+   "/assets/products/k11537/v2_front.jpg",
+   "/assets/products/k11537/v2_back.jpg",
    "/assets/products/k11537/03.jpg",
    "/assets/products/k11537/04.jpg",
    "/assets/products/k11537/05.jpg",
@@ -11590,7 +11629,7 @@
    "/assets/products/k11537/12.jpg",
    "/assets/products/k11537/13.jpg"
   ],
-  "thumb": "/assets/products/k11537/thumb.jpg",
+  "thumb": "/assets/products/k11537/v2_thumb.jpg",
   "summary_text": "イタリア・プラート発のブランド、GIADA Fashionによるオリーブグリーンのハーフジップポロシャツ。",
   "summary_points": [
    "オリーブグリーン（無地）の長袖ハーフジップポロシャツ（ブランド：GIADA Fashion）",
@@ -11649,7 +11688,39 @@
    ],
    "approved_at": "2026-11-22"
   },
-  "gender_by": "写真の見立て：レディース（イタリア婦人服サイズ表記「6/3」、細身のシルエット）・実寸が小さめ（肩幅40・身幅44）"
+  "gender_by": "写真の見立て：レディース（イタリア婦人服サイズ表記「6/3」、細身のシルエット）・実寸が小さめ（肩幅40・身幅44）",
+  "images_orig": [
+   "/assets/products/k11537/01.jpg",
+   "/assets/products/k11537/02.jpg",
+   "/assets/products/k11537/03.jpg",
+   "/assets/products/k11537/04.jpg",
+   "/assets/products/k11537/05.jpg",
+   "/assets/products/k11537/06.jpg",
+   "/assets/products/k11537/07.jpg",
+   "/assets/products/k11537/08.jpg",
+   "/assets/products/k11537/09.jpg",
+   "/assets/products/k11537/10.jpg",
+   "/assets/products/k11537/11.jpg",
+   "/assets/products/k11537/12.jpg",
+   "/assets/products/k11537/13.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-22",
+   "front_i": 0,
+   "back_i": 1,
+   "front_url": "/assets/products/k11537/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 97.3,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11537/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.2,
+    "garment_l": 100.7,
+    "bg": "normal"
+   }
+  }
  },
  {
   "sku": "K11455",
