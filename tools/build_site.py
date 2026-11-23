@@ -1689,6 +1689,17 @@ def is_new(p):
     except ValueError:
         return False
 
+JP_CHAR_RE = re.compile(r'[ぁ-んァ-ヶ一-龯]')   # ひらがな・カタカナ・漢字（日本語の名前かどうかの判定）
+def disp_name(p, lang):
+    """商品の名前として画面に出す文字。日本語ページで product_name に日本語が1文字も無く（K11265 の "Leather Utility Vest" など）、
+    日本語の題名（title）がある品は、title を出す（2026-11-23 外のレビュー）。英語ページと、ふつうの品は今までどおり product_name。"""
+    n = loc(p, 'product_name', lang)
+    if lang == 'ja' and not JP_CHAR_RE.search(n or ''):
+        t = p.get('title') or ''
+        if JP_CHAR_RE.search(t):
+            return t
+    return n
+
 def card_html(p, lang, lazy=True, findable=False):
     t = T[lang]
     w = body_width(p)
@@ -1701,14 +1712,13 @@ def card_html(p, lang, lazy=True, findable=False):
     _cturl, _ctw, _cth = card_image(thumb_src(p))   # 一覧カードは軽いWebP（ローカル）／メルカリ /medium（リモート）
     _ctdim = f' width="{_ctw}" height="{_cth}"' if _ctw else ''
     return (f'<a class="card{" sold" if sold else ""}" href="{pre(lang)}/journal/{p["slug"]}/" data-sku="{esc(p.get("sku", ""))}" data-cat="{cat_of(p)}" data-new="{1 if (not sold and is_new(p)) else 0}" data-w="{wv}" data-sold="{1 if sold else 0}"' + (f' data-p="{site_price(p)}" data-q="{esc(search_text(p))}"' if findable else '') + '>'
-            f'<div class="ph"><img src="{esc(_cturl)}" alt="{esc(loc(p, "product_name", lang))}"{lz}{_ctdim}>{alt_img(p)}{tag}</div>'
-            f'<div class="brand">{esc(brand_disp(p, lang))}</div><div class="nm">{esc(loc(p, "product_name", lang))}</div>'
+            f'<div class="ph"><img src="{esc(_cturl)}" alt="{esc(disp_name(p, lang))}"{lz}{_ctdim}>{alt_img(p)}{tag}</div>'
+            f'<div class="brand">{esc(brand_disp(p, lang))}</div><div class="nm">{esc(disp_name(p, lang))}</div>'
             + (f'<div class="sz">{T[lang]["width"].format(w=wv)}</div>' if (wv and not sold) else '') +   # 2026-11-03 一覧で身幅が分かるように
             f'<span class="fit" hidden></span>'
             f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small>{usd_span(site_price(p), lang)}{bf_pill(lang)}</div></a>')
 
 import urllib.parse
-JP_CHAR_RE = re.compile(r'[ぁ-んァ-ヶ一-龯]')   # ひらがな・カタカナ・漢字（日本語の見出しかどうかの判定）
 # 2026-11-03 法務の目（v0 §7）：輸出に許可が要る恐れのある素材は、英語ページで海外発送の見積を出さない
 NO_EXPORT_RE = re.compile(r'(パイソン|python|蛇革|ヘビ革|スネーク|snake|クロコ|croc|ワニ革|alligator|リザード|lizard|オーストリッチ|ostrich|珊瑚|サンゴ|コーラル|coral|べっ甲|鼈甲|tortoise|象牙|ivory)', re.I)
 # 2026-11-03 龍さん「状態A・サイズ…のように、項目名つきで分かりやすく」：価格の下に「商品情報」の表
@@ -1720,7 +1730,7 @@ INFO_KEYS = {
 
 def info_rows(p, lang):
     spec = {k: v for k, v in loc(p, 'spec', lang)}
-    rows = [('商品名' if lang == 'ja' else 'Item', loc(p, 'product_name', lang))]
+    rows = [('商品名' if lang == 'ja' else 'Item', disp_name(p, lang))]
     seen = set()
     for key, label in INFO_KEYS[lang]:
         v = str(spec.get(key, '')).strip()
@@ -1974,7 +1984,7 @@ for lang in ('ja', 'en'):
     list_ld = {'@context': 'https://schema.org', '@graph': [org_node(),
                {'@type': 'CollectionPage', 'name': t['jr_title'], 'url': BASE + P + '/journal/', 'inLanguage': lang,
                 'mainEntity': {'@type': 'ItemList', 'itemListElement': [
-                    {'@type': 'ListItem', 'position': i + 1, 'url': BASE + P + f"/journal/{p['slug']}/", 'name': loc(p, 'product_name', lang)}
+                    {'@type': 'ListItem', 'position': i + 1, 'url': BASE + P + f"/journal/{p['slug']}/", 'name': disp_name(p, lang)}
                     for i, p in enumerate(live)]}}]}
     jl = head(lang, t['jr_title'], t['jr_desc'], P + '/journal/', extra_ld=list_ld) + f'''
 <main class="wrap">
@@ -2075,7 +2085,7 @@ for lang in ('ja', 'en'):
         path = P + f"/journal/{p['slug']}/"
         price = site_price(p)
         sold = is_sold(p)
-        name = loc(p, 'product_name', lang)
+        name = disp_name(p, lang)   # 2026-11-23 日本語ページで product_name が英語だけの品は、日本語の題名（見出し・カート・構造化データも）
         offer = {'@type': 'Offer', 'price': str(price), 'priceCurrency': 'JPY',
                  'availability': 'https://schema.org/SoldOut' if sold else 'https://schema.org/InStock',
                  'itemCondition': 'https://schema.org/' + p.get('item_condition', 'UsedCondition'), 'url': BASE + path,
@@ -2161,8 +2171,8 @@ for lang in ('ja', 'en'):
         related = f'<section class="related"><h2>Recommended<small>{t["related"]}</small></h2><div class="grid">{rel_cards}</div></section>' if rel_cards else ''
         # 2026-11-23 外のレビュー：日本語ページの大きな見出しに日本語が1文字も無い品（K11265 の "Leather Utility Vest" など）は、日本語の題名（title）を見出しにして、英語名は下に小さく出す。英語ページは今のまま
         _h1, _h1sub = name, loc(p, 'title', lang)
-        if lang == 'ja' and not JP_CHAR_RE.search(name) and JP_CHAR_RE.search(_h1sub):
-            _h1, _h1sub = _h1sub, name
+        if lang == 'ja' and name != loc(p, 'product_name', lang):   # 日本語の題名を見出しにした品（disp_name）は、英語名を見出しの下に小さく出す
+            _h1sub = loc(p, 'product_name', lang)
         ttl = loc(p, 'title', lang)
         if lang == 'en' and not has_en(p):
             _b = p['brand'] if str(p.get('brand', '')).isascii() and p.get('brand') else 'Vintage'

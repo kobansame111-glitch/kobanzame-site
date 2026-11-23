@@ -81,6 +81,16 @@ def _spec(spec, keys):
     return next((v for k, v in spec if k in keys), '')
 
 
+_JP_CHAR = re.compile(r'[ぁ-んァ-ヶ一-龯]')
+
+
+def ja_name(p, loc):
+    """日本語ページに出す商品の名前（build_site.py の disp_name と同じ決まり）。product_name に日本語が1文字も無く、title に日本語がある品は title"""
+    n = loc(p, 'product_name', 'ja')
+    t = p.get('title') or ''
+    return t if (not _JP_CHAR.search(n or '') and _JP_CHAR.search(t)) else n
+
+
 def items_json(live, loc, site_price, is_sold, thumb_of):
     """お気に入りページが読む、掲載中の商品の小さな一覧（/assets/items.json）。英語の訳が無い商品は日本語のまま"""
     rows = []
@@ -88,7 +98,7 @@ def items_json(live, loc, site_price, is_sold, thumb_of):
         ja, en = p.get('spec', []), loc(p, 'spec', 'en')
         mat_ja = p.get('material', '') or _spec(ja, ('素材',))
         rows.append({'s': p['slug'], 'b': p.get('brand', ''),
-                     'n': {'ja': loc(p, 'product_name', 'ja'), 'en': loc(p, 'product_name', 'en')},
+                     'n': {'ja': ja_name(p, loc), 'en': loc(p, 'product_name', 'en')},
                      'p': site_price(p), 'sold': 1 if is_sold(p) else 0, 't': thumb_of(p), 'm': measures(p),
                      'mat': {'ja': mat_ja, 'en': _spec(en, ('Materials', 'Material')) or mat_ja},
                      'sz': {'ja': _spec(ja, ('サイズ',)), 'en': _spec(en, ('Size',)) or _spec(ja, ('サイズ',))}})
