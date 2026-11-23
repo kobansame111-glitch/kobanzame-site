@@ -11514,8 +11514,8 @@
   "price_rule": "店頭（Square登録価格）を正。メルカリ＝値札の税込額（2026-10-10決定）。自動下書き 2026-11-22",
   "links": {},
   "images": [
-   "/assets/products/k11455/01.jpg",
-   "/assets/products/k11455/02.jpg",
+   "/assets/products/k11455/v2_front.jpg",
+   "/assets/products/k11455/v2_back.jpg",
    "/assets/products/k11455/03.jpg",
    "/assets/products/k11455/04.jpg",
    "/assets/products/k11455/05.jpg",
@@ -11535,7 +11535,7 @@
    "/assets/products/k11455/19.jpg",
    "/assets/products/k11455/20.jpg"
   ],
-  "thumb": "/assets/products/k11455/thumb.jpg",
+  "thumb": "/assets/products/k11455/v2_thumb.jpg",
   "summary_text": "GAPの1969ラインから、ストレッチ入りのエクストラスリムフィットデニム。ダークウォッシュのインディゴが落ち着いていて、一枚でそのまま決まります。",
   "summary_points": [
    "インディゴブルー（無地・ダークウォッシュ）のデニムパンツ（ジーンズ）（ブランド：GAP 1969 EXTRASLIM FIT STRETCH）",
@@ -11594,6 +11594,45 @@
    ],
    "approved_at": "2026-11-23"
   },
-  "gender_by": "写真の見立て：メンズ（フロントボタンが着る人から見て右側・EXTRASLIM FITはGAPメンズライン）"
+  "gender_by": "写真の見立て：メンズ（フロントボタンが着る人から見て右側・EXTRASLIM FITはGAPメンズライン）",
+  "images_orig": [
+   "/assets/products/k11455/01.jpg",
+   "/assets/products/k11455/02.jpg",
+   "/assets/products/k11455/03.jpg",
+   "/assets/products/k11455/04.jpg",
+   "/assets/products/k11455/05.jpg",
+   "/assets/products/k11455/06.jpg",
+   "/assets/products/k11455/07.jpg",
+   "/assets/products/k11455/08.jpg",
+   "/assets/products/k11455/09.jpg",
+   "/assets/products/k11455/10.jpg",
+   "/assets/products/k11455/11.jpg",
+   "/assets/products/k11455/12.jpg",
+   "/assets/products/k11455/13.jpg",
+   "/assets/products/k11455/14.jpg",
+   "/assets/products/k11455/15.jpg",
+   "/assets/products/k11455/16.jpg",
+   "/assets/products/k11455/17.jpg",
+   "/assets/products/k11455/18.jpg",
+   "/assets/products/k11455/19.jpg",
+   "/assets/products/k11455/20.jpg"
+  ],
+  "photo_v2": {
+   "date": "2026-11-23",
+   "front_i": 0,
+   "back_i": 1,
+   "front_url": "/assets/products/k11455/v2_front.jpg",
+   "front_check": {
+    "brighten": 0.1,
+    "garment_l": 56.7,
+    "bg": "normal"
+   },
+   "back_url": "/assets/products/k11455/v2_back.jpg",
+   "back_check": {
+    "brighten": 0.0,
+    "garment_l": 56.0,
+    "bg": "normal"
+   }
+  }
  }
 ]
