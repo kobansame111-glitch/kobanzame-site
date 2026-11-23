@@ -257,6 +257,23 @@ SHIPWIN = {'from': '2026-11-24 00:00', 'to': '2026-12-03 00:00',
            'en': 'Orders placed on or after Nov 24 will be dispatched from Dec 3, in order.'}
 _HOL_F, _HOL_T = _bf_ms(HOLIDAY['from']), _bf_ms(HOLIDAY['to'])
 _SHIP_F, _SHIP_T = _bf_ms(SHIPWIN['from']), _bf_ms(SHIPWIN['to'])
+SHIPWIN['en'] = SHIPWIN['en'].rstrip('.')   # 2026-11-23 英語の文の後ろにすでに「.」が続く所（お届けの欄など）で「..」にならないよう、差し替える文の最後の「.」は付けない
+
+# ---------- お知らせ欄にも、店舗休業とブラックフライデーのしくみを出す（2026-11-23 外のレビュー⑤）----------
+# 休業：上の帯・お休みの枠と同じ期間（11/18 0:00〜12/6 0:00＝12/5 まで）だけ出す。from の前・until の後は、見る人のスマホ側（NEWS_JS）が隠す。
+# ブラックフライデー：カートの割引（gas/site-automation/63c_cart_v1.gs の QC_SALES）と同じ 11/27 0:00〜11/29 23:59。
+#   本文は 63c の実際の動きのとおり：クーポン不要・商品ページの「購入する」もカートも 63c の受付を通る（割引は支払いリンクの金額）・
+#   割引後の額＝税込×0.8 を100円単位で切り上げ（さらに、お店の下限より下がらない品がある）＝20%が上限で、品によっては20%に満たない。
+#   どの品が何%になるかは、お支払い画面（Square）の金額で分かる（サイトでは計算しない）。商品ページの値段は割引前のまま。
+_HOL_LAST = (datetime.date.fromisoformat(HOLIDAY['to'][:10]) - datetime.timedelta(days=1)).isoformat()
+NEWS_AUTO = [
+    {'id': 'B1', 'date': HOLIDAY['from'][:10], 'from': HOLIDAY['from'][:10], 'until': _HOL_LAST, 'band': False,
+     'text': '店舗休業のお知らせ：' + HOLIDAY['full_ja']},
+    {'id': 'B2', 'date': '2026-11-23', 'from': '', 'until': '2026-11-29', 'band': False,
+     'text': 'ブラックフライデー（11月27日 0:00〜29日 23:59）は、オンラインストアの商品が最大20%引きになります。クーポンコードは不要で、カートまたは商品ページの「購入する」から注文すると、お支払い画面の金額が自動で割引されます。'
+             '20%引きを100円単位で切り上げるため、商品によっては割引が20%に満たない場合があります（どの商品が何%引きかは、お支払い画面の金額でご確認ください）。商品ページの値段は割引前のままです。'},
+]
+NEWS = sorted(NEWS + [n for n in NEWS_AUTO if not n['until'] or n['until'] >= TODAY], key=lambda n: (n['date'], int(n['id'][1:])), reverse=True)
 HOL_STYLE = ('<style>'
   '.holband{background:#3b4a73;color:#fff;text-align:center;font-size:13px;letter-spacing:.02em;padding:7px 12px;line-height:1.5}'
   # 2026-11-22 トップの大きな黒い四角の正体＝このお知らせの枠。背景に文字色（--kinari＝ほぼ黒）を使っていて、文字も同じ色のため中身が見えない黒い箱になっていた。背景を薄い色（--susu）に、文字を --kinari にして読めるようにする
@@ -273,6 +290,8 @@ _SHIP_PHRASES = [
   # 2026-11-20 購入ボタンの下・よくある質問にも「3日以内」が残り、11/24〜12/3 の本当の発送（12/3から）と食い違っていたので足した
   '決済後3日以内に発送', 'Ships within 3 days',
   '決済の確認後3日以内に、川越の店から発送します（月曜定休を除く）', 'We dispatch within 3 days of payment (excluding our closed days)',
+  # 2026-11-23 外のレビュー②：英語の商品ページの「Delivery」の文が囲まれず、11/24〜12/3 も「3日以内」のままだったので足した
+  'Dispatched from our Kawagoe shop within 3 days of payment (closed Mondays)',
 ]
 def wrap_ship(html):
     """発送の時期の文言を .shipwhen で包む（発送期間中だけJSが差し替える）。長い語句から先に処理。"""
@@ -423,7 +442,7 @@ WORKSHOPS = [
 ]
 if WS_OPEN:
     T_WS_NAV = ({'ja': ('/workshop/', 'ワークショップ'), 'en': ('/en/workshop/', 'Workshops')} if WS_BOOKING else
-                {'ja': ('/workshop/', 'ワークショップ（準備中）'), 'en': ('/en/workshop/', 'Workshops (coming soon)')})
+                {'ja': ('/workshop/', 'ワークショップ（予約準備中）'), 'en': ('/en/workshop/', 'Workshops (booking soon)')})   # 2026-11-23 外のレビュー④：メニューは「予約準備中」（予約を受け付けるかどうか WS_BOOKING は変えない）
 
 CAT_EN = {'outer': 'Outer', 'tops': 'Tops', 'bottoms': 'Bottoms', 'dress': 'Dresses', 'shoes': 'Shoes', 'acc': 'Accessories', 'other': 'Goods'}
 
@@ -617,10 +636,12 @@ CART_PAGE = {
   'ja': {'title': 'カート｜古着屋 小判鮫', 'h1': 'カート', 'back': '商品を見る',
          'notes': ['まとめて1回のお支払いで、1つの荷物でお送りします', '送料込み・追加料金なし（何点でも）', '会員登録不要・決済はSquare（カード情報は当店に残りません）',
                    '一点ものなので、カートに入れても取り置きにはなりません。お支払いの前に、先に売れた商品はお知らせします'],
+         'ship': '決済確認後3日以内に発送（月曜定休を除く）',   # 2026-11-23 外のレビュー②：「まとめて購入する」の直前にも発送の時期（11/24〜12/3 は .shipwhen が「12/3から順に発送」に差し替わる）
          'go': 'まとめて購入する（クレジットカード）'},
   'en': {'title': 'Cart | Kobanzame Vintage, Kawagoe', 'h1': 'Cart', 'back': 'See the pieces',
          'notes': ['One payment, one parcel', 'Shipping within Japan included, however many items', 'No account needed · secure checkout by Square',
                    'Every piece is one of a kind. The cart does not hold items; if one sells first, we tell you before you pay'],
+         'ship': 'Dispatched within 3 days of payment (closed Mondays)',
          'go': 'Check out (credit card)'},
 }
 
@@ -1313,12 +1334,12 @@ document.addEventListener('visibilitychange',function(){if(document.visibilitySt
 </script>"""
 
 # お知らせ：期限（data-until）の日を過ぎたものを、見ている人のスマホ側で隠す（日本時間で判定。作り直しが遅れても出しっぱなしにしない）
-NEWS_JS = '''<script>document.addEventListener('DOMContentLoaded',function(){try{var d=new Date(Date.now()+324e5).toISOString().slice(0,10);document.querySelectorAll('[data-until]').forEach(function(e){var u=e.getAttribute('data-until');if(u&&u<d)e.hidden=true;});}catch(x){}});</script>'''
+NEWS_JS = '''<script>document.addEventListener('DOMContentLoaded',function(){try{var d=new Date(Date.now()+324e5).toISOString().slice(0,10);document.querySelectorAll('[data-until],[data-from]').forEach(function(e){var u=e.getAttribute('data-until'),f=e.getAttribute('data-from');if((u&&u<d)||(f&&f>d))e.hidden=true;});}catch(x){}});</script>'''   # 2026-11-23 data-from（この日から出す）にも対応。期限の前後どちらでも、日本時間の今日で隠す
 
 def news_items_html(items):
     """お知らせの一覧（<li>）。本文は文字として出す（HTMLにしない）"""
     return '\n'.join(
-        f'      <li data-until="{n["until"]}"><time datetime="{n["date"]}">{n["date"].replace("-", ".")}</time><p>{html.escape(n["text"])}</p></li>'
+        f'      <li data-until="{n["until"]}"' + (f' data-from="{n["from"]}"' if n.get('from') else '') + f'><time datetime="{n["date"]}">{n["date"].replace("-", ".")}</time><p>{html.escape(n["text"])}</p></li>'
         for n in items)
 
 def head(lang, title, desc, path, og_type='website', image=None, extra_ld=None, noindex=False):
@@ -1507,12 +1528,14 @@ def _wbr_text(t):
         return t
     return '<wbr>'.join(_BX.parse(t))
 
+_WRITTEN = set()
 def write(path, text):
     if path.endswith('.html'):
         text = wbr(text)
     full = os.path.join(ROOT, path.lstrip('/'))
     os.makedirs(os.path.dirname(full), exist_ok=True)
     open(full, 'w', encoding='utf-8').write(text)
+    _WRITTEN.add(os.path.normpath(full))   # 2026-11-23 この回に作ったページの記録（作り直されない古いページを見つけるため）
 
 # 2026-10-14 使いやすさの直し（龍さん決定A：デジタル庁デザインシステムの考え方＝押せる広さ44px以上・小さすぎる文字を使わない。見た目は変えない）
 A11Y_CSS = """
@@ -1685,6 +1708,7 @@ def card_html(p, lang, lazy=True, findable=False):
             f'<div class="pr">{money(site_price(p), lang)}<small>{t["tax"]}</small>{usd_span(site_price(p), lang)}{bf_pill(lang)}</div></a>')
 
 import urllib.parse
+JP_CHAR_RE = re.compile(r'[ぁ-んァ-ヶ一-龯]')   # ひらがな・カタカナ・漢字（日本語の見出しかどうかの判定）
 # 2026-11-03 法務の目（v0 §7）：輸出に許可が要る恐れのある素材は、英語ページで海外発送の見積を出さない
 NO_EXPORT_RE = re.compile(r'(パイソン|python|蛇革|ヘビ革|スネーク|snake|クロコ|croc|ワニ革|alligator|リザード|lizard|オーストリッチ|ostrich|珊瑚|サンゴ|コーラル|coral|べっ甲|鼈甲|tortoise|象牙|ivory)', re.I)
 # 2026-11-03 龍さん「状態A・サイズ…のように、項目名つきで分かりやすく」：価格の下に「商品情報」の表
@@ -2135,6 +2159,10 @@ for lang in ('ja', 'en'):
         relp = reco_of(p, avail_live)   # 2026-10-29 点数づけ（reco_score）に変更
         rel_cards = ''.join(card_html(x, lang) for x in relp)
         related = f'<section class="related"><h2>Recommended<small>{t["related"]}</small></h2><div class="grid">{rel_cards}</div></section>' if rel_cards else ''
+        # 2026-11-23 外のレビュー：日本語ページの大きな見出しに日本語が1文字も無い品（K11265 の "Leather Utility Vest" など）は、日本語の題名（title）を見出しにして、英語名は下に小さく出す。英語ページは今のまま
+        _h1, _h1sub = name, loc(p, 'title', lang)
+        if lang == 'ja' and not JP_CHAR_RE.search(name) and JP_CHAR_RE.search(_h1sub):
+            _h1, _h1sub = _h1sub, name
         ttl = loc(p, 'title', lang)
         if lang == 'en' and not has_en(p):
             _b = p['brand'] if str(p.get('brand', '')).isascii() and p.get('brand') else 'Vintage'
@@ -2156,8 +2184,8 @@ for lang in ('ja', 'en'):
     </div>
     <div class="info">
       <div class="brand">{esc(brand_disp(p, lang))}</div>
-      <h1>{esc(name)}</h1>
-      <div class="ttl">{esc(loc(p, 'title', lang))}</div>
+      <h1>{esc(_h1)}</h1>
+      <div class="ttl">{esc(_h1sub)}</div>
       <div class="sku">ITEM NO. {esc(p['sku'])}</div>
       <div class="price">{money(price, lang)}<small>{t['tax_ship']}</small>{usd_span(price, lang)}{bf_pill(lang)}</div>
       <p class="pnote">{PRICE_NOTE[lang]}</p>
@@ -2427,6 +2455,7 @@ for _cl in ('ja', 'en'):
     <ul class="cartlist" id="cartlist"></ul>
     <div class="carttotal"><span>{esc(CART_T[_cl]['total'])}</span><span id="carttotal"></span></div>
     {bf_note(_cl, 'cart')}
+    <p class="ship cartship" style="margin:0 0 12px">{wrap_ship(esc(_c['ship']))}</p>
     <button type="button" class="btn kin" id="cartgo" style="width:100%">{esc(_c['go'])}</button>
     <ul class="assure" style="margin-top:12px">{''.join(f'<li>{esc(x)}</li>' for x in _c['notes'])}</ul>
   </div>
@@ -2773,6 +2802,41 @@ if _ts['made'] or _ts['reused'] or _ts['failed']:
     print(f"[thumb] 一覧カード用WebP {_n}枚（新規{_ts['made']}・再利用{_ts['reused']}・失敗{_ts['failed']}）"
           f" / サムネ合計 {_ts['bytes_out']/1e6:.2f}MB（元の該当写真 {_ts['bytes_src']/1e6:.2f}MB → {_save/1e6:.2f}MB 軽量化）"
           f" / リモート画像はそのまま {_ts['remote']}参照")
+
+# ---------- 作り直されない古い商品ページのメニューの数（2026-11-23 外のレビュー③）----------
+# 商品データに無くなった品番のページ（SOLD 表示で残してあるもの）は、作り直しで書き直されないため、メニューの「すべての商品」「アウター」などの数が
+# 古いまま（54ではなく55など）になっていた。ここで、この回に作らなかった商品ページのメニューの数を、いまの数に合わせる（ページのほかの所は触らない）。
+def _refresh_stale_drawer_counts():
+    fixed = []
+    for _lang in ('ja', 'en'):
+        _n = {'': len([p for p in live if not is_sold(p)]), 'new': len([p for p in avail_live if is_new(p)])}
+        for _c in CATS_PRESENT:
+            _n[_c] = len([p for p in live if not is_sold(p) and cat_of(p) == _c])
+        _dir = os.path.join(ROOT, 'journal') if _lang == 'ja' else os.path.join(ROOT, 'en', 'journal')
+        if not os.path.isdir(_dir):
+            continue
+        for _name in sorted(os.listdir(_dir)):
+            _f = os.path.normpath(os.path.join(_dir, _name, 'index.html'))
+            if not os.path.isfile(_f) or _f in _WRITTEN:
+                continue
+            _t = open(_f, encoding='utf-8').read()
+            _a = _t.find('<nav class="drawer"')
+            _b = _t.find('</nav>', _a)
+            if _a < 0 or _b < 0:
+                continue   # 「移転しました」の転送ページなど（メニューが無いページ）は触らない
+            _d = _t[_a:_b]
+            _d2 = _d
+            for _cat, _cnt in _n.items():
+                if _cat == 'new' and not _cnt:
+                    _d2 = re.sub(r'<li><a href="[^"]*" data-cat="new">(?:(?!</li>).)*</li>', '', _d2, flags=re.S)   # 新着が0点なら、メニューの「新着」を消す（作り直したページと同じ）
+                    continue
+                _d2 = re.sub(r'(data-cat="' + re.escape(_cat) + r'">(?:(?!</a>).)*?<small>)\d+(</small>)', lambda m: m.group(1) + str(_cnt) + m.group(2), _d2, flags=re.S)
+            if _d2 != _d:
+                open(_f, 'w', encoding='utf-8').write(_t[:_a] + _d2 + _t[_b:])
+                fixed.append(os.path.relpath(_f, ROOT))
+    if fixed:
+        print(f'[stale] 作り直されない古い商品ページ {len(fixed)} 枚のメニューの数を、いまの数に合わせました: ' + ', '.join(fixed))
+_refresh_stale_drawer_counts()
 
 # ---------- 文章の点検（2026-10-09 龍さん決定：語尾は「です・ます」で言い切る） ----------
 # 止めはしない（サイトは作る）。言い切っていない文があれば、作り直しのログに一覧を出す。
