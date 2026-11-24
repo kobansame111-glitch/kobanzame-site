@@ -3514,7 +3514,7 @@
   "product_name": "ZUCCA TRAVAIL フランス製 オリーブのジャケット",
   "brand": "ZUCCA TRAVAIL",
   "category": "レディース／アウター／ジャケット",
-  "material": "",
+  "material": "綿 100%",
   "published_date": "2026-10-21",
   "prices": {
    "store": 7800,
@@ -3559,6 +3559,14 @@
    [
     "ブランド",
     "ZUCCA TRAVAIL（ズッカ トラバイユ）・made in France"
+   ],
+   [
+    "素材",
+    "綿 100%"
+   ],
+   [
+    "原産国",
+    "フランス製"
    ],
    [
     "色",
@@ -5746,6 +5754,10 @@
    [
     "色",
     "ラベンダー×ホワイト タイダイ染め"
+   ],
+   [
+    "原産国",
+    "Made in Pakistan"
    ],
    [
     "サイズ",
