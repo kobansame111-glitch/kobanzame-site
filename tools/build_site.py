@@ -243,14 +243,15 @@ def bf_note(lang, kind):
     return '<p class="bfnote" hidden>' + esc(BF_NOTE[kind][lang]) + '</p>'
 
 # ---------- お休みのお知らせ・発送の切り替え（2026-11-11 龍さん・日本時間で自動）----------
-# 店舗休業：11/25〜12/5（再開12/6）。お知らせと帯は 11/18 0:00〜12/6 0:00 に自動表示。
+# 店舗休業：11/25〜12/4（再開12/5）。お知らせと帯は 11/18 0:00〜12/5 0:00 に自動表示。
+# 2026-11-24 龍さん：休みは 12/4（金）まで・12/5（土）再開に変更（前は 12/5 まで・12/6 再開＝11/11 の決定）
 # 発送：11/24 0:00〜12/3 0:00 の間だけ、発送の文言を「12/3から順に発送」に切り替える（.shipwhen をJSで差し替え）。
 HOLIDAY = {
-  'from': '2026-11-18 00:00', 'to': '2026-12-06 00:00',
-  'band_ja': '店舗休業：11/25（水）〜12/5（土）。オンラインのご注文は期間中も受付。11/24以降のご注文は12/3から順に発送します。',
-  'band_en': 'Shop closed Nov 25–Dec 5. Online orders still accepted; orders from Nov 24 ship from Dec 3.',
-  'full_ja': '買い付けのため、店舗は11月25日（水）〜12月5日（土）お休みします。営業再開は12月6日（日）13:00〜（予定）。オンラインのご注文は期間中も受け付けます。11月24日以降のご注文は、12月3日から順に発送します。',
-  'full_en': 'We will be closed for buying trips from Nov 25 (Wed) to Dec 5 (Sat). We reopen Dec 6 (Sun) at 13:00 (planned). Online orders are accepted throughout. Orders placed on or after Nov 24 will be dispatched from Dec 3, in order.',
+  'from': '2026-11-18 00:00', 'to': '2026-12-05 00:00',
+  'band_ja': '店舗休業：11/25（水）〜12/4（金）。オンラインのご注文は期間中も受付。11/24以降のご注文は12/3から順に発送します。',
+  'band_en': 'Shop closed Nov 25–Dec 4. Online orders still accepted; orders from Nov 24 ship from Dec 3.',
+  'full_ja': '買い付けのため、店舗は11月25日（水）〜12月4日（金）お休みします。営業再開は12月5日（土）13:00〜です。オンラインのご注文は期間中も受け付けます。11月24日以降のご注文は、12月3日から順に発送します。',
+  'full_en': 'We will be closed for buying trips from Nov 25 (Wed) to Dec 4 (Fri). We reopen Dec 5 (Sat) at 13:00. Online orders are accepted throughout. Orders placed on or after Nov 24 will be dispatched from Dec 3, in order.',
 }
 SHIPWIN = {'from': '2026-11-24 00:00', 'to': '2026-12-03 00:00',
            'ja': '11月24日以降のご注文は、12月3日から順に発送します',
@@ -260,7 +261,7 @@ _SHIP_F, _SHIP_T = _bf_ms(SHIPWIN['from']), _bf_ms(SHIPWIN['to'])
 SHIPWIN['en'] = SHIPWIN['en'].rstrip('.')   # 2026-11-23 英語の文の後ろにすでに「.」が続く所（お届けの欄など）で「..」にならないよう、差し替える文の最後の「.」は付けない
 
 # ---------- お知らせ欄にも、店舗休業とブラックフライデーのしくみを出す（2026-11-23 外のレビュー⑤）----------
-# 休業：上の帯・お休みの枠と同じ期間（11/18 0:00〜12/6 0:00＝12/5 まで）だけ出す。from の前・until の後は、見る人のスマホ側（NEWS_JS）が隠す。
+# 休業：上の帯・お休みの枠と同じ期間（11/18 0:00〜12/5 0:00＝12/4 まで）だけ出す。from の前・until の後は、見る人のスマホ側（NEWS_JS）が隠す。
 # ブラックフライデー：カートの割引（gas/site-automation/63c_cart_v1.gs の QC_SALES）と同じ 11/27 0:00〜11/29 23:59。
 #   本文は 63c の実際の動きのとおり：クーポン不要・商品ページの「購入する」もカートも 63c の受付を通る（割引は支払いリンクの金額）・
 #   割引後の額＝税込×0.8 を100円単位で切り上げ（さらに、お店の下限より下がらない品がある）＝20%が上限で、品によっては20%に満たない。
@@ -269,6 +270,9 @@ _HOL_LAST = (datetime.date.fromisoformat(HOLIDAY['to'][:10]) - datetime.timedelt
 NEWS_AUTO = [
     {'id': 'B1', 'date': HOLIDAY['from'][:10], 'from': HOLIDAY['from'][:10], 'until': _HOL_LAST, 'band': False,
      'text': '店舗休業のお知らせ：' + HOLIDAY['full_ja']},
+    # 2026-11-24 龍さん：本日（11/24）は短縮営業。11/24 だけ出す
+    {'id': 'B3', 'date': '2026-11-24', 'from': '2026-11-24', 'until': '2026-11-24', 'band': False,
+     'text': '本日11月24日（火）は、13:00〜16:00頃までの短縮営業です。'},
     {'id': 'B2', 'date': '2026-11-23', 'from': '', 'until': '2026-11-29', 'band': False,
      'text': 'ブラックフライデー（11月27日 0:00〜29日 23:59）は、オンラインストアの商品が最大20%引きになります。クーポンコードは不要で、カートまたは商品ページの「購入する」から注文すると、お支払い画面の金額が自動で割引されます。'
              '20%引きを100円単位で切り上げるため、商品によっては割引が20%に満たない場合があります（どの商品が何%引きかは、お支払い画面の金額でご確認ください）。商品ページの値段は割引前のままです。'},
