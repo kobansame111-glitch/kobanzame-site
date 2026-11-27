@@ -46,7 +46,10 @@ MODEL_FILE = os.path.join(COST_DIR, 'MODEL_REQUEST')     # 2026-11-27：AIの固
 MODEL_DIR = os.path.join(COST_DIR, 'models')
 TRYON_FILE = os.path.join(COST_DIR, 'TRYON_REQUEST')     # 2026-11-27：固定モデルに商品を着せる試し。1行に「品番 モデル」（例 K10153 M02）
 TRYON_DIR = os.path.join(COST_DIR, 'tryon')
-MODEL_PICK = {'M01': '20261127/M01_1', 'M02': '20261127/M02_2', 'F01': '20261127/F01_1', 'F02': '20261127/F02_2'}   # 受付デスクが候補から選んだ1枚
+MODEL_PICK = {'M01': '20261127/M01_1', 'M02': '20261127/M02_2', 'F01': '20261127/F01_1', 'F02': '20261127/F02_2',
+              'M03': '20261128/M03_1', 'M04': '20261128/M04_1', 'F03': '20261128/F03_2', 'F04': '20261128/F04_1'}   # 受付デスクが候補から選んだ1枚
+TRYCHECK_FILE = os.path.join(COST_DIR, 'TRYCHECK_REQUEST')   # 2026-11-28：着せた写真の検品だけをする頼み。中身は tryon の日付のフォルダ名（例 20261127）
+CHECK_ITEMS = ('text_logo', 'print_pattern', 'color', 'sleeve_length', 'neckline_collar', 'buttons_pockets', 'garment_type', 'no_added_details')
 TRYON_PER_IMAGE_YEN = 40.0
 TRYON_MAX = 12                  # 1回の試しで作る上限
 MANNEQUIN_OFF_FILE = os.path.join(COST_DIR, 'MANNEQUIN_OFF')   # これがあれば、マネキン画像を作らない・Batch で頼まない（2026-11-12 龍さん決定）
@@ -931,6 +934,69 @@ def make_tryon(products, budget):
     log(f'着せる試しを {od} に作りました（TRYON_REQUEST は消しました）')
 
 
+# ===== 着せた写真の検品（2026-11-28） ============================================================
+# 元の写真と着せた写真を別のAIに見比べさせ、1項目でも「違う」「分からない」があれば載せない。
+# 11/27 の10点で、ハーレーのロゴの文字崩れ（K10856）と、半袖のニットが長袖になった（K11488）を止められるかで確かめる。
+
+def tryon_check_prompt():
+    items = ', '.join(f'"{k}"' for k in CHECK_ITEMS)
+    return ('Image 1 is the ORIGINAL photo of a real one-of-a-kind second-hand garment. Image 2 is an AI-generated photo of a model wearing it. '
+            'Check strictly whether the garment in image 2 is the SAME as in image 1. Compare: '
+            'text_logo = every letter of any text, logo or brand name (spelling must match exactly); '
+            'print_pattern = graphics, prints, stripes, checks, pattern layout and spacing; color = garment colors and fading; '
+            'sleeve_length = short vs long sleeves and where the sleeve ends; neckline_collar = neckline, collar, hood shape; '
+            'buttons_pockets = number and position of buttons, zips and pockets; garment_type = same kind of garment; '
+            'no_added_details = nothing added that is not in image 1 (new text, graphics, pockets, logos). '
+            'For each item answer "same", "different" or "unsure" (use "unsure" if you cannot see it clearly in both images). '
+            f'Return JSON only: {{"items": {{{items}: "same|different|unsure"}}, "problem": "short reason in Japanese, empty if all same"}}')
+
+
+def tryon_verdict(j):
+    """検品の返事 →（載せてよいか, 理由）。全部の項目が same のときだけ True（純粋関数・テスト対象）"""
+    if isinstance(j, list):
+        j = j[0] if j else {}
+    items = (j or {}).get('items') or {}
+    bad = [k for k in CHECK_ITEMS if str(items.get(k, '')).strip().lower() != 'same']
+    if not bad:
+        return True, ''
+    return False, ('・'.join(f'{k}={items.get(k, "無回答")}' for k in bad) + ' ' + str((j or {}).get('problem', ''))).strip()[:200]
+
+
+def tryon_check(src, out, sku, budget):
+    a, b = src.copy(), out.copy()
+    a.thumbnail((1024, 1024)); b.thumbnail((1024, 1024))
+    res, _ = gemini_logged(budget, sku, '着せた写真の検品', TEXT_MODEL, [img_part(a), img_part(b), {'text': tryon_check_prompt()}],
+                           {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 1200,
+                            'thinkingConfig': {'thinkingBudget': 512}})
+    try:
+        return tryon_verdict(json_of(res))
+    except Exception:
+        return False, f'検品の返事が読めない：{text_of(res)[:80]}'
+
+
+def check_tryon_folder(budget):
+    from PIL import Image
+    folders = re.findall(r'\b(\d{8})\b', open(TRYCHECK_FILE, encoding='utf-8').read())
+    for f in folders:
+        od = os.path.join(TRYON_DIR, f)
+        if not os.path.isdir(od):
+            log(f'検品：{od} が無い'); continue
+        rows = []
+        for name in sorted(os.listdir(od)):
+            m = re.match(r'(K\d{5})_([MF]0[1-4])\.jpg$', name)
+            if not m:
+                continue
+            src = os.path.join(od, f'{m.group(1)}_src.jpg')
+            if not os.path.exists(src) or not budget.can_spend(1.0):
+                rows.append(f'{name}：検品できず（元の写真が無い・お金の上限）'); continue
+            ok, why = tryon_check(Image.open(src).convert('RGB'), Image.open(os.path.join(od, name)).convert('RGB'), m.group(1), budget)
+            rows.append(f'{name}：{"載せてよい" if ok else "載せない"}' + (f'（{why}）' if why else ''))
+            log(rows[-1])
+        with open(os.path.join(od, 'CHECK.txt'), 'w', encoding='utf-8') as fh:
+            fh.write(f'検品（{now_jst():%Y-%m-%d %H:%M}・型 {TEXT_MODEL}）\n' + '\n'.join(rows) + '\n')
+    os.remove(TRYCHECK_FILE)
+
+
 def caption(im, text):
     from PIL import Image, ImageDraw, ImageFont
     W, H = im.size
@@ -1134,6 +1200,7 @@ def _main():
         n = (len(targets(products)) + len(waiting_products(products)) + (1 if os.path.exists(SAMPLE_FILE) else 0)
              + (1 if os.path.exists(MODEL_FILE) else 0)
              + (1 if os.path.exists(TRYON_FILE) else 0)
+             + (1 if os.path.exists(TRYCHECK_FILE) else 0)
              if os.environ.get('GEMINI_API_KEY') and not os.path.exists(STOP_FILE) else 0)
         print(n)
         out = os.environ.get('GITHUB_OUTPUT')
@@ -1147,6 +1214,11 @@ def _main():
         log('⛔ data/ai_cost/STOP があるので、AIは呼びません：' + open(STOP_FILE, encoding='utf-8').read().strip())
     elif not os.environ.get('GEMINI_API_KEY'):
         log('GEMINI_API_KEY が無いので何もしません')
+    elif os.path.exists(TRYCHECK_FILE):
+        budget = Budget(products)
+        check_tryon_folder(budget)
+        log(f'今月のこの処理のAI代（概算）：{budget.spent:.1f}円／上限 {MONTH_CAP_YEN:.0f}円')
+        changed = changed or 1
     elif os.path.exists(TRYON_FILE):
         # 着せる試しの頼みがある回は、それだけを作る（商品データ・サイトの写真は変えない）
         budget = Budget(products)
