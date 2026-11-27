@@ -212,5 +212,14 @@ check('固定モデルの頼み文：架空の人・ロゴなし・背景の色'
 check('固定モデル：上位の型・1枚の見込みは上限の内（40円）', pv.image_yen_estimate(pv.PRO_IMAGE_MODEL) < pv.MODEL_PER_IMAGE_YEN, True)
 check('固定モデル：ふだんの1枚の上限15円は変えない', pv.STOP_PER_IMAGE_YEN, 15.0)
 
+# ---- 着せる試し（2026-11-27） ----
+check('着せる試し：品番とモデルの組・重なりなし・小文字も', pv.tryon_requests('k10153 m02\nK10153 M02\nK11459 F01 メモ\nx'), [('K10153', 'M02'), ('K11459', 'F01')])
+check('着せる試し：上限で切る', len(pv.tryon_requests('\n'.join(f'K1{i:04d} M01' for i in range(20)))), pv.TRYON_MAX)
+tp = {'spec': {'サイズ': '実寸 身幅57cm・着丈73cm・肩幅53cm・袖丈20cm'}}
+check('着せる試し：寸法を拾う', (pv.spec_cm(tp, '身幅'), pv.spec_cm(tp, '着丈'), pv.spec_cm(tp, '股下')), (57.0, 73.0, None))
+tq = pv.tryon_prompt(tp)
+check('着せる試し：頼み文に寸法と「描き直さない」', all(w in tq for w in ('chest width (flat) 57 cm', 'Do not add, remove, redraw')), True)
+check('着せる試し：選んだモデル4人', sorted(pv.MODEL_PICK), ['F01', 'F02', 'M01', 'M02'])
+
 print(f'NG {ng}件／{ok + ng}' if ng else f'photo_v2：全部 OK（{ok}件）')
 sys.exit(1 if ng else 0)

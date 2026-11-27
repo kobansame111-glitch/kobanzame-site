@@ -44,6 +44,11 @@ SAMPLE_FILE = os.path.join(COST_DIR, 'SAMPLE_REQUEST')   # 見本を作る頼み
 SAMPLE_DIR = os.path.join(COST_DIR, 'samples')
 MODEL_FILE = os.path.join(COST_DIR, 'MODEL_REQUEST')     # 2026-11-27：AIの固定モデル（着用画像の人）を作る頼み。中身は M01・M02・F01・F02 のどれか（1行に1つ）か all
 MODEL_DIR = os.path.join(COST_DIR, 'models')
+TRYON_FILE = os.path.join(COST_DIR, 'TRYON_REQUEST')     # 2026-11-27：固定モデルに商品を着せる試し。1行に「品番 モデル」（例 K10153 M02）
+TRYON_DIR = os.path.join(COST_DIR, 'tryon')
+MODEL_PICK = {'M01': '20261127/M01_1', 'M02': '20261127/M02_2', 'F01': '20261127/F01_1', 'F02': '20261127/F02_2'}   # 受付デスクが候補から選んだ1枚
+TRYON_PER_IMAGE_YEN = 40.0
+TRYON_MAX = 12                  # 1回の試しで作る上限
 MANNEQUIN_OFF_FILE = os.path.join(COST_DIR, 'MANNEQUIN_OFF')   # これがあれば、マネキン画像を作らない・Batch で頼まない（2026-11-12 龍さん決定）
 SITE = 'https://kobanzame-kawagoe.com'
 JST = datetime.timezone(datetime.timedelta(hours=9))
@@ -843,6 +848,84 @@ def make_models(budget):
     log(f'固定モデルの候補を {od} に作りました（MODEL_REQUEST は消しました）')
 
 
+# ===== 固定モデルに商品を着せる試し（2026-11-27・龍さん「おけい」） =====================================
+# Python で服の写真を切り抜いて重ねるだけでは紙人形のようで着た写真に見えなかった（11/27 手元の試し）。
+# そこで上位の型に「同じ人」と「この服」を渡し、服の柄・文字・色・形を変えないように着せてもらう。試しは見本の置き場だけ。
+
+def tryon_requests(text):
+    """TRYON_REQUEST の中身 →［(品番, モデル)］（重なりなし・上限 TRYON_MAX・純粋関数・テスト対象）"""
+    out = []
+    for line in text.splitlines():
+        m = re.match(r'\s*(K\d{5})\s+([MF]0[12])\b', line.strip(), re.I)
+        if m:
+            pair = (m.group(1).upper(), m.group(2).upper())
+            if pair not in out:
+                out.append(pair)
+    return out[:TRYON_MAX]
+
+
+def spec_cm(p, word):
+    """商品の説明（spec・サイズの欄）から「身幅57cm」などの数字を拾う（無ければ None・純粋関数・テスト対象）"""
+    sp = p.get('spec') or {}
+    text = ' '.join(f'{k} {v}' for k, v in (sp.items() if isinstance(sp, dict) else sp))
+    m = re.search(word + r'\s*([0-9]+(?:\.[0-9]+)?)', text)
+    return float(m.group(1)) if m else None
+
+
+def tryon_prompt(p):
+    """着せる頼み文（純粋関数・テスト対象）"""
+    size = []
+    for w, en in (('身幅', 'chest width (flat)'), ('着丈', 'body length'), ('肩幅', 'shoulder width'), ('袖丈', 'sleeve length')):
+        v = spec_cm(p, w)
+        if v:
+            size.append(f'{en} {v:g} cm')
+    size_txt = ('Real garment measurements: ' + ', '.join(size) + '. Make the fit on the body consistent with these. ') if size else ''
+    return ('Image 1 is a fashion model. Image 2 is a real one-of-a-kind second-hand garment photographed on its own. '
+            'Create a photo of the SAME person from image 1 (same face, hair, body shape, pose, background, lighting and camera) '
+            'wearing the garment from image 2 as the top layer, replacing the plain gray T-shirt. '
+            'Reproduce the garment EXACTLY: same colors, prints, text and logos (letter for letter), stripes and pattern spacing, '
+            'collar, buttons, pockets, cuffs, hem, fading and visible wear. Do not add, remove, redraw or invent any print, text, logo or detail. '
+            'If a part of the garment is not visible in image 2, keep it plain and consistent rather than inventing details. '
+            + size_txt +
+            'Natural realistic drape and fit. Keep the gray trousers and white sneakers. Photorealistic, vertical 4:5.')
+
+
+def make_tryon(products, budget):
+    """TRYON_REQUEST の組を作り、tryon/YYYYMMDD/ に置く（商品データ・サイトは変えない）"""
+    pairs = tryon_requests(open(TRYON_FILE, encoding='utf-8').read())
+    by = {p.get('sku'): p for p in products}
+    od = os.path.join(TRYON_DIR, now_jst().strftime('%Y%m%d')); os.makedirs(od, exist_ok=True)
+    lines = [f'着せる試し（{now_jst():%Y-%m-%d %H:%M}・型 {PRO_IMAGE_MODEL}）']
+    for sku, mid in pairs:
+        p = by.get(sku)
+        if not p:
+            lines.append(f'{sku} {mid}：商品データに無い'); log(lines[-1]); continue
+        if os.path.exists(STOP_FILE) or not budget.can_spend(TRYON_PER_IMAGE_YEN):
+            lines.append(f'{sku} {mid}：お金の上限で作らず'); log(lines[-1]); continue
+        try:
+            model_im = load_image('/' + os.path.relpath(os.path.join(MODEL_DIR, MODEL_PICK[mid] + '.jpg'), ROOT))
+            g_im = load_image((p.get('images') or [None])[0])
+            g_im.thumbnail((1200, 1500))
+            before = budget.spent
+            res, y = gemini_logged(budget, sku, f'着せる試し {mid}', PRO_IMAGE_MODEL,
+                                   [img_part(model_im), img_part(g_im), {'text': tryon_prompt(p)}], MODEL_GEN, images=1)
+            if y > TRYON_PER_IMAGE_YEN:
+                Budget.stop(f'着せる試し {sku} の1枚が {y:.1f}円（上限 {TRYON_PER_IMAGE_YEN:.0f}円）')
+            image_from_response(res).save(os.path.join(od, f'{sku}_{mid}.jpg'), quality=90, optimize=True)
+            g_im.save(os.path.join(od, f'{sku}_src.jpg'), quality=85)
+            lines.append(f'{sku}_{mid}.jpg：{budget.spent - before:.2f}円')
+        except Exception as e:
+            lines.append(f'{sku} {mid}：失敗 {e!r}'[:300])
+        log(lines[-1])
+    with open(os.path.join(od, 'README.txt'), 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines) + '\n')
+    for name in sorted(os.listdir(od)):
+        if name.endswith('.jpg') and '_src' not in name:
+            dump_b64(os.path.join(od, name))
+    os.remove(TRYON_FILE)
+    log(f'着せる試しを {od} に作りました（TRYON_REQUEST は消しました）')
+
+
 def caption(im, text):
     from PIL import Image, ImageDraw, ImageFont
     W, H = im.size
@@ -1045,6 +1128,7 @@ def _main():
         # 2026-11-09：まとめて頼んで受け取る前の品（画像にする時に切り抜きの道具が要る）と、見本の頼みも数える
         n = (len(targets(products)) + len(waiting_products(products)) + (1 if os.path.exists(SAMPLE_FILE) else 0)
              + (1 if os.path.exists(MODEL_FILE) else 0)
+             + (1 if os.path.exists(TRYON_FILE) else 0)
              if os.environ.get('GEMINI_API_KEY') and not os.path.exists(STOP_FILE) else 0)
         print(n)
         out = os.environ.get('GITHUB_OUTPUT')
@@ -1058,6 +1142,12 @@ def _main():
         log('⛔ data/ai_cost/STOP があるので、AIは呼びません：' + open(STOP_FILE, encoding='utf-8').read().strip())
     elif not os.environ.get('GEMINI_API_KEY'):
         log('GEMINI_API_KEY が無いので何もしません')
+    elif os.path.exists(TRYON_FILE):
+        # 着せる試しの頼みがある回は、それだけを作る（商品データ・サイトの写真は変えない）
+        budget = Budget(products)
+        make_tryon(products, budget)
+        log(f'今月のこの処理のAI代（概算）：{budget.spent:.1f}円／上限 {MONTH_CAP_YEN:.0f}円')
+        changed = changed or 1
     elif os.path.exists(MODEL_FILE):
         # 固定モデルの頼みがある回は、それだけを作る（商品データ・サイトの写真は変えない）
         budget = Budget(products)
