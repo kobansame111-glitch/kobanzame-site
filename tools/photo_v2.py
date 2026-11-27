@@ -998,8 +998,8 @@ GARMENT_ENUMS = {
 }
 GARMENT_SCHEMA = {'type': 'OBJECT', 'properties': dict(
     {k: {'type': 'STRING', 'enum': v} for k, v in GARMENT_ENUMS.items()},
-    button_count={'type': 'INTEGER'}, pocket_count={'type': 'INTEGER'}, sleeve_to_body_ratio={'type': 'NUMBER'}),
-    'required': list(GARMENT_ENUMS) + ['button_count', 'pocket_count', 'sleeve_to_body_ratio']}
+    button_count={'type': 'INTEGER'}, pocket_count={'type': 'INTEGER'}),
+    'required': list(GARMENT_ENUMS) + ['button_count', 'pocket_count']}
 TEXT_SCHEMA = {'type': 'OBJECT', 'properties': {
     'text_presence': {'type': 'STRING', 'enum': ['present', 'absent', 'unclear']},
     'text_transcription': {'type': 'STRING'},
@@ -1026,9 +1026,7 @@ def garment_attr_prompt(who):
             '(a faint or flat patch pocket still counts). text_presence = letters, numbers or words that are part of the DESIGN '
             '(printed or embroidered graphics); ignore sewn-in brand labels, neck tags, size tags and care tags. '
             'sleeve_length: judge by where the sleeve actually ends, NOT by what is typical for this kind of garment. '
-            'In a flat-lay photo, compare the sleeve with the body: a sleeve ending far above the hem line is short or elbow length. '
-            'sleeve_to_body_ratio = length of one sleeve from the shoulder seam to the sleeve end, divided by the body length '
-            'from the shoulder to the hem (a long sleeve is about 0.8-1.1, a short sleeve about 0.2-0.4; 0 if sleeveless or not applicable).')
+            'In a flat-lay photo, compare the sleeve with the body: a sleeve ending far above the hem line is short or elbow length.')
 
 
 def text_read_prompt(who):
@@ -1148,30 +1146,226 @@ def tryon_check_v2(src, out, sku, budget):
     return ok, '・'.join(bad)[:300], {'元': [s_attr, s_text], '着用': [o_attr, o_text]}
 
 
+# ===== 検品 v4（2026-11-28：外の2つの答え＋試作から） ===============================================
+# 変えた所：①AI には数字や合否を答えさせない（袖は「点の位置」だけ返させ、長さは Python で測る）
+# ②結果を 合格／不一致／判定不能／システム障害 に分ける（掲載は合格だけ）③402（残高切れ）が出たらその回は止める
+# ④襟は名前でなく大まかな形の組で比べる ⑤文字の有無が同じ写真で食い違ったら、上半分を拡大・明暗を強めて1回だけ読み直す
+# 平置きの袖を画素だけで測る試作は、半袖と長袖の数字が重なって使えなかった（Project の仕分け文書）。
+
+class ApiStop(Exception):
+    """残高切れ（402）など、この回はもう呼ばない方がよい故障"""
+
+
+V4_STATUS = ('合格', '不一致', '判定不能', 'システム障害')
+COLLAR_GROUP = {'crew_neck': 'round', 'v_neck': 'v', 'polo_collar': 'collared', 'shirt_collar': 'collared',
+                'hood': 'hood', 'turtleneck': 'stand', 'mock_neck': 'stand', 'stand_collar': 'stand',
+                'lapel': 'lapel', 'not_applicable': 'none', 'other': 'other'}
+V4_KEYS = ('garment_type', 'collar_type', 'front_closure', 'pattern_type', 'primary_color')   # 袖の名前（sleeve_length）は比べない
+SLEEVE_SHORT_MAX = 0.42    # 袖（肩→袖口）÷ 身頃（首→裾）がこれ以下なら半袖の組
+SLEEVE_LONG_MIN = 0.62     # これ以上なら長袖の組。間は「中くらい」（肘丈・七分）
+SLEEVE_LR_GAP = 0.20       # 左右の袖の割合がこれ以上違えば、点の位置が怪しいので判定不能
+POINT_NAMES = ('neck_center', 'left_shoulder', 'right_shoulder', 'left_cuff', 'right_cuff', 'hem_center')
+POINT_SCHEMA = {'type': 'OBJECT', 'properties': {n: {'type': 'OBJECT', 'properties': {
+    'x': {'type': 'INTEGER'}, 'y': {'type': 'INTEGER'}, 'visible': {'type': 'BOOLEAN'}}, 'required': ['x', 'y', 'visible']}
+    for n in POINT_NAMES}, 'required': list(POINT_NAMES)}
+
+
+def points_prompt(who):
+    return (f'This is a cropped photo of {who}. Return only the positions of these points ON THE GARMENT, '
+            'as integer coordinates normalized to 0-1000 (x from the left edge, y from the top edge of THIS image): '
+            'neck_center = center of the neckline where the collar meets the body; '
+            'left_shoulder / right_shoulder = where each sleeve starts at the shoulder seam (left/right as seen in the image); '
+            'left_cuff / right_cuff = center of the END of each sleeve of the GARMENT (not the hand, wrist or elbow of a person); '
+            'hem_center = center of the bottom edge of the garment body. '
+            'If a point is covered, folded or outside the image, set visible=false (still give your best x,y). '
+            'Do not answer with typical positions; point to what is actually in this image.')
+
+
+def sleeve_from_points(pts, w, h):
+    """点の位置（0〜1000）と画像の大きさ → (袖の組, 割合, 理由)。純粋関数・テスト対象。
+    組は 'short' / 'mid' / 'long'、決められない時は None と理由"""
+    pts = pts or {}
+    for n in POINT_NAMES:
+        p = pts.get(n) or {}
+        if not p.get('visible') or not isinstance(p.get('x'), (int, float)) or not isinstance(p.get('y'), (int, float)):
+            return None, None, f'{n} が見えない'
+    xy = {n: (pts[n]['x'] * w / 1000, pts[n]['y'] * h / 1000) for n in POINT_NAMES}
+    dist = lambda a, b: ((xy[a][0] - xy[b][0]) ** 2 + (xy[a][1] - xy[b][1]) ** 2) ** 0.5
+    body = dist('neck_center', 'hem_center')
+    if body < 0.2 * h:
+        return None, None, '身頃の長さが短すぎる（点が怪しい）'
+    rl, rr = dist('left_shoulder', 'left_cuff') / body, dist('right_shoulder', 'right_cuff') / body
+    if abs(rl - rr) >= SLEEVE_LR_GAP:
+        return None, round((rl + rr) / 2, 2), f'左右の袖の割合が違いすぎる（{rl:.2f}・{rr:.2f}）'
+    r = (rl + rr) / 2
+    cls = 'short' if r <= SLEEVE_SHORT_MAX else 'long' if r >= SLEEVE_LONG_MIN else 'mid'
+    return cls, round(r, 2), ''
+
+
+def compare_v4(src, out, src_text, out_text, s_sleeve, o_sleeve):
+    """→（状態, 理由のリスト）。状態は 合格／不一致／判定不能。純粋関数・テスト対象。
+    はっきりした違いが1つでもあれば「不一致」、違いは無いが分からない所があれば「判定不能」"""
+    diff, unsure = [], []
+    src, out, src_text, out_text = src or {}, out or {}, src_text or {}, out_text or {}
+    for k in V4_KEYS:
+        a, b = str(src.get(k, '')).lower(), str(out.get(k, '')).lower()
+        if a in UNSURE or b in UNSURE:
+            unsure.append(f'{JA[k]}が分からない（元={a or "無回答"}・着用={b or "無回答"}）')
+        elif k == 'garment_type':
+            if GARMENT_GROUP.get(a, a) != GARMENT_GROUP.get(b, b):
+                diff.append(f'{JA[k]}が違う（元={a}・着用={b}）')
+        elif k == 'collar_type':
+            if COLLAR_GROUP.get(a, a) != COLLAR_GROUP.get(b, b):
+                diff.append(f'{JA[k]}の形が違う（元={a}・着用={b}）')
+        elif k == 'pattern_type':
+            if a != b and not ({a, b} & LOOSE_PATTERNS):
+                diff.append(f'{JA[k]}が違う（元={a}・着用={b}）')
+        elif k == 'primary_color':
+            if not (_near_color(a, b) or 'multicolor' in (a, b)):
+                diff.append(f'{JA[k]}が違う（元={a}・着用={b}）')
+        elif a != b:
+            diff.append(f'{JA[k]}が違う（元={a}・着用={b}）')
+    # 袖：点の位置から Python で測った組で比べる
+    (sc, sr, sw), (oc, orr, ow) = s_sleeve or (None, None, '無い'), o_sleeve or (None, None, '無い')
+    if sc and oc:
+        if sc != oc:
+            diff.append(f'袖の長さが違う（元={sc} {sr}・着用={oc} {orr}）')
+        elif sc == 'mid':
+            unsure.append(f'袖が中くらいの長さで決めきれない（元={sr}・着用={orr}）')
+    else:
+        unsure.append(f'袖の長さが測れない（元：{sw or sc}・着用：{ow or oc}）')
+    # ポケット：hidden は「無い」と扱わない
+    if src.get('pocket_status') != 'exact' or out.get('pocket_status') != 'exact':
+        unsure.append(f'ポケットが数えられない（元={src.get("pocket_status")}・着用={out.get("pocket_status")}）')
+    elif src.get('pocket_count') != out.get('pocket_count'):
+        diff.append(f'ポケットの数が違う（元={src.get("pocket_count")}・着用={out.get("pocket_count")}）')
+    # 文字：それぞれの写真の「文字だけの読み」（食い違いは読み直し済み）で比べる
+    ps, po = str(src_text.get('text_presence', '')).lower(), str(out_text.get('text_presence', '')).lower()
+    if ps not in ('present', 'absent') or po not in ('present', 'absent'):
+        unsure.append(f'文字の有無が定まらない（元={ps or "無回答"}・着用={po or "無回答"}）')
+    elif ps != po:
+        diff.append(f'文字の有無が違う（元={ps}・着用={po}）')
+    elif ps == 'present':
+        a, b = norm_text(src_text.get('text_transcription')), norm_text(out_text.get('text_transcription'))
+        if a and b and a != b:
+            diff.append(f'文字が違う（元「{a}」・着用「{b}」）')
+        if out_text.get('letters_legible') == 'no':
+            diff.append('着用の写真の文字が崩れている')
+        for name, txt in (('元', src_text), ('着用', out_text)):
+            if txt.get('letters_legible') not in ('yes', 'no') or txt.get('text_fully_visible') != 'yes' \
+                    or (txt is src_text and txt.get('letters_legible') == 'no'):
+                unsure.append(f'{name}の写真の文字が読み切れない（読める={txt.get("letters_legible")}・全部見える={txt.get("text_fully_visible")}）')
+        if not a or not b:
+            unsure.append('文字の書き起こしが空')
+    if diff:
+        return '不一致', diff + unsure
+    if unsure:
+        return '判定不能', unsure
+    return '合格', []
+
+
+def reread_text(im, sku, budget, who, label):
+    """文字の有無が食い違った時の読み直し：服の上60%を2倍に拡大し、明暗を強めて1回だけ読む"""
+    from PIL import ImageOps
+    W, H = im.size
+    part = ImageOps.autocontrast(im.crop((0, 0, W, int(H * 0.6))), cutoff=1)
+    part = part.resize((W * 2, int(H * 0.6) * 2))
+    part.thumbnail((1536, 1536))
+    res, _ = gemini_logged(budget, sku, f'検品v4 {label}の文字の読み直し', TEXT_MODEL, [img_part(part, 92), {'text': text_read_prompt(who)}],
+                           {'temperature': 0, 'responseMimeType': 'application/json', 'responseSchema': TEXT_SCHEMA,
+                            'maxOutputTokens': 1500, 'thinkingConfig': {'thinkingBudget': 1024}})
+    try:
+        return json_of(res)
+    except Exception:
+        return {}
+
+
+def settle_text(attrs, txt, again_fn):
+    """同じ写真の2回の読み（特徴の書き出し・文字だけの読み）が食い違ったら、読み直し1回の結果で決める。
+    読み直しが「文字だけの読み」と同じなら採用、違えば「定まらない」にする（純粋に近い関数・テスト対象）"""
+    p1, p2 = str(attrs.get('text_presence', '')).lower(), str(txt.get('text_presence', '')).lower()
+    if p1 == p2 and p1 in ('present', 'absent'):
+        return txt, ''
+    again = again_fn() or {}
+    p3 = str(again.get('text_presence', '')).lower()
+    if p3 in ('present', 'absent') and p3 == p2:
+        return txt, f'読み直しで{p3}に決定'
+    if p3 in ('present', 'absent') and p3 == p1:
+        return again, f'読み直しで{p3}に決定'
+    return dict(txt, text_presence='unclear'), f'読み直しても定まらない（{p1}・{p2}・{p3}）'
+
+
+def garment_points(im, sku, budget, who, label):
+    big = im.copy(); big.thumbnail((1024, 1024))
+    res, _ = gemini_logged(budget, sku, f'検品v4 {label}の袖の点', TEXT_MODEL, [img_part(big, 90), {'text': points_prompt(who)}],
+                           {'temperature': 0, 'responseMimeType': 'application/json', 'responseSchema': POINT_SCHEMA,
+                            'maxOutputTokens': 1500, 'thinkingConfig': {'thinkingBudget': 512}})
+    try:
+        pts = json_of(res)
+    except Exception:
+        pts = {}
+    return pts, sleeve_from_points(pts, *im.size)
+
+
+def _api(fn, *a):
+    try:
+        return fn(*a)
+    except RuntimeError as e:
+        if 'HTTP 402' in str(e) or 'HTTP 429' in str(e):
+            raise ApiStop(str(e)[:160])
+        raise
+
+
+def tryon_check_v4(src, out, sku, budget):
+    """→（状態, 理由, 書き出しの中身）"""
+    src_c = _api(crop_to_garment, src, sku, budget, 'the single garment for sale in this photo (the clothing item only, not hangers or background)')
+    s_attr, s_text = _api(extract_garment, src_c, sku, budget, 'a second-hand garment for sale', '元')
+    gtype = s_attr.get('garment_type', 'garment')
+    out_c = _api(crop_to_garment, out, sku, budget, f'the {gtype} the model is wearing (only that garment, not the other clothes)')
+    o_attr, o_text = _api(extract_garment, out_c, sku, budget, f'a {gtype} worn by a model', '着用')
+    s_text, s_note = settle_text(s_attr, s_text, lambda: _api(reread_text, src_c, sku, budget, 'a second-hand garment for sale', '元'))
+    o_text, o_note = settle_text(o_attr, o_text, lambda: _api(reread_text, out_c, sku, budget, f'a {gtype} worn by a model', '着用'))
+    s_pts, s_sl = _api(garment_points, src_c, sku, budget, 'a second-hand garment laid flat', '元')
+    o_pts, o_sl = _api(garment_points, out_c, sku, budget, f'a {gtype} worn by a model', '着用')
+    status, why = compare_v4(s_attr, o_attr, s_text, o_text, s_sl, o_sl)
+    detail = {'元': {'特徴': s_attr, '文字': s_text, '文字のメモ': s_note, '袖の点': s_pts, '袖': s_sl},
+              '着用': {'特徴': o_attr, '文字': o_text, '文字のメモ': o_note, '袖の点': o_pts, '袖': o_sl}}
+    return status, '・'.join(why)[:400], detail
+
+
 def check_tryon_folder(budget):
     from PIL import Image
     folders = re.findall(r'\b(\d{8})\b', open(TRYCHECK_FILE, encoding='utf-8').read())
+    stopped = ''
     for f in folders:
         od = os.path.join(TRYON_DIR, f)
         if not os.path.isdir(od):
             log(f'検品：{od} が無い'); continue
-        rows, details = [], {}
+        rows, details, count = [], {}, {k: 0 for k in V4_STATUS}
         for name in sorted(os.listdir(od)):
             m = re.match(r'(K\d{5})_([MF]0[1-4])\.jpg$', name)
             if not m:
                 continue
             src = os.path.join(od, f'{m.group(1)}_src.jpg')
-            if not os.path.exists(src) or not budget.can_spend(3.0):
-                rows.append(f'{name}：検品できず（元の写真が無い・お金の上限）'); continue
-            try:
-                ok, why, detail = tryon_check_v2(Image.open(src).convert('RGB'), Image.open(os.path.join(od, name)).convert('RGB'), m.group(1), budget)
-            except Exception as e:
-                ok, why, detail = False, f'検品が途中で失敗：{str(e)[:120]}', {}
-            rows.append(f'{name}：{"載せてよい" if ok else "載せない"}' + (f'（{why}）' if why else ''))
-            details[name] = detail
+            if stopped:
+                status, why, detail = 'システム障害', f'この回は止めた：{stopped}', {}
+            elif not os.path.exists(src) or not budget.can_spend(3.0):
+                status, why, detail = 'システム障害', '元の写真が無い・お金の上限', {}
+            else:
+                try:
+                    status, why, detail = tryon_check_v4(Image.open(src).convert('RGB'), Image.open(os.path.join(od, name)).convert('RGB'), m.group(1), budget)
+                except ApiStop as e:
+                    stopped = str(e)[:120]
+                    status, why, detail = 'システム障害', f'残高切れ・回数の上限（この回の残りは呼ばない）：{stopped}', {}
+                except Exception as e:
+                    status, why, detail = 'システム障害', f'検品が途中で失敗：{str(e)[:120]}', {}
+            count[status] += 1
+            rows.append(f'{name}：{status}' + ('（載せてよい）' if status == '合格' else '（載せない）') + (f'　{why}' if why else ''))
+            details[name] = dict(detail, 状態=status)
             log(rows[-1])
         with open(os.path.join(od, 'CHECK.txt'), 'w', encoding='utf-8') as fh:
-            fh.write(f'検品 v3（{now_jst():%Y-%m-%d %H:%M}・型 {TEXT_MODEL}・1枚ずつ書き出して Python で比較）\n' + '\n'.join(rows) + '\n')
+            fh.write(f'検品 v4（{now_jst():%Y-%m-%d %H:%M}・型 {TEXT_MODEL}）　' + '・'.join(f'{k}{v}' for k, v in count.items()) + '\n'
+                     + '\n'.join(rows) + '\n')
         with open(os.path.join(od, 'CHECK_detail.json'), 'w', encoding='utf-8') as fh:
             json.dump(details, fh, ensure_ascii=False, indent=1)
     os.remove(TRYCHECK_FILE)
