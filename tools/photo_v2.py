@@ -998,15 +998,21 @@ GARMENT_ENUMS = {
 }
 GARMENT_SCHEMA = {'type': 'OBJECT', 'properties': dict(
     {k: {'type': 'STRING', 'enum': v} for k, v in GARMENT_ENUMS.items()},
-    button_count={'type': 'INTEGER'}, pocket_count={'type': 'INTEGER'}),
-    'required': list(GARMENT_ENUMS) + ['button_count', 'pocket_count']}
+    button_count={'type': 'INTEGER'}, pocket_count={'type': 'INTEGER'}, sleeve_to_body_ratio={'type': 'NUMBER'}),
+    'required': list(GARMENT_ENUMS) + ['button_count', 'pocket_count', 'sleeve_to_body_ratio']}
 TEXT_SCHEMA = {'type': 'OBJECT', 'properties': {
     'text_presence': {'type': 'STRING', 'enum': ['present', 'absent', 'unclear']},
     'text_transcription': {'type': 'STRING'},
     'letters_legible': {'type': 'STRING', 'enum': ['yes', 'no', 'unclear', 'not_applicable']},
     'text_fully_visible': {'type': 'STRING', 'enum': ['yes', 'no', 'unclear', 'not_applicable']}},
     'required': ['text_presence', 'text_transcription', 'letters_legible', 'text_fully_visible']}
-COMPARE_KEYS = ('garment_type', 'sleeve_length', 'collar_type', 'front_closure', 'pattern_type', 'primary_color', 'graphic_presence')
+COMPARE_KEYS = ('garment_type', 'sleeve_length', 'collar_type', 'front_closure', 'pattern_type', 'primary_color')
+# 2026-11-28 v2 の試しで分かったこと：ボタンの数（スナップ・袖口まで数える）と「絵柄の有無」（小さなワッペンも数える）は
+# 平置きと着用で数え方がぶれ、正しい服まで止めた。この2つは比べない。服の種類は大まかな組で比べる。柄の other・編み地は比べない。
+GARMENT_GROUP = {'t_shirt': 'top', 'shirt': 'top', 'knit_sweater': 'top', 'cardigan': 'top', 'sweatshirt_hoodie': 'top', 'other': 'top',
+                 'jacket': 'outer', 'coat': 'outer', 'vest': 'outer', 'dress': 'dress', 'skirt': 'bottom', 'pants': 'bottom', 'shorts': 'bottom'}
+LOOSE_PATTERNS = {'other', 'knit_texture'}
+SLEEVE_RATIO_GAP = 0.25   # 袖の長さ（身頃に対する割合）がこれ以上違えば止める
 NEAR_COLORS = [{'navy', 'blue'}, {'blue', 'light_blue'}, {'white', 'off_white_cream'}]   # 光の当たり方で名前が揺れる組だけ同じとみなす
 JA = {'garment_type': '服の種類', 'sleeve_length': '袖の長さ', 'collar_type': '襟', 'front_closure': '前の留め方',
       'pattern_type': '柄', 'primary_color': '主な色', 'graphic_presence': '絵柄', 'text_presence': '文字'}
@@ -1017,12 +1023,17 @@ def garment_attr_prompt(who):
             'Do not guess from typical designs. If a part is covered by arms, hair, other clothes or cut off, answer "hidden". '
             'If you cannot see it clearly enough, answer "unclear". Count buttons and pockets you can actually see; '
             'button_count_status/pocket_status = "exact" only when you can see the whole area and are sure of the count '
-            '(a faint or flat patch pocket still counts). text_presence = any letters, numbers or words printed/embroidered on the garment.')
+            '(a faint or flat patch pocket still counts). text_presence = letters, numbers or words that are part of the DESIGN '
+            '(printed or embroidered graphics); ignore sewn-in brand labels, neck tags, size tags and care tags. '
+            'sleeve_length: judge by where the sleeve actually ends, NOT by what is typical for this kind of garment. '
+            'In a flat-lay photo, compare the sleeve with the body: a sleeve ending far above the hem line is short or elbow length. '
+            'sleeve_to_body_ratio = length of one sleeve from the shoulder seam to the sleeve end, divided by the body length '
+            'from the shoulder to the hem (a long sleeve is about 0.8-1.1, a short sleeve about 0.2-0.4; 0 if sleeveless or not applicable).')
 
 
 def text_read_prompt(who):
-    return (f'This is a cropped photo of {who}. Read ONLY letters/numbers/words printed, embroidered or patched on the garment '
-            '(ignore the background). Transcribe them exactly as they appear, in UPPERCASE, without correcting spelling or '
+    return (f'This is a cropped photo of {who}. Read ONLY letters/numbers/words that are part of the garment DESIGN '
+            '(printed or embroidered graphics). Ignore the background and ignore sewn-in brand labels, neck tags, size tags and care tags. Transcribe them exactly as they appear, in UPPERCASE, without correcting spelling or '
             'filling in letters you cannot see. letters_legible = "no" if any letter looks malformed, melted or garbled. '
             'text_fully_visible = "no" if any part of the text is covered or cut off. If there is no text: text_presence="absent", '
             'text_transcription="", letters_legible="not_applicable", text_fully_visible="not_applicable".')
@@ -1046,13 +1057,23 @@ def compare_attrs(src, out, src_text, out_text):
         a, b = str(src.get(k, '')).lower(), str(out.get(k, '')).lower()
         if a in UNSURE or b in UNSURE:
             bad.append(f'{JA[k]}が分からない（元={a or "無回答"}・着用={b or "無回答"}）')
-        elif not (_near_color(a, b) if k == 'primary_color' else a == b):
+        elif k == 'garment_type':
+            if GARMENT_GROUP.get(a, a) != GARMENT_GROUP.get(b, b):
+                bad.append(f'{JA[k]}が違う（元={a}・着用={b}）')
+        elif k == 'pattern_type':
+            if a != b and not ({a, b} & LOOSE_PATTERNS):
+                bad.append(f'{JA[k]}が違う（元={a}・着用={b}）')
+        elif k == 'primary_color':
+            if not (_near_color(a, b) or 'multicolor' in (a, b)):
+                bad.append(f'{JA[k]}が違う（元={a}・着用={b}）')
+        elif a != b:
             bad.append(f'{JA[k]}が違う（元={a}・着用={b}）')
-    if 'buttons' in (str(src.get('front_closure')), str(out.get('front_closure'))):
-        if src.get('button_count_status') != 'exact' or out.get('button_count_status') != 'exact':
-            bad.append(f'ボタンの数が数えられない（元={src.get("button_count_status")}・着用={out.get("button_count_status")}）')
-        elif src.get('button_count') != out.get('button_count'):
-            bad.append(f'ボタンの数が違う（元={src.get("button_count")}・着用={out.get("button_count")}）')
+    try:
+        ra, rb = float(src.get('sleeve_to_body_ratio')), float(out.get('sleeve_to_body_ratio'))
+        if abs(ra - rb) >= SLEEVE_RATIO_GAP:
+            bad.append(f'袖の長さの割合が違う（元={ra:.2f}・着用={rb:.2f}）')
+    except (TypeError, ValueError):
+        bad.append('袖の長さの割合が読めない')
     if src.get('pocket_status') != 'exact' or out.get('pocket_status') != 'exact':
         bad.append(f'ポケットが数えられない（元={src.get("pocket_status")}・着用={out.get("pocket_status")}）')
     elif src.get('pocket_count') != out.get('pocket_count'):
@@ -1150,7 +1171,7 @@ def check_tryon_folder(budget):
             details[name] = detail
             log(rows[-1])
         with open(os.path.join(od, 'CHECK.txt'), 'w', encoding='utf-8') as fh:
-            fh.write(f'検品 v2（{now_jst():%Y-%m-%d %H:%M}・型 {TEXT_MODEL}・1枚ずつ書き出して Python で比較）\n' + '\n'.join(rows) + '\n')
+            fh.write(f'検品 v3（{now_jst():%Y-%m-%d %H:%M}・型 {TEXT_MODEL}・1枚ずつ書き出して Python で比較）\n' + '\n'.join(rows) + '\n')
         with open(os.path.join(od, 'CHECK_detail.json'), 'w', encoding='utf-8') as fh:
             json.dump(details, fh, ensure_ascii=False, indent=1)
     os.remove(TRYCHECK_FILE)
