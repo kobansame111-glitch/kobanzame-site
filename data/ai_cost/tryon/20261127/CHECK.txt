@@ -1,11 +1,11 @@
-検品 v3（2026-11-28 07:48・型 gemini-2.5-flash・1枚ずつ書き出して Python で比較）
-K10153_M02.jpg：載せない（文字が違う（元「CATCHEMJOESCRABSHACK」・着用「CATCHEMLOUISIANA」））
-K10856_M01.jpg：載せない（着用の写真の文字が崩れている・読めない（no）・文字が違う（元「MOTORHARLEYDAVIDSONCYCLES」・着用「MOTODNAHLEFRARRISONSTYLED」））
-K11165_M01.jpg：載せてよい
-K11191_M02.jpg：載せてよい
-K11453_M02.jpg：載せてよい
-K11459_M01.jpg：載せてよい
-K11472_M01.jpg：載せない（元の写真の文字の有無が定まらない（1回目=present・2回目=absent）・文字の有無が違う（元=absent・着用=present））
-K11488_F02.jpg：載せない（襟が違う（元=mock_neck・着用=turtleneck）・ポケットが数えられない（元=exact・着用=hidden））
-K11537_F01.jpg：載せてよい
-K11560_F02.jpg：載せてよい
+検品 v4（2026-11-28 08:51・型 gemini-2.5-flash）　合格6・不一致3・判定不能1・システム障害0
+K10153_M02.jpg：不一致（載せない）　袖の長さが違う（元=short 0.34・着用=mid 0.49）・文字が違う（元「CATCHEMJOESCRABSHACK」・着用「CATCHEMLOUISIANA」）
+K10856_M01.jpg：不一致（載せない）　文字が違う（元「MOTORHARLEYDAVIDSONCYCLES」・着用「MOTODHARLEYRAERISONSTYLED」）
+K11165_M01.jpg：合格（載せてよい）
+K11191_M02.jpg：合格（載せてよい）
+K11453_M02.jpg：合格（載せてよい）
+K11459_M01.jpg：判定不能（載せない）　ポケットが数えられない（元=exact・着用=hidden）
+K11472_M01.jpg：合格（載せてよい）
+K11488_F02.jpg：不一致（載せない）　袖の長さが違う（元=short 0.34・着用=long 0.85）
+K11537_F01.jpg：合格（載せてよい）
+K11560_F02.jpg：合格（載せてよい）
