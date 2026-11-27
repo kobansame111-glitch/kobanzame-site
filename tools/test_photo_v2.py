@@ -266,8 +266,49 @@ check('v2：黒と紺は違う', pv.compare_attrs(A, dict(A, primary_color='navy
 check('v2：紺と青は同じ色とみなす（青どうし）', pv.compare_attrs(dict(A, primary_color='blue'), dict(A, primary_color='navy'), T, T)[0], True)
 check('v2：黒と赤は違う', pv.compare_attrs(A, dict(A, primary_color='red'), T, T)[0], False)
 check('v2：文字の正規化', pv.norm_text(' Harley-Davidson® 1903 '), 'HARLEYDAVIDSON1903')
-check('v2：型の必須項目', sorted(pv.GARMENT_SCHEMA['required']), sorted(list(pv.GARMENT_ENUMS) + ['button_count', 'pocket_count', 'sleeve_to_body_ratio']))
+check('v2：型の必須項目', sorted(pv.GARMENT_SCHEMA['required']), sorted(list(pv.GARMENT_ENUMS) + ['button_count', 'pocket_count']))
 check('v2：返事が空でもダメで止まる', pv.compare_attrs({}, {}, {}, {})[0], False)
+
+# 検品 v4（袖は点の位置から Python で測る・状態を分ける）
+def P(**kw):
+    base = {'neck_center': (500, 100), 'hem_center': (500, 900), 'left_shoulder': (300, 150), 'right_shoulder': (700, 150),
+            'left_cuff': (150, 300), 'right_cuff': (850, 300)}
+    base.update(kw)
+    return {k: {'x': v[0], 'y': v[1], 'visible': True} for k, v in base.items()}
+short = pv.sleeve_from_points(P(), 1000, 1000)
+check('v4：袖の短い点は short', short[0], 'short')
+long_ = pv.sleeve_from_points(P(left_cuff=(250, 750), right_cuff=(750, 750)), 1000, 1000)
+check('v4：袖の長い点は long', long_[0], 'long')
+check('v4：見えない点があれば決めない', pv.sleeve_from_points(dict(P(), left_cuff={'x': 1, 'y': 1, 'visible': False}), 1000, 1000)[0], None)
+check('v4：左右が違いすぎたら決めない', pv.sleeve_from_points(P(left_cuff=(250, 750)), 1000, 1000)[0], None)
+check('v4：点が無ければ決めない', pv.sleeve_from_points({}, 1000, 1000)[0], None)
+check('v4：画像の縦横を使って測る', pv.sleeve_from_points(P(), 500, 1000)[0], 'short')
+B = dict(A, collar_type='turtleneck', pattern_type='knit_texture', primary_color='brown', text_presence='absent', graphic_presence='absent')
+check('v4：全部同じ・袖も同じなら合格', pv.compare_v4(B, dict(B), N, N, short, short), ('合格', []))
+check('v4：半袖→長袖は袖だけで不一致', pv.compare_v4(B, dict(B), N, N, short, long_)[0], '不一致')
+check('v4：袖の理由が書かれる', '袖の長さが違う' in pv.compare_v4(B, dict(B), N, N, short, long_)[1][0], True)
+check('v4：モックネックとタートルは同じ組', pv.compare_v4(B, dict(B, collar_type='mock_neck'), N, N, short, short)[0], '合格')
+check('v4：丸首と襟付きは不一致', pv.compare_v4(B, dict(B, collar_type='shirt_collar'), N, N, short, short)[0], '不一致')
+check('v4：袖が測れないなら判定不能', pv.compare_v4(B, dict(B), N, N, short, (None, None, 'x'))[0], '判定不能')
+check('v4：中くらいどうしは判定不能', pv.compare_v4(B, dict(B), N, N, ('mid', 0.5, ''), ('mid', 0.5, ''))[0], '判定不能')
+check('v4：ポケット hidden は判定不能（不一致ではない）', pv.compare_v4(B, dict(B, pocket_status='hidden'), N, N, short, short)[0], '判定不能')
+check('v4：文字の書き換えは不一致', pv.compare_v4(A, dict(A), T, dict(T, text_transcription="CATCH'EM LOUISIANA"), short, short)[0], '不一致')
+check('v4：着用の文字崩れは不一致', pv.compare_v4(A, dict(A), T, dict(T, letters_legible='no'), short, short)[0], '不一致')
+check('v4：文字が増えたら不一致', pv.compare_v4(B, dict(B), N, T, short, short)[0], '不一致')
+check('v4：文字が定まらないなら判定不能', pv.compare_v4(B, dict(B), N, dict(N, text_presence='unclear'), short, short)[0], '判定不能')
+check('v4：違いと分からないが両方なら不一致', pv.compare_v4(B, dict(B, pocket_status='hidden'), N, N, short, long_)[0], '不一致')
+check('v4：返事が空なら合格にしない', pv.compare_v4({}, {}, {}, {}, None, None)[0] != '合格', True)
+# 文字の読みの食い違いの決め方
+calls = []
+def again(v):
+    def f():
+        calls.append(1); return {'text_presence': v}
+    return f
+check('v4：2回の読みが同じなら読み直さない', (pv.settle_text({'text_presence': 'absent'}, N, again('present'))[0]['text_presence'], len(calls)), ('absent', 0))
+check('v4：読み直しが文字の読みと同じなら採る', pv.settle_text({'text_presence': 'present'}, N, again('absent'))[0]['text_presence'], 'absent')
+check('v4：読み直しが特徴の方と同じならそれを採る', pv.settle_text({'text_presence': 'absent'}, T, again('absent'))[0]['text_presence'], 'absent')
+check('v4：読み直しが分からないなら定まらない', pv.settle_text({'text_presence': 'absent'}, T, again('unclear'))[0]['text_presence'], 'unclear')
+check('v4：状態は4つ', pv.V4_STATUS, ('合格', '不一致', '判定不能', 'システム障害'))
 check('検品：選んだモデル8人', sorted(pv.MODEL_PICK), ['F01', 'F02', 'F03', 'F04', 'M01', 'M02', 'M03', 'M04'])
 
 print(f'NG {ng}件／{ok + ng}' if ng else f'photo_v2：全部 OK（{ok}件）')
