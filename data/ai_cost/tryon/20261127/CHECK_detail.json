@@ -1,12 +1,482 @@
 {
- "K10153_M02.jpg": {},
- "K10856_M01.jpg": {},
- "K11165_M01.jpg": {},
- "K11191_M02.jpg": {},
- "K11453_M02.jpg": {},
- "K11459_M01.jpg": {},
- "K11472_M01.jpg": {},
- "K11488_F02.jpg": {},
- "K11537_F01.jpg": {},
- "K11560_F02.jpg": {}
+ "K10153_M02.jpg": {
+  "元": [
+   {
+    "garment_type": "t_shirt",
+    "sleeve_length": "short",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "graphic_print",
+    "primary_color": "white",
+    "graphic_presence": "present",
+    "text_presence": "present",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.35
+   },
+   {
+    "text_presence": "present",
+    "text_transcription": "CATCH'EM JOE'S CRABSHACK",
+    "letters_legible": "yes",
+    "text_fully_visible": "yes"
+   }
+  ],
+  "着用": [
+   {
+    "garment_type": "t_shirt",
+    "sleeve_length": "short",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "graphic_print",
+    "primary_color": "off_white_cream",
+    "graphic_presence": "present",
+    "text_presence": "present",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.35
+   },
+   {
+    "text_presence": "present",
+    "text_transcription": "CATCH'EM LOUISIANA",
+    "letters_legible": "yes",
+    "text_fully_visible": "yes"
+   }
+  ]
+ },
+ "K10856_M01.jpg": {
+  "元": [
+   {
+    "garment_type": "t_shirt",
+    "sleeve_length": "short",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "graphic_print",
+    "primary_color": "green",
+    "graphic_presence": "present",
+    "text_presence": "present",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.35
+   },
+   {
+    "text_presence": "present",
+    "text_transcription": "MOTOR HARLEY-DAVIDSON CYCLES",
+    "letters_legible": "yes",
+    "text_fully_visible": "yes"
+   }
+  ],
+  "着用": [
+   {
+    "garment_type": "t_shirt",
+    "sleeve_length": "short",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "graphic_print",
+    "primary_color": "green",
+    "graphic_presence": "present",
+    "text_presence": "present",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.35
+   },
+   {
+    "text_presence": "present",
+    "text_transcription": "MOTOD NAHLEF RARRISON STYLED",
+    "letters_legible": "no",
+    "text_fully_visible": "yes"
+   }
+  ]
+ },
+ "K11165_M01.jpg": {
+  "元": [
+   {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "stand_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "allover_print",
+    "primary_color": "green",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 6,
+    "pocket_count": 1,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ],
+  "着用": [
+   {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "stand_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "allover_print",
+    "primary_color": "green",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 7,
+    "pocket_count": 1,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ]
+ },
+ "K11191_M02.jpg": {
+  "元": [
+   {
+    "garment_type": "sweatshirt_hoodie",
+    "sleeve_length": "long",
+    "collar_type": "hood",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "allover_print",
+    "primary_color": "purple",
+    "graphic_presence": "present",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 1,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ],
+  "着用": [
+   {
+    "garment_type": "sweatshirt_hoodie",
+    "sleeve_length": "long",
+    "collar_type": "hood",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "allover_print",
+    "primary_color": "multicolor",
+    "graphic_presence": "present",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 1,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ]
+ },
+ "K11453_M02.jpg": {
+  "元": [
+   {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "allover_print",
+    "primary_color": "navy",
+    "graphic_presence": "present",
+    "text_presence": "absent",
+    "button_count": 8,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ],
+  "着用": [
+   {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "allover_print",
+    "primary_color": "navy",
+    "graphic_presence": "present",
+    "text_presence": "absent",
+    "button_count": 7,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ]
+ },
+ "K11459_M01.jpg": {
+  "元": [
+   {
+    "garment_type": "sweatshirt_hoodie",
+    "sleeve_length": "long",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "stripe",
+    "primary_color": "gray",
+    "graphic_presence": "present",
+    "text_presence": "present",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "present",
+    "text_transcription": "AeroNyATHLETIC DEPT.",
+    "letters_legible": "yes",
+    "text_fully_visible": "yes"
+   }
+  ],
+  "着用": [
+   {
+    "garment_type": "t_shirt",
+    "sleeve_length": "long",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "stripe",
+    "primary_color": "gray",
+    "graphic_presence": "present",
+    "text_presence": "present",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "present",
+    "text_transcription": "AeroNY ATHLETIC DEPT.",
+    "letters_legible": "yes",
+    "text_fully_visible": "yes"
+   }
+  ]
+ },
+ "K11472_M01.jpg": {
+  "元": [
+   {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "other",
+    "primary_color": "burgundy",
+    "graphic_presence": "present",
+    "text_presence": "present",
+    "button_count": 9,
+    "pocket_count": 2,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ],
+  "着用": [
+   {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "burgundy",
+    "graphic_presence": "absent",
+    "text_presence": "present",
+    "button_count": 9,
+    "pocket_count": 2,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "present",
+    "text_transcription": "WRANGLER",
+    "letters_legible": "yes",
+    "text_fully_visible": "yes"
+   }
+  ]
+ },
+ "K11488_F02.jpg": {
+  "元": [
+   {
+    "garment_type": "knit_sweater",
+    "sleeve_length": "long",
+    "collar_type": "mock_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "knit_texture",
+    "primary_color": "brown",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ],
+  "着用": [
+   {
+    "garment_type": "knit_sweater",
+    "sleeve_length": "long",
+    "collar_type": "turtleneck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "hidden",
+    "pattern_type": "knit_texture",
+    "primary_color": "brown",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ]
+ },
+ "K11537_F01.jpg": {
+  "元": [
+   {
+    "garment_type": "t_shirt",
+    "sleeve_length": "long",
+    "collar_type": "polo_collar",
+    "front_closure": "zipper",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "olive_khaki",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ],
+  "着用": [
+   {
+    "garment_type": "t_shirt",
+    "sleeve_length": "long",
+    "collar_type": "polo_collar",
+    "front_closure": "zipper",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "olive_khaki",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ]
+ },
+ "K11560_F02.jpg": {
+  "元": [
+   {
+    "garment_type": "knit_sweater",
+    "sleeve_length": "long",
+    "collar_type": "v_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "knit_texture",
+    "primary_color": "orange",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ],
+  "着用": [
+   {
+    "garment_type": "knit_sweater",
+    "sleeve_length": "long",
+    "collar_type": "v_neck",
+    "front_closure": "none",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "knit_texture",
+    "primary_color": "orange",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 0,
+    "sleeve_to_body_ratio": 0.9
+   },
+   {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   }
+  ]
+ }
 }
