@@ -204,7 +204,8 @@ os.environ.pop('PHOTO_V2_NO_MANNEQUIN')
 check('OFF：スイッチを戻す（ファイルを消す・環境変数を外す）と ON（作る）に戻る', pv.mannequin_off(), False)
 
 # ---- 固定モデル（2026-11-27） ----
-check('固定モデル：all で4人', pv.model_ids('all'), ['M01', 'M02', 'F01', 'F02'])
+check('固定モデル：all で8人', pv.model_ids('all'), ['M01', 'M02', 'F01', 'F02', 'M03', 'M04', 'F03', 'F04'])
+check('固定モデル：足した4人だけ', pv.model_ids('M03 M04\nF03 F04'), ['M03', 'M04', 'F03', 'F04'])
 check('固定モデル：名前を拾う・重なりなし・小文字も', pv.model_ids('m01\nF02 M01\nX99'), ['M01', 'F02'])
 check('固定モデル：何も無ければ0人', pv.model_ids('hello'), [])
 mp = pv.model_prompt('F01')
