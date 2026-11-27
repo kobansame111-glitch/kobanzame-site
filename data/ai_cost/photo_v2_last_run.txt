@@ -1,11 +1,12 @@
-2026-11-28 00:12
-M03_1.jpg：21.01円
-M03_2.jpg：21.11円
-M04_1.jpg：21.10円
-M04_2.jpg：20.94円
-F03_1.jpg：20.96円
-F03_2.jpg：21.07円
-F04_1.jpg：20.96円
-F04_2.jpg：21.09円
-固定モデルの候補を /home/runner/work/kobanzame-site/kobanzame-site/data/ai_cost/models/20261128 に作りました（MODEL_REQUEST は消しました）
-今月のこの処理のAI代（概算）：717.8円／上限 1000円
+2026-11-28 00:32
+K10153_M02.jpg：載せてよい
+K10856_M01.jpg：載せてよい
+K11165_M01.jpg：載せない（text_logo=unsure・buttons_pockets=different・no_added_details=different 画像2には画像1にはない胸ポケットが追加されています。）
+K11191_M02.jpg：載せてよい
+K11453_M02.jpg：載せない（text_logo=unsure）
+K11459_M01.jpg：載せてよい
+K11472_M01.jpg：載せてよい
+K11488_F02.jpg：載せてよい
+K11537_F01.jpg：載せてよい
+K11560_F02.jpg：載せてよい
+今月のこの処理のAI代（概算）：720.8円／上限 1000円
