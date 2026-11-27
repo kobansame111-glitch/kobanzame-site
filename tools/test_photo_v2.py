@@ -203,5 +203,14 @@ check('OFF：前からのスイッチ PHOTO_V2_NO_MANNEQUIN=1 でも止める', 
 os.environ.pop('PHOTO_V2_NO_MANNEQUIN')
 check('OFF：スイッチを戻す（ファイルを消す・環境変数を外す）と ON（作る）に戻る', pv.mannequin_off(), False)
 
+# ---- 固定モデル（2026-11-27） ----
+check('固定モデル：all で4人', pv.model_ids('all'), ['M01', 'M02', 'F01', 'F02'])
+check('固定モデル：名前を拾う・重なりなし・小文字も', pv.model_ids('m01\nF02 M01\nX99'), ['M01', 'F02'])
+check('固定モデル：何も無ければ0人', pv.model_ids('hello'), [])
+mp = pv.model_prompt('F01')
+check('固定モデルの頼み文：架空の人・ロゴなし・背景の色', all(w in mp for w in ('fictional person', 'No logos', 'off-white')), True)
+check('固定モデル：上位の型・1枚の見込みは上限の内（40円）', pv.image_yen_estimate(pv.PRO_IMAGE_MODEL) < pv.MODEL_PER_IMAGE_YEN, True)
+check('固定モデル：ふだんの1枚の上限15円は変えない', pv.STOP_PER_IMAGE_YEN, 15.0)
+
 print(f'NG {ng}件／{ok + ng}' if ng else f'photo_v2：全部 OK（{ok}件）')
 sys.exit(1 if ng else 0)

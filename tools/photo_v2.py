@@ -42,6 +42,8 @@ COST_CSV = os.path.join(COST_DIR, 'photo_v2.csv')
 STOP_FILE = os.path.join(COST_DIR, 'STOP')
 SAMPLE_FILE = os.path.join(COST_DIR, 'SAMPLE_REQUEST')   # 見本を作る頼み（品番を1行に1つ）
 SAMPLE_DIR = os.path.join(COST_DIR, 'samples')
+MODEL_FILE = os.path.join(COST_DIR, 'MODEL_REQUEST')     # 2026-11-27：AIの固定モデル（着用画像の人）を作る頼み。中身は M01・M02・F01・F02 のどれか（1行に1つ）か all
+MODEL_DIR = os.path.join(COST_DIR, 'models')
 MANNEQUIN_OFF_FILE = os.path.join(COST_DIR, 'MANNEQUIN_OFF')   # これがあれば、マネキン画像を作らない・Batch で頼まない（2026-11-12 龍さん決定）
 SITE = 'https://kobanzame-kawagoe.com'
 JST = datetime.timezone(datetime.timedelta(hours=9))
@@ -51,6 +53,7 @@ MAX_PER_RUN = int(os.environ.get('PHOTO_V2_MAX', '5'))           # 1回に処理
 TEXT_MODEL = 'gemini-2.5-flash'
 IMAGE_MODEL = 'gemini-3.1-flash-lite-image'   # 2026-11-09 Nano Banana 2 Lite（画像の型で一番安い・1K だけ）
 OLD_IMAGE_MODEL = 'gemini-2.5-flash-image'    # 2027-03-15 に終わる予定の型。見本の比べ用と、昔の台帳の行の料金用に残す
+PRO_IMAGE_MODEL = 'gemini-3-pro-image'        # 2026-11-27 固定モデルづくり用（Nano Banana Pro・Stable）。人を1回だけ作るので一番上の型
 
 # ---- お金のルール（円・推定）。料金が変わったらここを直す ----
 USD_JPY = 150.0                       # 為替（推定・固定）
@@ -58,8 +61,9 @@ PRICE = {                             # 100万トークンあたりのドル（G
     TEXT_MODEL: {'in': 0.30, 'out': 2.50, 'text_out': 2.50},
     OLD_IMAGE_MODEL: {'in': 0.30, 'out': 30.0, 'text_out': 2.50},   # 画像1枚の出力＝約1,290トークン＝0.039ドル＝約5.8円
     IMAGE_MODEL: {'in': 0.25, 'out': 30.0, 'text_out': 1.50},       # 1K の画像1枚＝1,120トークン＝0.0336ドル＝約5.0円。文字と考えた分は 1.50
+    PRO_IMAGE_MODEL: {'in': 2.0, 'out': 120.0, 'text_out': 12.0},   # 2026-11-27 推定（1K 画像1枚＝約20円の見込み）。初回の台帳の実測で直す
 }
-IMAGE_OUT_TOKENS = {OLD_IMAGE_MODEL: 1290, IMAGE_MODEL: 1120}   # 画像1枚の出力トークン（見込みの計算用）
+IMAGE_OUT_TOKENS = {OLD_IMAGE_MODEL: 1290, IMAGE_MODEL: 1120, PRO_IMAGE_MODEL: 1120}   # 画像1枚の出力トークン（見込みの計算用）
 BATCH_RATE = 0.5                      # Batch（まとめて頼む）は入力も出力も半額（公式の料金ページの Batch の表）
 STOP_PER_IMAGE_YEN = 15.0             # 画像1枚を作るのにこれを超えたら止める（ふだんは約2.5円・見本だけ約5〜6円）
 MONTH_CAP_YEN = 1000.0                # この処理の1か月の上限（Googleの上限1,500円の内側。21番・ジャンル判定の分を残す）
@@ -768,6 +772,77 @@ def make_samples(products, budget):
     log(f'見本を {od} に作りました（SAMPLE_REQUEST は消しました）')
 
 
+# ===== 固定モデル（着用画像の人）を作る（2026-11-27・龍さん「進めましょう」） ==========================
+# 方針：服はAIに描かせない。AIが作るのは人だけで、最初に1回作って固定し、毎回同じ画像を使う（成功29%で止めたマネキンの反省）。
+# この段では人の画像を作って見本の置き場に置くだけ。商品データ・サイトは変えない。どれを使うかは受付デスクが画像を見て決める。
+
+MODEL_SPECS = {   # 実在しない大人。顔・髪・体型・姿勢・照明・背景をそろえる
+    'M01': ('men', 'a slim man in his late 20s, about 170 cm tall, short dark hair, calm neutral expression'),
+    'M02': ('men', 'a man in his early 30s with a solid build, about 180 cm tall, short dark wavy hair, calm neutral expression'),
+    'F01': ('women', 'a petite woman in her late 20s, about 155 cm tall, shoulder-length dark hair tied back, calm neutral expression'),
+    'F02': ('women', 'a woman in her early 30s with an average build, about 165 cm tall, long dark hair tied back, calm neutral expression'),
+}
+MODEL_TRIES = 2                 # 1人につき候補を2枚
+MODEL_PER_IMAGE_YEN = 40.0      # 固定モデルは1回きりなので、1枚の上限を見本より高くする（ふだんの15円は変えない）
+MODEL_GEN = {'responseModalities': ['IMAGE', 'TEXT'], 'imageConfig': {'aspectRatio': '4:5'}}
+
+
+def model_ids(text):
+    """MODEL_REQUEST の中身から作る人を決める（all なら4人・重なりなし。純粋関数・テスト対象）"""
+    t = text.upper()
+    if re.search(r'\bALL\b', t):
+        return list(MODEL_SPECS)
+    out = []
+    for m in re.findall(r'\b[MF]0[12]\b', t):
+        if m not in out:
+            out.append(m)
+    return out
+
+
+def model_prompt(mid):
+    """固定モデルの頼み文（純粋関数・テスト対象）"""
+    _, who = MODEL_SPECS[mid]
+    r, g, b = BG
+    return (f'Full-body studio photograph of {who}. This is a fictional person; do not resemble any real or famous person. '
+            'Head to toe fully in frame with some space above the head and below the feet. Standing straight, facing the camera, '
+            'feet shoulder-width apart, arms relaxed and held slightly away from the body so the torso outline is fully visible. '
+            'Wearing a plain fitted light-gray crew-neck T-shirt and slim plain light-gray trousers, plain white sneakers. '
+            'No logos, no text, no jewelry, no tattoos, no bag, no hat. '
+            f'Seamless plain off-white background (RGB {r},{g},{b}), soft even front lighting, no strong shadows, '
+            'camera at chest height, 50mm lens look, sharp focus, natural skin, photorealistic. '
+            'Vertical 4:5 image.')
+
+
+def make_models(budget):
+    """固定モデルの候補を作り、models/YYYYMMDD/ に置く（商品データ・サイトは変えない）"""
+    ids = model_ids(open(MODEL_FILE, encoding='utf-8').read())
+    od = os.path.join(MODEL_DIR, now_jst().strftime('%Y%m%d')); os.makedirs(od, exist_ok=True)
+    lines = [f'固定モデルの候補（{now_jst():%Y-%m-%d %H:%M}・型 {PRO_IMAGE_MODEL}）']
+    if not ids:
+        lines.append('MODEL_REQUEST に M01・M02・F01・F02 か all が書かれていない')
+    for mid in ids:
+        for n in range(1, MODEL_TRIES + 1):
+            if os.path.exists(STOP_FILE) or not budget.can_spend(MODEL_PER_IMAGE_YEN):
+                lines.append(f'{mid}_{n}：お金の上限で作らず'); log(lines[-1]); continue
+            before = budget.spent
+            try:
+                res, y = gemini_logged(budget, mid, '固定モデル', PRO_IMAGE_MODEL, [{'text': model_prompt(mid)}], MODEL_GEN, images=1)
+                if y > MODEL_PER_IMAGE_YEN:
+                    Budget.stop(f'固定モデル {mid} の1枚が {y:.1f}円（上限 {MODEL_PER_IMAGE_YEN:.0f}円）')
+                image_from_response(res).save(os.path.join(od, f'{mid}_{n}.jpg'), quality=90, optimize=True)
+                lines.append(f'{mid}_{n}.jpg：{budget.spent - before:.2f}円')
+            except Exception as e:
+                lines.append(f'{mid}_{n}：失敗 {e!r}'[:300])
+            log(lines[-1])
+    with open(os.path.join(od, 'README.txt'), 'w', encoding='utf-8') as f:
+        f.write('\n'.join(lines) + '\n' + '頼み文の例（M01）：' + (model_prompt('M01') if 'M01' in MODEL_SPECS else '') + '\n')
+    for name in sorted(os.listdir(od)):   # main 以外で動いた時にも取り出せるよう、ログにも書き出す（見本と同じ）
+        if name.endswith('.jpg'):
+            dump_b64(os.path.join(od, name))
+    os.remove(MODEL_FILE)
+    log(f'固定モデルの候補を {od} に作りました（MODEL_REQUEST は消しました）')
+
+
 def caption(im, text):
     from PIL import Image, ImageDraw, ImageFont
     W, H = im.size
@@ -969,6 +1044,7 @@ def _main():
     if '--check' in sys.argv:          # 対象の件数だけ出す（ワークフローが重い道具を入れるか決める）
         # 2026-11-09：まとめて頼んで受け取る前の品（画像にする時に切り抜きの道具が要る）と、見本の頼みも数える
         n = (len(targets(products)) + len(waiting_products(products)) + (1 if os.path.exists(SAMPLE_FILE) else 0)
+             + (1 if os.path.exists(MODEL_FILE) else 0)
              if os.environ.get('GEMINI_API_KEY') and not os.path.exists(STOP_FILE) else 0)
         print(n)
         out = os.environ.get('GITHUB_OUTPUT')
@@ -982,6 +1058,12 @@ def _main():
         log('⛔ data/ai_cost/STOP があるので、AIは呼びません：' + open(STOP_FILE, encoding='utf-8').read().strip())
     elif not os.environ.get('GEMINI_API_KEY'):
         log('GEMINI_API_KEY が無いので何もしません')
+    elif os.path.exists(MODEL_FILE):
+        # 固定モデルの頼みがある回は、それだけを作る（商品データ・サイトの写真は変えない）
+        budget = Budget(products)
+        make_models(budget)
+        log(f'今月のこの処理のAI代（概算）：{budget.spent:.1f}円／上限 {MONTH_CAP_YEN:.0f}円')
+        changed = changed or 1
     elif os.path.exists(SAMPLE_FILE):
         # 見本の頼みがある回は、見本だけを作る（商品データ・サイトの写真は変えない）
         budget = Budget(products)
