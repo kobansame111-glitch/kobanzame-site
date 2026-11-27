@@ -974,6 +974,159 @@ def tryon_check(src, out, sku, budget):
         return False, f'検品の返事が読めない：{text_of(res)[:80]}'
 
 
+# ===== 検品 v2（2026-11-28：ChatGPT・Manus・Gemini の3つの答えから） ==================================
+# v1 は「2枚を一度に見比べて」と頼んだので、AI が似ていると思い込み、文字崩れ・袖の長さを見逃した。
+# v2 は ①服だけを切り出して大きくする ②1枚ずつ別々に、決まった形（JSON の型）で特徴を書き出させる
+# ③比べるのは Python（AI に「同じ？」と聞かない）④「分からない」「隠れている」は全部ダメ ⑤文字は別にもう1回読ませて食い違えばダメ。
+# Tesseract（文字読みの道具）は .github/workflows の変更が要るので入れず、Gemini の2回読みで代える。
+
+UNSURE = {'', 'unclear', 'hidden', 'unknown', 'none_visible'}
+GARMENT_ENUMS = {
+    'garment_type': ['t_shirt', 'shirt', 'knit_sweater', 'cardigan', 'sweatshirt_hoodie', 'jacket', 'coat', 'vest',
+                     'dress', 'skirt', 'pants', 'shorts', 'other', 'unclear'],
+    'sleeve_length': ['sleeveless', 'short', 'elbow', 'three_quarter', 'long', 'not_applicable', 'hidden', 'unclear'],
+    'collar_type': ['crew_neck', 'v_neck', 'polo_collar', 'shirt_collar', 'hood', 'turtleneck', 'mock_neck',
+                    'lapel', 'stand_collar', 'not_applicable', 'other', 'hidden', 'unclear'],
+    'front_closure': ['none', 'buttons', 'zipper', 'snaps', 'other', 'hidden', 'unclear'],
+    'button_count_status': ['exact', 'not_applicable', 'hidden', 'unclear'],
+    'pocket_status': ['exact', 'hidden', 'unclear'],
+    'pattern_type': ['solid', 'stripe', 'check_plaid', 'graphic_print', 'allover_print', 'knit_texture', 'other', 'unclear'],
+    'primary_color': ['black', 'white', 'off_white_cream', 'gray', 'navy', 'blue', 'light_blue', 'green', 'olive_khaki',
+                      'brown', 'beige_tan', 'red', 'burgundy', 'pink', 'purple', 'yellow', 'orange', 'multicolor', 'unclear'],
+    'graphic_presence': ['present', 'absent', 'unclear'],
+    'text_presence': ['present', 'absent', 'unclear'],
+}
+GARMENT_SCHEMA = {'type': 'OBJECT', 'properties': dict(
+    {k: {'type': 'STRING', 'enum': v} for k, v in GARMENT_ENUMS.items()},
+    button_count={'type': 'INTEGER'}, pocket_count={'type': 'INTEGER'}),
+    'required': list(GARMENT_ENUMS) + ['button_count', 'pocket_count']}
+TEXT_SCHEMA = {'type': 'OBJECT', 'properties': {
+    'text_presence': {'type': 'STRING', 'enum': ['present', 'absent', 'unclear']},
+    'text_transcription': {'type': 'STRING'},
+    'letters_legible': {'type': 'STRING', 'enum': ['yes', 'no', 'unclear', 'not_applicable']},
+    'text_fully_visible': {'type': 'STRING', 'enum': ['yes', 'no', 'unclear', 'not_applicable']}},
+    'required': ['text_presence', 'text_transcription', 'letters_legible', 'text_fully_visible']}
+COMPARE_KEYS = ('garment_type', 'sleeve_length', 'collar_type', 'front_closure', 'pattern_type', 'primary_color', 'graphic_presence')
+NEAR_COLORS = [{'navy', 'blue'}, {'blue', 'light_blue'}, {'white', 'off_white_cream'}]   # 光の当たり方で名前が揺れる組だけ同じとみなす
+JA = {'garment_type': '服の種類', 'sleeve_length': '袖の長さ', 'collar_type': '襟', 'front_closure': '前の留め方',
+      'pattern_type': '柄', 'primary_color': '主な色', 'graphic_presence': '絵柄', 'text_presence': '文字'}
+
+
+def garment_attr_prompt(who):
+    return (f'This is a cropped photo of {who}. Describe ONLY this one garment, as you actually see it in THIS photo. '
+            'Do not guess from typical designs. If a part is covered by arms, hair, other clothes or cut off, answer "hidden". '
+            'If you cannot see it clearly enough, answer "unclear". Count buttons and pockets you can actually see; '
+            'button_count_status/pocket_status = "exact" only when you can see the whole area and are sure of the count '
+            '(a faint or flat patch pocket still counts). text_presence = any letters, numbers or words printed/embroidered on the garment.')
+
+
+def text_read_prompt(who):
+    return (f'This is a cropped photo of {who}. Read ONLY letters/numbers/words printed, embroidered or patched on the garment '
+            '(ignore the background). Transcribe them exactly as they appear, in UPPERCASE, without correcting spelling or '
+            'filling in letters you cannot see. letters_legible = "no" if any letter looks malformed, melted or garbled. '
+            'text_fully_visible = "no" if any part of the text is covered or cut off. If there is no text: text_presence="absent", '
+            'text_transcription="", letters_legible="not_applicable", text_fully_visible="not_applicable".')
+
+
+def norm_text(s):
+    """文字の読みを比べやすくする：大文字・英数字とかなだけ残す（純粋関数・テスト対象）"""
+    return re.sub(r'[^0-9A-Z぀-ヿ一-鿿]', '', str(s or '').upper())
+
+
+def _near_color(a, b):
+    return a == b or any({a, b} <= g for g in NEAR_COLORS)
+
+
+def compare_attrs(src, out, src_text, out_text):
+    """元の写真と着せた写真の書き出しを Python で比べる →（載せてよいか, 理由のリスト）。純粋関数・テスト対象。
+    「分からない・隠れている」はどちらの写真でもダメ。数・文字は完全に一致したときだけ通す。"""
+    bad = []
+    src, out, src_text, out_text = src or {}, out or {}, src_text or {}, out_text or {}
+    for k in COMPARE_KEYS:
+        a, b = str(src.get(k, '')).lower(), str(out.get(k, '')).lower()
+        if a in UNSURE or b in UNSURE:
+            bad.append(f'{JA[k]}が分からない（元={a or "無回答"}・着用={b or "無回答"}）')
+        elif not (_near_color(a, b) if k == 'primary_color' else a == b):
+            bad.append(f'{JA[k]}が違う（元={a}・着用={b}）')
+    if 'buttons' in (str(src.get('front_closure')), str(out.get('front_closure'))):
+        if src.get('button_count_status') != 'exact' or out.get('button_count_status') != 'exact':
+            bad.append(f'ボタンの数が数えられない（元={src.get("button_count_status")}・着用={out.get("button_count_status")}）')
+        elif src.get('button_count') != out.get('button_count'):
+            bad.append(f'ボタンの数が違う（元={src.get("button_count")}・着用={out.get("button_count")}）')
+    if src.get('pocket_status') != 'exact' or out.get('pocket_status') != 'exact':
+        bad.append(f'ポケットが数えられない（元={src.get("pocket_status")}・着用={out.get("pocket_status")}）')
+    elif src.get('pocket_count') != out.get('pocket_count'):
+        bad.append(f'ポケットの数が違う（元={src.get("pocket_count")}・着用={out.get("pocket_count")}）')
+    # 文字：同じ写真の2回の読み（特徴の書き出し・文字だけの読み）が食い違ったらダメ。両方「無い」なら同じとみなす
+    pres = {}
+    for name, attrs, txt in (('元', src, src_text), ('着用', out, out_text)):
+        p1, p2 = str(attrs.get('text_presence', '')).lower(), str(txt.get('text_presence', '')).lower()
+        if p1 in UNSURE or p2 in UNSURE or p1 != p2:
+            bad.append(f'{name}の写真の文字の有無が定まらない（1回目={p1 or "無回答"}・2回目={p2 or "無回答"}）')
+        pres[name] = p2
+    if pres.get('元') in ('present', 'absent') and pres.get('着用') in ('present', 'absent'):
+        if pres['元'] != pres['着用']:
+            bad.append(f'文字の有無が違う（元={pres["元"]}・着用={pres["着用"]}）')
+        elif pres['元'] == 'present':
+            for name, txt in (('元', src_text), ('着用', out_text)):
+                if txt.get('letters_legible') != 'yes':
+                    bad.append(f'{name}の写真の文字が崩れている・読めない（{txt.get("letters_legible")}）')
+                if txt.get('text_fully_visible') != 'yes':
+                    bad.append(f'{name}の写真の文字が一部隠れている（{txt.get("text_fully_visible")}）')
+            a, b = norm_text(src_text.get('text_transcription')), norm_text(out_text.get('text_transcription'))
+            if not a or a != b:
+                bad.append(f'文字が違う（元「{a}」・着用「{b}」）')
+    return (not bad), bad
+
+
+def crop_to_garment(im, sku, budget, what, pad=0.03):
+    """服だけを箱で切り出す（取れなければ写真全体のまま）"""
+    small = im.copy(); small.thumbnail((1024, 1024))
+    prompt = (f'Detect {what}. The box must cover that whole garment from its top edge to its hem and both sleeves, '
+              'and nothing else if possible. Answer JSON only: {"box_2d":[y0,x0,y1,x1]} normalized to 0-1000.')
+    try:
+        res, _ = gemini_logged(budget, sku, '検品v2 服の箱', TEXT_MODEL, [img_part(small), {'text': prompt}],
+                               {'temperature': 0, 'responseMimeType': 'application/json', 'maxOutputTokens': 200,
+                                'thinkingConfig': {'thinkingBudget': 0}})
+        box = find_box(json_of(res))
+    except Exception as e:
+        log(f'  {sku} 服の箱が取れず全体で見ます：{e}')
+        box = None
+    if not box:
+        return im
+    W, H = im.size
+    y0, x0, y1, x1 = [v / 1000 for v in box]
+    return im.crop((max(0, int((x0 - pad) * W)), max(0, int((y0 - pad) * H)), min(W, int((x1 + pad) * W)), min(H, int((y1 + pad) * H))))
+
+
+def extract_garment(im, sku, budget, who, label):
+    """1枚だけを見て、特徴（型どおり）と文字の読み（別に1回）を書き出す →（特徴, 文字）"""
+    big = im.copy(); big.thumbnail((1536, 1536))
+    out = []
+    for kind, prompt, schema, think in (('特徴', garment_attr_prompt(who), GARMENT_SCHEMA, 512),
+                                        ('文字', text_read_prompt(who), TEXT_SCHEMA, 1024)):
+        res, _ = gemini_logged(budget, sku, f'検品v2 {label}の{kind}', TEXT_MODEL, [img_part(big, 92), {'text': prompt}],
+                               {'temperature': 0, 'responseMimeType': 'application/json', 'responseSchema': schema,
+                                'maxOutputTokens': 1500, 'thinkingConfig': {'thinkingBudget': think}})
+        try:
+            j = json_of(res)
+            out.append(j[0] if isinstance(j, list) and j else j)
+        except Exception:
+            out.append({})
+    return out[0], out[1]
+
+
+def tryon_check_v2(src, out, sku, budget):
+    """元の写真と着せた写真を別々に書き出して Python で比べる →（載せてよいか, 理由, 書き出しの中身）"""
+    src_c = crop_to_garment(src, sku, budget, 'the single garment for sale in this photo (the clothing item only, not hangers or background)')
+    s_attr, s_text = extract_garment(src_c, sku, budget, 'a second-hand garment for sale', '元')
+    gtype = s_attr.get('garment_type', 'garment')
+    out_c = crop_to_garment(out, sku, budget, f'the {gtype} the model is wearing (only that garment, not the other clothes)')
+    o_attr, o_text = extract_garment(out_c, sku, budget, f'a {gtype} worn by a model', '着用')
+    ok, bad = compare_attrs(s_attr, o_attr, s_text, o_text)
+    return ok, '・'.join(bad)[:300], {'元': [s_attr, s_text], '着用': [o_attr, o_text]}
+
+
 def check_tryon_folder(budget):
     from PIL import Image
     folders = re.findall(r'\b(\d{8})\b', open(TRYCHECK_FILE, encoding='utf-8').read())
@@ -981,19 +1134,25 @@ def check_tryon_folder(budget):
         od = os.path.join(TRYON_DIR, f)
         if not os.path.isdir(od):
             log(f'検品：{od} が無い'); continue
-        rows = []
+        rows, details = [], {}
         for name in sorted(os.listdir(od)):
             m = re.match(r'(K\d{5})_([MF]0[1-4])\.jpg$', name)
             if not m:
                 continue
             src = os.path.join(od, f'{m.group(1)}_src.jpg')
-            if not os.path.exists(src) or not budget.can_spend(1.0):
+            if not os.path.exists(src) or not budget.can_spend(3.0):
                 rows.append(f'{name}：検品できず（元の写真が無い・お金の上限）'); continue
-            ok, why = tryon_check(Image.open(src).convert('RGB'), Image.open(os.path.join(od, name)).convert('RGB'), m.group(1), budget)
+            try:
+                ok, why, detail = tryon_check_v2(Image.open(src).convert('RGB'), Image.open(os.path.join(od, name)).convert('RGB'), m.group(1), budget)
+            except Exception as e:
+                ok, why, detail = False, f'検品が途中で失敗：{str(e)[:120]}', {}
             rows.append(f'{name}：{"載せてよい" if ok else "載せない"}' + (f'（{why}）' if why else ''))
+            details[name] = detail
             log(rows[-1])
         with open(os.path.join(od, 'CHECK.txt'), 'w', encoding='utf-8') as fh:
-            fh.write(f'検品（{now_jst():%Y-%m-%d %H:%M}・型 {TEXT_MODEL}）\n' + '\n'.join(rows) + '\n')
+            fh.write(f'検品 v2（{now_jst():%Y-%m-%d %H:%M}・型 {TEXT_MODEL}・1枚ずつ書き出して Python で比較）\n' + '\n'.join(rows) + '\n')
+        with open(os.path.join(od, 'CHECK_detail.json'), 'w', encoding='utf-8') as fh:
+            json.dump(details, fh, ensure_ascii=False, indent=1)
     os.remove(TRYCHECK_FILE)
 
 

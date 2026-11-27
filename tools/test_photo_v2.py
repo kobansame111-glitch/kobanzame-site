@@ -229,6 +229,37 @@ check('検品：1つ different なら載せない', pv.tryon_verdict(one)[0], Fa
 check('検品：unsure も載せない', pv.tryon_verdict({'items': dict(allsame['items'], sleeve_length='unsure')})[0], False)
 check('検品：項目が抜けていたら載せない', pv.tryon_verdict({'items': {'color': 'same'}})[0], False)
 check('検品：返事が配列でも読む', pv.tryon_verdict([allsame])[0], True)
+
+# 検品 v2（1枚ずつ書き出して Python で比べる）
+A = {'garment_type': 't_shirt', 'sleeve_length': 'short', 'collar_type': 'crew_neck', 'front_closure': 'none',
+     'pattern_type': 'graphic_print', 'primary_color': 'black', 'graphic_presence': 'present', 'text_presence': 'present',
+     'button_count': 0, 'button_count_status': 'not_applicable', 'pocket_count': 0, 'pocket_status': 'exact'}
+T = {'text_presence': 'present', 'text_transcription': 'HARLEY-DAVIDSON', 'letters_legible': 'yes', 'text_fully_visible': 'yes'}
+check('v2：全部同じなら載せる', pv.compare_attrs(A, dict(A), T, dict(T)), (True, []))
+check('v2：袖が短→長はダメ', pv.compare_attrs(A, dict(A, sleeve_length='long'), T, T)[0], False)
+check('v2：文字が崩れたらダメ', pv.compare_attrs(A, A, T, dict(T, text_transcription='HARLEY-DAVIDSOM'))[0], False)
+check('v2：文字の読みが同じでも崩れの印があればダメ', pv.compare_attrs(A, A, T, dict(T, letters_legible='no'))[0], False)
+check('v2：文字が隠れていたらダメ', pv.compare_attrs(A, A, T, dict(T, text_fully_visible='no'))[0], False)
+check('v2：文字の大小・記号の違いは同じ', pv.compare_attrs(A, A, T, dict(T, text_transcription='harley davidson'))[0], True)
+N = {'text_presence': 'absent', 'text_transcription': '', 'letters_legible': 'not_applicable', 'text_fully_visible': 'not_applicable'}
+A0 = dict(A, text_presence='absent', pattern_type='solid', graphic_presence='absent')
+check('v2：両方とも文字が無いなら同じ', pv.compare_attrs(A0, dict(A0), N, dict(N))[0], True)
+check('v2：文字が増えたらダメ', pv.compare_attrs(A0, dict(A0, text_presence='present'), N, T)[0], False)
+check('v2：同じ写真の2回の読みが食い違えばダメ', pv.compare_attrs(A0, A0, N, dict(N, text_presence='present'))[0], False)
+check('v2：分からない（unclear）はダメ', pv.compare_attrs(A, dict(A, collar_type='unclear'), T, T)[0], False)
+check('v2：隠れている（hidden）はダメ', pv.compare_attrs(A, dict(A, sleeve_length='hidden'), T, T)[0], False)
+check('v2：項目が抜けていたらダメ', pv.compare_attrs(A, {k: v for k, v in A.items() if k != 'pattern_type'}, T, T)[0], False)
+check('v2：ポケットが増えたらダメ', pv.compare_attrs(A, dict(A, pocket_count=1), T, T)[0], False)
+check('v2：ポケットが数えられないならダメ', pv.compare_attrs(A, dict(A, pocket_status='hidden'), T, T)[0], False)
+S = dict(A0, garment_type='shirt', front_closure='buttons', button_count=6, button_count_status='exact', collar_type='shirt_collar')
+check('v2：ボタンの数が同じなら通す', pv.compare_attrs(S, dict(S), N, N)[0], True)
+check('v2：ボタンの数が違えばダメ', pv.compare_attrs(S, dict(S, button_count=5), N, N)[0], False)
+check('v2：黒と紺は違う', pv.compare_attrs(A, dict(A, primary_color='navy'), T, T)[0], False)
+check('v2：紺と青は同じ色とみなす（青どうし）', pv.compare_attrs(dict(A, primary_color='blue'), dict(A, primary_color='navy'), T, T)[0], True)
+check('v2：黒と赤は違う', pv.compare_attrs(A, dict(A, primary_color='red'), T, T)[0], False)
+check('v2：文字の正規化', pv.norm_text(' Harley-Davidson® 1903 '), 'HARLEYDAVIDSON1903')
+check('v2：型の必須項目', sorted(pv.GARMENT_SCHEMA['required']), sorted(list(pv.GARMENT_ENUMS) + ['button_count', 'pocket_count']))
+check('v2：返事が空でもダメで止まる', pv.compare_attrs({}, {}, {}, {})[0], False)
 check('検品：選んだモデル8人', sorted(pv.MODEL_PICK), ['F01', 'F02', 'F03', 'F04', 'M01', 'M02', 'M03', 'M04'])
 
 print(f'NG {ng}件／{ok + ng}' if ng else f'photo_v2：全部 OK（{ok}件）')
