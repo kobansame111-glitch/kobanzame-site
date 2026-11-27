@@ -1,11 +1,41 @@
-検品 v2（2026-11-28 01:27・型 gemini-2.5-flash・1枚ずつ書き出して Python で比較）
-K10153_M02.jpg：載せない（文字が違う（元「CATCHEMJOESCRABSHACK」・着用「CATCHEMLOUISIANA」））
-K10856_M01.jpg：載せない（文字が違う（元「MOTORHARLEYDAVIDSONCYCLES」・着用「MOTODNAIALEFANFRISONSTYLED」））
-K11165_M01.jpg：載せない（ボタンの数が違う（元=5・着用=7）・文字の有無が違う（元=present・着用=absent））
-K11191_M02.jpg：載せない（主な色が違う（元=purple・着用=multicolor））
-K11453_M02.jpg：載せない（文字の有無が違う（元=present・着用=absent））
-K11459_M01.jpg：載せてよい
-K11472_M01.jpg：載せない（柄が違う（元=other・着用=solid）・絵柄が違う（元=absent・着用=present）・ボタンの数が違う（元=9・着用=7））
-K11488_F02.jpg：載せてよい
-K11537_F01.jpg：載せない（服の種類が違う（元=shirt・着用=other））
-K11560_F02.jpg：載せない（絵柄が違う（元=present・着用=absent）・文字が違う（元「LLBEANL」・着用「DUTHIES」））
+検品 v3（2026-11-28 01:35・型 gemini-2.5-flash・1枚ずつ書き出して Python で比較）
+K10153_M02.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+K10856_M01.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+K11165_M01.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+K11191_M02.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+K11453_M02.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+K11459_M01.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+K11472_M01.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+K11488_F02.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+K11537_F01.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+K11560_F02.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）

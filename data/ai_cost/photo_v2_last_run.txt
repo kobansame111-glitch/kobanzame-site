@@ -1,12 +1,122 @@
-2026-11-28 01:27
-K10153_M02.jpg：載せない（文字が違う（元「CATCHEMJOESCRABSHACK」・着用「CATCHEMLOUISIANA」））
-K10856_M01.jpg：載せない（文字が違う（元「MOTORHARLEYDAVIDSONCYCLES」・着用「MOTODNAIALEFANFRISONSTYLED」））
-K11165_M01.jpg：載せない（ボタンの数が違う（元=5・着用=7）・文字の有無が違う（元=present・着用=absent））
-K11191_M02.jpg：載せない（主な色が違う（元=purple・着用=multicolor））
-K11453_M02.jpg：載せない（文字の有無が違う（元=present・着用=absent））
-K11459_M01.jpg：載せてよい
-K11472_M01.jpg：載せない（柄が違う（元=other・着用=solid）・絵柄が違う（元=absent・着用=present）・ボタンの数が違う（元=9・着用=7））
-K11488_F02.jpg：載せてよい
-K11537_F01.jpg：載せない（服の種類が違う（元=shirt・着用=other））
-K11560_F02.jpg：載せない（絵柄が違う（元=present・着用=absent）・文字が違う（元「LLBEANL」・着用「DUTHIES」））
-今月のこの処理のAI代（概算）：728.1円／上限 1000円
+2026-11-28 01:35
+  K10153 服の箱が取れず全体で見ます：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+K10153_M02.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+  K10856 服の箱が取れず全体で見ます：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+K10856_M01.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+  K11165 服の箱が取れず全体で見ます：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+K11165_M01.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+  K11191 服の箱が取れず全体で見ます：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+K11191_M02.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+  K11453 服の箱が取れず全体で見ます：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+K11453_M02.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+  K11459 服の箱が取れず全体で見ます：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+K11459_M01.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+  K11472 服の箱が取れず全体で見ます：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+K11472_M01.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+  K11488 服の箱が取れず全体で見ます：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+K11488_F02.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+  K11537 服の箱が取れず全体で見ます：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+K11537_F01.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+  K11560 服の箱が取れず全体で見ます：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI Studio at https://ai.studio/projects to manage your project and billing. Learn more at https://ai.google.dev/gemini-api/docs/billing#prepay. ",
+    "status": "RESOURCE_EXHAUSTED"
+  }
+}
+
+K11560_F02.jpg：載せない（検品が途中で失敗：Gemini HTTP 402：{
+  "error": {
+    "code": 402,
+    "message": "Your prepayment credits are depleted. Please go to AI St）
+今月のこの処理のAI代（概算）：728.0円／上限 1000円
