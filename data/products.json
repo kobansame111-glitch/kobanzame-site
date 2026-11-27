@@ -1521,7 +1521,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 9800,
-   "site": 8900,
+   "site": 8100,
    "mercari": 10980
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -1589,9 +1589,9 @@
   "genre": "dress",
   "genre_by": "manual-photo-2026-10-08",
   "price_ai": {
-   "at": "2026-11-13",
-   "from": 9800,
-   "to": 8900,
+   "at": "2026-11-28",
+   "from": 8900,
+   "to": 8100,
    "by": "pl_76"
   }
  },
@@ -2288,7 +2288,7 @@
   "published_date": "2026-10-04",
   "prices": {
    "store": 12800,
-   "site": 11600,
+   "site": 10500,
    "mercari": 11500
   },
   "price_rule": "店頭（Square登録価格）を正。2026-10-04 下書き作成時点",
@@ -2358,9 +2358,9 @@
   "genre": "tops",
   "genre_by": "manual-photo-2026-10-08",
   "price_ai": {
-   "at": "2026-11-13",
-   "from": 12800,
-   "to": 11600,
+   "at": "2026-11-28",
+   "from": 11600,
+   "to": 10500,
    "by": "pl_76"
   }
  },
