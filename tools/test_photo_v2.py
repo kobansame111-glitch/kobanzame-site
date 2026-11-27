@@ -220,7 +220,16 @@ tp = {'spec': {'サイズ': '実寸 身幅57cm・着丈73cm・肩幅53cm・袖�
 check('着せる試し：寸法を拾う', (pv.spec_cm(tp, '身幅'), pv.spec_cm(tp, '着丈'), pv.spec_cm(tp, '股下')), (57.0, 73.0, None))
 tq = pv.tryon_prompt(tp)
 check('着せる試し：頼み文に寸法と「描き直さない」', all(w in tq for w in ('chest width (flat) 57 cm', 'Do not add, remove, redraw')), True)
-check('着せる試し：選んだモデル4人', sorted(pv.MODEL_PICK), ['F01', 'F02', 'M01', 'M02'])
+
+# ---- 着せた写真の検品（2026-11-28） ----
+allsame = {'items': {k: 'same' for k in pv.CHECK_ITEMS}, 'problem': ''}
+check('検品：全部 same なら載せる', pv.tryon_verdict(allsame), (True, ''))
+one = {'items': dict(allsame['items'], text_logo='different'), 'problem': 'ロゴの文字が違う'}
+check('検品：1つ different なら載せない', pv.tryon_verdict(one)[0], False)
+check('検品：unsure も載せない', pv.tryon_verdict({'items': dict(allsame['items'], sleeve_length='unsure')})[0], False)
+check('検品：項目が抜けていたら載せない', pv.tryon_verdict({'items': {'color': 'same'}})[0], False)
+check('検品：返事が配列でも読む', pv.tryon_verdict([allsame])[0], True)
+check('検品：選んだモデル8人', sorted(pv.MODEL_PICK), ['F01', 'F02', 'F03', 'F04', 'M01', 'M02', 'M03', 'M04'])
 
 print(f'NG {ng}件／{ok + ng}' if ng else f'photo_v2：全部 OK（{ok}件）')
 sys.exit(1 if ng else 0)
