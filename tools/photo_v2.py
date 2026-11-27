@@ -42,7 +42,7 @@ COST_CSV = os.path.join(COST_DIR, 'photo_v2.csv')
 STOP_FILE = os.path.join(COST_DIR, 'STOP')
 SAMPLE_FILE = os.path.join(COST_DIR, 'SAMPLE_REQUEST')   # 見本を作る頼み（品番を1行に1つ）
 SAMPLE_DIR = os.path.join(COST_DIR, 'samples')
-MODEL_FILE = os.path.join(COST_DIR, 'MODEL_REQUEST')     # 2026-11-27：AIの固定モデル（着用画像の人）を作る頼み。中身は M01・M02・F01・F02 のどれか（1行に1つ）か all
+MODEL_FILE = os.path.join(COST_DIR, 'MODEL_REQUEST')     # 2026-11-27：AIの固定モデル（着用画像の人）を作る頼み。中身は M01〜M04・F01〜F04 のどれか（1行に1つ）か all
 MODEL_DIR = os.path.join(COST_DIR, 'models')
 TRYON_FILE = os.path.join(COST_DIR, 'TRYON_REQUEST')     # 2026-11-27：固定モデルに商品を着せる試し。1行に「品番 モデル」（例 K10153 M02）
 TRYON_DIR = os.path.join(COST_DIR, 'tryon')
@@ -786,6 +786,11 @@ MODEL_SPECS = {   # 実在しない大人。顔・髪・体型・姿勢・照明
     'M02': ('men', 'a man in his early 30s with a solid build, about 180 cm tall, short dark wavy hair, calm neutral expression'),
     'F01': ('women', 'a petite woman in her late 20s, about 155 cm tall, shoulder-length dark hair tied back, calm neutral expression'),
     'F02': ('women', 'a woman in her early 30s with an average build, about 165 cm tall, long dark hair tied back, calm neutral expression'),
+    # 2026-11-27 夜：アジア人／西洋人の比べを体型でそろえるための組（M01↔M03・M02↔M04・F01↔F03・F02↔F04）
+    'M03': ('men', 'a slim white European man in his late 20s, about 170 cm tall, short brown hair, calm neutral expression'),
+    'M04': ('men', 'an East Asian man in his early 30s with a solid build, about 180 cm tall, short black hair, calm neutral expression'),
+    'F03': ('women', 'a petite white European woman in her late 20s, about 155 cm tall, shoulder-length brown hair tied back, calm neutral expression'),
+    'F04': ('women', 'an East Asian woman in her early 30s with an average build, about 165 cm tall, long black hair tied back, calm neutral expression'),
 }
 MODEL_TRIES = 2                 # 1人につき候補を2枚
 MODEL_PER_IMAGE_YEN = 40.0      # 固定モデルは1回きりなので、1枚の上限を見本より高くする（ふだんの15円は変えない）
@@ -793,12 +798,12 @@ MODEL_GEN = {'responseModalities': ['IMAGE', 'TEXT'], 'imageConfig': {'aspectRat
 
 
 def model_ids(text):
-    """MODEL_REQUEST の中身から作る人を決める（all なら4人・重なりなし。純粋関数・テスト対象）"""
+    """MODEL_REQUEST の中身から作る人を決める（all なら8人・重なりなし。純粋関数・テスト対象）"""
     t = text.upper()
     if re.search(r'\bALL\b', t):
         return list(MODEL_SPECS)
     out = []
-    for m in re.findall(r'\b[MF]0[12]\b', t):
+    for m in re.findall(r'\b[MF]0[1-4]\b', t):
         if m not in out:
             out.append(m)
     return out
@@ -856,7 +861,7 @@ def tryon_requests(text):
     """TRYON_REQUEST の中身 →［(品番, モデル)］（重なりなし・上限 TRYON_MAX・純粋関数・テスト対象）"""
     out = []
     for line in text.splitlines():
-        m = re.match(r'\s*(K\d{5})\s+([MF]0[12])\b', line.strip(), re.I)
+        m = re.match(r'\s*(K\d{5})\s+([MF]0[1-4])\b', line.strip(), re.I)
         if m:
             pair = (m.group(1).upper(), m.group(2).upper())
             if pair not in out:
