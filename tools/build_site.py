@@ -706,7 +706,8 @@ def abs_url(u):
 def real_images(p):
     """AIで作ったマネキン画像を除いた、本物の写真だけ（Googleの商品フィード・構造化データ用。AI画像・文字入り画像は不承認の恐れ）"""
     mq = (p.get('photo_v2') or {}).get('mannequin_url')
-    return [u for u in p['images'] if u != mq] or p['images']
+    aw = (p.get('ai_wear') or {}).get('url')   # 2026-11-28 AIの着用画像も除く
+    return [u for u in p['images'] if u not in (mq, aw)] or p['images']
 
 # ===== 一覧カード用の軽いサムネイル（2026-11-15 龍さん「サイト=A」重い件の直し）=====
 # 一覧（トップ・ジャンル一覧）のカードは、商品ページ用の大きい写真（1枚400KB〜1MB）をそのまま読んでいて重い。
@@ -1677,7 +1678,7 @@ CATS_PRESENT = [c for c in ['outer', 'tops', 'bottoms', 'dress', 'shoes', 'acc',
 
 def alt_img(p):
     """2枚目の写真（PCでカーソルを乗せた時だけ見える）。マネキン画像は使わない"""
-    ims = [u for u in p.get('images', [])[1:] if u != (p.get('photo_v2') or {}).get('mannequin_url')]
+    ims = [u for u in p.get('images', [])[1:] if u not in ((p.get('photo_v2') or {}).get('mannequin_url'), (p.get('ai_wear') or {}).get('url'))]   # 2026-11-28 AIの着用画像も使わない
     if not (ims and not is_sold(p)):
         return ''
     url, aw, ah = card_image(ims[0].replace("/large/", "/medium/"))   # ローカルは軽いWebP、リモートは /medium
