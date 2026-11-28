@@ -136,9 +136,10 @@ BF_SALES = [
     {'from': '2026-11-27 00:00', 'to': '2026-11-30 00:00',
      'tease_from': '2026-11-26 00:00',
      # 2026-11-20 「全品20%引き」を「最大20%引き」に：カートの割引は80%を100円単位で切り上げ（＋原価の下限）なので、実際は品によって18〜20%（販売中55点のうちちょうど20%は1点）。言い過ぎを避ける（景表法）
-     'ja': 'BLACK FRIDAY ｜ オンライン限定・カートで最大20%引き（11/29まで）・この期間のご注文は12/3以降に順次発送', 'en': 'BLACK FRIDAY | Online only — up to 20% off at cart checkout (until Nov 29) — orders ship from Dec 3',
+     # 2026-11-28 告知の整理（龍さん・Manus・ChatGPT・受付デスクのレビュー）：上の帯は1行・「何が・条件・いつまで」だけ。発送はお休みの枠に1か所
+     'ja': 'BLACK FRIDAY｜カートで最大20%引き（11/29まで）', 'en': 'BLACK FRIDAY | Up to 20% off at cart (until Nov 29)',
      'hero_ja': 'オンラインストア限定 ｜ カートで最大20%引き（11月29日まで）｜ この期間のご注文は12/3以降に順次発送', 'hero_en': 'Online store only — up to 20% off at cart checkout (until Nov 29) — orders ship from Dec 3',
-     'pill_ja': 'カートで最大20%引き（11/29まで）', 'pill_en': 'Up to 20% off at cart (until Nov 29)',
+     'pill_ja': 'カートで最大20%引き', 'pill_en': 'Up to 20% off at cart',
      'tease_ja': 'BLACK FRIDAY ｜ オンライン限定・まもなく開始・カートで最大20%引き（11/27 0:00〜11/29）・ご注文は12/3以降に順次発送', 'tease_en': 'BLACK FRIDAY | Online only — Starts soon — up to 20% off at cart (Nov 27 0:00–Nov 29) — orders ship from Dec 3',
      'tease_hero_ja': 'オンラインストア限定 ｜ まもなく開始 ｜ カートで最大20%引き（11/27 0:00〜11/29）｜ ご注文は12/3以降に順次発送', 'tease_hero_en': 'Online store only — Starts soon — up to 20% off at cart (Nov 27 0:00 – Nov 29) — orders ship from Dec 3',
      'tease_pill_ja': 'まもなく最大20%引き', 'tease_pill_en': 'Coming soon'},
@@ -156,9 +157,10 @@ BF_STYLE = ('<style>'
   '.bfhero-in{display:flex;flex-direction:column;align-items:center;gap:8px;line-height:1.1}'
   '.bfhero-k{font-family:var(--roman,"Libre Caslon Text",serif);font-weight:700;letter-spacing:.16em;font-size:clamp(32px,10vw,64px);color:var(--kin,#d4af37)}'
   '.bfhero-t{font-size:clamp(14px,4.2vw,20px);letter-spacing:.03em;font-weight:700}'
-  '.bfpill{display:inline-block;margin-left:8px;background:#111;color:#fff;font-size:11px;font-weight:700;letter-spacing:.02em;padding:2px 8px;border-radius:999px;vertical-align:middle;white-space:nowrap}'
+  # 2026-11-28 一覧のカードで黒い札が隣の値段に重なっていた → 値段の下に、小さな落ち着いた文字で1行（帯・重ね置きにしない・はみ出しは折り返す）
+  '.bfpill{display:block;margin:4px 0 0;color:#6b5847;font-size:11px;font-weight:600;letter-spacing:.02em;line-height:1.4;white-space:normal;overflow-wrap:anywhere;max-width:100%}'
   '.bfpill[hidden]{display:none}'  # hidden 属性が効くように（author CSS の display が UA の [hidden] を上書きしてしまうため）
-  '.bar .bfpill{display:block;margin:2px 0 0;padding:1px 6px;font-size:10px;width:max-content}'   # 2026-11-20 画面下の購入バーでは値段の下に小さく
+  '.bar .bfpill{display:block;margin:2px 0 0;padding:0;font-size:10px;width:max-content;max-width:100%;color:inherit;opacity:.8}'   # 2026-11-20 画面下の購入バーでは値段の下に小さく
   '.bar .bfpill[hidden]{display:none}'   # 上の指定と同じ強さで後ろの display:block が勝ち、割引が無い期間にも空の札が出るのを防ぐ（Codex P3）
   '.bfnote{margin:0 0 12px;padding:10px 12px;border:1px solid var(--kin,#d4af37);border-radius:8px;font-size:13px;line-height:1.7;font-weight:600}'
   '.bfnote[hidden]{display:none}'
@@ -217,7 +219,10 @@ def bf_band(lang):
             '<script>(function(){function go(){' + js + '}'
             'if(document.readyState!=="loading"){go();}else{document.addEventListener("DOMContentLoaded",go);}})();</script>')
 def bf_hero(lang):
-    """トップの一番上に出る大きめの告知（期間中だけ・bf_band の script が #bfhero を出す）。"""
+    """トップの一番上に出る大きめの告知（期間中だけ・bf_band の script が #bfhero を出す）。
+    2026-11-28 告知の整理：大きな見出しは出さない（上の帯と同じことを2回言っていて、商品が下に押し下げられていた）。
+    次のセールでも原則出さない。出すときはこの return を外す。"""
+    return ''
     if not BF_PERIODS:
         return ''
     return ('<div class="bfhero" id="bfhero" role="status" hidden><div class="bfhero-in">'
@@ -250,8 +255,8 @@ HOLIDAY = {
   'from': '2026-11-18 00:00', 'to': '2026-12-05 00:00',
   'band_ja': '店舗休業：11/25（水）〜12/4（金）。オンラインのご注文は期間中も受付。11/24以降のご注文は12/3から順に発送します。',
   'band_en': 'Shop closed Nov 25–Dec 4. Online orders still accepted; orders from Nov 24 ship from Dec 3.',
-  'full_ja': '買い付けのため、店舗は11月25日（水）〜12月4日（金）お休みします。営業再開は12月5日（土）13:00〜です。オンラインのご注文は期間中も受け付けます。11月24日以降のご注文は、12月3日から順に発送します。',
-  'full_en': 'We will be closed for buying trips from Nov 25 (Wed) to Dec 4 (Fri). We reopen Dec 5 (Sat) at 13:00. Online orders are accepted throughout. Orders placed on or after Nov 24 will be dispatched from Dec 3, in order.',
+  'full_ja': '店舗は12月4日（金）までお休みし、12月5日（土）13:00に再開します。オンラインのご注文は受付中で、12月3日から順に発送します。',
+  'full_en': 'The shop is closed until Dec 4 (Fri) and reopens Dec 5 (Sat) at 13:00. Online orders are open and ship from Dec 3, in order.',
 }
 SHIPWIN = {'from': '2026-11-24 00:00', 'to': '2026-12-03 00:00',
            'ja': '11月24日以降のご注文は、12月3日から順に発送します',
@@ -268,14 +273,13 @@ SHIPWIN['en'] = SHIPWIN['en'].rstrip('.')   # 2026-11-23 英語の文の後ろ�
 #   どの品が何%になるかは、お支払い画面（Square）の金額で分かる（サイトでは計算しない）。商品ページの値段は割引前のまま。
 _HOL_LAST = (datetime.date.fromisoformat(HOLIDAY['to'][:10]) - datetime.timedelta(days=1)).isoformat()
 NEWS_AUTO = [
-    {'id': 'B1', 'date': HOLIDAY['from'][:10], 'from': HOLIDAY['from'][:10], 'until': _HOL_LAST, 'band': False,
-     'text': '店舗休業のお知らせ：' + HOLIDAY['full_ja']},
+    # 2026-11-28 告知の整理：お休みはトップの枠1か所にしたので、お知らせ欄からは外す（B1 は使わない）
     # 2026-11-24 龍さん：本日（11/24）は短縮営業。11/24 だけ出す
     {'id': 'B3', 'date': '2026-11-24', 'from': '2026-11-24', 'until': '2026-11-24', 'band': False,
      'text': '本日11月24日（火）は、13:00〜16:00頃までの短縮営業です。'},
     {'id': 'B2', 'date': '2026-11-23', 'from': '', 'until': '2026-11-29', 'band': False,
-     'text': 'ブラックフライデー（11月27日 0:00〜29日 23:59）は、オンラインストアの商品が最大20%引きになります。クーポンコードは不要で、カートまたは商品ページの「購入する」から注文すると、お支払い画面の金額が自動で割引されます。'
-             '20%引きを100円単位で切り上げるため、商品によっては割引が20%に満たない場合があります（どの商品が何%引きかは、お支払い画面の金額でご確認ください）。商品ページの値段は割引前のままです。'},
+     # 2026-11-28 告知の整理：1件・短く（割引の細かい説明は商品ページとカートの注記 bf_note にある）
+     'text': 'ブラックフライデー：11月29日（日）までオンラインストアがカートで最大20%引き。クーポン不要で、割引後の金額はお支払い画面に出ます。'},
 ]
 NEWS = sorted(NEWS + [n for n in NEWS_AUTO if not n['until'] or n['until'] >= TODAY], key=lambda n: (n['date'], int(n['id'][1:])), reverse=True)
 HOL_STYLE = ('<style>'
@@ -306,6 +310,8 @@ def wrap_ship(html):
 SHIPTILE_HEADS = ('3日以内に発送', 'Ships in 3 days')
 SHIPTILE_TXT = {'ja': ('12/3から順に発送', '11/24以降のご注文'), 'en': ('Ships from Dec 3', 'Orders placed from Nov 24')}
 def hol_band(lang):
+    # 2026-11-28 告知の整理：お休み・発送の案内はトップの「お休みのお知らせ」の枠1か所にする（上の帯の2段目・お知らせ欄には出さない）
+    return ''
     return '<div class="holband" id="holband" role="status" hidden>' + esc(HOLIDAY['band_' + lang]) + '</div>'
 def hol_notice(lang):
     ttl = 'お休みのお知らせ' if lang == 'ja' else 'Shop closure'
