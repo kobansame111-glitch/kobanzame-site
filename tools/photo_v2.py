@@ -1118,11 +1118,17 @@ def crop_to_garment(im, sku, budget, what, pad=0.03):
     return im.crop((max(0, int((x0 - pad) * W)), max(0, int((y0 - pad) * H)), min(W, int((x1 + pad) * W)), min(H, int((y1 + pad) * H))))
 
 
-def extract_garment(im, sku, budget, who, label):
-    """1枚だけを見て、特徴（型どおり）と文字の読み（別に1回）を書き出す →（特徴, 文字）"""
+def extract_garment(im, sku, budget, who, label, with_points=False):
+    """1枚だけを見て、特徴（型どおり）と文字の読み（別に1回）を書き出す →（特徴, 文字）。
+    with_points=True なら特徴と同じ呼び出しで袖の点の位置も返させる（v4.1・費用を下げるため。特徴の中の 'points' に入る）"""
     big = im.copy(); big.thumbnail((1536, 1536))
     out = []
-    for kind, prompt, schema, think in (('特徴', garment_attr_prompt(who), GARMENT_SCHEMA, 512),
+    attr_prompt, attr_schema = garment_attr_prompt(who), GARMENT_SCHEMA
+    if with_points:
+        attr_prompt += ' ALSO return "points": ' + points_prompt(who).split('Return only ', 1)[1]
+        attr_schema = dict(GARMENT_SCHEMA, properties=dict(GARMENT_SCHEMA['properties'], points=POINT_SCHEMA),
+                           required=GARMENT_SCHEMA['required'] + ['points'])
+    for kind, prompt, schema, think in (('特徴', attr_prompt, attr_schema, 512),
                                         ('文字', text_read_prompt(who), TEXT_SCHEMA, 1024)):
         res, _ = gemini_logged(budget, sku, f'検品v2 {label}の{kind}', TEXT_MODEL, [img_part(big, 92), {'text': prompt}],
                                {'temperature': 0, 'responseMimeType': 'application/json', 'responseSchema': schema,
@@ -1161,7 +1167,7 @@ COLLAR_GROUP = {'crew_neck': 'round', 'v_neck': 'v', 'polo_collar': 'collared', 
                 'hood': 'hood', 'turtleneck': 'stand', 'mock_neck': 'stand', 'stand_collar': 'stand',
                 'lapel': 'lapel', 'not_applicable': 'none', 'other': 'other'}
 V4_KEYS = ('garment_type', 'collar_type', 'front_closure', 'pattern_type', 'primary_color')   # 袖の名前（sleeve_length）は比べない
-SLEEVE_SHORT_MAX = 0.42    # 袖（肩→袖口）÷ 身頃（首→裾）がこれ以下なら半袖の組
+SLEEVE_SHORT_MAX = 0.52    # 袖（肩→袖口）÷ 身頃（首→裾）がこれ以下なら半袖の組（11/28 v4 の実測：着用の半袖T が 0.49 まで出たので 0.42→0.52）
 SLEEVE_LONG_MIN = 0.62     # これ以上なら長袖の組。間は「中くらい」（肘丈・七分）
 SLEEVE_LR_GAP = 0.20       # 左右の袖の割合がこれ以上違えば、点の位置が怪しいので判定不能
 POINT_NAMES = ('neck_center', 'left_shoulder', 'right_shoulder', 'left_cuff', 'right_cuff', 'hem_center')
@@ -1319,14 +1325,15 @@ def _api(fn, *a):
 def tryon_check_v4(src, out, sku, budget):
     """→（状態, 理由, 書き出しの中身）"""
     src_c = _api(crop_to_garment, src, sku, budget, 'the single garment for sale in this photo (the clothing item only, not hangers or background)')
-    s_attr, s_text = _api(extract_garment, src_c, sku, budget, 'a second-hand garment for sale', '元')
+    s_attr, s_text = _api(extract_garment, src_c, sku, budget, 'a second-hand garment laid flat for sale', '元', True)
     gtype = s_attr.get('garment_type', 'garment')
     out_c = _api(crop_to_garment, out, sku, budget, f'the {gtype} the model is wearing (only that garment, not the other clothes)')
-    o_attr, o_text = _api(extract_garment, out_c, sku, budget, f'a {gtype} worn by a model', '着用')
+    o_attr, o_text = _api(extract_garment, out_c, sku, budget, f'a {gtype} worn by a model', '着用', True)
     s_text, s_note = settle_text(s_attr, s_text, lambda: _api(reread_text, src_c, sku, budget, 'a second-hand garment for sale', '元'))
     o_text, o_note = settle_text(o_attr, o_text, lambda: _api(reread_text, out_c, sku, budget, f'a {gtype} worn by a model', '着用'))
-    s_pts, s_sl = _api(garment_points, src_c, sku, budget, 'a second-hand garment laid flat', '元')
-    o_pts, o_sl = _api(garment_points, out_c, sku, budget, f'a {gtype} worn by a model', '着用')
+    # v4.1：袖の点は特徴と同じ呼び出しで取る（別の呼び出しは 10点で約5円かかっていた）
+    s_pts, o_pts = s_attr.pop('points', {}) or {}, o_attr.pop('points', {}) or {}
+    s_sl, o_sl = sleeve_from_points(s_pts, *src_c.size), sleeve_from_points(o_pts, *out_c.size)
     status, why = compare_v4(s_attr, o_attr, s_text, o_text, s_sl, o_sl)
     detail = {'元': {'特徴': s_attr, '文字': s_text, '文字のメモ': s_note, '袖の点': s_pts, '袖': s_sl},
               '着用': {'特徴': o_attr, '文字': o_text, '文字のメモ': o_note, '袖の点': o_pts, '袖': o_sl}}
@@ -1364,7 +1371,7 @@ def check_tryon_folder(budget):
             details[name] = dict(detail, 状態=status)
             log(rows[-1])
         with open(os.path.join(od, 'CHECK.txt'), 'w', encoding='utf-8') as fh:
-            fh.write(f'検品 v4（{now_jst():%Y-%m-%d %H:%M}・型 {TEXT_MODEL}）　' + '・'.join(f'{k}{v}' for k, v in count.items()) + '\n'
+            fh.write(f'検品 v4.1（{now_jst():%Y-%m-%d %H:%M}・型 {TEXT_MODEL}）　' + '・'.join(f'{k}{v}' for k, v in count.items()) + '\n'
                      + '\n'.join(rows) + '\n')
         with open(os.path.join(od, 'CHECK_detail.json'), 'w', encoding='utf-8') as fh:
             json.dump(details, fh, ensure_ascii=False, indent=1)

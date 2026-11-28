@@ -278,6 +278,7 @@ def P(**kw):
 short = pv.sleeve_from_points(P(), 1000, 1000)
 check('v4：袖の短い点は short', short[0], 'short')
 long_ = pv.sleeve_from_points(P(left_cuff=(250, 750), right_cuff=(750, 750)), 1000, 1000)
+check('v4.1：割合0.46（着用の半袖Tくらい）は short', pv.sleeve_from_points(P(left_cuff=(180, 500), right_cuff=(820, 500)), 1000, 1000)[:2], ('short', 0.46))
 check('v4：袖の長い点は long', long_[0], 'long')
 check('v4：見えない点があれば決めない', pv.sleeve_from_points(dict(P(), left_cuff={'x': 1, 'y': 1, 'visible': False}), 1000, 1000)[0], None)
 check('v4：左右が違いすぎたら決めない', pv.sleeve_from_points(P(left_cuff=(250, 750)), 1000, 1000)[0], None)
