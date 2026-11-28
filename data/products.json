@@ -7682,6 +7682,7 @@
   },
   "images": [
    "/assets/products/k10824/v2_front.jpg",
+   "/assets/products/k10824/ai_wear_M01.jpg",
    "/assets/products/k10824/v2_back.jpg",
    "/assets/products/k10824/02.jpg",
    "/assets/products/k10824/03.jpg",
@@ -7783,6 +7784,12 @@
     "garment_l": 204,
     "bg": "light_item"
    }
+  },
+  "ai_wear": {
+   "url": "/assets/products/k10824/ai_wear_M01.jpg",
+   "model": "M01",
+   "checked": "20261128",
+   "check": "v4.2"
   }
  },
  {
@@ -7808,6 +7815,7 @@
   },
   "images": [
    "/assets/products/k11474/v2_front.jpg",
+   "/assets/products/k11474/ai_wear_M01.jpg",
    "/assets/products/k11474/v2_back.jpg",
    "/assets/products/k11474/02.jpg",
    "/assets/products/k11474/03.jpg",
@@ -7910,6 +7918,12 @@
     "garment_l": 192,
     "bg": "light_item"
    }
+  },
+  "ai_wear": {
+   "url": "/assets/products/k11474/ai_wear_M01.jpg",
+   "model": "M01",
+   "checked": "20261128",
+   "check": "v4.2"
   }
  },
  {
@@ -10433,6 +10447,7 @@
   "links": {},
   "images": [
    "/assets/products/k11550/v2_front.jpg",
+   "/assets/products/k11550/ai_wear_M01.jpg",
    "/assets/products/k11550/v2_back.jpg",
    "/assets/products/k11550/02.jpg",
    "/assets/products/k11550/03.jpg",
@@ -10548,6 +10563,12 @@
     "garment_l": 110.2,
     "bg": "normal"
    }
+  },
+  "ai_wear": {
+   "url": "/assets/products/k11550/ai_wear_M01.jpg",
+   "model": "M01",
+   "checked": "20261128",
+   "check": "v4.2"
   }
  },
  {

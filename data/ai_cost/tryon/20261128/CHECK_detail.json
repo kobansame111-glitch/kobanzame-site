@@ -17,9 +17,9 @@
    },
    "文字": {
     "text_presence": "present",
-    "text_transcription": "THE WAY WE WERE PALACE OF POISON MAY 30, 1947-MAY 1964 1500 LEMAY FERRY RD. ST. LOUIS, MO. CRUISIN' WILL NEVER DIE! WILD'S PALACE OF POISON WILD'S PALA EAT HERE IF IT KILLS YOU Second Annual Reunion 1994",
+    "text_transcription": "THE WAY WE WERE PALACE OF POISON MAY 30, 1947-MAY 1964 1500 LEMAY FERRY RD. ST. LOUIS, MO. CRUISIN' WILLIE NEVER DIE! EAT HERE IF IT KILLS YOU WILD'S PALACE OF POISON Second Annual Reunion 1994",
     "letters_legible": "yes",
-    "text_fully_visible": "no"
+    "text_fully_visible": "yes"
    },
    "文字のメモ": "",
    "袖の点": {
@@ -30,22 +30,22 @@
     },
     "left_shoulder": {
      "x": 200,
-     "y": 150,
+     "y": 120,
      "visible": true
     },
     "right_shoulder": {
      "x": 800,
-     "y": 150,
+     "y": 120,
      "visible": true
     },
     "left_cuff": {
      "x": 150,
-     "y": 500,
+     "y": 400,
      "visible": true
     },
     "right_cuff": {
      "x": 850,
-     "y": 500,
+     "y": 400,
      "visible": true
     },
     "hem_center": {
@@ -56,7 +56,7 @@
    },
    "袖": [
     "short",
-    0.41,
+    0.33,
     ""
    ]
   },
@@ -85,38 +85,38 @@
    "袖の点": {
     "neck_center": {
      "x": 500,
-     "y": 140,
+     "y": 120,
      "visible": true
     },
     "left_shoulder": {
-     "x": 220,
-     "y": 190,
+     "x": 250,
+     "y": 160,
      "visible": true
     },
     "right_shoulder": {
-     "x": 780,
-     "y": 190,
+     "x": 750,
+     "y": 160,
      "visible": true
     },
     "left_cuff": {
      "x": 200,
-     "y": 400,
+     "y": 360,
      "visible": true
     },
     "right_cuff": {
      "x": 800,
-     "y": 400,
+     "y": 360,
      "visible": true
     },
     "hem_center": {
      "x": 500,
-     "y": 900,
+     "y": 730,
      "visible": true
     }
    },
    "袖": [
     "short",
-    0.28,
+    0.33,
     ""
    ]
   },
@@ -132,7 +132,7 @@
     "button_count_status": "exact",
     "pocket_status": "exact",
     "pattern_type": "check_plaid",
-    "primary_color": "off_white_cream",
+    "primary_color": "white",
     "graphic_presence": "absent",
     "text_presence": "absent",
     "button_count": 7,
@@ -148,26 +148,26 @@
    "袖の点": {
     "neck_center": {
      "x": 500,
-     "y": 100,
+     "y": 150,
      "visible": true
     },
     "left_shoulder": {
-     "x": 190,
-     "y": 170,
+     "x": 200,
+     "y": 190,
      "visible": true
     },
     "right_shoulder": {
-     "x": 810,
-     "y": 170,
+     "x": 800,
+     "y": 190,
      "visible": true
     },
     "left_cuff": {
-     "x": 190,
+     "x": 200,
      "y": 800,
      "visible": true
     },
     "right_cuff": {
-     "x": 810,
+     "x": 800,
      "y": 800,
      "visible": true
     },
@@ -179,7 +179,7 @@
    },
    "袖": [
     "long",
-    0.74,
+    0.76,
     ""
    ]
   },
@@ -208,38 +208,38 @@
    "袖の点": {
     "neck_center": {
      "x": 500,
-     "y": 120,
+     "y": 130,
      "visible": true
     },
     "left_shoulder": {
-     "x": 220,
-     "y": 145,
+     "x": 240,
+     "y": 160,
      "visible": true
     },
     "right_shoulder": {
-     "x": 780,
-     "y": 145,
+     "x": 760,
+     "y": 160,
      "visible": true
     },
     "left_cuff": {
      "x": 200,
-     "y": 800,
+     "y": 700,
      "visible": true
     },
     "right_cuff": {
      "x": 800,
-     "y": 800,
+     "y": 700,
      "visible": true
     },
     "hem_center": {
      "x": 500,
-     "y": 900,
+     "y": 800,
      "visible": true
     }
    },
    "袖": [
     "long",
-    0.84,
+    0.81,
     ""
    ]
   },
@@ -263,7 +263,7 @@
    },
    "文字": {
     "text_presence": "present",
-    "text_transcription": "THE ORIGINAL HAWAIIAN SUMO CONNECTION HAWAII",
+    "text_transcription": "SUMO THE ORIGINAL CONNECTION EST. 1980 HAWAII",
     "letters_legible": "no",
     "text_fully_visible": "yes"
    },
@@ -323,7 +323,7 @@
    },
    "文字": {
     "text_presence": "present",
-    "text_transcription": "THE SUMO",
+    "text_transcription": "SUOKO",
     "letters_legible": "no",
     "text_fully_visible": "yes"
    },
@@ -336,12 +336,12 @@
     },
     "left_shoulder": {
      "x": 260,
-     "y": 120,
+     "y": 160,
      "visible": true
     },
     "right_shoulder": {
      "x": 740,
-     "y": 120,
+     "y": 160,
      "visible": true
     },
     "left_cuff": {
@@ -356,13 +356,13 @@
     },
     "hem_center": {
      "x": 500,
-     "y": 600,
+     "y": 910,
      "visible": true
     }
    },
    "袖": [
-    "mid",
-    0.57,
+    "short",
+    0.3,
     ""
    ]
   },
@@ -469,12 +469,12 @@
     },
     "left_cuff": {
      "x": 180,
-     "y": 500,
+     "y": 570,
      "visible": true
     },
     "right_cuff": {
      "x": 820,
-     "y": 500,
+     "y": 570,
      "visible": true
     },
     "hem_center": {
@@ -485,7 +485,7 @@
    },
    "袖": [
     "short",
-    0.4,
+    0.48,
     ""
    ]
   },
@@ -497,7 +497,7 @@
     "garment_type": "jacket",
     "sleeve_length": "long",
     "collar_type": "shirt_collar",
-    "front_closure": "buttons",
+    "front_closure": "snaps",
     "button_count_status": "exact",
     "pocket_status": "exact",
     "pattern_type": "solid",
@@ -522,22 +522,22 @@
     },
     "left_shoulder": {
      "x": 200,
-     "y": 150,
+     "y": 160,
      "visible": true
     },
     "right_shoulder": {
      "x": 800,
-     "y": 150,
+     "y": 160,
      "visible": true
     },
     "left_cuff": {
      "x": 100,
-     "y": 780,
+     "y": 790,
      "visible": true
     },
     "right_cuff": {
      "x": 900,
-     "y": 780,
+     "y": 790,
      "visible": true
     },
     "hem_center": {
@@ -612,7 +612,7 @@
     ""
    ]
   },
-  "状態": "不一致"
+  "状態": "合格"
  },
  "K11438_M01.jpg": {
   "元": {
@@ -735,7 +735,7 @@
     ""
    ]
   },
-  "状態": "不一致"
+  "状態": "合格"
  },
  "K11474_M01.jpg": {
   "元": {
@@ -763,17 +763,17 @@
    "袖の点": {
     "neck_center": {
      "x": 500,
-     "y": 140,
+     "y": 120,
      "visible": true
     },
     "left_shoulder": {
-     "x": 220,
-     "y": 160,
+     "x": 200,
+     "y": 170,
      "visible": true
     },
     "right_shoulder": {
-     "x": 780,
-     "y": 160,
+     "x": 800,
+     "y": 170,
      "visible": true
     },
     "left_cuff": {
@@ -788,13 +788,13 @@
     },
     "hem_center": {
      "x": 500,
-     "y": 880,
+     "y": 890,
      "visible": true
     }
    },
    "袖": [
     "long",
-    0.87,
+    0.82,
     ""
    ]
   },
@@ -890,13 +890,13 @@
      "visible": true
     },
     "left_shoulder": {
-     "x": 200,
-     "y": 100,
+     "x": 150,
+     "y": 150,
      "visible": true
     },
     "right_shoulder": {
-     "x": 800,
-     "y": 100,
+     "x": 850,
+     "y": 150,
      "visible": true
     },
     "left_cuff": {
@@ -911,7 +911,7 @@
     },
     "hem_center": {
      "x": 500,
-     "y": 950,
+     "y": 900,
      "visible": true
     }
    },
@@ -1104,7 +1104,7 @@
     ""
    ]
   },
-  "状態": "不一致"
+  "状態": "合格"
  },
  "K11550_M01.jpg": {
   "元": {
@@ -1179,7 +1179,7 @@
     "primary_color": "blue",
     "graphic_presence": "absent",
     "text_presence": "absent",
-    "button_count": 15,
+    "button_count": 13,
     "pocket_count": 2
    },
    "文字": {
@@ -1192,38 +1192,38 @@
    "袖の点": {
     "neck_center": {
      "x": 500,
-     "y": 100,
+     "y": 120,
      "visible": true
     },
     "left_shoulder": {
-     "x": 200,
-     "y": 150,
+     "x": 220,
+     "y": 160,
      "visible": true
     },
     "right_shoulder": {
-     "x": 800,
-     "y": 150,
+     "x": 780,
+     "y": 160,
      "visible": true
     },
     "left_cuff": {
-     "x": 180,
+     "x": 190,
      "y": 800,
      "visible": true
     },
     "right_cuff": {
-     "x": 820,
+     "x": 810,
      "y": 800,
      "visible": true
     },
     "hem_center": {
      "x": 500,
-     "y": 900,
+     "y": 890,
      "visible": true
     }
    },
    "袖": [
     "long",
-    0.81,
+    0.83,
     ""
    ]
   },
