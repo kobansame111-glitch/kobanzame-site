@@ -310,6 +310,11 @@ check('v4：2回の読みが同じなら読み直さない', (pv.settle_text({'t
 check('v4：読み直しが文字の読みと同じなら採る', pv.settle_text({'text_presence': 'present'}, N, again('absent'))[0]['text_presence'], 'absent')
 check('v4：読み直しが特徴の方と同じならそれを採る', pv.settle_text({'text_presence': 'absent'}, T, again('absent'))[0]['text_presence'], 'absent')
 check('v4：読み直しが分からないなら定まらない', pv.settle_text({'text_presence': 'absent'}, T, again('unclear'))[0]['text_presence'], 'unclear')
+check('v4.2：ボタンとスナップは同じ組', pv.compare_v4(dict(B, front_closure='buttons'), dict(B, front_closure='snaps'), N, N, short, short)[0], '合格')
+check('v4.2：ボタンとジッパーは違う', pv.compare_v4(dict(B, front_closure='buttons'), dict(B, front_closure='zipper'), N, N, short, short)[0], '不一致')
+check('v4.2：ラペルとシャツ襟は同じ組', pv.compare_v4(dict(B, collar_type='lapel'), dict(B, collar_type='shirt_collar'), N, N, short, short)[0], '合格')
+check('v4.2：生成りと黄色は同じとみなす', pv.compare_v4(dict(B, primary_color='off_white_cream'), dict(B, primary_color='yellow'), N, N, short, short)[0], '合格')
+check('v4.2：灰色と青は違う', pv.compare_v4(dict(B, primary_color='gray'), dict(B, primary_color='blue'), N, N, short, short)[0], '不一致')
 check('v4：状態は4つ', pv.V4_STATUS, ('合格', '不一致', '判定不能', 'システム障害'))
 # 着用画像をサイトに載せる（合格だけ・載せてよい商品だけ）
 prods = [{'sku': 'K10001', 'status': 'available', 'images': ['/assets/products/k10001/v2_front.jpg'], 'photo_v2': {'front': 'ok'}, 'published_date': '2026-11-01'},
