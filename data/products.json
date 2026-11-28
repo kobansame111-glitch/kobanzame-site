@@ -4509,6 +4509,7 @@
   },
   "images": [
    "/assets/products/k11438/v2_front.jpg",
+   "/assets/products/k11438/ai_wear_M01.jpg",
    "/assets/products/k11438/v2_mannequin.jpg",
    "/assets/products/k11438/v2_back.jpg",
    "/assets/products/k11438/02.jpg",
@@ -4608,6 +4609,12 @@
     "着丈": 62.5,
     "肩幅": 48.5
    }
+  },
+  "ai_wear": {
+   "url": "/assets/products/k11438/ai_wear_M01.jpg",
+   "model": "M01",
+   "checked": "20261128",
+   "check": "v4.2"
   }
  },
  {
@@ -7561,6 +7568,7 @@
   "links": {},
   "images": [
    "/assets/products/k11541/v2_front.jpg",
+   "/assets/products/k11541/ai_wear_F03.jpg",
    "/assets/products/k11541/06.jpg",
    "/assets/products/k11541/02.jpg",
    "/assets/products/k11541/03.jpg",
@@ -7657,6 +7665,12 @@
     "bg": "normal"
    },
    "back_error": "RuntimeError('仕上がり確認で不合格：袖の一部が切り取られています。')"
+  },
+  "ai_wear": {
+   "url": "/assets/products/k11541/ai_wear_F03.jpg",
+   "model": "F03",
+   "checked": "20261128",
+   "check": "v4.2"
   }
  },
  {
@@ -10161,6 +10175,7 @@
   },
   "images": [
    "/assets/products/k11197/v2_front.jpg",
+   "/assets/products/k11197/ai_wear_M03.jpg",
    "/assets/products/k11197/v2_back.jpg",
    "/assets/products/k11197/03.jpg",
    "/assets/products/k11197/04.jpg",
@@ -10278,6 +10293,12 @@
     "garment_l": 99.2,
     "bg": "normal"
    }
+  },
+  "ai_wear": {
+   "url": "/assets/products/k11197/ai_wear_M03.jpg",
+   "model": "M03",
+   "checked": "20261128",
+   "check": "v4.2"
   }
  },
  {
