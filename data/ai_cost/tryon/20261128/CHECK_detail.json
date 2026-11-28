@@ -1,0 +1,1232 @@
+{
+ "K10015_M03.jpg": {
+  "元": {
+   "特徴": {
+    "garment_type": "t_shirt",
+    "sleeve_length": "short",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "graphic_print",
+    "primary_color": "gray",
+    "graphic_presence": "present",
+    "text_presence": "present",
+    "button_count": 0,
+    "pocket_count": 0
+   },
+   "文字": {
+    "text_presence": "present",
+    "text_transcription": "THE WAY WE WERE PALACE OF POISON MAY 30, 1947-MAY 1964 1500 LEMAY FERRY RD. ST. LOUIS, MO. CRUISIN' WILL NEVER DIE! WILD'S PALACE OF POISON WILD'S PALA EAT HERE IF IT KILLS YOU Second Annual Reunion 1994",
+    "letters_legible": "yes",
+    "text_fully_visible": "no"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 150,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 150,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 150,
+     "y": 500,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 850,
+     "y": 500,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 950,
+     "visible": true
+    }
+   },
+   "袖": [
+    "short",
+    0.41,
+    ""
+   ]
+  },
+  "着用": {
+   "特徴": {
+    "garment_type": "t_shirt",
+    "sleeve_length": "short",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "graphic_print",
+    "primary_color": "gray",
+    "graphic_presence": "present",
+    "text_presence": "present",
+    "button_count": 0,
+    "pocket_count": 0
+   },
+   "文字": {
+    "text_presence": "present",
+    "text_transcription": "THE WAY WE WERE PALACE OF POISON DAY OF FRAGMENT POO COCO LE COEL NOEL AT TETOC CR & OALUING CAUCA MHP MG 4 M4.GO OF PROME THIEL Second Annual Reunion 1984 SAB",
+    "letters_legible": "yes",
+    "text_fully_visible": "yes"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 140,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 220,
+     "y": 190,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 780,
+     "y": 190,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 200,
+     "y": 400,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 800,
+     "y": 400,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 900,
+     "visible": true
+    }
+   },
+   "袖": [
+    "short",
+    0.28,
+    ""
+   ]
+  },
+  "状態": "不一致"
+ },
+ "K10824_M01.jpg": {
+  "元": {
+   "特徴": {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "check_plaid",
+    "primary_color": "off_white_cream",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 7,
+    "pocket_count": 1
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 190,
+     "y": 170,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 810,
+     "y": 170,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 190,
+     "y": 800,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 810,
+     "y": 800,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 950,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.74,
+    ""
+   ]
+  },
+  "着用": {
+   "特徴": {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "check_plaid",
+    "primary_color": "off_white_cream",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 7,
+    "pocket_count": 1
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 120,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 220,
+     "y": 145,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 780,
+     "y": 145,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 200,
+     "y": 800,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 800,
+     "y": 800,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 900,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.84,
+    ""
+   ]
+  },
+  "状態": "合格"
+ },
+ "K11021_M03.jpg": {
+  "元": {
+   "特徴": {
+    "garment_type": "t_shirt",
+    "sleeve_length": "short",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "graphic_print",
+    "primary_color": "off_white_cream",
+    "graphic_presence": "present",
+    "text_presence": "present",
+    "button_count": 0,
+    "pocket_count": 0
+   },
+   "文字": {
+    "text_presence": "present",
+    "text_transcription": "THE ORIGINAL HAWAIIAN SUMO CONNECTION HAWAII",
+    "letters_legible": "no",
+    "text_fully_visible": "yes"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 190,
+     "y": 140,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 810,
+     "y": 140,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 170,
+     "y": 400,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 830,
+     "y": 400,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 950,
+     "visible": true
+    }
+   },
+   "袖": [
+    "short",
+    0.31,
+    ""
+   ]
+  },
+  "着用": {
+   "特徴": {
+    "garment_type": "t_shirt",
+    "sleeve_length": "short",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "graphic_print",
+    "primary_color": "off_white_cream",
+    "graphic_presence": "present",
+    "text_presence": "present",
+    "button_count": 0,
+    "pocket_count": 0
+   },
+   "文字": {
+    "text_presence": "present",
+    "text_transcription": "THE SUMO",
+    "letters_legible": "no",
+    "text_fully_visible": "yes"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 260,
+     "y": 120,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 740,
+     "y": 120,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 200,
+     "y": 400,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 800,
+     "y": 400,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 600,
+     "visible": true
+    }
+   },
+   "袖": [
+    "mid",
+    0.57,
+    ""
+   ]
+  },
+  "状態": "不一致"
+ },
+ "K11190_M01.jpg": {
+  "元": {
+   "特徴": {
+    "garment_type": "sweatshirt_hoodie",
+    "sleeve_length": "elbow",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "gray",
+    "graphic_presence": "present",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 0
+   },
+   "文字": {
+    "text_presence": "present",
+    "text_transcription": "C",
+    "letters_legible": "yes",
+    "text_fully_visible": "yes"
+   },
+   "文字のメモ": "読み直しでpresentに決定",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 88,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 140,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 140,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 160,
+     "y": 580,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 840,
+     "y": 580,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 900,
+     "visible": true
+    }
+   },
+   "袖": [
+    "mid",
+    0.54,
+    ""
+   ]
+  },
+  "着用": {
+   "特徴": {
+    "garment_type": "sweatshirt_hoodie",
+    "sleeve_length": "elbow",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "blue",
+    "graphic_presence": "present",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 0
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 170,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 170,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 180,
+     "y": 500,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 820,
+     "y": 500,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 930,
+     "visible": true
+    }
+   },
+   "袖": [
+    "short",
+    0.4,
+    ""
+   ]
+  },
+  "状態": "不一致"
+ },
+ "K11197_M03.jpg": {
+  "元": {
+   "特徴": {
+    "garment_type": "jacket",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "red",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 6,
+    "pocket_count": 2
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 150,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 150,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 100,
+     "y": 780,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 900,
+     "y": 780,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 850,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.85,
+    ""
+   ]
+  },
+  "着用": {
+   "特徴": {
+    "garment_type": "jacket",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "snaps",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "red",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 6,
+    "pocket_count": 2
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 180,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 195,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 195,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 180,
+     "y": 790,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 820,
+     "y": 790,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 820,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.93,
+    ""
+   ]
+  },
+  "状態": "不一致"
+ },
+ "K11438_M01.jpg": {
+  "元": {
+   "特徴": {
+    "garment_type": "cardigan",
+    "sleeve_length": "long",
+    "collar_type": "v_neck",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "knit_texture",
+    "primary_color": "off_white_cream",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 5,
+    "pocket_count": 2
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 190,
+     "y": 120,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 810,
+     "y": 120,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 100,
+     "y": 800,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 900,
+     "y": 800,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 840,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.93,
+    ""
+   ]
+  },
+  "着用": {
+   "特徴": {
+    "garment_type": "cardigan",
+    "sleeve_length": "long",
+    "collar_type": "v_neck",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "yellow",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 5,
+    "pocket_count": 2
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 160,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 170,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 170,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 190,
+     "y": 800,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 810,
+     "y": 800,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 890,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.86,
+    ""
+   ]
+  },
+  "状態": "不一致"
+ },
+ "K11474_M01.jpg": {
+  "元": {
+   "特徴": {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "pink",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 11,
+    "pocket_count": 0
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 140,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 220,
+     "y": 160,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 780,
+     "y": 160,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 270,
+     "y": 800,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 730,
+     "y": 800,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 880,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.87,
+    ""
+   ]
+  },
+  "着用": {
+   "特徴": {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "pink",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 7,
+    "pocket_count": 0
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 140,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 140,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 200,
+     "y": 700,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 800,
+     "y": 700,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 800,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.8,
+    ""
+   ]
+  },
+  "状態": "合格"
+ },
+ "K11533_M03.jpg": {
+  "元": {
+   "特徴": {
+    "garment_type": "vest",
+    "sleeve_length": "sleeveless",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "knit_texture",
+    "primary_color": "gray",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 0
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 100,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 100,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 0,
+     "y": 0,
+     "visible": false
+    },
+    "right_cuff": {
+     "x": 0,
+     "y": 0,
+     "visible": false
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 950,
+     "visible": true
+    }
+   },
+   "袖": [
+    null,
+    null,
+    "left_cuff が見えない"
+   ]
+  },
+  "着用": {
+   "特徴": {
+    "garment_type": "vest",
+    "sleeve_length": "sleeveless",
+    "collar_type": "crew_neck",
+    "front_closure": "none",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "knit_texture",
+    "primary_color": "gray",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 0
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 250,
+     "y": 120,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 750,
+     "y": 120,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 180,
+     "y": 400,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 820,
+     "y": 400,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 800,
+     "visible": true
+    }
+   },
+   "袖": [
+    "short",
+    0.41,
+    ""
+   ]
+  },
+  "状態": "判定不能"
+ },
+ "K11541_F03.jpg": {
+  "元": {
+   "特徴": {
+    "garment_type": "jacket",
+    "sleeve_length": "long",
+    "collar_type": "lapel",
+    "front_closure": "zipper",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "brown",
+    "graphic_presence": "absent",
+    "text_presence": "present",
+    "button_count": 0,
+    "pocket_count": 4
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "読み直しでabsentに決定",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 170,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 170,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 150,
+     "y": 890,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 850,
+     "y": 890,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 900,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.9,
+    ""
+   ]
+  },
+  "着用": {
+   "特徴": {
+    "garment_type": "jacket",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "zipper",
+    "button_count_status": "not_applicable",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "brown",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 0,
+    "pocket_count": 4
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 150,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 150,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 180,
+     "y": 790,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 820,
+     "y": 790,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 790,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.93,
+    ""
+   ]
+  },
+  "状態": "不一致"
+ },
+ "K11550_M01.jpg": {
+  "元": {
+   "特徴": {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "light_blue",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 13,
+    "pocket_count": 2
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 180,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 180,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 100,
+     "y": 790,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 900,
+     "y": 790,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 900,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.78,
+    ""
+   ]
+  },
+  "着用": {
+   "特徴": {
+    "garment_type": "shirt",
+    "sleeve_length": "long",
+    "collar_type": "shirt_collar",
+    "front_closure": "buttons",
+    "button_count_status": "exact",
+    "pocket_status": "exact",
+    "pattern_type": "solid",
+    "primary_color": "blue",
+    "graphic_presence": "absent",
+    "text_presence": "absent",
+    "button_count": 15,
+    "pocket_count": 2
+   },
+   "文字": {
+    "text_presence": "absent",
+    "text_transcription": "",
+    "letters_legible": "not_applicable",
+    "text_fully_visible": "not_applicable"
+   },
+   "文字のメモ": "",
+   "袖の点": {
+    "neck_center": {
+     "x": 500,
+     "y": 100,
+     "visible": true
+    },
+    "left_shoulder": {
+     "x": 200,
+     "y": 150,
+     "visible": true
+    },
+    "right_shoulder": {
+     "x": 800,
+     "y": 150,
+     "visible": true
+    },
+    "left_cuff": {
+     "x": 180,
+     "y": 800,
+     "visible": true
+    },
+    "right_cuff": {
+     "x": 820,
+     "y": 800,
+     "visible": true
+    },
+    "hem_center": {
+     "x": 500,
+     "y": 900,
+     "visible": true
+    }
+   },
+   "袖": [
+    "long",
+    0.81,
+    ""
+   ]
+  },
+  "状態": "合格"
+ }
+}
