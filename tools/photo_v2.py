@@ -1013,7 +1013,8 @@ GARMENT_GROUP = {'t_shirt': 'top', 'shirt': 'top', 'knit_sweater': 'top', 'cardi
                  'jacket': 'outer', 'coat': 'outer', 'vest': 'outer', 'dress': 'dress', 'skirt': 'bottom', 'pants': 'bottom', 'shorts': 'bottom'}
 LOOSE_PATTERNS = {'other', 'knit_texture'}
 SLEEVE_RATIO_GAP = 0.25   # 袖の長さ（身頃に対する割合）がこれ以上違えば止める
-NEAR_COLORS = [{'navy', 'blue'}, {'blue', 'light_blue'}, {'white', 'off_white_cream'}]   # 光の当たり方で名前が揺れる組だけ同じとみなす
+NEAR_COLORS = [{'navy', 'blue'}, {'blue', 'light_blue'}, {'white', 'off_white_cream'},
+               {'off_white_cream', 'yellow'}, {'off_white_cream', 'beige_tan'}]   # 11/28 v4.2：生成りのカーディガンを yellow と呼んだ   # 光の当たり方で名前が揺れる組だけ同じとみなす
 JA = {'garment_type': '服の種類', 'sleeve_length': '袖の長さ', 'collar_type': '襟', 'front_closure': '前の留め方',
       'pattern_type': '柄', 'primary_color': '主な色', 'graphic_presence': '絵柄', 'text_presence': '文字'}
 
@@ -1163,9 +1164,11 @@ class ApiStop(Exception):
 
 
 V4_STATUS = ('合格', '不一致', '判定不能', 'システム障害')
+# 11/28 v4.2：ジャケットの襟を lapel と shirt_collar で呼び分けたので、折り返しのある襟は1つの組にする
 COLLAR_GROUP = {'crew_neck': 'round', 'v_neck': 'v', 'polo_collar': 'collared', 'shirt_collar': 'collared',
                 'hood': 'hood', 'turtleneck': 'stand', 'mock_neck': 'stand', 'stand_collar': 'stand',
-                'lapel': 'lapel', 'not_applicable': 'none', 'other': 'other'}
+                'lapel': 'collared', 'not_applicable': 'none', 'other': 'other'}
+CLOSURE_GROUP = {'buttons': 'buttons_snaps', 'snaps': 'buttons_snaps'}   # 11/28 v4.2：コーチジャケットのスナップを buttons と呼んだ
 V4_KEYS = ('garment_type', 'collar_type', 'front_closure', 'pattern_type', 'primary_color')   # 袖の名前（sleeve_length）は比べない
 SLEEVE_SHORT_MAX = 0.52    # 袖（肩→袖口）÷ 身頃（首→裾）がこれ以下なら半袖の組（11/28 v4 の実測：着用の半袖T が 0.49 まで出たので 0.42→0.52）
 SLEEVE_LONG_MIN = 0.62     # これ以上なら長袖の組。間は「中くらい」（肘丈・七分）
@@ -1223,6 +1226,9 @@ def compare_v4(src, out, src_text, out_text, s_sleeve, o_sleeve):
         elif k == 'collar_type':
             if COLLAR_GROUP.get(a, a) != COLLAR_GROUP.get(b, b):
                 diff.append(f'{JA[k]}の形が違う（元={a}・着用={b}）')
+        elif k == 'front_closure':
+            if CLOSURE_GROUP.get(a, a) != CLOSURE_GROUP.get(b, b):
+                diff.append(f'{JA[k]}が違う（元={a}・着用={b}）')
         elif k == 'pattern_type':
             if a != b and not ({a, b} & LOOSE_PATTERNS):
                 diff.append(f'{JA[k]}が違う（元={a}・着用={b}）')
@@ -1371,7 +1377,7 @@ def check_tryon_folder(budget):
             details[name] = dict(detail, 状態=status)
             log(rows[-1])
         with open(os.path.join(od, 'CHECK.txt'), 'w', encoding='utf-8') as fh:
-            fh.write(f'検品 v4.1（{now_jst():%Y-%m-%d %H:%M}・型 {TEXT_MODEL}）　' + '・'.join(f'{k}{v}' for k, v in count.items()) + '\n'
+            fh.write(f'検品 v4.2（{now_jst():%Y-%m-%d %H:%M}・型 {TEXT_MODEL}）　' + '・'.join(f'{k}{v}' for k, v in count.items()) + '\n'
                      + '\n'.join(rows) + '\n')
         with open(os.path.join(od, 'CHECK_detail.json'), 'w', encoding='utf-8') as fh:
             json.dump(details, fh, ensure_ascii=False, indent=1)
@@ -1437,7 +1443,7 @@ def publish_tryon(products):
             os.makedirs(os.path.join(ROOT, rel_dir.lstrip('/')), exist_ok=True)
             ai_wear_caption(Image.open(os.path.join(od, name))).save(os.path.join(ROOT, url.lstrip('/')), quality=88, optimize=True)
             p['images'] = p['images'][:1] + [url] + p['images'][1:]
-            p['ai_wear'] = {'url': url, 'model': mid, 'checked': folder, 'check': 'v4.1'}
+            p['ai_wear'] = {'url': url, 'model': mid, 'checked': folder, 'check': 'v4.2'}
             n += 1
             lines.append(f'{sku}：{url}'); log(lines[-1])
         with open(os.path.join(od, 'PUBLISHED.txt'), 'w', encoding='utf-8') as f:
