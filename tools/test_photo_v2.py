@@ -1,3 +1,4 @@
+import os
 #!/usr/bin/env python3
 """tools/photo_v2.py の模擬テスト（2026-11-09・Gemini にはつながない。お金はかからない）
 使い方：python3 tools/test_photo_v2.py（NG が1つでもあれば終了コード1）
@@ -310,6 +311,21 @@ check('v4：読み直しが文字の読みと同じなら採る', pv.settle_text
 check('v4：読み直しが特徴の方と同じならそれを採る', pv.settle_text({'text_presence': 'absent'}, T, again('absent'))[0]['text_presence'], 'absent')
 check('v4：読み直しが分からないなら定まらない', pv.settle_text({'text_presence': 'absent'}, T, again('unclear'))[0]['text_presence'], 'unclear')
 check('v4：状態は4つ', pv.V4_STATUS, ('合格', '不一致', '判定不能', 'システム障害'))
+# 着用画像をサイトに載せる（合格だけ・載せてよい商品だけ）
+prods = [{'sku': 'K10001', 'status': 'available', 'images': ['/assets/products/k10001/v2_front.jpg'], 'photo_v2': {'front': 'ok'}, 'published_date': '2026-11-01'},
+         {'sku': 'K10002', 'status': 'sold', 'images': ['/a.jpg'], 'photo_v2': {'front': 'ok'}},
+         {'sku': 'K10003', 'status': 'available', 'images': ['/a.jpg'], 'photo_v2': {'front': 'ok'}, 'ai_wear': {'url': '/x.jpg'}},
+         {'sku': 'K10004', 'status': 'available', 'images': ['/a.jpg'], 'photo_v2': {'front': 'ok'}, 'published': False}]
+det = {'K10001_M01.jpg': {'状態': '合格'}, 'K10002_M01.jpg': {'状態': '合格'}, 'K10003_M01.jpg': {'状態': '合格'},
+       'K10004_M01.jpg': {'状態': '合格'}, 'K10005_M01.jpg': {'状態': '合格'}, 'K10001_src.jpg': {}}
+check('載せる：合格で在庫ありの物だけ', pv.publish_plan(prods, det, '20261128'), [('K10001', 'M01', 'K10001_M01.jpg')])
+check('載せる：不一致は載せない', pv.publish_plan(prods, {'K10001_M01.jpg': {'状態': '不一致'}}, 'x'), [])
+check('載せる：判定不能・システム障害も載せない', pv.publish_plan(prods, {'K10001_M01.jpg': {'状態': '判定不能'}, 'K10001_F01.jpg': {'状態': 'システム障害'}}, 'x'), [])
+check('載せる：状態が無い（古い検品）は載せない', pv.publish_plan(prods, {'K10001_M01.jpg': {}}, 'x'), [])
+check('載せる：背景をそろえる前の商品には入れない', pv.publish_plan([{'sku': 'K10001', 'status': 'available', 'images': ['/a.jpg'], 'published_date': '2099-01-01'}], {'K10001_M01.jpg': {'状態': '合格'}}, 'x'), [])
+from PIL import Image as _I
+_c = pv.ai_wear_caption(_I.new('RGB', (928, 1152), 'white')) if os.path.exists(pv.FONT) else None
+check('載せる：帯を足しても画像は切らない', (_c.size[0], _c.size[1] > 1152) if _c else (928, True), (928, True))
 check('検品：選んだモデル8人', sorted(pv.MODEL_PICK), ['F01', 'F02', 'F03', 'F04', 'M01', 'M02', 'M03', 'M04'])
 
 print(f'NG {ng}件／{ok + ng}' if ng else f'photo_v2：全部 OK（{ok}件）')

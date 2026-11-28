@@ -1378,6 +1378,74 @@ def check_tryon_folder(budget):
     os.remove(TRYCHECK_FILE)
 
 
+# ===== 検品に合格した着用画像をサイトに載せる（2026-11-28） =======================================
+# TRYPUBLISH_REQUEST に tryon の日付フォルダ名（例 20261127）を書くと、そのフォルダの CHECK_detail.json で
+# 状態が「合格」の着用画像だけを、商品の2枚目に入れる（1枚目＝実物の写真はそのまま）。
+# 画像の下に「AIで作成した着用イメージです」の帯を付ける。Google の商品フィード・構造化データ・一覧のカーソル写真には使わない（build_site.py）。
+# 売り切れ・非公開・まだ背景をそろえる前の商品・もう着用画像がある商品には入れない。AI は呼ばない（お金はかからない）。
+TRYPUB_FILE = os.path.join(COST_DIR, 'TRYPUBLISH_REQUEST')
+AI_WEAR_NOTE = 'AIで作成した着用イメージです（実物は1枚目の写真）  AI-generated try-on image'
+
+
+def publish_plan(products, details, folder):
+    """→［(品番, モデル, 着用画像のファイル名)］（純粋関数・テスト対象）。合格だけ・載せてよい商品だけ"""
+    by = {str(p.get('sku', '')).upper(): p for p in products}
+    out = []
+    for name, d in sorted((details or {}).items()):
+        m = re.match(r'(K\d{5})_([MF]0[1-4])\.jpg$', name)
+        if not m or (d or {}).get('状態') != '合格':
+            continue
+        p = by.get(m.group(1))
+        if (not p or p.get('status') != 'available' or p.get('published') is False or p.get('noindex')
+                or p.get('ai_wear') or not p.get('images') or is_target(p) or m.group(1) in [o[0] for o in out]):
+            continue
+        out.append((m.group(1), m.group(2), name))
+    return out
+
+
+def ai_wear_caption(im):
+    """画像の下に帯を足して注記を書く（画像は切らない）"""
+    from PIL import Image, ImageDraw, ImageFont
+    W, H = im.size
+    bar = max(56, W // 16)
+    out = Image.new('RGB', (W, H + bar), BG)
+    out.paste(im.convert('RGB'), (0, 0))
+    d = ImageDraw.Draw(out)
+    size = bar // 3
+    f = ImageFont.truetype(FONT, size)
+    while d.textlength(AI_WEAR_NOTE, font=f) > W * 0.94 and size > 12:
+        size -= 1; f = ImageFont.truetype(FONT, size)
+    d.text(((W - d.textlength(AI_WEAR_NOTE, font=f)) / 2, H + (bar - size) / 2 - 2), AI_WEAR_NOTE, fill=(90, 90, 90), font=f)
+    return out
+
+
+def publish_tryon(products):
+    """→ 載せた件数。products をその場で書き換える（保存は呼び出し側）"""
+    from PIL import Image
+    n = 0
+    for folder in re.findall(r'\b(\d{8})\b', open(TRYPUB_FILE, encoding='utf-8').read()):
+        od = os.path.join(TRYON_DIR, folder)
+        dp = os.path.join(od, 'CHECK_detail.json')
+        if not os.path.exists(dp):
+            log(f'載せる：{dp} が無い（先に検品を）'); continue
+        lines = [f'サイトに載せた（{now_jst():%Y-%m-%d %H:%M}）']
+        by = {str(p.get('sku', '')).upper(): p for p in products}
+        for sku, mid, name in publish_plan(products, json.load(open(dp, encoding='utf-8')), folder):
+            p = by[sku]
+            rel_dir = os.path.dirname(p['images'][0]) if str(p['images'][0]).startswith('/assets/products/') else f'/assets/products/{sku.lower()}'
+            url = f'{rel_dir}/ai_wear_{mid}.jpg'
+            os.makedirs(os.path.join(ROOT, rel_dir.lstrip('/')), exist_ok=True)
+            ai_wear_caption(Image.open(os.path.join(od, name))).save(os.path.join(ROOT, url.lstrip('/')), quality=88, optimize=True)
+            p['images'] = p['images'][:1] + [url] + p['images'][1:]
+            p['ai_wear'] = {'url': url, 'model': mid, 'checked': folder, 'check': 'v4.1'}
+            n += 1
+            lines.append(f'{sku}：{url}'); log(lines[-1])
+        with open(os.path.join(od, 'PUBLISHED.txt'), 'w', encoding='utf-8') as f:
+            f.write('\n'.join(lines) + '\n')
+    os.remove(TRYPUB_FILE)
+    return n
+
+
 def caption(im, text):
     from PIL import Image, ImageDraw, ImageFont
     W, H = im.size
@@ -1582,6 +1650,7 @@ def _main():
              + (1 if os.path.exists(MODEL_FILE) else 0)
              + (1 if os.path.exists(TRYON_FILE) else 0)
              + (1 if os.path.exists(TRYCHECK_FILE) else 0)
+             + (1 if os.path.exists(TRYPUB_FILE) else 0)
              if os.environ.get('GEMINI_API_KEY') and not os.path.exists(STOP_FILE) else 0)
         print(n)
         out = os.environ.get('GITHUB_OUTPUT')
@@ -1591,6 +1660,11 @@ def _main():
     changed = apply_approvals(products)
     if changed:
         log(f'マネキン画像のOKを {changed}件 反映しました')
+    if os.path.exists(TRYPUB_FILE):   # 2026-11-28 検品に合格した着用画像を載せる（AI は呼ばない）
+        got = publish_tryon(products)
+        save_products(products)
+        log(f'着用画像を {got}件 サイトに載せました')
+        changed = changed or 1
     if os.path.exists(STOP_FILE):
         log('⛔ data/ai_cost/STOP があるので、AIは呼びません：' + open(STOP_FILE, encoding='utf-8').read().strip())
     elif not os.environ.get('GEMINI_API_KEY'):
