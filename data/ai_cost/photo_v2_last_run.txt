@@ -1,12 +1,20 @@
-2026-11-28 09:06
-K10153_M02.jpg：不一致（載せない）　文字が違う（元「CATCHEMCRABSHACK」・着用「CATCHEMLOUISIANA」）
-K10856_M01.jpg：不一致（載せない）　文字が違う（元「MOTORHARLEYDAVIDSONCYCLES」・着用「MOTODHARLEYRAERISONSTYLED」）
-K11165_M01.jpg：合格（載せてよい）
-K11191_M02.jpg：合格（載せてよい）
-K11453_M02.jpg：合格（載せてよい）
-K11459_M01.jpg：合格（載せてよい）
-K11472_M01.jpg：不一致（載せない）　文字が違う（元「WRANGLER」・着用「RAGBONE」）
-K11488_F02.jpg：不一致（載せない）　袖の長さが違う（元=short 0.42・着用=long 0.92）
-K11537_F01.jpg：合格（載せてよい）
-K11560_F02.jpg：合格（載せてよい）
-今月のこの処理のAI代（概算）：756.2円／上限 1000円
+2026-11-28 11:10
+K11165：/assets/products/k11165/ai_wear_M01.jpg
+K11191：/assets/products/k11191/ai_wear_M02.jpg
+K11453：/assets/products/k11453/ai_wear_M02.jpg
+K11459：/assets/products/k11459/ai_wear_M01.jpg
+K11537：/assets/products/k11537/ai_wear_F01.jpg
+K11560：/assets/products/k11560/ai_wear_F02.jpg
+着用画像を 6件 サイトに載せました
+K10015_M03.jpg：21.33円
+K11021_M03.jpg：21.24円
+K11190_M01.jpg：21.16円
+K11438_M01.jpg：21.08円
+K10824_M01.jpg：21.20円
+K11474_M01.jpg：21.17円
+K11197_M03.jpg：21.14円
+K11550_M01.jpg：21.14円
+K11533_M03.jpg：21.14円
+K11541_F03.jpg：21.15円
+着せる試しを /home/runner/work/kobanzame-site/kobanzame-site/data/ai_cost/tryon/20261128 に作りました（TRYON_REQUEST は消しました）
+今月のこの処理のAI代（概算）：967.8円／上限 1000円
