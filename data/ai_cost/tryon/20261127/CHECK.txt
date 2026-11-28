@@ -1,11 +1,11 @@
-検品 v4（2026-11-28 08:51・型 gemini-2.5-flash）　合格6・不一致3・判定不能1・システム障害0
-K10153_M02.jpg：不一致（載せない）　袖の長さが違う（元=short 0.34・着用=mid 0.49）・文字が違う（元「CATCHEMJOESCRABSHACK」・着用「CATCHEMLOUISIANA」）
+検品 v4.1（2026-11-28 09:06・型 gemini-2.5-flash）　合格6・不一致4・判定不能0・システム障害0
+K10153_M02.jpg：不一致（載せない）　文字が違う（元「CATCHEMCRABSHACK」・着用「CATCHEMLOUISIANA」）
 K10856_M01.jpg：不一致（載せない）　文字が違う（元「MOTORHARLEYDAVIDSONCYCLES」・着用「MOTODHARLEYRAERISONSTYLED」）
 K11165_M01.jpg：合格（載せてよい）
 K11191_M02.jpg：合格（載せてよい）
 K11453_M02.jpg：合格（載せてよい）
-K11459_M01.jpg：判定不能（載せない）　ポケットが数えられない（元=exact・着用=hidden）
-K11472_M01.jpg：合格（載せてよい）
-K11488_F02.jpg：不一致（載せない）　袖の長さが違う（元=short 0.34・着用=long 0.85）
+K11459_M01.jpg：合格（載せてよい）
+K11472_M01.jpg：不一致（載せない）　文字が違う（元「WRANGLER」・着用「RAGBONE」）
+K11488_F02.jpg：不一致（載せない）　袖の長さが違う（元=short 0.42・着用=long 0.92）
 K11537_F01.jpg：合格（載せてよい）
 K11560_F02.jpg：合格（載せてよい）
